@@ -20,9 +20,9 @@
     </nav>
 
     <div class="header-actions">
-      <a class="header-call" href="tel:+919357690454">
+      <a class="header-call" href="tel:{{ .Site.Params.phone | urlize }}">
         <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
-        +91 9357690454
+        {{ .Site.Params.phone }}
       </a>
       <a class="btn btn--primary btn--small" href="/#contact">
         Enquire Now

@@ -13,7 +13,7 @@
   <meta name="description" content="{{ $description }}">
   <meta name="keywords" content="{{ if reflect.IsSlice $keywords }}{{ delimit $keywords ", " }}{{ else }}{{ $keywords }}{{ end }}">
   <meta name="author" content="Saar Biotech Pvt. Ltd.">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="{{ if .Site.Params.noindex }}noindex, nofollow{{ else }}index, follow{{ end }}">
   <meta name="theme-color" content="#18A999">
   <link rel="canonical" href="{{ .Permalink }}">
 
@@ -42,6 +42,17 @@
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" as="script">
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js" as="script">
 
+  {{ if .Site.Params.google_analytics_id }}
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.google_analytics_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ .Site.Params.google_analytics_id }}');
+  </script>
+  {{ end }}
+
   {{ $cssFiles := slice
     (resources.Get "css/style.css")
   }}
@@ -65,9 +76,7 @@
         "foundingDate": "{{ .Site.Params.founded }}",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "SCO-165, Sector-38C",
-          "addressLocality": "Chandigarh",
-          "postalCode": "160038",
+          "streetAddress": "{{ .Site.Params.address }}",
           "addressCountry": "IN"
         },
         "areaServed": {

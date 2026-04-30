@@ -53,10 +53,10 @@
       <address class="not-italic">
         <h2 class="footer-title">Contact</h2>
         <ul class="footer-list">
-          <li><span itemprop="address">SCO-165, Sector-38C, Chandigarh - 160038</span></li>
-          <li><a href="tel:+919357690454" itemprop="telephone">+91 9357690454</a></li>
-          <li><a href="mailto:quotation@saarbiotech.com" itemprop="email">quotation@saarbiotech.com</a></li>
-          <li><span>Baddi, Himachal Pradesh</span></li>
+          <li><span itemprop="address">{{ .Site.Params.address }}</span></li>
+          <li><a href="tel:{{ .Site.Params.phone | urlize }}" itemprop="telephone">{{ .Site.Params.phone }}</a></li>
+          <li><a href="mailto:{{ .Site.Params.email }}" itemprop="email">{{ .Site.Params.email }}</a></li>
+          <li><span>{{ .Site.Params.plant }}</span></li>
         </ul>
       </address>
     </div>

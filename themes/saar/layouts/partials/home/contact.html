@@ -15,15 +15,15 @@
       <div class="contact-list" aria-label="Contact details">
         <div class="contact-item">
           <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
-          <div><strong>Phone</strong><a href="tel:+919357690454">+91 9357690454</a></div>
+          <div><strong>Phone</strong><a href="tel:{{ .Site.Params.phone | urlize }}">{{ .Site.Params.phone }}</a></div>
         </div>
         <div class="contact-item">
           <i data-lucide="mail" class="icon" aria-hidden="true"></i>
-          <div><strong>Email</strong><a href="mailto:quotation@saarbiotech.com">quotation@saarbiotech.com</a></div>
+          <div><strong>Email</strong><a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></div>
         </div>
         <div class="contact-item">
           <i data-lucide="map-pin" class="icon" aria-hidden="true"></i>
-          <div><strong>Head office</strong><span>SCO-165, Sector-38C, Chandigarh - 160038</span></div>
+          <div><strong>Head office</strong><span>{{ .Site.Params.address }}</span></div>
         </div>
       </div>
       <div class="contact-chips" aria-label="Helpful enquiry checklist">
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <form class="contact-form" name="manufacturing-enquiry" method="post" action="#" aria-label="Manufacturing enquiry form" data-animate data-delay="0.1">
+    <form class="contact-form" name="manufacturing-enquiry" method="post" action="{{ .Site.Params.form_endpoint }}" aria-label="Manufacturing enquiry form" data-animate data-delay="0.1">
       <div class="form-row">
         <div class="form-field">
           <label for="name">Full name</label>

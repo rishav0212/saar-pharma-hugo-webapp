@@ -19,6 +19,9 @@ enableRobotsTXT = true
   products = "240+"
   product_count = 240
   units = "4"
+  form_endpoint = "#"
+  google_analytics_id = ""
+  noindex = true
 
 [taxonomies]
   category    = "categories"
