@@ -11,14 +11,14 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.10);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    background-color: rgba(11, 26, 38, 0.8);
+    background-color: rgba(11, 20, 33, 0.8);
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
     z-index: 0;
   }
 
   .site-header.scrolled::before,
   .site-header.nav-active::before {
-    background-color: rgba(11, 26, 38, 0.96);
+    background-color: rgba(11, 20, 33, 0.96);
     box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
   }
 
@@ -321,20 +321,23 @@
   }
 
   .footer-cta {
-    @apply grid gap-6 items-center mb-14 p-6 rounded-lg max-md:grid-cols-1 max-md:items-start max-md:p-5;
-    grid-template-columns: 1fr auto;
+    @apply grid grid-cols-[1fr_auto] gap-6 items-center mb-14 p-8 rounded-lg max-lg:p-6 max-md:grid-cols-1 max-md:items-start max-md:p-6;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(100, 212, 197, 0.18);
   }
 
   .footer-cta h2 {
-    @apply text-[28px];
+    @apply text-[28px] max-md:text-[22px];
     color: #ffffff;
   }
 
   .footer-cta p {
-    @apply mt-2 max-w-[650px];
+    @apply mt-2 max-w-[650px] max-md:text-sm;
     color: rgba(255, 255, 255, 0.70);
+  }
+
+  .footer-cta .btn {
+    @apply max-md:w-full;
   }
 
   .footer-grid {
