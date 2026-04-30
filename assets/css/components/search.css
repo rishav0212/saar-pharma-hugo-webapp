@@ -97,14 +97,59 @@
     @apply text-[11px] text-muted/60 leading-normal line-clamp-2 italic border-t border-line/5 pt-2;
   }
 
-  /* ─── Mobile Tweaks ─── */
+  /* ─── Mobile Tweaks (Deep Optimization) ─── */
   @media (max-width: 768px) {
-    .search-spotlight { @apply p-2; }
-    .search-spotlight__inner { @apply mt-2 rounded-lg max-h-[95vh]; }
-    .search-spotlight__header { @apply p-4 gap-3; }
+    .search-spotlight { @apply p-3; }
+    
+    .search-spotlight__inner { 
+      @apply mt-0 rounded-none w-full max-w-none h-full max-h-none; 
+      border: none;
+    }
+
+    .search-spotlight__header { 
+      @apply p-4 gap-3 bg-white sticky top-0 z-10; 
+    }
+    
     .search-spotlight__header input { @apply text-[18px]; }
-    .search-spotlight__results { @apply p-4 pb-32 grid-cols-1; }
+    
+    .search-close-btn { 
+      @apply w-10 h-10 p-0 items-center justify-center rounded-full;
+      span { display: none; }
+    }
+
+    .search-spotlight__results { 
+      @apply p-3 pb-40 grid-cols-1 gap-3; 
+    }
+
+    .search-result-item {
+      @apply p-4 gap-3 items-start;
+      border-radius: 12px;
+    }
+
+    .search-result-item .result-icon {
+      @apply w-10 h-10 rounded-lg bg-brand/5 mt-0;
+    }
+
+    .search-result-item .result-title {
+      @apply text-[16px] mb-0;
+    }
+
+    .search-result-item .result-summary {
+      @apply text-[12px] line-clamp-1;
+    }
+
+    .search-result-item .result-snippet {
+      @apply hidden; /* Hide snippets on mobile to save space */
+    }
+
     .search-result-item[data-type="about"],
-    .search-result-item[data-type="page"] { @apply col-span-1; }
+    .search-result-item[data-type="page"] {
+      @apply col-span-1 border-brand/20 bg-brand/[0.03];
+    }
+
+    /* Floating Close for Mobile UX */
+    .search-close-btn {
+      @apply bg-brand text-white shadow-lg border-none;
+    }
   }
 }
