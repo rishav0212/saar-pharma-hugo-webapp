@@ -3,6 +3,7 @@ title: "About Saar Biotech | 20+ Years of Pharmaceutical Manufacturing Excellenc
 description: "Discover the legacy of Saar Biotech Pvt. Ltd. Established in 2005, we are a leading WHO-GMP & ISO certified third-party pharma manufacturer in Baddi, Himachal Pradesh. Partnering with 11,700+ companies globally."
 keywords: ["About Saar Biotech", "Pharma manufacturer history", "Baddi pharmaceutical industry", "WHO-GMP manufacturing facility", "Saar Biotech leadership", "Pharmaceutical contract manufacturing India"]
 layout: "list"
+type: "about"
 
 ---
 
