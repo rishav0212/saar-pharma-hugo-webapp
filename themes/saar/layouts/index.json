@@ -9,7 +9,7 @@
       {{- $summary = "Leading WHO-GMP & ISO certified pharmaceutical manufacturer specializing in oral liquids, ointments, and drops." -}}
     {{- end -}}
     
-    {{- $item := dict "title" .Title "permalink" .Permalink "summary" $summary "content" (.Plain | truncate 800) "type" .Type -}}
+    {{- $item := dict "title" .Title "permalink" .RelPermalink "summary" $summary "content" (.Plain | truncate 800) "type" .Type -}}
     {{- $index = $index | append $item -}}
   {{- end -}}
 {{- end -}}
