@@ -1,5 +1,5 @@
 /**
- * Global Search Module - Spotlight version
+ * Global Search Module - Professional Medical Spotlight
  */
 export function initSearch() {
   const spotlight = document.getElementById('search-spotlight');
@@ -16,29 +16,37 @@ export function initSearch() {
   async function loadIndex() {
     if (searchIndex) return;
     try {
-      const response = await fetch('/index.json');
+      // Robust root fetch with cache buster
+      const response = await fetch('/index.json?nocache=' + Date.now());
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      
       searchIndex = await response.json();
+      
       fuse = new Fuse(searchIndex, {
-        keys: ['title', 'summary', 'content', 'type'],
-        threshold: 0.3,
-        includeMatches: true,
-        minMatchCharLength: 2
+        keys: [
+          { name: 'title', weight: 1.0 },
+          { name: 'summary', weight: 0.5 }
+        ],
+        threshold: 0.4,
+        minMatchCharLength: 1
       });
     } catch (err) {
-      console.error('Search Load Error:', err);
+      console.error('Search Init Error:', err);
     }
   }
 
   function openSpotlight() {
     spotlight.classList.add('is-active');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => input.focus(), 100);
+    document.body.classList.add('search-open');
+    if (window.lenis) window.lenis.stop();
+    setTimeout(() => input.focus(), 150);
     loadIndex();
   }
 
   function closeSpotlight() {
     spotlight.classList.remove('is-active');
-    document.body.style.overflow = '';
+    document.body.classList.remove('search-open');
+    if (window.lenis) window.lenis.start();
     input.value = '';
     resetResults();
   }
@@ -47,7 +55,7 @@ export function initSearch() {
     resultsArea.innerHTML = `
       <div class="search-placeholder">
         <i data-lucide="sparkles" class="icon"></i>
-        <p>Search across the entire site</p>
+        <p>Find products or pages...</p>
       </div>
     `;
     if (window.lucide) window.lucide.createIcons();
@@ -60,47 +68,56 @@ export function initSearch() {
 
   close.addEventListener('click', closeSpotlight);
 
-  // Close on Escape
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && spotlight.classList.contains('is-active')) {
-      closeSpotlight();
-    }
+    if (e.key === 'Escape' && spotlight.classList.contains('is-active')) closeSpotlight();
   });
 
-  // Close on click outside the inner panel
   spotlight.addEventListener('click', (e) => {
     if (e.target === spotlight) closeSpotlight();
   });
 
   input.addEventListener('input', (e) => {
     const query = e.target.value.trim();
-    if (query.length < 2) {
+    if (query.length < 1) {
       resetResults();
       return;
     }
     if (!fuse) return;
-    renderResults(fuse.search(query));
+
+    let results = fuse.search(query).map(r => r.item);
+    results.sort((a, b) => a.weight - b.weight);
+
+    renderResults(results);
   });
+
+  function getIconForType(type) {
+    const t = type.toLowerCase();
+    if (t.includes('range')) return 'package';
+    if (t.includes('unit')) return 'factory';
+    if (t.includes('faq')) return 'help-circle';
+    if (t.includes('category')) return 'layers';
+    return 'file-text';
+  }
 
   function renderResults(results) {
     if (results.length === 0) {
-      resultsArea.innerHTML = `
-        <div class="search-no-results">
-          <p>No results found for your search</p>
-        </div>
-      `;
+      resultsArea.innerHTML = `<div class="search-no-results"><p>No results found for "${input.value}"</p></div>`;
       return;
     }
 
-    resultsArea.innerHTML = results.map(result => {
-      const item = result.item;
-      return `
-        <a href="${item.permalink}" class="search-result-item">
-          <div class="result-meta"><span>${item.type || 'Page'}</span></div>
+    resultsArea.innerHTML = results.map(item => `
+      <a href="${item.permalink}" class="search-result-item">
+        <div class="result-icon">
+          <i data-lucide="${getIconForType(item.type)}" class="icon"></i>
+        </div>
+        <div class="result-content">
+          <div class="result-meta"><span>${item.type}</span></div>
           <div class="result-title">${item.title}</div>
           <div class="result-summary">${item.summary || ''}</div>
-        </a>
-      `;
-    }).join('');
+        </div>
+      </a>
+    `).join('');
+    
+    if (window.lucide) window.lucide.createIcons();
   }
 }
