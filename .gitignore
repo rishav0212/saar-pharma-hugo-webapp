@@ -2,8 +2,8 @@
 # Hugo-specific ignores
 # ---------------------------------------------------
 # Ignore the generated build folders (Vercel builds these automatically)
-/public/
-/resources/
+./public/
+./resources/
 
 # Ignore Hugo's temporary lock file
 .hugo_build.lock

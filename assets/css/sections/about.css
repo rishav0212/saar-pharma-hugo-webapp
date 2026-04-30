@@ -10,11 +10,24 @@
   }
 
   .about-hero__backdrop {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 120%, rgba(21, 159, 145, 0.15) 0%, transparent 60%);
+    @apply absolute inset-0 overflow-hidden;
     pointer-events: none;
+    z-index: 0;
+  }
+
+  .about-hero__backdrop::after {
+    content: "";
+    @apply absolute inset-0;
+    background: 
+      radial-gradient(circle at 50% 120%, rgba(21, 159, 145, 0.25) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(6, 15, 20, 0.8) 0%, rgba(6, 15, 20, 0.4) 100%);
+    z-index: 1;
+  }
+
+  .hero-backdrop-img {
+    @apply w-full h-full object-cover;
+    filter: blur(2px) scale(1.05);
+    opacity: 0.5;
   }
 
   /* ─── About Stats ─── */
@@ -40,7 +53,7 @@
   }
 
   .facility-card {
-    @apply flex items-start gap-6 p-8 border border-line rounded-lg bg-white shadow-soft transition-all duration-300;
+    @apply flex items-start gap-6 p-8 border border-line rounded-lg bg-white shadow-soft transition-all duration-300 max-md:p-6 max-md:gap-4;
   }
 
   .facility-card:hover {
@@ -71,6 +84,8 @@
 
   .timeline-track {
     @apply absolute left-1/2 top-0 bottom-0 w-[2px] bg-brand/10 -translate-x-1/2 max-md:left-8;
+    background: linear-gradient(to bottom, transparent, var(--color-brand) 10%, var(--color-brand) 90%, transparent);
+    opacity: 0.3;
   }
 
   .timeline-item {
@@ -86,7 +101,7 @@
   }
 
   .timeline-content {
-    @apply w-[42%] p-8 border border-line rounded-lg bg-white shadow-soft transition-all duration-300 max-md:w-[calc(100%-60px)] max-md:ml-20;
+    @apply w-[42%] p-8 border border-line rounded-lg bg-white shadow-soft transition-all duration-300 max-md:w-[calc(100%-84px)] max-md:ml-auto max-md:p-6;
   }
 
   .timeline-item:hover .timeline-content {
@@ -108,7 +123,8 @@
 
   @media (max-width: 767px) {
     .timeline-track { left: 32px; }
-    .timeline-node { left: 32px; width: 44px; height: 44px; font-size: 11px; }
+    .timeline-node { left: 32px; width: 44px; height: 44px; font-size: 11px; transform: translateX(-50%); }
+    .about-timeline { gap: 2rem; }
   }
 
   /* ─── Image Placeholders & Frames ─── */
