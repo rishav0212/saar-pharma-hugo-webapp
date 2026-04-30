@@ -40,7 +40,7 @@ function initLenis() {
 const initAll = () => {
   safeInit("Icons", initIcons);
   safeInit("Lenis", initLenis);
-  safeInit("Vanta", initHeroCanvas);
+  // safeInit("Vanta", initHeroCanvas);
   safeInit("Animations", initAnimations);
   safeInit("Counters", initCounters);
   safeInit("Tabs", initTabs);

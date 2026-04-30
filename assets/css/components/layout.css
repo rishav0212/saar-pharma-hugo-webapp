@@ -23,7 +23,7 @@
   }
 
   .site-header__inner {
-    @apply w-full max-w-[1600px] mx-auto px-6 h-full flex items-center justify-between gap-[22px];
+    @apply w-full max-w-[1600px] mx-auto px-6 h-full flex items-center justify-between gap-[22px] max-md:px-4 max-md:gap-4;
     position: relative;
     z-index: 1;
   }
@@ -185,7 +185,7 @@
 
   /* ─── Header Actions ─── */
   .header-actions {
-    @apply flex items-center gap-2.5;
+    @apply flex items-center gap-2.5 max-md:gap-2;
   }
 
   .header-call {
