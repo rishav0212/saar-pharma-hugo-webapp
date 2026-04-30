@@ -219,6 +219,25 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
+  
+  <!-- Global Search Spotlight -->
+  <div id="search-spotlight" class="search-spotlight" aria-hidden="true">
+    <div class="search-spotlight__inner">
+      <div class="search-spotlight__header">
+        <i data-lucide="search" class="icon"></i>
+        <input type="text" id="search-input" placeholder="Search for products, categories, units..." autocomplete="off">
+        <button id="search-close" class="search-close-btn" title="Close (Esc)">
+          <i data-lucide="x" class="icon"></i>
+        </button>
+      </div>
+      <div id="search-results" class="search-spotlight__results">
+        <div class="search-placeholder">
+          <i data-lucide="sparkles" class="icon"></i>
+          <p>Search across the entire site</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>

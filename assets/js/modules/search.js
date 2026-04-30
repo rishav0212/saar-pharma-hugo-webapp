@@ -1,20 +1,19 @@
 /**
- * Global Search Module - Header Dropdown version
+ * Global Search Module - Spotlight version
  */
 export function initSearch() {
-  const searchContainer = document.getElementById('search-container');
-  const searchToggle = document.getElementById('search-toggle');
-  const searchClose = document.getElementById('search-close');
-  const searchInput = document.getElementById('search-input');
-  const searchResults = document.getElementById('search-results');
+  const spotlight = document.getElementById('search-spotlight');
+  const toggle = document.getElementById('search-toggle');
+  const close = document.getElementById('search-close');
+  const input = document.getElementById('search-input');
+  const resultsArea = document.getElementById('search-results');
 
-  if (!searchContainer || !searchToggle) return;
+  if (!spotlight || !toggle) return;
 
   let searchIndex = null;
   let fuse = null;
 
-  // ─── Initialize Fuse.js ───
-  async function loadSearchIndex() {
+  async function loadIndex() {
     if (searchIndex) return;
     try {
       const response = await fetch('/index.json');
@@ -26,30 +25,26 @@ export function initSearch() {
         minMatchCharLength: 2
       });
     } catch (err) {
-      console.error('Search Index Error:', err);
+      console.error('Search Load Error:', err);
     }
   }
 
-  // ─── Search Bar Controls ───
-  function toggleSearch() {
-    const isActive = searchContainer.classList.toggle('is-active');
-    if (isActive) {
-      searchInput.focus();
-      loadSearchIndex();
-    } else {
-      searchInput.value = '';
-      resetResults();
-    }
+  function openSpotlight() {
+    spotlight.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input.focus(), 100);
+    loadIndex();
   }
 
-  function closeSearch() {
-    searchContainer.classList.remove('is-active');
-    searchInput.value = '';
+  function closeSpotlight() {
+    spotlight.classList.remove('is-active');
+    document.body.style.overflow = '';
+    input.value = '';
     resetResults();
   }
 
   function resetResults() {
-    searchResults.innerHTML = `
+    resultsArea.innerHTML = `
       <div class="search-placeholder">
         <i data-lucide="sparkles" class="icon"></i>
         <p>Search across the entire site</p>
@@ -58,57 +53,54 @@ export function initSearch() {
     if (window.lucide) window.lucide.createIcons();
   }
 
-  searchToggle.addEventListener('click', toggleSearch);
-  searchClose.addEventListener('click', closeSearch);
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    openSpotlight();
+  });
 
-  // Close on Outside Click
-  document.addEventListener('click', (e) => {
-    if (!searchContainer.contains(e.target)) {
-      closeSearch();
+  close.addEventListener('click', closeSpotlight);
+
+  // Close on Escape
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && spotlight.classList.contains('is-active')) {
+      closeSpotlight();
     }
   });
 
-  // ─── Search Logic ───
-  searchInput.addEventListener('input', (e) => {
-    const query = e.target.value.trim();
+  // Close on click outside the inner panel
+  spotlight.addEventListener('click', (e) => {
+    if (e.target === spotlight) closeSpotlight();
+  });
 
+  input.addEventListener('input', (e) => {
+    const query = e.target.value.trim();
     if (query.length < 2) {
       resetResults();
       return;
     }
-
     if (!fuse) return;
-    const results = fuse.search(query);
-    renderResults(results);
+    renderResults(fuse.search(query));
   });
 
   function renderResults(results) {
     if (results.length === 0) {
-      searchResults.innerHTML = `
+      resultsArea.innerHTML = `
         <div class="search-no-results">
-          <i data-lucide="frown" class="icon"></i>
-          <p>No results found</p>
+          <p>No results found for your search</p>
         </div>
       `;
-      if (window.lucide) window.lucide.createIcons();
       return;
     }
 
-    const html = `
-      <div class="search-dropdown-results">
-        ${results.map(result => {
-          const item = result.item;
-          return `
-            <a href="${item.permalink}" class="search-result-item">
-              <div class="result-meta"><span>${item.type || 'Page'}</span></div>
-              <div class="result-title">${item.title}</div>
-              <div class="result-summary">${item.summary || ''}</div>
-            </a>
-          `;
-        }).join('')}
-      </div>
-    `;
-
-    searchResults.innerHTML = html;
+    resultsArea.innerHTML = results.map(result => {
+      const item = result.item;
+      return `
+        <a href="${item.permalink}" class="search-result-item">
+          <div class="result-meta"><span>${item.type || 'Page'}</span></div>
+          <div class="result-title">${item.title}</div>
+          <div class="result-summary">${item.summary || ''}</div>
+        </a>
+      `;
+    }).join('');
   }
 }

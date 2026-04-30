@@ -20,21 +20,9 @@
     </nav>
 
     <div class="header-actions">
-      <div id="search-container" class="search-container">
-        <button id="search-toggle" class="header-action-btn" type="button" aria-label="Open Search">
-          <i data-lucide="search" class="icon" aria-hidden="true"></i>
-        </button>
-        <div class="search-bar">
-          <i data-lucide="search" class="icon" aria-hidden="true"></i>
-          <input type="text" id="search-input" placeholder="Search products..." autocomplete="off">
-          <button id="search-close" class="search-bar-close" aria-label="Close search">
-            <i data-lucide="x" class="icon" aria-hidden="true"></i>
-          </button>
-        </div>
-        <div id="search-results" class="search-dropdown">
-          <!-- Results injected here -->
-        </div>
-      </div>
+      <button id="search-toggle" class="header-action-btn" type="button" aria-label="Open Search">
+        <i data-lucide="search" class="icon" aria-hidden="true"></i>
+      </button>
       <a class="header-call" href="tel:{{ .Site.Params.phone | urlize }}">
         <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
         {{ .Site.Params.phone }}
