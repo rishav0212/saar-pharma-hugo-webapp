@@ -7,17 +7,17 @@
   --color-abyss-rgb: 6, 17, 33;
   --color-text: #102a43;
   --color-muted: #627d98;
-  --color-paper: #f0f4f8;
-  --color-surface: #e1e7ed;
-  --color-surface-2: #d9e2ec;
+  --color-paper: #f6fbfb;
+  --color-surface: #edf7f6;
+  --color-surface-2: #e5f2f0;
   
   /* Brand colors */
   --color-brand: #159f91;
   --color-brand-2: #64d4c5;
   --color-brand-3: #0a756b;
   --color-brand-line: rgba(21, 159, 145, 0.28);
-  --color-line: rgba(14, 48, 56, 0.1);
-  --color-line-strong: rgba(14, 48, 56, 0.18);
+  --color-line: rgba(16, 42, 67, 0.1);
+  --color-line-strong: rgba(16, 42, 67, 0.18);
   --color-light-line: rgba(255, 255, 255, 0.16);
   
   --color-blue-soft: #6f94b8;
@@ -25,8 +25,8 @@
   --font-sans: "Inter", Arial, sans-serif;
   --font-display: "Manrope", "Inter", Arial, sans-serif;
   
-  --shadow-soft: 0 14px 32px rgba(14, 48, 56, 0.08);
-  --shadow-lift: 0 30px 62px -16px rgba(14, 48, 56, 0.26);
+  --shadow-soft: 0 14px 32px rgba(6, 17, 33, 0.08);
+  --shadow-lift: 0 30px 62px -16px rgba(6, 17, 33, 0.26);
   
   --radius-lg: 8px;
 }
