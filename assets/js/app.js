@@ -23,7 +23,7 @@ function initLenis() {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion || !window.Lenis) return;
   
-  const lenis = new window.Lenis({
+  window.lenis = new window.Lenis({
     duration: 1.4,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
@@ -31,7 +31,7 @@ function initLenis() {
   });
 
   function raf(time) {
-    lenis.raf(time);
+    window.lenis.raf(time);
     requestAnimationFrame(raf);
   }
   requestAnimationFrame(raf);
