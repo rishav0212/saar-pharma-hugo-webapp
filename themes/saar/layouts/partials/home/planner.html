@@ -1,0 +1,48 @@
+<section class="section section--cloud section-rail" id="brief-planner" aria-labelledby="planner-title">
+  <div class="container">
+    <div class="section-head">
+      <div data-animate>
+        <span class="eyebrow">Manufacturing brief</span>
+        <h2 id="planner-title" class="section-title">Choose a requirement type and prepare the right details.</h2>
+      </div>
+      <p class="section-kicker" data-animate data-delay="0.1">
+        A compact planning panel for liquid, topical, and private-label manufacturing enquiries.
+      </p>
+    </div>
+
+    <div class="planner-shell" data-animate>
+      <div class="planner-tabs" role="tablist" aria-label="Manufacturing requirement types">
+        {{ range $index, $item := .items }}
+        <button class="planner-tab{{ if eq $index 0 }} is-active{{ end }}" type="button" role="tab" aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}" data-planner-tab="{{ $item.key }}">
+          <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
+          <span>
+            <strong>{{ $item.label }}</strong>
+            <small>{{ $item.sub }}</small>
+          </span>
+        </button>
+        {{ end }}
+      </div>
+
+      <div class="planner-stage">
+        {{ range $index, $item := .items }}
+        <article class="planner-panel" data-planner-panel="{{ $item.key }}"{{ if ne $index 0 }} hidden{{ end }}>
+          <div>
+            <span class="product-type">{{ $item.label }}</span>
+            <h3>{{ $item.title }}</h3>
+            <p>{{ $item.text }}</p>
+          </div>
+          <ul class="planner-checks">
+            {{ range $item.checks }}
+            <li><i data-lucide="check-circle-2" class="icon" aria-hidden="true"></i>{{ . }}</li>
+            {{ end }}
+          </ul>
+          <aside class="planner-summary">
+            <small>Helpful brief</small>
+            <strong>{{ $item.summary }}</strong>
+          </aside>
+        </article>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,147 @@
+@layer components {
+  /* ─── About Hero ─── */
+  .section--about-hero {
+    @apply pt-[180px] pb-[120px] max-md:pt-[140px] max-md:pb-[80px] text-center bg-ink overflow-hidden;
+    position: relative;
+  }
+
+  .about-hero__inner {
+    @apply relative z-10;
+  }
+
+  .about-hero__backdrop {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 120%, rgba(21, 159, 145, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ─── About Stats ─── */
+  .about-stats-grid {
+    @apply grid grid-cols-4 gap-8 py-4 max-lg:grid-cols-2 max-md:gap-y-10;
+  }
+
+  .about-stat {
+    @apply flex flex-col items-center text-center;
+  }
+
+  .about-stat strong {
+    @apply block text-[42px] leading-none font-display text-brand-3 mb-2;
+  }
+
+  .about-stat span {
+    @apply text-xs font-extrabold uppercase tracking-normal text-muted;
+  }
+
+  /* ─── About Facility Grid ─── */
+  .about-facility-grid {
+    @apply grid grid-cols-2 gap-6 max-md:grid-cols-1;
+  }
+
+  .facility-card {
+    @apply flex items-start gap-6 p-8 border border-line rounded-lg bg-white shadow-soft transition-all duration-300;
+  }
+
+  .facility-card:hover {
+    @apply -translate-y-1.5 shadow-lift;
+    border-color: rgba(21, 159, 145, 0.25);
+  }
+
+  .facility-card__icon {
+    @apply grid place-items-center w-14 h-14 rounded-lg bg-surface text-brand-3 flex-none;
+  }
+
+  .facility-card__icon .icon {
+    @apply w-7 h-7;
+  }
+
+  .facility-card__body h3 {
+    @apply text-[19px] font-extrabold text-ink mb-2;
+  }
+
+  .facility-card__body p {
+    @apply text-[14px] leading-relaxed text-muted;
+  }
+
+  /* ─── About Timeline (Snake Path) ─── */
+  .about-timeline {
+    @apply relative flex flex-col gap-12 max-w-[900px] mx-auto;
+  }
+
+  .timeline-track {
+    @apply absolute left-1/2 top-0 bottom-0 w-[2px] bg-brand/10 -translate-x-1/2 max-md:left-8;
+  }
+
+  .timeline-item {
+    @apply relative flex items-center justify-between w-full max-md:flex-col max-md:items-start;
+  }
+
+  .timeline-item:nth-child(even) {
+    @apply flex-row-reverse max-md:flex-row;
+  }
+
+  .timeline-node {
+    @apply absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-white border-2 border-brand-2 flex items-center justify-center text-brand-3 font-display font-extrabold text-sm shadow-lift z-10 max-md:left-8;
+  }
+
+  .timeline-content {
+    @apply w-[42%] p-8 border border-line rounded-lg bg-white shadow-soft transition-all duration-300 max-md:w-[calc(100%-60px)] max-md:ml-20;
+  }
+
+  .timeline-item:hover .timeline-content {
+    @apply shadow-lift border-brand/20;
+    transform: translateY(-4px);
+  }
+
+  .timeline-tag {
+    @apply inline-block mb-3 px-2 py-1 rounded text-[10px] font-extrabold uppercase tracking-widest bg-surface text-brand-3;
+  }
+
+  .timeline-content h3 {
+    @apply text-[18px] font-extrabold text-ink mb-2;
+  }
+
+  .timeline-content p {
+    @apply text-[14px] leading-relaxed text-muted m-0;
+  }
+
+  @media (max-width: 767px) {
+    .timeline-track { left: 32px; }
+    .timeline-node { left: 32px; width: 44px; height: 44px; font-size: 11px; }
+  }
+
+  /* ─── Image Placeholders & Frames ─── */
+  .img-placeholder {
+    @apply relative w-full h-full bg-slate-900/40 backdrop-blur-sm overflow-hidden flex items-center justify-center p-8 text-center;
+  }
+
+  .img-placeholder::before {
+    content: "IMAGE: " attr(data-caption);
+    @apply text-white/50 text-[11px] font-extrabold uppercase tracking-widest border border-white/20 p-4 rounded-lg;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .img-frame {
+    @apply relative w-full max-w-[500px] aspect-[4/5] rounded-lg border border-line overflow-hidden shadow-soft;
+  }
+
+  .frame-accent {
+    @apply absolute -bottom-6 -right-6 w-32 h-32 rounded-full z-0;
+    background: radial-gradient(circle, var(--color-brand-2) 0%, transparent 70%);
+    opacity: 0.2;
+  }
+
+  /* ─── Text Link ─── */
+  .text-link {
+    @apply inline-flex items-center gap-2 text-brand-3 font-extrabold text-sm border-b-2 border-brand/20 pb-1 transition-all duration-200;
+  }
+
+  .text-link:hover {
+    @apply border-brand text-brand;
+  }
+
+  .text-link .icon {
+    @apply w-4 h-4;
+  }
+}

@@ -1,0 +1,26 @@
+<section class="section section--deep-soft section-rail" id="certifications" aria-labelledby="certifications-title">
+  <div class="container">
+    <div class="cert-layout">
+      <div class="cert-copy" data-animate data-animate-type="scale-in">
+        <span class="eyebrow">Quality confidence</span>
+        <h2 id="certifications-title" class="section-title section-title--sm">Certification and documentation, presented clearly</h2>
+        <p class="section-kicker mt-5">
+          Quality systems, batch review, and dispatch documentation are central to every manufacturing conversation.
+        </p>
+      </div>
+      <div class="cert-badges" data-animate data-animate-stagger>
+        {{ range $index, $item := .items }}
+        <div class="cert-badge">
+          <div class="cert-badge__icon">
+            <i data-lucide="{{ $item.icon }}" class="icon icon--md" aria-hidden="true"></i>
+          </div>
+          <div class="cert-badge__body">
+            <strong>{{ $item.title }}</strong>
+            <span>{{ $item.text }}</span>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>

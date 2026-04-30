@@ -1,0 +1,141 @@
+@layer components {
+  /* Typography */
+  .section-title {
+    @apply text-[42px] leading-tight max-w-[800px] text-ink font-extrabold max-md:text-[30px];
+  }
+  
+  .section-title--sm {
+    @apply text-[36px] max-md:text-[24px];
+  }
+
+  .section-kicker {
+    @apply text-[17px] text-muted max-w-[650px] leading-relaxed max-md:text-[16px];
+  }
+
+  .text-accent {
+    @apply text-brand-2;
+  }
+
+  /* Section Layouts */
+  .section-head {
+    @apply grid grid-cols-[1.1fr_0.9fr] gap-10 items-end mb-20;
+  }
+  
+  @media (max-width: 820px) {
+    .section-head {
+      @apply grid-cols-1 gap-6 mb-12;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .section-head {
+      @apply mb-8;
+    }
+  }
+  
+  .section-head--center {
+    @apply flex flex-col items-center text-center max-w-[780px] mx-auto mb-16 max-md:mb-8;
+  }
+
+  .section--cloud {
+    background-color: var(--color-surface);
+    border-top: 1px solid rgba(21, 159, 145, 0.12);
+    border-bottom: 1px solid rgba(21, 159, 145, 0.12);
+  }
+
+  .section--deep-soft {
+    background-color: var(--color-ink);
+    color: #ffffff;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .section--deep-soft .section-title {
+    color: #ffffff;
+  }
+  
+  .section--deep-soft .section-kicker {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .section--deep-soft .eyebrow {
+    color: var(--color-brand-2);
+  }
+
+  .section--abyss .section-title {
+    color: #ffffff;
+  }
+
+  .section--abyss .section-kicker {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  
+  .section--paper {
+    background-color: var(--color-paper);
+    border-bottom: 1px solid rgba(21, 159, 145, 0.10);
+  }
+  
+  .section--brand {
+    background-color: var(--color-brand);
+    color: #ffffff;
+  }
+  
+  .section--brand .section-title {
+    color: #ffffff;
+  }
+  
+  .section--brand .section-kicker {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .section-rail {
+    background-image: linear-gradient(90deg, rgba(21, 159, 145, 0.03) 1px, transparent 1px);
+    background-size: max(8.33vw, 120px) 100%;
+    background-position: center top;
+  }
+
+  /* ─── CTA Panel (H5 fix) ─── */
+  .cta-panel {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 40px;
+    padding: 30px 0;
+  }
+
+  .section--compact .cta-panel {
+    padding: 0;
+  }
+
+  @media (max-width: 767px) {
+    .cta-panel {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 10px 0;
+    }
+    .section--compact .cta-panel {
+      padding: 0;
+    }
+  }
+
+  /* H4 fix — force h2 inside brand section to be white */
+  .section--brand h2,
+  .section--brand .section-title {
+    color: #ffffff !important;
+  }
+
+  .section--brand p {
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  /* btn--ghost inside brand section — make white */
+  .section--brand .btn--ghost {
+    border-color: rgba(255, 255, 255, 0.40);
+    color: #ffffff;
+  }
+
+  .section--brand .btn--ghost:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.60);
+  }
+}

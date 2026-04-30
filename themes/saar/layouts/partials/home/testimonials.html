@@ -1,0 +1,29 @@
+<section class="section section--paper section-rail" id="testimonials" aria-labelledby="testimonials-title">
+  <div class="container">
+    <div class="section-head section-head--center" data-animate>
+      <span class="eyebrow">Partner confidence</span>
+      <h2 id="testimonials-title" class="section-title">What pharma partners value most.</h2>
+      <p class="section-kicker">
+        The strongest feedback usually comes down to clarity, reliability, and documentation that does not create friction.
+      </p>
+    </div>
+    <div class="testimonial-strip" data-animate data-animate-stagger>
+      {{ range $index, $item := .items }}
+      <article class="testimonial-card">
+        <div class="testimonial-card__quote-mark" aria-hidden="true">&ldquo;</div>
+        <blockquote>{{ $item.quote }}</blockquote>
+        <div class="testimonial-card__footer">
+          <div class="testimonial-card__avatar" aria-hidden="true">{{ substr $item.name 0 1 }}</div>
+          <div>
+            <strong>{{ $item.name }}</strong>
+            <span>{{ $item.role }}</span>
+          </div>
+        </div>
+        <div class="stars" aria-label="5 stars" aria-hidden="true">
+          {{ range seq 1 5 }}<svg class="star-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{{ end }}
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,310 @@
+{
+  "categories": [
+    {
+      "icon": "droplets",
+      "title": "Syrups & Oral Liquids",
+      "text": "Liquid dosage support for cough, digestive, paediatric, wellness, and general medicine ranges.",
+      "tags": ["Syrups", "Liquids", "Drops"],
+      "url": "/categories/syrups/"
+    },
+    {
+      "icon": "beaker",
+      "title": "Suspensions",
+      "text": "Commercially practical suspension formats with attention to stability, taste, packing, and dispatch readiness.",
+      "tags": ["Paediatric", "Adult", "Bottles"],
+      "url": "/categories/suspensions/"
+    },
+    {
+      "icon": "spray-can",
+      "title": "Ointments, Gels & Sprays",
+      "text": "Topical formats for dermatology, hygiene, scalp, pain-relief, and external application portfolios.",
+      "tags": ["Topical", "Derma", "Sprays"],
+      "url": "/categories/ointments/"
+    },
+    {
+      "icon": "eye",
+      "title": "Drops & Small-Volume Formats",
+      "text": "Eye, ear, vitamin, and allied drop categories with compact-format packing support.",
+      "tags": ["Eye", "Ear", "Vitamin"],
+      "url": "/products/"
+    },
+    {
+      "icon": "package-check",
+      "title": "Private Label Support",
+      "text": "Brand-ready manufacturing with packing coordination, product selection support, and repeat supply planning.",
+      "tags": ["Artwork", "Packing", "Dispatch"],
+      "url": "/products/"
+    },
+    {
+      "icon": "shield-check",
+      "title": "Documentation-Led Supply",
+      "text": "COA, batch records, and core manufacturing documents aligned to pharma marketing company needs.",
+      "tags": ["COA", "Batch", "Certificates"],
+      "url": "/manufacturing-unit/"
+    }
+  ],
+  "why": [
+    {
+      "icon": "badge-check",
+      "title": "WHO-GMP Confidence",
+      "text": "A manufacturing culture built around disciplined SOPs, batch records, and compliance-led decisions."
+    },
+    {
+      "icon": "clock-3",
+      "title": "Timely Production",
+      "text": "Planning, sourcing, and production updates designed to reduce uncertainty for launches and repeat orders."
+    },
+    {
+      "icon": "flask-conical",
+      "title": "Practical Product Fit",
+      "text": "Buyer conversations stay rooted in approved compositions, commercially sensible dosage forms, and workable packing plans."
+    },
+    {
+      "icon": "users",
+      "title": "Dedicated Support",
+      "text": "A responsive team for quotation, product selection, packing, documentation, and repeat order coordination."
+    },
+    {
+      "icon": "route",
+      "title": "Transparent Workflow",
+      "text": "Clear movement from enquiry to dispatch, with documentation and QC checkpoints visible through the process."
+    },
+    {
+      "icon": "handshake",
+      "title": "Long-Term Partnering",
+      "text": "Built for pharma companies that need dependable manufacturing continuity, not one-time transactional supply."
+    }
+  ],
+  "products": [
+    {
+      "type": "Syrup range",
+      "title": "Pediatric & Adult Syrups",
+      "text": "High-demand liquid formulations for cough, allergy, digestion, wellness, and antibiotic support.",
+      "url": "/categories/syrups/"
+    },
+    {
+      "type": "Suspension range",
+      "title": "Oral Suspensions",
+      "text": "Stable, taste-aware suspension formats for paediatric and adult therapeutic segments.",
+      "url": "/categories/suspensions/"
+    },
+    {
+      "type": "Topical range",
+      "title": "Ointments & Gels",
+      "text": "Dermatology and external application products with practical commercial packing support.",
+      "url": "/categories/ointments/"
+    },
+    {
+      "type": "Drop range",
+      "title": "Eye, Ear & Vitamin Drops",
+      "text": "Compact dosage forms backed by quality checks and market-ready documentation.",
+      "url": "/products/"
+    },
+    {
+      "type": "Spray range",
+      "title": "Topical & Oral Sprays",
+      "text": "Convenient delivery formats for differentiated product portfolios and fast-moving categories.",
+      "url": "/categories/sprays/"
+    },
+    {
+      "type": "Solution range",
+      "title": "Topical Solutions",
+      "text": "Hair, scalp, derma, and external solutions for branded pharma and healthcare companies.",
+      "url": "/categories/topical-solutions/"
+    }
+  ],
+  "process": [
+    {
+      "num": "01",
+      "title": "Enquiry Mapping",
+      "text": "Share product, dosage form, packing, quantity, market, and documentation expectations."
+    },
+    {
+      "num": "02",
+      "title": "Product Fit Review",
+      "text": "The team checks feasibility, formulation options, commercial fit, and manufacturing readiness."
+    },
+    {
+      "num": "03",
+      "title": "Quote & Timeline",
+      "text": "Receive cost, MOQ, packing inputs, expected lead time, and next-step clarity."
+    },
+    {
+      "num": "04",
+      "title": "Manufacturing",
+      "text": "Production moves through SOP-led processes with in-process checks and batch documentation."
+    },
+    {
+      "num": "05",
+      "title": "QC Release",
+      "text": "The batch is tested, reviewed, documented, and approved before dispatch movement."
+    },
+    {
+      "num": "06",
+      "title": "Dispatch Support",
+      "text": "Packing, invoice, COA, and logistics coordination help your product move smoothly."
+    }
+  ],
+  "units": [
+    {
+      "name": "Unit I",
+      "focus": "Syrups & Oral Liquids",
+      "capacity": "Liquid dosage manufacturing"
+    },
+    {
+      "name": "Unit II",
+      "focus": "Ointments & Creams",
+      "capacity": "Topical product support"
+    },
+    {
+      "name": "Unit III",
+      "focus": "Suspensions & Drops",
+      "capacity": "Stable dosage formats"
+    },
+    {
+      "name": "Unit IV",
+      "focus": "Sprays & Solutions",
+      "capacity": "Special delivery formats"
+    }
+  ],
+  "certs": [
+    {
+      "icon": "shield-check",
+      "title": "WHO-GMP",
+      "text": "Quality-led manufacturing systems"
+    },
+    {
+      "icon": "file-check-2",
+      "title": "ISO 9001",
+      "text": "Documented management practice"
+    },
+    {
+      "icon": "clipboard-check",
+      "title": "GLP",
+      "text": "Lab and testing discipline"
+    },
+    {
+      "icon": "factory",
+      "title": "Schedule M",
+      "text": "Indian pharma compliance"
+    },
+    {
+      "icon": "search-check",
+      "title": "Batch Review",
+      "text": "Release-focused checks"
+    },
+    {
+      "icon": "package-check",
+      "title": "COA Support",
+      "text": "Dispatch documentation"
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Saar Biotech has been dependable for repeat production. The team is responsive, documentation is clear, and timelines are practical.",
+      "name": "Rajesh Sharma",
+      "role": "Director, Pharma Marketing Company"
+    },
+    {
+      "quote": "We needed support across multiple liquid products. Their product-fit guidance and quality documentation helped us launch faster.",
+      "name": "Dr. Priya Mehta",
+      "role": "Healthcare Brand Founder"
+    },
+    {
+      "quote": "The enquiry process is simple and professional. For third-party manufacturing, clarity from the first conversation matters a lot.",
+      "name": "Vikram Singh",
+      "role": "Distribution Partner"
+    }
+  ],
+  "articles": [
+    {
+      "cat": "Manufacturing",
+      "title": "How to choose a third-party pharma manufacturer",
+      "desc": "A practical checklist for quality systems, documentation, product fit, and dispatch readiness.",
+      "icon": "clipboard-list",
+      "url": "/articles/"
+    },
+    {
+      "cat": "Quality",
+      "title": "What WHO-GMP means for pharma marketing companies",
+      "desc": "Why certification, SOPs, batch records, and QC release matter when your brand is on the label.",
+      "icon": "shield-check",
+      "url": "/articles/"
+    },
+    {
+      "cat": "Business",
+      "title": "Planning a pharma product portfolio for enquiries",
+      "desc": "How dosage forms, therapeutic categories, and packing choices influence conversion and repeat demand.",
+      "icon": "chart-column",
+      "url": "/articles/"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "What does Saar Biotech manufacture for third-party pharma companies?",
+      "a": "Saar Biotech manufactures approved pharmaceutical dosage forms such as syrups, suspensions, oral liquids, drops, ointments, creams, gels, topical solutions, and sprays for pharma marketing companies and healthcare brands."
+    },
+    {
+      "q": "Does Saar Biotech support private-label pharma manufacturing?",
+      "a": "Yes. Saar Biotech supports private-label and third-party manufacturing with product selection, packing coordination, documentation support, production planning, quality checks, and dispatch coordination."
+    },
+    {
+      "q": "Where is the Saar Biotech manufacturing facility located?",
+      "a": "Saar Biotech operates from Baddi, District Solan, Himachal Pradesh, with a manufacturing campus and quality-control setup for pharmaceutical contract manufacturing."
+    },
+    {
+      "q": "How can a company request a manufacturing quotation?",
+      "a": "A company can request a quotation by sharing the product category, approved composition or dosage details, packing requirement, quantity, target market, and expected timeline through the enquiry form, phone, or email."
+    }
+  ],
+  "planner": [
+    {
+      "key": "liquid",
+      "icon": "droplets",
+      "label": "Liquid Manufacturing",
+      "sub": "Syrups, suspensions, drops",
+      "title": "Liquid Dosage Manufacturing Requirements",
+      "text": "For syrups, oral suspensions, and drop formats — share formulation type, packing size, quantity, and any stability or taste requirements.",
+      "checks": [
+        "Approved composition or formula name",
+        "Dosage form and concentration",
+        "Pack size, cap type, bottle material",
+        "Expected quantity (MOQ and repeat)",
+        "Target timeline"
+      ],
+      "summary": "Mention formulation type, pack size, and quantity in your enquiry for faster response."
+    },
+    {
+      "key": "topical",
+      "icon": "layers",
+      "label": "Topical Products",
+      "sub": "Ointments, gels, creams",
+      "title": "Topical & Derma Product Requirements",
+      "text": "For ointments, gels, creams, and sprays — mention application area, base type, preferred packing, and any regulatory market requirements.",
+      "checks": [
+        "Product type: ointment, cream, gel, spray",
+        "Active ingredient and base",
+        "Tube, jar, or pump packing preference",
+        "Pack size and branding requirements",
+        "Export or domestic market"
+      ],
+      "summary": "Topical enquiries move faster with base type, packing format, and target market included."
+    },
+    {
+      "key": "privatelabel",
+      "icon": "package-check",
+      "label": "Private Label",
+      "sub": "Brand-ready supply",
+      "title": "Private Label Manufacturing Requirements",
+      "text": "For brand-ready private label supply — share your product list, dosage preferences, artwork readiness, and repeat order planning details.",
+      "checks": [
+        "Product name and category",
+        "Artwork or label design status",
+        "Packing format and material",
+        "MOQ and repeat supply plan",
+        "Documentation needs (COA, batch records)"
+      ],
+      "summary": "Private label enquiries need product list, pack details, and artwork status to proceed."
+    }
+  ]
+}

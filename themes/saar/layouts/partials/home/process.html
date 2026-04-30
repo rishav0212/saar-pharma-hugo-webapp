@@ -1,0 +1,26 @@
+<section class="section section--cloud section-rail" id="process" aria-labelledby="process-title">
+  <div class="container">
+    <div class="section-head section-head--center" data-animate>
+      <span class="eyebrow">From enquiry to dispatch</span>
+      <h2 id="process-title" class="section-title">What happens after you send the enquiry</h2>
+      <p class="section-kicker">
+        The path from requirement mapping to batch release is straightforward, documented, and easy to follow.
+      </p>
+    </div>
+
+    <div class="timeline" data-animate data-animate-stagger>
+      {{ range $index, $item := .items }}
+      <div class="timeline-step">
+        <div class="timeline-step__track">
+          <div class="timeline-step__num">{{ $item.num }}</div>
+          {{ if ne $index 5 }}<div class="timeline-step__line"></div>{{ end }}
+        </div>
+        <div class="timeline-step__body">
+          <h3>{{ $item.title }}</h3>
+          <p>{{ $item.text }}</p>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

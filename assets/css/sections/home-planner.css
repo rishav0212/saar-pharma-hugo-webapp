@@ -1,0 +1,129 @@
+@layer components {
+  /* Planner Shell */
+  .planner-shell {
+    @apply grid grid-cols-[280px_1fr] gap-0 border border-line rounded-lg bg-white shadow-soft overflow-hidden max-lg:grid-cols-1;
+  }
+
+  /* Planner Tab Sidebar */
+  .planner-tabs {
+    @apply flex content-start gap-0 border-r border-line overflow-x-auto overflow-y-hidden max-lg:border-r-0 max-lg:border-b max-lg:flex-row;
+    background-color: var(--color-paper);
+    scrollbar-width: none;
+  }
+
+  .planner-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .planner-tab {
+    @apply flex items-center gap-3.5 w-full px-5 py-4 border-b border-line text-left cursor-pointer transition-all duration-200 max-lg:border-b-0 max-lg:border-r max-lg:w-auto max-lg:flex-none;
+    background: transparent;
+    border-right: 3px solid transparent;
+  }
+
+  .planner-tab:last-child {
+    @apply border-b-0;
+  }
+
+  .planner-tab .icon {
+    @apply w-5 h-5 flex-none;
+    color: var(--color-muted);
+  }
+
+  .planner-tab span {
+    @apply flex flex-col gap-0.5;
+  }
+
+  .planner-tab strong {
+    @apply block text-[14px] font-extrabold;
+    color: var(--color-ink);
+  }
+
+  .planner-tab small {
+    @apply block text-[12px];
+    color: var(--color-muted);
+  }
+
+  .planner-tab:hover {
+    background-color: var(--color-surface);
+  }
+
+  .planner-tab:hover .icon {
+    color: var(--color-brand-3);
+  }
+
+  .planner-tab.is-active {
+    background-color: #ffffff;
+    border-right-color: var(--color-brand);
+  }
+
+  @media (max-width: 1023px) {
+    .planner-tab.is-active {
+      border-right-color: transparent;
+      border-bottom: 3px solid var(--color-brand);
+    }
+  }
+
+  .planner-tab.is-active .icon {
+    color: var(--color-brand);
+  }
+
+  .planner-tab.is-active strong {
+    color: var(--color-brand-3);
+  }
+
+  /* Planner Stage (content area) */
+  .planner-stage {
+    @apply relative;
+  }
+
+  .planner-panel {
+    @apply grid grid-cols-[1fr_auto] gap-8 p-8 items-start max-lg:grid-cols-1 max-lg:p-6;
+    animation: fade-in 300ms ease;
+  }
+
+  .planner-panel[hidden] {
+    @apply hidden;
+  }
+
+  .planner-panel h3 {
+    @apply text-[22px] mb-3 mt-2;
+    color: var(--color-ink);
+  }
+
+  .planner-panel p {
+    @apply text-[15px] leading-relaxed;
+    color: var(--color-muted);
+  }
+
+  /* Checklist */
+  .planner-checks {
+    @apply grid gap-3 mt-5 p-0 m-0 list-none;
+  }
+
+  .planner-checks li {
+    @apply flex items-start gap-3 text-[14px];
+    color: var(--color-text);
+  }
+
+  .planner-checks .icon {
+    @apply w-4.5 h-4.5 flex-none mt-0.5;
+    color: var(--color-brand);
+  }
+
+  /* Summary Aside */
+  .planner-summary {
+    @apply flex-none w-[220px] p-5 rounded-lg border-l border-line max-lg:w-full max-lg:border-l-0 max-lg:border-t;
+    background-color: var(--color-surface);
+  }
+
+  .planner-summary small {
+    @apply block mb-2 text-[11px] font-extrabold uppercase tracking-wide;
+    color: var(--color-brand-3);
+  }
+
+  .planner-summary strong {
+    @apply block text-[14px] leading-relaxed;
+    color: var(--color-ink);
+  }
+}

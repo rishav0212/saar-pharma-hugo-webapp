@@ -1,0 +1,69 @@
+<section class="section section--paper section-rail" id="capabilities" aria-labelledby="capabilities-title">
+  <div class="container">
+    <div class="section-head" data-animate>
+      <div>
+        <span class="eyebrow">Dosage categories</span>
+        <h2 id="capabilities-title" class="section-title">Core dosage categories for third-party manufacturing</h2>
+      </div>
+      <p class="section-kicker">
+        Syrups, suspensions, topicals, drops, sprays, and private-label supply — scan by category to find your product range.
+      </p>
+    </div>
+
+    <div class="tab-block" data-animate data-delay="0.1">
+      <div class="tab-nav" role="tablist" aria-label="Dosage category tabs">
+        {{ range $index, $item := .items }}
+        <button
+          type="button"
+          class="tab-btn{{ if eq $index 0 }} is-active{{ end }}"
+          role="tab"
+          aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+          aria-controls="tab-panel-{{ $index }}"
+          id="tab-{{ $index }}"
+          data-tab="{{ $index }}">
+          <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
+          <span>{{ $item.title }}</span>
+        </button>
+        {{ end }}
+      </div>
+
+      <div class="tab-panels">
+        {{ range $index, $item := .items }}
+        <div
+          class="tab-panel{{ if eq $index 0 }} is-active{{ end }}"
+          role="tabpanel"
+          id="tab-panel-{{ $index }}"
+          aria-labelledby="tab-{{ $index }}"
+          data-tab="{{ $index }}"
+          {{ if ne $index 0 }}hidden{{ end }}>
+          <div class="tab-panel__icon">
+            <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
+          </div>
+          <div class="tab-panel__body">
+            <h3>{{ $item.title }}</h3>
+            <p>{{ $item.text }}</p>
+            <div class="tag-list">
+              {{ range $item.tags }}<span class="tag">{{ . }}</span>{{ end }}
+            </div>
+            <a class="btn btn--primary" href="{{ $item.url }}">
+              Explore category
+              <i data-lucide="arrow-right" class="icon" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="tab-panel__visual" aria-hidden="true">
+            <div class="tab-visual-ring tab-visual-ring--1"></div>
+            <div class="tab-visual-ring tab-visual-ring--2"></div>
+            <div class="tab-visual-dots">
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+            </div>
+            <div class="tab-visual-icon">
+              <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>

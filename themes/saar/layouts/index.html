@@ -1,0 +1,19 @@
+{{ define "main" }}
+
+{{ partial "home/hero.html" . }}
+{{ partial "home/trust-band.html" . }}
+{{ partial "home/about-intro.html" . }}
+{{ partial "home/categories.html" (dict "items" .Site.Data.home.categories) }}
+{{ partial "home/why.html" (dict "items" .Site.Data.home.why) }}
+{{ partial "home/manufacturing.html" (dict "units" .Site.Data.home.units) }}
+{{ partial "home/process.html" (dict "items" .Site.Data.home.process) }}
+{{ partial "home/products.html" (dict "items" .Site.Data.home.products) }}
+{{ partial "home/certifications.html" (dict "items" .Site.Data.home.certs) }}
+{{ partial "home/testimonials.html" (dict "items" .Site.Data.home.testimonials) }}
+{{ partial "home/articles.html" (dict "items" .Site.Data.home.articles) }}
+{{ partial "home/planner.html" (dict "items" .Site.Data.home.planner) }}
+{{ partial "home/faq.html" (dict "items" .Site.Data.home.faqs) }}
+{{ partial "shared/cta.html" . }}
+{{ partial "home/contact.html" . }}
+
+{{ end }}

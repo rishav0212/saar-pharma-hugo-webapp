@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  {{ $title := .Title }}
+  {{ $description := .Description | default .Site.Params.description }}
+  {{ $keywords := .Params.keywords | default .Site.Params.keywords }}
+
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $description }}">
+  <meta name="keywords" content="{{ if reflect.IsSlice $keywords }}{{ delimit $keywords ", " }}{{ else }}{{ $keywords }}{{ end }}">
+  <meta name="author" content="Saar Biotech Pvt. Ltd.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#18A999">
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $description }}">
+  <meta property="og:image" content="{{ "images/og-image.png" | absURL }}">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $title }}">
+  <meta name="twitter:description" content="{{ $description }}">
+  <meta name="twitter:image" content="{{ "images/og-image.png" | absURL }}">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon.png" | relURL }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ "favicon.png" | relURL }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Preload Critical Dependencies -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" as="script">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" as="script">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js" as="script">
+
+  {{ $cssFiles := slice
+    (resources.Get "css/style.css")
+  }}
+  {{ $styles := $cssFiles | resources.Concat "css/app.css" | postCSS (dict "config" "./postcss.config.js") | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+
+  {{ if .IsHome }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Organization", "LocalBusiness"],
+        "@id": "{{ .Site.BaseURL }}#organization",
+        "name": "Saar Biotech Pvt. Ltd.",
+        "alternateName": "Saar Biotech",
+        "url": "{{ .Site.BaseURL }}",
+        "description": "{{ .Site.Params.description }}",
+        "telephone": "{{ .Site.Params.phone }}",
+        "email": "{{ .Site.Params.email }}",
+        "foundingDate": "{{ .Site.Params.founded }}",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "SCO-165, Sector-38C",
+          "addressLocality": "Chandigarh",
+          "postalCode": "160038",
+          "addressCountry": "IN"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "India"
+        },
+        "knowsAbout": [
+          "Third-party pharmaceutical manufacturing",
+          "Contract pharmaceutical manufacturing",
+          "WHO-GMP manufacturing",
+          "Private-label pharma manufacturing",
+          "Syrups",
+          "Suspensions",
+          "Ointments",
+          "Oral liquids",
+          "Topical solutions",
+          "Sprays"
+        ],
+        "hasOfferCatalog": {
+          "@id": "{{ .Site.BaseURL }}#offer-catalog"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{ .Site.BaseURL }}#website",
+        "name": "Saar Biotech",
+        "url": "{{ .Site.BaseURL }}",
+        "publisher": {
+          "@id": "{{ .Site.BaseURL }}#organization"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{{ .Site.BaseURL }}products/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "{{ .Permalink }}#webpage",
+        "url": "{{ .Permalink }}",
+        "name": "{{ $title }}",
+        "description": "{{ $description }}",
+        "isPartOf": {
+          "@id": "{{ .Site.BaseURL }}#website"
+        },
+        "about": {
+          "@id": "{{ .Site.BaseURL }}#organization"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "{{ .Site.BaseURL }}#third-party-pharma-manufacturing",
+        "name": "Third-party pharmaceutical manufacturing",
+        "serviceType": "Contract pharmaceutical manufacturing",
+        "provider": {
+          "@id": "{{ .Site.BaseURL }}#organization"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "India"
+        },
+        "audience": {
+          "@type": "BusinessAudience",
+          "audienceType": "Pharma marketing companies, distributors, and healthcare brands"
+        },
+        "description": "WHO-GMP and ISO certified third-party pharmaceutical manufacturing for approved dosage forms including syrups, suspensions, oral liquids, drops, ointments, creams, gels, topical solutions, and sprays."
+      },
+      {
+        "@type": "OfferCatalog",
+        "@id": "{{ .Site.BaseURL }}#offer-catalog",
+        "name": "Saar Biotech manufacturing product families",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Syrup manufacturing", "url": "{{ .Site.BaseURL }}categories/syrups/" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Suspension manufacturing", "url": "{{ .Site.BaseURL }}categories/suspensions/" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ointment and gel manufacturing", "url": "{{ .Site.BaseURL }}categories/ointments/" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Oral liquid manufacturing", "url": "{{ .Site.BaseURL }}categories/oral-liquids/" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Topical solution manufacturing", "url": "{{ .Site.BaseURL }}categories/topical-solutions/" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Spray manufacturing", "url": "{{ .Site.BaseURL }}categories/sprays/" } }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "{{ .Permalink }}#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Saar Biotech manufacture for third-party pharma companies?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Saar Biotech manufactures approved pharmaceutical dosage forms such as syrups, suspensions, oral liquids, drops, ointments, creams, gels, topical solutions, and sprays for pharma marketing companies and healthcare brands."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Saar Biotech support private-label pharma manufacturing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Saar Biotech supports private-label and third-party manufacturing with product selection, packing coordination, documentation support, production planning, quality checks, and dispatch coordination."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is the Saar Biotech manufacturing facility located?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Saar Biotech operates from Baddi, District Solan, Himachal Pradesh, with a manufacturing campus and quality-control setup for pharmaceutical contract manufacturing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can a company request a manufacturing quotation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A company can request a quotation by sharing the product category, approved composition or dosage details, packing requirement, quantity, target market, and expected timeline through the enquiry form, phone, or email."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "{{ .Permalink }}#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ .Site.BaseURL }}"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  {{ end }}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  {{ partial "header.html" . }}
+  <main id="main-content" tabindex="-1">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- Bundled App Logic -->
+  {{ $js := resources.Get "js/app.js" | js.Build (dict "minify" true) | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+</body>
+</html>

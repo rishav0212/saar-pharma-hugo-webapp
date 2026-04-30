@@ -1,0 +1,129 @@
+@layer components {
+  /* Timeline */
+  .timeline {
+    @apply grid gap-0 max-w-[800px] mx-auto p-10 rounded-lg bg-white shadow-soft max-lg:p-5;
+  }
+
+  .timeline-step {
+    @apply grid grid-cols-[60px_1fr] gap-8 relative max-lg:grid-cols-[44px_1fr] max-lg:gap-5;
+  }
+
+  .timeline-step__track {
+    @apply flex flex-col items-center;
+  }
+
+  .timeline-step__num {
+    @apply grid place-items-center w-11 h-11 rounded-full text-brand-3 font-display font-extrabold text-[16px] z-10 transition-all duration-300;
+    background-color: rgba(21, 159, 145, 0.10);
+  }
+
+  .timeline-step:hover .timeline-step__num {
+    @apply bg-brand text-white scale-110;
+  }
+
+  .timeline-step__line {
+    @apply flex-1 w-[2px] bg-line my-2 min-h-[40px] relative overflow-hidden;
+  }
+
+  .timeline-step:hover .timeline-step__line::after {
+    content: '';
+    @apply absolute inset-0 bg-brand animate-[line-fill_600ms_ease_forwards];
+  }
+
+  .timeline-step__body {
+    @apply pb-12 max-lg:pb-8 max-md:pb-5;
+  }
+
+  .timeline-step:last-child .timeline-step__body {
+    @apply pb-0;
+  }
+
+  .timeline-step__body h3 {
+    @apply text-[22px] mb-2;
+    color: var(--color-ink);
+  }
+
+  .timeline-step__body p {
+    color: var(--color-text);
+  }
+
+  /* Horizontal Scroll Track */
+  .scroll-track-wrapper {
+    @apply relative mt-12;
+  }
+
+  .scroll-track {
+    @apply flex gap-6 overflow-x-auto pb-8 pt-3 px-3 -mx-3 scroll-smooth max-lg:-mx-3.5 max-lg:px-3.5;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scroll-track::-webkit-scrollbar {
+    @apply hidden; /* Chrome/Safari */
+  }
+
+  .product-scroll-card {
+    @apply flex-[0_0_380px] flex flex-col min-h-[400px] p-8 border border-line rounded-lg bg-white shadow-[0_12px_28px_rgba(14,48,56,0.04)] transition-all duration-300 max-lg:flex-[0_0_85vw] max-lg:min-h-[340px] max-lg:p-6;
+    scroll-snap-align: start;
+  }
+
+  .product-scroll-card:hover {
+    @apply -translate-y-2 shadow-lift;
+    border-color: rgba(21, 159, 145, 0.28);
+  }
+
+  .product-scroll-card__top {
+    @apply flex justify-between items-start mb-8;
+  }
+
+  .product-scroll-card__icon {
+    @apply relative w-20 h-20;
+  }
+
+  .product-scroll-card__ring {
+    @apply absolute inset-0 rounded-full border-2 transition-transform duration-400;
+    border-color: rgba(21, 159, 145, 0.20);
+  }
+
+  .product-scroll-card__ring--2 {
+    @apply inset-2.5;
+    border-color: rgba(21, 159, 145, 0.40);
+  }
+
+  .product-scroll-card:hover .product-scroll-card__ring {
+    @apply scale-110;
+  }
+  
+  .product-scroll-card:hover .product-scroll-card__ring--2 {
+    @apply scale-90;
+  }
+
+  .scroll-arrow {
+    @apply absolute top-1/2 -translate-y-1/2 w-14 h-14 grid place-items-center rounded-full bg-white border border-line text-ink shadow-soft cursor-pointer z-10 transition-all duration-200 max-lg:hidden;
+  }
+
+  .scroll-arrow:hover {
+    @apply bg-brand text-white border-brand;
+  }
+
+  .scroll-arrow--left {
+    @apply -left-7;
+  }
+
+  .scroll-arrow--right {
+    @apply -right-7;
+  }
+  
+  .product-type {
+    @apply text-brand-3 text-[12px] font-extrabold tracking-normal uppercase;
+  }
+  
+  .product-actions {
+    @apply flex gap-2.5 mt-5 max-md:flex-col max-md:items-stretch;
+  }
+}
+
+@keyframes line-fill {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}

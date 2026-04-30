@@ -1,0 +1,44 @@
+<section class="section section--deep-soft section-rail" id="manufacturing" aria-labelledby="manufacturing-title">
+  <div class="container facility-layout">
+    <div class="facility-board" aria-label="Manufacturing facility visual" data-animate data-animate-type="scale-in">
+      <div class="facility-board__grid">
+        <div class="facility-zone">
+          <span>Production Campus</span>
+          <strong>80k+</strong>
+        </div>
+        <div class="facility-zone">
+          <span>QC Lab</span>
+          <strong>3k+</strong>
+        </div>
+        <div class="facility-zone">
+          <span>Units</span>
+          <strong>4</strong>
+        </div>
+      </div>
+    </div>
+    <div data-animate data-delay="0.1">
+      <span class="eyebrow">Manufacturing infrastructure</span>
+      <h2 id="manufacturing-title" class="section-title section-title--sm">
+        Manufacturing discipline backed by facility, QC, and documentation
+      </h2>
+      <p class="section-kicker mt-5">
+        Saar Biotech operates from Baddi, Himachal Pradesh with an 80,000+ sq ft facility, dedicated QC space, and a compliance-led workflow designed for repeat third-party production.
+      </p>
+      <div class="unit-grid" data-animate data-animate-stagger>
+        {{ range .units }}
+        <div class="unit-card">
+          <small>{{ .name }}</small>
+          <strong>{{ .focus }}</strong>
+          <span>{{ .capacity }}</span>
+        </div>
+        {{ end }}
+      </div>
+      <div class="mt-7">
+        <a class="btn btn--ghost" href="/manufacturing-unit/">
+          Explore Facility
+          <i data-lucide="arrow-right" class="icon" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

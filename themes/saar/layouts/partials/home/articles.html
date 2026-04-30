@@ -1,0 +1,30 @@
+<section class="section section--deep-soft section-rail" id="articles" aria-labelledby="articles-title">
+  <div class="container">
+    <div class="section-head">
+      <div data-animate>
+        <span class="eyebrow">Knowledge hub</span>
+        <h2 id="articles-title" class="section-title">Useful reads for pharma brands evaluating manufacturing partners.</h2>
+      </div>
+      <div data-animate data-delay="0.1">
+        <p class="section-kicker">
+          Practical reads on compliance, product planning, and third-party manufacturing decisions.
+        </p>
+        <div class="mt-4.5">
+          <a class="btn btn--outline" href="/articles/">View Articles</a>
+        </div>
+      </div>
+    </div>
+    <div class="article-grid" data-animate data-animate-stagger>
+      {{ range $index, $item := .items }}
+      <a class="article-card" href="{{ $item.url }}">
+        <div class="article-visual" aria-hidden="true"><i data-lucide="{{ $item.icon }}" class="icon icon--xl"></i></div>
+        <div class="article-body">
+          <span class="article-category">{{ $item.cat }}</span>
+          <h3>{{ $item.title }}</h3>
+          <p>{{ $item.desc }}</p>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>

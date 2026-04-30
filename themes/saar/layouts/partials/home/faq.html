@@ -1,0 +1,21 @@
+<section class="section section--paper section-rail" id="faq" aria-labelledby="faq-title">
+  <div class="container faq-layout">
+    <div class="faq-aside" data-animate data-animate-type="slide-right">
+      <span class="eyebrow">Common questions</span>
+      <h2 id="faq-title" class="section-title section-title--sm">Before you send a manufacturing brief</h2>
+      <p class="section-kicker">Quick answers on product range, private label support, facility location, and quotation details.</p>
+      <a class="btn btn--outline" href="#contact">
+        Start Enquiry
+        <i data-lucide="arrow-right" class="icon" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="faq-list" data-animate data-animate-stagger>
+      {{ range $index, $item := .items }}
+      <details class="faq-item"{{ if eq $index 0 }} open{{ end }}>
+        <summary>{{ $item.q }}</summary>
+        <p>{{ $item.a }}</p>
+      </details>
+      {{ end }}
+    </div>
+  </div>
+</section>

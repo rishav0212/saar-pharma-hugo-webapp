@@ -1,0 +1,37 @@
+baseURL = 'https://saarbiotech.in/'
+languageCode = 'en-us'
+title = 'Saar Biotech | WHO-GMP Third Party Pharma Manufacturer'
+theme = 'saar'
+relativeURLs = false
+canonifyURLs = true
+enableRobotsTXT = true
+
+[params]
+  description = "Saar Biotech is a leading WHO-GMP & ISO certified third-party pharmaceutical manufacturer in Baddi, India, specializing in oral liquids, ointments, and drops."
+  keywords = ["third party pharma manufacturer", "WHO-GMP", "Baddi pharma", "Saar Biotech"]
+  phone = "+91 9357690454"
+  email = "quotation@saarbiotech.com"
+  address = "SCO-165, Sector-38C, Chandigarh - 160038"
+  plant = "Baddi, District Solan, Himachal Pradesh"
+  founded = "2005"
+  clients = "11,700+"
+  products = "500+"
+  units = "4"
+
+[taxonomies]
+  category    = "categories"
+  subCategory = "subCategories"
+
+[permalinks]
+  products      = "/products/:slug/"
+  categories    = "/categories/:slug/"
+  subCategories = "/sub-categories/:slug/"
+
+[sitemap]
+  changefreq = "weekly"
+  priority   = 0.5
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

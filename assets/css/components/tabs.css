@@ -1,0 +1,203 @@
+@layer components {
+  /* Tabs Section */
+  .tab-block {
+    @apply grid grid-cols-[280px_1fr] gap-10 items-start max-lg:grid-cols-1 max-lg:gap-6;
+  }
+
+  .tab-nav {
+    @apply grid gap-2 max-lg:flex max-lg:overflow-x-auto max-lg:pb-2 max-lg:-mx-6 max-lg:px-6;
+    scrollbar-width: none;
+  }
+
+  .tab-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    @apply flex items-center gap-3 w-full px-5 py-4 rounded-lg bg-transparent text-muted text-[15px] font-bold text-left cursor-pointer transition-all duration-200 max-lg:px-4 max-lg:py-3 max-lg:gap-2.5 max-lg:w-max max-lg:whitespace-nowrap max-lg:flex-shrink-0;
+  }
+
+  .tab-btn:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: var(--color-ink);
+  }
+
+  .tab-btn.is-active {
+    background-color: #ffffff;
+    color: var(--color-brand-3);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .tab-panels {
+    @apply relative min-h-[400px] max-lg:min-h-auto;
+  }
+
+  .tab-panel {
+    @apply hidden grid-cols-2 gap-10 items-center p-10 border border-line rounded-lg bg-white shadow-soft max-lg:grid-cols-1 max-lg:gap-6 max-lg:p-6;
+    animation: fade-in 400ms ease;
+  }
+
+  .tab-panel.is-active {
+    @apply grid;
+    display: grid !important;
+  }
+
+  .tab-panel__icon {
+    @apply grid place-items-center w-16 h-16 mb-6 rounded-lg text-brand-3 max-lg:w-12 max-lg:h-12 max-lg:mb-4;
+    background-color: rgba(21, 159, 145, 0.10);
+  }
+
+  .tab-panel__icon .icon {
+    @apply w-8 h-8;
+  }
+
+  .tab-panel__body h3 {
+    @apply text-[28px] mb-4;
+  }
+
+  .tab-panel__body p {
+    @apply text-muted text-[16px] leading-relaxed mb-6;
+  }
+
+  .tab-panel__body .btn {
+    @apply mt-8;
+  }
+
+  .tab-visual {
+    @apply relative h-full min-h-[320px] rounded-lg grid place-items-center overflow-hidden max-lg:min-h-[200px];
+    background: linear-gradient(135deg, var(--color-surface) 0%, #ffffff 100%);
+  }
+
+  /* Renamed correctly — the HTML uses tab-panel__visual */
+  .tab-panel__visual {
+    @apply relative rounded-lg grid place-items-center overflow-hidden;
+    min-height: 320px;
+    background: linear-gradient(135deg, var(--color-surface) 0%, #ffffff 100%);
+  }
+
+  @media (max-width: 1023px) {
+    .tab-panel__visual { min-height: 180px; }
+  }
+
+  /* Animated ring decorations inside tab panel visual */
+  .tab-visual-ring {
+    @apply absolute rounded-full;
+    border: 1px solid rgba(21, 159, 145, 0.20);
+    animation: spin-slow 9s linear infinite;
+  }
+
+  .tab-visual-ring--1 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .tab-visual-ring--2 {
+    width: 140px;
+    height: 140px;
+    border-color: rgba(21, 159, 145, 0.30);
+    animation-direction: reverse;
+    animation-duration: 6s;
+  }
+
+  .tab-visual-dots {
+    @apply absolute grid grid-cols-3 gap-2.5;
+    opacity: 0.22;
+    bottom: 28px;
+    right: 28px;
+  }
+
+  .tab-visual-dots span {
+    @apply w-1.5 h-1.5 rounded-full;
+    background-color: var(--color-brand);
+  }
+
+  .tab-visual-icon {
+    @apply relative z-10 grid place-items-center w-[72px] h-[72px] rounded-xl;
+    background-color: rgba(21, 159, 145, 0.12);
+    color: var(--color-brand-3);
+    border: 1px solid rgba(21, 159, 145, 0.22);
+  }
+
+  .tab-visual-icon .icon {
+    @apply w-9 h-9;
+  }
+
+  /* Product scroll card icon inner */
+  .product-scroll-card__icon-inner {
+    @apply absolute inset-0 grid place-items-center;
+    color: var(--color-brand-3);
+  }
+
+  .product-scroll-card__icon-inner .icon {
+    @apply w-7 h-7;
+  }
+  
+  .tag-list {
+    @apply flex flex-wrap gap-2 mt-5;
+  }
+
+  .tag {
+    @apply px-2.5 py-1.5 rounded-full text-brand-3 text-[12px] font-extrabold;
+    border: 1px solid rgba(14, 48, 56, 0.10);
+    background-color: rgba(21, 159, 145, 0.10);
+  }
+
+  .text-link {
+    @apply inline-flex items-center gap-2 mt-auto pt-4.5 text-brand-3 text-[13px] font-extrabold;
+  }
+
+  .text-link .icon {
+    @apply w-3.5 h-3.5;
+  }
+  
+  /* FAQ layout */
+  .faq-aside {
+    @apply sticky top-[96px] max-lg:static;
+  }
+
+  .faq-list {
+    @apply grid gap-3;
+  }
+
+  .faq-item {
+    @apply p-0 overflow-hidden border border-line rounded-lg bg-white shadow-[0_12px_28px_rgba(14,48,56,0.06)] transition-all duration-300;
+  }
+
+  .faq-item summary {
+    @apply relative flex items-center justify-between gap-5 p-5 text-ink cursor-pointer list-none font-display text-[21px] leading-tight max-md:p-4 max-md:text-[18px];
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    @apply hidden;
+  }
+
+  .faq-item summary::after {
+    content: "+";
+    @apply grid place-items-center flex-none w-7.5 h-7.5 rounded-lg text-brand-3 font-display text-[22px] leading-none transition-all duration-200;
+    background-color: rgba(21, 159, 145, 0.10);
+  }
+
+  .faq-item[open] {
+    border-color: rgba(21, 159, 145, 0.28);
+    @apply shadow-soft;
+  }
+
+  .faq-item[open] summary::after {
+    content: "-";
+    @apply bg-brand text-white;
+  }
+
+  .faq-item p {
+    @apply m-0 px-5 pb-5 text-muted text-[14px] leading-relaxed;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

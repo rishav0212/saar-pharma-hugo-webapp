@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="pt-28 pb-20 min-h-screen">
+  <div class="max-w-[1240px] mx-auto px-6">
+    <h1 class="text-3xl md:text-4xl font-bold text-white mb-8">{{ .Title }}</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {{ range .Pages }}
+      <a
+        href="{{ .RelPermalink }}"
+        class="bg-navy-300 border border-brand-border rounded-2xl p-6 text-white no-underline hover:border-brand/40 hover:bg-navy-400 transition-all duration-200 group card-glow"
+      >
+        <h2
+          class="font-display text-base font-bold mb-2 group-hover:text-brand transition-colors"
+        >
+          {{ .Title }}
+        </h2>
+        {{ with .Description }}
+        <p class="text-sm text-slate-400">{{ . }}</p>
+        {{ end }}
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}

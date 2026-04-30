@@ -1,0 +1,24 @@
+<section class="section section--cloud section-rail" id="why-choose-us" aria-labelledby="why-title">
+  <div class="container">
+    <div class="section-head section-head--center" data-animate data-animate-type="slide-left">
+      <span class="eyebrow">Why choose Saar</span>
+      <h2 id="why-title" class="section-title">Why pharma marketing companies continue with Saar Biotech</h2>
+      <p class="section-kicker">
+        The value is in clarity, consistency, documentation, and dependable supply discipline.
+      </p>
+    </div>
+
+    <div class="bento-grid" data-animate data-animate-stagger>
+      {{ range $index, $item := .items }}
+      <div class="bento-cell bento-cell--{{ $index }}">
+        <div class="bento-cell__icon">
+          <i data-lucide="{{ $item.icon }}" class="icon icon--md" aria-hidden="true"></i>
+        </div>
+        <h3>{{ $item.title }}</h3>
+        <p>{{ $item.text }}</p>
+        <div class="bento-cell__glow" aria-hidden="true"></div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

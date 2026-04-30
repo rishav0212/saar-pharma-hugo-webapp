@@ -1,0 +1,47 @@
+<header id="site-header" class="site-header" role="banner">
+  <div class="site-header__inner">
+    <a class="brand" href="/" aria-label="Saar Biotech home">
+      <div class="brand-logo">
+        {{ partial "logo-svg.html" . }}
+      </div>
+      <span class="brand__text">
+        <span class="brand__name">Saar Biotech</span>
+        <span class="brand__meta">WHO-GMP Manufacturing</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/about/" class="{{ if eq .RelPermalink "/about/" }}active{{ end }}">About</a>
+      <a href="/#categories">Categories</a>
+      <a href="/#products">Products</a>
+      <a href="/manufacturing-unit/" class="{{ if eq .RelPermalink "/manufacturing-unit/" }}active{{ end }}">Manufacturing</a>
+      <a href="/#process">Process</a>
+      <a href="/articles/" class="{{ if eq .RelPermalink "/articles/" }}active{{ end }}">Articles</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-call" href="tel:+919357690454">
+        <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
+        +91 9357690454
+      </a>
+      <a class="btn btn--primary btn--small" href="/#contact">
+        Enquire Now
+        <i data-lucide="arrow-right" class="icon" aria-hidden="true"></i>
+      </a>
+      <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav">
+        <i data-lucide="menu" class="icon icon-menu" aria-hidden="true"></i>
+        <i data-lucide="x" class="icon icon-close" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
+    <a href="/" class="{{ if .IsHome }}active{{ end }}">Home</a>
+    <a href="/about/" class="{{ if eq .RelPermalink "/about/" }}active{{ end }}">About</a>
+    <a href="/manufacturing-unit/" class="{{ if eq .RelPermalink "/manufacturing-unit/" }}active{{ end }}">Manufacturing</a>
+    <a href="/products/" class="{{ if eq .RelPermalink "/products/" }}active{{ end }}">Product Range</a>
+    <a href="/#process">Process</a>
+    <a href="/articles/" class="{{ if eq .RelPermalink "/articles/" }}active{{ end }}">Articles</a>
+    <a href="/#contact">Enquire Now</a>
+  </nav>
+</header>

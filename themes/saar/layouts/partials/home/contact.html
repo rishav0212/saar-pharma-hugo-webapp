@@ -1,0 +1,82 @@
+<section class="section section--deep-soft section-rail relative overflow-hidden" id="contact" aria-labelledby="contact-title">
+  <!-- Animated Background Orbs -->
+  <div class="contact-orbs">
+    <div class="contact-orb contact-orb--1"></div>
+    <div class="contact-orb contact-orb--2"></div>
+  </div>
+
+  <div class="container contact-layout relative z-10">
+    <div data-animate>
+      <span class="eyebrow">Start an enquiry</span>
+      <h2 id="contact-title" class="section-title section-title--sm">Tell us what you want to manufacture</h2>
+      <p class="section-kicker mt-5">
+        Share approved composition details, product category, dosage form, packing requirement, target quantity, and documentation needs. The team responds with practical next steps.
+      </p>
+      <div class="contact-list" aria-label="Contact details">
+        <div class="contact-item">
+          <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
+          <div><strong>Phone</strong><a href="tel:+919357690454">+91 9357690454</a></div>
+        </div>
+        <div class="contact-item">
+          <i data-lucide="mail" class="icon" aria-hidden="true"></i>
+          <div><strong>Email</strong><a href="mailto:quotation@saarbiotech.com">quotation@saarbiotech.com</a></div>
+        </div>
+        <div class="contact-item">
+          <i data-lucide="map-pin" class="icon" aria-hidden="true"></i>
+          <div><strong>Head office</strong><span>SCO-165, Sector-38C, Chandigarh - 160038</span></div>
+        </div>
+      </div>
+      <div class="contact-chips" aria-label="Helpful enquiry checklist">
+        <span class="contact-chip">Product name or approved composition</span>
+        <span class="contact-chip">Dosage form and pack size</span>
+        <span class="contact-chip">Expected quantity</span>
+        <span class="contact-chip">Target timeline and market</span>
+      </div>
+    </div>
+
+    <form class="contact-form" name="manufacturing-enquiry" method="post" action="#" aria-label="Manufacturing enquiry form" data-animate data-delay="0.1">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="name">Full name</label>
+          <input class="form-control" id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+        </div>
+        <div class="form-field">
+          <label for="company">Company</label>
+          <input class="form-control" id="company" name="company" type="text" autocomplete="organization" placeholder="Company name">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input class="form-control" id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-field">
+          <label for="phone">Phone</label>
+          <input class="form-control" id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+91 XXXXX XXXXX">
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="category">Product category</label>
+        <select class="form-control" id="category" name="category">
+          <option value="">Select a category</option>
+          <option>Syrups</option>
+          <option>Suspensions</option>
+          <option>Ointments / Gels</option>
+          <option>Drops</option>
+          <option>Sprays</option>
+          <option>Topical solutions</option>
+          <option>Other product</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="message">Requirement</label>
+        <textarea class="form-control" id="message" name="message" placeholder="Mention product name, dosage form, packing, quantity, and timeline." required></textarea>
+      </div>
+      <button class="btn btn--light" type="submit">
+        Send Enquiry
+        <i data-lucide="send" class="icon" aria-hidden="true"></i>
+      </button>
+      <p class="form-note">For urgent quotes, call or email directly using the contact details shown here.</p>
+    </form>
+  </div>
+</section>

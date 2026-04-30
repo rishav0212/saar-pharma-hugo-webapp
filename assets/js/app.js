@@ -1,0 +1,57 @@
+/**
+ * Saar Biotech Master Entry Point
+ * Bundled via Hugo Pipes (esbuild)
+ */
+
+import { initTabs, initHeader, initProductScroll, initAnchorScroll, initFooterYear } from './modules/ui';
+import { initAnimations, initCounters, initHeroCanvas } from './modules/animations';
+
+function safeInit(name, fn) {
+  try { 
+    fn(); 
+  } catch (e) { 
+    console.error(`Saar Init Error [${name}]: `, e); 
+  }
+}
+
+function initIcons() {
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function initLenis() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion || !window.Lenis) return;
+  
+  const lenis = new window.Lenis({
+    duration: 1.4,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    wheelMultiplier: 1.1
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+}
+
+// Global Orchestration
+const initAll = () => {
+  safeInit("Icons", initIcons);
+  safeInit("Lenis", initLenis);
+  safeInit("Vanta", initHeroCanvas);
+  safeInit("Animations", initAnimations);
+  safeInit("Counters", initCounters);
+  safeInit("Tabs", initTabs);
+  safeInit("Header", initHeader);
+  safeInit("ProductScroll", initProductScroll);
+  safeInit("AnchorScroll", initAnchorScroll);
+  safeInit("FooterYear", initFooterYear);
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initAll);
+} else {
+  initAll();
+}
