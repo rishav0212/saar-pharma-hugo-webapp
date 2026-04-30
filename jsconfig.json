@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext",
+    "target": "ESNext",
+    "checkJs": false,
+    "paths": {
+      "@/*": ["assets/js/*"]
+    }
+  },
+  "exclude": ["node_modules", "public", "resources"]
+}

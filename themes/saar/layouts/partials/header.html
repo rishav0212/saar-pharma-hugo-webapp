@@ -20,6 +20,9 @@
     </nav>
 
     <div class="header-actions">
+      <button id="search-toggle" class="header-action-btn" type="button" aria-label="Open Search">
+        <i data-lucide="search" class="icon" aria-hidden="true"></i>
+      </button>
       <a class="header-call" href="tel:{{ .Site.Params.phone | urlize }}">
         <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
         {{ .Site.Params.phone }}

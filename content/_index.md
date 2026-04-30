@@ -5,6 +5,6 @@ keywords: ["third party pharma manufacturer India", "pharmaceutical contract man
 type: "page"
 ---
 
-# High-Performance Pharmaceutical Manufacturing
-This content is primarily managed via data/home.json for the advanced landing page layout.
-This file serves as the SEO and Metadata controller for the homepage.
+# Saar Biotech: Your Trusted Third-Party Pharmaceutical Manufacturing Partner
+
+Saar Biotech Pvt. Ltd. is a premier WHO-GMP and ISO certified manufacturer based in Baddi, Himachal Pradesh. With over two decades of expertise, we provide high-quality contract manufacturing services for a wide range of pharmaceutical formulations, including oral liquids, syrups, suspensions, ointments, and specialty topical solutions. Our commitment to quality, timely delivery, and ethical manufacturing has made us a preferred partner for leading pharmaceutical brands globally.

@@ -1,0 +1,62 @@
+{{- $index := slice -}}
+
+{{/* 1. Standard Pages & Articles */}}
+{{- range .Site.AllPages -}}
+  {{- if and (ne .Kind "taxonomy") (ne .Kind "term") (ne .Title "") -}}
+    {{/* Special handling for homepage to avoid generic text */}}
+    {{- $summary := .Summary | plainify -}}
+    {{- if .IsHome -}}
+      {{- $summary = "Leading WHO-GMP & ISO certified pharmaceutical manufacturer specializing in oral liquids, ointments, and drops." -}}
+    {{- end -}}
+    
+    {{- $item := dict "title" .Title "permalink" .Permalink "summary" $summary "content" (.Plain | truncate 800) "type" .Type -}}
+    {{- $index = $index | append $item -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* 2. Deep Indexing Homepage Sections (from data/home.json) */}}
+{{- $home := .Site.Data.home -}}
+
+{{/* Categories Section */}}
+{{- range $home.categories -}}
+  {{- $item := dict "title" .title "permalink" (.url | default "/#categories") "summary" .text "content" (delimit .tags " ") "type" "Category" -}}
+  {{- $index = $index | append $item -}}
+{{- end -}}
+
+{{/* Products Section */}}
+{{- range $home.products -}}
+  {{- $item := dict "title" .title "permalink" (.url | default "/#products") "summary" .text "content" .type "type" "Manufacturing Range" -}}
+  {{- $index = $index | append $item -}}
+{{- end -}}
+
+{{/* Why Choose Us Section */}}
+{{- range $home.why -}}
+  {{- $item := dict "title" .title "permalink" "/#why" "summary" .text "content" "" "type" "Our Advantage" -}}
+  {{- $index = $index | append $item -}}
+{{- end -}}
+
+{{/* Manufacturing Units */}}
+{{- range $home.units -}}
+  {{- $item := dict "title" .name "permalink" "/#manufacturing" "summary" (printf "%s - %s" .focus .capacity) "content" "" "type" "Production Unit" -}}
+  {{- $index = $index | append $item -}}
+{{- end -}}
+
+{{/* Process Steps */}}
+{{- range $home.process -}}
+  {{- $item := dict "title" .title "permalink" "/#process" "summary" .text "content" "" "type" "Process Workflow" -}}
+  {{- $index = $index | append $item -}}
+{{- end -}}
+
+{{/* Homepage Articles */}}
+{{- range $home.articles -}}
+  {{- $item := dict "title" .title "permalink" .url "summary" .desc "content" .cat "type" "Featured Article" -}}
+  {{- $index = $index | append $item -}}
+{{- end -}}
+
+{{/* FAQs */}}
+{{- range $home.faqs -}}
+  {{- $item := dict "title" .q "permalink" "/#faq" "summary" .a "content" "" "type" "FAQ" -}}
+  {{- $index = $index | append $item -}}
+{{- end -}}
+
+{{- $index | jsonify -}}

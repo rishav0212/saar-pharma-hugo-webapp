@@ -1,8 +1,16 @@
 @layer components {
   /* ─── About Hero ─── */
   .section--about-hero {
-    @apply pt-[180px] pb-[120px] max-md:pt-[140px] max-md:pb-[80px] text-center bg-ink overflow-hidden;
+    @apply pt-[180px] pb-[120px] max-md:pt-[140px] max-md:pb-[80px] text-center bg-ink overflow-hidden text-white;
     position: relative;
+  }
+
+  .section--about-hero .hero-title {
+    @apply text-white;
+  }
+
+  .section--about-hero .section-kicker {
+    @apply text-white/80;
   }
 
   .about-hero__inner {

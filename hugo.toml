@@ -6,6 +6,9 @@ relativeURLs = false
 canonifyURLs = false
 enableRobotsTXT = true
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 [params]
   description = "Saar Biotech is a leading WHO-GMP & ISO certified third-party pharmaceutical manufacturer in Baddi, India, specializing in oral liquids, ointments, and drops."
   keywords = ["third party pharma manufacturer", "WHO-GMP", "Baddi pharma", "Saar Biotech"]
