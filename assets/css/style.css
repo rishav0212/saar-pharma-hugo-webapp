@@ -16,6 +16,15 @@
     color: var(--color-ink);
     @apply m-0 font-display font-extrabold tracking-normal leading-[1.06];
   }
+
+  [id] {
+    scroll-margin-top: 100px;
+  }
+  @media (max-width: 767px) {
+    [id] {
+      scroll-margin-top: 80px;
+    }
+  }
 }
 
 @layer components {

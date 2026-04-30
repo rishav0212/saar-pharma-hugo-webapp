@@ -9,6 +9,7 @@ export function initAnimations() {
   const animated = document.querySelectorAll("[data-animate], .section-head, .bento-grid, .timeline, .unit-grid, .metric-grid, .faq-list, .article-grid, .copy-stack, .facility-board, .planner-shell, .product-autoplay-wrapper, .footer-content");
   if (!animated.length) return;
 
+  const isMobile = window.innerWidth < 768;
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -22,7 +23,10 @@ export function initAnimations() {
         observer.unobserve(el);
       }
     });
-  }, { threshold: 0.2, rootMargin: "0px 0px -100px 0px" });
+  }, { 
+    threshold: isMobile ? 0.05 : 0.15, 
+    rootMargin: isMobile ? "0px 0px -30px 0px" : "0px 0px -100px 0px" 
+  });
 
   animated.forEach((el) => {
     if (el.closest(".section--hero")) {

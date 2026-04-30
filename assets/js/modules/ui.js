@@ -133,9 +133,7 @@ export function initAnchorScroll() {
       if (!target) return;
 
       e.preventDefault();
-      const headerHeight = (header ? header.getBoundingClientRect().height : 72) + 12;
-      const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-      window.scrollTo({ top, behavior: "smooth" });
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
 }
