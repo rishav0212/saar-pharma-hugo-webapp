@@ -220,27 +220,6 @@
   </main>
   {{ partial "footer.html" . }}
 
-  <!-- Global Search Overlay -->
-  <div id="search-modal" class="search-modal" aria-hidden="true">
-    <div class="search-modal__inner">
-      <div class="search-modal__header">
-        <div class="search-input-wrapper">
-          <i data-lucide="search" class="icon" aria-hidden="true"></i>
-          <input type="text" id="search-input" placeholder="Search for products, categories, sections..." autocomplete="off">
-        </div>
-        <button id="search-close" class="search-close-btn" aria-label="Close search">
-          <i data-lucide="x" class="icon" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div id="search-results" class="search-results">
-        <div class="search-placeholder">
-          <i data-lucide="sparkles" class="icon"></i>
-          <p>Enter keywords to search across the entire site</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
