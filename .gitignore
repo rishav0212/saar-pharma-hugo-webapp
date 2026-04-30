@@ -1,0 +1,26 @@
+# ---------------------------------------------------
+# Hugo-specific ignores
+# ---------------------------------------------------
+# Ignore the generated build folders (Vercel builds these automatically)
+/public/
+/resources/
+
+# Ignore Hugo's temporary lock file
+.hugo_build.lock
+
+# ---------------------------------------------------
+# Node & Build Tools (Tailwind/PostCSS)
+# ---------------------------------------------------
+# Ignore downloaded packages (Vercel installs these automatically)
+/node_modules/
+
+# ---------------------------------------------------
+# OS & Editor specific ignores
+# ---------------------------------------------------
+# Mac/Windows clutter
+.DS_Store
+Thumbs.db
+
+# Editor configs (like the one that blocked your revert earlier)
+assets/jsconfig.json
+.vscode/
