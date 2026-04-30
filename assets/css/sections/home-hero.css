@@ -2,7 +2,7 @@
   /* Hero Section */
   .section--hero {
     @apply min-h-[100svh] grid items-center text-white py-[110px] pb-[70px] max-md:min-h-auto max-md:py-[100px] max-md:pb-[64px];
-    background: linear-gradient(140deg, #060f14 0%, #0e3038 52%, #16424b 100%);
+    background: linear-gradient(140deg, var(--color-abyss) 0%, var(--color-ink) 52%, var(--color-ink-2) 100%);
   }
 
   .section--hero::after {
@@ -83,7 +83,7 @@
 
   .manufacturing-board {
     @apply relative p-5.5 border border-white/20 rounded-lg shadow-[0_36px_84px_rgba(6,15,20,0.6),inset_0_0_40px_rgba(255,255,255,0.03)] overflow-hidden max-md:p-4;
-    background: linear-gradient(165deg, #0e3038 0%, #060f14 100%);
+    background: linear-gradient(165deg, var(--color-ink) 0%, var(--color-abyss) 100%);
     min-height: 505px;
     animation: float-soft 5s ease-in-out infinite;
   }

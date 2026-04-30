@@ -1,13 +1,13 @@
 @theme {
-  --color-ink: #0e3038;
-  --color-ink-2: #16424b;
-  --color-ink-3: #1c5661;
-  --color-abyss: #060f14;
-  --color-text: #173640;
-  --color-muted: #647e85;
-  --color-paper: #f6fbfb;
-  --color-surface: #edf7f6;
-  --color-surface-2: #e5f2f0;
+  --color-ink: #0b1a26;
+  --color-ink-2: #122736;
+  --color-ink-3: #1a3447;
+  --color-abyss: #050c12;
+  --color-text: #1e2b36;
+  --color-muted: #6b7d8c;
+  --color-paper: #f8fafc;
+  --color-surface: #f1f5f9;
+  --color-surface-2: #e2e8f0;
   
   /* Brand colors */
   --color-brand: #159f91;
