@@ -32,11 +32,11 @@
         <span>Years of Excellence</span>
       </div>
       <div class="metric">
-        <strong>11,700+</strong>
+        <strong>{{ .Site.Params.clients }}</strong>
         <span>Global Partners</span>
       </div>
       <div class="metric">
-        <strong>500+</strong>
+        <strong>{{ .Site.Params.products }}</strong>
         <span>Approved Formulations</span>
       </div>
       <div class="metric">
@@ -173,7 +173,7 @@
     <div class="grid grid-cols-2 gap-12 max-md:grid-cols-1">
       <div data-animate>
         <h3>Looking for specific compositions?</h3>
-        <p class="mt-2 text-muted">Browse our comprehensive list of 500+ approved products across various therapeutic categories.</p>
+        <p class="mt-2 text-muted">Browse our comprehensive list of {{ .Site.Params.products }} approved products across various therapeutic categories.</p>
         <a class="btn btn--outline mt-6" href="/products/">Browse Product List</a>
       </div>
       <div data-animate data-delay="0.2">
