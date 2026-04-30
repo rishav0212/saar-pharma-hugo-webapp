@@ -2,309 +2,309 @@
   "categories": [
     {
       "icon": "droplets",
-      "title": "Syrups & Oral Liquids",
-      "text": "Liquid dosage support for cough, digestive, paediatric, wellness, and general medicine ranges.",
-      "tags": ["Syrups", "Liquids", "Drops"],
+      "title": "WHO-GMP Syrups & Liquids",
+      "text": "Specialized pediatric drops, wellness syrups, and high-efficacy oral liquids manufactured in ISO-certified environments.",
+      "tags": ["Pediatric Drops", "Wellness Syrups", "Oral Liquids"],
       "url": "/categories/syrups/"
     },
     {
       "icon": "beaker",
-      "title": "Suspensions",
-      "text": "Commercially practical suspension formats with attention to stability, taste, packing, and dispatch readiness.",
-      "tags": ["Paediatric", "Adult", "Bottles"],
+      "title": "Advanced Suspensions",
+      "text": "Innovative sodium alginate and therapeutic suspensions with 3-minute relief profiles and superior stability.",
+      "tags": ["Antacids", "Antibiotics", "Stable Formats"],
       "url": "/categories/suspensions/"
     },
     {
       "icon": "spray-can",
-      "title": "Ointments, Gels & Sprays",
-      "text": "Topical formats for dermatology, hygiene, scalp, pain-relief, and external application portfolios.",
-      "tags": ["Topical", "Derma", "Sprays"],
+      "title": "Topical Gels & Nasal Sprays",
+      "text": "Market-leading Fluticasone nasal sprays, Diclofenac sprays, and specialized Derma-care ointments.",
+      "tags": ["Nasal Sprays", "Derma Gels", "Pain Sprays"],
       "url": "/categories/ointments/"
     },
     {
       "icon": "eye",
-      "title": "Drops & Small-Volume Formats",
-      "text": "Eye, ear, vitamin, and allied drop categories with compact-format packing support.",
-      "tags": ["Eye", "Ear", "Vitamin"],
+      "title": "Sterile Drops & Pediatric Care",
+      "text": "Precision-dosed eye, ear, and vitamin drops supported by advanced analytical testing and documentation.",
+      "tags": ["Eye Drops", "Ear Drops", "Vitamin D3"],
       "url": "/products/"
     },
     {
       "icon": "package-check",
-      "title": "Private Label Support",
-      "text": "Brand-ready manufacturing with packing coordination, product selection support, and repeat supply planning.",
-      "tags": ["Artwork", "Packing", "Dispatch"],
+      "title": "Global Contract Manufacturing",
+      "text": "End-to-end third-party manufacturing solutions for 2050+ global clients with 500+ DCGI-approved products.",
+      "tags": ["Contract Pharma", "Global Export", "Baddi Unit"],
       "url": "/products/"
     },
     {
       "icon": "shield-check",
-      "title": "Documentation-Led Supply",
-      "text": "COA, batch records, and core manufacturing documents aligned to pharma marketing company needs.",
-      "tags": ["COA", "Batch", "Certificates"],
+      "title": "Regulatory & QC Excellence",
+      "text": "GLP-compliant labs equipped with Agilent and Shimadzu machinery ensuring absolute batch-to-batch consistency.",
+      "tags": ["GLP Certified", "QC Excellence", "Batch Integrity"],
       "url": "/manufacturing-unit/"
     }
   ],
   "why": [
     {
-      "icon": "badge-check",
-      "title": "WHO-GMP Confidence",
-      "text": "A manufacturing culture built around disciplined SOPs, batch records, and compliance-led decisions."
+      "icon": "history",
+      "title": "20+ Years of Expertise",
+      "text": "Established in 2005, we bring two decades of pharmaceutical excellence and trusted manufacturing legacy to every batch."
     },
     {
-      "icon": "clock-3",
-      "title": "Timely Production",
-      "text": "Planning, sourcing, and production updates designed to reduce uncertainty for launches and repeat orders."
+      "icon": "factory",
+      "title": "80,000 Sq. Ft. Facility",
+      "text": "Operating 4 state-of-the-art units in Baddi, Asia's largest pharma hub, with massive production scale and precision."
     },
     {
-      "icon": "flask-conical",
-      "title": "Practical Product Fit",
-      "text": "Buyer conversations stay rooted in approved compositions, commercially sensible dosage forms, and workable packing plans."
+      "icon": "microscope",
+      "title": "Advanced QC Lab",
+      "text": "Equipped with world-class Agilent and Waters analytical machinery for rigorous GLP-certified quality control."
     },
     {
       "icon": "users",
-      "title": "Dedicated Support",
-      "text": "A responsive team for quotation, product selection, packing, documentation, and repeat order coordination."
+      "title": "2050+ Global Clients",
+      "text": "Demonstrated trust across international markets, serving procurement managers and pharma brands with unyielding reliability."
     },
     {
-      "icon": "route",
-      "title": "Transparent Workflow",
-      "text": "Clear movement from enquiry to dispatch, with documentation and QC checkpoints visible through the process."
+      "icon": "clipboard-check",
+      "title": "500+ Formulations",
+      "text": "A massive formulation bank of DCGI-approved products across all therapeutic segments for fast market entry."
     },
     {
-      "icon": "handshake",
-      "title": "Long-Term Partnering",
-      "text": "Built for pharma companies that need dependable manufacturing continuity, not one-time transactional supply."
+      "icon": "globe",
+      "title": "Baddi Pharma Hub",
+      "text": "Strategic location in Baddi, Himachal Pradesh, offering cost-effective production and seamless logistics connectivity."
     }
   ],
   "products": [
     {
-      "type": "Syrup range",
-      "title": "Pediatric & Adult Syrups",
-      "text": "High-demand liquid formulations for cough, allergy, digestion, wellness, and antibiotic support.",
-      "url": "/categories/syrups/"
-    },
-    {
-      "type": "Suspension range",
-      "title": "Oral Suspensions",
-      "text": "Stable, taste-aware suspension formats for paediatric and adult therapeutic segments.",
-      "url": "/categories/suspensions/"
-    },
-    {
-      "type": "Topical range",
-      "title": "Ointments & Gels",
-      "text": "Dermatology and external application products with practical commercial packing support.",
-      "url": "/categories/ointments/"
-    },
-    {
-      "type": "Drop range",
-      "title": "Eye, Ear & Vitamin Drops",
-      "text": "Compact dosage forms backed by quality checks and market-ready documentation.",
-      "url": "/products/"
-    },
-    {
-      "type": "Spray range",
-      "title": "Topical & Oral Sprays",
-      "text": "Convenient delivery formats for differentiated product portfolios and fast-moving categories.",
+      "type": "Nasal Care",
+      "title": "Fluticasone Nasal Sprays",
+      "text": "Leading nasal delivery solutions with specialized packing in Amber glass and HDPE formats for maximum stability.",
       "url": "/categories/sprays/"
     },
     {
-      "type": "Solution range",
-      "title": "Topical Solutions",
-      "text": "Hair, scalp, derma, and external solutions for branded pharma and healthcare companies.",
+      "type": "Digestive Health",
+      "title": "Sodium Alginate Suspensions",
+      "text": "Fast-acting oral suspensions providing 3-minute symptomatic relief for acidity and digestive wellness.",
+      "url": "/categories/suspensions/"
+    },
+    {
+      "type": "Topical Relief",
+      "title": "Diclofenac 4X Sprays",
+      "text": "High-concentration pain relief sprays and roll-ons for dermatological and orthopedic therapeutic segments.",
+      "url": "/categories/ointments/"
+    },
+    {
+      "type": "Oral Wellness",
+      "title": "Vitamin D3 & Immunity Sprays",
+      "text": "Innovative sublingual and oral sprays for modern supplement portfolios and fast-moving wellness brands.",
+      "url": "/categories/sprays/"
+    },
+    {
+      "type": "Pediatric Range",
+      "title": "Oral Drops & Syrups",
+      "text": "Safety-focused pediatric formulations with precision droppers and taste-optimized wellness profiles.",
+      "url": "/products/"
+    },
+    {
+      "type": "Derma Care",
+      "title": "Antifungal Gels & Creams",
+      "text": "Specialized dermatological pastes, shampoos, and topical solutions for global private-label distribution.",
       "url": "/categories/topical-solutions/"
     }
   ],
   "process": [
     {
       "num": "01",
-      "title": "Enquiry Mapping",
-      "text": "Share product, dosage form, packing, quantity, market, and documentation expectations."
+      "title": "Strategic Enquiry",
+      "text": "Share your therapeutic target, dosage form (Sprays, Syrups, Gels), packing, and documentation needs."
     },
     {
       "num": "02",
-      "title": "Product Fit Review",
-      "text": "The team checks feasibility, formulation options, commercial fit, and manufacturing readiness."
+      "title": "Formulation Audit",
+      "text": "Our technical team reviews DCGI approvals, formulation stability, and cost-effective production feasibility."
     },
     {
       "num": "03",
-      "title": "Quote & Timeline",
-      "text": "Receive cost, MOQ, packing inputs, expected lead time, and next-step clarity."
+      "title": "Commercial Roadmap",
+      "text": "Receive a transparent quote including MOQs, artwork timelines, and a dedicated manufacturing schedule."
     },
     {
       "num": "04",
-      "title": "Manufacturing",
-      "text": "Production moves through SOP-led processes with in-process checks and batch documentation."
+      "title": "WHO-GMP Production",
+      "text": "Manufacturing kicks off in our Baddi units using SOP-led processes and high-precision automated machinery."
     },
     {
       "num": "05",
-      "title": "QC Release",
-      "text": "The batch is tested, reviewed, documented, and approved before dispatch movement."
+      "title": "GLP-Certified QC",
+      "text": "Every batch undergoes rigorous analytical testing in our Agilent-equipped labs for COA and batch release."
     },
     {
       "num": "06",
-      "title": "Dispatch Support",
-      "text": "Packing, invoice, COA, and logistics coordination help your product move smoothly."
+      "title": "Global Logistics",
+      "text": "Seamless packing and dispatch coordination ensuring your products reach domestic or global markets on time."
     }
   ],
   "units": [
     {
-      "name": "Unit I",
-      "focus": "Syrups & Oral Liquids",
-      "capacity": "Liquid dosage manufacturing"
+      "name": "Unit I (Liquid)",
+      "focus": "Oral Liquids & Wellness",
+      "capacity": "High-Volume Syrup Production"
     },
     {
-      "name": "Unit II",
-      "focus": "Ointments & Creams",
-      "capacity": "Topical product support"
+      "name": "Unit II (Derma)",
+      "focus": "Topical Ointments & Gels",
+      "capacity": "Specialized Cream Manufacturing"
     },
     {
-      "name": "Unit III",
-      "focus": "Suspensions & Drops",
-      "capacity": "Stable dosage formats"
+      "name": "Unit III (Sterile)",
+      "focus": "Drops & Small Volume",
+      "capacity": "Precision Pediatric Formats"
     },
     {
-      "name": "Unit IV",
-      "focus": "Sprays & Solutions",
-      "capacity": "Special delivery formats"
+      "name": "Unit IV (Spray)",
+      "focus": "Nasal & Oral Sprays",
+      "capacity": "Advanced Delivery Formats"
     }
   ],
   "certs": [
     {
-      "icon": "shield-check",
+      "icon": "award",
       "title": "WHO-GMP",
-      "text": "Quality-led manufacturing systems"
+      "text": "Global Manufacturing Standard"
     },
     {
-      "icon": "file-check-2",
-      "title": "ISO 9001",
-      "text": "Documented management practice"
+      "icon": "shield-check",
+      "title": "ISO 9001:2015",
+      "text": "Quality Management Systems"
     },
     {
-      "icon": "clipboard-check",
-      "title": "GLP",
-      "text": "Lab and testing discipline"
+      "icon": "microscope",
+      "title": "GLP Certified",
+      "text": "Laboratory Excellence"
     },
     {
-      "icon": "factory",
+      "icon": "file-text",
+      "title": "DCGI Approved",
+      "text": "New Drug Formulations"
+    },
+    {
+      "icon": "check-circle",
+      "title": "FSSAI Licensed",
+      "text": "Food & Wellness Safety"
+    },
+    {
+      "icon": "package",
       "title": "Schedule M",
-      "text": "Indian pharma compliance"
-    },
-    {
-      "icon": "search-check",
-      "title": "Batch Review",
-      "text": "Release-focused checks"
-    },
-    {
-      "icon": "package-check",
-      "title": "COA Support",
-      "text": "Dispatch documentation"
+      "text": "Indian Pharma Compliance"
     }
   ],
   "testimonials": [
     {
-      "quote": "Saar Biotech has been dependable for repeat production. The team is responsive, documentation is clear, and timelines are practical.",
-      "name": "Rajesh Sharma",
-      "role": "Director, Pharma Marketing Company"
+      "quote": "Saar Biotech's 80,000 sq. ft. facility in Baddi is impressive. Their documentation for WHO-GMP compliance is the best we've seen.",
+      "name": "Dr. Ankit Mehta",
+      "role": "Procurement Head, Global Pharma"
     },
     {
-      "quote": "We needed support across multiple liquid products. Their product-fit guidance and quality documentation helped us launch faster.",
-      "name": "Dr. Priya Mehta",
-      "role": "Healthcare Brand Founder"
+      "quote": "Switching to Saar for our Fluticasone Nasal Spray range was the right move. The stability and delivery quality are outstanding.",
+      "name": "Sanjeev Gupta",
+      "role": "CEO, Branded Formulations"
     },
     {
-      "quote": "The enquiry process is simple and professional. For third-party manufacturing, clarity from the first conversation matters a lot.",
-      "name": "Vikram Singh",
-      "role": "Distribution Partner"
+      "quote": "Highly reliable partner for third-party manufacturing. Their Shimadzu-equipped QC lab gives us immense confidence in every batch.",
+      "name": "Arjun Varma",
+      "role": "Director, Healthcare Exports"
     }
   ],
   "articles": [
     {
       "cat": "Manufacturing",
-      "title": "How to choose a third-party pharma manufacturer",
-      "desc": "A practical checklist for quality systems, documentation, product fit, and dispatch readiness.",
-      "icon": "clipboard-list",
+      "title": "Why Baddi is the Hub of Pharmaceutical Contract Manufacturing",
+      "desc": "Exploring the ecosystem of Asia's largest pharma hub and how Saar Biotech leverages it for global exports.",
+      "icon": "factory",
       "url": "/articles/"
     },
     {
       "cat": "Quality",
-      "title": "What WHO-GMP means for pharma marketing companies",
-      "desc": "Why certification, SOPs, batch records, and QC release matter when your brand is on the label.",
-      "icon": "shield-check",
+      "title": "Understanding GLP Compliance in Modern Pharma Labs",
+      "desc": "How Agilent and Shimadzu machinery ensure your branded products meet global safety standards.",
+      "icon": "microscope",
       "url": "/articles/"
     },
     {
-      "cat": "Business",
-      "title": "Planning a pharma product portfolio for enquiries",
-      "desc": "How dosage forms, therapeutic categories, and packing choices influence conversion and repeat demand.",
-      "icon": "chart-column",
+      "cat": "Innovation",
+      "title": "The Rise of Specialized Nasal and Oral Sprays",
+      "desc": "Why modern pharma marketing brands are shifting towards advanced delivery formats for faster absorption.",
+      "icon": "spray-can",
       "url": "/articles/"
     }
   ],
   "faqs": [
     {
-      "q": "What does Saar Biotech manufacture for third-party pharma companies?",
-      "a": "Saar Biotech manufactures approved pharmaceutical dosage forms such as syrups, suspensions, oral liquids, drops, ointments, creams, gels, topical solutions, and sprays for pharma marketing companies and healthcare brands."
+      "q": "What makes Saar Biotech a leading WHO-GMP pharma manufacturer in India?",
+      "a": "Saar Biotech combines 20 years of expertise with a massive 80,000 sq. ft. infrastructure in Baddi. Our WHO-GMP and GLP certifications, along with advanced analytical machinery from Agilent and Shimadzu, ensure elite quality for 2050+ global clients."
     },
     {
-      "q": "Does Saar Biotech support private-label pharma manufacturing?",
-      "a": "Yes. Saar Biotech supports private-label and third-party manufacturing with product selection, packing coordination, documentation support, production planning, quality checks, and dispatch coordination."
+      "q": "Which product categories do you specialize in for third-party manufacturing?",
+      "a": "We specialize in high-demand formulations including Fluticasone Nasal Sprays, Sodium Alginate Suspensions, Diclofenac Sprays, Pediatric Oral Drops, and a full range of Dermacare ointments and gels."
     },
     {
-      "q": "Where is the Saar Biotech manufacturing facility located?",
-      "a": "Saar Biotech operates from Baddi, District Solan, Himachal Pradesh, with a manufacturing campus and quality-control setup for pharmaceutical contract manufacturing."
+      "q": "Do you provide support for DCGI-approved new drugs?",
+      "a": "Yes, we specialize in DCGI-approved formulations and provide comprehensive documentation support (COA, Batch Records) for third-party registrations and global exports."
     },
     {
-      "q": "How can a company request a manufacturing quotation?",
-      "a": "A company can request a quotation by sharing the product category, approved composition or dosage details, packing requirement, quantity, target market, and expected timeline through the enquiry form, phone, or email."
+      "q": "What is the typical timeline for a new manufacturing enquiry?",
+      "a": "After initial enquiry mapping, we provide a strategic roadmap within 48 hours. Production timelines typically vary by formulation, but our Baddi units are optimized for high-volume, time-bound delivery."
     }
   ],
   "planner": [
     {
       "key": "liquid",
       "icon": "droplets",
-      "label": "Liquid Manufacturing",
-      "sub": "Syrups, suspensions, drops",
-      "title": "Liquid Dosage Manufacturing Requirements",
-      "text": "For syrups, oral suspensions, and drop formats — share formulation type, packing size, quantity, and any stability or taste requirements.",
+      "label": "Liquid Dosage",
+      "sub": "Syrups, Suspensions, Drops",
+      "title": "Specialized Liquid Manufacturing",
+      "text": "For syrups, antacids, and antibiotic suspensions — share your concentration, pack size (Amber glass/HDPE), and therapeutic target.",
       "checks": [
-        "Approved composition or formula name",
-        "Dosage form and concentration",
-        "Pack size, cap type, bottle material",
-        "Expected quantity (MOQ and repeat)",
-        "Target timeline"
+        "Approved therapeutic composition",
+        "Concentration (mg/ml)",
+        "Pack format (Bottle material, Cap type)",
+        "Projected annual volume",
+        "Documentation requirements"
       ],
-      "summary": "Mention formulation type, pack size, and quantity in your enquiry for faster response."
+      "summary": "Enquiries with specific concentrations and pack formats receive priority technical reviews."
     },
     {
       "key": "topical",
       "icon": "layers",
-      "label": "Topical Products",
-      "sub": "Ointments, gels, creams",
-      "title": "Topical & Derma Product Requirements",
-      "text": "For ointments, gels, creams, and sprays — mention application area, base type, preferred packing, and any regulatory market requirements.",
+      "label": "Advanced Delivery",
+      "sub": "Nasal & Oral Sprays",
+      "title": "Nasal & Oral Spray Manufacturing",
+      "text": "For specialized Fluticasone or Vitamin D3 sprays — mention the delivery mechanism, dosage per spray, and target registration market.",
       "checks": [
-        "Product type: ointment, cream, gel, spray",
-        "Active ingredient and base",
-        "Tube, jar, or pump packing preference",
-        "Pack size and branding requirements",
-        "Export or domestic market"
+        "Spray type: Nasal, Oral, Topical",
+        "Dosage per actuation",
+        "Bottle and Pump specifications",
+        "Stability study requirements",
+        "Domestic or International registration"
       ],
-      "summary": "Topical enquiries move faster with base type, packing format, and target market included."
+      "summary": "Spray enquiries move faster with actuation dosage and pump specifications included."
     },
     {
       "key": "privatelabel",
       "icon": "package-check",
-      "label": "Private Label",
-      "sub": "Brand-ready supply",
-      "title": "Private Label Manufacturing Requirements",
-      "text": "For brand-ready private label supply — share your product list, dosage preferences, artwork readiness, and repeat order planning details.",
+      "label": "Global Export",
+      "sub": "Contract Manufacturing",
+      "title": "Global Pharma Export Solutions",
+      "text": "For international private-label supply — share your country-specific registration needs, artwork guidelines, and documentation checklist.",
       "checks": [
-        "Product name and category",
-        "Artwork or label design status",
-        "Packing format and material",
-        "MOQ and repeat supply plan",
-        "Documentation needs (COA, batch records)"
+        "Target export country",
+        "Registration dossier requirements",
+        "Labeling and artwork status",
+        "MOQ per SKU",
+        "Logistics and shipping terms"
       ],
-      "summary": "Private label enquiries need product list, pack details, and artwork status to proceed."
+      "summary": "Export enquiries require specific country documentation and registration needs to proceed."
     }
   ]
 }
