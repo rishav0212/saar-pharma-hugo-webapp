@@ -18,7 +18,7 @@
 
   /* Section Layouts */
   .section-head {
-    @apply grid grid-cols-[1.1fr_0.9fr] gap-10 items-end mb-20;
+    @apply flex flex-col gap-4 mb-16;
   }
   
   @media (max-width: 820px) {
