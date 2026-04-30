@@ -3,7 +3,7 @@ languageCode = 'en-us'
 title = 'Saar Biotech | WHO-GMP Third Party Pharma Manufacturer'
 theme = 'saar'
 relativeURLs = false
-canonifyURLs = false
+canonifyURLs = true
 enableRobotsTXT = true
 
 [params]
