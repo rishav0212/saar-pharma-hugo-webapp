@@ -24,9 +24,9 @@
         <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
         {{ .Site.Params.phone }}
       </a>
-      <a class="btn btn--primary btn--small" href="/#contact">
+      <a class="btn btn--primary btn--small" href="/#enquiry-form">
         <span class="max-sm:hidden">Enquire Now</span>
-        <i data-lucide="arrow-right" class="icon" aria-hidden="true"></i>
+        <i data-lucide="send" class="icon" aria-hidden="true"></i>
       </a>
       <button id="menu-toggle" class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav">
         <i data-lucide="menu" class="icon icon-menu" aria-hidden="true"></i>
@@ -42,6 +42,6 @@
     <a href="/products/" class="{{ if eq .RelPermalink "/products/" }}active{{ end }}">Product Range</a>
     <a href="/#process">Process</a>
     <a href="/articles/" class="{{ if eq .RelPermalink "/articles/" }}active{{ end }}">Articles</a>
-    <a href="/#contact">Enquire Now</a>
+    <a href="/#enquiry-form">Enquire Now</a>
   </nav>
 </header>

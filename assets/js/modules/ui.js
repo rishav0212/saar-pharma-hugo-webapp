@@ -87,6 +87,40 @@ export function initProductScroll() {
   if (nextBtn) nextBtn.addEventListener('click', () => { 
     track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }); 
   });
+
+  // Custom Draggable / Swipe Support
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  const startDragging = (e) => {
+    isDown = true;
+    track.classList.add('is-dragging');
+    startX = (e.pageX || e.touches[0].pageX) - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  };
+
+  const stopDragging = () => {
+    isDown = false;
+    track.classList.remove('is-dragging');
+  };
+
+  const move = (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = (e.pageX || e.touches[0].pageX) - track.offsetLeft;
+    const walk = (x - startX) * 2;
+    track.scrollLeft = scrollLeft - walk;
+  };
+
+  track.addEventListener('mousedown', startDragging);
+  track.addEventListener('touchstart', startDragging, { passive: true });
+  
+  window.addEventListener('mouseup', stopDragging);
+  window.addEventListener('touchend', stopDragging);
+  
+  track.addEventListener('mousemove', move);
+  track.addEventListener('touchmove', move, { passive: false });
 }
 
 export function initAnchorScroll() {

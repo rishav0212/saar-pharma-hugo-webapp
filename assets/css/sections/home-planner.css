@@ -6,7 +6,7 @@
 
   /* Planner Tab Sidebar */
   .planner-tabs {
-    @apply flex content-start gap-0 border-r border-line overflow-x-auto overflow-y-hidden max-lg:border-r-0 max-lg:border-b max-lg:flex-row;
+    @apply flex flex-col content-start gap-0 border-r border-line overflow-x-auto overflow-y-hidden max-lg:border-r-0 max-lg:border-b max-lg:flex-row;
     background-color: var(--color-paper);
     scrollbar-width: none;
   }

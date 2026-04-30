@@ -361,11 +361,11 @@
   }
 
   .cert-badges {
-    @apply grid grid-cols-2 gap-5 max-md:gap-3;
+    @apply grid grid-cols-2 gap-5 max-md:grid-cols-1 max-md:gap-4;
   }
 
   .cert-badge {
-    @apply flex items-center gap-4 p-5 rounded-lg transition-all duration-300;
+    @apply flex items-center gap-4 p-5 rounded-lg transition-all duration-300 max-md:p-4;
     border: 1px solid rgba(255, 255, 255, 0.10);
     background-color: rgba(255, 255, 255, 0.05);
   }

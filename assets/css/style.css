@@ -67,7 +67,7 @@
   }
   
   .btn--small {
-    @apply min-h-[40px] px-3.5 py-2.5 text-[13px];
+    @apply min-h-[38px] px-3.5 py-1.5 text-[13px] gap-2;
   }
 
   /* ─── Global Icon Standardization (M12) ─── */
@@ -98,10 +98,9 @@
 
 /* Animations */
 [data-animate] {
-  opacity: 0;
-  filter: blur(2px);
-  will-change: transform, opacity, filter;
-  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1), filter 1s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0.15;
+  will-change: transform, opacity;
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Default: Fade Up */
@@ -115,16 +114,14 @@
 
 [data-animate].is-visible {
   opacity: 1;
-  filter: blur(0);
   transform: translate(0, 0) scale(1);
 }
 
 /* Staggering for Grids */
 .bento-grid > *, .unit-grid > *, .timeline-step, .metric, .article-card, .faq-item, .product-scroll-card, .footer-col {
   opacity: 0;
-  filter: blur(1px);
   transform: translateY(20px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Stagger Delays (CSS Only) */
@@ -136,7 +133,6 @@
 .is-visible .bento-grid > *, .is-visible .unit-grid > *, .is-visible .timeline-step, .is-visible .metric, .is-visible .article-card, .is-visible .faq-item, .is-visible .product-scroll-card, .is-visible .footer-col,
 .is-visible.bento-grid > *, .is-visible.unit-grid > *, .is-visible.timeline-step {
   opacity: 1;
-  filter: blur(0);
   transform: translateY(0);
 }
 
