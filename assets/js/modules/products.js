@@ -1,13 +1,17 @@
 /**
- * Saar Biotech — Products Module (Final Elite)
- * Handles: robust category filter, scored search, staggered reveals, URL state
+ * Saar Biotech — Products Module (Elite Search & Sync)
+ * Handles: dual-search sync, category dropdown sync, smooth scrolling, scored search
  */
 export function initProducts() {
   const page = document.getElementById('products-page');
   if (!page) return;
 
+  const grid        = document.getElementById('products-grid');
   const filterPills = document.querySelectorAll('.filter-pill[data-filter]');
-  const searchInput = document.getElementById('products-search');
+  const mainSearch  = document.getElementById('products-search');
+  const heroSearch  = document.getElementById('hero-search');
+  const heroSelect  = document.getElementById('hero-cat-select');
+  
   const cardWraps   = Array.from(document.querySelectorAll('.product-card-wrap'));
   const countEl     = document.getElementById('products-count');
   const activeLabel = document.getElementById('products-active-label');
@@ -18,44 +22,48 @@ export function initProducts() {
   let currentFilter = 'all';
   let currentQuery  = '';
 
-  // ─── Cache Data ────────────────────────────────────────────────
+  // ─── Pre-Index Data ────────────────────────────────────────────
   const productData = cardWraps.map(wrap => ({
     el: wrap,
-    cat: (wrap.dataset.category || '').toLowerCase().trim(), // Standardize
+    cat: (wrap.dataset.category || '').toLowerCase().trim(),
     title: (wrap.dataset.title || '').toLowerCase(),
     comp: (wrap.dataset.composition || '').toLowerCase(),
     area: (wrap.dataset.area || '').toLowerCase(),
+    desc: (wrap.dataset.desc || '').toLowerCase(),
+    packs: (wrap.dataset.packs || '').toLowerCase()
   }));
 
-  // ─── URL State ──────────────────────────────────────────────────
-  const hash = window.location.hash.replace('#', '').toLowerCase().trim();
-  if (hash && hash !== 'all') {
-    currentFilter = hash;
-    // Set initial active pill
+  // ─── Sync Logic ───────────────────────────────────────────────
+  function updateInputs(query, filter) {
+    if (mainSearch) mainSearch.value = query;
+    if (heroSearch) heroSearch.value = query;
+    if (heroSelect) heroSelect.value = filter;
+
     filterPills.forEach(p => {
       const pFilter = p.dataset.filter.toLowerCase().trim();
-      p.classList.toggle('is-active', pFilter === currentFilter);
+      p.classList.toggle('is-active', pFilter === filter);
     });
   }
 
-  // ─── Apply Filter & Search ──────────────────────────────────────
-  function applyFilters(animate = false) {
+  // ─── Apply Filters ─────────────────────────────────────────────
+  function applyFilters(animate = false, source = 'filter') {
     let visibleCount = 0;
     const matches = [];
 
     productData.forEach(item => {
-      // Split space-separated categories and check if filter matches any
       const itemCats = item.cat.split(' ');
       const passesCategory = (currentFilter === 'all') || itemCats.includes(currentFilter);
+      
       let score = 0;
-
       if (currentQuery) {
-        // Scoring: Higher points for composition matches
-        if (item.comp.includes(currentQuery)) score += 100;
-        if (item.title.includes(currentQuery)) score += 50;
-        if (item.area.includes(currentQuery)) score += 25;
+        if (item.title.includes(currentQuery))       score += 1000;
+        if (item.cat.includes(currentQuery))         score += 500;
+        if (item.comp.includes(currentQuery))        score += 250;
+        if (item.area.includes(currentQuery))        score += 100;
+        if (item.desc.includes(currentQuery))        score += 50;
+        if (item.packs.includes(currentQuery))       score += 25;
       } else {
-        score = 1; // Basic visibility if no search
+        score = 1;
       }
 
       if (passesCategory && score > 0) {
@@ -64,75 +72,103 @@ export function initProducts() {
       } else {
         item.el.classList.add('is-hidden');
         item.el.style.opacity = '0';
-        item.el.style.transform = 'translateY(10px)';
+        item.el.style.transform = 'scale(0.96) translateY(10px)';
       }
     });
 
-    // Sort visible results by score
     matches.sort((a, b) => b.score - a.score);
 
-    // Render Results with Stagger
+    // UX: Scroll down if searching from Hero
+    if (source === 'hero' && (currentQuery.length > 0 || currentFilter !== 'all')) {
+      const gridHeader = document.querySelector('.products-section');
+      if (gridHeader) {
+        window.scrollTo({
+          top: gridHeader.offsetTop - 80,
+          behavior: 'smooth'
+        });
+        
+        // Transfer focus to main search after a slight delay to allow scroll start
+        setTimeout(() => {
+          if (mainSearch && document.activeElement !== mainSearch) {
+            mainSearch.focus();
+            // Move cursor to end
+            const val = mainSearch.value;
+            mainSearch.value = '';
+            mainSearch.value = val;
+          }
+        }, 300);
+      }
+    }
+
+    // Render Grid
     matches.forEach(({ item }, index) => {
       item.el.classList.remove('is-hidden');
-      item.el.style.order = index; // Keep sorting via CSS order
+      item.el.style.order = index;
 
       if (animate) {
-        // Force reset
         item.el.style.opacity = '0';
-        item.el.style.transform = 'translateY(15px)';
+        item.el.style.transform = 'scale(0.98) translateY(15px)';
         item.el.style.transition = 'none';
-        
         void item.el.offsetWidth;
-
         setTimeout(() => {
-          item.el.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+          item.el.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
           item.el.style.opacity = '1';
-          item.el.style.transform = 'translateY(0)';
-        }, index * 30);
+          item.el.style.transform = 'scale(1) translateY(0)';
+        }, index * 20);
       } else {
         item.el.style.opacity = '1';
-        item.el.style.transform = 'translateY(0)';
-        item.el.style.transition = 'none';
+        item.el.style.transform = 'scale(1) translateY(0)';
       }
     });
 
-    // UI Updates
     if (countEl) countEl.textContent = visibleCount;
     if (emptyState) emptyState.style.display = (visibleCount === 0) ? 'flex' : 'none';
-    
     if (activeLabel) {
       const activePill = document.querySelector('.filter-pill.is-active');
-      activeLabel.textContent = activePill?.querySelector('.filter-pill__label')?.textContent || 'All Formulations';
+      activeLabel.textContent = activePill?.querySelector('.filter-pill__label')?.textContent || 'All Products';
     }
   }
 
-  // ─── Events ─────────────────────────────────────────────────────
+  // ─── Event Listeners ──────────────────────────────────────────
+  
+  // Search Inputs Sync
+  [mainSearch, heroSearch].forEach(input => {
+    if (!input) return;
+    input.addEventListener('input', (e) => {
+      currentQuery = e.target.value.trim().toLowerCase();
+      const isHero = e.target.id === 'hero-search';
+      updateInputs(currentQuery, currentFilter);
+      applyFilters(true, isHero ? 'hero' : 'main');
+    });
+  });
+
+  // Category Dropdown
+  if (heroSelect) {
+    heroSelect.addEventListener('change', (e) => {
+      currentFilter = e.target.value.toLowerCase().trim();
+      updateInputs(currentQuery, currentFilter);
+      applyFilters(true, 'hero');
+    });
+  }
+
+  // Filter Pills
   filterPills.forEach(pill => {
     pill.addEventListener('click', () => {
       const filter = pill.dataset.filter.toLowerCase().trim();
       if (filter === currentFilter) return;
-
-      filterPills.forEach(p => p.classList.remove('is-active'));
-      pill.classList.add('is-active');
-
       currentFilter = filter;
+      updateInputs(currentQuery, currentFilter);
       window.history.replaceState(null, '', filter === 'all' ? '#' : `#${filter}`);
-      
-      applyFilters(true);
+      applyFilters(true, 'filter');
     });
   });
 
-  if (searchInput) {
-    let debounce;
-    searchInput.addEventListener('input', (e) => {
-      clearTimeout(debounce);
-      debounce = setTimeout(() => {
-        currentQuery = e.target.value.trim().toLowerCase();
-        applyFilters(true);
-      }, 150);
-    });
+  // Initial Sync from URL
+  const hash = window.location.hash.replace('#', '').toLowerCase().trim();
+  if (hash && hash !== 'all') {
+    currentFilter = hash;
+    updateInputs('', currentFilter);
   }
 
-  // Initial Run
   applyFilters(false);
 }
