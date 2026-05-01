@@ -12,6 +12,8 @@
       {{- $cats := "" -}}
       {{- if .Params.categories }}{{ $cats = delimit .Params.categories " " }}{{ end -}}
       {{- $deepContent = printf "%s %s %s %s" $deepContent $cats (.Params.composition | default "") (.Params.dosage_form | default "") -}}
+      {{- /* Move technical info to summary for better search UI visibility */ -}}
+      {{- $summary = printf "%s • %s" (.Params.composition | default "") (.Params.dosage_form | default "") -}}
     {{- end -}}
 
     {{- $item := dict "title" .Title "permalink" .RelPermalink "summary" $summary "content" ($deepContent | truncate 2000) "type" .Type "weight" 1 -}}

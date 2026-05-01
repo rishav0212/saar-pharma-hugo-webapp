@@ -168,11 +168,14 @@
     }
 
     .search-result-item .result-meta {
-      @apply hidden; /* Hide meta on mobile results for cleaner look */
+      @apply block mb-0.5;
+    }
+    .search-result-item .result-meta span {
+      @apply text-[7px] px-1.5 py-0.5;
     }
 
     .search-result-item .result-snippet {
-      @apply hidden;
+      @apply block text-[10px] mt-1 line-clamp-1 border-t-0 pt-0 opacity-50;
     }
 
     .search-result-item[data-type="about"],
