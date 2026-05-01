@@ -240,30 +240,67 @@
   }
   .product-card__enquire-icon:hover { @apply bg-brand-3 text-white shadow-lift border-transparent; }
 
-  /* ─── Dynamic Responsive Grid (2-Column on Mobile) ─── */
+  /* ─── Dynamic Responsive Grid ─── */
   .products-grid {
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.75rem !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 2rem !important;
   }
 
-  @media (min-width: 640px) {
-    .products-grid {
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
-      gap: 2rem !important;
-    }
-  }
-
+  /* ─── Premium Horizontal Cards (Mobile Only) ─── */
   @media (max-width: 639px) {
-    .product-card__content { @apply p-4; }
-    .product-card__composition-tag { @apply text-[11px] min-h-[54px] p-2 mb-2; }
+    .products-grid {
+      grid-template-columns: 1fr !important;
+      gap: 1.25rem !important;
+    }
+
+    .product-card {
+    flex-direction: row !important;
+    align-items: stretch !important;
+    min-height: 180px;
+    display: flex !important;
+  }
+
+    .product-card__image-container {
+      @apply w-[38%] aspect-auto border-b-0 border-r border-line bg-surface/40;
+    }
+
+    .product-card__content {
+      @apply w-[62%] p-4 flex flex-col justify-between;
+    }
+
+    .product-card__title {
+      @apply text-[16px] min-h-0 mb-1.5;
+    }
+
+    .product-card__composition-tag {
+      @apply text-[10px] min-h-0 p-2 mb-2 bg-transparent border-none;
+    }
+
+    .product-card__dosage {
+      @apply mb-1.5;
+    }
+
     .product-card__desc { @apply hidden; }
-    .product-card__packs { @apply hidden; }
-    .product-card__footer { @apply pt-2; }
-    .product-card__cta { @apply text-[9px]; }
-    .product-card__enquire-icon { @apply w-8 h-8; }
-    .product-card__enquire-icon i { @apply w-4 h-4; }
-    .product-card__image-container { @apply aspect-square; }
+    .product-card__packs { 
+      @apply flex flex-wrap gap-1 mb-2; 
+    }
+    .product-card__pack {
+      @apply text-[8px] px-1.5 py-0.5;
+    }
+
+    .product-card__footer {
+      @apply pt-2 border-t-0;
+    }
+
+    .product-card__cta { @apply hidden; }
+    .product-card__enquire-icon { 
+      @apply relative w-11 h-11 bg-brand text-white shadow-lift border-transparent rounded-full flex items-center justify-center shrink-0 ml-auto; 
+      position: relative !important;
+      bottom: auto !important;
+      right: auto !important;
+      transform: none !important;
+    }
     .product-card__cat-group { @apply top-2 left-2; }
     .product-card__cat-badge { @apply text-[7px] px-2 py-0.5; }
   }

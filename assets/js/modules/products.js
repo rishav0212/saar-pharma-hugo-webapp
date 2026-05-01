@@ -138,8 +138,11 @@ export function initProducts() {
     searchTimeout = setTimeout(() => {
       applyFilters(true);
       if (isHero && val.length > 0) {
-        const target = document.getElementById('products-grid-top');
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        const target = document.getElementById('products-explorer');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          if (mainSearch) setTimeout(() => mainSearch.focus(), 600); // Wait for scroll
+        }
       }
     }, 300);
   }

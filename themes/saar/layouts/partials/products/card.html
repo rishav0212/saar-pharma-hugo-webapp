@@ -3,7 +3,7 @@
     {{ $safeCats = $safeCats | append (. | urlize) }}
 {{ end }}
 
-<article class="product-card product-card-wrap flex flex-col h-full group"
+<article class="product-card product-card-wrap h-full group"
     data-title="{{ .Title | lower }}"
     data-category="{{ delimit $safeCats " " }}"
     data-composition="{{ .Params.composition | lower }}"
