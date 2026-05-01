@@ -60,10 +60,12 @@ export function initSearch() {
       fuseEngine = new Fuse(searchIndex, {
         keys: [
           { name: 'title', weight: 1.0 },
-          { name: 'summary', weight: 0.5 }
+          { name: 'type', weight: 0.7 },
+          { name: 'summary', weight: 0.5 },
+          { name: 'content', weight: 0.3 }
         ],
-        threshold: 0.4,
-        minMatchCharLength: 1
+        threshold: 0.3,
+        minMatchCharLength: 2
       });
       console.log('Saar Search: Engine Ready.');
     } catch (err) {
