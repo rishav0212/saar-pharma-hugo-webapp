@@ -1,0 +1,12 @@
+<div id="enquiry-modal" class="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+  <div class="enquiry-modal__overlay" data-modal-close></div>
+  <div class="enquiry-modal__container">
+    <button class="enquiry-modal__close" data-modal-close aria-label="Close modal">
+      <i data-lucide="x" class="icon"></i>
+    </button>
+    
+    <div class="enquiry-modal__content-wrapper">
+      {{ partial "home/contact.html" (dict "id" "modal-form" "Site" .Site) }}
+    </div>
+  </div>
+</div>

@@ -10,6 +10,8 @@
   --color-paper: #f6fbfb;
   --color-surface: #edf7f6;
   --color-surface-2: #e5f2f0;
+  --color-white: #ffffff;
+  --color-white-rgb: 255, 255, 255;
   
   /* Brand colors */
   --color-brand: #159f91;

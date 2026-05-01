@@ -27,7 +27,7 @@
         <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
         {{ .Site.Params.phone }}
       </a>
-      <a class="btn btn--primary btn--small" href="/#enquiry-form">
+      <a class="btn btn--primary btn--small" href="#" data-enquire-trigger>
         <span class="max-sm:hidden">Enquire Now</span>
         <i data-lucide="send" class="icon" aria-hidden="true"></i>
       </a>
@@ -45,6 +45,6 @@
     <a href="/products/" class="{{ if eq .RelPermalink "/products/" }}active{{ end }}">Product Range</a>
     <a href="/#process">Process</a>
     <a href="/articles/" class="{{ if eq .RelPermalink "/articles/" }}active{{ end }}">Articles</a>
-    <a href="/#enquiry-form">Enquire Now</a>
+    <a href="#" data-enquire-trigger>Enquire Now</a>
   </nav>
 </header>

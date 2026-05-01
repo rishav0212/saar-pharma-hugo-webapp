@@ -34,49 +34,10 @@
       </div>
     </div>
 
-    <form id="enquiry-form" class="contact-form" name="manufacturing-enquiry" method="post" action="{{ .Site.Params.form_endpoint }}" aria-label="Manufacturing enquiry form" data-animate data-delay="0.1">
-      <div class="form-row">
-        <div class="form-field">
-          <label for="name">Full name</label>
-          <input class="form-control" id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
-        </div>
-        <div class="form-field">
-          <label for="company">Company</label>
-          <input class="form-control" id="company" name="company" type="text" autocomplete="organization" placeholder="Company name">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input class="form-control" id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
-        </div>
-        <div class="form-field">
-          <label for="phone">Phone</label>
-          <input class="form-control" id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+91 XXXXX XXXXX">
-        </div>
-      </div>
-      <div class="form-field">
-        <label for="category">Product category</label>
-        <select class="form-control" id="category" name="category">
-          <option value="">Select a category</option>
-          <option>Syrups</option>
-          <option>Suspensions</option>
-          <option>Ointments / Gels</option>
-          <option>Drops</option>
-          <option>Sprays</option>
-          <option>Topical solutions</option>
-          <option>Other product</option>
-        </select>
-      </div>
-      <div class="form-field">
-        <label for="message">Requirement</label>
-        <textarea class="form-control" id="message" name="message" placeholder="Mention product name, dosage form, packing, quantity, and timeline." required></textarea>
-      </div>
-      <button class="btn btn--light" type="submit">
-        Send Enquiry
-        <i data-lucide="send" class="icon" aria-hidden="true"></i>
-      </button>
-      <p class="form-note">For urgent quotes, call or email directly using the contact details shown here.</p>
-    </form>
+    {{ $formId := "contact-form" }}
+    {{ if reflect.IsMap . }}
+      {{ $formId = .id | default "contact-form" }}
+    {{ end }}
+    {{ partial "ui/enquiry-form.html" (dict "id" $formId "animate" (ne $formId "modal-form") "Site" $.Site) }}
   </div>
 </section>

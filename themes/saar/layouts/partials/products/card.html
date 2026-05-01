@@ -1,81 +1,86 @@
-{{/*
-  Partial: products/card.html
-*/}}
-
-{{ $allCats := slice }}
+{{ $safeCats := slice }}
 {{ range .Params.categories }}
-    {{ $allCats = $allCats | append (. | urlize) }}
+    {{ $safeCats = $safeCats | append (. | urlize) }}
 {{ end }}
-{{ $catString := delimit $allCats " " }}
-{{ $dosageForm := .Params.dosage_form | default "Formulation" }}
-{{ $composition := .Params.composition | default .Description }}
-{{ $icon := .Params.icon | default "flask-conical" }}
 
-<div class="product-card-wrap" 
-     data-category="{{ $catString }}" 
-     data-title="{{ .Title | lower }}" 
-     data-composition="{{ $composition | lower }}"
-     data-area="{{ .Params.therapeutic_area | default "" | lower }}"
-     data-desc="{{ .Description | default .Summary | lower }}"
-     data-packs="{{ delimit .Params.pack_sizes " " | lower }}">
+<article class="product-card product-card-wrap flex flex-col h-full group"
+    data-title="{{ .Title | lower }}"
+    data-category="{{ delimit $safeCats " " }}"
+    data-composition="{{ .Params.composition | lower }}"
+    data-area="{{ .Params.therapeutic_area | default "" | lower }}"
+    data-desc="{{ .Description | default .Summary | lower }}"
+    data-categories="{{ delimit .Params.categories " " | lower }}"
+    data-packs="{{ delimit .Params.pack_sizes " " | lower }}">
     
-    <article class="product-card group">
-        <!-- Main Overlay Link for Clickability -->
-        <a href="{{ .RelPermalink }}" class="absolute inset-0 z-10" aria-label="View {{ .Title }} details"></a>
+    <!-- Main Overlay Link -->
+    <a href="{{ .RelPermalink }}" class="absolute inset-0 z-10" aria-label="View {{ .Title }} details"></a>
 
-        <!-- Category Badge (Top-Left) -->
-        <span class="product-card__cat-badge">{{ index .Params.categories 0 }}</span>
-
-        <!-- Image Area -->
-        <div class="product-card__image-container">
-            {{ if .Params.image }}
-                <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
-            {{ else }}
-                <div class="text-teal-600/10">
-                    <i data-lucide="{{ $icon }}" class="w-16 h-16"></i>
-                </div>
+    {{ if .Params.categories }}
+        <div class="product-card__cat-group">
+            {{ range first 3 .Params.categories }}
+                <span class="product-card__cat-badge">{{ . }}</span>
             {{ end }}
         </div>
+    {{ end }}
 
-        <!-- Content Area -->
-        <div class="product-card__content">
-            <!-- Dosage Form Above Title -->
-            <span class="product-card__dosage">{{ $dosageForm }}</span>
-
-            <!-- Authoritative Title -->
-            <h3 class="product-card__title">
-                {{ .Title }}
-            </h3>
-
-            <!-- Distinct Composition Box -->
-            <div class="product-card__composition-tag">
-                {{ $composition }}
+    <div class="product-card__image-container">
+        {{ if .Params.image }}
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" class="product-card__image" loading="lazy" decoding="async">
+        {{ else }}
+            <div class="text-teal-600/10">
+                <i data-lucide="{{ default "pill" .Params.icon }}" class="w-16 h-16"></i>
             </div>
+        {{ end }}
+    </div>
 
-            {{ with .Params.pack_sizes }}
+    <div class="product-card__content flex-1 flex flex-col">
+        {{ if .Params.dosage_form }}
+            <div>
+                <span class="product-card__dosage">{{ .Params.dosage_form }}</span>
+            </div>
+        {{ end }}
+        
+        <h3 class="product-card__title">
+            {{ .Title }}
+        </h3>
+
+        {{ if .Params.composition }}
+            <div class="product-card__composition-tag">
+                <i data-lucide="microscope" class="w-3.5 h-3.5"></i>
+                <span>{{ .Params.composition }}</span>
+            </div>
+        {{ end }}
+
+        {{ if .Params.pack_sizes }}
             <div class="product-card__packs">
-                {{ range . }}
-                <span class="product-card__pack">{{ . }}</span>
+                {{ range .Params.pack_sizes }}
+                    <span class="product-card__pack">
+                        <i data-lucide="package" class="w-3 h-3"></i>
+                        {{ . }}
+                    </span>
                 {{ end }}
             </div>
-            {{ end }}
+        {{ end }}
 
-            <!-- Description -->
-            <p class="product-card__desc">
-                {{ .Description | default .Summary | truncate 100 }}
-            </p>
+        <p class="product-card__desc">
+            {{ .Description | default .Summary | truncate 120 }}
+        </p>
 
-            <!-- Footer / CTA -->
-            <div class="product-card__footer">
-                <div class="product-card__cta">
-                    View Product
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </div>
-                
-                <a href="/#enquiry-form" class="product-card__enquire-icon relative z-20" aria-label="Enquire about {{ .Title }}">
-                    <i data-lucide="mail" class="w-5 h-5"></i>
-                </a>
+        <!-- Pushed to bottom via flex-1 + mt-auto -->
+        <div class="product-card__footer mt-auto">
+            <div class="product-card__cta">
+                View Details
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </div>
+            
+            <a href="#" 
+               class="product-card__enquire-icon relative z-20" 
+               aria-label="Enquire about {{ .Title }}"
+               data-enquire-trigger
+               data-product-name="{{ .Title }}"
+               data-category="{{ index .Params.categories 0 | default "" }}">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+            </a>
         </div>
-    </article>
-</div>
+    </div>
+</article>

@@ -23,9 +23,16 @@
   }
 
   .site-header__inner {
-    @apply w-full max-w-[1600px] mx-auto px-6 h-full flex items-center justify-between gap-[22px] max-md:px-4 max-md:gap-4;
+    @apply w-full mx-auto px-6 h-full flex items-center justify-between gap-[22px] max-md:px-4 max-md:gap-4;
+    max-width: 100%;
     position: relative;
     z-index: 1;
+  }
+
+  @media (min-width: 1024px) {
+    .site-header__inner {
+      max-width: 98%;
+    }
   }
 
   /* ─── Brand / Logo ─── */

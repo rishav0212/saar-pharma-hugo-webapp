@@ -22,14 +22,14 @@
                 </p>
 
                 <!-- Hero Search with Category Dropdown -->
-                <div class="products-hero-search-group">
-                    <div class="hero-search-wrap">
+                <div class="products-hero-search-group flex flex-col md:flex-row gap-0">
+                    <div class="hero-search-wrap w-full md:w-auto flex-1">
                         <i data-lucide="search" class="icon-search"></i>
-                        <input type="text" id="hero-search" placeholder="Search formulations..." class="hero-search-input">
+                        <input type="text" id="hero-search" aria-label="Search formulations" placeholder="Search formulations..." class="hero-search-input">
                     </div>
                     
-                    <div class="hero-cat-wrap">
-                        <select id="hero-cat-select" class="hero-cat-select">
+                    <div class="hero-cat-wrap w-full md:w-[260px] border-t md:border-t-0 border-white/15 md:border-l">
+                        <select id="hero-cat-select" class="hero-cat-select" aria-label="Select Category">
                             <option value="all">All Categories</option>
                             {{ $cats := slice }}
                             {{ range (where .Site.RegularPages "Section" "products") }}
@@ -63,52 +63,98 @@
         </div>
     </section>
 
+    <!-- Animated Category Marquee -->
+    <div class="marquee">
+        <div class="marquee__track">
+            {{ $allCats := slice }}
+            {{ range (where .Site.RegularPages "Section" "products") }}
+                {{ if .Params.categories }}
+                    {{ range .Params.categories }}
+                        {{ $allCats = $allCats | append . }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+            {{ $uniqueCats := $allCats | uniq | sort }}
+            
+            {{/* Duplicate for seamless loop */}}
+            {{ range (seq 4) }}
+                {{ range $uniqueCats }}
+                    {{ $catName := . }}
+                    {{ $count := 0 }}
+                    {{ range $allCats }}
+                        {{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}
+                    {{ end }}
+                    <button class="marquee__item cursor-pointer" data-filter-ticker="{{ . | urlize }}">
+                        {{ . }}
+                    </button>
+                {{ end }}
+            {{ end }}
+        </div>
+    </div>
+
     <!-- Floating Global Filter & Search Bar -->
-    <nav class="product-filter-bar shadow-sm">
+    <nav class="product-filter-bar shadow-sm sticky top-0 md:top-[72px]">
         <div class="container">
             <div class="product-filter-bar__inner">
                 <!-- Inline Search & Dropdown -->
-                <div class="product-filter-search">
+                <!-- Premium Smart Search -->
+                <div class="product-filter-search-group">
                     <div class="filter-search-wrap">
                         <i data-lucide="search" class="icon-search"></i>
-                        <input type="text" id="products-search" placeholder="Quick find formulations..." class="filter-search-input">
-                    </div>
-                    
-                    <div class="filter-cat-dropdown">
-                        <select id="filter-cat-select" class="filter-cat-select">
-                            <option value="all">Categories</option>
-                            {{ range (uniq $cats) }}
-                            <option value="{{ . | urlize }}">{{ . }}</option>
-                            {{ end }}
-                        </select>
-                        <i data-lucide="chevron-down" class="icon-chevron-small"></i>
+                        <input type="text" id="products-search" autocomplete="off" aria-label="Search products" placeholder="Search by category, name, or composition..." class="filter-search-input">
+                        
+                        <!-- Custom Suggestions Dropdown -->
+                        <div id="search-suggestions" class="search-suggestions is-hidden">
+                            <div class="suggestions-header">Therapeutic Categories</div>
+                            <div class="suggestions-list">
+                                {{ range $uniqueCats }}
+                                    {{ $catName := . }}
+                                    {{ $count := 0 }}
+                                    {{ range $allCats }}
+                                        {{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}
+                                    {{ end }}
+                                    <div class="suggestion-item" data-value="{{ . }}">
+                                        <i data-lucide="tag" class="w-3.5 h-3.5 opacity-50"></i>
+                                        <div class="flex justify-between items-center w-full pr-2">
+                                            <span>{{ . }}</span>
+                                            <span class="text-[10px] opacity-40 font-black">{{ $count }} Items</span>
+                                        </div>
+                                    </div>
+                                {{ end }}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Category Slider -->
                 <div class="product-filter-pills-wrap">
-                    <div class="filter-pills no-scrollbar">
+                    <button class="filter-nav-btn filter-nav-btn--left" id="pills-scroll-left" aria-label="Scroll Left">
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+                    
+                    <div class="filter-pills no-scrollbar" id="filter-pills-scroll">
                         <button class="filter-pill is-active" data-filter="all" aria-pressed="true">
-                            <span class="filter-pill__label">All</span>
-                            <span class="filter-pill__count">{{ len (where .Site.RegularPages "Section" "products") }}</span>
+                            <span class="filter-pill__label">All <span class="opacity-50 ml-1">({{ len (where .Site.RegularPages "Section" "products") }})</span></span>
                         </button>
-                        
-                        {{ range (uniq $cats) }}
-                        {{ $catName := . }}
-                        {{ $count := 0 }}
-                        {{ range (where $.Site.RegularPages "Section" "products") }}
-                            {{ if in .Params.categories $catName }}
-                                {{ $count = add $count 1 }}
+
+                        {{ range $uniqueCats }}
+                            {{ $catName := . }}
+                            {{ $count := 0 }}
+                            {{ range $allCats }}
+                                {{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}
                             {{ end }}
-                        {{ end }}
-                        <button class="filter-pill" data-filter="{{ . | urlize }}" aria-pressed="false">
-                            <span class="filter-pill__label">{{ . }}</span>
-                            <span class="filter-pill__count">{{ $count }}</span>
-                        </button>
+                            <button class="filter-pill" data-filter="{{ . | urlize }}" aria-pressed="false">
+                                <span class="filter-pill__label">{{ . }} <span class="opacity-50 ml-1">({{ $count }})</span></span>
+                            </button>
                         {{ end }}
                     </div>
-                    <div class="filter-fade-left"></div>
-                    <div class="filter-fade-right"></div>
+
+                    <button class="filter-nav-btn filter-nav-btn--right" id="pills-scroll-right" aria-label="Scroll Right">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                    
+                    <div class="filter-fade-left" id="fade-left"></div>
+                    <div class="filter-fade-right" id="fade-right"></div>
                 </div>
 
                 <!-- Result Counter -->
@@ -121,17 +167,20 @@
     </nav>
 
     <!-- Products Grid Section -->
-    <section class="products-section">
+    <section id="products-grid-top" class="products-section">
         <div class="container relative z-10">
             <div class="products-active-header" data-animate="fade-up">
                 <div class="flex items-center gap-3 mb-2">
                     <span class="w-8 h-[2px] bg-teal-600"></span>
                     <span class="text-[10px] font-black text-teal-600 uppercase tracking-widest">Manufacturing Portfolio</span>
                 </div>
-                <h2 id="products-active-label" class="text-3xl font-display font-black text-gray-900">All Products</h2>
+                <h2 id="products-active-label" class="text-3xl font-display font-black text-gray-900 flex items-center gap-3">
+                    <span id="active-cat-name">All</span>
+                    <span id="products-count-badge" class="text-[0.6em] opacity-30 font-bold">({{ len (where .Site.RegularPages "Section" "products") }})</span>
+                </h2>
             </div>
 
-            <div class="products-grid" id="products-grid">
+            <div class="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="products-grid">
                 {{ range .Pages.ByTitle }}
                     {{ partial "products/card.html" . }}
                 {{ end }}
@@ -151,8 +200,35 @@
         </div>
     </section>
 
+    <!-- Authority & Technical Expertise Section -->
+    {{ partial "products/authority.html" . }}
+
+    <!-- Products Knowledge Base (SEO FAQ Section) -->
+    <section class="products-faq section section--paper section-rail" id="product-faq" aria-labelledby="faq-title">
+        <div class="container faq-layout">
+            <div class="faq-aside" data-animate="slide-right">
+                <span class="eyebrow">Product Expertise</span>
+                <h2 id="faq-title" class="section-title section-title--sm">Therapeutic & Manufacturing Knowledge</h2>
+                <p class="section-kicker">Detailed answers regarding our DCGI approved molecules, therapeutic categories, and third-party manufacturing protocols at our Baddi facility.</p>
+                <a class="btn btn--outline" href="#" data-enquire-trigger>
+                    Download Portfolio
+                    <i data-lucide="download" class="icon" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <div class="faq-list" data-animate data-animate-stagger>
+                {{ range $index, $item := .Params.faqs }}
+                <details class="faq-item" {{ if eq $index 0 }}open{{ end }}>
+                    <summary>{{ $item.q }}</summary>
+                    <p>{{ $item.a | markdownify }}</p>
+                </details>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+
     <!-- Integrated Global Enquiry Section -->
-    <div class="mt-12">
+    <div class="mt-0">
         {{ partial "home/contact.html" . }}
     </div>
 </div>

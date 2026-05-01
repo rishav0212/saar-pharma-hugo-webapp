@@ -1,0 +1,43 @@
+<form id="{{ .id | default "enquiry-form" }}" class="contact-form" name="manufacturing-enquiry" method="post" action="{{ .Site.Params.form_endpoint }}" aria-label="Manufacturing enquiry form" {{ if .animate }}data-animate data-delay="0.1"{{ end }}>
+  <div class="form-row">
+    <div class="form-field">
+      <label for="{{ .id | default "enquiry-form" }}-name">Full name</label>
+      <input class="form-control" id="{{ .id | default "enquiry-form" }}-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+    </div>
+    <div class="form-field">
+      <label for="{{ .id | default "enquiry-form" }}-company">Company</label>
+      <input class="form-control" id="{{ .id | default "enquiry-form" }}-company" name="company" type="text" autocomplete="organization" placeholder="Company name">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-field">
+      <label for="{{ .id | default "enquiry-form" }}-email">Email</label>
+      <input class="form-control" id="{{ .id | default "enquiry-form" }}-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+    </div>
+    <div class="form-field">
+      <label for="{{ .id | default "enquiry-form" }}-phone">Phone</label>
+      <input class="form-control" id="{{ .id | default "enquiry-form" }}-phone" name="phone" type="tel" autocomplete="tel" placeholder="+91 XXXXX XXXXX">
+    </div>
+  </div>
+  <div class="form-field">
+    <label for="{{ .id | default "enquiry-form" }}-category">Product category</label>
+    <select class="form-control" id="{{ .id | default "enquiry-form" }}-category" name="category">
+      <option value="">Select a category</option>
+      <option>Tablets / Capsules</option>
+      <option>Syrups / Suspensions</option>
+      <option>Ointments / Gels</option>
+      <option>Drops / Sprays</option>
+      <option>Topical solutions</option>
+      <option>Other product</option>
+    </select>
+  </div>
+  <div class="form-field">
+    <label for="{{ .id | default "enquiry-form" }}-message">Requirement</label>
+    <textarea class="form-control" id="{{ .id | default "enquiry-form" }}-message" name="message" placeholder="Mention product name, dosage form, packing, quantity, and timeline." required></textarea>
+  </div>
+  <button class="btn btn--primary" type="submit">
+    Send Enquiry
+    <i data-lucide="send" class="icon" aria-hidden="true"></i>
+  </button>
+  <p class="form-note">For urgent quotes, call or email directly using the contact details shown here.</p>
+</form>

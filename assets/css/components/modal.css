@@ -1,0 +1,67 @@
+@layer components {
+  .enquiry-modal {
+    @apply fixed inset-0 flex items-center justify-center p-4 md:p-6 transition-all duration-300 pointer-events-none opacity-0;
+    z-index: 9999;
+    background-color: rgba(6, 17, 33, 0.85);
+    backdrop-filter: blur(12px);
+    display: none;
+  }
+
+  .enquiry-modal.is-active {
+    @apply opacity-100 pointer-events-auto;
+    display: flex;
+  }
+
+  .enquiry-modal__overlay {
+    @apply absolute inset-0 cursor-pointer;
+  }
+
+  .enquiry-modal__container {
+    @apply relative w-full max-w-[1240px] bg-abyss rounded-[32px] shadow-2xl flex flex-col transition-all duration-400 scale-95 overflow-hidden;
+    max-height: 94vh;
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .enquiry-modal.is-active .enquiry-modal__container {
+    @apply scale-100;
+  }
+
+  .enquiry-modal__close {
+    @apply absolute top-6 right-6 w-11 h-11 flex items-center justify-center rounded-full transition-all duration-200 cursor-pointer bg-white/10 text-white border border-white/10 z-50;
+  }
+
+  .enquiry-modal__close:hover {
+    @apply bg-brand text-white border-transparent rotate-90;
+  }
+
+  .enquiry-modal__content-wrapper {
+    @apply overflow-y-auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-brand) rgba(255,255,255,0.05);
+  }
+
+  .enquiry-modal__content-wrapper::-webkit-scrollbar { width: 6px; }
+  .enquiry-modal__content-wrapper::-webkit-scrollbar-thumb { @apply bg-brand rounded-full; }
+
+  /* Adapt contact.html for Modal context */
+  .enquiry-modal .section {
+    @apply py-16 px-12 max-lg:py-12 max-lg:px-10 max-md:py-10 max-md:px-8;
+    background-color: transparent !important;
+  }
+
+  .enquiry-modal .container {
+    @apply max-w-none p-0 m-0;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .enquiry-modal .contact-layout {
+    @apply grid grid-cols-[0.95fr_1.05fr] gap-[58px] items-center max-lg:grid-cols-1 max-lg:gap-10;
+  }
+
+  /* Ensure form styles are correct in modal */
+  .enquiry-modal .contact-form {
+    @apply p-0 border-none shadow-none bg-transparent backdrop-blur-none;
+  }
+}

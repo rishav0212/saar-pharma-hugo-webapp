@@ -6,6 +6,20 @@ module.exports = {
     "./themes/saar/layouts/**/*.html",
   ],
   theme: {
+    /* Direct Definitions to ensure 3xl and 4xl variants exist */
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1140px',   /* Force 4 columns on your screen */
+      '2xl': '1340px',
+      '3xl': '1600px',
+      '4xl': '1850px',
+    },
+    container: {
+      center: true,
+      padding: '1.5rem',
+    },
     extend: {
       colors: {
         teal: {
