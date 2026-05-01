@@ -60,9 +60,9 @@ export function initSearch() {
       fuseEngine = new Fuse(searchIndex, {
         keys: [
           { name: 'title', weight: 1.0 },
-          { name: 'type', weight: 0.7 },
-          { name: 'summary', weight: 0.5 },
-          { name: 'content', weight: 0.3 }
+          { name: 'type', weight: 0.8 },
+          { name: 'summary', weight: 0.6 },
+          { name: 'content', weight: 0.6 }
         ],
         threshold: 0.3,
         minMatchCharLength: 2
@@ -162,6 +162,7 @@ export function initSearch() {
     if (t.includes('unit')) return 'factory';
     if (t.includes('faq')) return 'help-circle';
     if (t.includes('category')) return 'layers';
+    if (t.includes('products')) return 'pill';
     return 'file-text';
   }
 

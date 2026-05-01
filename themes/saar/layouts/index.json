@@ -1,20 +1,31 @@
 {{- $index := slice -}}
 
-{{/* 1. Standard Pages & Articles (Weight: 1 - Highest Priority) */}}
+{{/* 1. Standard Pages & Articles (Enhanced with Product Deep-Indexing) */}}
 {{- range .Site.AllPages -}}
   {{- if and (ne .Kind "taxonomy") (ne .Kind "term") (ne .Title "") -}}
     {{- $summary := .Summary | plainify -}}
     {{- if .IsHome -}}{{- $summary = "Leading WHO-GMP & ISO certified pharmaceutical manufacturer specializing in oral liquids, ointments, and drops." -}}{{- end -}}
-    {{- $item := dict "title" .Title "permalink" .RelPermalink "summary" $summary "content" (.Plain | truncate 800) "type" .Type "weight" 1 -}}
+    
+    {{/* Combine technical content for deep searching */}}
+    {{- $deepContent := .Plain -}}
+    {{- if eq .Type "products" -}}
+      {{- $cats := "" -}}
+      {{- if .Params.categories }}{{ $cats = delimit .Params.categories " " }}{{ end -}}
+      {{- $deepContent = printf "%s %s %s %s" $deepContent $cats (.Params.composition | default "") (.Params.dosage_form | default "") -}}
+    {{- end -}}
+
+    {{- $item := dict "title" .Title "permalink" .RelPermalink "summary" $summary "content" ($deepContent | truncate 2000) "type" .Type "weight" 1 -}}
     {{- $index = $index | append $item -}}
   {{- end -}}
 {{- end -}}
 
-{{/* 2. Deep Sections (Weight: 10 - Lower Priority) */}}
-{{- $home := .Site.Data.home -}}
+{{/* 2. Deep Sections from Homepage (Migrated to Params) */}}
+{{- $home := .Site.Home.Params -}}
 
 {{- range $home.categories -}}
-  {{- $item := dict "title" .title "permalink" (.url | default "/#categories") "summary" .text "content" (delimit .tags " ") "type" "Category" "weight" 10 -}}
+  {{- $tags := "" -}}
+  {{- if .tags }}{{ $tags = delimit .tags " " }}{{ end -}}
+  {{- $item := dict "title" .title "permalink" (.url | default "/#categories") "summary" .text "content" $tags "type" "Category" "weight" 10 -}}
   {{- $index = $index | append $item -}}
 {{- end -}}
 
