@@ -67,10 +67,22 @@
     <nav class="product-filter-bar shadow-sm">
         <div class="container">
             <div class="product-filter-bar__inner">
-                <!-- Inline Search -->
+                <!-- Inline Search & Dropdown -->
                 <div class="product-filter-search">
-                    <i data-lucide="search" class="icon-search"></i>
-                    <input type="text" id="products-search" placeholder="Quick find..." class="filter-search-input">
+                    <div class="filter-search-wrap">
+                        <i data-lucide="search" class="icon-search"></i>
+                        <input type="text" id="products-search" placeholder="Quick find formulations..." class="filter-search-input">
+                    </div>
+                    
+                    <div class="filter-cat-dropdown">
+                        <select id="filter-cat-select" class="filter-cat-select">
+                            <option value="all">Categories</option>
+                            {{ range (uniq $cats) }}
+                            <option value="{{ . | urlize }}">{{ . }}</option>
+                            {{ end }}
+                        </select>
+                        <i data-lucide="chevron-down" class="icon-chevron-small"></i>
+                    </div>
                 </div>
 
                 <!-- Category Slider -->

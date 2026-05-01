@@ -11,6 +11,7 @@ export function initProducts() {
   const mainSearch  = document.getElementById('products-search');
   const heroSearch  = document.getElementById('hero-search');
   const heroSelect  = document.getElementById('hero-cat-select');
+  const filterSelect = document.getElementById('filter-cat-select'); // New dropdown in filter bar
   
   const cardWraps   = Array.from(document.querySelectorAll('.product-card-wrap'));
   const countEl     = document.getElementById('products-count');
@@ -38,6 +39,7 @@ export function initProducts() {
     if (mainSearch) mainSearch.value = query;
     if (heroSearch) heroSearch.value = query;
     if (heroSelect) heroSelect.value = filter;
+    if (filterSelect) filterSelect.value = filter;
 
     filterPills.forEach(p => {
       const pFilter = p.dataset.filter.toLowerCase().trim();
@@ -56,12 +58,13 @@ export function initProducts() {
       
       let score = 0;
       if (currentQuery) {
-        if (item.title.includes(currentQuery))       score += 1000;
-        if (item.cat.includes(currentQuery))         score += 500;
+        // Priority Scoring: Title > Category > Desc > Others
+        if (item.title.includes(currentQuery))       score += 2000;
+        if (item.cat.includes(currentQuery))         score += 1000;
+        if (item.desc.includes(currentQuery))        score += 500;
         if (item.comp.includes(currentQuery))        score += 250;
         if (item.area.includes(currentQuery))        score += 100;
-        if (item.desc.includes(currentQuery))        score += 50;
-        if (item.packs.includes(currentQuery))       score += 25;
+        if (item.packs.includes(currentQuery))       score += 50;
       } else {
         score = 1;
       }
@@ -70,12 +73,15 @@ export function initProducts() {
         matches.push({ item, score });
         visibleCount++;
       } else {
+        // Smooth Hide
         item.el.classList.add('is-hidden');
         item.el.style.opacity = '0';
-        item.el.style.transform = 'scale(0.96) translateY(10px)';
+        item.el.style.transform = 'scale(0.95) translateY(20px)';
+        item.el.style.pointerEvents = 'none';
       }
     });
 
+    // Sort by score
     matches.sort((a, b) => b.score - a.score);
 
     // UX: Scroll down if searching from Hero
@@ -83,38 +89,35 @@ export function initProducts() {
       const gridHeader = document.querySelector('.products-section');
       if (gridHeader) {
         window.scrollTo({
-          top: gridHeader.offsetTop - 80,
+          top: gridHeader.offsetTop - 120,
           behavior: 'smooth'
         });
         
-        // Transfer focus to main search after a slight delay to allow scroll start
+        // Transfer focus to main search
         setTimeout(() => {
           if (mainSearch && document.activeElement !== mainSearch) {
             mainSearch.focus();
-            // Move cursor to end
             const val = mainSearch.value;
             mainSearch.value = '';
             mainSearch.value = val;
           }
-        }, 300);
+        }, 400);
       }
     }
 
-    // Render Grid
+    // Render Grid with Order and Smooth Show
     matches.forEach(({ item }, index) => {
       item.el.classList.remove('is-hidden');
       item.el.style.order = index;
+      item.el.style.pointerEvents = 'auto';
 
       if (animate) {
-        item.el.style.opacity = '0';
-        item.el.style.transform = 'scale(0.98) translateY(15px)';
-        item.el.style.transition = 'none';
-        void item.el.offsetWidth;
+        // Delay each item slightly for a "wave" effect
         setTimeout(() => {
-          item.el.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+          item.el.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
           item.el.style.opacity = '1';
           item.el.style.transform = 'scale(1) translateY(0)';
-        }, index * 20);
+        }, index * 15);
       } else {
         item.el.style.opacity = '1';
         item.el.style.transform = 'scale(1) translateY(0)';
@@ -142,14 +145,16 @@ export function initProducts() {
     });
   });
 
-  // Category Dropdown
-  if (heroSelect) {
-    heroSelect.addEventListener('change', (e) => {
+  // Category Dropdowns
+  [heroSelect, filterSelect].forEach(select => {
+    if (!select) return;
+    select.addEventListener('change', (e) => {
       currentFilter = e.target.value.toLowerCase().trim();
+      const isHero = e.target.id === 'hero-cat-select';
       updateInputs(currentQuery, currentFilter);
-      applyFilters(true, 'hero');
+      applyFilters(true, isHero ? 'hero' : 'filter');
     });
-  }
+  });
 
   // Filter Pills
   filterPills.forEach(pill => {
@@ -162,6 +167,17 @@ export function initProducts() {
       applyFilters(true, 'filter');
     });
   });
+
+  // Horizontal Scroll for Pills (Visual Polish)
+  const pillsContainer = document.querySelector('.filter-pills');
+  if (pillsContainer) {
+    pillsContainer.addEventListener('wheel', (e) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+        pillsContainer.scrollLeft += e.deltaY;
+      }
+    });
+  }
 
   // Initial Sync from URL
   const hash = window.location.hash.replace('#', '').toLowerCase().trim();
