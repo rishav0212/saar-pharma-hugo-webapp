@@ -168,10 +168,28 @@ export function initProducts() {
   if (mainSearch) {
     mainSearch.addEventListener('input', (e) => handleSearchInput(e, false));
     mainSearch.addEventListener('focus', showSuggestions);
+    
+    // Mobile dismissal on Enter
+    mainSearch.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const gridTop = document.getElementById('products-grid-top');
+        if (gridTop) gridTop.scrollIntoView({ behavior: 'smooth' });
+        mainSearch.blur();
+        if (suggestionsBox) suggestionsBox.classList.add('is-hidden');
+      }
+    });
   }
 
   if (heroSearch) {
     heroSearch.addEventListener('input', (e) => handleSearchInput(e, true));
+    
+    heroSearch.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const gridTop = document.getElementById('products-grid-top');
+        if (gridTop) gridTop.scrollIntoView({ behavior: 'smooth' });
+        heroSearch.blur();
+      }
+    });
   }
 
   if (heroSelect) {
