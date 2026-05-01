@@ -28,7 +28,7 @@ categories:
     url: "/products/"
   - icon: "package-check"
     title: "Global Contract Manufacturing"
-    text: "End-to-end third-party manufacturing solutions for 2050+ global clients with 500+ DCGI-approved products."
+    text: "End-to-end third-party manufacturing solutions for 2050+ global clients with 240+ DCGI-approved products."
     tags: ["Contract Pharma", "Global Export", "Baddi Unit"]
     url: "/products/"
   - icon: "shield-check"
@@ -51,7 +51,7 @@ why:
     title: "2050+ Global Clients"
     text: "Demonstrated trust across international markets, serving procurement managers and pharma brands with unyielding reliability."
   - icon: "clipboard-check"
-    title: "500+ Formulations"
+    title: "240+ Formulations"
     text: "A massive formulation bank of DCGI-approved products across all therapeutic segments for fast market entry."
   - icon: "globe"
     title: "Baddi Pharma Hub"
