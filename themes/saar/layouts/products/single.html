@@ -1,131 +1,212 @@
 {{ define "main" }}
 
-{{ $primaryCat := index .Params.categories 0 | default "general" }}
+<main class="product-single-page bg-white">
+    <!-- Clean Clinical Header -->
+    <header class="pt-[140px] pb-16 bg-paper border-b border-line">
+        <div class="container">
+            <!-- Subtle Breadcrumb -->
+            <nav class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted mb-8" data-animate="fade-in">
+                <a href="/" class="hover:text-brand transition-colors">Home</a>
+                <i data-lucide="chevron-right" class="w-3 h-3 opacity-30"></i>
+                <a href="/products/" class="hover:text-brand transition-colors">Products</a>
+                <i data-lucide="chevron-right" class="w-3 h-3 opacity-30"></i>
+                <span class="text-ink">{{ .Title }}</span>
+            </nav>
 
-<!-- Product Hero -->
-<section class="section--product-hero">
-    <div class="container">
-        <nav class="product-breadcrumb">
-            <a href="/">Home</a>
-            <i data-lucide="chevron-right" class="icon"></i>
-            <a href="/products/">Products</a>
-            <i data-lucide="chevron-right" class="icon"></i>
-            <span>{{ .Title }}</span>
-        </nav>
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-24 items-start">
+                <div data-animate="slide-right">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="px-3 py-1 bg-brand/5 text-brand text-[10px] font-black uppercase tracking-widest rounded-md border border-brand/10">
+                            {{ .Params.dosage_form }}
+                        </span>
+                        <span class="px-3 py-1 bg-ink/5 text-ink text-[10px] font-black uppercase tracking-widest rounded-md border border-ink/10">
+                            {{ .Params.therapeutic_area }}
+                        </span>
+                    </div>
 
-        <div class="product-hero__grid">
-            <div data-animate="fade-up">
-                <div class="product-hero__form-badge">
-                    <i data-lucide="flask-conical" class="w-3.5 h-3.5"></i>
-                    {{ .Params.dosage_form }}
-                </div>
-                <h1 class="product-hero__title">{{ .Title }}</h1>
-                <p class="product-hero__composition">{{ .Params.composition }}</p>
-                
-                <div class="product-hero__tags">
-                    {{ range .Params.categories }}
-                    <span class="product-hero__tag">{{ . }}</span>
-                    {{ end }}
-                    {{ with .Params.therapeutic_area }}
-                    <span class="product-hero__tag bg-brand/20 border-brand/30 text-brand-2">{{ . }}</span>
-                    {{ end }}
-                </div>
+                    <h1 class="text-4xl md:text-5xl font-display font-black text-ink mb-4 leading-tight">
+                        {{ .Title }}
+                    </h1>
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-[2px] bg-brand"></div>
+                        <p class="text-xl text-brand font-bold tracking-tight">{{ .Params.composition }}</p>
+                    </div>
 
-                <div class="product-hero__actions">
-                    <a href="/#enquiry-form" class="btn btn--primary px-8">
-                        Request Manufacturing Quote
-                        <i data-lucide="send" class="icon" aria-hidden="true"></i>
-                    </a>
-                    <button class="btn btn--ghost" onclick="window.print()">
-                        Print Specifications
-                        <i data-lucide="printer" class="icon" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
+                    <div class="prose prose-lg text-muted leading-relaxed mb-10 max-w-2xl">
+                        {{ .Summary | default .Description }}
+                    </div>
 
-            <aside class="product-details-panel" data-animate="slide-left">
-                <div class="product-detail-block">
-                    <div class="product-detail-block__label">Pack Sizes</div>
-                    <div class="product-detail-block__list">
-                        {{ range .Params.pack_sizes }}
-                        <div class="product-detail-block__list-item">
-                            <i data-lucide="package" class="icon"></i>
+                    <!-- Marketing USPs (Clean Style) -->
+                    <div class="flex flex-wrap gap-3 mb-12">
+                        {{ range .Params.usp }}
+                        <div class="flex items-center gap-2 px-4 py-2 bg-white border border-line rounded-lg text-[11px] font-bold text-ink shadow-sm">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-brand"></i>
                             {{ . }}
                         </div>
                         {{ end }}
                     </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="btn btn--primary px-10 h-14" data-enquire-trigger data-product-name="{{ .Title }}">
+                            Request Quote
+                            <i data-lucide="send" class="w-4 h-4 ml-2"></i>
+                        </a>
+                        <button class="btn btn--outline h-14 px-8" onclick="window.print()">
+                            <i data-lucide="printer" class="w-4 h-4 mr-3"></i>
+                            Print Specs
+                        </button>
+                    </div>
                 </div>
-                <div class="product-detail-block">
-                    <div class="product-detail-block__label">Certification</div>
-                    <div class="product-detail-block__value">WHO-GMP & ISO Certified</div>
-                </div>
-                <div class="product-detail-block">
-                    <div class="product-detail-block__label">Availability</div>
-                    <div class="product-detail-block__value text-brand-2">Third-Party Manufacturing</div>
-                </div>
-            </aside>
+
+                <!-- Technical Specification Card (Clinical Style) -->
+                <aside class="bg-white border border-line rounded-[32px] p-8 shadow-soft sticky top-[100px]" data-animate="slide-left">
+                    <h2 class="flex items-center gap-3 text-[12px] font-black uppercase tracking-[0.1em] text-ink mb-8 pb-4 border-b border-line">
+                        <i data-lucide="activity" class="text-brand w-5 h-5"></i>
+                        Product Specifications
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <div class="group">
+                            <div class="text-[10px] font-black uppercase tracking-widest text-muted mb-1 transition-colors group-hover:text-brand">Approved Name</div>
+                            <div class="text-[15px] font-bold text-ink leading-tight">{{ .Params.approved_name }}</div>
+                        </div>
+                        <div class="pt-4 border-t border-dashed border-line">
+                            <div class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Presentation</div>
+                            <div class="text-[15px] font-bold text-ink">{{ .Params.presentation }}</div>
+                        </div>
+                        <div class="pt-4 border-t border-dashed border-line">
+                            <div class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Pack Sizes</div>
+                            <div class="text-[15px] font-bold text-ink">{{ delimit .Params.pack_sizes ", " }}</div>
+                        </div>
+                        <div class="pt-4 border-t border-dashed border-line">
+                            <div class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Manufacturing Unit</div>
+                            <div class="text-[15px] font-bold text-ink">{{ .Params.manufacturing_unit }}</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t border-line">
+                         <div class="p-4 bg-surface rounded-2xl flex items-center gap-4">
+                             <div class="w-10 h-10 bg-brand text-white rounded-full flex items-center justify-center flex-shrink-0">
+                                 <i data-lucide="factory" class="w-5 h-5"></i>
+                             </div>
+                             <div>
+                                 <div class="text-[10px] font-black uppercase tracking-widest text-brand mb-0.5">Capacity</div>
+                                 <div class="text-xs font-bold text-ink">{{ .Params.capacity }}</div>
+                             </div>
+                         </div>
+                    </div>
+                </aside>
+            </div>
         </div>
-    </div>
-</section>
+    </header>
 
-<!-- Content Section -->
-<section class="section--product-content">
-    <div class="container">
-        <div class="product-content-grid">
-            <div class="product-prose">
-                <div class="bg-white rounded-2xl p-8 md:p-12 border border-line shadow-sm">
-                    <h2 class="!mt-0">Product Overview</h2>
-                    {{ .Content }}
-                    {{ if not .Content }}
-                    <p>{{ .Params.description }}</p>
-                    <p>Our facility ensures that {{ .Title }} is manufactured under stringent quality control measures, adhering to global pharmaceutical standards. We offer specialized third-party manufacturing for this composition with flexible batch sizes and premium packaging options.</p>
-                    {{ end }}
+    <!-- Content & Tabs Section -->
+    <section class="py-20">
+        <div class="container">
+            <div class="max-w-4xl">
+                <nav class="flex gap-10 border-b-2 border-line mb-12 overflow-x-auto" role="tablist">
+                    <button class="relative py-6 text-[12px] font-black uppercase tracking-widest text-muted hover:text-brand transition-all product-tab-btn active" data-tab="overview">Description</button>
+                    <button class="relative py-6 text-[12px] font-black uppercase tracking-widest text-muted hover:text-brand transition-all product-tab-btn" data-tab="technical">Technical Data</button>
+                    <button class="relative py-6 text-[12px] font-black uppercase tracking-widest text-muted hover:text-brand transition-all product-tab-btn" data-tab="safety">Safety Information</button>
+                </nav>
 
-                    <h2 class="mt-12">Quality Assurance</h2>
-                    <p>At Saar Biotech, quality is not just a standard but a commitment. Our manufacturing units are equipped with advanced machinery and testing laboratories to ensure the safety and efficacy of every batch.</p>
-                    <ul>
-                        <li>WHO-GMP Certified Manufacturing</li>
-                        <li>Rigorous Stability Testing</li>
-                        <li>Modern Analytical Laboratories</li>
-                        <li>High-Quality Packaging Material</li>
-                    </ul>
+                <div class="product-content min-h-[400px]">
+                    <div id="tab-overview" class="product-tab-pane active prose prose-lg max-w-none">
+                        {{ .Content }}
+                    </div>
+                    
+                    <div id="tab-technical" class="product-tab-pane">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="p-8 bg-paper border border-line rounded-3xl">
+                                <h3 class="text-xl font-bold text-ink mb-4">Mechanism</h3>
+                                <p class="text-muted text-sm">Detailed pharmacological pathway for this composition.</p>
+                            </div>
+                            <div class="p-8 bg-paper border border-line rounded-3xl">
+                                <h3 class="text-xl font-bold text-ink mb-4">Pharmacokinetics</h3>
+                                <p class="text-muted text-sm">Absorption, distribution, and elimination profile.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-safety" class="product-tab-pane">
+                         <div class="p-8 border-l-4 border-brand bg-surface rounded-r-3xl">
+                             <h3 class="text-xl font-bold text-ink mb-4">Storage & Safety</h3>
+                             <p class="text-muted text-sm">Store in a cool, dry place. Refer to master dosage chart for protocols.</p>
+                         </div>
+                    </div>
                 </div>
             </div>
-
-            <aside class="product-sidebar">
-                <div class="sticky top-24">
-                    <h3 class="product-sidebar__title">Related Compositions</h3>
-                    <div class="grid gap-4">
-                        {{ range first 3 (where (where .Site.RegularPages "Section" "products") "Permalink" "!=" .Permalink) }}
-                        <div class="product-card product-card--compact">
-                             <div class="flex items-center justify-between mb-2">
-                                <span class="text-[10px] font-extrabold text-brand uppercase">{{ index .Params.categories 0 }}</span>
-                                <i data-lucide="{{ .Params.icon | default "flask-conical" }}" class="w-4 h-4 text-brand"></i>
-                             </div>
-                             <h4 class="text-sm font-bold text-ink mb-1">
-                                <a href="{{ .RelPermalink }}" class="hover:text-brand transition-colors">{{ .Title }}</a>
-                             </h4>
-                             <p class="text-[11px] text-muted line-clamp-2 mb-3">{{ .Params.composition }}</p>
-                             <a href="{{ .RelPermalink }}" class="text-[11px] font-bold text-brand flex items-center gap-1 group">
-                                View Details
-                                <i data-lucide="arrow-right" class="w-3 h-3 transition-transform group-hover:translate-x-0.5"></i>
-                             </a>
-                        </div>
-                        {{ end }}
-                    </div>
-
-                    <div class="mt-8 p-6 bg-brand rounded-xl text-white text-center">
-                        <i data-lucide="phone-call" class="w-8 h-8 mx-auto mb-4 opacity-50"></i>
-                        <h4 class="font-bold mb-2">Quick Quote?</h4>
-                        <p class="text-xs mb-4 opacity-80">Call our manufacturing experts for immediate assistance.</p>
-                        <a href="tel:{{ .Site.Params.phone | urlize }}" class="btn btn--light btn--small w-full">
-                            Call {{ .Site.Params.phone }}
-                        </a>
-                    </div>
-                </div>
-            </aside>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- FAQ Section -->
+    {{ if .Params.faqs }}
+    <section class="py-24 bg-paper border-t border-line">
+        <div class="container">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-display font-black text-ink mb-12 text-center">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    {{ range $faq := .Params.faqs }}
+                    <div class="faq-item bg-white border border-line rounded-2xl overflow-hidden transition-all duration-300">
+                        <button class="faq-question w-full flex items-center justify-between p-6 text-left text-[15px] font-bold text-ink">
+                            <span>{{ $faq.q }}</span>
+                            <i data-lucide="plus" class="icon-chevron w-5 h-5 text-brand transition-transform"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 text-[14px] text-muted leading-relaxed hidden">
+                            {{ $faq.a }}
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </section>
+    {{ end }}
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Tab Switching
+    const tabBtns = document.querySelectorAll('.product-tab-btn');
+    const tabPanes = document.querySelectorAll('.product-tab-pane');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabPanes.forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+        });
+    });
+
+    // Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const btn = item.querySelector('.faq-question');
+        btn.addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+});
+</script>
+
+<style>
+.product-tab-btn.active { color: var(--color-brand); }
+.product-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-brand);
+}
+.product-tab-pane { display: none; }
+.product-tab-pane.active { display: block; animation: fadeIn 0.4s ease; }
+.faq-item.active .faq-answer { display: block; }
+.faq-item.active .icon-chevron { transform: rotate(45deg); color: var(--color-brand); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+</style>
 
 {{ end }}
