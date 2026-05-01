@@ -71,17 +71,40 @@
     {{ end }}
     {{ if eq .Section "products" }}
     ,{
-      "@type": "ItemList",
-      "name": "Pharmaceutical Formulations Portfolio",
-      "numberOfItems": {{ len (where .Site.RegularPages "Section" "products") }},
-      "itemListElement": [
-        {{ range $index, $page := (where .Site.RegularPages "Section" "products") }}
+      "@type": "CollectionPage",
+      "@id": "{{ $url }}#collection",
+      "url": "{{ $url }}",
+      "name": "Pharmaceutical Formulations Portfolio | Saar Biotech",
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": {{ len (where .Site.RegularPages "Section" "products") }},
+        "itemListElement": [
+          {{ range $index, $page := (where .Site.RegularPages "Section" "products") }}
+          {
+            "@type": "ListItem",
+            "position": {{ add $index 1 }},
+            "name": "{{ $page.Title }}",
+            "url": "{{ $page.Permalink }}"
+          }{{ if lt (add $index 1) (len (where $.Site.RegularPages "Section" "products")) }},{{ end }}
+          {{ end }}
+        ]
+      }
+    }
+    {{ end }}
+
+    {{ if .Params.faqs }}
+    ,{
+      "@type": "FAQPage",
+      "mainEntity": [
+        {{ range $index, $faq := .Params.faqs }}
         {
-          "@type": "ListItem",
-          "position": {{ add $index 1 }},
-          "name": "{{ $page.Title }}",
-          "url": "{{ $page.Permalink }}"
-        }{{ if lt (add $index 1) (len (where $.Site.RegularPages "Section" "products")) }},{{ end }}
+          "@type": "Question",
+          "name": "{{ $faq.q }}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ $faq.a | plainify }}"
+          }
+        }{{ if lt (add $index 1) (len $.Params.faqs) }},{{ end }}
         {{ end }}
       ]
     }

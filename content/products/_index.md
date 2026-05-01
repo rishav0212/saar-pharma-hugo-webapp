@@ -1,6 +1,6 @@
 ---
-title: "Our Products"
-description: "Explore Saar Biotech's extensive range of high-quality pharmaceutical compositions, manufactured in our WHO-GMP certified facility."
+title: "Pharmaceutical Compositions & Third-Party Manufacturing List | Saar Biotech"
+description: "Browse Saar Biotech's WHO-GMP certified pharmaceutical product list. Specialist contract manufacturing for approved compositions in Baddi, covering Syrups, Suspensions, Ointments, and more."
 layout: "list"
 faqs:
   - q: "Which therapeutic categories does Saar Biotech cover for third-party manufacturing?"
