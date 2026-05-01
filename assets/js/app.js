@@ -6,6 +6,7 @@
 import { initTabs, initHeader, initProductScroll, initAnchorScroll, initFooterYear } from './modules/ui';
 import { initAnimations, initCounters, initHeroCanvas } from './modules/animations';
 import { initSearch } from './modules/search';
+import { initProducts } from './modules/products';
 
 function safeInit(name, fn) {
   try { 
@@ -50,6 +51,7 @@ const initAll = () => {
   safeInit("AnchorScroll", initAnchorScroll);
   safeInit("FooterYear", initFooterYear);
   safeInit("Search", initSearch);
+  safeInit("Products", initProducts);
 };
 
 if (document.readyState === "loading") {

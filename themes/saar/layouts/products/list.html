@@ -1,0 +1,150 @@
+{{ define "main" }}
+
+<div id="products-page">
+    <!-- Elite Blended Products Hero -->
+    <section class="section--products-hero">
+        <!-- Background Layers -->
+        <div class="products-hero__bg"></div>
+        <div class="products-hero__overlay"></div>
+
+        <!-- Floating Elements (Subtle) -->
+        <div class="floating-capsule floating-capsule--1"></div>
+        <div class="floating-capsule floating-capsule--2"></div>
+        <div class="floating-capsule floating-capsule--3"></div>
+        
+        <div class="container">
+            <div class="products-hero__inner" data-animate="fade-up">
+                <h1 class="text-white">
+                    Pharmaceutical <br>
+                    <span class="text-brand-2">Compositions</span>
+                </h1>
+                
+                <p>
+                    Precision-engineered medical formulations produced in our state-of-the-art WHO-GMP certified facilities.
+                </p>
+
+                <!-- Integrated Premium Search -->
+                <div class="products-search-wrap">
+                    <input type="text" id="products-search" placeholder="Search formulations..." class="products-search-input">
+                    <i data-lucide="search" class="icon"></i>
+                </div>
+
+                <!-- Quality Badges -->
+                <div class="products-hero-stats">
+                    <div class="products-hero-stat">
+                        <i data-lucide="shield-check" class="icon"></i>
+                        WHO-GMP
+                    </div>
+                    <div class="products-hero-stat">
+                        <i data-lucide="dna" class="icon"></i>
+                        R&D
+                    </div>
+                    <div class="products-hero-stat">
+                        <i data-lucide="box" class="icon"></i>
+                        Manufacturing
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Sticky Filter Bar -->
+    <nav class="product-filter-bar">
+        <div class="container">
+            <div class="product-filter-bar__inner">
+                <div class="filter-pills">
+                    <button class="filter-pill is-active" data-filter="all" aria-pressed="true">
+                        <span class="filter-pill__label">All Formulations</span>
+                        <span class="filter-pill__count">{{ len (where .Site.RegularPages "Section" "products") }}</span>
+                    </button>
+                    
+                    {{/* Dynamic Category Logic */}}
+                    {{ $cats := slice }}
+                    {{ range (where .Site.RegularPages "Section" "products") }}
+                        {{ range .Params.categories }}
+                            {{ $cats = $cats | append . }}
+                        {{ end }}
+                    {{ end }}
+                    
+                    {{ range (uniq $cats) }}
+                    {{ $catName := . }}
+                    {{ $count := 0 }}
+                    {{ range (where $.Site.RegularPages "Section" "products") }}
+                        {{ if in .Params.categories $catName }}
+                            {{ $count = add $count 1 }}
+                        {{ end }}
+                    {{ end }}
+                    <button class="filter-pill" data-filter="{{ . | urlize }}" aria-pressed="false">
+                        <span class="filter-pill__label">{{ . }}</span>
+                        <span class="filter-pill__count">{{ $count }}</span>
+                    </button>
+                    {{ end }}
+                </div>
+
+                <div class="product-result-count max-md:hidden text-[12px] font-bold text-muted uppercase tracking-widest">
+                    <strong id="products-count" class="text-brand">{{ len (where .Site.RegularPages "Section" "products") }}</strong> Items
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Refined Products Grid Section -->
+    <section class="section py-16 bg-paper relative overflow-hidden">
+        <div class="container relative z-10">
+            <div class="products-active-filter flex items-end justify-between mb-10 pb-6 border-b border-line">
+                <div>
+                    <h2 id="products-active-label" class="text-3xl font-display font-extrabold text-ink">All Formulations</h2>
+                    <p class="text-muted text-sm mt-1">Specialized third-party manufacturing portfolio</p>
+                </div>
+                <div class="flex items-center gap-3 text-xs font-black text-muted uppercase tracking-[0.2em] max-sm:hidden">
+                    <span class="w-2 h-2 rounded-full bg-brand"></span>
+                    Portfolio
+                </div>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                {{ range .Pages.ByTitle }}
+                    {{ partial "products/card.html" . }}
+                {{ end }}
+            </div>
+
+            <!-- Enhanced Empty State -->
+            <div id="products-empty" class="products-empty" style="display: none;">
+                <div class="products-empty__visual">
+                    <i data-lucide="microscope" class="w-10 h-10"></i>
+                </div>
+                <h3>No Formulations Found</h3>
+                <p>Try refining your search or contact us for specialized requests.</p>
+                <button onclick="document.getElementById('products-search').value = ''; window.location.hash = ''; location.reload();" class="btn btn--primary">
+                    Reset Filter
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Enquiry Section -->
+    <div class="mt-20">
+        {{ partial "home/contact.html" . }}
+    </div>
+</div>
+
+<!-- SEO Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {{ range $index, $element := .Pages }}
+    {{ if $index }},{{ end }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $index 1 }},
+      "url": "{{ .Permalink }}",
+      "name": "{{ .Title }}"
+    }
+    {{ end }}
+  ]
+}
+</script>
+
+{{ end }}

@@ -1,0 +1,64 @@
+{{/*
+  Partial: products/card.html
+*/}}
+
+{{ $allCats := slice }}
+{{ range .Params.categories }}
+    {{ $allCats = $allCats | append (. | urlize) }}
+{{ end }}
+{{ $catString := delimit $allCats " " }}
+{{ $dosageForm := .Params.dosage_form | default "Formulation" }}
+{{ $composition := .Params.composition | default .Description }}
+{{ $icon := .Params.icon | default "flask-conical" }}
+
+<div class="product-card-wrap" 
+     data-category="{{ $catString }}" 
+     data-title="{{ .Title | lower }}" 
+     data-composition="{{ $composition | lower }}"
+     data-area="{{ .Params.therapeutic_area | default "" | lower }}">
+    
+    <article class="product-card">
+        <!-- Overlay Link -->
+        <a href="{{ .RelPermalink }}" class="absolute inset-0 z-10" aria-label="View {{ .Title }}"></a>
+
+        <div class="product-card__image-container">
+            {{ if .Params.image }}
+                <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy">
+            {{ else }}
+                <div class="w-full h-full flex items-center justify-center bg-surface-2 text-brand/10">
+                    <i data-lucide="{{ $icon }}" class="w-12 h-12"></i>
+                </div>
+            {{ end }}
+        </div>
+
+        <div class="product-card__content">
+            <div class="product-card__header">
+                <h3 class="product-card__title">{{ .Title }}</h3>
+                <span class="product-card__form-badge">{{ $dosageForm }}</span>
+            </div>
+
+            <div class="product-card__composition">
+                <p class="product-card__composition-text">{{ $composition }}</p>
+            </div>
+
+            {{ with .Params.pack_sizes }}
+            <div class="product-card__packs">
+                {{ range . }}
+                <span class="product-card__pack">{{ . }}</span>
+                {{ end }}
+            </div>
+            {{ end }}
+
+            <div class="product-card__footer">
+                <div class="product-card__cta">
+                    Specs
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </div>
+                
+                <a href="/#enquiry-form" class="product-card__enquire relative z-20" aria-label="Enquire about {{ .Title }}">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </article>
+</div>

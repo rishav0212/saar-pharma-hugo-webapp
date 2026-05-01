@@ -1,0 +1,213 @@
+@layer components {
+  /* ─────────────────────────────────────────────────
+     Products Portfolio — Full Elite Signature
+     ───────────────────────────────────────────────── */
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* ─── Elite Scientific Hero ─── */
+  .section--products-hero {
+    @apply relative pt-[120px] pb-[80px] max-md:pt-[90px] max-md:pb-[50px] text-white bg-abyss overflow-hidden;
+  }
+
+  .products-hero__bg {
+    @apply absolute inset-0 z-0 pointer-events-none;
+    background-image: url('/images/products/hero-bg.webp');
+    background-size: cover; background-position: center;
+    filter: brightness(0.4) contrast(1.1) saturate(1.05);
+  }
+
+  .products-hero__overlay {
+    @apply absolute inset-0 z-1 pointer-events-none;
+    background: radial-gradient(circle at 20% 30%, rgba(14, 48, 56, 0.45) 0%, transparent 65%),
+                radial-gradient(circle at 80% 70%, rgba(14, 117, 137, 0.3) 0%, transparent 65%),
+                linear-gradient(to bottom, rgba(14, 48, 56, 0.1) 0%, var(--color-abyss) 100%);
+  }
+
+  /* Floating Elements Logic */
+  .floating-capsule {
+    @apply absolute z-1 opacity-20 pointer-events-none;
+    animation: floatAround 20s infinite linear;
+  }
+
+  .floating-capsule--1 { width: 60px; height: 120px; border-radius: 60px; border: 1.5px solid var(--color-brand-2); top: 15%; left: 10%; animation-duration: 25s; }
+  .floating-capsule--2 { width: 40px; height: 80px; border-radius: 40px; background: linear-gradient(to bottom, var(--color-brand), transparent); top: 60%; right: 12%; animation-duration: 35s; animation-delay: -5s; }
+  .floating-capsule--3 { width: 50px; height: 50px; border-radius: 50%; border: 1px dashed var(--color-brand-2); top: 30%; right: 25%; animation-duration: 45s; }
+
+  @keyframes floatAround {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -50px) rotate(120deg); }
+    66% { transform: translate(-20px, 40px) rotate(240deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+  }
+
+  .products-hero__inner {
+    @apply relative z-10 max-w-[900px] mx-auto text-center px-6;
+  }
+
+  .products-hero__inner h1 {
+    @apply text-[clamp(32px,5.5vw,64px)] leading-[1.05] mb-5 font-display font-extrabold tracking-tight;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  .products-hero__inner p {
+    @apply text-[clamp(16px,1.2vw,19px)] text-white/80 leading-relaxed max-w-2xl mx-auto mb-10 font-medium;
+  }
+
+  /* Search & Stats */
+  .products-search-wrap {
+    @apply relative max-w-[540px] mx-auto mb-12;
+  }
+
+  .products-search-input {
+    @apply w-full h-[54px] pl-14 pr-6 rounded-2xl bg-white/10 border border-white/20 text-white text-[15px] font-medium placeholder:text-white/40 outline-none transition-all duration-300;
+    backdrop-filter: blur(20px);
+  }
+
+  .products-search-input:focus {
+    @apply border-brand-2 bg-white/15;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .products-search-wrap .icon {
+    @apply absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-2;
+  }
+
+  .products-hero-stats {
+    @apply flex flex-wrap justify-center gap-3;
+  }
+
+  .products-hero-stat {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/80 text-[12px] font-bold transition-all duration-300;
+    backdrop-filter: blur(8px);
+  }
+
+  .products-hero-stat:hover { @apply bg-white/10 -translate-y-1; }
+
+  /* ─── Premium Filter Bar ─── */
+  .product-filter-bar {
+    @apply bg-white border-b border-line sticky top-[72px] z-30 transition-all duration-300;
+  }
+
+  .product-filter-bar__inner {
+    @apply flex items-center justify-center gap-8 py-4 overflow-x-auto;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .product-filter-bar__inner::-webkit-scrollbar { display: none; }
+
+  .filter-pills {
+    @apply flex items-center gap-2 p-1 bg-surface rounded-full border border-line/50;
+  }
+
+  .filter-pill {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-widest transition-all duration-300 bg-transparent text-muted cursor-pointer whitespace-nowrap;
+  }
+
+  .filter-pill.is-active {
+    @apply bg-white text-brand shadow-sm border border-line/50;
+  }
+
+  .filter-pill__count {
+    @apply inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full text-[9px] font-black bg-black/5 text-muted;
+  }
+
+  .filter-pill.is-active .filter-pill__count {
+    @apply bg-brand/10 text-brand;
+  }
+
+  /* ─── ELITE SIGNATURE GRID ─── */
+  .products-section {
+    @apply py-14 bg-paper relative overflow-hidden;
+  }
+
+  .products-grid {
+    @apply grid gap-8;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+
+  .product-card {
+    @apply relative flex flex-col bg-white border border-line rounded-2xl overflow-hidden h-full transition-all duration-500 cursor-pointer;
+    box-shadow: 0 4px 20px rgba(16, 42, 67, 0.05);
+  }
+
+  .product-card:hover {
+    @apply -translate-y-2 border-brand/40 shadow-soft;
+    box-shadow: 0 25px 50px -12px rgba(16, 42, 67, 0.15);
+  }
+
+  .product-card::before {
+    content: "";
+    @apply absolute top-0 left-0 right-0 h-1.5 z-20 transition-all duration-300;
+    background-color: var(--pc-color, var(--color-brand));
+  }
+
+  /* Curated Colors */
+  .product-card-wrap[data-category="sprays"] { --pc-color: #0d9488; --pc-bg: rgba(13, 148, 136, 0.04); }
+  .product-card-wrap[data-category="syrups"] { --pc-color: #7c3aed; --pc-bg: rgba(124, 58, 237, 0.04); }
+  .product-card-wrap[data-category="suspensions"] { --pc-color: #059669; --pc-bg: rgba(5, 150, 105, 0.04); }
+  .product-card-wrap[data-category="tablets-capsules"] { --pc-color: #2563eb; --pc-bg: rgba(37, 99, 235, 0.04); }
+
+  .product-card__image-container {
+    @apply relative aspect-[16/10] overflow-hidden bg-surface-2;
+  }
+
+  .product-card__image-container img {
+    @apply w-full h-full object-cover transition-transform duration-700;
+  }
+
+  .product-card:hover .product-card__image-container img { @apply scale-110; }
+
+  .product-card__content {
+    @apply flex-1 p-6 flex flex-col;
+  }
+
+  .product-card__header {
+    @apply flex items-start justify-between gap-3 mb-3;
+  }
+
+  .product-card__title {
+    @apply text-[17px] font-display font-black text-ink leading-tight transition-colors duration-300;
+  }
+
+  .product-card:hover .product-card__title { color: var(--pc-color, var(--color-brand)); }
+
+  .product-card__form-badge {
+    @apply px-2 py-0.5 bg-brand/10 text-brand text-[9px] font-black uppercase rounded;
+  }
+
+  .product-card__composition {
+    @apply relative mb-5 p-4 rounded-xl transition-all duration-500 border-l-4;
+    background-color: var(--pc-bg, var(--color-surface-2));
+    border-color: var(--pc-color, var(--color-brand));
+  }
+
+  .product-card__composition-text {
+    @apply text-[12px] leading-relaxed text-ink/80 font-medium italic line-clamp-3;
+  }
+
+  .product-card__packs {
+    @apply flex flex-wrap gap-1.5 mb-6;
+  }
+
+  .product-card__pack {
+    @apply inline-flex items-center px-2 py-1 bg-white border border-line rounded-lg text-[9px] font-bold text-muted;
+  }
+
+  .product-card__footer {
+    @apply mt-auto pt-4 border-t border-line/50 flex items-center justify-between;
+  }
+
+  .product-card__cta {
+    @apply text-[11px] font-black text-brand uppercase tracking-widest flex items-center gap-2;
+  }
+
+  .product-card__enquire {
+    @apply w-9 h-9 rounded-full flex items-center justify-center bg-surface border border-line text-brand transition-all duration-300 relative z-30 hover:bg-brand hover:text-white hover:shadow-lg;
+  }
+
+  /* Utilities */
+  .is-hidden { display: none !important; }
+
+  .products-empty { @apply flex flex-col items-center justify-center py-20 text-center; }
+}

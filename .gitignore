@@ -4,6 +4,7 @@
 # Ignore the generated build folders (Vercel builds these automatically)
 /public/
 /resources/
+/claude files/
 
 # Ignore Hugo's temporary lock file
 .hugo_build.lock

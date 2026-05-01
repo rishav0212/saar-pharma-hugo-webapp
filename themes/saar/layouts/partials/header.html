@@ -13,7 +13,7 @@
     <nav class="site-nav" aria-label="Main navigation">
       <a href="/about/" class="{{ if eq .RelPermalink "/about/" }}active{{ end }}">About</a>
       <a href="/#categories">Categories</a>
-      <a href="/#products">Products</a>
+      <a href="/products/" class="{{ if eq .RelPermalink "/products/" }}active{{ end }}">Products</a>
       <a href="/manufacturing-unit/" class="{{ if eq .RelPermalink "/manufacturing-unit/" }}active{{ end }}">Manufacturing</a>
       <a href="/#process">Process</a>
       <a href="/articles/" class="{{ if eq .RelPermalink "/articles/" }}active{{ end }}">Articles</a>
