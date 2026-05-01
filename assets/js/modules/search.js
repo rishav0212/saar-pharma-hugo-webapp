@@ -3,7 +3,7 @@
  */
 export function initSearch() {
   console.log('Saar Search: Initializing...');
-  
+
   const spotlight = document.getElementById('search-spotlight');
   const toggle = document.getElementById('search-toggle');
   const close = document.getElementById('search-close');
@@ -22,22 +22,22 @@ export function initSearch() {
   async function loadIndex() {
     if (searchIndex || isFetching) return;
     isFetching = true;
-    
+
     console.log('Saar Search: Loading index...');
     try {
       const paths = ['/index.json', './index.json', 'index.json'];
       let response = null;
-      
+
       for (const path of paths) {
         try {
           console.log(`Saar Search: Trying ${path}...`);
           // Add a 5-second timeout to each fetch attempt
           const controller = new AbortController();
           const timeoutId = setTimeout(() => controller.abort(), 5000);
-          
+
           response = await fetch(path, { signal: controller.signal });
           clearTimeout(timeoutId);
-          
+
           if (response.ok) {
             console.log(`Saar Search: Success from ${path}`);
             break;
@@ -50,10 +50,10 @@ export function initSearch() {
       if (!response || !response.ok) {
         throw new Error(`Data not found (Status: ${response ? response.status : 'None'})`);
       }
-      
+
       searchIndex = await response.json();
       console.log('Saar Search: Index parsed, items:', searchIndex.length);
-      
+
       const Fuse = window.Fuse;
       if (!Fuse) throw new Error('Fuse.js not found');
 
@@ -81,12 +81,12 @@ export function initSearch() {
     spotlight.classList.add('is-active');
     spotlight.setAttribute('aria-hidden', 'false');
     document.body.classList.add('search-open');
-    
+
     // Safety check for Lenis instance and stop method
     if (window.lenis && typeof window.lenis.stop === 'function') {
       window.lenis.stop();
     }
-    
+
     setTimeout(() => input.focus(), 150);
     loadIndex();
   }
@@ -95,11 +95,11 @@ export function initSearch() {
     spotlight.classList.remove('is-active');
     spotlight.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('search-open');
-    
+
     if (window.lenis && typeof window.lenis.start === 'function') {
       window.lenis.start();
     }
-    
+
     input.value = '';
     resetResults();
   }
@@ -109,7 +109,7 @@ export function initSearch() {
     resultsArea.innerHTML = `
       <div class="search-placeholder">
         <i data-lucide="sparkles" class="icon"></i>
-        <p>Find products or pages...</p>
+        <p>Type to find products, dosages, sections or pages...</p>
       </div>
     `;
     if (window.lucide) window.lucide.createIcons();
@@ -185,7 +185,7 @@ export function initSearch() {
         </div>
       </a>
     `).join('');
-    
+
     if (window.lucide) window.lucide.createIcons();
   }
 }
