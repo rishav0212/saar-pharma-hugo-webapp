@@ -3,8 +3,12 @@
 <div id="products-page">
     {{ partial "products/hero.html" . }}
     {{ partial "products/marquee.html" . }}
-    {{ partial "products/filter-bar.html" . }}
-    {{ partial "products/grid.html" . }}
+    
+    <div id="products-explorer" class="relative">
+        {{ partial "products/filter-bar.html" . }}
+        {{ partial "products/grid.html" . }}
+    </div>
+
     {{ partial "products/authority.html" . }}
     {{ partial "products/faq.html" . }}
 
