@@ -188,6 +188,18 @@
     @apply flex items-center gap-2.5 max-md:gap-2;
   }
 
+  .header-action-btn {
+    @apply w-10 h-10 flex items-center justify-center rounded-lg bg-white/10 text-white transition-all duration-200 cursor-pointer border-none outline-none;
+  }
+
+  .header-action-btn:hover {
+    @apply bg-white/20 scale-105;
+  }
+
+  .header-action-btn .icon {
+    @apply w-5 h-5;
+  }
+
   .header-call {
     display: inline-flex;
     align-items: center;
