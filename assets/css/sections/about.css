@@ -27,8 +27,8 @@
     content: "";
     @apply absolute inset-0;
     background: 
-      radial-gradient(circle at 50% 120%, rgba(21, 159, 145, 0.25) 0%, transparent 60%),
-      linear-gradient(180deg, rgba(6, 15, 20, 0.8) 0%, rgba(6, 15, 20, 0.4) 100%);
+      radial-gradient(circle at 50% 120%, var(--color-brand-line) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(var(--color-abyss-rgb), 0.8) 0%, rgba(var(--color-abyss-rgb), 0.4) 100%);
     z-index: 1;
   }
 
@@ -66,7 +66,7 @@
 
   .facility-card:hover {
     @apply -translate-y-1.5 shadow-lift;
-    border-color: rgba(21, 159, 145, 0.25);
+    border-color: var(--color-brand-line);
   }
 
   .facility-card__icon {

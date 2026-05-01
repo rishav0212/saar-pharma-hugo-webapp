@@ -1,0 +1,91 @@
+{{ $title := .Title }}
+{{ $description := .Description | default .Site.Params.description }}
+{{ $url := .Permalink }}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "LocalBusiness"],
+      "@id": "{{ .Site.BaseURL }}#organization",
+      "name": "Saar Biotech Pvt. Ltd.",
+      "alternateName": "Saar Biotech",
+      "url": "{{ .Site.BaseURL }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ "favicon.png" | absURL }}",
+        "width": 512,
+        "height": 512
+      },
+      "telephone": "{{ .Site.Params.phone }}",
+      "email": "{{ .Site.Params.email }}",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{ .Site.Params.address }}",
+        "addressCountry": "IN"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ .Site.BaseURL }}#website",
+      "name": "Saar Biotech",
+      "url": "{{ .Site.BaseURL }}",
+      "publisher": { "@id": "{{ .Site.BaseURL }}#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ $url }}#webpage",
+      "url": "{{ $url }}",
+      "name": "{{ $title }}",
+      "description": "{{ $description }}",
+      "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ $url }}#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ .Site.BaseURL }}"
+        }
+        {{ if not .IsHome }}
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ .Title }}",
+          "item": "{{ .Permalink }}"
+        }
+        {{ end }}
+      ]
+    }
+    {{ if .IsHome }}
+    ,{
+      "@type": "Service",
+      "name": "Third-party Pharmaceutical Manufacturing",
+      "provider": { "@id": "{{ .Site.BaseURL }}#organization" },
+      "description": "WHO-GMP and ISO certified contract manufacturing in Baddi."
+    }
+    {{ end }}
+    {{ if eq .Section "products" }}
+    ,{
+      "@type": "ItemList",
+      "name": "Pharmaceutical Formulations Portfolio",
+      "numberOfItems": {{ len (where .Site.RegularPages "Section" "products") }},
+      "itemListElement": [
+        {{ range $index, $page := (where .Site.RegularPages "Section" "products") }}
+        {
+          "@type": "ListItem",
+          "position": {{ add $index 1 }},
+          "name": "{{ $page.Title }}",
+          "url": "{{ $page.Permalink }}"
+        }{{ if lt (add $index 1) (len (where $.Site.RegularPages "Section" "products")) }},{{ end }}
+        {{ end }}
+      ]
+    }
+    {{ end }}
+  ]
+}
+</script>
