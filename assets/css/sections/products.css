@@ -274,7 +274,7 @@
     }
 
     .product-card__composition-tag {
-      @apply text-[10px] min-h-0 p-2 mb-2 bg-transparent border-none;
+      @apply text-[11px] min-h-0 p-2.5 mb-2 bg-surface/60 border border-line rounded-lg flex items-center gap-2;
     }
 
     .product-card__dosage {
