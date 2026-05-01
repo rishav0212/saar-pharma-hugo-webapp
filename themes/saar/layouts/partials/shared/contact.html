@@ -6,13 +6,20 @@
   </div>
 
   <div class="container contact-layout relative z-10">
-    <div data-animate>
+    {{ $isModal := false }}
+    {{ if reflect.IsMap . }}
+      {{ $isModal = .isModal | default false }}
+    {{ end }}
+
+    <div data-animate class="{{ if $isModal }}max-md:mb-8{{ end }}">
       <span class="eyebrow">Start an enquiry</span>
       <h2 id="contact-title" class="section-title section-title--sm">Tell us what you want to manufacture</h2>
       <p class="section-kicker mt-5">
         Share approved composition details, product category, dosage form, packing requirement, target quantity, and documentation needs. The team responds with practical next steps.
       </p>
-      <div class="contact-list" aria-label="Contact details">
+
+      <!-- Contact details hidden on mobile when in modal context -->
+      <div class="contact-list {{ if $isModal }}max-md:hidden{{ end }}" aria-label="Contact details">
         <div class="contact-item">
           <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
           <div><strong>Phone</strong><a href="tel:{{ .Site.Params.phone | urlize }}">{{ .Site.Params.phone }}</a></div>
@@ -26,12 +33,24 @@
           <div><strong>Head office</strong><span>{{ .Site.Params.address }}</span></div>
         </div>
       </div>
-      <div class="contact-chips" aria-label="Helpful enquiry checklist">
+
+      <!-- Checklist hidden on mobile when in modal context -->
+      <div class="contact-chips {{ if $isModal }}max-md:hidden{{ end }}" aria-label="Helpful enquiry checklist">
         <span class="contact-chip">Product name or approved composition</span>
         <span class="contact-chip">Dosage form and pack size</span>
         <span class="contact-chip">Expected quantity</span>
         <span class="contact-chip">Target timeline and market</span>
       </div>
+
+      <!-- Mobile-only redirection button in modal context -->
+      {{ if $isModal }}
+      <div class="md:hidden mt-8">
+        <a href="/contact/" class="btn btn--outline w-full gap-3 py-4">
+          View Detailed Contact Info
+          <i data-lucide="arrow-right-circle" class="icon--sm"></i>
+        </a>
+      </div>
+      {{ end }}
     </div>
 
     {{ $formId := "contact-form" }}

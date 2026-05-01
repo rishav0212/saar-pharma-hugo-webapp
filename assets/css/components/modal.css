@@ -46,7 +46,7 @@
 
   /* Adapt contact.html for Modal context */
   .enquiry-modal .section {
-    @apply py-16 px-12 max-lg:py-12 max-lg:px-10 max-md:py-10 max-md:px-8;
+    @apply py-16 px-12 max-lg:py-12 max-lg:px-10 max-md:py-10 max-md:px-4;
     background-color: transparent !important;
   }
 
