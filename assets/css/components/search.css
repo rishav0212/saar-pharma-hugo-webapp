@@ -131,7 +131,7 @@
     .search-close-btn span { display: none; }
 
     .search-spotlight__results { 
-      @apply flex-1 p-4 pb-32 grid grid-cols-1 gap-3 bg-white; 
+      @apply flex-1 p-4 pb-32 grid grid-cols-1 gap-3 bg-white content-start; 
     }
 
     .search-placeholder, .search-no-results {
