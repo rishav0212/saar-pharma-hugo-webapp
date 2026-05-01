@@ -118,14 +118,7 @@
     @apply grid grid-cols-[auto_1fr_auto] gap-4 p-5 border border-line rounded-lg bg-white shadow-soft transition-all duration-300 max-md:gap-3 max-md:p-4;
   }
   
-  .eyebrow {
-    @apply inline-flex items-center gap-2.5 mb-4 text-brand-3 text-xs font-extrabold tracking-normal uppercase;
-  }
-  
-  .eyebrow::before {
-    content: "";
-    @apply w-6 h-0.5 rounded-full bg-current;
-  }
+
 }
 
 /* Animations */

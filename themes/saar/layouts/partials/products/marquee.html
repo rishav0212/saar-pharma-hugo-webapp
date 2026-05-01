@@ -1,0 +1,23 @@
+<!-- Animated Category Marquee -->
+<div class="marquee">
+    <div class="marquee__track">
+        {{ $allCats := slice }}
+        {{ range (where .Site.RegularPages "Section" "products") }}
+            {{ if .Params.categories }}
+                {{ range .Params.categories }}
+                    {{ $allCats = $allCats | append . }}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+        {{ $uniqueCats := $allCats | uniq | sort }}
+        
+        {{/* Duplicate for seamless loop */}}
+        {{ range (seq 4) }}
+            {{ range $uniqueCats }}
+                <button class="marquee__item cursor-pointer" data-filter-ticker="{{ . | urlize }}">
+                    {{ . }}
+                </button>
+            {{ end }}
+        {{ end }}
+    </div>
+</div>

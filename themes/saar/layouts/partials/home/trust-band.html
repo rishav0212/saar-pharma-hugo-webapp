@@ -15,25 +15,11 @@
   </div>
 </div>
 
-<section class="metric-band" aria-label="Saar Biotech statistics">
-  <div class="container">
-    <div class="metric-grid" data-animate>
-      <div class="metric">
-        <strong data-count="{{ .Site.Params.client_count }}" data-suffix="+">{{ .Site.Params.clients }}</strong>
-        <span>Clients and pharma partners</span>
-      </div>
-      <div class="metric">
-        <strong data-count="{{ .Site.Params.product_count }}" data-suffix="+">{{ .Site.Params.products }}</strong>
-        <span>Product formulations</span>
-      </div>
-      <div class="metric">
-        <strong data-count="80000" data-suffix="+">80,000+</strong>
-        <span>Sq ft manufacturing campus</span>
-      </div>
-      <div class="metric">
-        <strong data-count="20" data-suffix="+">20+</strong>
-        <span>Years of manufacturing focus</span>
-      </div>
-    </div>
-  </div>
-</section>
+{{ $metrics := slice 
+  (dict "count" .Site.Params.client_count "suffix" "+" "value" .Site.Params.clients "label" "Clients and pharma partners")
+  (dict "count" .Site.Params.product_count "suffix" "+" "value" .Site.Params.products "label" "Product formulations")
+  (dict "count" "80000" "suffix" "+" "value" "80,000+" "label" "Sq ft manufacturing campus")
+  (dict "count" "20" "suffix" "+" "value" "20+" "label" "Years of manufacturing focus")
+}}
+{{ partial "shared/metrics.html" (dict "items" $metrics "class" "") }}
+

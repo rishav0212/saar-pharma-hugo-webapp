@@ -1,0 +1,23 @@
+<!-- Products Knowledge Base (SEO FAQ Section) -->
+<section class="products-faq section section--paper section-rail" id="product-faq" aria-labelledby="faq-title">
+    <div class="container faq-layout">
+        <div class="faq-aside" data-animate="slide-right">
+            <span class="eyebrow">Product Expertise</span>
+            <h2 id="faq-title" class="section-title section-title--sm">Therapeutic & Manufacturing Knowledge</h2>
+            <p class="section-kicker">Detailed answers regarding our DCGI approved molecules, therapeutic categories, and third-party manufacturing protocols at our Baddi facility.</p>
+            <a class="btn btn--outline" href="#" data-enquire-trigger>
+                Download Portfolio
+                <i data-lucide="download" class="icon" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div class="faq-list" data-animate data-animate-stagger>
+            {{ range $index, $item := .Params.faqs }}
+            <details class="faq-item" {{ if eq $index 0 }}open{{ end }}>
+                <summary>{{ $item.q }}</summary>
+                <p>{{ $item.a | markdownify }}</p>
+            </details>
+            {{ end }}
+        </div>
+    </div>
+</section>

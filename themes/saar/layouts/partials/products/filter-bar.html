@@ -1,0 +1,83 @@
+{{ $allCats := slice }}
+{{ range (where .Site.RegularPages "Section" "products") }}
+    {{ if .Params.categories }}
+        {{ range .Params.categories }}
+            {{ $allCats = $allCats | append . }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+{{ $uniqueCats := $allCats | uniq | sort }}
+
+<!-- Floating Global Filter & Search Bar -->
+<nav class="product-filter-bar shadow-sm sticky top-0 md:top-[72px]">
+    <div class="container">
+        <div class="product-filter-bar__inner">
+            <!-- Inline Search & Dropdown -->
+            <!-- Premium Smart Search -->
+            <div class="product-filter-search-group">
+                <div class="filter-search-wrap">
+                    <i data-lucide="search" class="icon-search"></i>
+                    <input type="text" id="products-search" autocomplete="off" aria-label="Search products" placeholder="Search by category, name, or composition..." class="filter-search-input">
+                    
+                    <!-- Custom Suggestions Dropdown -->
+                    <div id="search-suggestions" class="search-suggestions is-hidden">
+                        <div class="suggestions-header">Therapeutic Categories</div>
+                        <div class="suggestions-list">
+                            {{ range $uniqueCats }}
+                                {{ $catName := . }}
+                                {{ $count := 0 }}
+                                {{ range $allCats }}
+                                    {{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}
+                                {{ end }}
+                                <div class="suggestion-item" data-value="{{ . }}">
+                                    <i data-lucide="tag" class="w-3.5 h-3.5 opacity-50"></i>
+                                    <div class="flex justify-between items-center w-full pr-2">
+                                        <span>{{ . }}</span>
+                                        <span class="text-[10px] opacity-40 font-black">{{ $count }} Items</span>
+                                    </div>
+                                </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Slider -->
+            <div class="product-filter-pills-wrap">
+                <button class="filter-nav-btn filter-nav-btn--left" id="pills-scroll-left" aria-label="Scroll Left">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+                
+                <div class="filter-pills no-scrollbar" id="filter-pills-scroll">
+                    <button class="filter-pill is-active" data-filter="all" aria-pressed="true">
+                        <span class="filter-pill__label">All <span class="opacity-50 ml-1">({{ len (where .Site.RegularPages "Section" "products") }})</span></span>
+                    </button>
+
+                    {{ range $uniqueCats }}
+                        {{ $catName := . }}
+                        {{ $count := 0 }}
+                        {{ range $allCats }}
+                            {{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}
+                        {{ end }}
+                        <button class="filter-pill" data-filter="{{ . | urlize }}" aria-pressed="false">
+                            <span class="filter-pill__label">{{ . }} <span class="opacity-50 ml-1">({{ $count }})</span></span>
+                        </button>
+                    {{ end }}
+                </div>
+
+                <button class="filter-nav-btn filter-nav-btn--right" id="pills-scroll-right" aria-label="Scroll Right">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+                
+                <div class="filter-fade-left" id="fade-left"></div>
+                <div class="filter-fade-right" id="fade-right"></div>
+            </div>
+
+            <!-- Result Counter -->
+            <div class="product-result-count max-xl:hidden">
+                <span id="products-count" class="count-num">{{ len (where .Site.RegularPages "Section" "products") }}</span>
+                <span class="count-label">Items</span>
+            </div>
+        </div>
+    </div>
+</nav>

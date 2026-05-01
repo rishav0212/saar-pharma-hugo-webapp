@@ -138,4 +138,13 @@
     background-color: rgba(255, 255, 255, 0.12);
     border-color: rgba(255, 255, 255, 0.60);
   }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 mb-4 text-brand-3 text-xs font-extrabold tracking-normal uppercase;
+  }
+  
+  .eyebrow::before {
+    content: "";
+    @apply w-6 h-0.5 rounded-full bg-current;
+  }
 }

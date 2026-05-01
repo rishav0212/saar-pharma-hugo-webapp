@@ -1,0 +1,33 @@
+<!-- Products Grid Section -->
+<section id="products-grid-top" class="products-section">
+    <div class="container relative z-10">
+        <div class="products-active-header" data-animate="fade-up">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="w-8 h-[2px] bg-teal-600"></span>
+                <span class="text-[10px] font-black text-teal-600 uppercase tracking-widest">Manufacturing Portfolio</span>
+            </div>
+            <h2 id="products-active-label" class="text-3xl font-display font-black text-gray-900 flex items-center gap-3">
+                <span id="active-cat-name">All</span>
+                <span id="products-count-badge" class="text-[0.6em] opacity-30 font-bold">({{ len (where .Site.RegularPages "Section" "products") }})</span>
+            </h2>
+        </div>
+
+        <div class="products-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="products-grid">
+            {{ range .Pages.ByTitle }}
+                {{ partial "products/card.html" . }}
+            {{ end }}
+        </div>
+
+        <!-- Empty State -->
+        <div id="products-empty" class="products-empty" style="display: none;">
+            <div class="products-empty__visual">
+                <i data-lucide="flask-round" class="w-12 h-12"></i>
+            </div>
+            <h3>No Formulations Found</h3>
+            <p>Try refining your search terms or view another category.</p>
+            <button onclick="window.location.hash = ''; location.reload();" class="btn btn--primary mt-6">
+                Reset Portfolio
+            </button>
+        </div>
+    </div>
+</section>

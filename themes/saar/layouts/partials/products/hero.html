@@ -1,0 +1,61 @@
+<!-- Elite Products Hero -->
+<section class="section--products-hero">
+    <div class="products-hero__bg"></div>
+    <div class="products-hero__overlay"></div>
+
+    <div class="floating-asset floating-asset--1"></div>
+    <div class="floating-asset floating-asset--2"></div>
+    <div class="floating-asset floating-asset--3"></div>
+    
+    <div class="container">
+        <div class="products-hero__inner" data-animate="fade-up">
+            <h1 class="text-white">
+                Pharmaceutical <br>
+                <span class="text-teal-400">Compositions</span>
+            </h1>
+            
+            <p>
+                Precision-engineered medical formulations produced in our state-of-the-art WHO-GMP certified facilities.
+            </p>
+
+            <!-- Hero Search with Category Dropdown -->
+            <div class="products-hero-search-group flex flex-col md:flex-row gap-0">
+                <div class="hero-search-wrap w-full md:w-auto flex-1">
+                    <i data-lucide="search" class="icon-search"></i>
+                    <input type="text" id="hero-search" aria-label="Search formulations" placeholder="Search formulations..." class="hero-search-input">
+                </div>
+                
+                <div class="hero-cat-wrap w-full md:w-[260px] border-t md:border-t-0 border-white/15 md:border-l">
+                    <select id="hero-cat-select" class="hero-cat-select" aria-label="Select Category">
+                        <option value="all">All Categories</option>
+                        {{ $cats := slice }}
+                        {{ range (where .Site.RegularPages "Section" "products") }}
+                            {{ range .Params.categories }}
+                                {{ $cats = $cats | append . }}
+                            {{ end }}
+                        {{ end }}
+                        {{ range (uniq $cats) }}
+                        <option value="{{ . | urlize }}">{{ . }}</option>
+                        {{ end }}
+                    </select>
+                    <i data-lucide="chevron-down" class="icon-chevron"></i>
+                </div>
+            </div>
+
+            <div class="products-hero-stats">
+                <div class="products-hero-stat">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-teal-400"></i>
+                    WHO-GMP
+                </div>
+                <div class="products-hero-stat">
+                    <i data-lucide="dna" class="w-4 h-4 text-teal-400"></i>
+                    Advanced R&D
+                </div>
+                <div class="products-hero-stat">
+                    <i data-lucide="package" class="w-4 h-4 text-teal-400"></i>
+                    Bulk Capacity
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

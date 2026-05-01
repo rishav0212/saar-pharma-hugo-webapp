@@ -1,0 +1,12 @@
+<section class="metric-band {{ .class }}" aria-label="Saar Biotech statistics">
+  <div class="container">
+    <div class="metric-grid" data-animate>
+      {{ range .items }}
+      <div class="metric">
+        <strong data-count="{{ .count }}" data-suffix="{{ .suffix }}">{{ .value }}</strong>
+        <span>{{ .label }}</span>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
