@@ -66,9 +66,10 @@
   .hero-search-wrap .icon-search { @apply absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-brand-2; }
 
   .hero-cat-wrap { @apply relative w-[260px] max-md:hidden; }
-  .hero-cat-select { @apply w-full h-[64px] bg-transparent border-none text-white pl-6 pr-14 text-[15px] font-bold appearance-none outline-none cursor-pointer; }
-  .hero-cat-select option { @apply bg-abyss text-white; }
-  .hero-cat-wrap .icon-chevron { @apply absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-2 pointer-events-none opacity-60; }
+  .hero-cat-select { @apply w-full h-[64px] bg-transparent border-none text-white/90 pl-6 pr-14 text-[15px] font-bold appearance-none outline-none cursor-pointer transition-colors duration-200; }
+  .hero-cat-select:hover { @apply text-white; }
+  .hero-cat-select option { @apply bg-ink text-white; } /* Deep blue instead of near-black */
+  .hero-cat-wrap .icon-chevron { @apply absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-2 pointer-events-none opacity-80; }
 
   .products-hero-stats { @apply flex flex-wrap justify-center gap-6 mt-4; }
   .products-hero-stat {
