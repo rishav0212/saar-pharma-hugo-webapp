@@ -128,6 +128,15 @@ export function initSearch() {
     if (e.target === spotlight) closeSpotlight();
   });
 
+  // Close spotlight when a result is clicked
+  resultsArea.addEventListener('click', (e) => {
+    const link = e.target.closest('.search-result-item');
+    if (link) {
+      // Small delay to ensure the click interaction is registered before UI disappears
+      setTimeout(closeSpotlight, 10);
+    }
+  });
+
   input.addEventListener('input', (e) => {
     const query = e.target.value.trim();
     if (query.length < 1) {
