@@ -9,15 +9,17 @@
     position: absolute;
     inset: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    background-color: rgba(var(--color-abyss-rgb), 0.92);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(var(--color-abyss-rgb), 0.90);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
     z-index: 0;
   }
   
   .site-header.nav-active::before {
     background-color: rgba(var(--color-abyss-rgb), 0.98);
+    backdrop-filter: blur(20px);
   }
 
   .site-header__inner {

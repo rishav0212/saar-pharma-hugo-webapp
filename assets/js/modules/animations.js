@@ -112,7 +112,7 @@ export function initCounters() {
 export function initHeroCanvas() {
   const canvasEl = document.getElementById("hero-canvas");
   if (!canvasEl || reduceMotion || !window.VANTA || !window.VANTA.NET) return;
-  
+
   window.VANTA.NET({
     el: "#hero-canvas",
     mouseControls: true,
@@ -128,3 +128,4 @@ export function initHeroCanvas() {
     spacing: 18.00
   });
 }
+

@@ -1,7 +1,7 @@
 @layer components {
   /* ─── Search Overlay ─── */
   .search-spotlight {
-    @apply fixed inset-0 z-[150] flex items-start justify-center p-4 transition-all duration-400 pointer-events-none opacity-0;
+    @apply fixed inset-0 z-[150] flex items-start justify-center p-4 transition-all duration-300 pointer-events-none opacity-0;
     background-color: rgba(6, 17, 33, 0.4);
     backdrop-filter: blur(8px);
   }
@@ -16,7 +16,7 @@
 
   /* ─── Inner Panel (Ultra Wide & Adaptive) ─── */
   .search-spotlight__inner {
-    @apply w-[95vw] max-w-[1000px] mt-[8vh] bg-white rounded-xl shadow-[0_40px_80px_rgba(0,0,0,0.3)] border border-line overflow-hidden transition-all duration-400 scale-[0.98] -translate-y-4;
+    @apply w-[95vw] max-w-[1000px] mt-[8vh] bg-white rounded-xl shadow-[0_40px_80px_rgba(0,0,0,0.3)] border border-line overflow-hidden transition-all duration-300 scale-[0.98] -translate-y-4;
     background-color: var(--color-paper);
   }
 
