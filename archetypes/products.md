@@ -45,18 +45,33 @@ images:
   - "{{ .Name }}.webp"
 ---
 
-## Description
-<!-- High-level clinical overview -->
+## Description & Therapeutic Class
+<!-- High-level clinical overview and primary use cases -->
+
+## The Saar Biotech Advantage
+<!-- Why partner with Saar Biotech for this specific formulation (e.g., precise manufacturing, API stability) -->
+- **Advantage 1**: Detail here.
+- **Advantage 2**: Detail here.
 
 ## Key Indications & Usage
-<!-- Bullet points of clinical uses -->
+<!-- Bullet points of clinical uses and conditions treated -->
+- **Indication 1**: Detail here.
+- **Indication 2**: Detail here.
 
-## Mechanism of Action
-<!-- How the molecule works -->
+## Mechanism of Action (MOA)
+<!-- How the molecule works pharmacologically -->
 
-## B2B Manufacturing Conclusion
-<!-- Why partner with Saar Biotech for this specific product -->
+## Pharmacokinetics & Bioavailability
+<!-- Details on absorption, distribution, and elimination -->
+
+## Storage & Reconstitution Intelligence
+<!-- Specific handling and storage instructions for B2B partners -->
+
+## Quality Control & Compliance
+<!-- Specific QC tests performed (e.g., Dissolution, Assay, MLT) -->
+
+## Side Effects & Safety Profile
+<!-- Common adverse effects and contraindications -->
 
 ---
-**Looking for Contract Manufacturing for {{ replace .Name "-" " " | title }}?**  
-[Start your journey with Saar Biotech — Quote Now](/#enquiry-form)
+*For B2B manufacturing enquiries, third-party contracts, or to request a full technical dossier for {{ replace .Name "-" " " | title }}, please use the enquiry form below.*
