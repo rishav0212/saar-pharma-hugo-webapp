@@ -1,0 +1,47 @@
+{{/*
+  partial: product/sidebar.html
+  Purpose: Right sticky sidebar for the lower content section —
+           contract manufacturing widget and portfolio link.
+  Context: Full Hugo page context (.)
+*/}}
+<aside class="ps-sticky-sidebar">
+  <div class="ps-widget-card">
+    <div class="widget-header">
+      <i data-lucide="factory"></i>
+      <h3>Contract Manufacturing</h3>
+    </div>
+    <div class="widget-body">
+      <p>Looking to manufacture <strong>{{ .Params.product_name | default "this formulation" }}</strong> under your own brand name?</p>
+      <ul class="widget-benefits">
+        <li>
+          <i data-lucide="check-circle-2"></i>
+          <span><strong>WHO-GMP &amp; ISO</strong> Certified Facility</span>
+        </li>
+        <li>
+          <i data-lucide="check-circle-2"></i>
+          <span><strong>GLP Tested</strong> in Agilent equipped labs</span>
+        </li>
+        <li>
+          <i data-lucide="check-circle-2"></i>
+          <span><strong>DCGI Approved</strong> formulations</span>
+        </li>
+        <li>
+          <i data-lucide="check-circle-2"></i>
+          <span>Complete <strong>Dossier Support</strong></span>
+        </li>
+      </ul>
+      {{/* Reuses global .btn.btn--primary — no custom class */}}
+      <button class="btn btn--primary w-full" data-enquire-trigger data-product-name="{{ .Title }}">
+        Get a Quote Today
+      </button>
+    </div>
+  </div>
+
+  <a href="/products/" class="ps-widget-link">
+    <div>
+      <strong>Browse Full Portfolio</strong>
+      <span>View all 240+ formulations</span>
+    </div>
+    <i data-lucide="arrow-right"></i>
+  </a>
+</aside>

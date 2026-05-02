@@ -1,0 +1,82 @@
+{{/*
+  partial: product/gallery.html
+  Purpose: Left column — main image frame, filmstrip thumbnails, and progress dots.
+  Context: Full Hugo page context (.)
+*/}}
+<div class="ps-gallery-col" data-animate="slide-right">
+
+  {{/* Category + cert pill bar */}}
+  <div class="ps-gallery-pill-row">
+    {{ if reflect.IsSlice .Params.categories }}
+      {{ range .Params.categories }}
+        <span class="ps-pill ps-pill--cat">{{ . }}</span>
+      {{ end }}
+    {{ else if .Params.category }}
+      <span class="ps-pill ps-pill--cat">{{ .Params.category }}</span>
+    {{ end }}
+    {{ with .Params.therapeutic_class }}
+      <span class="ps-pill ps-pill--cat">{{ . }}</span>
+    {{ end }}
+    <span class="ps-pill ps-pill--cert">WHO-GMP</span>
+  </div>
+
+  {{/* Main image frame — click opens lightbox */}}
+  <div class="ps-gallery-frame" id="ps-gallery-frame"
+       role="button" tabindex="0" aria-label="Click to zoom image">
+
+    <div class="ps-gallery-badges">
+      <span class="ps-gal-badge ps-gal-badge--teal">{{ .Params.dosage_form | default .Params.category }}</span>
+      <span class="ps-gal-badge">{{ .Params.therapeutic_class | default "Pharmaceutical" }}</span>
+    </div>
+
+    {{ if .Params.images }}
+      <div class="ps-gallery-img-wrap">
+        <img
+          id="ps-main-img"
+          src="/images/products/{{ index .Params.images 0 }}"
+          alt="{{ .Params.product_name | default .Title }}"
+          loading="eager"
+          class="ps-main-img"
+        >
+      </div>
+    {{ else }}
+      <div class="ps-no-image">
+        <i data-lucide="flask-conical"></i>
+        <p>Image Unavailable</p>
+      </div>
+    {{ end }}
+
+    <div class="ps-gallery-zoom-hint">
+      <i data-lucide="zoom-in"></i> Click to zoom
+    </div>
+  </div>
+
+  {{/* Filmstrip thumbnails — only shown when multiple images exist */}}
+  {{ if .Params.images }}
+    {{ if gt (len .Params.images) 1 }}
+    <div class="ps-filmstrip-wrap">
+      <div class="ps-filmstrip" id="ps-filmstrip" role="list" aria-label="Product images">
+        {{ range $i, $img := .Params.images }}
+        <button
+          class="ps-filmstrip-thumb {{ if eq $i 0 }}active{{ end }}"
+          data-src="/images/products/{{ $img }}"
+          data-index="{{ $i }}"
+          aria-label="View image {{ add $i 1 }}"
+          role="listitem"
+        >
+          <img src="/images/products/{{ $img }}" alt="{{ $.Title }} view {{ add $i 1 }}" loading="lazy">
+        </button>
+        {{ end }}
+      </div>
+    </div>
+
+    {{/* Progress dots for auto-slide indicator */}}
+    <div class="ps-slide-progress" id="ps-slide-progress" aria-hidden="true">
+      {{ range $i, $img := .Params.images }}
+      <span class="ps-slide-dot {{ if eq $i 0 }}active{{ end }}" data-dot-index="{{ $i }}"></span>
+      {{ end }}
+    </div>
+    {{ end }}
+  {{ end }}
+
+</div>

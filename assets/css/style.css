@@ -177,6 +177,12 @@
   transform: translateY(0);
 }
 
+/* pulse-dot — used by product page CMO availability badge, available globally */
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(21, 159, 145, 0.5); }
+  60%       { box-shadow: 0 0 0 5px rgba(21, 159, 145, 0); }
+}
+
 @import "./assets/css/components/typography.css";
 @import "./assets/css/components/cards.css";
 @import "./assets/css/components/tabs.css";
@@ -190,4 +196,5 @@
 @import "./assets/css/sections/about.css";
 @import "./assets/css/sections/about-timeline.css";
 @import "./assets/css/sections/products.css";
+@import "./assets/css/sections/product-lightbox.css";
 @import "./assets/css/sections/product-single.css";
