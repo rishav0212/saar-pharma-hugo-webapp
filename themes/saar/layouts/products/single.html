@@ -3,7 +3,7 @@
 
 <article class="ps-premium-page" itemscope itemtype="https://schema.org/Drug">
 
-  {{/* ── JSON-LD SCHEMA (Maximum SEO Priority) ───────────────────────────── */}}
+  {{/* ── JSON-LD SCHEMA ───────────────────────────────────────────────── */}}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -25,7 +25,7 @@
   }
   </script>
 
-  {{/* ── 1. BREADCRUMBS ─────────────────────────────────────────────────── */}}
+  {{/* ── BREADCRUMB BAR ─────────────────────────────────────────────── */}}
   <div class="ps-breadcrumb-bar">
     <div class="container">
       <nav class="ps-breadcrumbs" aria-label="Breadcrumb">
@@ -39,111 +39,233 @@
   </div>
 
 
-  {{/* ── 2. PRODUCT CONTENT AREA ────────────────────────────────────────── */}}
-  <section class="ps-content-section">
+  {{/* ══════════════════════════════════════════════════════════════════
+       UPPER SECTION: EDITORIAL SPLIT HERO
+       Left: Large gallery with filmstrip
+       Right: Sticky composition + specs + CTA
+  ══════════════════════════════════════════════════════════════════ */}}
+  <section class="ps-upper-section">
     <div class="container">
-      
-      {{/* Integrated Product Info (Top Row) */}}
-      <div class="ps-hero-grid mb-16 lg:mb-24" data-animate="fade-up">
-        
-        {{/* LEFT: Image Gallery */}}
-        <div class="ps-hero-gallery">
+      <div class="ps-split-layout">
+
+        {{/* ── LEFT: Gallery Column ── */}}
+        <div class="ps-gallery-col" data-animate="slide-right">
+
+          {{/* Category + cert pill bar */}}
+          <div class="ps-gallery-pill-row">
+            {{ if reflect.IsSlice .Params.categories }}
+              {{ range .Params.categories }}
+                <span class="ps-pill ps-pill--cat">{{ . }}</span>
+              {{ end }}
+            {{ else if .Params.category }}
+              <span class="ps-pill ps-pill--cat">{{ .Params.category }}</span>
+            {{ end }}
+            {{ with .Params.therapeutic_class }}
+              <span class="ps-pill ps-pill--cat">{{ . }}</span>
+            {{ end }}
+            <span class="ps-pill ps-pill--cert">WHO-GMP</span>
+          </div>
+
+          {{/* Main image frame — click opens lightbox */}}
+          <div class="ps-gallery-frame" id="ps-gallery-frame" role="button" tabindex="0" aria-label="Click to zoom image">
+            <div class="ps-gallery-badges">
+              <span class="ps-gal-badge ps-gal-badge--teal">{{ .Params.dosage_form | default .Params.category }}</span>
+              <span class="ps-gal-badge">{{ .Params.therapeutic_class | default "Pharmaceutical" }}</span>
+            </div>
+
+            {{ if .Params.images }}
+              <div class="ps-gallery-img-wrap">
+                <img
+                  id="ps-main-img"
+                  src="/images/products/{{ index .Params.images 0 }}"
+                  alt="{{ .Params.product_name | default .Title }}"
+                  loading="eager"
+                  class="ps-main-img"
+                >
+              </div>
+            {{ else }}
+              <div class="ps-no-image">
+                <i data-lucide="flask-conical"></i>
+                <p>Image Unavailable</p>
+              </div>
+            {{ end }}
+
+            <div class="ps-gallery-zoom-hint">
+              <i data-lucide="zoom-in"></i> Click to zoom
+            </div>
+          </div>
+
+          {{/* Filmstrip thumbnails */}}
           {{ if .Params.images }}
-            <div class="swiper ps-main-swiper">
-              <div class="swiper-wrapper">
-                {{ range .Params.images }}
-                <div class="swiper-slide">
-                  <img src="/images/products/{{ . }}" alt="{{ $.Title }}" loading="eager">
-                </div>
-                {{ end }}
-              </div>
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
-              <div class="swiper-pagination"></div>
-            </div>
-            
             {{ if gt (len .Params.images) 1 }}
-            <div class="swiper ps-thumb-swiper">
-              <div class="swiper-wrapper">
-                {{ range .Params.images }}
-                <div class="swiper-slide">
-                  <img src="/images/products/{{ . }}" alt="{{ $.Title }} thumbnail" loading="lazy">
-                </div>
+            <div class="ps-filmstrip-wrap">
+              <div class="ps-filmstrip" id="ps-filmstrip" role="list" aria-label="Product images">
+                {{ range $i, $img := .Params.images }}
+                <button
+                  class="ps-filmstrip-thumb {{ if eq $i 0 }}active{{ end }}"
+                  data-src="/images/products/{{ $img }}"
+                  data-index="{{ $i }}"
+                  aria-label="View image {{ add $i 1 }}"
+                  role="listitem"
+                >
+                  <img src="/images/products/{{ $img }}" alt="{{ $.Title }} view {{ add $i 1 }}" loading="lazy">
+                </button>
                 {{ end }}
               </div>
             </div>
-            {{ end }}
-          {{ else }}
-            <div class="ps-no-image">
-              <i data-lucide="flask-conical"></i>
-              <p>Image Unavailable</p>
+
+            {{/* Progress dots for auto-slide */}}
+            <div class="ps-slide-progress" id="ps-slide-progress" aria-hidden="true">
+              {{ range $i, $img := .Params.images }}
+              <span class="ps-slide-dot {{ if eq $i 0 }}active{{ end }}" data-dot-index="{{ $i }}"></span>
+              {{ end }}
             </div>
+            {{ end }}
           {{ end }}
         </div>
 
-        {{/* RIGHT: Product Data */}}
-        <div class="ps-hero-data">
-          <div class="ps-badges">
-            {{ with .Params.category }}
-            <span class="badge-solid">{{ . }}</span>
-            {{ end }}
-            <span class="badge-outline">
-              <i data-lucide="shield-check"></i> WHO-GMP
-            </span>
-          </div>
 
-          <h1 class="ps-title" itemprop="name">{{ .Title }}</h1>
-          
-          {{ with .Params.approved_name }}
-          <p class="ps-approved-name">Approved Name: <strong>{{ . }}</strong></p>
-          {{ end }}
 
-          <div class="ps-composition-box" itemprop="activeIngredient">
-            <span class="comp-label">Composition</span>
-            <h3 class="comp-value">{{ .Params.composition }}</h3>
-            {{ with .Params.presentation }}
-            <p class="comp-presentation">{{ . }}</p>
-            {{ end }}
-          </div>
 
-          <div class="ps-quick-specs">
-            <div class="spec-item">
-              <i data-lucide="activity"></i>
-              <div>
-                <span class="spec-title">Therapeutic Class</span>
-                <span class="spec-data">{{ .Params.therapeutic_class }}</span>
+        {{/* ── RIGHT: Sticky Info Panel ── */}}
+        <div class="ps-info-col" data-animate="slide-left">
+          <div class="ps-info-sticky">
+
+            {{/* Product title block */}}
+            <div class="ps-info-header">
+              <h1 class="ps-product-title" itemprop="name">{{ .Params.product_name | default .Title }}</h1>
+              {{ with .Params.approved_name }}
+              <p class="ps-approved-name">Approved Name: <strong itemprop="activeIngredient">{{ . }}</strong></p>
+              {{ end }}
+            </div>
+
+            {{/* Composition highlight box */}}
+            <div class="ps-comp-box" itemprop="description">
+              <span class="ps-comp-box__label">Composition</span>
+              <div class="ps-comp-box__name">{{ .Params.composition }}</div>
+              {{ with .Params.presentation }}
+              <div class="ps-comp-box__pres">{{ . }}</div>
+              {{ end }}
+            </div>
+
+            {{/* Specification table — replaces basic quick-specs */}}
+            <div class="ps-spec-table">
+              <div class="ps-spec-table__title">Key Specifications</div>
+              <div class="ps-spec-table__grid">
+                <div class="ps-spec-row">
+                  <span class="ps-spec-row__icon"><i data-lucide="layers"></i></span>
+                  <span class="ps-spec-row__key">Dosage Form</span>
+                  <span class="ps-spec-row__val">{{ .Params.dosage_form | default .Params.category }}</span>
+                </div>
+                <div class="ps-spec-row">
+                  <span class="ps-spec-row__icon"><i data-lucide="activity"></i></span>
+                  <span class="ps-spec-row__key">Therapeutic Area</span>
+                  <span class="ps-spec-row__val">{{ .Params.therapeutic_class | default "Pharmaceutical" }}</span>
+                </div>
+                <div class="ps-spec-row">
+                  <span class="ps-spec-row__icon"><i data-lucide="package"></i></span>
+                  <span class="ps-spec-row__key">Pack Sizes</span>
+                  <span class="ps-spec-row__val">
+                    {{ if reflect.IsSlice .Params.pack_sizes }}
+                      {{ delimit .Params.pack_sizes " / " }}
+                    {{ else if .Params.pack_sizes }}
+                      {{ .Params.pack_sizes }}
+                    {{ else }}
+                      On Enquiry
+                    {{ end }}
+                  </span>
+                </div>
+                <div class="ps-spec-row">
+                  <span class="ps-spec-row__icon"><i data-lucide="factory"></i></span>
+                  <span class="ps-spec-row__key">CMO Type</span>
+                  <span class="ps-spec-row__val">Third-Party Manufacturing</span>
+                </div>
+                <div class="ps-spec-row">
+                  <span class="ps-spec-row__icon"><i data-lucide="clock"></i></span>
+                  <span class="ps-spec-row__key">Quote Turnaround</span>
+                  <span class="ps-spec-row__val">Within 24 Hours</span>
+                </div>
+                <div class="ps-spec-row">
+                  <span class="ps-spec-row__icon"><i data-lucide="shield-check"></i></span>
+                  <span class="ps-spec-row__key">Quality Standard</span>
+                  <span class="ps-spec-row__val">WHO-GMP / GLP Certified</span>
+                </div>
               </div>
             </div>
-            <div class="spec-item">
-              <i data-lucide="factory"></i>
-              <div>
-                <span class="spec-title">Manufacturing</span>
-                <span class="spec-data">Third-Party / Contract</span>
-              </div>
-            </div>
-          </div>
 
-          <div class="ps-hero-actions">
-            <button class="btn btn-primary btn-large w-full" data-enquire-trigger data-product-name="{{ .Title }}">
-              <i data-lucide="mail"></i> Request Manufacturing Quote
-            </button>
-            <a href="https://wa.me/{{ .Site.Params.whatsapp }}" target="_blank" class="btn btn-whatsapp btn-large w-full">
-              <i data-lucide="message-circle"></i> Connect on WhatsApp
-            </a>
+            {{/* Certifications */}}
+            <div class="ps-certs-row">
+              <span class="ps-cert-pill">WHO-GMP</span>
+              <span class="ps-cert-pill">ISO 9001:2015</span>
+              <span class="ps-cert-pill">GLP Certified</span>
+              <span class="ps-cert-pill">DCGI Approved</span>
+              <span class="ps-cert-pill">Schedule M</span>
+            </div>
+
+            {{/* CTA Buttons */}}
+            <div class="ps-cta-group">
+              <button
+                class="btn btn--primary ps-cta-btn"
+                data-enquire-trigger
+                data-product-name="{{ .Title }}"
+              >
+                <i data-lucide="mail"></i>
+                Request Manufacturing Quote
+              </button>
+              <a
+                href="https://wa.me/{{ .Site.Params.whatsapp }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn ps-cta-btn--wa"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp Enquiry
+              </a>
+              <a href="/products/" class="ps-cta-link">
+                <i data-lucide="arrow-left"></i>
+                Browse all 240+ formulations
+              </a>
+            </div>
+
+            {{/* Trust badges strip */}}
+            <div class="ps-trust-row">
+              <span class="ps-trust-item">
+                <i data-lucide="check-circle-2"></i>
+                24hr Quote Turnaround
+              </span>
+              <span class="ps-trust-sep">·</span>
+              <span class="ps-trust-item">
+                <i data-lucide="check-circle-2"></i>
+                Private Label Support
+              </span>
+              <span class="ps-trust-sep">·</span>
+              <span class="ps-trust-item">
+                <i data-lucide="check-circle-2"></i>
+                Full COA & Dossier
+              </span>
+            </div>
+
           </div>
         </div>
-      </div>
 
-      {{/* Bottom Row: Content & Sidebar */}}
+      </div><!-- /ps-split-layout -->
+    </div><!-- /container -->
+  </section>
+
+
+  {{/* ══════════════════════════════════════════════════════════════════
+       LOWER SECTION: CONTENT + SIDEBAR
+  ══════════════════════════════════════════════════════════════════ */}}
+  <div class="ps-content-wrap">
+    <div class="container">
       <div class="ps-content-grid">
-        
-        {{/* LEFT: Markdown Content (Automatically styled via CSS) */}}
-        {{/* Why: Rendering raw markdown ensures Google parses H2s, H3s, and lists perfectly for SEO Featured Snippets. */}}
+
+        {{/* LEFT: Markdown content */}}
         <main class="ps-markdown-content" id="main-product-content">
           {{ .Content }}
         </main>
 
-        {{/* RIGHT: Sticky Manufacturing Authority Widget */}}
+        {{/* RIGHT: Sticky sidebar */}}
         <aside class="ps-sticky-sidebar">
           <div class="ps-widget-card">
             <div class="widget-header">
@@ -152,11 +274,10 @@
             </div>
             <div class="widget-body">
               <p>Looking to manufacture <strong>{{ .Params.product_name | default "this formulation" }}</strong> under your own brand name?</p>
-              
               <ul class="widget-benefits">
                 <li>
                   <i data-lucide="check-circle-2"></i>
-                  <span><strong>WHO-GMP & ISO</strong> Certified Facility</span>
+                  <span><strong>WHO-GMP &amp; ISO</strong> Certified Facility</span>
                 </li>
                 <li>
                   <i data-lucide="check-circle-2"></i>
@@ -171,14 +292,12 @@
                   <span>Complete <strong>Dossier Support</strong></span>
                 </li>
               </ul>
-
-              <button class="btn btn-primary w-full" data-enquire-trigger data-product-name="{{ .Title }}">
+              <button class="btn btn--primary w-full" data-enquire-trigger data-product-name="{{ .Title }}">
                 Get a Quote Today
               </button>
             </div>
           </div>
 
-          {{/* Related Categories Link */}}
           <a href="/products/" class="ps-widget-link">
             <div>
               <strong>Browse Full Portfolio</strong>
@@ -190,45 +309,152 @@
 
       </div>
     </div>
-  </section>
+  </div>
 
 </article>
 
+
+{{/* ── LIGHTBOX OVERLAY ── */}}
+<div class="ps-lightbox" id="ps-lightbox" role="dialog" aria-modal="true" aria-label="Product image zoom">
+  <button class="ps-lightbox-close" id="ps-lb-close" aria-label="Close">✕</button>
+  <button class="ps-lightbox-nav ps-lightbox-nav--prev" id="ps-lb-prev" aria-label="Previous image">‹</button>
+  <img class="ps-lightbox-img" id="ps-lb-img" src="" alt="">
+  <button class="ps-lightbox-nav ps-lightbox-nav--next" id="ps-lb-next" aria-label="Next image">›</button>
+</div>
+
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Swiper if the gallery exists on the page
-  if(document.querySelector('.ps-main-swiper')) {
-    
-    // Check if thumbnail swiper exists (multiple images)
-    const thumbEl = document.querySelector('.ps-thumb-swiper');
-    let thumbSwiper = null;
-    
-    if (thumbEl) {
-      thumbSwiper = new Swiper('.ps-thumb-swiper', {
-        spaceBetween: 10,
-        slidesPerView: 4,
-        freeMode: true,
-        watchSlidesProgress: true,
-      });
+  /* ── Elements ── */
+  const mainImg    = document.getElementById('ps-main-img');
+  const filmstrip  = document.getElementById('ps-filmstrip');
+  const progressEl = document.getElementById('ps-slide-progress');
+  const frame      = document.getElementById('ps-gallery-frame');
+  const lightbox   = document.getElementById('ps-lightbox');
+  const lbImg      = document.getElementById('ps-lb-img');
+  const lbClose    = document.getElementById('ps-lb-close');
+  const lbPrev     = document.getElementById('ps-lb-prev');
+  const lbNext     = document.getElementById('ps-lb-next');
+
+  if (!mainImg) return;
+
+  const thumbs = filmstrip ? Array.from(filmstrip.querySelectorAll('.ps-filmstrip-thumb')) : [];
+  const dots   = progressEl ? Array.from(progressEl.querySelectorAll('.ps-slide-dot')) : [];
+  const srcs   = thumbs.length ? thumbs.map(t => t.getAttribute('data-src')) : [mainImg.src];
+  const total  = srcs.length;
+  let current  = 0;
+  let timer    = null;
+  const DELAY  = 4000;
+
+  if (mainImg) mainImg.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+
+  /* ── Go to slide ── */
+  function goTo(idx, animateMain) {
+    if (typeof animateMain === 'undefined') animateMain = true;
+    if (idx < 0) idx = total - 1;
+    if (idx >= total) idx = 0;
+    current = idx;
+    var src = srcs[idx];
+
+    if (mainImg && animateMain) {
+      mainImg.style.opacity = '0';
+      mainImg.style.transform = 'scale(0.96)';
+      setTimeout(function() {
+        mainImg.src = src;
+        mainImg.style.opacity = '1';
+        mainImg.style.transform = 'scale(1)';
+      }, 220);
+    } else if (mainImg) {
+      mainImg.src = src;
     }
-    
-    // Main image swiper
-    new Swiper('.ps-main-swiper', {
-      spaceBetween: 10,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      thumbs: {
-        swiper: thumbSwiper
-      },
-      // Smooth fade effect for premium feel
-      effect: 'fade',
-      fadeEffect: {
-        crossFade: true
-      }
+
+    thumbs.forEach(function(t, i) { t.classList.toggle('active', i === idx); });
+    dots.forEach(function(d, i)   { d.classList.toggle('active', i === idx); });
+    if (thumbs[idx]) thumbs[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    if (lbImg && lightbox && lightbox.classList.contains('is-open')) lbImg.src = src;
+  }
+
+  /* ── Autoplay ── */
+  function startAutoplay() {
+    stopAutoplay();
+    if (total < 2) return;
+    timer = setInterval(function() { goTo(current + 1); }, DELAY);
+  }
+  function stopAutoplay() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+
+  /* ── Lightbox ── */
+  function openLightbox() {
+    if (!lightbox || !lbImg) return;
+    lbImg.src = srcs[current];
+    if (mainImg) lbImg.alt = mainImg.alt;
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    stopAutoplay();
+  }
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+    startAutoplay();
+  }
+
+  if (frame) {
+    frame.addEventListener('click', openLightbox);
+    frame.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
     });
   }
+
+  if (lbClose) lbClose.addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
+  if (lbPrev)  lbPrev.addEventListener('click',  function(e) { e.stopPropagation(); goTo(current - 1, false); });
+  if (lbNext)  lbNext.addEventListener('click',  function(e) { e.stopPropagation(); goTo(current + 1, false); });
+  if (lightbox) {
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+
+  /* ── Thumb & dot clicks ── */
+  thumbs.forEach(function(thumb, idx) {
+    thumb.addEventListener('click', function() { goTo(idx); stopAutoplay(); startAutoplay(); });
+  });
+  dots.forEach(function(dot, idx) {
+    dot.addEventListener('click', function() { goTo(idx); stopAutoplay(); startAutoplay(); });
+  });
+
+  /* ── Keyboard ── */
+  document.addEventListener('keydown', function(e) {
+    var lbOpen = lightbox && lightbox.classList.contains('is-open');
+    if (e.key === 'Escape' && lbOpen) { closeLightbox(); return; }
+    if (e.key === 'ArrowRight') { goTo(current + 1, !lbOpen); if (!lbOpen) { stopAutoplay(); startAutoplay(); } }
+    if (e.key === 'ArrowLeft')  { goTo(current - 1, !lbOpen); if (!lbOpen) { stopAutoplay(); startAutoplay(); } }
+  });
+
+  /* ── Swipe ── */
+  function addSwipe(el, cb) {
+    if (!el) return;
+    var sx = 0;
+    el.addEventListener('touchstart', function(e) { sx = e.changedTouches[0].clientX; }, { passive: true });
+    el.addEventListener('touchend', function(e) {
+      var d = e.changedTouches[0].clientX - sx;
+      if (Math.abs(d) > 40) cb(d);
+    }, { passive: true });
+  }
+  addSwipe(frame, function(d) { goTo(d < 0 ? current + 1 : current - 1); stopAutoplay(); startAutoplay(); });
+  addSwipe(lightbox, function(d) { goTo(d < 0 ? current + 1 : current - 1, false); });
+
+  /* ── Hover pause ── */
+  [frame, filmstrip].forEach(function(el) {
+    if (!el) return;
+    el.addEventListener('mouseenter', stopAutoplay);
+    el.addEventListener('mouseleave', startAutoplay);
+  });
+
+  /* ── Init ── */
+  if (total > 1) startAutoplay();
 });
 </script>
+
 {{ end }}

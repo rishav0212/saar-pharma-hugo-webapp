@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # SAAR Biotech Hugo Site - Project Rules
 
 ## 1. Core Architecture & Code Quality

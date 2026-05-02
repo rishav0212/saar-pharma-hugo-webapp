@@ -63,9 +63,6 @@ export function initHeader() {
     });
   }
 
-  window.addEventListener("scroll", () => {
-    header.classList.toggle("scrolled", window.scrollY > 30);
-  });
 }
 
 export function initProductScroll() {
