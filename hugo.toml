@@ -32,7 +32,7 @@ enableRobotsTXT = true
   subCategory = "subCategories"
 
 [permalinks]
-  products      = "/products/:slug/"
+  products      = "/product/:slug/"
   categories    = "/categories/:slug/"
   subCategories = "/sub-categories/:slug/"
 

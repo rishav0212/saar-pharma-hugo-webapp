@@ -6,7 +6,6 @@ type: "products"
 layout: "single"
 
 # Technical Metadata (SEO-Friendly)
-url: "/products/sucralfate-oxetacaine-suspension/"
 composition: "Sucralfate + Oxetacaine"
 dosage_form: "Oral Suspension"
 approved_name: "Sucralfate & Oxetacaine Suspension"

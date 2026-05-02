@@ -6,7 +6,6 @@ type: "products"
 layout: "single"
 
 # Technical Metadata (SEO-Friendly)
-url: "/products/sodium-alginate-suspension/"
 composition: "Sodium Alginate + Sodium Bicarbonate + Calcium Carbonate"
 dosage_form: "Oral Suspension"
 approved_name: "Sodium Alginate, Sodium Bicarbonate & Calcium Carbonate Suspension"
