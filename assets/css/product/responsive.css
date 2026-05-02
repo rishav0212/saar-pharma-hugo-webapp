@@ -1,0 +1,119 @@
+@layer components {
+
+  /* ──────────────────────────────────────────────────────────────────────────
+     PRODUCT SINGLE — RESPONSIVE OVERRIDES
+     ────────────────────────────────────────────────────────────────────────── */
+
+  /* Tablet landscape (768–1023px): stack gallery above, info below */
+  @media (max-width: 1023px) {
+    .ps-split-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .ps-gallery-frame {
+      /* On tablet/mobile use 4:3 (landscape) for more thumb visibility */
+      aspect-ratio: 4 / 3;
+      max-height: 420px;
+    }
+
+    .ps-product-title {
+      @apply text-[28px];
+    }
+
+    .ps-info-sticky {
+      position: static !important;
+      max-height: none !important;
+      overflow-y: visible !important;
+    }
+  }
+
+  /* Tablet portrait (640–767px) */
+  @media (max-width: 767px) {
+    .ps-filmstrip {
+      grid-auto-columns: 84px;
+    }
+
+    .ps-filmstrip-thumb {
+      width: 84px;
+      height: 70px;
+    }
+
+    .ps-gallery-frame {
+      border-radius: 20px;
+    }
+  }
+
+  /* Mobile (< 640px) */
+  @media (max-width: 639px) {
+    .ps-upper-section {
+      @apply pt-5 pb-2;
+    }
+
+    .ps-gallery-frame {
+      border-radius: 16px;
+      aspect-ratio: 4 / 3;
+      max-height: 280px;
+    }
+
+    .ps-gallery-img-wrap {
+      padding: 14px;
+    }
+
+    .ps-filmstrip {
+      grid-auto-columns: 72px;
+    }
+
+    .ps-filmstrip-thumb {
+      width: 72px;
+      height: 60px;
+      padding: 5px;
+    }
+
+    .ps-product-title {
+      @apply text-[24px];
+    }
+
+    /* Lightbox full-screen on mobile */
+    .ps-lightbox-img {
+      max-width: 96vw;
+      max-height: 80vh;
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    .ps-lightbox-nav {
+      width: 38px;
+      height: 38px;
+      font-size: 16px;
+    }
+
+    .ps-lightbox-nav--prev {
+      left: 8px;
+    }
+
+    .ps-lightbox-nav--next {
+      right: 8px;
+    }
+
+    .ps-lightbox-close {
+      top: 12px;
+      right: 12px;
+      width: 38px;
+      height: 38px;
+    }
+  }
+
+  /* Very small mobile (< 380px) */
+  @media (max-width: 379px) {
+    .ps-filmstrip {
+      grid-auto-columns: 60px;
+    }
+
+    .ps-filmstrip-thumb {
+      width: 60px;
+      height: 50px;
+      padding: 4px;
+    }
+  }
+
+}

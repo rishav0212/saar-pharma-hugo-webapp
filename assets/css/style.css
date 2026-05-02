@@ -195,6 +195,10 @@
 @import "./assets/css/sections/home-planner.css";
 @import "./assets/css/sections/about.css";
 @import "./assets/css/sections/about-timeline.css";
-@import "./assets/css/sections/products.css";
-@import "./assets/css/sections/product-lightbox.css";
-@import "./assets/css/sections/product-single.css";
+@import "./assets/css/product/listing.css";
+@import "./assets/css/product/lightbox.css";
+@import "./assets/css/product/layout.css";
+@import "./assets/css/product/gallery.css";
+@import "./assets/css/product/info.css";
+@import "./assets/css/product/content.css";
+@import "./assets/css/product/responsive.css";

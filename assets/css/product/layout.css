@@ -1,0 +1,54 @@
+@layer components {
+
+  /* ──────────────────────────────────────────────────────────────────────────
+     PRODUCT SINGLE — BASE LAYOUT & BREADCRUMBS
+     ────────────────────────────────────────────────────────────────────────── */
+
+  .ps-premium-page {
+    @apply bg-[#F8FAFC] pb-24;
+  }
+
+  /* ── BREADCRUMBS ── */
+  .ps-breadcrumb-bar {
+    @apply relative z-20 border-b border-line py-3.5 bg-white;
+  }
+
+  .ps-breadcrumbs {
+    @apply flex items-center gap-2.5 text-[12px] font-bold text-muted flex-wrap;
+  }
+
+  .ps-breadcrumbs a {
+    @apply hover:text-brand transition-colors no-underline text-muted;
+  }
+
+  .ps-breadcrumbs [data-lucide] {
+    @apply w-3.5 h-3.5 opacity-30;
+  }
+
+  .ps-breadcrumbs .current {
+    @apply text-ink font-black;
+  }
+
+  /* ── UPPER SECTION SPLIT LAYOUT ── */
+  .ps-upper-section {
+    @apply pt-10 pb-4;
+  }
+
+  /* Two-column split: narrower gallery, wider info */
+  .ps-split-layout {
+    @apply grid grid-cols-1 gap-6 lg:gap-10 items-start;
+  }
+
+  @media (min-width: 1024px) {
+    .ps-split-layout {
+      grid-template-columns: minmax(0, 580px) 1fr;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .ps-split-layout {
+      grid-template-columns: minmax(0, 640px) 1fr;
+    }
+  }
+
+}

@@ -110,23 +110,23 @@
 
     {{/* ── 4. B2B AUTHORITY ROW — uses site params ────────────────
          Compact 3-col strip using .Site.Params values (single source of truth) */}}
+    {{/* ── 4. B2B AUTHORITY ROW — uses site params ────────────────
+         Compact 3-col strip using .Site.Params values (single source of truth) */}}
     <div class="ps-authority-strip">
       <div class="ps-authority-item">
-        <strong>{{ .Site.Params.products }}</strong>
-        <span>Formulations</span>
+        <strong class="ps-authority-num">{{ .Site.Params.products }}</strong>
+        <span class="ps-authority-label">DCGI Formulations</span>
       </div>
-      <div class="ps-authority-sep"></div>
+      <div class="ps-authority-divider"></div>
       <div class="ps-authority-item">
-        <strong>{{ .Site.Params.clients }}</strong>
-        <span>B2B Partners</span>
+        <strong class="ps-authority-num">{{ .Site.Params.clients }}</strong>
+        <span class="ps-authority-label">Global Partners</span>
       </div>
-      <div class="ps-authority-sep"></div>
+      <div class="ps-authority-divider"></div>
       <div class="ps-authority-item">
-        {{/* Calculate years from .Site.Params.founded */}}
-        {{ $founded := .Site.Params.founded | default "2005" }}
-        {{ $years := sub 2025 (int $founded) }}
-        <strong>{{ $years }}+</strong>
-        <span>Yrs Experience</span>
+        {{/* Use a fixed "25+" if that's what the user prefers, or calculate from founded */}}
+        <strong class="ps-authority-num">25+</strong>
+        <span class="ps-authority-label">Years Legacy</span>
       </div>
     </div>
 

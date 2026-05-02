@@ -1,0 +1,161 @@
+@layer components {
+
+  /* ──────────────────────────────────────────────────────────────────────────
+     PRODUCT SINGLE — GALLERY & FILMSTRIP
+     ────────────────────────────────────────────────────────────────────────── */
+
+  .ps-gallery-col {
+    @apply flex flex-col gap-4 min-w-0;
+  }
+
+  /* Stick the gallery in view while the taller right panel scrolls past it */
+  @media (min-width: 1024px) {
+    .ps-gallery-col {
+      position: sticky;
+      top: 88px;
+      /* Self-height must not exceed viewport or it won't scroll into view */
+      max-height: calc(100vh - 108px);
+      overflow: visible;
+    }
+  }
+
+  /* Category pill row above gallery */
+  .ps-gallery-pill-row {
+    @apply flex flex-wrap gap-2 mb-1;
+  }
+
+  .ps-pill {
+    @apply px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border;
+  }
+
+  .ps-pill--cat {
+    @apply bg-surface text-brand-3 border-brand-line;
+  }
+
+  .ps-pill--cert {
+    @apply bg-ink text-brand-2 border-ink;
+  }
+
+  /* ── MAIN IMAGE FRAME ── */
+  .ps-gallery-frame {
+    @apply relative bg-white border border-line overflow-hidden;
+    border-radius: 24px;
+    aspect-ratio: 3 / 4;
+    max-height: 520px;
+    cursor: zoom-in;
+    box-shadow: 0 20px 56px -10px rgba(16, 42, 67, 0.13), 0 4px 16px rgba(16, 42, 67, 0.06);
+  }
+
+  .ps-gallery-badges {
+    @apply absolute top-4 left-4 z-10 flex flex-col gap-1.5;
+  }
+
+  .ps-gal-badge {
+    @apply px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-xl border border-line text-[9px] font-black text-ink uppercase tracking-widest shadow-sm transition-all duration-300 w-fit;
+  }
+
+  .ps-gal-badge--teal {
+    @apply bg-brand text-white border-transparent;
+  }
+
+  /* image wrapper fills the frame */
+  .ps-gallery-img-wrap {
+    @apply w-full h-full flex items-center justify-center;
+    padding: 20px;
+  }
+
+  .ps-main-img {
+    @apply w-full h-full object-contain block;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    max-height: 100%;
+  }
+
+  .ps-gallery-frame:hover .ps-main-img {
+    transform: scale(1.04);
+  }
+
+  /* Zoom hint badge — shown on hover */
+  .ps-gallery-zoom-hint {
+    @apply absolute bottom-3.5 right-3.5 flex items-center gap-1.5 bg-ink/65 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full pointer-events-none select-none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .ps-gallery-frame:hover .ps-gallery-zoom-hint {
+    opacity: 1;
+  }
+
+  .ps-gallery-zoom-hint [data-lucide] {
+    @apply w-3 h-3;
+  }
+
+  .ps-no-image {
+    @apply w-full h-full flex flex-col items-center justify-center gap-4 text-muted;
+  }
+
+  .ps-no-image [data-lucide] {
+    @apply w-16 h-16 opacity-30;
+  }
+
+  .ps-no-image p {
+    @apply text-[13px] font-bold opacity-50;
+  }
+
+  /* ── FILMSTRIP ── */
+  .ps-filmstrip-wrap {
+    @apply w-full;
+    overflow: visible;
+  }
+
+  .ps-filmstrip {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 96px;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(21, 159, 145, 0.3) transparent;
+  }
+
+  .ps-filmstrip::-webkit-scrollbar { height: 4px; }
+  .ps-filmstrip::-webkit-scrollbar-track { background: transparent; }
+  .ps-filmstrip::-webkit-scrollbar-thumb {
+    background: rgba(21, 159, 145, 0.3);
+    border-radius: 9999px;
+  }
+
+  .ps-filmstrip-thumb {
+    @apply flex-none rounded-xl border-2 border-line bg-white cursor-pointer overflow-hidden;
+    width: 96px; height: 80px; padding: 6px;
+    box-shadow: 0 2px 6px rgba(16, 42, 67, 0.06);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .ps-filmstrip-thumb img {
+    @apply w-full h-full object-contain block;
+    border-radius: 6px;
+  }
+
+  .ps-filmstrip-thumb.active {
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 2px rgba(21, 159, 145, 0.25), 0 6px 18px rgba(21, 159, 145, 0.2);
+    background: var(--color-surface);
+  }
+
+  .ps-filmstrip-thumb:hover:not(.active) {
+    border-color: var(--color-brand-2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(16, 42, 67, 0.08);
+  }
+
+  /* Progress dots */
+  .ps-slide-progress { @apply flex gap-2 justify-center mt-0.5; }
+  .ps-slide-dot {
+    height: 3px; border-radius: 9999px; background: var(--color-line); cursor: pointer; width: 20px;
+    transition: width 0.4s ease, background 0.3s ease;
+  }
+  .ps-slide-dot.active { background: var(--color-brand); width: 36px; }
+  .ps-slide-dot:hover:not(.active) { background: var(--color-brand-2); }
+
+}

@@ -1,0 +1,270 @@
+@layer components {
+
+  /* ──────────────────────────────────────────────────────────────────────────
+     PRODUCT SINGLE — INFO PANEL (ELITE CLINICAL DESIGN)
+     Focus: Professionalism, Data Clarity, and Premium B2B Aesthetic
+     ────────────────────────────────────────────────────────────────────────── */
+
+  .ps-info-col {
+    @apply min-w-0;
+  }
+
+  .ps-info-sticky {
+    @apply flex flex-col gap-4;
+  }
+
+  /* Sticky behavior on desktop */
+  @media (min-width: 1024px) {
+    .ps-info-sticky {
+      position: sticky;
+      top: 100px;
+    }
+  }
+
+  /* ── 1. HEADER ─────────────────────────────────────────── */
+  .ps-info-header {
+    @apply flex flex-col gap-3.5 pb-5;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .ps-info-meta-row {
+    @apply flex items-center gap-2.5 flex-wrap;
+  }
+
+  .ps-meta-category {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.1em] bg-surface border border-brand-line text-brand-3;
+  }
+
+  .ps-meta-category [data-lucide] {
+    @apply w-3.5 h-3.5 flex-shrink-0;
+  }
+
+  .ps-meta-live {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.1em] bg-brand/5 border border-brand/10 text-brand-3;
+  }
+
+  .ps-badge-dot {
+    @apply inline-block w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  .ps-product-title {
+    @apply text-[32px] lg:text-[42px] font-display font-black text-ink leading-[1.1] tracking-tight m-0;
+  }
+
+  .ps-product-subtitle {
+    @apply text-[14px] text-muted font-semibold m-0 leading-relaxed flex flex-wrap items-center gap-2;
+  }
+
+  .ps-subtitle-name {
+    @apply text-brand font-black bg-brand/5 px-2 py-0.5 rounded-md;
+  }
+
+  .ps-subtitle-class {
+    @apply text-ink-3;
+  }
+
+  /* Authority badge row under title */
+  .ps-header-badges { @apply flex flex-wrap gap-2 pt-1; }
+  .ps-hbadge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all duration-300;
+  }
+  .ps-hbadge [data-lucide] { @apply w-3.5 h-3.5 flex-shrink-0; }
+  
+  .ps-hbadge--green {
+    @apply bg-emerald-50 border-emerald-100 text-emerald-700;
+  }
+  .ps-hbadge:hover {
+    @apply -translate-y-0.5 shadow-sm;
+  }
+  .ps-hbadge--teal {
+    @apply bg-brand/5 border-brand-line text-brand-3;
+  }
+  .ps-hbadge--muted { 
+    @apply bg-white border-line text-muted; 
+  }
+
+  /* ── 2. COMPOSITION CARD (CLINICAL REDESIGN) ─────────────── */
+  .ps-comp-card {
+    @apply relative rounded-2xl overflow-hidden bg-white border border-line p-6;
+    box-shadow: 0 10px 30px -10px rgba(21, 159, 145, 0.1);
+    border-left: 4px solid var(--color-brand);
+  }
+
+  /* Subtle laboratory grid background */
+  .ps-comp-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-[0.03] pointer-events-none;
+    background-image: radial-gradient(var(--color-brand) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .ps-comp-card__label {
+    @apply relative z-10 flex items-center gap-2.5 mb-3 text-[11px] font-black uppercase tracking-[0.2em] text-brand;
+  }
+
+  .ps-comp-card__label [data-lucide] {
+    @apply w-4 h-4 flex-shrink-0;
+  }
+
+  .ps-comp-card__formula {
+    @apply relative z-10 font-display font-black text-[18px] lg:text-[22px] leading-snug m-0 text-ink;
+  }
+
+  .ps-comp-card__pres {
+    @apply relative z-10 flex items-center gap-2 mt-4 pt-4 text-[12px] font-bold border-t border-line text-muted;
+  }
+
+  .ps-comp-card__pres [data-lucide] {
+    @apply w-4 h-4 flex-shrink-0 text-brand-2;
+  }
+
+  /* ── 3. SPECIFICATION PANEL (DATA SHEET STYLE) ───────────── */
+  .ps-spec-panel { 
+    @apply bg-white border border-line rounded-2xl overflow-hidden shadow-sm; 
+  }
+  
+  .ps-spec-panel__head { 
+    @apply flex items-center gap-2.5 px-5 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-ink bg-surface border-b border-line; 
+  }
+  
+  .ps-spec-panel__head [data-lucide] { 
+    @apply w-4 h-4 text-brand; 
+  }
+  
+  .ps-spec-panel__body { 
+    @apply divide-y divide-line; 
+  }
+  
+  .ps-spec-item {
+    @apply flex items-center gap-4 px-5 py-3 transition-all duration-150 border-l-[3px] border-transparent;
+  }
+  
+  .ps-spec-item:hover { 
+    @apply bg-brand/5 border-brand;
+  }
+  
+  .ps-spec-item__icon { 
+    @apply w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 bg-white border border-line shadow-sm; 
+  }
+  
+  .ps-spec-item__icon [data-lucide] { @apply w-4 h-4; }
+  
+  .ps-spec-item__icon--teal { color: var(--color-brand); }
+  .ps-spec-item__icon--blue { color: #4a7fd6; }
+  .ps-spec-item__icon--purple { color: #7c3aed; }
+  .ps-spec-item__icon--orange { color: #d97706; }
+  .ps-spec-item__icon--green { color: #16a34a; }
+  
+  .ps-spec-item__key { 
+    @apply flex-1 text-[12px] font-bold text-muted uppercase tracking-wider; 
+  }
+  
+  .ps-spec-item__val { 
+    @apply text-[14px] font-black text-ink text-right leading-tight max-w-[60%]; 
+  }
+  
+  .ps-spec-item__val--accent { 
+    @apply text-brand;
+  }
+
+  /* ── 4. AUTHORITY STRIP (TRUST MATRIX) ─────────────────── */
+  .ps-authority-strip {
+    @apply flex items-stretch bg-ink rounded-2xl overflow-hidden border border-ink shadow-lift;
+  }
+  
+  .ps-authority-item { 
+    @apply flex-1 flex flex-col items-center justify-center py-5 px-4 text-white; 
+  }
+  
+  .ps-authority-divider { 
+    @apply w-px bg-white/10 self-stretch my-4; 
+  }
+  
+  .ps-authority-num { 
+    @apply font-display font-black text-[24px] lg:text-[28px] leading-none text-brand-2; 
+  }
+  
+  .ps-authority-label { 
+    @apply text-[9px] font-black text-white/50 text-center uppercase tracking-widest mt-2 leading-none; 
+  }
+
+  /* ── 5. VALUE STRIP (COMPLIANCE GRID) ──────────────────── */
+  .ps-value-strip { @apply grid grid-cols-2 gap-2.5; }
+  
+  .ps-value-strip__item {
+    @apply flex items-center gap-2.5 px-4 py-3 rounded-2xl text-[12px] font-black transition-all duration-300 bg-white border border-line text-ink;
+    box-shadow: 0 4px 12px rgba(16, 42, 67, 0.04);
+  }
+  
+  .ps-value-strip__item:hover { 
+    @apply border-brand-line bg-surface shadow-md -translate-y-0.5;
+  }
+  
+  .ps-value-strip__item [data-lucide] { 
+    @apply w-4 h-4 flex-shrink-0 text-brand; 
+  }
+
+  /* ── 6. CTA BLOCK (PREMIUM ACTION) ───────────────────────── */
+  .ps-cta-block { @apply flex flex-col gap-3; }
+  
+  .ps-cta-primary {
+    @apply w-full flex items-center gap-4 px-6 py-5 rounded-2xl text-white border-none cursor-pointer text-left transition-all duration-300 relative overflow-hidden;
+    background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-3) 100%);
+    box-shadow: 0 12px 36px -12px rgba(21, 159, 145, 0.6);
+  }
+  
+  .ps-cta-primary:hover { 
+    @apply -translate-y-1;
+    box-shadow: 0 20px 48px -12px rgba(21, 159, 145, 0.8);
+  }
+
+  .ps-cta-primary__icon { 
+    @apply flex items-center justify-center w-11 h-11 rounded-2xl flex-shrink-0 bg-white/10 border border-white/20; 
+  }
+  
+  .ps-cta-primary__icon [data-lucide] { @apply w-6 h-6; }
+  
+  .ps-cta-primary__text { @apply flex flex-col flex-1 min-w-0; }
+  .ps-cta-primary__text strong { @apply block text-[16px] font-black leading-tight; }
+  .ps-cta-primary__text small { @apply block text-[12px] font-medium mt-1 text-white/70; }
+  
+  .ps-cta-primary__arrow { @apply w-6 h-6 flex-shrink-0 text-white/50 transition-transform duration-300; }
+  .ps-cta-primary:hover .ps-cta-primary__arrow { @apply translate-x-1.5 text-white; }
+
+  /* Secondary row: WhatsApp + Browse */
+  .ps-cta-secondary-row { @apply grid grid-cols-2 gap-3; }
+  
+  .ps-cta-wa {
+    @apply inline-flex items-center justify-center gap-2.5 py-3.5 px-5 rounded-2xl text-white text-[14px] font-black leading-none transition-all duration-300 no-underline bg-[#128c7e] border border-white/10 shadow-lg shadow-[#128c7e]/20;
+  }
+  
+  .ps-cta-wa:hover { 
+    @apply bg-[#075e54] -translate-y-1 shadow-xl shadow-[#128c7e]/40;
+  }
+  
+  .ps-cta-browse {
+    @apply inline-flex items-center justify-center gap-2.5 py-3.5 px-5 rounded-2xl text-[14px] font-black leading-none transition-all duration-300 no-underline bg-white border border-line text-ink;
+    box-shadow: 0 4px 12px rgba(16, 42, 67, 0.05);
+  }
+  
+  .ps-cta-browse:hover { 
+    @apply border-brand-line text-brand -translate-y-1 shadow-md;
+  }
+  
+  .ps-cta-browse [data-lucide] { @apply w-4 h-4; }
+
+  /* ── 7. CERTIFICATION STRIP ─────────────────────────────── */
+  .ps-cert-strip { 
+    @apply flex flex-wrap gap-2 pt-4 border-t border-line; 
+  }
+  
+  .ps-cert-pill {
+    @apply inline-flex items-center gap-2 px-3 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-200 cursor-default bg-surface border border-brand-line text-brand-3;
+  }
+  
+  .ps-cert-pill:hover { 
+    @apply bg-brand text-white border-transparent;
+  }
+
+}
