@@ -30,11 +30,16 @@
                         <option value="all">All Categories</option>
                         {{ $cats := slice }}
                         {{ range (where .Site.RegularPages "Section" "products") }}
-                            {{ range .Params.categories }}
-                                {{ $cats = $cats | append . }}
+                            {{ if .Params.category }}
+                                {{ $cats = $cats | append .Params.category }}
+                            {{ end }}
+                            {{ if .Params.categories }}
+                                {{ range .Params.categories }}
+                                    {{ $cats = $cats | append . }}
+                                {{ end }}
                             {{ end }}
                         {{ end }}
-                        {{ range (uniq $cats) }}
+                        {{ range (uniq $cats | sort) }}
                         <option value="{{ . | urlize }}">{{ . }}</option>
                         {{ end }}
                     </select>

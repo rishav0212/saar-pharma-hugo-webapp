@@ -1,0 +1,85 @@
+{{/* 
+  partial: seo/product-schema.html
+  Dynamic JSON-LD Schema for Products and FAQs
+*/}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ .Params.product_name | default .Title }}",
+  "image": [
+    {{ range $i, $img := .Params.images }}
+      {{ if $i }},{{ end }}"{{ $.Site.BaseURL }}images/products/{{ $img }}"
+    {{ end }}
+  ],
+  "description": "{{ .Params.meta_description | default .Summary | plainify }}",
+  "sku": "{{ .Params.slug }}",
+  "mpn": "{{ .Params.slug }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "Saar Biotech"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ .Permalink }}",
+    "priceCurrency": "INR",
+    "price": "0",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "Saar Biotech Pvt. Ltd."
+    }
+  },
+  "additionalProperty": [
+    {{ if .Params.composition }}
+    {
+      "@type": "PropertyValue",
+      "name": "Composition",
+      "value": "{{ .Params.composition }}"
+    }
+    {{ end }}
+    {{ if .Params.therapeutic_class }}
+    , {
+      "@type": "PropertyValue",
+      "name": "Therapeutic Class",
+      "value": "{{ .Params.therapeutic_class }}"
+    }
+    {{ end }}
+    {{ range .Params.custom_specs }}
+    , {
+      "@type": "PropertyValue",
+      "name": "{{ .label }}",
+      "value": "{{ .value }}"
+    }
+    {{ end }}
+  ]
+}
+</script>
+
+{{/* Merge all FAQ sources for Unified JSON-LD */}}
+{{ $allFaqs := slice }}
+{{ with .Params.faq_clinical }}{{ $allFaqs = $allFaqs | append . }}{{ end }}
+{{ with .Params.faq_b2b }}{{ $allFaqs = $allFaqs | append . }}{{ end }}
+{{ with .Params.faq }}{{ $allFaqs = $allFaqs | append . }}{{ end }}
+
+{{ if gt (len $allFaqs) 0 }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{ range $i, $item := $allFaqs }}
+    {{ if $i }},{{ end }}
+    {
+      "@type": "Question",
+      "name": "{{ $item.question }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ $item.answer | plainify }}"
+      }
+    }
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}

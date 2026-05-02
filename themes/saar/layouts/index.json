@@ -9,11 +9,17 @@
     {{/* Combine technical content for deep searching */}}
     {{- $deepContent := .Plain -}}
     {{- if eq .Type "products" -}}
-      {{- $cats := "" -}}
-      {{- if .Params.categories }}{{ $cats = delimit .Params.categories " " }}{{ end -}}
-      {{- $deepContent = printf "%s %s %s %s" $deepContent $cats (.Params.composition | default "") (.Params.dosage_form | default "") -}}
-      {{- /* Move technical info to summary for better search UI visibility */ -}}
-      {{- $summary = printf "%s • %s" (.Params.composition | default "") (.Params.dosage_form | default "") -}}
+      {{- $cats := "" -}}{{- with .Params.categories }}{{ $cats = delimit . " " }}{{ end -}}
+      {{- $tClass := "" -}}{{- with .Params.therapeutic_class }}{{ if reflect.IsSlice . }}{{ $tClass = delimit . " " }}{{ else }}{{ $tClass = . }}{{ end }}{{ end -}}
+      
+      {{- /* Deep search through custom specs */ -}}
+      {{- $specs := "" -}}
+      {{- range .Params.custom_specs }}{{ $specs = printf "%s %s %s" $specs .label .value }}{{ end -}}
+      
+      {{- $deepContent = printf "%s %s %s %s %s %s %s %s" $deepContent $cats $tClass (.Params.composition | default "") (.Params.dosage_form | default "") (.Params.drug_form | default "") (.Params.approved_name | default "") $specs -}}
+      
+      {{- /* Search result snippet (molecule + primary dosage) */ -}}
+      {{- $summary = printf "%s • %s" (.Params.composition | default "") (.Params.dosage_form | default (index .Params.categories 0) | default "") -}}
     {{- end -}}
 
     {{- $item := dict "title" .Title "permalink" .RelPermalink "summary" $summary "content" ($deepContent | truncate 2000) "type" .Type "weight" 1 -}}
@@ -25,8 +31,7 @@
 {{- $home := .Site.Home.Params -}}
 
 {{- range $home.categories -}}
-  {{- $tags := "" -}}
-  {{- if .tags }}{{ $tags = delimit .tags " " }}{{ end -}}
+  {{- $tags := "" -}}{{- if .tags }}{{ $tags = delimit .tags " " }}{{ end -}}
   {{- $item := dict "title" .title "permalink" (.url | default "/#categories") "summary" .text "content" $tags "type" "Category" "weight" 10 -}}
   {{- $index = $index | append $item -}}
 {{- end -}}

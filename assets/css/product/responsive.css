@@ -116,4 +116,23 @@
     }
   }
 
+  /* Spec Grid Stacking */
+  @media (max-width: 640px) {
+    .ps-spec-grid {
+      @apply grid-cols-1 divide-x-0;
+    }
+    
+    .ps-authority-strip {
+      @apply flex-col;
+    }
+    
+    .ps-authority-divider {
+      @apply w-full h-px my-0;
+    }
+    
+    .ps-authority-item {
+      @apply py-4;
+    }
+  }
+
 }

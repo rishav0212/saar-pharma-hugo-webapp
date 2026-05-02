@@ -1,8 +1,8 @@
 @layer components {
 
   /* ──────────────────────────────────────────────────────────────────────────
-     PRODUCT SINGLE — INFO PANEL (ELITE CLINICAL DESIGN)
-     Focus: Professionalism, Data Clarity, and Premium B2B Aesthetic
+     PRODUCT SINGLE — INFO PANEL (ELITE CLINICAL DESIGN V2)
+     Focus: High-Density Data, Professional Grid, and Premium B2B Trust
      ────────────────────────────────────────────────────────────────────────── */
 
   .ps-info-col {
@@ -10,10 +10,9 @@
   }
 
   .ps-info-sticky {
-    @apply flex flex-col gap-4;
+    @apply flex flex-col gap-5;
   }
 
-  /* Sticky behavior on desktop */
   @media (min-width: 1024px) {
     .ps-info-sticky {
       position: sticky;
@@ -23,16 +22,16 @@
 
   /* ── 1. HEADER ─────────────────────────────────────────── */
   .ps-info-header {
-    @apply flex flex-col gap-3.5 pb-5;
+    @apply flex flex-col gap-4 pb-6;
     border-bottom: 1px solid var(--color-line);
   }
 
   .ps-info-meta-row {
-    @apply flex items-center gap-2.5 flex-wrap;
+    @apply flex items-center justify-between gap-4 flex-wrap;
   }
 
   .ps-meta-category {
-    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.1em] bg-surface border border-brand-line text-brand-3;
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-[0.12em] bg-surface border border-brand-line text-brand-3;
   }
 
   .ps-meta-category [data-lucide] {
@@ -40,231 +39,244 @@
   }
 
   .ps-meta-live {
-    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.1em] bg-brand/5 border border-brand/10 text-brand-3;
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-[0.1em] bg-emerald-50 border border-emerald-100 text-emerald-700;
   }
 
   .ps-badge-dot {
-    @apply inline-block w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0;
+    @apply inline-block w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0;
     animation: pulse-dot 2s ease-in-out infinite;
   }
 
   .ps-product-title {
-    @apply text-[32px] lg:text-[42px] font-display font-black text-ink leading-[1.1] tracking-tight m-0;
+    @apply text-[30px] lg:text-[38px] font-display font-black text-ink leading-[1.1] tracking-tight m-0;
   }
 
   .ps-product-subtitle {
-    @apply text-[14px] text-muted font-semibold m-0 leading-relaxed flex flex-wrap items-center gap-2;
+    @apply text-[15px] text-muted font-bold m-0 leading-relaxed flex flex-wrap items-center gap-2;
   }
 
   .ps-subtitle-name {
-    @apply text-brand font-black bg-brand/5 px-2 py-0.5 rounded-md;
+    @apply text-brand font-black bg-brand/5 px-2.5 py-0.5 rounded-md;
   }
 
-  .ps-subtitle-class {
-    @apply text-ink-3;
+  .ps-header-badges {
+    @apply flex flex-wrap gap-2.5 pt-1.5;
   }
 
-  /* Authority badge row under title */
-  .ps-header-badges { @apply flex flex-wrap gap-2 pt-1; }
   .ps-hbadge {
-    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all duration-300;
-  }
-  .ps-hbadge [data-lucide] { @apply w-3.5 h-3.5 flex-shrink-0; }
-  
-  .ps-hbadge--green {
-    @apply bg-emerald-50 border-emerald-100 text-emerald-700;
-  }
-  .ps-hbadge:hover {
-    @apply -translate-y-0.5 shadow-sm;
-  }
-  .ps-hbadge--teal {
-    @apply bg-brand/5 border-brand-line text-brand-3;
-  }
-  .ps-hbadge--muted { 
-    @apply bg-white border-line text-muted; 
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all duration-300 bg-white;
   }
 
-  /* ── 2. COMPOSITION CARD (CLINICAL REDESIGN) ─────────────── */
+  .ps-hbadge [data-lucide] {
+    @apply w-4 h-4 flex-shrink-0 text-brand;
+  }
+
+  .ps-hbadge:hover {
+    @apply -translate-y-0.5 shadow-sm border-brand-line;
+  }
+
+  /* ── 2. ELITE AUTHORITY STRIP (DASHBOARD STYLE) ─────────── */
+  .ps-authority-strip {
+    @apply flex items-stretch bg-ink rounded-2xl overflow-hidden border border-ink shadow-lift relative;
+  }
+
+  /* Subtle light reflect */
+  .ps-authority-strip::after {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-1/2 bg-white/5 pointer-events-none;
+  }
+
+  .ps-authority-item {
+    @apply flex-1 flex flex-col items-center justify-center py-4.5 px-4 text-white relative z-10;
+  }
+
+  .ps-authority-divider {
+    @apply w-px bg-white/10 self-stretch my-5;
+  }
+
+  .ps-authority-num {
+    @apply font-display font-black text-[22px] lg:text-[28px] leading-none text-brand-2;
+    text-shadow: 0 4px 12px rgba(100, 212, 197, 0.3);
+  }
+
+  .ps-authority-label {
+    @apply text-[9px] font-black text-white/50 text-center uppercase tracking-[0.15em] mt-2.5 leading-none;
+  }
+
+  /* ── 3. COMPOSITION CARD (TECHNICAL LOOK) ───────────────── */
   .ps-comp-card {
-    @apply relative rounded-2xl overflow-hidden bg-white border border-line p-6;
-    box-shadow: 0 10px 30px -10px rgba(21, 159, 145, 0.1);
+    @apply relative rounded-2xl overflow-hidden bg-white border border-line p-5;
+    box-shadow: 0 10px 40px -10px rgba(21, 159, 145, 0.08);
     border-left: 4px solid var(--color-brand);
   }
 
-  /* Subtle laboratory grid background */
-  .ps-comp-card::before {
-    content: '';
-    @apply absolute inset-0 opacity-[0.03] pointer-events-none;
-    background-image: radial-gradient(var(--color-brand) 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
-
   .ps-comp-card__label {
-    @apply relative z-10 flex items-center gap-2.5 mb-3 text-[11px] font-black uppercase tracking-[0.2em] text-brand;
-  }
-
-  .ps-comp-card__label [data-lucide] {
-    @apply w-4 h-4 flex-shrink-0;
+    @apply relative z-10 flex items-center gap-2.5 mb-4 text-[11px] font-black uppercase tracking-[0.25em] text-brand opacity-80;
   }
 
   .ps-comp-card__formula {
-    @apply relative z-10 font-display font-black text-[18px] lg:text-[22px] leading-snug m-0 text-ink;
+    @apply relative z-10 font-display font-black text-[18px] lg:text-[21px] leading-snug m-0 text-ink;
+    font-feature-settings: "tnum" on, "lnum" on;
   }
 
   .ps-comp-card__pres {
-    @apply relative z-10 flex items-center gap-2 mt-4 pt-4 text-[12px] font-bold border-t border-line text-muted;
+    @apply relative z-10 flex items-center gap-2 mt-5 pt-4 text-[13px] font-extrabold border-t border-line text-muted;
   }
 
-  .ps-comp-card__pres [data-lucide] {
-    @apply w-4 h-4 flex-shrink-0 text-brand-2;
+  /* ── 4. SPECIFICATION GRID (DATA SHEET) ──────────────────── */
+  .ps-spec-panel {
+    @apply bg-white border border-line rounded-2xl overflow-hidden shadow-sm;
   }
 
-  /* ── 3. SPECIFICATION PANEL (DATA SHEET STYLE) ───────────── */
-  .ps-spec-panel { 
-    @apply bg-white border border-line rounded-2xl overflow-hidden shadow-sm; 
+  .ps-spec-panel__head {
+    @apply flex items-center justify-between px-6 py-4 text-[11px] font-black uppercase tracking-[0.2em] text-ink bg-surface border-b border-line;
   }
-  
-  .ps-spec-panel__head { 
-    @apply flex items-center gap-2.5 px-5 py-3 text-[10px] font-black uppercase tracking-[0.2em] text-ink bg-surface border-b border-line; 
+
+  .ps-spec-panel__head [data-lucide] {
+    @apply w-4 h-4 text-brand;
   }
-  
-  .ps-spec-panel__head [data-lucide] { 
-    @apply w-4 h-4 text-brand; 
+
+  .ps-spec-grid {
+    @apply grid grid-cols-2 divide-x divide-line;
   }
-  
-  .ps-spec-panel__body { 
-    @apply divide-y divide-line; 
-  }
-  
+
   .ps-spec-item {
-    @apply flex items-center gap-4 px-5 py-3 transition-all duration-150 border-l-[3px] border-transparent;
+    @apply flex items-center gap-4 px-6 py-4 transition-all duration-200 border-b border-line bg-white;
   }
-  
-  .ps-spec-item:hover { 
-    @apply bg-brand/5 border-brand;
+
+  .ps-spec-item:hover {
+    @apply bg-surface/50;
   }
-  
-  .ps-spec-item__icon { 
-    @apply w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 bg-white border border-line shadow-sm; 
+
+  .ps-spec-item__icon {
+    @apply w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-white border border-line shadow-sm text-brand;
   }
-  
-  .ps-spec-item__icon [data-lucide] { @apply w-4 h-4; }
-  
-  .ps-spec-item__icon--teal { color: var(--color-brand); }
-  .ps-spec-item__icon--blue { color: #4a7fd6; }
-  .ps-spec-item__icon--purple { color: #7c3aed; }
-  .ps-spec-item__icon--orange { color: #d97706; }
-  .ps-spec-item__icon--green { color: #16a34a; }
-  
-  .ps-spec-item__key { 
-    @apply flex-1 text-[12px] font-bold text-muted uppercase tracking-wider; 
+
+  .ps-spec-item__icon [data-lucide] {
+    @apply w-4 h-4;
   }
-  
-  .ps-spec-item__val { 
-    @apply text-[14px] font-black text-ink text-right leading-tight max-w-[60%]; 
+
+  .ps-spec-item__text {
+    @apply flex flex-col min-w-0;
   }
-  
-  .ps-spec-item__val--accent { 
+
+  .ps-spec-item__key {
+    @apply text-[10px] font-black text-muted uppercase tracking-widest mb-0.5;
+  }
+
+  .ps-spec-item__val {
+    @apply text-[13.5px] font-black text-ink leading-tight truncate;
+  }
+
+  /* Special full-width footer area of spec panel */
+  .ps-spec-footer {
+    @apply bg-surface/30;
+  }
+
+  .ps-spec-item--full {
+    @apply col-span-2 border-none;
+  }
+
+  .ps-spec-item--full .ps-spec-item__val {
+    @apply whitespace-normal overflow-visible;
+  }
+
+  .ps-spec-item__val--accent {
     @apply text-brand;
   }
 
-  /* ── 4. AUTHORITY STRIP (TRUST MATRIX) ─────────────────── */
-  .ps-authority-strip {
-    @apply flex items-stretch bg-ink rounded-2xl overflow-hidden border border-ink shadow-lift;
-  }
-  
-  .ps-authority-item { 
-    @apply flex-1 flex flex-col items-center justify-center py-5 px-4 text-white; 
-  }
-  
-  .ps-authority-divider { 
-    @apply w-px bg-white/10 self-stretch my-4; 
-  }
-  
-  .ps-authority-num { 
-    @apply font-display font-black text-[24px] lg:text-[28px] leading-none text-brand-2; 
-  }
-  
-  .ps-authority-label { 
-    @apply text-[9px] font-black text-white/50 text-center uppercase tracking-widest mt-2 leading-none; 
+  /* ── 5. B2B COMPLIANCE STRIP ─────────────────────────────── */
+  .ps-value-strip {
+    @apply grid grid-cols-2 gap-3;
   }
 
-  /* ── 5. VALUE STRIP (COMPLIANCE GRID) ──────────────────── */
-  .ps-value-strip { @apply grid grid-cols-2 gap-2.5; }
-  
   .ps-value-strip__item {
-    @apply flex items-center gap-2.5 px-4 py-3 rounded-2xl text-[12px] font-black transition-all duration-300 bg-white border border-line text-ink;
+    @apply flex items-center gap-3 px-4 py-3.5 rounded-2xl text-[12px] font-black transition-all duration-300 bg-white border border-line text-ink;
     box-shadow: 0 4px 12px rgba(16, 42, 67, 0.04);
   }
-  
-  .ps-value-strip__item:hover { 
+
+  .ps-value-strip__item:hover {
     @apply border-brand-line bg-surface shadow-md -translate-y-0.5;
   }
-  
-  .ps-value-strip__item [data-lucide] { 
-    @apply w-4 h-4 flex-shrink-0 text-brand; 
+
+  .ps-value-strip__item [data-lucide] {
+    @apply w-4 h-4 flex-shrink-0 text-brand;
   }
 
-  /* ── 6. CTA BLOCK (PREMIUM ACTION) ───────────────────────── */
-  .ps-cta-block { @apply flex flex-col gap-3; }
-  
+  /* ── 6. CTA BLOCK (ELITE ACTION) ─────────────────────────── */
+  .ps-cta-block {
+    @apply flex flex-col gap-4;
+  }
+
   .ps-cta-primary {
-    @apply w-full flex items-center gap-4 px-6 py-5 rounded-2xl text-white border-none cursor-pointer text-left transition-all duration-300 relative overflow-hidden;
+    @apply w-full flex items-center gap-4 px-6 py-4.5 rounded-2xl text-white border-none cursor-pointer text-left transition-all duration-300 relative overflow-hidden;
     background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-3) 100%);
-    box-shadow: 0 12px 36px -12px rgba(21, 159, 145, 0.6);
+    box-shadow: 0 12px 32px -10px rgba(21, 159, 145, 0.4);
   }
-  
-  .ps-cta-primary:hover { 
+
+  /* Glass reflect on CTA */
+  .ps-cta-primary::before {
+    content: '';
+    @apply absolute top-0 -left-full w-full h-full bg-white/20 skew-x-[45deg] transition-all duration-700;
+  }
+
+  .ps-cta-primary:hover::before {
+    @apply left-full;
+  }
+
+  .ps-cta-primary:hover {
     @apply -translate-y-1;
-    box-shadow: 0 20px 48px -12px rgba(21, 159, 145, 0.8);
+    box-shadow: 0 24px 56px -12px rgba(21, 159, 145, 0.7);
   }
 
-  .ps-cta-primary__icon { 
-    @apply flex items-center justify-center w-11 h-11 rounded-2xl flex-shrink-0 bg-white/10 border border-white/20; 
+  .ps-cta-primary [data-lucide] {
+    @apply w-6 h-6 flex-shrink-0;
   }
-  
-  .ps-cta-primary__icon [data-lucide] { @apply w-6 h-6; }
-  
-  .ps-cta-primary__text { @apply flex flex-col flex-1 min-w-0; }
-  .ps-cta-primary__text strong { @apply block text-[16px] font-black leading-tight; }
-  .ps-cta-primary__text small { @apply block text-[12px] font-medium mt-1 text-white/70; }
-  
-  .ps-cta-primary__arrow { @apply w-6 h-6 flex-shrink-0 text-white/50 transition-transform duration-300; }
-  .ps-cta-primary:hover .ps-cta-primary__arrow { @apply translate-x-1.5 text-white; }
 
-  /* Secondary row: WhatsApp + Browse */
-  .ps-cta-secondary-row { @apply grid grid-cols-2 gap-3; }
-  
+  .ps-cta-primary__text {
+    @apply flex flex-col flex-1;
+  }
+
+  .ps-cta-primary__text strong {
+    @apply block text-[15.5px] font-black leading-tight;
+  }
+
+  .ps-cta-primary__text small {
+    @apply block text-[11px] font-medium mt-1 text-white/70;
+  }
+
+  /* Secondary Buttons */
+  .ps-cta-secondary-row {
+    @apply grid grid-cols-2 gap-3;
+  }
+
   .ps-cta-wa {
-    @apply inline-flex items-center justify-center gap-2.5 py-3.5 px-5 rounded-2xl text-white text-[14px] font-black leading-none transition-all duration-300 no-underline bg-[#128c7e] border border-white/10 shadow-lg shadow-[#128c7e]/20;
+    @apply inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-2xl text-white text-[13px] font-black leading-none transition-all duration-300 no-underline bg-[#128c7e] border border-white/10 shadow-lg shadow-[#128c7e]/20;
   }
-  
-  .ps-cta-wa:hover { 
+
+  .ps-cta-wa:hover {
     @apply bg-[#075e54] -translate-y-1 shadow-xl shadow-[#128c7e]/40;
   }
-  
+
   .ps-cta-browse {
-    @apply inline-flex items-center justify-center gap-2.5 py-3.5 px-5 rounded-2xl text-[14px] font-black leading-none transition-all duration-300 no-underline bg-white border border-line text-ink;
-    box-shadow: 0 4px 12px rgba(16, 42, 67, 0.05);
+    @apply inline-flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-2xl text-[13px] font-black leading-none transition-all duration-300 no-underline bg-white border border-line text-ink shadow-sm;
   }
-  
-  .ps-cta-browse:hover { 
+
+  .ps-cta-browse:hover {
     @apply border-brand-line text-brand -translate-y-1 shadow-md;
   }
-  
-  .ps-cta-browse [data-lucide] { @apply w-4 h-4; }
 
-  /* ── 7. CERTIFICATION STRIP ─────────────────────────────── */
-  .ps-cert-strip { 
-    @apply flex flex-wrap gap-2 pt-4 border-t border-line; 
+  /* ── 7. CERTIFICATION PILLS ─────────────────────────────── */
+  .ps-cert-strip {
+    @apply flex flex-wrap gap-2 pt-5 border-t border-line;
   }
-  
+
   .ps-cert-pill {
-    @apply inline-flex items-center gap-2 px-3 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-200 cursor-default bg-surface border border-brand-line text-brand-3;
+    @apply inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 bg-surface border border-brand-line text-brand-3;
   }
-  
-  .ps-cert-pill:hover { 
-    @apply bg-brand text-white border-transparent;
+
+  .ps-cert-pill:hover {
+    @apply bg-brand text-white border-transparent -translate-y-0.5 shadow-sm;
   }
 
 }

@@ -1,5 +1,8 @@
 {{ $allCats := slice }}
 {{ range (where .Site.RegularPages "Section" "products") }}
+    {{ if .Params.category }}
+        {{ $allCats = $allCats | append .Params.category }}
+    {{ end }}
     {{ if .Params.categories }}
         {{ range .Params.categories }}
             {{ $allCats = $allCats | append . }}

@@ -13,11 +13,17 @@ export function initProducts() {
   const heroSelect   = document.getElementById('hero-cat-select');
   const suggestionsBox = document.getElementById('search-suggestions');
   const suggestionItems = document.querySelectorAll('.suggestion-item');
+  const tickerItems    = document.querySelectorAll('[data-filter-ticker]');
   
-  const cardWraps    = Array.from(document.querySelectorAll('.product-card-wrap'));
-  const countEl      = document.getElementById('products-count');
-  const activeLabel  = document.getElementById('products-active-label');
-  const emptyState   = document.getElementById('products-empty');
+  const cardWraps      = Array.from(document.querySelectorAll('.product-card-wrap'));
+  const countEl        = document.getElementById('products-count');
+  const activeLabel    = document.getElementById('products-active-label');
+  const emptyState     = document.getElementById('products-empty');
+
+  // Horizontal Scroll Elements
+  const pillsContainer = document.getElementById('filter-pills-scroll');
+  const scrollLeftBtn  = document.getElementById('pills-scroll-left');
+  const scrollRightBtn = document.getElementById('pills-scroll-right');
 
   if (!cardWraps.length) return;
 
@@ -28,11 +34,14 @@ export function initProducts() {
   // ─── Pre-Index Data ────────────────────────────────────────────
   const productData = cardWraps.map(el => ({
     el: el,
+    categorySlugs: (el.dataset.categorySlugs || '').toLowerCase(),
     categories: (el.dataset.categories || '').toLowerCase(),
-    cat: (el.dataset.category || '').toLowerCase().trim(),
     title: (el.dataset.title || '').toLowerCase(),
     comp: (el.dataset.composition || '').toLowerCase(),
     area: (el.dataset.area || '').toLowerCase(),
+    tclass: (el.dataset.therapeuticClass || '').toLowerCase(),
+    tarea: (el.dataset.therapeuticArea || '').toLowerCase(),
+    dform: (el.dataset.drugForm || '').toLowerCase(),
     desc: (el.dataset.desc || '').toLowerCase(),
     packs: (el.dataset.packs || '').toLowerCase()
   }));
@@ -54,9 +63,8 @@ export function initProducts() {
     let visibleCount = 0;
     const matches = [];
 
-    // Phase 1: Fade out everything that doesn't match
     productData.forEach(item => {
-      const itemCats = item.cat.split(' ').filter(Boolean); 
+      const itemCats = item.categorySlugs.split(' ').filter(Boolean); 
       const passesCategory = (currentFilter === 'all') || itemCats.includes(currentFilter);
       
       let score = 0;
@@ -65,6 +73,9 @@ export function initProducts() {
         if (item.categories.includes(currentQuery))  score += 1500;
         if (item.desc.includes(currentQuery))        score += 500;
         if (item.comp.includes(currentQuery))        score += 250;
+        if (item.dform.includes(currentQuery))       score += 220;
+        if (item.tclass.includes(currentQuery))      score += 200;
+        if (item.tarea.includes(currentQuery))       score += 180;
         if (item.area.includes(currentQuery))        score += 100;
         if (item.packs.includes(currentQuery))       score += 50;
       } else {
@@ -72,31 +83,22 @@ export function initProducts() {
       }
 
       const isMatch = passesCategory && score > 0;
-
       if (isMatch) {
         matches.push({ item, score });
         visibleCount++;
       } else {
-        // Start fade out immediately (Faster)
         item.el.style.transition = 'all 0.3s ease-out';
         item.el.style.opacity = '0';
         item.el.style.transform = 'scale(0.9) translateY(20px)';
       }
     });
 
-    // Phase 2: Wait for fade-out, then reflow layout and fade-in matches
     setTimeout(() => {
-      // Hide non-matches from layout
       productData.forEach(item => {
-        const itemCats = item.cat.split(' ').filter(Boolean);
+        const itemCats = item.categorySlugs.split(' ').filter(Boolean);
         const isMatch = (currentFilter === 'all' || itemCats.includes(currentFilter)) && 
                         (!currentQuery || matches.some(m => m.item === item));
-        
-        if (!isMatch) {
-          item.el.classList.add('is-hidden');
-        } else {
-          item.el.classList.remove('is-hidden');
-        }
+        item.el.classList.toggle('is-hidden', !isMatch);
       });
 
       // Sort and Reveal Matches
@@ -164,7 +166,7 @@ export function initProducts() {
   };
 
   // ─── Unified Event Listeners ──────────────────────────────────────────
-  
+
   if (mainSearch) {
     mainSearch.addEventListener('input', (e) => handleSearchInput(e, false));
     mainSearch.addEventListener('focus', showSuggestions);
@@ -194,10 +196,10 @@ export function initProducts() {
 
   if (heroSelect) {
     heroSelect.addEventListener('change', (e) => {
-      currentFilter = e.target.value.toLowerCase().trim();
-      updateInputs(currentQuery, currentFilter);
-      applyFilters(true);
-    });
+    currentFilter = e.target.value.toLowerCase().trim();
+    updateInputs(currentQuery, currentFilter);
+    applyFilters(true);
+  });
   }
 
   filterPills.forEach(pill => {
@@ -208,14 +210,11 @@ export function initProducts() {
     });
   });
 
-  const tickerItems = document.querySelectorAll('[data-filter-ticker]');
   tickerItems.forEach(item => {
     item.addEventListener('click', () => {
-      const filterValue = item.getAttribute('data-filter-ticker');
+      currentFilter = item.getAttribute('data-filter-ticker').toLowerCase().trim();
       const gridTop = document.getElementById('products-grid-top');
       if (gridTop) gridTop.scrollIntoView({ behavior: 'smooth' });
-      
-      currentFilter = filterValue;
       updateInputs(currentQuery, currentFilter);
       applyFilters(true);
     });
@@ -227,7 +226,7 @@ export function initProducts() {
       currentQuery = val.toLowerCase();
       updateInputs(val, currentFilter);
       applyFilters(true);
-      suggestionsBox.classList.add('is-hidden');
+      if (suggestionsBox) suggestionsBox.classList.add('is-hidden');
     });
   });
 
@@ -237,10 +236,7 @@ export function initProducts() {
     }
   });
 
-  // ─── Horizontal Scroll ───
-  const pillsContainer = document.getElementById('filter-pills-scroll');
-  const scrollLeftBtn  = document.getElementById('pills-scroll-left');
-  const scrollRightBtn = document.getElementById('pills-scroll-right');
+  // ─── Horizontal Scroll UI Logic ───
 
   if (pillsContainer) {
     const updateArrows = () => {

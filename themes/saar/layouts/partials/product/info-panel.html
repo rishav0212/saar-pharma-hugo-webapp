@@ -1,39 +1,47 @@
 {{/*
   partial: product/info-panel.html
-  B2B Pharmaceutical Product Info Panel — Clinical & Compact
-  Uses site params: .Site.Params.products, .Site.Params.clients, .Site.Params.founded
+  Ultimate B2B Pharma Info Panel — High-Density Data Sheet
 */}}
 <div class="ps-info-col" data-animate="slide-left">
   <div class="ps-info-sticky">
 
     {{/* ── 1. HEADER ─────────────────────────────────────────────── */}}
     <header class="ps-info-header">
-
-      {{/* Category + availability row */}}
       <div class="ps-info-meta-row">
+        {{ $primaryCat := index .Params.categories 0 }}
+        {{ if $primaryCat }}
         <span class="ps-meta-category">
           <i data-lucide="layers"></i>
-          {{ .Params.category | default "Pharmaceutical" }}
+          {{ $primaryCat }}
+          {{ if gt (len .Params.categories) 1 }}
+            <span class="opacity-40 px-1">/</span> {{ index .Params.categories 1 }}
+          {{ end }}
         </span>
+        {{ end }}
+        
+        {{ if ne .Params.manufacturing_status "None" }}
         <span class="ps-meta-live">
           <span class="ps-badge-dot"></span>
-          Available for CMO
+          {{ .Params.manufacturing_status | default "Available for CMO" }}
         </span>
+        {{ end }}
       </div>
 
-      {{/* H1 — single per page for SEO */}}
       <h1 class="ps-product-title" itemprop="name">{{ .Params.product_name | default .Title }}</h1>
 
-      {{/* Approved name · therapeutic class */}}
-      {{ if or .Params.approved_name .Params.therapeutic_class }}
+      {{/* Scientific Subtitle (Therapeutic Class List) */}}
+      {{ $tClass := .Params.therapeutic_class }}
+      {{ if $tClass }}
       <p class="ps-product-subtitle">
-        {{ with .Params.approved_name }}<span class="ps-subtitle-name">{{ . }}</span>{{ end }}
-        {{ if and .Params.approved_name .Params.therapeutic_class }} &middot; {{ end }}
-        {{ with .Params.therapeutic_class }}<span class="ps-subtitle-class">{{ . }}</span>{{ end }}
+        {{ with .Params.approved_name }}
+          <span class="ps-subtitle-name">{{ . }}</span> &middot;
+        {{ end }}
+        <span class="ps-subtitle-class">
+          {{ if reflect.IsSlice $tClass }}{{ delimit $tClass " &middot; " }}{{ else }}{{ $tClass }}{{ end }}
+        </span>
       </p>
       {{ end }}
 
-      {{/* Trust badges — compact, inline */}}
       <div class="ps-header-badges">
         <span class="ps-hbadge ps-hbadge--green"><i data-lucide="shield-check"></i> WHO-GMP</span>
         <span class="ps-hbadge ps-hbadge--teal"><i data-lucide="award"></i> DCGI Approved</span>
@@ -41,77 +49,7 @@
       </div>
     </header>
 
-    {{/* ── 2. COMPOSITION CARD ─────────────────────────────────────
-         Uses a teal-surface background — light, on-theme, clinical feel */}}
-    <div class="ps-comp-card">
-      <div class="ps-comp-card__label">
-        <i data-lucide="flask-conical"></i>
-        Active Composition
-      </div>
-      <p class="ps-comp-card__formula" itemprop="activeIngredient">{{ .Params.composition }}</p>
-      {{ with .Params.presentation }}
-      <div class="ps-comp-card__pres">
-        <i data-lucide="package-2"></i>
-        <span>{{ . }}</span>
-      </div>
-      {{ end }}
-    </div>
-
-    {{/* ── 3. SPECIFICATION TABLE ──────────────────────────────────── */}}
-    <div class="ps-spec-panel" role="table" aria-label="Product specifications" itemprop="description">
-      <div class="ps-spec-panel__head">
-        <i data-lucide="clipboard-list"></i>
-        Product Specifications
-      </div>
-      <div class="ps-spec-panel__body" role="rowgroup">
-
-        <div class="ps-spec-item" role="row">
-          <div class="ps-spec-item__icon ps-spec-item__icon--blue" role="cell"><i data-lucide="layers"></i></div>
-          <span class="ps-spec-item__key" role="cell">Dosage Form</span>
-          <span class="ps-spec-item__val" role="cell" itemprop="dosageForm">{{ .Params.dosage_form | default .Params.category }}</span>
-        </div>
-
-        <div class="ps-spec-item" role="row">
-          <div class="ps-spec-item__icon ps-spec-item__icon--teal" role="cell"><i data-lucide="activity"></i></div>
-          <span class="ps-spec-item__key" role="cell">Therapeutic Area</span>
-          <span class="ps-spec-item__val" role="cell">{{ .Params.therapeutic_class | default "Pharmaceutical" }}</span>
-        </div>
-
-        <div class="ps-spec-item" role="row">
-          <div class="ps-spec-item__icon ps-spec-item__icon--purple" role="cell"><i data-lucide="package"></i></div>
-          <span class="ps-spec-item__key" role="cell">Pack Sizes</span>
-          <span class="ps-spec-item__val" role="cell">
-            {{ if reflect.IsSlice .Params.pack_sizes }}{{ delimit .Params.pack_sizes " · " }}
-            {{ else if .Params.pack_sizes }}{{ .Params.pack_sizes }}
-            {{ else }}On Enquiry{{ end }}
-          </span>
-        </div>
-
-        <div class="ps-spec-item" role="row">
-          <div class="ps-spec-item__icon ps-spec-item__icon--orange" role="cell"><i data-lucide="factory"></i></div>
-          <span class="ps-spec-item__key" role="cell">Manufacturing</span>
-          <span class="ps-spec-item__val" role="cell">Third-Party CMO</span>
-        </div>
-
-        <div class="ps-spec-item" role="row">
-          <div class="ps-spec-item__icon ps-spec-item__icon--green" role="cell"><i data-lucide="clock-4"></i></div>
-          <span class="ps-spec-item__key" role="cell">Quote Turnaround</span>
-          <span class="ps-spec-item__val ps-spec-item__val--accent" role="cell">Within 24 Hours</span>
-        </div>
-
-        <div class="ps-spec-item" role="row">
-          <div class="ps-spec-item__icon ps-spec-item__icon--teal" role="cell"><i data-lucide="shield-check"></i></div>
-          <span class="ps-spec-item__key" role="cell">Quality Standard</span>
-          <span class="ps-spec-item__val" role="cell">WHO-GMP / GLP</span>
-        </div>
-
-      </div>
-    </div>
-
-    {{/* ── 4. B2B AUTHORITY ROW — uses site params ────────────────
-         Compact 3-col strip using .Site.Params values (single source of truth) */}}
-    {{/* ── 4. B2B AUTHORITY ROW — uses site params ────────────────
-         Compact 3-col strip using .Site.Params values (single source of truth) */}}
+    {{/* ── 2. ELITE AUTHORITY STRIP ────────────────────────────────── */}}
     <div class="ps-authority-strip">
       <div class="ps-authority-item">
         <strong class="ps-authority-num">{{ .Site.Params.products }}</strong>
@@ -124,9 +62,135 @@
       </div>
       <div class="ps-authority-divider"></div>
       <div class="ps-authority-item">
-        {{/* Use a fixed "25+" if that's what the user prefers, or calculate from founded */}}
-        <strong class="ps-authority-num">25+</strong>
+        <strong class="ps-authority-num">20+</strong>
         <span class="ps-authority-label">Years Legacy</span>
+      </div>
+    </div>
+
+    {{/* ── 3. COMPOSITION CARD ─────────────────────────────────────── */}}
+    {{ if or .Params.composition .Params.presentation }}
+    <div class="ps-comp-card">
+      <div class="ps-comp-card__label">
+        <i data-lucide="flask-conical"></i>
+        <span>Active Pharma Composition</span>
+      </div>
+      {{ with .Params.composition }}
+      <p class="ps-comp-card__formula" itemprop="activeIngredient">{{ . }}</p>
+      {{ end }}
+      {{ with .Params.presentation }}
+      <div class="ps-comp-card__pres">
+        <i data-lucide="package-2"></i>
+        <span>{{ . }}</span>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    {{/* ── 4. SPECIFICATION GRID ───────────────────────────────────── */}}
+    <div class="ps-spec-panel" role="table" aria-label="Product specifications" itemprop="description">
+      <div class="ps-spec-panel__head">
+        <i data-lucide="clipboard-list"></i>
+        Product Data Sheet
+      </div>
+      <div class="ps-spec-grid" role="rowgroup">
+
+        {{/* Unified Segments (Full Categories List) */}}
+        {{ with .Params.categories }}
+        <div class="ps-spec-item" role="row">
+          <div class="ps-spec-item__icon ps-spec-item__icon--blue" role="cell"><i data-lucide="layers"></i></div>
+          <div class="ps-spec-item__text">
+            <span class="ps-spec-item__key">Segments & Ranges</span>
+            <span class="ps-spec-item__val">{{ delimit . " &middot; " }}</span>
+          </div>
+        </div>
+        {{ end }}
+
+        {{/* Dosage / Drug Form */}}
+        {{ with .Params.dosage_form | default .Params.drug_form }}
+        <div class="ps-spec-item" role="row">
+          <div class="ps-spec-item__icon ps-spec-item__icon--teal" role="cell"><i data-lucide="pill"></i></div>
+          <div class="ps-spec-item__text">
+            <span class="ps-spec-item__key">Dosage Form</span>
+            <span class="ps-spec-item__val">{{ . }}</span>
+          </div>
+        </div>
+        {{ end }}
+
+        {{/* Pharmacological Class (List Support) */}}
+        {{ with .Params.therapeutic_class }}
+        <div class="ps-spec-item" role="row">
+          <div class="ps-spec-item__icon ps-spec-item__icon--purple" role="cell"><i data-lucide="activity"></i></div>
+          <div class="ps-spec-item__text">
+            <span class="ps-spec-item__key">Pharmacological Class</span>
+            <span class="ps-spec-item__val">
+              {{ if reflect.IsSlice . }}{{ delimit . " / " }}{{ else }}{{ . }}{{ end }}
+            </span>
+          </div>
+        </div>
+        {{ end }}
+
+        {{/* Pack Sizes (Handles List) */}}
+        {{ with .Params.pack_sizes }}
+        <div class="ps-spec-item" role="row">
+          <div class="ps-spec-item__icon ps-spec-item__icon--orange" role="cell"><i data-lucide="package"></i></div>
+          <div class="ps-spec-item__text">
+            <span class="ps-spec-item__key">Available Packing</span>
+            <span class="ps-spec-item__val">
+              {{ if reflect.IsSlice . }}{{ delimit . " / " }}
+              {{ else }}{{ . }}{{ end }}
+            </span>
+          </div>
+        </div>
+        {{ end }}
+
+        {{ with .Params.storage_conditions }}
+        <div class="ps-spec-item" role="row">
+          <div class="ps-spec-item__icon ps-spec-item__icon--blue" role="cell"><i data-lucide="thermometer-snowflake"></i></div>
+          <div class="ps-spec-item__text">
+            <span class="ps-spec-item__key">Storage Condition</span>
+            <span class="ps-spec-item__val">{{ . }}</span>
+          </div>
+        </div>
+        {{ end }}
+
+        {{ with .Params.shelf_life }}
+        <div class="ps-spec-item" role="row">
+          <div class="ps-spec-item__icon ps-spec-item__icon--muted" role="cell"><i data-lucide="calendar-check-2"></i></div>
+          <div class="ps-spec-item__text">
+            <span class="ps-spec-item__key">Stability / Shelf Life</span>
+            <span class="ps-spec-item__val">{{ . }}</span>
+          </div>
+        </div>
+        {{ end }}
+
+        {{/* Custom Specs Loop */}}
+        {{ range .Params.custom_specs }}
+        <div class="ps-spec-item" role="row">
+          <div class="ps-spec-item__icon ps-spec-item__icon--blue" role="cell"><i data-lucide="info"></i></div>
+          <div class="ps-spec-item__text">
+            <span class="ps-spec-item__key">{{ .label }}</span>
+            <span class="ps-spec-item__val">{{ .value }}</span>
+          </div>
+        </div>
+        {{ end }}
+
+      </div>
+      
+      <div class="ps-spec-footer">
+        <div class="ps-spec-item ps-spec-item--full" role="row">
+          <div class="ps-spec-item__icon ps-spec-item__icon--green" role="cell"><i data-lucide="clock-4"></i></div>
+          <div class="ps-spec-item__text">
+            <span class="ps-spec-item__key">Manufacturing Response</span>
+            <span class="ps-spec-item__val ps-spec-item__val--accent">{{ .Params.quote_priority | default "On Priority" }}</span>
+          </div>
+        </div>
+        <div class="ps-spec-item ps-spec-item--full" role="row">
+          <div class="ps-spec-item__icon ps-spec-item__icon--teal" role="cell"><i data-lucide="shield-check"></i></div>
+          <div class="ps-spec-item__text">
+            <span class="ps-spec-item__key">Compliance Level</span>
+            <span class="ps-spec-item__val">{{ .Params.quality_standards | default "WHO-GMP / ISO 9001:2015" }}</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -138,34 +202,24 @@
       <div class="ps-value-strip__item"><i data-lucide="check-circle-2"></i><span>Pan-India Dispatch</span></div>
     </div>
 
-    {{/* ── 6. CTA BLOCK ─────────────────────────────────────────────── */}}
+    {{/* ── 6. CTA BLOCK (SYSTEM INTEGRATED) ────────────────────────── */}}
     <div class="ps-cta-block">
-      <button
-        class="ps-cta-primary"
-        data-enquire-trigger
-        data-product-name="{{ .Title }}"
-        data-category="{{ .Params.category }}"
-        id="ps-quote-btn"
-      >
-        <i data-lucide="send"></i>
-        <span class="ps-cta-primary__text">
-          <strong>Request Manufacturing Quote</strong>
-          <small>Free · No commitment · 24 hr response</small>
+      <button class="btn btn--primary w-full !min-h-[64px] !rounded-2xl" data-enquire-trigger data-product-name="{{ .Params.product_name | default .Title }}" id="ps-quote-btn">
+        <i data-lucide="send" class="icon--sm"></i>
+        <span class="flex flex-col text-left">
+          <strong class="text-[16px] leading-tight">Request Manufacturing Quote</strong>
+          <small class="text-[11px] font-medium opacity-80 mt-0.5">WHO-GMP Facility · Fast-Track B2B Response</small>
         </span>
       </button>
 
-      <div class="ps-cta-secondary-row">
-        <a
-          href="https://wa.me/{{ .Site.Params.phone | replaceRE `[^0-9]` `` }}?text=Hi%2C%20I%20am%20interested%20in%20CMO%20for%20{{ .Title | urlquery }}%20by%20Saar%20Biotech."
-          target="_blank" rel="noopener noreferrer"
-          class="ps-cta-wa"
-        >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <div class="grid grid-cols-2 gap-3">
+        <a href="https://wa.me/{{ .Site.Params.phone | replaceRE `[^0-9]` `` }}" target="_blank" rel="noopener" class="btn btn--whatsapp !rounded-xl !min-h-[48px]">
+          <i data-lucide="message-circle" class="icon--sm"></i>
           WhatsApp
         </a>
-        <a href="/products/" class="ps-cta-browse">
-          <i data-lucide="layout-grid"></i>
-          All Products
+        <a href="/products/" class="btn btn--outline !rounded-xl !min-h-[48px]">
+          <i data-lucide="arrow-left" class="icon--sm"></i>
+          Browse All
         </a>
       </div>
     </div>

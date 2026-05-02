@@ -6,28 +6,40 @@
 {{ end }}
 
 <article class="product-card product-card-wrap h-full group"
-    data-title="{{ .Title | lower }}"
-    data-category="{{ delimit $safeCats " " }}"
-    data-composition="{{ .Params.composition | lower }}"
-    data-area="{{ .Params.therapeutic_area | default "" | lower }}"
-    data-desc="{{ .Description | default .Summary | lower }}"
+    data-title="{{ .Params.product_name | default .Title | lower }}"
+    data-category-slugs="{{ delimit $safeCats " " }}"
     data-categories="{{ with .Params.categories }}{{ delimit . " " | lower }}{{ end }}"
-    data-packs="{{ with .Params.pack_sizes }}{{ delimit . " " | lower }}{{ end }}">
+    data-composition="{{ .Params.composition | lower }}"
+    data-area="{{ with .Params.therapeutic_class }}{{ if reflect.IsSlice . }}{{ delimit . " " | lower }}{{ else }}{{ . | lower }}{{ end }}{{ else }}{{ .Params.therapeutic_area | default "" | lower }}{{ end }}"
+    data-therapeutic-class="{{ with .Params.therapeutic_class }}{{ if reflect.IsSlice . }}{{ delimit . " " | lower }}{{ else }}{{ . | lower }}{{ end }}{{ end }}"
+    data-therapeutic-area="{{ .Params.therapeutic_area | default "" | lower }}"
+    data-drug-form="{{ .Params.dosage_form | default .Params.drug_form | default "" | lower }}"
+    data-desc="{{ .Description | default .Summary | plainify | lower }}"
+    data-packs="{{ with .Params.pack_sizes }}{{ if reflect.IsSlice . }}{{ delimit . " " | lower }}{{ else }}{{ . | lower }}{{ end }}{{ end }}">
     
     <!-- Main Overlay Link -->
     <a href="{{ .RelPermalink }}" class="absolute inset-0 z-10" aria-label="View {{ .Title }} details"></a>
 
-    {{ if .Params.categories }}
-        <div class="product-card__cat-group">
-            {{ range first 3 .Params.categories }}
-                <span class="product-card__cat-badge">{{ . }}</span>
+    {{/* ── New Category Badge System (Universal) ── */}}
+    <div class="product-card__cat-group">
+        {{ if .Params.categories }}
+            <span class="product-card__cat-badge">{{ index .Params.categories 0 }}</span>
+            {{ if gt (len .Params.categories) 1 }}
+                <span class="product-card__cat-badge product-card__cat-badge--sub">{{ index .Params.categories 1 }}</span>
             {{ end }}
-        </div>
-    {{ end }}
+        {{ end }}
+    </div>
 
     <div class="product-card__image-container">
-        {{ if .Params.image }}
-            <img src="{{ .Params.image }}" alt="{{ .Title }}" class="product-card__image" loading="lazy" decoding="async">
+        {{ $productImg := "" }}
+        {{ if .Params.images }}
+            {{ $productImg = index .Params.images 0 }}
+        {{ else if .Params.image }}
+            {{ $productImg = .Params.image }}
+        {{ end }}
+
+        {{ if $productImg }}
+            <img src="/images/products/{{ $productImg }}" alt="{{ .Title }}" class="product-card__image" loading="lazy">
         {{ else }}
             <div class="text-teal-600/10">
                 <i data-lucide="{{ default "pill" .Params.icon }}" class="w-16 h-16"></i>
@@ -36,14 +48,15 @@
     </div>
 
     <div class="product-card__content flex-1 flex flex-col">
-        {{ if .Params.dosage_form }}
+        {{ $dosage := .Params.dosage_form | default .Params.drug_form | default (index .Params.categories 0) }}
+        {{ if $dosage }}
             <div>
-                <span class="product-card__dosage">{{ .Params.dosage_form }}</span>
+                <span class="product-card__dosage">{{ $dosage }}</span>
             </div>
         {{ end }}
         
         <h3 class="product-card__title">
-            {{ .Title }}
+            {{ .Params.product_name | default .Title }}
         </h3>
 
         {{ if .Params.composition }}
@@ -53,9 +66,13 @@
             </div>
         {{ end }}
 
-        {{ if .Params.pack_sizes }}
+        {{ with .Params.pack_sizes }}
             <div class="product-card__packs">
-                {{ range .Params.pack_sizes }}
+                {{ if reflect.IsSlice . }}
+                    {{ range . }}
+                        <span class="product-card__pack"><i data-lucide="package" class="w-3 h-3"></i> {{ . }}</span>
+                    {{ end }}
+                {{ else }}
                     <span class="product-card__pack">
                         <i data-lucide="package" class="w-3 h-3"></i>
                         {{ . }}
@@ -65,14 +82,17 @@
         {{ end }}
 
         <p class="product-card__desc">
-            {{ .Description | default .Summary | truncate 120 }}
+            {{/* Strip "Description" heading if Hugo includes it in summary */}}
+            {{ $rawDesc := .Description | default .Summary | plainify }}
+            {{ $cleanDesc := replace $rawDesc "Description" "" }}
+            {{ $cleanDesc | truncate 120 }}
+
         </p>
 
         <!-- Pushed to bottom via flex-1 + mt-auto -->
         <div class="product-card__footer mt-auto">
             <div class="product-card__cta">
-                View Details
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                View Details <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </div>
             
             <a href="#" 
