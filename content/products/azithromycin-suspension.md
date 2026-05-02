@@ -50,53 +50,53 @@ faq_b2b:
 # 7. GALLERY
 images:
   - "azithromycin.webp"
+  - azithromycin-premium.png
+  - azithromycin.png
 ---
 
-## Description
-Azithromycin is a macrolide antibiotic used to treat or prevent certain bacterial infections, most often those causing middle ear infections, strep throat, pneumonia, typhoid, bronchitis. Azithromycin exhibits superior activity against gram+ve and gram-ve organisms. It prevents bacteria from growing by interfering with their protein synthesis.
+Azithromycin is a potent, broad-spectrum macrolide antibiotic essential for treating a wide range of bacterial infections. As a premier **WHO-GMP certified pharmaceutical manufacturer in Baddi**, Saar Biotech utilizes advanced micronization techniques to ensure that our Azithromycin Oral Suspension delivers superior bioavailability and molecular stability.
+
+## Description & Therapeutic Class
+Azithromycin is a second-generation macrolide antibiotic derived from erythromycin. It is primarily used to treat or prevent certain bacterial infections, most notably those affecting the upper and lower respiratory tracts, middle ear, and soft tissues. Unlike traditional antibiotics, Azithromycin exhibits **superior tissue penetration** and a long half-life, allowing for convenient once-daily dosing.
+
+## The Saar Biotech Advantage
+At Saar Biotech, we manufacture Azithromycin Suspension using a proprietary **pH-stabilized formulation** that ensures the active pharmaceutical ingredient (API) remains potent throughout its shelf life.
+- **Micronized API**: Ensures rapid absorption and consistent therapeutic levels.
+- **Palatable Formulation**: Designed for high patient compliance in pediatric cases.
+- **Dossier Readiness**: Complete stability data (Real-time and Accelerated) is available for B2B partners.
 
 ## Key Indications & Usage
-Azithromycin is highly effective for the following conditions:
-* **Otitis Media**: Infections of the middle ear.
-* **Upper Respiratory Tract Infection**: Including Sinusitis and Pharyngitis.
-* **Pneumonia & Bronchitis**: Lower respiratory tract infections.
-* **Skin or Soft Tissue Infections**: Bacterial skin conditions.
-* **Gonococcal Infection**: Uncomplicated cases.
-* **Typhoid Fever**: Effective systemic treatment.
+Our Azithromycin suspension is formulated to treat the following conditions with clinical precision:
+- **Upper Respiratory Tract Infections**: Including Acute Bacterial Sinusitis and Pharyngitis/Tonsillitis.
+- **Lower Respiratory Tract Infections**: Such as Community-Acquired Pneumonia (CAP) and Acute Bronchitis.
+- **Otitis Media**: Highly effective for pediatric middle ear infections.
+- **Skin & Soft Tissue Infections**: Bacterial dermatological conditions.
+- **Systemic Infections**: Effective treatment for Typhoid Fever and certain uncomplicated Gonococcal infections.
 
-## Mechanism of Action
-Azithromycin binds to the **50S subunit** of the 70S bacterial ribosomes, inhibiting RNA-dependent protein synthesis in bacterial cells. This bacteriostatic action effectively halts the multiplication of pathogens.
+## Mechanism of Action (MOA)
+Azithromycin acts by binding to the **50S ribosomal subunit** of susceptible microorganisms, thereby interfering with microbial protein synthesis. It is highly effective against both Gram-positive and Gram-negative pathogens, including *S. pneumoniae*, *H. influenzae*, and *M. catarrhalis*.
 
-## Pharmacokinetics
+## Pharmacokinetics & Bioavailability
+- **Absorption**: Approximately 37% bioavailability after oral administration.
+- **Distribution**: Azithromycin is rapidly distributed into the tissues, where concentrations can be up to **50 times higher** than in the plasma.
+- **Elimination**: Plasma terminal elimination half-life closely reflects the tissue depletion half-life of 2 to 4 days. Approximately 12% of an intravenously administered dose is excreted in the urine over 3 days as the parent drug, the majority in the first 24 hours. Biliary excretion of azithromycin is a major route of elimination for unchanged drug following oral administration. Very high concentrations of unchanged drug have been found in human bile, together with 10 metabolites, formed by Nand O-demethylation, by hydroxylation of the desosamine and aglycone rings, and by cleavage of the cladinose conjugate. Comparison of HPLC and microbiological assays in tissues suggests that metabolites play no part in the microbiological activity of azithromycin.
 
-### Absorption
-Following oral administration in humans, azithromycin is widely distributed throughout the body. Its bioavailability is approximately **37%**. The time taken to reach peak plasma levels (Tmax) is typically **2-3 hours**.
 
-### Distribution
-Pharmacokinetic studies have shown markedly higher azithromycin levels in tissue than in plasma (up to 50 times the maximum observed concentration in plasma), indicating that the drug is heavily tissue-bound. Concentrations in target tissues, such as lung, tonsil, and prostate, exceed the MIC90 for likely pathogens after a single dose.
 
-### Elimination
-The plasma terminal elimination half-life closely reflects the tissue depletion half-life of **2 to 4 days**. Approximately 12% of an intravenously administered dose is excreted in the urine over 3 days as the parent drug, primarily in the first 24 hours. Biliary excretion of azithromycin is a major route of elimination for unchanged drug following oral administration.
+## Storage & Reconstitution Intelligence
+For B2B partners and healthcare providers, proper handling is critical for therapeutic efficacy:
+1. **Unreconstituted Powder**: Store below 30°C in a dry environment.
+2. **Reconstitution**: Use purified water as per the specified volume on the label.
+3. **Post-Reconstitution**: The suspension remains stable for 10-14 days when stored correctly.
 
-## Side Effects & Contraindications
+## Quality Control & Compliance
+Every batch of Azithromycin at Saar Biotech undergoes rigorous testing in our **Agilent-equipped GLP laboratories** to ensure 100% therapeutic efficacy and safety:
+- **Assay Testing**: Ensuring 100% label claim accuracy through high-performance liquid chromatography (HPLC).
+- **Dissolution Profile**: Verifying rapid and consistent drug release in biological environments.
+- **Microbial Limit Test (MLT)**: Guaranteeing absolute purity and safety for pediatric care formulations.
 
-### Side Effects
-Common side effects may include:
-* Abdominal pain
-* Skin rash
-* Headache
+## Side Effects & Safety Profile
+While generally well-tolerated, some patients may experience mild gastrointestinal effects such as abdominal pain or nausea. It is **contraindicated** in patients with a known hypersensitivity to macrolide antibiotics.
 
-### Contraindications
-The use of azithromycin is contraindicated in patients with hypersensitivity to azithromycin, erythromycin, or any macrolide or ketolide antibiotic.
-
-## Manufacturing Excellence: SAAR Biotech
-Saar Biotech Pvt. Ltd. is a distinguished **WHO-GMP certified** pharmaceutical manufacturing company in Baddi, Chandigarh, renowned for its dedication to quality and innovation since 2005. 
-
-Specializing in **third-party contract manufacturing**, we partner with over 1700 clients to deliver a wide range of pharmaceutical products, including Suspensions, Syrups, Ointments, and Roll-Ons. Our extensive experience and advanced technology make us a trusted choice for companies seeking reliable manufacturing solutions.
-
-## B2B Manufacturing Conclusion
-From the clinical data, it is evident that Azithromycin is a versatile macrolide antibiotic effective against a broad spectrum of infections. At SAAR Biotech, we manufacture superior quality **Azithromycin Suspension** processed using high-grade chemical compounds and advanced formulation techniques.
-
-Our offered suspension is highly treasured for its reliability, accurate composition, and excellent purity. We provide this formulation to our esteemed clients at market-leading prices with full regulatory support.
-
-**Experience the difference of partnering with a leader in pharmaceutical excellence. [Quote Now](#ps-quote-btn) to start your journey with us.**
+---
+*For B2B manufacturing enquiries, third-party contracts, or to request a full technical dossier for Azithromycin Suspension, please use the enquiry form below.*

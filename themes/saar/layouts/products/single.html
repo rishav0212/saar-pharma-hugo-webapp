@@ -30,74 +30,202 @@
 
 
   {{/* ══════════════════════════════════════════════════════════════════════════
-       LOWER SECTION: MARKDOWN CONTENT + SIDEBAR
+       LOWER SECTION: TABBED CLINICAL DASHBOARD + SIDEBAR
   ══════════════════════════════════════════════════════════════════════════ */}}
   <div class="ps-content-wrap">
     <div class="container">
       <div class="ps-content-grid">
 
-        {{/* LEFT: Clinical Content Area */}}
-        <main class="ps-markdown-content" id="main-product-content">
+        {{/* LEFT: Dynamic Tabbed Clinical Console */}}
+        <main class="ps-clinical-console" id="main-product-content">
           
-          {{/* Render the Markdown body */}}
-          {{ .Content }}
-
-          {{/* ── DYNAMIC FAQ SECTION (Dual Layer) ── */}}
-          {{ if or .Params.faq_clinical .Params.faq_b2b .Params.faq (isset .Site.Params "common_faqs") }}
-          <section class="ps-faq-section mt-12 pt-12 border-t border-line">
-            <h2 class="section-title section-title--sm mb-8">Clinical & Manufacturing Intelligence</h2>
+          <div class="tab-block">
+            {{/* ── AUTO-TABBER LOGIC ── */}}
+            {{ $content := .Content }}
+            {{/* Split content by H2 tags. The first part is everything before the first H2 */}}
+            {{ $rawSections := split $content "<h2" }}
             
-            <div class="ps-faq-grid">
-              {{/* 1. Clinical FAQs */}}
-              {{ if .Params.faq_clinical }}
-              <div class="mb-10">
-                <h4 class="text-[12px] font-black uppercase tracking-widest text-brand-3 mb-5 flex items-center gap-2">
-                  <i data-lucide="microscope" class="w-4 h-4"></i> Molecule & Usage FAQ
-                </h4>
-                {{ range .Params.faq_clinical }}
-                <div class="ps-faq-item mb-6">
-                  <h3 class="text-[16px] font-black text-ink mb-2">{{ .question }}</h3>
-                  <p class="text-[14px] text-muted leading-relaxed">{{ .answer | markdownify }}</p>
+            {{/* Initialize sections array */}}
+            {{ $sections := slice }}
+            
+            {{/* Handle intro content (before first H2) */}}
+            {{ $intro := index $rawSections 0 }}
+            {{ if (gt (len (trim $intro " \n\r")) 0) }}
+              {{ $sections = $sections | append (dict "title" "Overview" "content" $intro "id" "overview" "icon" "info") }}
+            {{ end }}
+
+            {{/* Initialize sections array with the "Authority" tab first */}}
+            {{ $sections := slice (dict 
+              "title" "Manufacturing Advantage" 
+              "id" "manufacturing-authority" 
+              "icon" "factory" 
+              "content" (printf `
+                <div class="ps-authority-pane">
+                  <div class="ps-authority-header">
+                    <span class="ps-badge">Manufacturing Advantage</span>
+                    <h4 class="text-[32px] font-black text-ink leading-tight mb-4">Why Saar Biotech for %s?</h4>
+                    <p class="ps-authority-lead text-muted text-[18px] leading-relaxed mb-8">
+                      Since 2005, Saar Biotech has been a distinguished **WHO-GMP certified** leader in pharmaceutical manufacturing. We partner with over **1700+ global clients** to deliver unmatched stability and bioavailability for this %s formulation.
+                    </p>
+                  </div>
+                  
+                  <div class="ps-authority-grid">
+                    <div class="ps-authority-card">
+                      <i data-lucide="shield-check" class="icon text-brand"></i>
+                      <h5>DCGI Approved</h5>
+                      <p>Ready-to-use dossiers for rapid market entry.</p>
+                    </div>
+                    <div class="ps-authority-card">
+                      <i data-lucide="zap" class="icon text-brand"></i>
+                      <h5>Fast Turnaround</h5>
+                      <p>30-45 days lead time for new batches.</p>
+                    </div>
+                  </div>
+
+                  <div class="ps-authority-footer">
+                    <a href="#clinical-faq" class="btn btn--outline btn--small">
+                      <i data-lucide="help-circle" class="icon"></i>
+                      View Technical Intelligence
+                    </a>
+                    <a href="/products/" class="btn btn--primary btn--small">
+                      <i data-lucide="arrow-right" class="icon"></i>
+                      Browse Similar Formulations
+                    </a>
+                  </div>
                 </div>
+              ` .Title (index .Params.subCategories 0 | default "Pharmaceutical"))
+            ) }}
+
+            {{/* Process H2 sections */}}
+            {{ range $idx, $rawSection := $rawSections }}
+              {{ if gt $idx 0 }}
+                {{/* Extract the ID: look for id="..." at the very start of the split string */}}
+                {{ $idMatch := findRE `^ id=".*?"` $rawSection 1 }}
+                {{ $titleMatch := findRE `^.*?>.*?</h2>` $rawSection 1 }}
+                
+                {{ if and $idMatch $titleMatch }}
+                  {{/* Clean up the ID: remove ' id="' and '"' */}}
+                  {{ $id := index $idMatch 0 | replaceRE ` id="(.*)"` "$1" }}
+                  
+                  {{/* Clean up the Title: extract text between > and </h2> */}}
+                  {{ $title := index $titleMatch 0 | replaceRE `^.*?> (.*) </h2>` "$1" | replaceRE `^.*?>` "" | replaceRE `</h2>` "" | htmlUnescape }}
+                  
+                  {{/* Extract the actual body content (everything after </h2>) */}}
+                  {{ $sectionBody := $rawSection | replaceRE `^.*?>.*?</h2>` "" }}
+                  
+                  {{/* Icon Mapping */}}
+                  {{ $icon := "file-text" }}
+                  {{ $tLower := lower $title }}
+                  {{ if (findRE "description|overview" $tLower) }} {{ $icon = "info" }}
+                  {{ else if (findRE "indication|usage" $tLower) }} {{ $icon = "stethoscope" }}
+                  {{ else if (findRE "mechanism|action" $tLower) }} {{ $icon = "microscope" }}
+                  {{ else if (findRE "pharmacokinetics|absorption|pharmacology" $tLower) }} {{ $icon = "activity" }}
+                  {{ else if (findRE "side effect|safety|contraindication" $tLower) }} {{ $icon = "shield-alert" }}
+                  {{ else if (findRE "manufactur" $tLower) }} {{ $icon = "factory" }}
+                  {{ end }}
+
+                  {{ $sections = $sections | append (dict "title" $title "content" $sectionBody "id" $id "icon" $icon) }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+
+            {{/* 1. Tab Navigation (Sidebar style) */}}
+            <aside class="ps-console-sidebar">
+              <div class="tab-nav" role="tablist" aria-label="Product information tabs">
+                {{ range $idx, $section := $sections }}
+                <button class="tab-btn {{ if eq $idx 0 }}is-active{{ end }}" data-tab="{{ $section.id }}" role="tab" aria-selected="{{ if eq $idx 0 }}true{{ else }}false{{ end }}">
+                  <i data-lucide="{{ $section.icon }}" class="icon"></i>
+                  <span>{{ $section.title }}</span>
+                </button>
                 {{ end }}
               </div>
-              {{ end }}
+            </aside>
 
-              {{/* 2. B2B / Manufacturing FAQs */}}
-              {{ if .Params.faq_b2b }}
-              <div class="ps-faq-global p-8 bg-surface-2 rounded-2xl border border-brand-line mb-8">
-                <h4 class="text-[12px] font-black uppercase tracking-widest text-brand mb-5 flex items-center gap-2">
-                  <i data-lucide="factory" class="w-4 h-4"></i> B2B & Supply Solutions
-                </h4>
-                {{ range .Params.faq_b2b }}
-                <div class="ps-faq-item mb-5 pb-5 border-b border-brand-line/50 last:border-0 last:pb-0">
-                  <h5 class="text-[15px] font-bold text-ink mb-1.5">{{ .question }}</h5>
-                  <p class="text-[13px] text-muted">{{ .answer | markdownify }}</p>
+            {{/* 2. Tab Content Panes */}}
+            <div class="tab-panels">
+              {{ range $idx, $section := $sections }}
+              <div class="tab-panel {{ if eq $idx 0 }}is-active{{ end }}" data-tab="{{ $section.id }}" role="tabpanel" {{ if ne $idx 0 }}hidden{{ end }}>
+                <div class="tab-panel__body h-full flex flex-col">
+                  <div class="flex items-center justify-between mb-8 border-b border-line pb-6">
+                    <h3 class="text-[28px] m-0">{{ $section.title }}</h3>
+                    <span class="ps-badge">Expert Verified Content</span>
+                  </div>
+
+                  <div class="ps-markdown-content p-0 border-0 shadow-none flex-grow">
+                    {{ $section.content | safeHTML }}
+                  </div>
+
+                  {{/* B2B Supply Readiness Dashboard */}}
+                  <div class="mt-12 pt-8 border-t border-line">
+                    <h4 class="text-[14px] font-black uppercase tracking-widest text-brand mb-6">Global Supply & B2B Compliance</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div class="p-5 bg-surface rounded-2xl border border-brand-line/30 group hover:border-brand transition-colors">
+                        <span class="block text-[10px] font-black text-muted uppercase mb-1">Batch Lead Time</span>
+                        <span class="block text-[14px] font-bold text-ink">30-45 Days (Standard)</span>
+                      </div>
+                      <div class="p-5 bg-surface rounded-2xl border border-brand-line/30 group hover:border-brand transition-colors">
+                        <span class="block text-[10px] font-black text-muted uppercase mb-1">Documentation</span>
+                        <span class="block text-[14px] font-bold text-ink">Complete CTD/Dossier Support</span>
+                      </div>
+                      <div class="p-5 bg-surface rounded-2xl border border-brand-line/30 group hover:border-brand transition-colors">
+                        <span class="block text-[10px] font-black text-muted uppercase mb-1">Facility Status</span>
+                        <span class="block text-[14px] font-bold text-ink">WHO-GMP & ISO Certified</span>
+                      </div>
+                    </div>
+                    <p class="mt-6 text-[11px] text-muted leading-relaxed italic">
+                      Note: Technical data provided is for B2B informational purposes for pharmaceutical professionals. All formulations comply with DCGI and Schedule M standards.
+                    </p>
+                  </div>
                 </div>
-                {{ end }}
               </div>
-              {{ end }}
-
-              {{/* Fallback for old FAQ structure */}}
-              {{ if .Params.faq }}
-                {{ range .Params.faq }}
-                <div class="ps-faq-item mb-6">
-                  <h3 class="text-[16px] font-black text-ink mb-2">{{ .question }}</h3>
-                  <p class="text-[14px] text-muted leading-relaxed">{{ .answer | markdownify }}</p>
-                </div>
-                {{ end }}
               {{ end }}
             </div>
-          </section>
-          {{ end }}
-        </main>
-
-        {{/* RIGHT: Sidebar widget */}}
-        {{ partial "product/sidebar.html" . }}
-
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
+
+    {{/* ── STANDALONE FAQ SECTION (Outside Tabs for SEO & Visibility) ── */}}
+    {{ if or .Params.faq_clinical .Params.faq_b2b }}
+    <section id="clinical-faq" class="ps-faq-section section bg-surface">
+      <div class="container">
+        <div class="section-header">
+          <span class="ps-badge mb-4">Technical Intelligence</span>
+          <h2 class="text-[36px] mb-6">Expert Q&A for {{ .Title }}</h2>
+          <p class="text-muted text-[18px]">Detailed clinical insights and B2B enquiry guides for our WHO-GMP certified {{ .Title }} formulation.</p>
+        </div>
+
+        <div class="ps-faq-grid mt-12 grid grid-cols-[1fr_400px] gap-12 max-lg:grid-cols-1">
+          <div class="faq-list">
+            {{ range .Params.faq_clinical }}
+            <details class="faq-item">
+              <summary>{{ .question }}</summary>
+              <p>{{ .answer | markdownify }}</p>
+            </details>
+            {{ end }}
+            
+            {{ range .Params.faq_b2b }}
+            <details class="faq-item">
+              <summary>{{ .question }}</summary>
+              <p>{{ .answer | markdownify }}</p>
+            </details>
+            {{ end }}
+          </div>
+
+          <aside class="ps-faq-cta">
+            <div class="ps-sticky-cta-card">
+              <div class="ps-cta-icon">
+                <i data-lucide="message-square" class="icon text-white"></i>
+              </div>
+              <h4>Have more questions?</h4>
+              <p>Our regulatory and technical team is ready to assist with stability data and dossier support.</p>
+              <a href="#enquiry-form" class="btn btn--primary w-full">Request Technical Data</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+    {{ end }}
 
 </article>
 
@@ -202,6 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (lbNext)  lbNext.addEventListener('click',  function(e) { e.stopPropagation(); goTo(current + 1, false); });
   if (lightbox) lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
 
+  /* ── Thumb & dot clicks ── */
   thumbs.forEach(function(thumb, idx) {
     thumb.addEventListener('click', function() { goTo(idx); stopAutoplay(); startAutoplay(); });
   });
@@ -209,8 +338,38 @@ document.addEventListener('DOMContentLoaded', () => {
     dot.addEventListener('click', function() { goTo(idx); stopAutoplay(); startAutoplay(); });
   });
 
+  /* ── Keyboard navigation ── */
+  document.addEventListener('keydown', function(e) {
+    var lbOpen = lightbox && lightbox.classList.contains('is-open');
+    if (e.key === 'Escape'     && lbOpen)  { closeLightbox(); return; }
+    if (e.key === 'ArrowRight') { goTo(current + 1, !lbOpen); if (!lbOpen) { stopAutoplay(); startAutoplay(); } }
+    if (e.key === 'ArrowLeft')  { goTo(current - 1, !lbOpen); if (!lbOpen) { stopAutoplay(); startAutoplay(); } }
+  });
+
+  /* ── Touch swipe ── */
+  function addSwipe(el, cb) {
+    if (!el) return;
+    var sx = 0;
+    el.addEventListener('touchstart', function(e) { sx = e.changedTouches[0].clientX; }, { passive: true });
+    el.addEventListener('touchend',   function(e) {
+      var d = e.changedTouches[0].clientX - sx;
+      if (Math.abs(d) > 40) cb(d);
+    }, { passive: true });
+  }
+  addSwipe(frame,    function(d) { goTo(d < 0 ? current + 1 : current - 1); stopAutoplay(); startAutoplay(); });
+  addSwipe(lightbox, function(d) { goTo(d < 0 ? current + 1 : current - 1, false); });
+
+  /* ── Hover pause ── */
+  [frame, filmstrip].forEach(function(el) {
+    if (!el) return;
+    el.addEventListener('mouseenter', stopAutoplay);
+    el.addEventListener('mouseleave', startAutoplay);
+  });
+
+  /* ── Init ── */
   if (total > 1) startAutoplay();
 });
 </script>
+
 
 {{ end }}

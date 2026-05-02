@@ -5,11 +5,15 @@
      ────────────────────────────────────────────────────────────────────────── */
 
   .ps-content-wrap {
-    @apply pt-12 pb-16;
+    /* Full-bleed background — must be on this wrapper, NOT on ps-clinical-console
+       which lives inside .container and would get clipped by its max-width */
+    @apply w-full py-24;
+    background-color: #F1F5F9;
+    border-top: 1px solid var(--color-line);
   }
 
   .ps-content-grid {
-    @apply grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 lg:gap-16 items-start;
+    @apply grid grid-cols-1 gap-12 lg:gap-16 items-start w-full;
   }
 
   /* Markdown Content */
@@ -21,58 +25,343 @@
     @apply text-[24px] font-display font-black text-ink mt-10 mb-5 pb-4 border-b border-line flex items-center gap-3;
   }
 
-  .ps-markdown-content h2:first-child { @apply mt-0; }
+  .ps-markdown-content h2:first-child {
+    @apply mt-0;
+  }
+
   .ps-markdown-content h2::before {
-    content: ''; @apply block w-1.5 h-7 bg-brand rounded-full flex-shrink-0;
+    content: '';
+    @apply block w-1.5 h-7 bg-brand rounded-full flex-shrink-0;
   }
 
-  .ps-markdown-content h3 { @apply text-[18px] font-bold text-ink mt-8 mb-4; }
-  .ps-markdown-content p { @apply text-[15px] text-muted leading-relaxed mb-5; }
-  .ps-markdown-content strong { @apply font-bold text-ink; }
+  .ps-markdown-content h3 {
+    @apply text-[18px] font-bold text-ink mt-8 mb-4;
+  }
 
-  .ps-markdown-content ul { @apply grid gap-3 mb-8 pl-0 list-none; }
+  .ps-markdown-content p {
+    @apply text-[15px] text-muted leading-relaxed mb-5;
+  }
+
+  .ps-markdown-content strong {
+    @apply font-bold text-ink;
+  }
+
+  .ps-markdown-content ul,
+  .ps-markdown-content ol {
+    @apply grid gap-4 mb-8 pl-0 list-none;
+  }
+
   .ps-markdown-content li {
-    @apply relative pl-7 text-[14px] text-ink font-medium leading-relaxed bg-[#F8FAFC] p-4 rounded-xl border border-line;
-  }
-  .ps-markdown-content li::before {
-    content: '✓'; @apply absolute left-4 top-[18px] text-brand font-black text-[11px];
+    @apply relative pl-10 pr-6 py-5 text-[15px] text-ink font-medium leading-relaxed bg-[#F8FAFC] rounded-xl border border-line;
   }
 
-  .ps-markdown-content details { @apply mb-4 border border-line rounded-xl overflow-hidden bg-white; }
-  .ps-markdown-content summary { @apply p-5 font-bold text-ink cursor-pointer bg-[#F8FAFC] outline-none; list-style: none; }
-  .ps-markdown-content summary::-webkit-details-marker { display: none; }
-  .ps-markdown-content details[open] summary { @apply border-b border-line text-brand; }
-  .ps-markdown-content details p { @apply p-5 m-0; }
+  .ps-markdown-content ul li::before {
+    content: '✓';
+    @apply absolute left-4 top-[22px] text-brand font-black text-[12px];
+  }
+
+  .ps-markdown-content ol {
+    counter-reset: md-ol;
+  }
+
+  .ps-markdown-content ol li::before {
+    content: counter(md-ol);
+    counter-increment: md-ol;
+    @apply absolute left-3 top-[18px] w-6 h-6 flex items-center justify-center bg-brand/10 text-brand text-[11px] font-black rounded-full;
+  }
+
+  /* Remove odd decorator from headings inside tab panels */
+  .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content h2::before {
+    display: none;
+  }
+  
+  .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content h2 {
+    @apply pb-3 mb-6 mt-8 text-[22px];
+  }
+  
+  .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content h2:first-child {
+    @apply mt-0;
+  }
+
+  .ps-markdown-content details {
+    @apply mb-4 border border-line rounded-xl overflow-hidden bg-white;
+  }
+
+  .ps-markdown-content summary {
+    @apply p-5 font-bold text-ink cursor-pointer bg-[#F8FAFC] outline-none;
+    list-style: none;
+  }
+
+  .ps-markdown-content summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .ps-markdown-content details[open] summary {
+    @apply border-b border-line text-brand;
+  }
+
+  .ps-markdown-content details p {
+    @apply p-5 m-0;
+  }
+
+  /* ── Clinical Console: reset background — bg is now on ps-content-wrap ── */
+  .ps-clinical-console {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Consolidating widescreen overrides... */
+
+  .ps-tabbed-console {
+    display: grid !important;
+    grid-template-columns: 320px 1fr !important;
+    gap: 4rem !important;
+    width: 100% !important;
+  }
+
+  .ps-clinical-console .tab-panels,
+  .ps-clinical-console .tab-panels .tab-panel {
+    width: 100% !important;
+    min-width: 100% !important;
+    flex-grow: 1 !important;
+  }
+
+  .ps-console-sidebar {
+    position: sticky !important;
+    top: 6rem !important;
+    width: 100% !important;
+  }
+
+  .ps-clinical-console .tab-btn {
+    @apply px-5 py-4 text-[14px] rounded-2xl transition-all duration-300;
+  }
+
+  .ps-clinical-console .tab-btn:hover {
+    @apply bg-white/60 -translate-x-1 text-ink;
+  }
+
+  .ps-clinical-console .tab-btn.is-active {
+    @apply bg-white text-brand-3 shadow-md -translate-x-2 font-black;
+  }
+
+  /* ── Final Force-Width Clinical Console ── */
+  .ps-clinical-console .container {
+    max-width: 98% !important;
+    width: 100% !important;
+    padding-left: 1% !important;
+    padding-right: 1% !important;
+    margin: 0 auto !important;
+  }
+
+  .ps-tabbed-console {
+    display: grid !important;
+    grid-template-columns: 320px 1fr !important;
+    gap: 2.5rem !important;
+    width: 100% !important;
+    align-items: start !important;
+  }
+
+  .ps-console-sidebar {
+    position: sticky !important;
+    top: 6rem !important;
+    width: 100% !important;
+  }
+
+  .ps-clinical-console .tab-panels {
+    width: 100% !important;
+    flex-grow: 1 !important;
+  }
+
+  .ps-clinical-console .tab-panels .tab-panel {
+    @apply bg-white border border-line rounded-2xl p-10 lg:p-12 shadow-sm;
+    width: 100% !important;
+    min-width: 100% !important;
+    min-height: 700px !important;
+    display: none;
+    flex-direction: column;
+  }
+
+  .ps-clinical-console .tab-panels .tab-panel.is-active {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .ps-clinical-console .tab-btn {
+    @apply px-5 py-4 text-[14px] rounded-xl transition-all duration-300;
+  }
+
+  /* Authority Tab (First Tab) Styling */
+  .ps-authority-pane {
+    @apply space-y-8;
+  }
+
+  .ps-badge {
+    @apply inline-flex items-center px-3 py-1 bg-brand-3/10 text-brand-3 text-[11px] font-black uppercase tracking-wider rounded-full mb-2;
+  }
+
+  .ps-authority-grid {
+    @apply grid grid-cols-2 gap-6 max-md:grid-cols-1;
+  }
+
+  .ps-authority-card {
+    @apply p-6 border border-line rounded-xl bg-surface/50 transition-all duration-300;
+  }
+
+  .ps-authority-card:hover {
+    @apply border-brand/30 shadow-soft bg-white;
+  }
+
+  .ps-authority-card h5 {
+    @apply text-[18px] mb-2 mt-4;
+  }
+
+  .ps-authority-card p {
+    @apply text-muted text-[14px] leading-relaxed;
+  }
+
+  .ps-authority-footer {
+    @apply flex items-center gap-4 mt-10 pt-8 border-t border-line max-md:flex-col max-md:items-stretch;
+  }
+
+  /* Standalone FAQ Section Styling */
+  .ps-faq-section {
+    @apply py-24 bg-surface/50;
+  }
+
+  .ps-faq-cta {
+    @apply relative;
+  }
+
+  .ps-sticky-cta-card {
+    @apply sticky top-32 p-8 bg-brand-3 text-white rounded-[32px] shadow-lift overflow-hidden;
+  }
+
+  .ps-sticky-cta-card::before {
+    content: "";
+    @apply absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16;
+  }
+
+  .ps-cta-icon {
+    @apply w-12 h-12 bg-white/20 rounded-xl grid place-items-center mb-6;
+  }
+
+  .ps-sticky-cta-card h4 {
+    @apply text-[24px] text-white mb-4;
+  }
+
+  .ps-sticky-cta-card p {
+    @apply text-white/80 text-[15px] leading-relaxed mb-8;
+  }
+
+  /* Tab-specific formatting */
+  .ps-clinical-console h4 {
+    @apply text-[16px] font-black text-ink mt-8 mb-4 flex items-center gap-2;
+  }
+
+  /* 2-column grid for indications/features in tabs */
+  .ps-tab-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 my-6;
+  }
+
+  .ps-tab-grid-item {
+    @apply flex items-center gap-3 p-4 bg-paper rounded-xl border border-line transition-all hover:border-brand-line hover:bg-surface;
+  }
+
+  .ps-tab-grid-item i {
+    @apply text-brand w-4 h-4 flex-none;
+  }
+
+  .ps-tab-grid-item span {
+    @apply text-[14px] font-semibold text-ink;
+  }
+
+  /* Clinical Data Table in Tabs */
+  .ps-clinical-table {
+    @apply w-full border-collapse mb-6;
+  }
+
+  .ps-clinical-table th {
+    @apply text-left py-3 px-4 bg-surface text-brand font-black text-[11px] uppercase tracking-wider border-b-2 border-brand-line;
+  }
+
+  .ps-clinical-table td {
+    @apply py-4 px-4 text-[14px] text-muted border-b border-line;
+  }
+
+  .ps-clinical-table tr:hover td {
+    @apply bg-paper text-ink;
+  }
+
+  .ps-clinical-table td strong {
+    @apply text-ink;
+  }
 
   /* Sticky Sidebar */
-  .ps-sticky-sidebar { @apply sticky top-[100px] flex flex-col gap-6; }
-  .ps-widget-card { @apply bg-white rounded-3xl border border-line shadow-lift overflow-hidden; }
+  .ps-sticky-sidebar {
+    @apply sticky top-[100px] flex flex-col gap-6;
+  }
+
+  .ps-widget-card {
+    @apply bg-white rounded-3xl border border-line shadow-lift overflow-hidden;
+  }
 
   .widget-header {
     @apply bg-abyss p-8 flex flex-col items-center text-center gap-4 text-white relative overflow-hidden;
   }
+
   .widget-header::before {
-    content: ''; @apply absolute inset-0 opacity-10 pointer-events-none;
+    content: '';
+    @apply absolute inset-0 opacity-10 pointer-events-none;
     background-image: radial-gradient(circle at center, var(--color-brand-2) 0%, transparent 70%);
   }
+
   .widget-header [data-lucide] {
     @apply w-12 h-12 p-2.5 rounded-2xl bg-brand-2/20 text-brand-2 relative z-10;
   }
-  .widget-header h3 { @apply text-[20px] font-black m-0 relative z-10; }
 
-  .widget-body { @apply p-6; }
-  .widget-body p { @apply text-[14px] text-muted leading-relaxed mb-6; }
-  .widget-body strong { @apply text-ink; }
+  .widget-header h3 {
+    @apply text-[20px] font-black m-0 relative z-10;
+  }
 
-  .widget-benefits { @apply grid gap-4 list-none pl-0 mb-8; }
-  .widget-benefits li { @apply flex items-center gap-3 text-[13px] text-muted; }
-  .widget-benefits [data-lucide] { @apply w-5 h-5 text-brand flex-none; }
+  .widget-body {
+    @apply p-6;
+  }
+
+  .widget-body p {
+    @apply text-[14px] text-muted leading-relaxed mb-6;
+  }
+
+  .widget-body strong {
+    @apply text-ink;
+  }
+
+  .widget-benefits {
+    @apply grid gap-4 list-none pl-0 mb-8;
+  }
+
+  .widget-benefits li {
+    @apply flex items-center gap-3 text-[13px] text-muted;
+  }
+
+  .widget-benefits [data-lucide] {
+    @apply w-5 h-5 text-brand flex-none;
+  }
 
   .ps-widget-link {
     @apply flex items-center justify-between p-6 bg-abyss rounded-3xl border border-white/10 shadow-sm hover:border-brand-2 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 no-underline text-white;
   }
-  .ps-widget-link strong { @apply block text-[15px] font-black text-white mb-0.5; }
-  .ps-widget-link span { @apply block text-[12px] text-white/50; }
-  .ps-widget-link [data-lucide] { @apply w-6 h-6 text-brand-2; }
+
+  .ps-widget-link strong {
+    @apply block text-[15px] font-black text-white mb-0.5;
+  }
+
+  .ps-widget-link span {
+    @apply block text-[12px] text-white/50;
+  }
+
+  .ps-widget-link [data-lucide] {
+    @apply w-6 h-6 text-brand-2;
+  }
 
 }

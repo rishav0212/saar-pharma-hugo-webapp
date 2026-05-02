@@ -5,20 +5,6 @@
 */}}
 <div class="ps-gallery-col" data-animate="slide-right">
 
-  {{/* Category + cert pill bar */}}
-  <div class="ps-gallery-pill-row">
-    {{ if reflect.IsSlice .Params.categories }}
-      {{ range .Params.categories }}
-        <span class="ps-pill ps-pill--cat">{{ . }}</span>
-      {{ end }}
-    {{ else if .Params.category }}
-      <span class="ps-pill ps-pill--cat">{{ .Params.category }}</span>
-    {{ end }}
-    {{ with .Params.therapeutic_class }}
-      <span class="ps-pill ps-pill--cat">{{ . }}</span>
-    {{ end }}
-    <span class="ps-pill ps-pill--cert">WHO-GMP</span>
-  </div>
 
   {{/* Main image frame — click opens lightbox */}}
   <div class="ps-gallery-frame" id="ps-gallery-frame"
@@ -26,7 +12,7 @@
 
     <div class="ps-gallery-badges">
       <span class="ps-gal-badge ps-gal-badge--teal">{{ .Params.dosage_form | default .Params.category }}</span>
-      <span class="ps-gal-badge">{{ .Params.therapeutic_class | default "Pharmaceutical" }}</span>
+      <span class="ps-gal-badge">{{ if reflect.IsSlice .Params.therapeutic_class }}{{ delimit .Params.therapeutic_class " · " }}{{ else }}{{ .Params.therapeutic_class | default "Pharmaceutical" }}{{ end }}</span>
     </div>
 
     {{ if .Params.images }}

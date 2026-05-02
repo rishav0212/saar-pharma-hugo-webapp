@@ -5,7 +5,7 @@
      ────────────────────────────────────────────────────────────────────────── */
 
   .ps-premium-page {
-    @apply bg-[#F8FAFC] pb-24;
+    @apply bg-[#F8FAFC] pb-24 w-full;
   }
 
   /* ── BREADCRUMBS ── */

@@ -7,37 +7,51 @@ export function initTabs() {
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".tab-btn, .planner-tab");
     if (!btn) return;
-    
+
     const isPlanner = btn.classList.contains("planner-tab");
     const container = isPlanner ? btn.closest(".planner-shell") : btn.closest(".tab-block");
     const targetAttr = isPlanner ? "data-planner-tab" : "data-tab";
     const panelAttr = isPlanner ? "data-planner-panel" : "data-tab";
     const btnClass = isPlanner ? ".planner-tab" : ".tab-btn";
     const panelClass = isPlanner ? ".planner-panel" : ".tab-panel";
-    
+
     const target = btn.getAttribute(targetAttr);
     const btns = container.querySelectorAll(btnClass);
     const panels = container.querySelectorAll(panelClass);
-    
-    btns.forEach((b) => { 
-      b.classList.remove("is-active"); 
-      b.setAttribute("aria-selected", "false"); 
+
+    btns.forEach((b) => {
+      b.classList.remove("is-active");
+      b.setAttribute("aria-selected", "false");
     });
-    
-    panels.forEach((p) => { 
-      p.classList.remove("is-active"); 
-      p.setAttribute("hidden", ""); 
+
+    panels.forEach((p) => {
+      p.classList.remove("is-active");
+      p.setAttribute("hidden", "");
     });
-    
+
     btn.classList.add("is-active");
     btn.setAttribute("aria-selected", "true");
-    
+
     const panel = container.querySelector(`${panelClass}[${panelAttr}="${target}"]`);
     if (panel) {
       panel.classList.add("is-active");
       panel.removeAttribute("hidden");
       if (window.gsap) {
         window.gsap.fromTo(panel, { opacity: 0, x: 15 }, { opacity: 1, x: 0, duration: 0.4 });
+      }
+
+      // Smart Scroll: on tab switch, bring user back to the top of the lower section
+      // so they always see the new tab content from the beginning.
+      // Target ps-content-wrap (the full-width section) not ps-clinical-console (inner grid col).
+      if (!isPlanner) {
+        const consoleSection = container.closest(".ps-content-wrap") || container.closest(".ps-clinical-console") || container;
+        const sectionTop = consoleSection.getBoundingClientRect().top + window.scrollY;
+        const headerHeight = document.querySelector(".site-header")?.offsetHeight || 80;
+        const scrollTarget = sectionTop - headerHeight - 8; // 8px breathing room below sticky header
+
+        if (window.scrollY > scrollTarget + 60) {
+          window.scrollTo({ top: scrollTarget, behavior: "smooth" });
+        }
       }
     }
   });
@@ -56,7 +70,7 @@ export function initHeader() {
       header.classList.toggle("nav-active", open);
       document.body.classList.toggle("nav-open", open);
     };
-    
+
     menuToggle.addEventListener("click", () => setMenu(!mobileNav.classList.contains("open")));
     mobileNav.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => setMenu(false));
@@ -77,12 +91,12 @@ export function initProductScroll() {
     return card ? card.offsetWidth + 24 : 344;
   };
 
-  if (prevBtn) prevBtn.addEventListener('click', () => { 
-    track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' }); 
+  if (prevBtn) prevBtn.addEventListener('click', () => {
+    track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
   });
-  
-  if (nextBtn) nextBtn.addEventListener('click', () => { 
-    track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' }); 
+
+  if (nextBtn) nextBtn.addEventListener('click', () => {
+    track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
   });
 
   // Custom Draggable / Swipe Support
@@ -112,10 +126,10 @@ export function initProductScroll() {
 
   track.addEventListener('mousedown', startDragging);
   track.addEventListener('touchstart', startDragging, { passive: true });
-  
+
   window.addEventListener('mouseup', stopDragging);
   window.addEventListener('touchend', stopDragging);
-  
+
   track.addEventListener('mousemove', move);
   track.addEventListener('touchmove', move, { passive: false });
 }

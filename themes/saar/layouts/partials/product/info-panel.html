@@ -37,7 +37,7 @@
           <span class="ps-subtitle-name">{{ . }}</span> &middot;
         {{ end }}
         <span class="ps-subtitle-class">
-          {{ if reflect.IsSlice $tClass }}{{ delimit $tClass " &middot; " }}{{ else }}{{ $tClass }}{{ end }}
+          {{ if reflect.IsSlice $tClass }}{{ delimit $tClass ", " }}{{ else }}{{ $tClass }}{{ end }}
         </span>
       </p>
       {{ end }}
@@ -90,7 +90,7 @@
     <div class="ps-spec-panel" role="table" aria-label="Product specifications" itemprop="description">
       <div class="ps-spec-panel__head">
         <i data-lucide="clipboard-list"></i>
-        Product Data Sheet
+        <span>Product Data Sheet</span>
       </div>
       <div class="ps-spec-grid" role="rowgroup">
 
@@ -100,7 +100,7 @@
           <div class="ps-spec-item__icon ps-spec-item__icon--blue" role="cell"><i data-lucide="layers"></i></div>
           <div class="ps-spec-item__text">
             <span class="ps-spec-item__key">Segments & Ranges</span>
-            <span class="ps-spec-item__val">{{ delimit . " &middot; " }}</span>
+            <span class="ps-spec-item__val">{{ delimit . " / " }}</span>
           </div>
         </div>
         {{ end }}
@@ -121,7 +121,7 @@
         <div class="ps-spec-item" role="row">
           <div class="ps-spec-item__icon ps-spec-item__icon--purple" role="cell"><i data-lucide="activity"></i></div>
           <div class="ps-spec-item__text">
-            <span class="ps-spec-item__key">Pharmacological Class</span>
+            <span class="ps-spec-item__key">Pharma Class</span>
             <span class="ps-spec-item__val">
               {{ if reflect.IsSlice . }}{{ delimit . " / " }}{{ else }}{{ . }}{{ end }}
             </span>
@@ -134,7 +134,7 @@
         <div class="ps-spec-item" role="row">
           <div class="ps-spec-item__icon ps-spec-item__icon--orange" role="cell"><i data-lucide="package"></i></div>
           <div class="ps-spec-item__text">
-            <span class="ps-spec-item__key">Available Packing</span>
+            <span class="ps-spec-item__key">Pack Sizes</span>
             <span class="ps-spec-item__val">
               {{ if reflect.IsSlice . }}{{ delimit . " / " }}
               {{ else }}{{ . }}{{ end }}
@@ -217,9 +217,10 @@
           <i data-lucide="message-circle" class="icon--sm"></i>
           WhatsApp
         </a>
+        {{/* Right-arrow: intuitive for a 'Browse' / forward navigation action */}}
         <a href="/products/" class="btn btn--outline !rounded-xl !min-h-[48px]">
-          <i data-lucide="arrow-left" class="icon--sm"></i>
           Browse All
+          <i data-lucide="arrow-right" class="icon--sm"></i>
         </a>
       </div>
     </div>

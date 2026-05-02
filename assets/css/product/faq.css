@@ -1,0 +1,72 @@
+@layer components {
+
+  /* ──────────────────────────────────────────────────────────────────────────
+     PRODUCT SINGLE — FAQ SECTION (Clinical & B2B)
+     ────────────────────────────────────────────────────────────────────────── */
+
+  .ps-faq-section {
+    @apply mt-16 pt-16 border-t border-line;
+  }
+
+  .ps-faq-grid {
+    @apply grid grid-cols-1 gap-12 lg:gap-16;
+  }
+
+  /* Single FAQ Item Styling */
+  .ps-faq-item {
+    @apply transition-all duration-300;
+  }
+
+  .ps-faq-item h3, .ps-faq-item h5 {
+    @apply font-display font-black text-ink mb-2.5 leading-tight;
+  }
+
+  .ps-faq-item p {
+    @apply text-muted leading-relaxed m-0;
+  }
+
+  /* Clinical FAQ Item (White bg or transparent) */
+  .ps-faq-item--clinical {
+    @apply mb-8;
+  }
+
+  /* Global/B2B FAQ Box */
+  .ps-faq-global {
+    @apply p-8 lg:p-10 rounded-3xl border border-brand-line bg-surface-2 relative overflow-hidden;
+    box-shadow: 0 20px 48px -12px rgba(21, 159, 145, 0.12);
+  }
+
+  /* Subtle background pattern for B2B box */
+  .ps-faq-global::before {
+    content: '';
+    @apply absolute inset-0 opacity-[0.03] pointer-events-none;
+    background-image: radial-gradient(var(--color-brand) 0.5px, transparent 0.5px);
+    background-size: 16px 16px;
+  }
+
+  .ps-faq-global h4 {
+    @apply relative z-10;
+  }
+
+  .ps-faq-global .ps-faq-item {
+    @apply relative z-10;
+  }
+
+  /* Grid for FAQs if needed */
+  @media (min-width: 1024px) {
+    .ps-faq-grid {
+      grid-template-columns: 1fr; /* Stacked by default, can be 2-col if requested */
+    }
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 767px) {
+    .ps-faq-section {
+      @apply mt-10 pt-10;
+    }
+    .ps-faq-global {
+      @apply p-6;
+    }
+  }
+
+}

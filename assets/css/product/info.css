@@ -10,7 +10,7 @@
   }
 
   .ps-info-sticky {
-    @apply flex flex-col gap-5;
+    @apply flex flex-col gap-4;
   }
 
   @media (min-width: 1024px) {
@@ -67,12 +67,17 @@
     @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider border transition-all duration-300 bg-white;
   }
 
+  /* Icon inherits the parent element's text color — do NOT force text-brand here */
   .ps-hbadge [data-lucide] {
-    @apply w-4 h-4 flex-shrink-0 text-brand;
+    @apply w-3.5 h-3.5 flex-shrink-0;
   }
 
+  .ps-hbadge--green { @apply text-emerald-700 border-emerald-100 bg-emerald-50; }
+  .ps-hbadge--teal  { @apply text-brand-3 border-brand-line bg-brand/5; }
+  .ps-hbadge--muted { @apply text-muted border-line bg-surface; }
+
   .ps-hbadge:hover {
-    @apply -translate-y-0.5 shadow-sm border-brand-line;
+    @apply -translate-y-0.5 shadow-sm;
   }
 
   /* ── 2. ELITE AUTHORITY STRIP (DASHBOARD STYLE) ─────────── */
@@ -95,12 +100,13 @@
   }
 
   .ps-authority-num {
-    @apply font-display font-black text-[22px] lg:text-[28px] leading-none text-brand-2;
+    @apply font-display font-black text-[22px] lg:text-[26px] leading-none text-brand-2;
     text-shadow: 0 4px 12px rgba(100, 212, 197, 0.3);
   }
 
   .ps-authority-label {
-    @apply text-[9px] font-black text-white/50 text-center uppercase tracking-[0.15em] mt-2.5 leading-none;
+    /* Bumped from 9px — more readable without being bulky */
+    @apply text-[10px] font-bold text-white/60 text-center uppercase tracking-[0.12em] mt-2 leading-none;
   }
 
   /* ── 3. COMPOSITION CARD (TECHNICAL LOOK) ───────────────── */
@@ -129,7 +135,7 @@
   }
 
   .ps-spec-panel__head {
-    @apply flex items-center justify-between px-6 py-4 text-[11px] font-black uppercase tracking-[0.2em] text-ink bg-surface border-b border-line;
+    @apply flex items-center gap-2 px-6 py-4 text-[11px] font-black uppercase tracking-[0.2em] text-ink bg-surface border-b border-line;
   }
 
   .ps-spec-panel__head [data-lucide] {
@@ -165,7 +171,8 @@
   }
 
   .ps-spec-item__val {
-    @apply text-[13.5px] font-black text-ink leading-tight truncate;
+    /* Remove truncate — allow wrapping so values like 'WHO-GMP / ISO 9001:2015' show fully */
+    @apply text-[13px] font-bold text-ink leading-snug;
   }
 
   /* Special full-width footer area of spec panel */
@@ -191,8 +198,8 @@
   }
 
   .ps-value-strip__item {
-    @apply flex items-center gap-3 px-4 py-3.5 rounded-2xl text-[12px] font-black transition-all duration-300 bg-white border border-line text-ink;
-    box-shadow: 0 4px 12px rgba(16, 42, 67, 0.04);
+    @apply flex items-center gap-2.5 px-4 py-4 rounded-xl text-[11.5px] font-bold transition-all duration-300 bg-white border border-line text-ink;
+    box-shadow: 0 2px 8px rgba(16, 42, 67, 0.04);
   }
 
   .ps-value-strip__item:hover {
@@ -268,15 +275,24 @@
 
   /* ── 7. CERTIFICATION PILLS ─────────────────────────────── */
   .ps-cert-strip {
-    @apply flex flex-wrap gap-2 pt-5 border-t border-line;
+    @apply flex flex-wrap gap-1.5 pt-4 border-t border-line;
   }
 
   .ps-cert-pill {
-    @apply inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 bg-surface border border-brand-line text-brand-3;
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-200 bg-surface border border-line text-muted;
+  }
+
+  .ps-cert-pill::before {
+    content: '✓';
+    @apply text-brand font-black text-[10px];
   }
 
   .ps-cert-pill:hover {
     @apply bg-brand text-white border-transparent -translate-y-0.5 shadow-sm;
+  }
+
+  .ps-cert-pill:hover::before {
+    @apply text-white;
   }
 
 }
