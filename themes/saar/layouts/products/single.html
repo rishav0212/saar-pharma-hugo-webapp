@@ -1,212 +1,234 @@
+
 {{ define "main" }}
 
-<main class="product-single-page bg-white">
-    <!-- Clean Clinical Header -->
-    <header class="pt-[140px] pb-16 bg-paper border-b border-line">
-        <div class="container">
-            <!-- Subtle Breadcrumb -->
-            <nav class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted mb-8" data-animate="fade-in">
-                <a href="/" class="hover:text-brand transition-colors">Home</a>
-                <i data-lucide="chevron-right" class="w-3 h-3 opacity-30"></i>
-                <a href="/products/" class="hover:text-brand transition-colors">Products</a>
-                <i data-lucide="chevron-right" class="w-3 h-3 opacity-30"></i>
-                <span class="text-ink">{{ .Title }}</span>
-            </nav>
+<article class="ps-premium-page" itemscope itemtype="https://schema.org/Drug">
 
-            <div class="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-24 items-start">
-                <div data-animate="slide-right">
-                    <div class="flex items-center gap-3 mb-6">
-                        <span class="px-3 py-1 bg-brand/5 text-brand text-[10px] font-black uppercase tracking-widest rounded-md border border-brand/10">
-                            {{ .Params.dosage_form }}
-                        </span>
-                        <span class="px-3 py-1 bg-ink/5 text-ink text-[10px] font-black uppercase tracking-widest rounded-md border border-ink/10">
-                            {{ .Params.therapeutic_area }}
-                        </span>
-                    </div>
-
-                    <h1 class="text-4xl md:text-5xl font-display font-black text-ink mb-4 leading-tight">
-                        {{ .Title }}
-                    </h1>
-                    <div class="flex items-center gap-4 mb-8">
-                        <div class="w-12 h-[2px] bg-brand"></div>
-                        <p class="text-xl text-brand font-bold tracking-tight">{{ .Params.composition }}</p>
-                    </div>
-
-                    <div class="prose prose-lg text-muted leading-relaxed mb-10 max-w-2xl">
-                        {{ .Summary | default .Description }}
-                    </div>
-
-                    <!-- Marketing USPs (Clean Style) -->
-                    <div class="flex flex-wrap gap-3 mb-12">
-                        {{ range .Params.usp }}
-                        <div class="flex items-center gap-2 px-4 py-2 bg-white border border-line rounded-lg text-[11px] font-bold text-ink shadow-sm">
-                            <i data-lucide="shield-check" class="w-4 h-4 text-brand"></i>
-                            {{ . }}
-                        </div>
-                        {{ end }}
-                    </div>
-
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="btn btn--primary px-10 h-14" data-enquire-trigger data-product-name="{{ .Title }}">
-                            Request Quote
-                            <i data-lucide="send" class="w-4 h-4 ml-2"></i>
-                        </a>
-                        <button class="btn btn--outline h-14 px-8" onclick="window.print()">
-                            <i data-lucide="printer" class="w-4 h-4 mr-3"></i>
-                            Print Specs
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Technical Specification Card (Clinical Style) -->
-                <aside class="bg-white border border-line rounded-[32px] p-8 shadow-soft sticky top-[100px]" data-animate="slide-left">
-                    <h2 class="flex items-center gap-3 text-[12px] font-black uppercase tracking-[0.1em] text-ink mb-8 pb-4 border-b border-line">
-                        <i data-lucide="activity" class="text-brand w-5 h-5"></i>
-                        Product Specifications
-                    </h2>
-                    
-                    <div class="space-y-6">
-                        <div class="group">
-                            <div class="text-[10px] font-black uppercase tracking-widest text-muted mb-1 transition-colors group-hover:text-brand">Approved Name</div>
-                            <div class="text-[15px] font-bold text-ink leading-tight">{{ .Params.approved_name }}</div>
-                        </div>
-                        <div class="pt-4 border-t border-dashed border-line">
-                            <div class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Presentation</div>
-                            <div class="text-[15px] font-bold text-ink">{{ .Params.presentation }}</div>
-                        </div>
-                        <div class="pt-4 border-t border-dashed border-line">
-                            <div class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Pack Sizes</div>
-                            <div class="text-[15px] font-bold text-ink">{{ delimit .Params.pack_sizes ", " }}</div>
-                        </div>
-                        <div class="pt-4 border-t border-dashed border-line">
-                            <div class="text-[10px] font-black uppercase tracking-widest text-muted mb-1">Manufacturing Unit</div>
-                            <div class="text-[15px] font-bold text-ink">{{ .Params.manufacturing_unit }}</div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 pt-8 border-t border-line">
-                         <div class="p-4 bg-surface rounded-2xl flex items-center gap-4">
-                             <div class="w-10 h-10 bg-brand text-white rounded-full flex items-center justify-center flex-shrink-0">
-                                 <i data-lucide="factory" class="w-5 h-5"></i>
-                             </div>
-                             <div>
-                                 <div class="text-[10px] font-black uppercase tracking-widest text-brand mb-0.5">Capacity</div>
-                                 <div class="text-xs font-bold text-ink">{{ .Params.capacity }}</div>
-                             </div>
-                         </div>
-                    </div>
-                </aside>
-            </div>
-        </div>
-    </header>
-
-    <!-- Content & Tabs Section -->
-    <section class="py-20">
-        <div class="container">
-            <div class="max-w-4xl">
-                <nav class="flex gap-10 border-b-2 border-line mb-12 overflow-x-auto" role="tablist">
-                    <button class="relative py-6 text-[12px] font-black uppercase tracking-widest text-muted hover:text-brand transition-all product-tab-btn active" data-tab="overview">Description</button>
-                    <button class="relative py-6 text-[12px] font-black uppercase tracking-widest text-muted hover:text-brand transition-all product-tab-btn" data-tab="technical">Technical Data</button>
-                    <button class="relative py-6 text-[12px] font-black uppercase tracking-widest text-muted hover:text-brand transition-all product-tab-btn" data-tab="safety">Safety Information</button>
-                </nav>
-
-                <div class="product-content min-h-[400px]">
-                    <div id="tab-overview" class="product-tab-pane active prose prose-lg max-w-none">
-                        {{ .Content }}
-                    </div>
-                    
-                    <div id="tab-technical" class="product-tab-pane">
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div class="p-8 bg-paper border border-line rounded-3xl">
-                                <h3 class="text-xl font-bold text-ink mb-4">Mechanism</h3>
-                                <p class="text-muted text-sm">Detailed pharmacological pathway for this composition.</p>
-                            </div>
-                            <div class="p-8 bg-paper border border-line rounded-3xl">
-                                <h3 class="text-xl font-bold text-ink mb-4">Pharmacokinetics</h3>
-                                <p class="text-muted text-sm">Absorption, distribution, and elimination profile.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="tab-safety" class="product-tab-pane">
-                         <div class="p-8 border-l-4 border-brand bg-surface rounded-r-3xl">
-                             <h3 class="text-xl font-bold text-ink mb-4">Storage & Safety</h3>
-                             <p class="text-muted text-sm">Store in a cool, dry place. Refer to master dosage chart for protocols.</p>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    {{ if .Params.faqs }}
-    <section class="py-24 bg-paper border-t border-line">
-        <div class="container">
-            <div class="max-w-3xl mx-auto">
-                <h2 class="text-3xl font-display font-black text-ink mb-12 text-center">Frequently Asked Questions</h2>
-                <div class="space-y-4">
-                    {{ range $faq := .Params.faqs }}
-                    <div class="faq-item bg-white border border-line rounded-2xl overflow-hidden transition-all duration-300">
-                        <button class="faq-question w-full flex items-center justify-between p-6 text-left text-[15px] font-bold text-ink">
-                            <span>{{ $faq.q }}</span>
-                            <i data-lucide="plus" class="icon-chevron w-5 h-5 text-brand transition-transform"></i>
-                        </button>
-                        <div class="faq-answer px-6 pb-6 text-[14px] text-muted leading-relaxed hidden">
-                            {{ $faq.a }}
-                        </div>
-                    </div>
-                    {{ end }}
-                </div>
-            </div>
-        </div>
-    </section>
+  {{/* ── JSON-LD SCHEMA (Maximum SEO Priority) ───────────────────────────── */}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Drug",
+    "name": "{{ .Title }}",
+    "description": "{{ .Description | default .Summary }}",
+    "activeIngredient": "{{ .Params.composition }}",
+    "dosageForm": "{{ .Params.category }}",
+    "administrationRoute": "Oral",
+    "availableStrength": "{{ .Params.presentation }}",
+    {{ with .Params.images }}
+    "image": "{{ index . 0 | absURL }}",
     {{ end }}
-</main>
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Saar Biotech Pvt. Ltd.",
+      "url": "{{ .Site.BaseURL }}"
+    }
+  }
+  </script>
+
+  {{/* ── 1. BREADCRUMBS ─────────────────────────────────────────────────── */}}
+  <div class="ps-breadcrumb-bar">
+    <div class="container">
+      <nav class="ps-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <i data-lucide="chevron-right"></i>
+        <a href="/products/">Products</a>
+        <i data-lucide="chevron-right"></i>
+        <span class="current">{{ .Params.product_name | default .Title }}</span>
+      </nav>
+    </div>
+  </div>
+
+
+  {{/* ── 2. PRODUCT CONTENT AREA ────────────────────────────────────────── */}}
+  <section class="ps-content-section">
+    <div class="container">
+      
+      {{/* Integrated Product Info (Top Row) */}}
+      <div class="ps-hero-grid mb-16 lg:mb-24" data-animate="fade-up">
+        
+        {{/* LEFT: Image Gallery */}}
+        <div class="ps-hero-gallery">
+          {{ if .Params.images }}
+            <div class="swiper ps-main-swiper">
+              <div class="swiper-wrapper">
+                {{ range .Params.images }}
+                <div class="swiper-slide">
+                  <img src="/images/products/{{ . }}" alt="{{ $.Title }}" loading="eager">
+                </div>
+                {{ end }}
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            
+            {{ if gt (len .Params.images) 1 }}
+            <div class="swiper ps-thumb-swiper">
+              <div class="swiper-wrapper">
+                {{ range .Params.images }}
+                <div class="swiper-slide">
+                  <img src="/images/products/{{ . }}" alt="{{ $.Title }} thumbnail" loading="lazy">
+                </div>
+                {{ end }}
+              </div>
+            </div>
+            {{ end }}
+          {{ else }}
+            <div class="ps-no-image">
+              <i data-lucide="flask-conical"></i>
+              <p>Image Unavailable</p>
+            </div>
+          {{ end }}
+        </div>
+
+        {{/* RIGHT: Product Data */}}
+        <div class="ps-hero-data">
+          <div class="ps-badges">
+            {{ with .Params.category }}
+            <span class="badge-solid">{{ . }}</span>
+            {{ end }}
+            <span class="badge-outline">
+              <i data-lucide="shield-check"></i> WHO-GMP
+            </span>
+          </div>
+
+          <h1 class="ps-title" itemprop="name">{{ .Title }}</h1>
+          
+          {{ with .Params.approved_name }}
+          <p class="ps-approved-name">Approved Name: <strong>{{ . }}</strong></p>
+          {{ end }}
+
+          <div class="ps-composition-box" itemprop="activeIngredient">
+            <span class="comp-label">Composition</span>
+            <h3 class="comp-value">{{ .Params.composition }}</h3>
+            {{ with .Params.presentation }}
+            <p class="comp-presentation">{{ . }}</p>
+            {{ end }}
+          </div>
+
+          <div class="ps-quick-specs">
+            <div class="spec-item">
+              <i data-lucide="activity"></i>
+              <div>
+                <span class="spec-title">Therapeutic Class</span>
+                <span class="spec-data">{{ .Params.therapeutic_class }}</span>
+              </div>
+            </div>
+            <div class="spec-item">
+              <i data-lucide="factory"></i>
+              <div>
+                <span class="spec-title">Manufacturing</span>
+                <span class="spec-data">Third-Party / Contract</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ps-hero-actions">
+            <button class="btn btn-primary btn-large w-full" data-enquire-trigger data-product-name="{{ .Title }}">
+              <i data-lucide="mail"></i> Request Manufacturing Quote
+            </button>
+            <a href="https://wa.me/{{ .Site.Params.whatsapp }}" target="_blank" class="btn btn-whatsapp btn-large w-full">
+              <i data-lucide="message-circle"></i> Connect on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {{/* Bottom Row: Content & Sidebar */}}
+      <div class="ps-content-grid">
+        
+        {{/* LEFT: Markdown Content (Automatically styled via CSS) */}}
+        {{/* Why: Rendering raw markdown ensures Google parses H2s, H3s, and lists perfectly for SEO Featured Snippets. */}}
+        <main class="ps-markdown-content" id="main-product-content">
+          {{ .Content }}
+        </main>
+
+        {{/* RIGHT: Sticky Manufacturing Authority Widget */}}
+        <aside class="ps-sticky-sidebar">
+          <div class="ps-widget-card">
+            <div class="widget-header">
+              <i data-lucide="factory"></i>
+              <h3>Contract Manufacturing</h3>
+            </div>
+            <div class="widget-body">
+              <p>Looking to manufacture <strong>{{ .Params.product_name | default "this formulation" }}</strong> under your own brand name?</p>
+              
+              <ul class="widget-benefits">
+                <li>
+                  <i data-lucide="check-circle-2"></i>
+                  <span><strong>WHO-GMP & ISO</strong> Certified Facility</span>
+                </li>
+                <li>
+                  <i data-lucide="check-circle-2"></i>
+                  <span><strong>GLP Tested</strong> in Agilent equipped labs</span>
+                </li>
+                <li>
+                  <i data-lucide="check-circle-2"></i>
+                  <span><strong>DCGI Approved</strong> formulations</span>
+                </li>
+                <li>
+                  <i data-lucide="check-circle-2"></i>
+                  <span>Complete <strong>Dossier Support</strong></span>
+                </li>
+              </ul>
+
+              <button class="btn btn-primary w-full" data-enquire-trigger data-product-name="{{ .Title }}">
+                Get a Quote Today
+              </button>
+            </div>
+          </div>
+
+          {{/* Related Categories Link */}}
+          <a href="/products/" class="ps-widget-link">
+            <div>
+              <strong>Browse Full Portfolio</strong>
+              <span>View all 240+ formulations</span>
+            </div>
+            <i data-lucide="arrow-right"></i>
+          </a>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+</article>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Tab Switching
-    const tabBtns = document.querySelectorAll('.product-tab-btn');
-    const tabPanes = document.querySelectorAll('.product-tab-pane');
-
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const tabId = btn.getAttribute('data-tab');
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabPanes.forEach(p => p.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById(`tab-${tabId}`).classList.add('active');
-        });
+  // Initialize Swiper if the gallery exists on the page
+  if(document.querySelector('.ps-main-swiper')) {
+    
+    // Check if thumbnail swiper exists (multiple images)
+    const thumbEl = document.querySelector('.ps-thumb-swiper');
+    let thumbSwiper = null;
+    
+    if (thumbEl) {
+      thumbSwiper = new Swiper('.ps-thumb-swiper', {
+        spaceBetween: 10,
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesProgress: true,
+      });
+    }
+    
+    // Main image swiper
+    new Swiper('.ps-main-swiper', {
+      spaceBetween: 10,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      thumbs: {
+        swiper: thumbSwiper
+      },
+      // Smooth fade effect for premium feel
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true
+      }
     });
-
-    // Accordion
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const btn = item.querySelector('.faq-question');
-        btn.addEventListener('click', () => {
-            item.classList.toggle('active');
-        });
-    });
+  }
 });
 </script>
-
-<style>
-.product-tab-btn.active { color: var(--color-brand); }
-.product-tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--color-brand);
-}
-.product-tab-pane { display: none; }
-.product-tab-pane.active { display: block; animation: fadeIn 0.4s ease; }
-.faq-item.active .faq-answer { display: block; }
-.faq-item.active .icon-chevron { transform: rotate(45deg); color: var(--color-brand); }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-</style>
-
 {{ end }}

@@ -1,68 +1,65 @@
 ---
-title: "Azithromycin Oral Suspension"
-description: "Leading WHO-GMP Azithromycin Oral Suspension manufacturer in Baddi. We offer specialized third-party manufacturing for pediatric antibiotics with 100mg/200mg compositions."
-keywords: ["Azithromycin suspension manufacturer", "WHO-GMP Azithromycin Baddi", "Pediatric Antibiotic manufacturer", "Third party pharma manufacturing", "Azithromycin 200mg suspension", "Baddi pharma unit", "Saar Biotech products"]
-type: "products"
-layout: "single"
+# 1. SEO & METADATA
+title: "Azithromycin Suspension 100mg/200mg | Top Manufacturer"
+meta_title: "Azithromycin Suspension Manufacturer & Supplier in Baddi | SAAR Biotech"
+slug: "azithromycin-oral-suspension"
+meta_description: "SAAR Biotech is a WHO-GMP certified manufacturer of Azithromycin Dihydrate Suspension. Get high-quality third-party manufacturing services for antibiotics."
+keywords: ["Azithromycin Suspension", "Third Party Manufacturing", "Pharma Manufacturer in Baddi", "Antibiotic Suspension", "Azithromycin 200mg"]
 
-# Technical Metadata (SEO-Friendly)
-url: "/products/azithromycin-oral-suspension/"
-composition: "Azithromycin Dihydrate"
-dosage_form: "Oral Suspension"
-approved_name: "Azithromycin Dihydrate IP/BP/USP"
-therapeutic_area: "Antibiotic / Antibacterial"
-presentation: "Each 5ml contains: Eq. to Azithromycin 100mg or 200mg"
-pack_sizes: ["15ml with Dropper", "30ml with Measuring Cup"]
-categories: ["Suspensions", "Pediatric Range", "Antibiotics"]
-icon: "flask-conical"
+# 2. PRODUCT DATA (For UI and JSON-LD Schema)
+product_name: "Azithromycin"
+approved_name: "Azithromycin Dihydrate"
+category: "Suspensions"
+therapeutic_class: "Antibiotic / Antibacterial"
+presentation: "Each 5 ml contains: Eq to Azithromycin 100mg/200mg"
 
-# Marketing & Authority Signals
-usp:
-  - "DCGI Approved Formulation"
-  - "Advanced Stability Tested (24 Months)"
-  - "Premium Amber Glass/HDPE Packaging"
-  - "Ready-to-Ship for Global Brands"
-
-# Manufacturing Capacity (Baddi Unit)
-manufacturing_unit: "Saar Biotech Unit I (Liquid)"
-capacity: "High-volume automated filling lines"
-
-# Visuals
-image: "/images/products/azithromycin1.jpg"
-
-# FAQs for Search Ranking
-faqs:
-  - q: "What is the typical shelf life of Azithromycin Oral Suspension?"
-    a: "Our formulation is stabilized for a shelf life of 24 months when stored in a cool, dry place. We provide complete stability data for third-party registrations."
-  - q: "Do you provide customized packaging for pediatric brands?"
-    a: "Yes, we offer multiple packaging options including Amber Glass bottles for maximum stability and HDPE bottles with child-resistant caps and precision droppers."
-  - q: "Is this composition DCGI approved for the Indian market?"
-    a: "Yes, our Azithromycin Dihydrate suspension is fully DCGI approved and manufactured in our WHO-GMP certified facility in Baddi."
+# 3. IMAGE GALLERY
+# Just drop the image names here, and our Hugo template will build the slider automatically!
+images:
+  - "azithromycin.webp"
+  - "azithromycin-premium.png"
 ---
 
-## Market Overview
-Azithromycin remains one of the most trusted macrolide antibiotics globally. For pharmaceutical marketing companies and distributors, our **Azithromycin Oral Suspension** offers a high-performance product that combines clinical efficacy with superior taste masking—a critical factor for pediatric patient compliance.
+## Description
+Azithromycin is a premium macrolide antibiotic used to treat or prevent certain bacterial infections, most often those causing middle ear infections, strep throat, pneumonia, typhoid, and bronchitis. 
 
-## Clinical Indications
-As a versatile antibacterial agent, this suspension is indicated for:
-- **Pediatric Infections**: Otitis Media and Pharyngitis.
-- **Respiratory Health**: Acute bacterial exacerbations of COPD and pneumonia.
-- **Dermatological Care**: Uncomplicated skin and skin structure infections.
-- **Urogenital Care**: Effective against non-gonococcal urethritis and cervicitis.
+It boasts superior activity against **gram-positive** and **gram-negative** organisms. It effectively prevents bacteria from growing by interfering with their protein synthesis, ensuring rapid recovery.
 
-## Why Partner with Saar Biotech for Azithromycin?
-When you choose Saar Biotech for your third-party manufacturing needs, you benefit from:
-1. **Analytical Excellence**: Every batch is tested in our GLP-certified labs equipped with Agilent HPLC systems.
-2. **Timely Delivery**: Our Baddi facility is optimized for high-volume output, ensuring your marketing brand never faces a stock-out.
-3. **Documentation Support**: We provide COA, Batch Records, and all regulatory dossiers required for domestic and international markets.
+## Key Indications
+Our Azithromycin suspension is highly prescribed for the following conditions:
+* **Otitis Media:** Effective treatment for middle ear infections.
+* **Upper Respiratory Tract Infection:** Clears infections in the throat and airways.
+* **Pneumonia & Bronchitis:** Targets severe lung and respiratory conditions.
+* **Pharyngitis & Sinusitis:** Rapid relief from sinus and throat inflammation.
+* **Skin or Soft Tissue Infection:** Eradicates bacterial skin conditions.
+* **Gonococcal Infection:** Used for uncomplicated cases.
 
 ## Mechanism of Action
-Azithromycin binds to the **50S subunit of the 70S bacterial ribosomes**, inhibiting RNA-dependent protein synthesis. This halts bacterial replication without affecting the human host's cells, making it a safe and effective therapeutic choice.
+Azithromycin binds strictly to the **50S subunit of the 70S bacterial ribosomes**. By doing so, it successfully inhibits RNA-dependent protein synthesis in bacterial cells, stopping the infection from spreading.
 
 ## Pharmacokinetics
-- **Absorption**: Rapid distribution with 37% bioavailability.
-- **Half-Life**: Long terminal elimination half-life of 2-4 days allows for convenient once-daily dosing.
-- **Biliary Excretion**: Primary route of elimination for the parent drug.
+* **Absorption:** Following oral administration, azithromycin is widely distributed throughout the body with a bioavailability of approximately 37%. Peak plasma levels are reached within 2-3 hours.
+* **Distribution:** Pharmacokinetic studies show markedly higher azithromycin levels in tissue than in plasma (up to 50 times the maximum observed concentration), indicating that the drug is heavily tissue-bound. Concentrations in target tissues exceed the MIC90 for likely pathogens after a single dose.
+* **Elimination:** Biliary excretion is a major route of elimination for unchanged drugs following oral administration. The plasma terminal elimination half-life closely reflects the tissue depletion half-life of 2 to 4 days.
 
-## Precautions & Safety
-While Azithromycin is highly safe, it should be used with caution in patients with hepatic impairment. It is contraindicated in individuals with a history of cholestatic jaundice or hepatic dysfunction associated with prior azithromycin use.
+## Potential Side Effects
+While generally well-tolerated, some common side effects may include:
+* Abdominal pain and cramping
+* Mild skin rash
+* Headaches or dizziness
+* Nausea or vomiting
+
+## Contraindications
+The use of azithromycin is strictly contraindicated in patients with a known hypersensitivity to azithromycin, erythromycin, or any macrolide or ketolide antibiotic.
+
+## Why Choose SAAR Biotech for Manufacturing?
+From the clinical data, it is concluded that Azithromycin is a highly effective macrolide antibiotic for respiratory, skin, and ear infections. 
+
+**SAAR Biotech** manufactures superior quality Azithromycin Suspensions using high-grade active pharmaceutical ingredients (APIs). As a **WHO-GMP certified** facility in Baddi, our experienced quality controllers ensure pure, accurate, and stable compositions. Highly treasured among our B2B clients for reliability, this suspension is offered for third-party contract manufacturing at market-leading prices.
+
+## Frequently Asked Questions (FAQ)
+**What is Azithromycin suspension used for?**
+It is primarily used to treat bacterial infections such as respiratory tract infections, ear infections, and skin infections in both adults and children.
+
+**Is SAAR Biotech WHO-GMP certified?**
+Yes, SAAR Biotech operates a state-of-the-art, WHO-GMP certified manufacturing facility in Baddi, ensuring all products meet strict international quality standards.

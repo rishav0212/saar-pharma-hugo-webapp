@@ -1,6 +1,8 @@
 {{ $safeCats := slice }}
-{{ range .Params.categories }}
-    {{ $safeCats = $safeCats | append (. | urlize) }}
+{{ with .Params.categories }}
+    {{ range . }}
+        {{ $safeCats = $safeCats | append (. | urlize) }}
+    {{ end }}
 {{ end }}
 
 <article class="product-card product-card-wrap h-full group"
@@ -9,8 +11,8 @@
     data-composition="{{ .Params.composition | lower }}"
     data-area="{{ .Params.therapeutic_area | default "" | lower }}"
     data-desc="{{ .Description | default .Summary | lower }}"
-    data-categories="{{ delimit .Params.categories " " | lower }}"
-    data-packs="{{ delimit .Params.pack_sizes " " | lower }}">
+    data-categories="{{ with .Params.categories }}{{ delimit . " " | lower }}{{ end }}"
+    data-packs="{{ with .Params.pack_sizes }}{{ delimit . " " | lower }}{{ end }}">
     
     <!-- Main Overlay Link -->
     <a href="{{ .RelPermalink }}" class="absolute inset-0 z-10" aria-label="View {{ .Title }} details"></a>
@@ -78,7 +80,7 @@
                aria-label="Enquire about {{ .Title }}"
                data-enquire-trigger
                data-product-name="{{ .Title }}"
-               data-category="{{ index .Params.categories 0 | default "" }}">
+               data-category="{{ with .Params.categories }}{{ index . 0 }}{{ else }}{{ .Params.category | default "" }}{{ end }}">
                 <i data-lucide="mail" class="w-5 h-5"></i>
             </a>
         </div>

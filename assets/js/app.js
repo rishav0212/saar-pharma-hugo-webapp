@@ -8,6 +8,7 @@ import { initAnimations, initCounters, initHeroCanvas } from './modules/animatio
 import { initSearch } from './modules/search';
 import { initProducts } from './modules/products';
 import { initEnquiryModal } from './modules/modal';
+import { initGallery } from './modules/gallery';
 
 function safeInit(name, fn) {
   try { 
@@ -54,6 +55,7 @@ const initAll = () => {
   safeInit("Search", initSearch);
   safeInit("Products", initProducts);
   safeInit("EnquiryModal", initEnquiryModal);
+  safeInit("Gallery", initGallery);
 };
 
 if (document.readyState === "loading") {

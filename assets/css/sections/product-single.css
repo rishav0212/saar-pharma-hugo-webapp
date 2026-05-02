@@ -1,101 +1,294 @@
+
+
+
+
 @layer components {
-  /* ─────────────────────────────────────────────────
-     Product Single Elite — Design System Compliant
-     ───────────────────────────────────────────────── */
 
-  .product-hero-elite {
-    @apply min-h-0 py-24 md:py-32;
-    background: radial-gradient(circle at 100% 0%, var(--color-brand-3) 0%, transparent 40%),
-                linear-gradient(140deg, var(--color-abyss) 0%, var(--color-ink) 52%, var(--color-ink-2) 100%);
+  /* ── GLOBALS & LAYOUT ── */
+  .ps-premium-page {
+    @apply bg-[#F8FAFC] pb-24; /* Very soft, premium off-white background */
   }
 
-  /* ─── Immersive Floating Assets ─── */
-  .product-hero-elite .molecule-ring {
-    @apply border-brand-2/10;
+  /* ── BREADCRUMBS ── */
+  .ps-breadcrumb-bar {
+    @apply relative z-20 border-b border-line py-3.5 bg-white;
+  }
+  .ps-breadcrumbs {
+    @apply flex items-center gap-2.5 text-[12px] font-bold text-muted flex-wrap;
+  }
+  .ps-breadcrumbs a {
+    @apply hover:text-brand transition-colors no-underline text-muted;
+  }
+  .ps-breadcrumbs [data-lucide] {
+    @apply w-3.5 h-3.5 opacity-30;
+  }
+  .ps-breadcrumbs .current {
+    @apply text-ink font-black;
   }
 
-  .product-hero-elite .hero-title {
-    @apply text-[clamp(32px,5vw,56px)] leading-[1.1] mb-6 font-display font-black tracking-tight text-white;
+  /* ── HERO SHOWCASE ── */
+  .ps-hero {
+    @apply relative z-10 py-12 lg:py-24 overflow-hidden;
+  }
+  .ps-hero-grid {
+    @apply grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20 items-center;
   }
 
-  /* ─── Elite Tabs Architecture ─── */
-  .product-tabs-nav {
-    @apply flex gap-12 border-b-2 border-line mb-10 overflow-x-auto;
-    scrollbar-width: none;
+  /* Gallery */
+  .ps-hero-gallery {
+    @apply w-full;
+  }
+  .ps-main-swiper {
+    @apply w-full rounded-3xl border border-line bg-white shadow-lift mb-6 relative cursor-zoom-in overflow-hidden block;
+    aspect-ratio: 4/3;
+    max-height: 540px;
+  }
+  
+  .ps-main-swiper .swiper-wrapper {
+    @apply flex h-full;
+  }
+  
+  .ps-main-swiper .swiper-slide {
+    @apply flex-shrink-0 w-full h-full flex items-center justify-center overflow-hidden;
   }
 
-  .product-tab-btn {
-    @apply relative py-6 text-[11px] font-black uppercase tracking-[0.2em] text-muted transition-all duration-300 whitespace-nowrap;
+  /* Navigation Arrows Styling */
+  .ps-main-swiper .swiper-button-next,
+  .ps-main-swiper .swiper-button-prev {
+    @apply w-12 h-12 rounded-full bg-white/90 text-brand border border-line shadow-lg backdrop-blur-md transition-all duration-300 opacity-0 scale-90;
+    margin-top: 0;
+    transform: translateY(-50%);
   }
 
-  .product-tab-btn:hover { @apply text-brand; }
-
-  .product-tab-btn.active {
-    @apply text-brand;
+  /* Pagination Styling */
+  .ps-main-swiper .swiper-pagination {
+    @apply !bottom-6;
+  }
+  .ps-main-swiper .swiper-pagination-bullet {
+    @apply w-2.5 h-2.5 bg-brand opacity-20 transition-all duration-300;
+  }
+  .ps-main-swiper .swiper-pagination-bullet-active {
+    @apply opacity-100 w-8 rounded-full;
+  }
+  .ps-main-swiper:hover .swiper-button-next,
+  .ps-main-swiper:hover .swiper-button-prev {
+    @apply opacity-100 scale-100;
+  }
+  .ps-main-swiper .swiper-button-next::after,
+  .ps-main-swiper .swiper-button-prev::after {
+    @apply text-[18px] font-black;
+  }
+  .ps-main-swiper .swiper-button-next:hover,
+  .ps-main-swiper .swiper-button-prev:hover {
+    @apply bg-brand text-white border-brand;
   }
 
-  .product-tab-btn.active::after {
+  .ps-main-swiper img {
+    @apply w-full h-full object-contain p-8 transition-transform duration-700 ease-out;
+  }
+  .ps-main-swiper:hover img {
+    @apply scale-105;
+  }
+  .ps-thumb-swiper {
+    @apply h-20 px-1;
+  }
+  .ps-thumb-swiper .swiper-slide {
+    @apply rounded-xl border border-line bg-white opacity-40 cursor-pointer transition-all duration-300 overflow-hidden;
+  }
+  .ps-thumb-swiper .swiper-slide-thumb-active {
+    @apply opacity-100 border-brand ring-4 ring-brand/5 shadow-sm scale-[0.98];
+  }
+  .ps-thumb-swiper img {
+    @apply w-full h-full object-contain p-2;
+  }
+  .ps-no-image {
+    @apply w-full aspect-[4/3] rounded-2xl border border-dashed border-line-strong bg-surface flex flex-col items-center justify-center text-muted gap-3;
+  }
+  .ps-no-image [data-lucide] { @apply w-12 h-12 text-brand/30; }
+
+  /* Hero Data */
+  .ps-badges {
+    @apply flex flex-wrap gap-3 mb-6;
+  }
+  .badge-solid {
+    @apply px-3.5 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest bg-brand/10 text-brand;
+  }
+  .badge-outline {
+    @apply flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest border border-line-strong text-muted;
+  }
+  .badge-outline [data-lucide] { @apply w-3.5 h-3.5 text-brand; }
+
+  .ps-title {
+    @apply text-[clamp(32px,5vw,52px)] font-display font-black text-ink leading-[1.1] mb-3;
+  }
+  .ps-approved-name {
+    @apply text-[16px] text-muted mb-10;
+  }
+  .ps-approved-name strong { @apply text-brand; }
+
+  .ps-composition-box {
+    @apply p-8 rounded-2xl border border-brand/20 bg-brand/5 mb-10 relative overflow-hidden;
+  }
+  .ps-composition-box::before {
     content: '';
-    @apply absolute bottom-[-2px] left-0 right-0 h-[3px] bg-brand shadow-[0_0_15px_rgba(21,159,145,0.4)];
+    @apply absolute left-0 top-0 bottom-0 w-1.5 bg-brand shadow-[0_0_20px_rgba(21,159,145,0.2)];
+  }
+  .comp-label {
+    @apply block text-[11px] font-black uppercase tracking-[0.2em] text-brand mb-3 opacity-80;
+  }
+  .comp-value {
+    @apply text-[22px] font-display font-bold text-ink leading-snug m-0 tracking-tight;
+  }
+  .comp-presentation {
+    @apply text-[14px] text-muted mt-3 mb-0 font-medium font-mono;
   }
 
-  /* ─── Content Mastery (Typography) ─── */
-  .product-content h2 {
-    @apply text-[28px] font-display font-black text-ink mb-6 tracking-tight mt-12 first:mt-0;
+  .ps-quick-specs {
+    @apply grid grid-cols-2 gap-4 mb-12 max-sm:grid-cols-1;
+  }
+  .spec-item {
+    @apply flex items-center gap-4 p-5 rounded-2xl border border-line bg-white shadow-soft transition-all duration-300;
+  }
+  .spec-item:hover {
+    @apply border-brand/20 -translate-y-1 shadow-lift;
+  }
+  .spec-item [data-lucide] {
+    @apply w-10 h-10 p-2 rounded-xl bg-brand/10 text-brand flex-none;
+  }
+  .spec-title {
+    @apply block text-[10px] font-black uppercase tracking-[0.15em] text-muted mb-1;
+  }
+  .spec-data {
+    @apply block text-[15px] font-bold text-ink;
   }
 
-  .product-content p {
-    @apply text-[16px] text-ink-3 leading-[1.8] mb-6;
+  .ps-hero-actions {
+    @apply grid grid-cols-2 gap-4 max-sm:grid-cols-1;
+  }
+  .btn-large {
+    @apply h-14 text-[14px] uppercase tracking-widest font-black;
+  }
+  .btn-primary {
+    @apply bg-brand text-white shadow-lift;
+  }
+  .btn-whatsapp {
+    @apply border-line text-ink hover:bg-surface;
   }
 
-  .product-content ul {
-    @apply grid gap-4 mb-10;
+  /* ── CONTENT & SIDEBAR ── */
+  .ps-content-section {
+    @apply py-16 lg:py-24;
+  }
+  .ps-content-grid {
+    @apply grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-16 items-start;
   }
 
-  .product-content li {
-    @apply relative pl-8 text-[15px] text-ink-3 font-medium;
+  /* Markdown Content Styling (SEO Engine) */
+  /* Why: This targets standard markdown tags generated by Hugo and styles them beautifully. */
+  .ps-markdown-content {
+    @apply bg-white p-8 lg:p-12 rounded-2xl border border-line shadow-sm;
   }
-
-  .product-content li::before {
+  .ps-markdown-content h2 {
+    @apply text-[26px] font-display font-black text-ink mt-12 mb-6 pb-4 border-b border-line flex items-center gap-3;
+  }
+  .ps-markdown-content h2:first-child {
+    @apply mt-0;
+  }
+  /* Decorative accent for H2s */
+  .ps-markdown-content h2::before {
     content: '';
-    @apply absolute left-0 top-2.5 w-2 h-2 bg-brand rounded-full shadow-[0_0_10px_rgba(21,159,145,0.3)];
+    @apply block w-2 h-8 bg-brand rounded-full;
+  }
+  
+  .ps-markdown-content h3 {
+    @apply text-[18px] font-bold text-ink mt-8 mb-4;
+  }
+  
+  .ps-markdown-content p {
+    @apply text-[16px] text-muted leading-relaxed mb-6;
+  }
+  
+  .ps-markdown-content strong {
+    @apply font-bold text-ink;
   }
 
-  /* ─── Enhanced Technical Dashboard ─── */
-  .product-hero-elite .manufacturing-board {
-    @apply border-white/10 shadow-lift;
-    background: linear-gradient(165deg, rgba(16, 42, 67, 0.4) 0%, rgba(6, 17, 33, 0.6) 100%);
-    backdrop-filter: blur(20px);
+  .ps-markdown-content ul {
+    @apply grid gap-3 mb-8 pl-0 list-none;
+  }
+  .ps-markdown-content li {
+    @apply relative pl-8 text-[15px] text-ink font-medium leading-relaxed bg-[#F8FAFC] p-4 rounded-xl border border-line;
+  }
+  /* Custom Teal Checkmark for Markdown Lists */
+  .ps-markdown-content li::before {
+    content: '✓';
+    @apply absolute left-4 top-[18px] text-brand font-black text-[12px];
   }
 
-  .product-hero-elite .board-panel {
-    @apply border-white/5 bg-white/5 transition-all duration-300;
+  /* FAQ Accordion Styling (If you use H3s and paragraphs for FAQs) */
+  .ps-markdown-content details {
+    @apply mb-4 border border-line rounded-xl overflow-hidden bg-white;
+  }
+  .ps-markdown-content summary {
+    @apply p-5 font-bold text-ink cursor-pointer bg-[#F8FAFC] outline-none;
+    list-style: none;
+  }
+  .ps-markdown-content summary::-webkit-details-marker {
+    display: none;
+  }
+  .ps-markdown-content details[open] summary {
+    @apply border-b border-line text-brand;
+  }
+  .ps-markdown-content details p {
+    @apply p-5 m-0;
   }
 
-  .product-hero-elite .board-panel:hover {
-    @apply bg-white/10 border-white/20 -translate-y-1;
+  /* Sticky Sidebar */
+  .ps-sticky-sidebar {
+    @apply sticky top-[100px] flex flex-col gap-6;
+  }
+  
+  .ps-widget-card {
+    @apply bg-white rounded-3xl border border-line shadow-lift overflow-hidden;
+  }
+  .widget-header {
+    @apply bg-abyss p-8 flex flex-col items-center text-center gap-4 text-white relative overflow-hidden;
+  }
+  .widget-header::before {
+    content: '';
+    @apply absolute inset-0 opacity-10 pointer-events-none;
+    background-image: radial-gradient(circle at center, var(--color-brand-2) 0%, transparent 70%);
+  }
+  .widget-header [data-lucide] { @apply w-12 h-12 p-2.5 rounded-2xl bg-brand-2/20 text-brand-2 relative z-10; }
+  .widget-header h3 { @apply text-[20px] font-black m-0 relative z-10; }
+  
+  .widget-body {
+    @apply p-6;
+  }
+  .widget-body p {
+    @apply text-[14px] text-muted leading-relaxed mb-6;
+  }
+  .widget-body strong { @apply text-ink; }
+  
+  .widget-benefits {
+    @apply grid gap-4 list-none pl-0 mb-8;
+  }
+  .widget-benefits li {
+    @apply flex items-center gap-3 text-[13px] text-muted;
+  }
+  .widget-benefits [data-lucide] {
+    @apply w-5 h-5 text-brand flex-none;
   }
 
-  /* ─── Breadcrumb Polish ─── */
-  .hero-breadcrumb {
-    @apply text-[11px] font-black uppercase tracking-widest;
+  .ps-widget-link {
+    @apply flex items-center justify-between p-6 bg-abyss rounded-3xl border border-white/10 shadow-sm hover:border-brand-2 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 no-underline text-white;
   }
-
-  /* ─── Layout Optimizations ─── */
-  @media (max-width: 1024px) {
-    .product-hero-elite .hero-grid {
-      @apply grid-cols-1 text-left;
-    }
-    .product-hero-elite .hero-actions {
-      @apply justify-start;
-    }
+  .ps-widget-link strong {
+    @apply block text-[15px] font-black text-white mb-0.5;
   }
-
-  /* ─── Marketing Proof Section ─── */
-  .proof-pill {
-    @apply transition-all duration-300 cursor-default;
+  .ps-widget-link span {
+    @apply block text-[12px] text-white/50;
   }
-  .proof-pill:hover {
-    @apply -translate-y-1 bg-brand-2/10 border-brand-2/40;
+  .ps-widget-link [data-lucide] {
+    @apply w-6 h-6 text-brand-2;
   }
 }
