@@ -9,6 +9,16 @@
         {{ partial "products/grid.html" . }}
     </div>
 
+    {{ if .Content }}
+    <section class="section section--paper">
+        <div class="container">
+            <div class="prose prose-teal max-w-none ps-markdown-content">
+                {{ .Content }}
+            </div>
+        </div>
+    </section>
+    {{ end }}
+
     {{ partial "products/dosage-authority.html" . }}
     {{ partial "products/authority.html" . }}
     {{ partial "products/faq.html" . }}

@@ -1,60 +1,72 @@
 ---
 # 1. SEO & SEARCH METADATA
 title: "Azithromycin Suspension"
-meta_title: "Azithromycin Suspension Manufacturer & Supplier in India | SAAR Biotech"
-slug: "azithromycin-oral-suspension"
-meta_description: "SAAR Biotech is a WHO-GMP certified manufacturer of Azithromycin Dihydrate Suspension in Baddi. We offer premium third-party contract manufacturing for antibiotics."
-keywords: ["Azithromycin Suspension", "Third Party Manufacturing", "Contract Manufacturing in Baddi", "Pharma Manufacturer in India", "Antibiotic Suspension", "Azithromycin 200mg", "WHO-GMP facility"]
-description: "A premium macrolide antibacterial suspension manufactured in our WHO-GMP Baddi facility, used for respiratory, ear, and skin infections."
+meta_title: "Azithromycin Suspension Manufacturer | Third Party Manufacturing Baddi"
+slug: "azithromycin-oral-solution"
+meta_description: "WHO-GMP certified manufacturer of Azithromycin Oral Suspension in Baddi. We offer premier third-party contract manufacturing with complete dossier support and fast turnaround."
+keywords: ["Azithromycin Suspension Manufacturer", "Third Party Manufacturing Baddi", "Contract Manufacturing Antibiotics", "Pharma Manufacturer India", "Azithromycin 200mg Suspension", "WHO-GMP facility Baddi"]
+description: "A premium macrolide antibacterial suspension manufactured in our WHO-GMP Baddi facility, offering superior bioavailability for respiratory and pediatric infections."
 
 # 2. CORE PRODUCT DATA
 product_name: "Azithromycin"
 approved_name: "Azithromycin Dihydrate"
-categories: ["Suspensions", "Antibiotics", "Infectious Diseases"]
+categories: ["Suspensions", "Antibiotics", "Infectious Diseases", "Pediatric Care"]
 
-# 3. CLINICAL DATA (Visible in Info Panel)
+# 3. CLINICAL DATA
 therapeutic_class: ["Antibiotic", "Antibacterial", "Macrolide"]
 dosage_form: "Oral Suspension"
 drug_form: "Liquid"
 composition: "Azithromycin Dihydrate eq. to Azithromycin 100mg/200mg"
-presentation: "Spray Presentation - Each 5 ml contains: Eq to Azithromycin 100mg/200mg"
+presentation: "Each 5 ml contains: Eq to Azithromycin 100mg/200mg"
 
 # 4. LOGISTICS & MANUFACTURING
 pack_sizes: ["15 ml", "30 ml", "60 ml"]
-manufacturing_status: "Available for CMO"
-quote_priority: "On Priority"
+manufacturing_status: "Available for Third Party / CMO"
+quote_priority: "High Priority"
 quality_standards: "WHO-GMP / ISO 9001:2015"
-storage_conditions: "Store in a cool & dry place, below 30°C."
+storage_conditions: "Store below 30°C. Protect from light."
 shelf_life: "24 Months"
 
 # 5. CUSTOM SPECIFICATIONS
 custom_specs:
-  - label: "Manufacturing Facility"
+  - label: "Manufacturing Location"
     value: "Baddi, Himachal Pradesh"
   - label: "Compliance"
-    value: "DCGI Approved Formulations"
+    value: "DCGI Approved / Schedule M"
+  - label: "Dossier Status"
+    value: "CTD/ACTD Available"
 
 # 6. DUAL-LAYER FAQ
 faq_clinical:
-  - question: "What are the common medical uses for Azithromycin Suspension?"
-    answer: "Azithromycin oral suspension is primarily used to treat a wide variety of bacterial infections including respiratory tract infections, ear infections, and skin infections."
-  - question: "How should Azithromycin suspension be stored after opening?"
-    answer: "It should be stored at room temperature or in a cool, dry place below 30°C. Keep the bottle tightly closed."
+  - question: "What are the primary clinical indications for Azithromycin Suspension?"
+    answer: "Azithromycin is indicated for mild to moderate infections caused by susceptible organisms, including Acute Bacterial Sinusitis, Community-Acquired Pneumonia, and pediatric Otitis Media."
+  - question: "How does the 'Z-Pack' dosing logic apply to the suspension?"
+    answer: "The suspension allows for precise weight-based dosing (usually 10mg/kg), maintaining the convenience of a short 3-to-5 day course due to its long tissue half-life."
 
 faq_b2b:
-  - question: "Does SAAR Biotech provide technical dossiers for Azithromycin?"
-    answer: "Yes, we provide complete technical documentation, including COA, stability data, and technical dossiers for registration."
-  - question: "What is the typical turnaround time for contract manufacturing?"
-    answer: "We offer some of the fastest turnaround times in Baddi for third-party manufacturing, usually within 30-45 days."
+  - question: "Can Saar Biotech provide customized flavoring for pediatric Azithromycin?"
+    answer: "Yes, as a specialized contract manufacturer, we offer palette-optimized flavoring systems (Mango, Peppermint, etc.) to ensure high patient compliance in pediatric segments."
+  - question: "What is the Minimum Order Quantity (MOQ) for third-party manufacturing?"
+    answer: "Our standard MOQs are competitive for the Baddi cluster; please contact our B2B team for a specific quote based on your batch requirements."
 
 # 7. GALLERY
 images:
   - "azithromycin.webp"
   - azithromycin-premium.png
-  - azithromycin.png
 ---
 
 Azithromycin is a potent, broad-spectrum macrolide antibiotic essential for treating a wide range of bacterial infections. As a premier **WHO-GMP certified pharmaceutical manufacturer in Baddi**, Saar Biotech utilizes advanced micronization techniques to ensure that our Azithromycin Oral Suspension delivers superior bioavailability and molecular stability.
+
+## Technical Specifications
+For our clinical and B2B partners, we maintain the highest technical standards for the active ingredient:
+
+| Parameter | Specification |
+|-----------|---------------|
+| **Active Molecule** | Azithromycin Dihydrate (USP/IP/BP) |
+| **CAS Number** | 117772-70-0 |
+| **Molecular Formula** | C38H72N2O12 · 2H2O |
+| **Appearance** | White or almost white crystalline powder (reconstituted) |
+| **Solubility** | Soluble in Ethanol & Methanol; optimized suspension stability |
 
 ## Description & Therapeutic Class
 Azithromycin is a second-generation macrolide antibiotic derived from erythromycin. It is primarily used to treat or prevent certain bacterial infections, most notably those affecting the upper and lower respiratory tracts, middle ear, and soft tissues. Unlike traditional antibiotics, Azithromycin exhibits **superior tissue penetration** and a long half-life, allowing for convenient once-daily dosing.
@@ -70,7 +82,6 @@ Our Azithromycin suspension is formulated to treat the following conditions with
 - **Upper Respiratory Tract Infections**: Including Acute Bacterial Sinusitis and Pharyngitis/Tonsillitis.
 - **Lower Respiratory Tract Infections**: Such as Community-Acquired Pneumonia (CAP) and Acute Bronchitis.
 - **Otitis Media**: Highly effective for pediatric middle ear infections.
-- **Skin & Soft Tissue Infections**: Bacterial dermatological conditions.
 - **Systemic Infections**: Effective treatment for Typhoid Fever and certain uncomplicated Gonococcal infections.
 
 ## Mechanism of Action (MOA)
@@ -78,16 +89,20 @@ Azithromycin acts by binding to the **50S ribosomal subunit** of susceptible mic
 
 ## Pharmacokinetics & Bioavailability
 - **Absorption**: Approximately 37% bioavailability after oral administration.
-- **Distribution**: Azithromycin is rapidly distributed into the tissues, where concentrations can be up to **50 times higher** than in the plasma.
-- **Elimination**: Plasma terminal elimination half-life closely reflects the tissue depletion half-life of 2 to 4 days. Approximately 12% of an intravenously administered dose is excreted in the urine over 3 days as the parent drug, the majority in the first 24 hours. Biliary excretion of azithromycin is a major route of elimination for unchanged drug following oral administration. Very high concentrations of unchanged drug have been found in human bile, together with 10 metabolites, formed by Nand O-demethylation, by hydroxylation of the desosamine and aglycone rings, and by cleavage of the cladinose conjugate. Comparison of HPLC and microbiological assays in tissues suggests that metabolites play no part in the microbiological activity of azithromycin.
+- **Distribution**: Azithromycin is rapidly distributed into the tissues, where concentrations can be up to **50 times higher** than in the plasma. This unique "phagocyte-mediated delivery" ensures the drug reaches the site of infection in high concentrations.
+- **Elimination**: The terminal elimination half-life is approximately 68 hours, allowing for a simplified 3-day or 5-day treatment regimen.
 
-
+## B2B & Third-Party Manufacturing Info
+We offer specialized **Contract Manufacturing (CMO)** services for Azithromycin Suspension from our Baddi facility:
+*   **Capacity**: High-speed automatic liquid filling lines.
+*   **Quality**: Agilent-equipped GLP laboratories for rigorous assay testing.
+*   **Turnaround**: Standard 30-45 days for new batch production.
+*   **Packaging**: Available in 15ml, 30ml, and 60ml with customized mono-cartons and measuring cups.
 
 ## Storage & Reconstitution Intelligence
-For B2B partners and healthcare providers, proper handling is critical for therapeutic efficacy:
-1. **Unreconstituted Powder**: Store below 30°C in a dry environment.
-2. **Reconstitution**: Use purified water as per the specified volume on the label.
-3. **Post-Reconstitution**: The suspension remains stable for 10-14 days when stored correctly.
+1.  **Unreconstituted Powder**: Store below 30°C in a dry environment.
+2.  **Reconstitution**: Use purified water as per the specified volume on the label.
+3.  **Post-Reconstitution**: The suspension remains stable for 10-14 days when stored correctly.
 
 ## Quality Control & Compliance
 Every batch of Azithromycin at Saar Biotech undergoes rigorous testing in our **Agilent-equipped GLP laboratories** to ensure 100% therapeutic efficacy and safety:
