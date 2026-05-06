@@ -11,7 +11,7 @@
   }
 
   .faq-accordion__aside {
-    @apply sticky top-32;
+    @apply sticky top-32 max-lg:static max-lg:mb-6;
   }
 
   .faq-accordion__list {

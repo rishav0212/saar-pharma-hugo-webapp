@@ -12,12 +12,14 @@
 @layer base {
   html {
     @apply antialiased;
+    overflow-x: clip;
   }
 
   body {
     background-color: var(--color-paper);
     color: var(--color-text);
-    @apply font-sans text-[15px] leading-[1.65] min-w-[320px] overflow-x-hidden antialiased;
+    @apply font-sans text-[15px] leading-[1.65] min-w-[320px] antialiased;
+    overflow-x: clip;
   }
   
   h1, h2, h3, h4, h5, h6 {
