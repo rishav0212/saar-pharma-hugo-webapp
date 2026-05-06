@@ -44,14 +44,14 @@
   }
 
   .section--deep-soft {
-    background: linear-gradient(135deg, var(--color-abyss) 0%, var(--color-ink) 100%);
+    background-color: var(--color-ink);
     color: var(--color-white);
     border-top: 1px solid var(--color-light-line);
     border-bottom: 1px solid var(--color-light-line);
   }
   
   .section--deep-soft .section-title {
-    color: #ffffff;
+    color: var(--color-white);
   }
   
   .section--deep-soft .section-kicker {
@@ -63,7 +63,7 @@
   }
 
   .section--abyss .section-title {
-    color: #ffffff;
+    color: var(--color-white);
   }
 
   .section--abyss .section-kicker {
@@ -77,11 +77,11 @@
   
   .section--brand {
     background-color: var(--color-brand);
-    color: #ffffff;
+    color: var(--color-white);
   }
   
   .section--brand .section-title {
-    color: #ffffff;
+    color: var(--color-white);
   }
   
   .section--brand .section-kicker {
@@ -121,7 +121,7 @@
   /* H4 fix — force h2 inside brand section to be white */
   .section--brand h2,
   .section--brand .section-title {
-    color: #ffffff !important;
+    color: var(--color-white) !important;
   }
 
   .section--brand p {
@@ -131,7 +131,7 @@
   /* btn--ghost inside brand section — make white */
   .section--brand .btn--ghost {
     border-color: rgba(255, 255, 255, 0.40);
-    color: #ffffff;
+    color: var(--color-white);
   }
 
   .section--brand .btn--ghost:hover {

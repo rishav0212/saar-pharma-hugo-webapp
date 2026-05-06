@@ -12,7 +12,7 @@
   --color-surface-2: #e5f2f0;
   --color-white: #ffffff;
   --color-white-rgb: 255, 255, 255;
-  
+
   /* Brand colors */
   --color-brand: #159f91;
   --color-brand-2: #64d4c5;
@@ -21,14 +21,14 @@
   --color-line: rgba(16, 42, 67, 0.1);
   --color-line-strong: rgba(16, 42, 67, 0.18);
   --color-light-line: rgba(255, 255, 255, 0.16);
-  
+
   --color-blue-soft: #6f94b8;
-  
+
   --font-sans: "Inter", Arial, sans-serif;
   --font-display: "Manrope", "Inter", Arial, sans-serif;
-  
+
   --shadow-soft: 0 14px 32px rgba(6, 17, 33, 0.08);
   --shadow-lift: 0 30px 62px -16px rgba(6, 17, 33, 0.26);
-  
+
   --radius-lg: 8px;
 }
