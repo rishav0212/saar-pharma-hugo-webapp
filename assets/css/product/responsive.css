@@ -47,6 +47,11 @@
       max-height: 420px;
     }
 
+    /* Tab Nav Overrides for Mobile */
+    .tab-nav-wrap {
+      @apply relative;
+    }
+
     .ps-product-title {
       @apply text-[26px];
     }

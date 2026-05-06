@@ -11,20 +11,22 @@
     </div>
 
     <div class="tab-block" data-animate data-delay="0.1">
-      <div class="tab-nav" role="tablist" aria-label="Dosage category tabs">
-        {{ range $index, $item := .items }}
-        <button
-          type="button"
-          class="tab-btn{{ if eq $index 0 }} is-active{{ end }}"
-          role="tab"
-          aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
-          aria-controls="tab-panel-{{ $index }}"
-          id="tab-{{ $index }}"
-          data-tab="{{ $index }}">
-          <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
-          <span>{{ $item.title }}</span>
-        </button>
-        {{ end }}
+      <div class="relative max-lg:-mx-6 max-lg:px-6">
+        <div class="tab-nav js-scroll-fade max-lg:mx-0 max-lg:px-0" role="tablist" aria-label="Dosage category tabs">
+          {{ range $index, $item := .items }}
+          <button
+            type="button"
+            class="tab-btn{{ if eq $index 0 }} is-active{{ end }}"
+            role="tab"
+            aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+            aria-controls="tab-panel-{{ $index }}"
+            id="tab-{{ $index }}"
+            data-tab="{{ $index }}">
+            <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
+            <span>{{ $item.title }}</span>
+          </button>
+          {{ end }}
+        </div>
       </div>
 
       <div class="tab-panels">

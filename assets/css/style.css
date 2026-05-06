@@ -150,6 +150,14 @@
 
 }
 
+/* ─── Universal Horizontal Scroll Utilities ─── */
+.js-scroll-fade.is-dragging {
+  cursor: grabbing !important;
+}
+.js-scroll-fade.is-dragging * {
+  pointer-events: none;
+}
+
 /* Animations */
 [data-animate] {
   opacity: 0.15;
@@ -215,6 +223,7 @@
 @import "./assets/css/product/info.css";
 @import "./assets/css/product/content.css";
 @import "./assets/css/components/faq.css";
+@import "./assets/css/product/related.css";
 @import "./assets/css/product/responsive.css";
 
 

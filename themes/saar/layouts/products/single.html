@@ -179,14 +179,16 @@
               <h2 class="section-title section-title--sm mt-2">Product Information</h2>
             </div>
             
-            <div class="tab-nav" role="tablist" aria-label="Product information tabs">
-              {{ range $idx, $section := $sections }}
-              <button class="tab-btn {{ if eq $idx 0 }}is-active{{ end }}" data-tab="{{ $section.id }}" role="tab"
-                aria-selected="{{ if eq $idx 0 }}true{{ else }}false{{ end }}">
-                <i data-lucide="{{ $section.icon }}" class="icon"></i>
-                <span>{{ $section.title }}</span>
-              </button>
-              {{ end }}
+            <div class="tab-nav-wrap relative">
+              <div class="tab-nav js-scroll-fade" role="tablist" aria-label="Product information tabs">
+                {{ range $idx, $section := $sections }}
+                <button class="tab-btn {{ if eq $idx 0 }}is-active{{ end }}" data-tab="{{ $section.id }}" role="tab"
+                  aria-selected="{{ if eq $idx 0 }}true{{ else }}false{{ end }}">
+                  <i data-lucide="{{ $section.icon }}" class="icon"></i>
+                  <span>{{ $section.title }}</span>
+                </button>
+                {{ end }}
+              </div>
             </div>
           </aside>
 

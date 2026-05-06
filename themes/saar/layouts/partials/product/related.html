@@ -83,21 +83,22 @@ Feature: 3s Interval + ScrollBy Support + Overflow Detection
 
   {{/* SECTION 1: MOLECULAR SYNC */}}
   {{ if $row1Final }}
-  <section class="ps-related-row section bg-white relative overflow-hidden pb-12">
+  <section class="ps-related-row section bg-white relative overflow-hidden pt-8 pb-16">
     <div
       class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2">
     </div>
     <div class="container relative z-10">
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
-        <div class="max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 mb-5">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-x-12 gap-y-6 mb-6">
+        <div class="flex-grow">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 mb-3">
             <span class="w-2 h-2 rounded-full bg-brand animate-pulse"></span>
-            <span class="text-[10px] font-black text-brand-3 uppercase tracking-widest">Molecular Sync</span>
+            <span class="text-[10px] font-black text-brand-3 uppercase tracking-widest">Similar Products</span>
           </div>
-          <h2 class="text-3xl lg:text-5xl font-display font-black text-ink mb-4 tracking-tight leading-tight">Similar
-            <span class="text-brand">Compositions</span></h2>
-          <p class="text-muted text-[17px]">Formulations sharing synchronized active ingredients and molecular profiles.
-          </p>
+          <div class="flex flex-col lg:flex-row lg:items-baseline gap-x-8 gap-y-2">
+            <h2 class="text-3xl lg:text-4xl font-display font-black text-ink tracking-tight leading-tight whitespace-nowrap">Same
+              <span class="text-brand">Formula</span></h2>
+            <p class="text-muted text-[15px] lg:border-l lg:border-line lg:pl-8 max-w-md">Other high-quality products that use the same effective active ingredients.</p>
+          </div>
         </div>
 
         <div class="ps-nav-group flex items-center gap-3 opacity-0 pointer-events-none transition-opacity duration-300"
@@ -112,7 +113,7 @@ Feature: 3s Interval + ScrollBy Support + Overflow Detection
       </div>
 
       <div class="ps-slider-viewport overflow-x-auto hide-scrollbar snap-x snap-mandatory" id="mol-slider">
-        <div class="flex gap-8 pb-4">
+        <div class="flex gap-8 pt-10 pb-4">
           {{ range $row1Final }}
           <div class="ps-slider-item flex-shrink-0 w-[280px] md:w-[320px] snap-start product-card-wrap">
             {{ partial "products/card.html" . }}
@@ -125,21 +126,23 @@ Feature: 3s Interval + ScrollBy Support + Overflow Detection
   {{ end }}
 
   {{/* SECTION 2: CLINICAL RANGE */}}
-  <section class="ps-related-row section bg-paper relative overflow-hidden border-t border-line/50">
+  <section class="ps-related-row section bg-paper relative overflow-hidden border-t border-line/50 pt-8 pb-16">
     <div
       class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-brand-2/5 rounded-full blur-[150px] pointer-events-none -translate-x-1/2 -translate-y-1/2">
     </div>
     <div class="container relative z-10">
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
-        <div class="max-w-2xl">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-x-12 gap-y-6 mb-6">
+        <div class="flex-grow">
           <div
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-2/10 border border-brand-2/20 mb-5">
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-2/10 border border-brand-2/20 mb-3">
             <span class="w-2 h-2 rounded-full bg-brand-2"></span>
-            <span class="text-[10px] font-black text-brand-2 uppercase tracking-widest">Therapeutic Range</span>
+            <span class="text-[10px] font-black text-brand-2 uppercase tracking-widest">Discover More</span>
           </div>
-          <h2 class="text-3xl lg:text-5xl font-display font-black text-ink mb-4 tracking-tight leading-tight">Explore
-            <span class="text-brand-2">Portfolio</span></h2>
-          <p class="text-muted text-[17px]">Intelligent mapping of formulations within related clinical categories.</p>
+          <div class="flex flex-col lg:flex-row lg:items-baseline gap-x-8 gap-y-2">
+            <h2 class="text-3xl lg:text-4xl font-display font-black text-ink tracking-tight leading-tight whitespace-nowrap">Related
+              <span class="text-brand-2">Health Solutions</span></h2>
+            <p class="text-muted text-[15px] lg:border-l lg:border-line lg:pl-8 max-w-md">Explore other trusted medicines that help treat similar health conditions.</p>
+          </div>
         </div>
 
         <div class="ps-nav-group flex items-center gap-3 opacity-0 pointer-events-none transition-opacity duration-300"
@@ -154,7 +157,7 @@ Feature: 3s Interval + ScrollBy Support + Overflow Detection
       </div>
 
       <div class="ps-slider-viewport overflow-x-auto hide-scrollbar snap-x snap-mandatory" id="clinical-slider">
-        <div class="flex gap-8 pb-4">
+        <div class="flex gap-8 pt-10 pb-4">
           {{ range $row2Final }}
           <div class="ps-slider-item flex-shrink-0 w-[280px] md:w-[320px] snap-start product-card-wrap">
             {{ partial "products/card.html" . }}
@@ -165,111 +168,3 @@ Feature: 3s Interval + ScrollBy Support + Overflow Detection
     </div>
   </section>
 </div>
-
-<style>
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .slider-nav-btn {
-    @apply w-12 h-12 rounded-full border border-line bg-white flex items-center justify-center text-muted transition-all duration-300;
-  }
-
-  .slider-nav-btn:hover {
-    @apply border-brand text-brand shadow-sm bg-brand/5;
-  }
-
-  .ps-slider-viewport {
-    scroll-behavior: smooth;
-  }
-
-  .ps-nav-group.is-visible {
-    @apply opacity-100 pointer-events-auto;
-  }
-</style>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const sliders = document.querySelectorAll('.ps-slider-viewport');
-
-    sliders.forEach(slider => {
-      const id = slider.id;
-      const navGroup = document.getElementById(`nav-${id}`);
-      if (!navGroup) return;
-
-      const nextBtn = navGroup.querySelector(`.next-btn`);
-      const prevBtn = navGroup.querySelector(`.prev-btn`);
-      let autoPlayInterval = null;
-
-      const getScrollStep = () => {
-        const item = slider.querySelector('.ps-slider-item');
-        return item ? (item.offsetWidth + 32) : 300;
-      };
-
-      const moveNext = () => {
-        const maxScroll = slider.scrollWidth - slider.clientWidth;
-        if (slider.scrollLeft >= maxScroll - 20) {
-          slider.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          slider.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
-        }
-      };
-
-      const movePrev = () => {
-        if (slider.scrollLeft <= 20) {
-          const maxScroll = slider.scrollWidth - slider.clientWidth;
-          slider.scrollTo({ left: maxScroll, behavior: 'smooth' });
-        } else {
-          slider.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
-        }
-      };
-
-      const startAutoPlay = () => {
-        if (autoPlayInterval) return;
-        autoPlayInterval = setInterval(moveNext, 3000); // 3-second interval
-      };
-
-      const stopAutoPlay = () => {
-        clearInterval(autoPlayInterval);
-        autoPlayInterval = null;
-      };
-
-      const checkOverflow = () => {
-        if (slider.scrollWidth > slider.clientWidth + 10) {
-          navGroup.classList.add('is-visible');
-          startAutoPlay();
-        } else {
-          navGroup.classList.remove('is-visible');
-          stopAutoPlay();
-        }
-      };
-
-      // Event Listeners
-      nextBtn.addEventListener('click', () => {
-        stopAutoPlay();
-        moveNext();
-        setTimeout(startAutoPlay, 3000);
-      });
-
-      prevBtn.addEventListener('click', () => {
-        stopAutoPlay();
-        movePrev();
-        setTimeout(startAutoPlay, 3000);
-      });
-
-      slider.addEventListener('mouseenter', stopAutoPlay);
-      slider.addEventListener('mouseleave', () => {
-        if (slider.scrollWidth > slider.clientWidth + 10) startAutoPlay();
-      });
-
-      // Periodic check for dynamic content or layout shifts
-      setTimeout(checkOverflow, 800);
-      window.addEventListener('resize', checkOverflow);
-    });
-  });
-</script>

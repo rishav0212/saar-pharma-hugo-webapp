@@ -129,7 +129,10 @@
   .suggestion-item i { @apply text-brand; }
 
   /* Category Scroll Logic */
-  .product-filter-pills-wrap { @apply relative flex-1 min-w-0 overflow-hidden flex items-center; }
+  .product-filter-pills-wrap { 
+    @apply relative flex-1 min-w-0 overflow-hidden flex items-center; 
+    --fade-bg: rgba(237, 247, 246, 0.95);
+  }
   .filter-pills {
     @apply flex items-center gap-2 overflow-x-auto py-1.5 px-4 scroll-smooth;
     scrollbar-width: none; -ms-overflow-style: none;
@@ -147,10 +150,7 @@
   }
   .filter-pill.is-active .filter-pill__count { @apply bg-white/20 text-white opacity-100; }
 
-  /* Dynamic Fade Indicators */
-  .filter-fade-left, .filter-fade-right { @apply absolute top-0 bottom-0 w-16 pointer-events-none z-10 opacity-0 transition-opacity duration-300; }
-  .filter-fade-left { @apply left-0 bg-gradient-to-r from-surface via-surface/80 to-transparent; }
-  .filter-fade-right { @apply right-0 bg-gradient-to-l from-surface via-surface/80 to-transparent; }
+  /* Dynamic Fade Indicators (Now handled globally by .scroll-fade-left/right) */
 
   .filter-nav-btn {
     @apply absolute top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white border border-line flex items-center justify-center text-brand shadow-sm z-20 opacity-0 scale-90 transition-all duration-300 pointer-events-none;
@@ -159,8 +159,8 @@
   .filter-nav-btn--left { @apply left-1; }
   .filter-nav-btn--right { @apply right-1; }
 
-  .has-scroll-left #fade-left, .has-scroll-left #pills-scroll-left { @apply opacity-100 scale-100 pointer-events-auto; }
-  .has-scroll-right #fade-right, .has-scroll-right #pills-scroll-right { @apply opacity-100 scale-100 pointer-events-auto; }
+  .has-scroll-left #pills-scroll-left { @apply opacity-100 scale-100 pointer-events-auto; }
+  .has-scroll-right #pills-scroll-right { @apply opacity-100 scale-100 pointer-events-auto; }
 
   .product-result-count { @apply flex flex-col items-end gap-0 min-w-[100px]; }
   .count-num { @apply text-2xl font-display font-black text-brand-3 leading-none tracking-tighter; }

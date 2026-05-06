@@ -1,0 +1,26 @@
+/* Product Related Section Styles */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.slider-nav-btn {
+  @apply w-12 h-12 rounded-full border border-line bg-white flex items-center justify-center text-muted transition-all duration-300;
+}
+
+.slider-nav-btn:hover {
+  @apply border-brand text-brand shadow-sm bg-brand/5;
+}
+
+.ps-slider-viewport {
+  scroll-behavior: smooth;
+  @apply py-4 -my-4; /* Offset the clipping area */
+}
+
+.ps-nav-group.is-visible {
+  @apply opacity-100 pointer-events-auto;
+}

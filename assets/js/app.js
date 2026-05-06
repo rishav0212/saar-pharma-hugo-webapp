@@ -3,12 +3,13 @@
  * Bundled via Hugo Pipes (esbuild)
  */
 
-import { initTabs, initHeader, initProductScroll, initAnchorScroll, initAccordion, initFooterYear } from './modules/ui';
+import { initTabs, initHeader, initProductScroll, initAnchorScroll, initAccordion, initFooterYear, initScrollFades } from './modules/ui';
 import { initAnimations, initCounters, initHeroCanvas } from './modules/animations';
 import { initSearch } from './modules/search';
 import { initProducts } from './modules/products';
 import { initEnquiryModal } from './modules/modal';
 import { initGallery } from './modules/gallery';
+import { initSliders } from './modules/slider';
 
 
 function safeInit(name, fn) {
@@ -58,6 +59,8 @@ const initAll = () => {
   safeInit("Products", initProducts);
   safeInit("EnquiryModal", initEnquiryModal);
   safeInit("Gallery", initGallery);
+  safeInit("ScrollFades", initScrollFades);
+  safeInit("Sliders", initSliders);
 };
 
 if (document.readyState === "loading") {

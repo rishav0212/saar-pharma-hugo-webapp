@@ -58,7 +58,7 @@
                     <i data-lucide="chevron-left"></i>
                 </button>
                 
-                <div class="filter-pills no-scrollbar" id="filter-pills-scroll">
+                <div class="filter-pills no-scrollbar js-scroll-fade" id="filter-pills-scroll">
                     <button class="filter-pill is-active" data-filter="all" aria-pressed="true">
                         <span class="filter-pill__label">All <span class="opacity-50 ml-1">({{ len (where .Site.RegularPages "Section" "products") }})</span></span>
                     </button>
@@ -81,9 +81,6 @@
                 <button class="filter-nav-btn filter-nav-btn--right" id="pills-scroll-right" aria-label="Scroll Right">
                     <i data-lucide="chevron-right"></i>
                 </button>
-                
-                <div class="filter-fade-left" id="fade-left"></div>
-                <div class="filter-fade-right" id="fade-right"></div>
             </div>
 
             <!-- Result Counter -->

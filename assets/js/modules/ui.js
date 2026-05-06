@@ -68,6 +68,66 @@ export function initTabs() {
   });
 }
 
+export function initScrollFades() {
+  const scrollers = document.querySelectorAll('.js-scroll-fade');
+  if (!scrollers.length) return;
+
+  scrollers.forEach(scroller => {
+    const wrap = scroller.parentElement;
+    if (!wrap) return;
+
+    const updateFades = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = scroller;
+      // If content doesn't scroll, remove fades
+      if (scrollWidth <= clientWidth + 2) {
+        wrap.classList.remove('has-scroll-left', 'has-scroll-right');
+        return;
+      }
+      
+      const isAtStart = scrollLeft <= 5;
+      const isAtEnd = Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 2;
+      
+      wrap.classList.toggle('has-scroll-left', !isAtStart);
+      wrap.classList.toggle('has-scroll-right', !isAtEnd);
+    };
+
+    scroller.addEventListener('scroll', updateFades, { passive: true });
+    window.addEventListener('resize', updateFades, { passive: true });
+    // Initial check (use small timeout to ensure layout is calculated)
+    setTimeout(updateFades, 100);
+
+    // ─── Mouse Drag to Scroll Logic ───
+    let isDown = false;
+    let startX;
+    let scrollLeftPos;
+
+    scroller.addEventListener('mousedown', (e) => {
+      isDown = true;
+      scroller.classList.add('is-dragging');
+      startX = e.pageX - scroller.offsetLeft;
+      scrollLeftPos = scroller.scrollLeft;
+    });
+
+    scroller.addEventListener('mouseleave', () => {
+      isDown = false;
+      scroller.classList.remove('is-dragging');
+    });
+
+    scroller.addEventListener('mouseup', () => {
+      isDown = false;
+      scroller.classList.remove('is-dragging');
+    });
+
+    scroller.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault(); // Prevent text selection
+      const x = e.pageX - scroller.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll speed multiplier
+      scroller.scrollLeft = scrollLeftPos - walk;
+    });
+  });
+}
+
 export function initHeader() {
   const header = document.querySelector(".site-header");
   const menuToggle = document.getElementById("menu-toggle");

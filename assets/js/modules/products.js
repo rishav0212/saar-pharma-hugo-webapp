@@ -237,17 +237,7 @@ export function initProducts() {
   });
 
   // ─── Horizontal Scroll UI Logic ───
-
   if (pillsContainer) {
-    const updateArrows = () => {
-      const { scrollLeft, scrollWidth, clientWidth } = pillsContainer;
-      const wrap = pillsContainer.parentElement;
-      wrap.classList.toggle('has-scroll-left', scrollLeft > 10);
-      wrap.classList.toggle('has-scroll-right', scrollLeft < scrollWidth - clientWidth - 10);
-    };
-    pillsContainer.addEventListener('scroll', updateArrows);
-    window.addEventListener('resize', updateArrows);
-    updateArrows();
     if (scrollLeftBtn) scrollLeftBtn.onclick = () => pillsContainer.scrollBy({ left: -300, behavior: 'smooth' });
     if (scrollRightBtn) scrollRightBtn.onclick = () => pillsContainer.scrollBy({ left: 300, behavior: 'smooth' });
   }
