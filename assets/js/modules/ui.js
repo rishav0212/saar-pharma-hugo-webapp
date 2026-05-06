@@ -4,56 +4,67 @@
  */
 
 export function initTabs() {
-  document.addEventListener("click", (e) => {
-    const btn = e.target.closest(".tab-btn, .planner-tab");
-    if (!btn) return;
+  const tabs = document.querySelectorAll('.tab-btn, .planner-tab');
+  if (!tabs.length) return;
 
-    const isPlanner = btn.classList.contains("planner-tab");
-    const container = isPlanner ? btn.closest(".planner-shell") : btn.closest(".tab-block");
-    const targetAttr = isPlanner ? "data-planner-tab" : "data-tab";
-    const panelAttr = isPlanner ? "data-planner-panel" : "data-tab";
-    const btnClass = isPlanner ? ".planner-tab" : ".tab-btn";
-    const panelClass = isPlanner ? ".planner-panel" : ".tab-panel";
+  tabs.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const isPlanner = btn.classList.contains("planner-tab");
+      const container = isPlanner ? btn.closest(".planner-shell") : btn.closest(".tab-block");
+      if (!container) return;
 
-    const target = btn.getAttribute(targetAttr);
-    const btns = container.querySelectorAll(btnClass);
-    const panels = container.querySelectorAll(panelClass);
+      const targetAttr = isPlanner ? "data-planner-tab" : "data-tab";
+      const panelAttr = isPlanner ? "data-planner-panel" : "data-tab";
+      const btnClass = isPlanner ? ".planner-tab" : ".tab-btn";
+      const panelClass = isPlanner ? ".planner-panel" : ".tab-panel";
 
-    btns.forEach((b) => {
-      b.classList.remove("is-active");
-      b.setAttribute("aria-selected", "false");
-    });
+      const target = btn.getAttribute(targetAttr);
+      const btns = container.querySelectorAll(btnClass);
+      const panels = container.querySelectorAll(panelClass);
 
-    panels.forEach((p) => {
-      p.classList.remove("is-active");
-      p.setAttribute("hidden", "");
-    });
+      // 1. Update States
+      btns.forEach((b) => {
+        b.classList.remove("is-active");
+        b.setAttribute("aria-selected", "false");
+      });
 
-    btn.classList.add("is-active");
-    btn.setAttribute("aria-selected", "true");
+      panels.forEach((p) => {
+        p.classList.remove("is-active");
+        p.setAttribute("hidden", "");
+      });
 
-    const panel = container.querySelector(`${panelClass}[${panelAttr}="${target}"]`);
-    if (panel) {
+      btn.classList.add("is-active");
+      btn.setAttribute("aria-selected", "true");
+
+      const panel = container.querySelector(`${panelClass}[${panelAttr}="${target}"]`);
+      if (!panel) return;
+
+      // 2. Show Panel
       panel.classList.add("is-active");
       panel.removeAttribute("hidden");
+      
       if (window.gsap) {
         window.gsap.fromTo(panel, { opacity: 0, x: 15 }, { opacity: 1, x: 0, duration: 0.4 });
       }
 
-      // Smart Scroll: on tab switch, bring user back to the top of the lower section
-      // so they always see the new tab content from the beginning.
-      // Target ps-content-wrap (the full-width section) not ps-clinical-console (inner grid col).
-      if (!isPlanner) {
-        const consoleSection = container.closest(".ps-content-wrap") || container.closest(".ps-clinical-console") || container;
-        const sectionTop = consoleSection.getBoundingClientRect().top + window.scrollY;
-        const headerHeight = document.querySelector(".site-header")?.offsetHeight || 80;
-        const scrollTarget = sectionTop - headerHeight - 8; // 8px breathing room below sticky header
-
-        if (window.scrollY > scrollTarget + 60) {
-          window.scrollTo({ top: scrollTarget, behavior: "smooth" });
+      // 3. Smart Scroll (Product Page Only)
+      if (!isPlanner && btn.classList.contains('tab-btn')) {
+        const consoleSection = container.closest(".ps-clinical-console");
+        if (consoleSection) {
+          const rect = consoleSection.getBoundingClientRect();
+          const headerHeight = document.querySelector(".site-header")?.offsetHeight || 80;
+          
+          // Only scroll if the console top is already scrolled off-screen
+          if (rect.top < -20) {
+            const scrollTarget = window.scrollY + rect.top - headerHeight - 15;
+            window.scrollTo({ 
+              top: scrollTarget, 
+              behavior: "smooth" 
+            });
+          }
         }
       }
-    }
+    });
   });
 }
 
@@ -146,6 +157,21 @@ export function initAnchorScroll() {
       e.preventDefault();
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  });
+}
+
+export function initAccordion() {
+  document.addEventListener('click', (e) => {
+    const header = e.target.closest('.faq-accordion__header');
+    if (!header) return;
+
+    const item = header.closest('.faq-accordion__item');
+    if (!item) return;
+
+    const isOpen = item.classList.contains('is-active');
+    
+    // Toggle current item
+    item.classList.toggle('is-active');
   });
 }
 

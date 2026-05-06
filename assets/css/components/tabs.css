@@ -1,7 +1,8 @@
 @layer components {
+
   /* Tabs Section */
   .tab-block {
-    @apply grid grid-cols-[280px_1fr] gap-10 items-start max-lg:grid-cols-1 max-lg:gap-6;
+    @apply grid grid-cols-[280px_1fr] gap-10 items-stretch max-lg:grid-cols-1 max-lg:gap-6;
   }
 
   .tab-nav {
@@ -76,7 +77,9 @@
   }
 
   @media (max-width: 1023px) {
-    .tab-panel__visual { min-height: 180px; }
+    .tab-panel__visual {
+      min-height: 180px;
+    }
   }
 
   /* Animated ring decorations inside tab panel visual */
@@ -131,7 +134,7 @@
   .product-scroll-card__icon-inner .icon {
     @apply w-7 h-7;
   }
-  
+
   .tag-list {
     @apply flex flex-wrap gap-2 mt-5;
   }
@@ -149,7 +152,7 @@
   .text-link .icon {
     @apply w-3.5 h-3.5;
   }
-  
+
   /* FAQ layout */
   .faq-aside {
     @apply sticky top-[96px] max-lg:static;
@@ -193,11 +196,23 @@
 }
 
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

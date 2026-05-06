@@ -44,10 +44,10 @@
   }
 
   .section--deep-soft {
-    background-color: var(--color-ink);
-    color: #ffffff;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(135deg, var(--color-abyss) 0%, var(--color-ink) 100%);
+    color: var(--color-white);
+    border-top: 1px solid var(--color-light-line);
+    border-bottom: 1px solid var(--color-light-line);
   }
   
   .section--deep-soft .section-title {

@@ -1,0 +1,114 @@
+# Master Taxonomy Schema
+# This file is the SINGLE SOURCE OF TRUTH for all product data.
+
+# 1. Broad Therapeutic Classes
+# (Consolidated for better UX filtering and SEO accuracy)
+therapeutic_class:
+  - Antibiotics
+  - Antibacterial
+  - Macrolide
+  - Antacids
+  - Analgesics & Pain Relief
+  - Anti-Inflammatory
+  - Anti-Infectives
+  - Anti-Pyretic
+  - Anti-Hypertensive
+  - Anti-Histamines
+  - Anti-Fungal
+  - Anti-Viral
+  - Anti-Emetic
+  - Acne Treatment
+  - Anti-Aging
+  - Cardiology
+  - Cosmeceuticals
+  - Cough & Cold
+  - Critical Care
+  - Dental
+  - Dermatology
+  - Diabetology
+  - Erectile Dysfunction
+  - Energy Boosters
+  - Eye Care
+  - Gastroenterology
+  - Gynaecology
+  - Haematology
+  - Hepatology
+  - Hair Growth
+  - Immunity Boosters
+  - Infectious Diseases
+  - Infusions & Electrolytes
+  - Liver Care
+  - Memory Enhancers
+  - Mental Wellness
+  - Multivitamins
+  - Nephrology
+  - Neurology
+  - Nutraceuticals
+  - Oncology
+  - Ophthalmology
+  - Orthopaedics
+  - Pediatric Care
+  - Psychiatry
+  - Probiotics
+  - Rheumatology
+  - Respiratory
+  - Skin Care
+  - Skin Brightening
+  - Sun Protection
+  - Urology
+  - Weight Management
+  - Whitening & De-Tan
+  - Ayurvedic & Herbal
+  - Face Care
+  - Hair Care
+  - Body Care
+  - General Wellness
+
+# 2. Product Categories (Dosage Forms)
+categories:
+  - Tablets
+  - Capsules
+  - Softgel Capsules
+  - Effervescent Tablets
+  - Chewable Tablets
+  - Lozenges
+  - Syrups
+  - Dry Syrups
+  - Suspensions
+  - Oral Drops
+  - Injections
+  - Infusions
+  - Pellets
+  - DC Granules
+  - Ointments
+  - Creams
+  - Gels
+  - Facewash
+  - Shampoos
+  - Lotions
+  - Serums
+  - Sunscreens
+  - Soaps
+  - Medicated Soaps
+  - Dusting Powders
+  - Hair Oils
+  - Cleansers
+  - Cleansing Milks
+  - Toners
+  - Moisturizers
+  - Face Masks
+  - Eye Drops
+  - Ear Drops
+  - Nasal Sprays
+  - Mouthwash
+  - Gargles
+  - Inhalers
+  - Sachets
+  - Granules
+  - Protein Powders
+  - Suppositories
+  - Transdermal Patches
+  - Vaccines
+  - Surgical Items
+  - Veterinary
+  - Sanitizers & Wipes

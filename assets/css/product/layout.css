@@ -31,7 +31,7 @@
 
   /* ── UPPER SECTION SPLIT LAYOUT ── */
   .ps-upper-section {
-    @apply pt-10 pb-4;
+    @apply pt-10 pb-12;
   }
 
   /* Two-column split: narrower gallery, wider info */

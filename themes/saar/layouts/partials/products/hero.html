@@ -28,20 +28,15 @@
                 <div class="hero-cat-wrap w-full md:w-[260px] border-t md:border-t-0 border-white/15 md:border-l">
                     <select id="hero-cat-select" class="hero-cat-select" aria-label="Select Category">
                         <option value="all">All Categories</option>
-                        {{ $cats := slice }}
-                        {{ range (where .Site.RegularPages "Section" "products") }}
-                            {{ if .Params.category }}
-                                {{ $cats = $cats | append .Params.category }}
-                            {{ end }}
-                            {{ if .Params.categories }}
-                                {{ range .Params.categories }}
-                                    {{ $cats = $cats | append . }}
-                                {{ end }}
-                            {{ end }}
-                        {{ end }}
-                        {{ range (uniq $cats | sort) }}
+                        {{- $products := where .Site.RegularPages "Section" "products" -}}
+                        {{- $appliedTerms := slice -}}
+                        {{- range $products -}}
+                            {{- with .Params.categories -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
+                            {{- with .Params.therapeutic_class -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
+                        {{- end -}}
+                        {{- range (uniq $appliedTerms | sort) -}}
                         <option value="{{ . | urlize }}">{{ . }}</option>
-                        {{ end }}
+                        {{- end -}}
                     </select>
                     <i data-lucide="chevron-down" class="icon-chevron"></i>
                 </div>

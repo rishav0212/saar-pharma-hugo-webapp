@@ -1,15 +1,19 @@
-{{ $allCats := slice }}
-{{ range (where .Site.RegularPages "Section" "products") }}
-    {{ if .Params.category }}
-        {{ $allCats = $allCats | append .Params.category }}
-    {{ end }}
-    {{ if .Params.categories }}
-        {{ range .Params.categories }}
-            {{ $allCats = $allCats | append . }}
-        {{ end }}
-    {{ end }}
-{{ end }}
-{{ $uniqueCats := $allCats | uniq | sort }}
+{{- /* 
+  UNIFIED TAXONOMY COLLECTION 
+  Pulls from data/schema.yml and counts across both categories and therapeutic_class
+*/ -}}
+{{- $schema := site.Data.schema -}}
+{{- $products := where .Site.RegularPages "Section" "products" -}}
+
+{{- /* Collect all applied terms from all products for accurate counting */ -}}
+{{- $appliedTerms := slice -}}
+{{- range $products -}}
+    {{- with .Params.categories -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
+    {{- with .Params.therapeutic_class -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
+{{- end -}}
+
+{{- /* Merge schema lists for the UI Pills */ -}}
+{{- $uniqueCats := $schema.therapeutic_class | append $schema.categories | uniq | sort -}}
 
 <!-- Floating Global Filter & Search Bar -->
 <nav class="product-filter-bar shadow-sm sticky top-0 md:top-[72px]">
@@ -29,9 +33,11 @@
                             {{ range $uniqueCats }}
                                 {{ $catName := . }}
                                 {{ $count := 0 }}
-                                {{ range $allCats }}
+                                {{ range $appliedTerms }}
                                     {{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}
                                 {{ end }}
+                                
+                                {{ if gt $count 0 }}
                                 <div class="suggestion-item" data-value="{{ . }}">
                                     <i data-lucide="tag" class="w-3.5 h-3.5 opacity-50"></i>
                                     <div class="flex justify-between items-center w-full pr-2">
@@ -39,6 +45,7 @@
                                         <span class="text-[10px] opacity-40 font-black">{{ $count }} Items</span>
                                     </div>
                                 </div>
+                                {{ end }}
                             {{ end }}
                         </div>
                     </div>
@@ -59,12 +66,15 @@
                     {{ range $uniqueCats }}
                         {{ $catName := . }}
                         {{ $count := 0 }}
-                        {{ range $allCats }}
+                        {{ range $appliedTerms }}
                             {{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}
                         {{ end }}
+
+                        {{ if gt $count 0 }}
                         <button class="filter-pill" data-filter="{{ . | urlize }}" aria-pressed="false">
                             <span class="filter-pill__label">{{ . }} <span class="opacity-50 ml-1">({{ $count }})</span></span>
                         </button>
+                        {{ end }}
                     {{ end }}
                 </div>
 

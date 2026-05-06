@@ -7,9 +7,11 @@
   .ps-content-wrap {
     /* Full-bleed background — must be on this wrapper, NOT on ps-clinical-console
        which lives inside .container and would get clipped by its max-width */
-    @apply w-full py-24;
-    background-color: #F1F5F9;
+    @apply w-full pt-24 pb-32 relative z-10;
+    background-color: var(--color-surface);
     border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line-strong);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.02);
   }
 
   .ps-content-grid {
@@ -18,7 +20,7 @@
 
   /* Markdown Content */
   .ps-markdown-content {
-    @apply bg-white p-8 lg:p-12 rounded-3xl border border-line shadow-sm;
+    @apply bg-white p-8 lg:p-12 rounded-2xl border border-line shadow-sm;
   }
 
   .ps-markdown-content h2 {
@@ -74,13 +76,27 @@
   .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content h2::before {
     display: none;
   }
-  
+
   .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content h2 {
     @apply pb-3 mb-6 mt-8 text-[22px];
   }
-  
+
   .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content h2:first-child {
     @apply mt-0;
+  }
+
+  /* Premium List Points for Tab Panels */
+  .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content li {
+    @apply relative pl-12 pr-6 py-4 mb-3 text-[14px] text-ink font-semibold leading-relaxed bg-brand/5 rounded-xl border border-brand/10 transition-all hover:bg-brand/10;
+  }
+
+  .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content li::before {
+    content: '';
+    @apply absolute left-4 top-[24px] w-2 h-2 bg-brand rounded-full shadow-[0_0_10px_rgba(0,128,128,0.3)];
+  }
+
+  .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content {
+    @apply bg-transparent border-0 shadow-none p-0;
   }
 
   .ps-markdown-content details {
@@ -104,100 +120,76 @@
     @apply p-5 m-0;
   }
 
-  /* ── Clinical Console: reset background — bg is now on ps-content-wrap ── */
+  /* ── Clinical Console: Layout & Navigation ── */
   .ps-clinical-console {
-    width: 100% !important;
-    max-width: 100% !important;
+    @apply w-full max-w-full mb-20;
   }
 
-  /* Consolidating widescreen overrides... */
-
-  .ps-tabbed-console {
-    display: grid !important;
-    grid-template-columns: 320px 1fr !important;
-    gap: 4rem !important;
-    width: 100% !important;
-  }
-
-  .ps-clinical-console .tab-panels,
-  .ps-clinical-console .tab-panels .tab-panel {
-    width: 100% !important;
-    min-width: 100% !important;
-    flex-grow: 1 !important;
+  .ps-tabbed-console,
+  .ps-clinical-console .tab-block {
+    @apply grid grid-cols-[280px_1fr] gap-16 items-stretch w-full max-lg:grid-cols-1 max-lg:gap-8;
   }
 
   .ps-console-sidebar {
-    position: sticky !important;
-    top: 6rem !important;
-    width: 100% !important;
+    @apply sticky top-24 w-full;
   }
 
-  .ps-clinical-console .tab-btn {
-    @apply px-5 py-4 text-[14px] rounded-2xl transition-all duration-300;
-  }
-
-  .ps-clinical-console .tab-btn:hover {
-    @apply bg-white/60 -translate-x-1 text-ink;
-  }
-
-  .ps-clinical-console .tab-btn.is-active {
-    @apply bg-white text-brand-3 shadow-md -translate-x-2 font-black;
-  }
-
-  /* ── Final Force-Width Clinical Console ── */
-  .ps-clinical-console .container {
-    max-width: 98% !important;
-    width: 100% !important;
-    padding-left: 1% !important;
-    padding-right: 1% !important;
-    margin: 0 auto !important;
-  }
-
-  .ps-tabbed-console {
-    display: grid !important;
-    grid-template-columns: 320px 1fr !important;
-    gap: 2.5rem !important;
-    width: 100% !important;
-    align-items: start !important;
-  }
-
-  .ps-console-sidebar {
-    position: sticky !important;
-    top: 6rem !important;
-    width: 100% !important;
+  .ps-clinical-console .tab-nav {
+    @apply mt-2 max-lg:mt-0 flex flex-col gap-1.5;
   }
 
   .ps-clinical-console .tab-panels {
-    width: 100% !important;
-    flex-grow: 1 !important;
+    @apply w-full flex-grow;
+  }
+
+  .ps-console-frame {
+    @apply bg-white border border-line py-8 lg:py-10 px-10 lg:px-16 shadow-xl min-h-full rounded-[16px] relative overflow-hidden flex flex-col;
   }
 
   .ps-clinical-console .tab-panels .tab-panel {
-    @apply bg-white border border-line rounded-2xl p-10 lg:p-12 shadow-sm;
-    width: 100% !important;
-    min-width: 100% !important;
-    min-height: 700px !important;
-    display: none;
-    flex-direction: column;
+    @apply hidden flex-col w-full h-full bg-transparent border-0 shadow-none p-0 m-0;
   }
 
+  .ps-clinical-console .tab-panel__body {
+    @apply w-full px-0 mx-0;
+  }
+
+  .ps-markdown-content p:first-child {
+    @apply mt-0;
+  }
+
+
+
   .ps-clinical-console .tab-panels .tab-panel.is-active {
-    display: block !important;
+    display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
 
   .ps-clinical-console .tab-btn {
-    @apply px-5 py-4 text-[14px] rounded-xl transition-all duration-300;
+    @apply px-5 py-2.5 text-[14px] rounded-xl transition-all duration-300 border border-transparent;
   }
 
-  /* Authority Tab (First Tab) Styling */
+  .ps-clinical-console .tab-btn.is-active {
+    @apply border-brand/10 bg-white shadow-soft text-brand-3;
+    background-image: linear-gradient(to right, var(--color-brand) 0%, var(--color-brand) 4px, transparent 4px);
+  }
+
+  /* Authority Tab Styling */
   .ps-authority-pane {
-    @apply space-y-8;
+    @apply space-y-10;
   }
 
-  .ps-badge {
-    @apply inline-flex items-center px-3 py-1 bg-brand-3/10 text-brand-3 text-[11px] font-black uppercase tracking-wider rounded-full mb-2;
+  .ps-authority-header {
+    @apply max-w-3xl;
+  }
+
+  .ps-authority-title {
+    @apply text-[32px] font-black text-ink leading-tight mb-4;
+  }
+
+  .ps-authority-lead {
+    @apply text-muted text-[18px] leading-relaxed mb-8;
   }
 
   .ps-authority-grid {
@@ -205,97 +197,58 @@
   }
 
   .ps-authority-card {
-    @apply p-6 border border-line rounded-xl bg-surface/50 transition-all duration-300;
+    @apply p-8 border border-line rounded-2xl bg-surface/50 transition-all duration-300;
   }
 
   .ps-authority-card:hover {
-    @apply border-brand/30 shadow-soft bg-white;
+    @apply border-brand/30 shadow-soft bg-white -translate-y-1;
+  }
+
+  .ps-authority-icon {
+    @apply w-12 h-12 rounded-2xl bg-brand/5 flex items-center justify-center mb-6;
   }
 
   .ps-authority-card h5 {
-    @apply text-[18px] mb-2 mt-4;
+    @apply text-[20px] font-black text-ink mb-3;
   }
 
   .ps-authority-card p {
-    @apply text-muted text-[14px] leading-relaxed;
+    @apply text-muted text-[15px] leading-relaxed;
   }
 
   .ps-authority-footer {
     @apply flex items-center gap-4 mt-10 pt-8 border-t border-line max-md:flex-col max-md:items-stretch;
   }
 
-  /* Standalone FAQ Section Styling */
-  .ps-faq-section {
-    @apply py-24 bg-surface/50;
+  /* Supply Dashboard Styling */
+  .ps-supply-dashboard {
+    @apply mt-16 pt-10 border-t border-line px-0 mx-0;
   }
 
-  .ps-faq-cta {
-    @apply relative;
+  .ps-supply-title {
+    @apply text-[14px] font-black uppercase tracking-[0.2em] text-brand mb-8 px-0;
   }
 
-  .ps-sticky-cta-card {
-    @apply sticky top-32 p-8 bg-brand-3 text-white rounded-[32px] shadow-lift overflow-hidden;
+  .ps-supply-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6;
   }
 
-  .ps-sticky-cta-card::before {
-    content: "";
-    @apply absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16;
+  .ps-supply-card {
+    @apply p-6 bg-surface rounded-2xl border border-brand-line/30 transition-all hover:border-brand hover:shadow-sm;
   }
 
-  .ps-cta-icon {
-    @apply w-12 h-12 bg-white/20 rounded-xl grid place-items-center mb-6;
+  .ps-supply-label {
+    @apply block text-[11px] font-black text-muted uppercase tracking-wider mb-2;
   }
 
-  .ps-sticky-cta-card h4 {
-    @apply text-[24px] text-white mb-4;
+  .ps-supply-value {
+    @apply block text-[15px] font-bold text-ink;
   }
 
-  .ps-sticky-cta-card p {
-    @apply text-white/80 text-[15px] leading-relaxed mb-8;
+  .ps-supply-disclaimer {
+    @apply mt-8 text-[12px] text-muted leading-relaxed italic max-w-2xl;
   }
 
-  /* Tab-specific formatting */
-  .ps-clinical-console h4 {
-    @apply text-[16px] font-black text-ink mt-8 mb-4 flex items-center gap-2;
-  }
-
-  /* 2-column grid for indications/features in tabs */
-  .ps-tab-grid {
-    @apply grid grid-cols-1 md:grid-cols-2 gap-4 my-6;
-  }
-
-  .ps-tab-grid-item {
-    @apply flex items-center gap-3 p-4 bg-paper rounded-xl border border-line transition-all hover:border-brand-line hover:bg-surface;
-  }
-
-  .ps-tab-grid-item i {
-    @apply text-brand w-4 h-4 flex-none;
-  }
-
-  .ps-tab-grid-item span {
-    @apply text-[14px] font-semibold text-ink;
-  }
-
-  /* Clinical Data Table in Tabs */
-  .ps-clinical-table {
-    @apply w-full border-collapse mb-6;
-  }
-
-  .ps-clinical-table th {
-    @apply text-left py-3 px-4 bg-surface text-brand font-black text-[11px] uppercase tracking-wider border-b-2 border-brand-line;
-  }
-
-  .ps-clinical-table td {
-    @apply py-4 px-4 text-[14px] text-muted border-b border-line;
-  }
-
-  .ps-clinical-table tr:hover td {
-    @apply bg-paper text-ink;
-  }
-
-  .ps-clinical-table td strong {
-    @apply text-ink;
-  }
 
   /* Sticky Sidebar */
   .ps-sticky-sidebar {
@@ -303,7 +256,7 @@
   }
 
   .ps-widget-card {
-    @apply bg-white rounded-3xl border border-line shadow-lift overflow-hidden;
+    @apply bg-white rounded-2xl border border-line shadow-lift overflow-hidden;
   }
 
   .widget-header {
@@ -349,7 +302,7 @@
   }
 
   .ps-widget-link {
-    @apply flex items-center justify-between p-6 bg-abyss rounded-3xl border border-white/10 shadow-sm hover:border-brand-2 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 no-underline text-white;
+    @apply flex items-center justify-between p-6 bg-abyss rounded-2xl border border-white/10 shadow-sm hover:border-brand-2 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 no-underline text-white;
   }
 
   .ps-widget-link strong {

@@ -1,15 +1,13 @@
 <!-- Animated Category Marquee -->
 <div class="marquee">
     <div class="marquee__track">
-        {{ $allCats := slice }}
-        {{ range (where .Site.RegularPages "Section" "products") }}
-            {{ if .Params.categories }}
-                {{ range .Params.categories }}
-                    {{ $allCats = $allCats | append . }}
-                {{ end }}
-            {{ end }}
-        {{ end }}
-        {{ $uniqueCats := $allCats | uniq | sort }}
+        {{- $products := where .Site.RegularPages "Section" "products" -}}
+        {{- $appliedTerms := slice -}}
+        {{- range $products -}}
+            {{- with .Params.categories -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
+            {{- with .Params.therapeutic_class -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
+        {{- end -}}
+        {{- $uniqueCats := $appliedTerms | uniq | sort -}}
         
         {{/* Duplicate for seamless loop */}}
         {{ range (seq 4) }}

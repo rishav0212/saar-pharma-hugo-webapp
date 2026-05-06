@@ -4,6 +4,11 @@
         {{ $safeCats = $safeCats | append (. | urlize) }}
     {{ end }}
 {{ end }}
+{{ with .Params.therapeutic_class }}
+    {{ range . }}
+        {{ $safeCats = $safeCats | append (. | urlize) }}
+    {{ end }}
+{{ end }}
 
 <article class="product-card product-card-wrap h-full group"
     data-title="{{ .Params.product_name | default .Title | lower }}"
@@ -22,11 +27,11 @@
 
     {{/* ── New Category Badge System (Universal) ── */}}
     <div class="product-card__cat-group">
-        {{ if .Params.categories }}
-            <span class="product-card__cat-badge">{{ index .Params.categories 0 }}</span>
-            {{ if gt (len .Params.categories) 1 }}
-                <span class="product-card__cat-badge product-card__cat-badge--sub">{{ index .Params.categories 1 }}</span>
-            {{ end }}
+        {{ with .Params.categories }}
+            <span class="product-card__cat-badge">{{ index . 0 }}</span>
+        {{ end }}
+        {{ with .Params.therapeutic_class }}
+            <span class="product-card__cat-badge product-card__cat-badge--sub">{{ index . 0 }}</span>
         {{ end }}
     </div>
 

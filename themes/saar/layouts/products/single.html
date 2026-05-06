@@ -1,5 +1,27 @@
 {{ define "main" }}
 
+{{- /* 
+  BUILD-TIME DATA VALIDATION 
+  Ensures all front matter taxonomies match data/schema.yml 
+*/ -}}
+{{- $schema := site.Data.schema -}}
+
+{{- with .Params.therapeutic_class -}}
+  {{- range . -}}
+    {{- if not (in $schema.therapeutic_class .) -}}
+      {{- errorf "DATA ERROR: Invalid therapeutic class '%s' found in %s. Must match exactly with data/schema.yml." . $.File.Path -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with .Params.categories -}}
+  {{- range . -}}
+    {{- if not (in $schema.categories .) -}}
+      {{- errorf "DATA ERROR: Invalid product category '%s' found in %s. Must match exactly with data/schema.yml." . $.File.Path -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 <article class="ps-premium-page" itemscope itemtype="https://schema.org/Drug">
 
   {{/* ── DYNAMIC JSON-LD SCHEMA (Product + FAQPage) ── */}}
@@ -10,9 +32,9 @@
 
 
   {{/* ══════════════════════════════════════════════════════════════════════════
-       UPPER SECTION: EDITORIAL SPLIT HERO
-       Left: Large gallery with filmstrip    Right: Sticky info panel
-       UI remains identical as requested, but logic is now fully dynamic.
+  UPPER SECTION: EDITORIAL SPLIT HERO
+  Left: Large gallery with filmstrip Right: Sticky info panel
+  UI remains identical as requested, but logic is now fully dynamic.
   ══════════════════════════════════════════════════════════════════════════ */}}
   <section class="ps-upper-section">
     <div class="container">
@@ -30,7 +52,7 @@
 
 
   {{/* ══════════════════════════════════════════════════════════════════════════
-       LOWER SECTION: TABBED CLINICAL DASHBOARD + SIDEBAR
+  LOWER SECTION: TABBED CLINICAL DASHBOARD + SIDEBAR
   ══════════════════════════════════════════════════════════════════════════ */}}
   <div class="ps-content-wrap">
     <div class="container">
@@ -38,63 +60,68 @@
 
         {{/* LEFT: Dynamic Tabbed Clinical Console */}}
         <main class="ps-clinical-console" id="main-product-content">
-          
+
           <div class="tab-block">
             {{/* ── AUTO-TABBER LOGIC ── */}}
             {{ $content := .Content }}
             {{/* Split content by H2 tags. The first part is everything before the first H2 */}}
             {{ $rawSections := split $content "<h2" }}
             
-            {{/* Initialize sections array */}}
             {{ $sections := slice }}
             
-            {{/* Handle intro content (before first H2) */}}
+            {{/* 1. Combined Product Profile Tab */}}
             {{ $intro := index $rawSections 0 }}
             {{ if (gt (len (trim $intro " \n\r")) 0) }}
-              {{ $sections = $sections | append (dict "title" "Overview" "content" $intro "id" "overview" "icon" "info") }}
-            {{ end }}
+              {{ $sections = $sections | append (dict 
+                "title" "Product Profile" 
+                "id" "overview" 
+                "icon" "info" 
+                "content" (printf `
+                  <div class="ps-markdown-content !p-0 border-0 shadow-none mb-12">
+                    %s
+                  </div>
 
-            {{/* Initialize sections array with the "Authority" tab first */}}
-            {{ $sections := slice (dict 
-              "title" "Manufacturing Advantage" 
-              "id" "manufacturing-authority" 
-              "icon" "factory" 
-              "content" (printf `
-                <div class="ps-authority-pane">
-                  <div class="ps-authority-header">
-                    <span class="ps-badge">Manufacturing Advantage</span>
-                    <h4 class="text-[32px] font-black text-ink leading-tight mb-4">Why Saar Biotech for %s?</h4>
-                    <p class="ps-authority-lead text-muted text-[18px] leading-relaxed mb-8">
-                      Since 2005, Saar Biotech has been a distinguished **WHO-GMP certified** leader in pharmaceutical manufacturing. We partner with over **1700+ global clients** to deliver unmatched stability and bioavailability for this %s formulation.
+                  <div class="ps-authority-intro mb-10 pt-10 border-t border-line">
+                    <span class="eyebrow text-brand">Manufacturing Advantage</span>
+                    <h2 class="text-[32px] mt-2 mb-4">Why Saar Biotech for %s?</h2>
+                    <p class="text-muted leading-relaxed text-[15px]">
+                      Since 2005, Saar Biotech has been a distinguished <b>WHO-GMP certified</b> leader in pharmaceutical manufacturing. 
+                      We utilize advanced micronization and pH-stabilization protocols to deliver unmatched bioavailability for this 
+                      %s formulation.
                     </p>
                   </div>
-                  
-                  <div class="ps-authority-grid">
-                    <div class="ps-authority-card">
-                      <i data-lucide="shield-check" class="icon text-brand"></i>
-                      <h5>DCGI Approved</h5>
-                      <p>Ready-to-use dossiers for rapid market entry.</p>
+
+                  <div class="grid grid-cols-2 gap-6 max-md:grid-cols-1">
+                    <div class="ps-feature-card p-6 bg-brand/5 rounded-2xl border border-brand/10">
+                      <div class="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center mb-4">
+                        <i data-lucide="shield-check" class="text-brand w-5 h-5"></i>
+                      </div>
+                      <h4 class="text-[18px] font-bold mb-2">DCGI Approved</h4>
+                      <p class="text-[14px] text-muted leading-relaxed">Ready-to-use dossiers and CDSCO support for rapid market entry in India.</p>
                     </div>
-                    <div class="ps-authority-card">
-                      <i data-lucide="zap" class="icon text-brand"></i>
-                      <h5>Fast Turnaround</h5>
-                      <p>30-45 days lead time for new batches.</p>
+
+                    <div class="ps-feature-card p-6 bg-brand/5 rounded-2xl border border-brand/10">
+                      <div class="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center mb-4">
+                        <i data-lucide="zap" class="text-brand w-5 h-5"></i>
+                      </div>
+                      <h4 class="text-[18px] font-bold mb-2">Fast Turnaround</h4>
+                      <p class="text-[14px] text-muted leading-relaxed">30-45 days lead time for new batches with state-of-the-art logistics.</p>
                     </div>
                   </div>
 
-                  <div class="ps-authority-footer">
-                    <a href="#clinical-faq" class="btn btn--outline btn--small">
-                      <i data-lucide="help-circle" class="icon"></i>
-                      View Technical Intelligence
+                  <div class="ps-authority-footer mt-10 flex items-center gap-4 max-md:flex-col max-md:items-stretch">
+                    <a href="#clinical-faq" class="btn btn--outline btn--small flex items-center gap-2">
+                      <i data-lucide="help-circle" class="w-4 h-4"></i>
+                      <span>View Technical Intelligence</span>
                     </a>
-                    <a href="/products/" class="btn btn--primary btn--small">
-                      <i data-lucide="arrow-right" class="icon"></i>
-                      Browse Similar Formulations
+                    <a href="/products/" class="btn btn--primary btn--small flex items-center gap-2">
+                      <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                      <span>Browse Manufacturing List</span>
                     </a>
                   </div>
-                </div>
-              ` .Title (index .Params.subCategories 0 | default "Pharmaceutical"))
-            ) }}
+                ` $intro .Title .Title)
+              ) }}
+            {{ end }}
 
             {{/* Process H2 sections */}}
             {{ range $idx, $rawSection := $rawSections }}
@@ -123,109 +150,161 @@
                   {{ else if (findRE "side effect|safety|contraindication" $tLower) }} {{ $icon = "shield-alert" }}
                   {{ else if (findRE "manufactur" $tLower) }} {{ $icon = "factory" }}
                   {{ end }}
-
+ 
                   {{ $sections = $sections | append (dict "title" $title "content" $sectionBody "id" $id "icon" $icon) }}
                 {{ end }}
               {{ end }}
             {{ end }}
 
-            {{/* 1. Tab Navigation (Sidebar style) */}}
-            <aside class="ps-console-sidebar">
-              <div class="tab-nav" role="tablist" aria-label="Product information tabs">
-                {{ range $idx, $section := $sections }}
-                <button class="tab-btn {{ if eq $idx 0 }}is-active{{ end }}" data-tab="{{ $section.id }}" role="tab" aria-selected="{{ if eq $idx 0 }}true{{ else }}false{{ end }}">
-                  <i data-lucide="{{ $section.icon }}" class="icon"></i>
-                  <span>{{ $section.title }}</span>
-                </button>
-                {{ end }}
-              </div>
-            </aside>
 
-            {{/* 2. Tab Content Panes */}}
-            <div class="tab-panels">
+
+          {{/* 1. Tab Navigation (Sidebar style) */}}
+          <aside class="ps-console-sidebar">
+            <div class="ps-console-header mb-10" data-animate>
+              <span class="eyebrow text-brand-3">Technical Details</span>
+              <h2 class="section-title section-title--sm mt-2">Product Information</h2>
+            </div>
+            
+            <div class="tab-nav" role="tablist" aria-label="Product information tabs">
               {{ range $idx, $section := $sections }}
-              <div class="tab-panel {{ if eq $idx 0 }}is-active{{ end }}" data-tab="{{ $section.id }}" role="tabpanel" {{ if ne $idx 0 }}hidden{{ end }}>
-                <div class="tab-panel__body h-full flex flex-col">
-                  <div class="flex items-center justify-between mb-8 border-b border-line pb-6">
-                    <h3 class="text-[28px] m-0">{{ $section.title }}</h3>
-                    <span class="ps-badge">Expert Verified Content</span>
-                  </div>
-
-                  <div class="ps-markdown-content p-0 border-0 shadow-none flex-grow">
-                    {{ $section.content | safeHTML }}
-                  </div>
-
-                  {{/* B2B Supply Readiness Dashboard */}}
-                  <div class="mt-12 pt-8 border-t border-line">
-                    <h4 class="text-[14px] font-black uppercase tracking-widest text-brand mb-6">Global Supply & B2B Compliance</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <div class="p-5 bg-surface rounded-2xl border border-brand-line/30 group hover:border-brand transition-colors">
-                        <span class="block text-[10px] font-black text-muted uppercase mb-1">Batch Lead Time</span>
-                        <span class="block text-[14px] font-bold text-ink">30-45 Days (Standard)</span>
-                      </div>
-                      <div class="p-5 bg-surface rounded-2xl border border-brand-line/30 group hover:border-brand transition-colors">
-                        <span class="block text-[10px] font-black text-muted uppercase mb-1">Documentation</span>
-                        <span class="block text-[14px] font-bold text-ink">Complete CTD/Dossier Support</span>
-                      </div>
-                      <div class="p-5 bg-surface rounded-2xl border border-brand-line/30 group hover:border-brand transition-colors">
-                        <span class="block text-[10px] font-black text-muted uppercase mb-1">Facility Status</span>
-                        <span class="block text-[14px] font-bold text-ink">WHO-GMP & ISO Certified</span>
-                      </div>
-                    </div>
-                    <p class="mt-6 text-[11px] text-muted leading-relaxed italic">
-                      Note: Technical data provided is for B2B informational purposes for pharmaceutical professionals. All formulations comply with DCGI and Schedule M standards.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <button class="tab-btn {{ if eq $idx 0 }}is-active{{ end }}" data-tab="{{ $section.id }}" role="tab"
+                aria-selected="{{ if eq $idx 0 }}true{{ else }}false{{ end }}">
+                <i data-lucide="{{ $section.icon }}" class="icon"></i>
+                <span>{{ $section.title }}</span>
+              </button>
               {{ end }}
             </div>
+          </aside>
+
+          {{/* 2. Tab Content Panes (Inside a static frame to prevent card-flicker) */}}
+          <div class="tab-panels ps-console-frame">
+            {{ range $idx, $section := $sections }}
+            <div class="tab-panel {{ if eq $idx 0 }}is-active{{ end }}" data-tab="{{ $section.id }}" role="tabpanel" {{
+              if ne $idx 0 }}hidden{{ end }}>
+              <div class="tab-panel__body h-full flex flex-col">
+                <div class="flex items-center justify-between mb-5 border-b border-line pb-4">
+                  <h3 class="text-[28px] m-0">{{ $section.title }}</h3>
+                </div>
+
+                <div class="ps-markdown-content !p-0 border-0 shadow-none flex-grow">
+                  {{ $section.content | safeHTML }}
+                </div>
+
+                {{/* Pan-India Supply & Manufacturing Dashboard */}}
+                <div class="ps-supply-dashboard">
+                  <h4 class="ps-supply-title">Pan-India Supply & Contract Manufacturing</h4>
+
+                  <div class="ps-supply-grid">
+                    <div class="ps-supply-card">
+                      <span class="ps-supply-label">Batch Lead Time</span>
+                      <span class="ps-supply-value">30-45 Days (Domestic)</span>
+                    </div>
+
+                    <div class="ps-supply-card">
+                      <span class="ps-supply-label">B2B Services</span>
+                      <span class="ps-supply-value">Contract & Third-Party</span>
+                    </div>
+
+                    <div class="ps-supply-card">
+                      <span class="ps-supply-label">Compliance</span>
+                      <span class="ps-supply-value">DCGI & Schedule M Standards</span>
+                    </div>
+                  </div>
+
+
+                </div>
+
+                <div class="ps-console-footer mt-auto pt-8 border-t border-line flex items-center justify-between">
+                  <div class="flex items-center gap-2 text-[12px] text-muted font-medium italic opacity-70">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-brand"></i>
+                    <span>Technical & Regulatory Integrity Verified</span>
+                  </div>
+                  <a href="#enquiry" class="flex items-center gap-1.5 text-brand font-bold text-[13px] hover:text-brand-dark transition-colors" data-enquire-trigger>
+                    <span>Request Product Dossier</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            {{ end }}
           </div>
-        </div>
+        </main>
       </div>
+    </div>
     </section>
 
-    {{/* ── STANDALONE FAQ SECTION (Outside Tabs for SEO & Visibility) ── */}}
-    {{ if or .Params.faq_clinical .Params.faq_b2b }}
-    <section id="clinical-faq" class="ps-faq-section section bg-surface">
+    {{/* ── STANDALONE FAQ SECTIONS ── */}}
+    {{ if .Params.faq_clinical }}
+    <section id="clinical-faq" class="ps-faq-section section section--deep-soft">
       <div class="container">
-        <div class="section-header">
-          <span class="ps-badge mb-4">Technical Intelligence</span>
-          <h2 class="text-[36px] mb-6">Expert Q&A for {{ .Title }}</h2>
-          <p class="text-muted text-[18px]">Detailed clinical insights and B2B enquiry guides for our WHO-GMP certified {{ .Title }} formulation.</p>
-        </div>
-
-        <div class="ps-faq-grid mt-12 grid grid-cols-[1fr_400px] gap-12 max-lg:grid-cols-1">
-          <div class="faq-list">
-            {{ range .Params.faq_clinical }}
-            <details class="faq-item">
-              <summary>{{ .question }}</summary>
-              <p>{{ .answer | markdownify }}</p>
-            </details>
-            {{ end }}
-            
-            {{ range .Params.faq_b2b }}
-            <details class="faq-item">
-              <summary>{{ .question }}</summary>
-              <p>{{ .answer | markdownify }}</p>
-            </details>
-            {{ end }}
+        <div class="clinical-faq-hub" data-animate>
+          <div class="section-head mb-12">
+            <div class="section-head__left">
+              <span class="eyebrow">Medical Intelligence</span>
+              <h2 class="section-title section-title--sm">Clinical Q&A for {{ .Title }}</h2>
+            </div>
+            <p class="section-kicker">Technical data on bioavailability, pediatric dosing protocols, and therapeutic
+              efficacy for healthcare professionals.</p>
           </div>
 
-          <aside class="ps-faq-cta">
-            <div class="ps-sticky-cta-card">
-              <div class="ps-cta-icon">
-                <i data-lucide="message-square" class="icon text-white"></i>
+          <div class="faq-grid" data-animate-stagger>
+            {{ range .Params.faq_clinical }}
+            <div class="faq-grid__card group">
+              <div class="faq-grid__icon">
+                <i data-lucide="stethoscope"></i>
               </div>
-              <h4>Have more questions?</h4>
-              <p>Our regulatory and technical team is ready to assist with stability data and dossier support.</p>
-              <a href="#enquiry-form" class="btn btn--primary w-full">Request Technical Data</a>
+              <h3>{{ .question }}</h3>
+              <div class="faq-grid__answer">
+                {{ .answer | markdownify }}
+              </div>
             </div>
-          </aside>
+            {{ end }}
+          </div>
         </div>
       </div>
     </section>
     {{ end }}
+
+    {{ if .Params.faq_b2b }}
+    <section id="b2b-faq" class="ps-faq-section section bg-surface">
+      <div class="container">
+        <div class="faq-accordion">
+          <div class="faq-accordion__aside" data-animate data-animate-type="slide-right">
+            <span class="eyebrow">Manufacturing Support</span>
+            <h2 class="section-title section-title--sm">B2B Manufacturing Guide for {{ .Title }}</h2>
+            <p class="section-kicker">Detailed insights on MOQs, lead times, and regulatory dossier support for contract
+              manufacturing partners.</p>
+            <button class="btn btn--outline mt-8" data-enquire-trigger
+              data-product-name="{{ .Params.product_name | default .Title }}">
+              Request Commercial Quotation
+              <i data-lucide="arrow-right" class="icon"></i>
+            </button>
+          </div>
+
+          <div class="faq-accordion__list" data-animate-stagger>
+            {{ range .Params.faq_b2b }}
+            <div class="faq-accordion__item">
+              <div class="faq-accordion__header">
+                <span>{{ .question }}</span>
+              </div>
+              <div class="faq-accordion__answer">
+                <div class="faq-accordion__inner">
+                  <div class="faq-accordion__content">
+                    {{ .answer | markdownify }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </section>
+    {{ end }}
+
+
+
+
 
 </article>
 
@@ -240,136 +319,10 @@
 
 
 {{/* ── GALLERY + LIGHTBOX JS (PRESERVED) ── */}}
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const mainImg    = document.getElementById('ps-main-img');
-  const filmstrip  = document.getElementById('ps-filmstrip');
-  const progressEl = document.getElementById('ps-slide-progress');
-  const frame      = document.getElementById('ps-gallery-frame');
-  const lightbox   = document.getElementById('ps-lightbox');
-  const lbImg      = document.getElementById('ps-lb-img');
-  const lbClose    = document.getElementById('ps-lb-close');
-  const lbPrev     = document.getElementById('ps-lb-prev');
-  const lbNext     = document.getElementById('ps-lb-next');
+{{/* ── INTERACTIVE COMPONENTS JS (Refactored for Modularity & Performance) ── */}}
+{{/* JavaScript migrated to assets/js/modules/product-single.js */}}
 
-  if (!mainImg) return;
 
-  const thumbs = filmstrip ? Array.from(filmstrip.querySelectorAll('.ps-filmstrip-thumb')) : [];
-  const dots   = progressEl ? Array.from(progressEl.querySelectorAll('.ps-slide-dot')) : [];
-  const srcs   = thumbs.length ? thumbs.map(t => t.getAttribute('data-src')) : [mainImg.src];
-  const total  = srcs.length;
-  let current  = 0;
-  let timer    = null;
-  const DELAY  = 4000;
-
-  function goTo(idx, animateMain) {
-    if (typeof animateMain === 'undefined') animateMain = true;
-    if (idx < 0) idx = total - 1;
-    if (idx >= total) idx = 0;
-    current = idx;
-    var src = srcs[idx];
-
-    if (mainImg && animateMain) {
-      mainImg.style.opacity   = '0';
-      mainImg.style.transform = 'scale(0.96)';
-      setTimeout(function() {
-        mainImg.src             = src;
-        mainImg.style.opacity   = '1';
-        mainImg.style.transform = 'scale(1)';
-      }, 220);
-    } else if (mainImg) {
-      mainImg.src = src;
-    }
-
-    thumbs.forEach(function(t, i) { t.classList.toggle('active', i === idx); });
-    dots.forEach(function(d, i)   { d.classList.toggle('active', i === idx); });
-    if (thumbs[idx]) thumbs[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    if (lbImg && lightbox && lightbox.classList.contains('is-open')) lbImg.src = src;
-  }
-
-  function startAutoplay() {
-    stopAutoplay();
-    if (total < 2) return;
-    timer = setInterval(function() { goTo(current + 1); }, DELAY);
-  }
-  function stopAutoplay() {
-    if (timer) { clearInterval(timer); timer = null; }
-  }
-
-  function openLightbox() {
-    if (!lightbox || !lbImg) return;
-    lbImg.src = srcs[current];
-    if (mainImg) lbImg.alt = mainImg.alt;
-
-    lightbox.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-    stopAutoplay();
-
-    if (window.gsap) {
-      gsap.fromTo(lightbox, { opacity: 0 }, { opacity: 1, duration: 0.22, ease: 'power2.out' });
-      gsap.fromTo(lbImg, { scale: 0.88, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.28, ease: 'back.out(1.5)' });
-    }
-  }
-  function closeLightbox() {
-    if (!lightbox) return;
-    const doClose = () => {
-      lightbox.classList.remove('is-open');
-      document.body.style.overflow = '';
-      startAutoplay();
-    };
-    if (window.gsap) {
-      gsap.to(lightbox, { opacity: 0, duration: 0.18, ease: 'power2.in', onComplete: doClose });
-    } else {
-      doClose();
-    }
-  }
-
-  if (frame) { frame.addEventListener('click', openLightbox); }
-  if (lbClose) lbClose.addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
-  if (lbPrev)  lbPrev.addEventListener('click',  function(e) { e.stopPropagation(); goTo(current - 1, false); });
-  if (lbNext)  lbNext.addEventListener('click',  function(e) { e.stopPropagation(); goTo(current + 1, false); });
-  if (lightbox) lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
-
-  /* ── Thumb & dot clicks ── */
-  thumbs.forEach(function(thumb, idx) {
-    thumb.addEventListener('click', function() { goTo(idx); stopAutoplay(); startAutoplay(); });
-  });
-  dots.forEach(function(dot, idx) {
-    dot.addEventListener('click', function() { goTo(idx); stopAutoplay(); startAutoplay(); });
-  });
-
-  /* ── Keyboard navigation ── */
-  document.addEventListener('keydown', function(e) {
-    var lbOpen = lightbox && lightbox.classList.contains('is-open');
-    if (e.key === 'Escape'     && lbOpen)  { closeLightbox(); return; }
-    if (e.key === 'ArrowRight') { goTo(current + 1, !lbOpen); if (!lbOpen) { stopAutoplay(); startAutoplay(); } }
-    if (e.key === 'ArrowLeft')  { goTo(current - 1, !lbOpen); if (!lbOpen) { stopAutoplay(); startAutoplay(); } }
-  });
-
-  /* ── Touch swipe ── */
-  function addSwipe(el, cb) {
-    if (!el) return;
-    var sx = 0;
-    el.addEventListener('touchstart', function(e) { sx = e.changedTouches[0].clientX; }, { passive: true });
-    el.addEventListener('touchend',   function(e) {
-      var d = e.changedTouches[0].clientX - sx;
-      if (Math.abs(d) > 40) cb(d);
-    }, { passive: true });
-  }
-  addSwipe(frame,    function(d) { goTo(d < 0 ? current + 1 : current - 1); stopAutoplay(); startAutoplay(); });
-  addSwipe(lightbox, function(d) { goTo(d < 0 ? current + 1 : current - 1, false); });
-
-  /* ── Hover pause ── */
-  [frame, filmstrip].forEach(function(el) {
-    if (!el) return;
-    el.addEventListener('mouseenter', stopAutoplay);
-    el.addEventListener('mouseleave', startAutoplay);
-  });
-
-  /* ── Init ── */
-  if (total > 1) startAutoplay();
-});
-</script>
 
 
 {{ end }}

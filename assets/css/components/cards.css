@@ -6,9 +6,6 @@
     @apply grid grid-cols-[0.95fr_1.05fr] gap-[58px] items-center max-lg:grid-cols-1 max-lg:gap-10;
   }
   
-  .faq-layout {
-    @apply grid grid-cols-[0.85fr_1.15fr] gap-[44px] items-start max-lg:grid-cols-1;
-  }
 
   .unit-grid {
     @apply grid grid-cols-4 gap-3.5 mt-8 max-lg:grid-cols-2 max-md:grid-cols-2 max-md:gap-2.5;
@@ -161,7 +158,12 @@
   }
 
   .marquee__item {
-    @apply inline-flex items-center gap-4.5 px-4.5 py-3.5 text-[13px] font-extrabold uppercase whitespace-nowrap;
+    @apply inline-flex items-center gap-4.5 px-4.5 py-3.5 text-[13px] font-extrabold uppercase whitespace-nowrap transition-all duration-300;
+  }
+
+  .marquee__item:hover {
+    color: var(--color-brand);
+    @apply scale-110;
   }
 
   .marquee__item::after {

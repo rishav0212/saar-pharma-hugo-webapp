@@ -3,18 +3,19 @@
  * Bundled via Hugo Pipes (esbuild)
  */
 
-import { initTabs, initHeader, initProductScroll, initAnchorScroll, initFooterYear } from './modules/ui';
+import { initTabs, initHeader, initProductScroll, initAnchorScroll, initAccordion, initFooterYear } from './modules/ui';
 import { initAnimations, initCounters, initHeroCanvas } from './modules/animations';
 import { initSearch } from './modules/search';
 import { initProducts } from './modules/products';
 import { initEnquiryModal } from './modules/modal';
 import { initGallery } from './modules/gallery';
 
+
 function safeInit(name, fn) {
-  try { 
-    fn(); 
-  } catch (e) { 
-    console.error(`Saar Init Error [${name}]: `, e); 
+  try {
+    fn();
+  } catch (e) {
+    console.error(`Saar Init Error [${name}]: `, e);
   }
 }
 
@@ -25,7 +26,7 @@ function initIcons() {
 function initLenis() {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion || !window.Lenis) return;
-  
+
   window.lenis = new window.Lenis({
     duration: 1.4,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -50,7 +51,8 @@ const initAll = () => {
   safeInit("Tabs", initTabs);
   safeInit("Header", initHeader);
   safeInit("ProductScroll", initProductScroll);
-  safeInit("AnchorScroll", initAnchorScroll);
+  // safeInit("AnchorScroll", initAnchorScroll);
+  safeInit("Accordion", initAccordion);
   safeInit("FooterYear", initFooterYear);
   safeInit("Search", initSearch);
   safeInit("Products", initProducts);
