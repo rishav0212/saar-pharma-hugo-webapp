@@ -236,8 +236,10 @@
   .product-card__desc { @apply text-muted text-[12.5px] leading-relaxed line-clamp-2 mb-3; }
 
   .product-card__footer { @apply mt-auto pt-3 border-t border-line flex items-center justify-between; }
-  .product-card__cta { @apply text-[11px] font-black text-brand uppercase tracking-widest transition-all duration-300; }
-  .product-card:hover .product-card__cta { @apply text-brand-3 translate-x-1; }
+  .product-card__cta { @apply inline-flex items-center gap-1.5 text-[11px] font-black text-brand uppercase tracking-widest transition-all duration-300; }
+  .product-card:hover .product-card__cta { @apply text-brand-3; }
+  .product-card:hover .product-card__cta i { @apply translate-x-1; }
+  .product-card__cta i { @apply transition-transform duration-300; }
 
   .product-card__enquire-icon {
     @apply w-10 h-10 rounded-full flex items-center justify-center bg-surface border border-line text-brand transition-all duration-300 relative z-30;
