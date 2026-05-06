@@ -235,7 +235,7 @@
 
     /* 2. Component Padding & Spacing */
     .container {
-      @apply px-4 !important; /* Maximize usable width */
+      @apply !px-4; /* Maximize usable width */
     }
     .ps-content-grid {
       @apply gap-6;
