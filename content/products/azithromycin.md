@@ -1,6 +1,6 @@
 ---
 # 1. SEO & SEARCH METADATA
-title: "Azithromycin Suspension"
+title: "Azithromycin"
 meta_title: "Azithromycin Oral Suspension 100mg/200mg | Third Party Manufacturing Baddi | Saar Biotech"
 slug: "azithromycin-oral-solution"
 meta_description: "WHO-GMP certified manufacturer of Azithromycin Oral Suspension in Baddi. We offer premier third-party contract manufacturing with complete dossier support and fast turnaround."
@@ -24,7 +24,6 @@ keywords: [
 description: "A premium macrolide antibacterial suspension manufactured in our WHO-GMP Baddi facility, offering superior bioavailability for respiratory and pediatric infections."
 
 # 2. CORE PRODUCT DATA
-product_name: "Azithromycin"
 approved_name: "Azithromycin Dihydrate"
 categories: ["Suspensions"]
 

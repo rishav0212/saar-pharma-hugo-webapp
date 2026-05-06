@@ -8,7 +8,6 @@ keywords: ["{{ replace .Name "-" " " | title }}", "Third Party Manufacturing", "
 description: "" # Concise marketing blurb for the product card (Max 120 chars)
 
 # 2. CORE PRODUCT DATA
-product_name: "{{ replace .Name "-" " " | title }}"
 approved_name: "" # e.g., Aceclofenac IP / BP / USP
 categories: ["Suspensions", "Antibiotics"] # First item = Main Badge, Second = Sub Badge
 

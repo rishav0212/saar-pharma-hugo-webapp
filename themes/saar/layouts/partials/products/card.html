@@ -11,7 +11,7 @@
 {{ end }}
 
 <article class="product-card product-card-wrap h-full group"
-    data-title="{{ .Params.product_name | default .Title | lower }}" data-category-slugs="{{ delimit $safeCats " " }}"
+    data-title="{{  default .Title | lower }}" data-category-slugs="{{ delimit $safeCats " " }}"
     data-categories="{{ with .Params.categories }}{{ delimit . " " | lower }}{{ end }}"
     data-composition="{{ with .Params.compositions }}{{ delimit . " " | lower }}{{ else }}{{ .Params.composition | lower }}{{ end }}"
     data-area="{{ with .Params.therapeutic_class }}{{ if reflect.IsSlice . }}{{ delimit . " " | lower }}{{ else }}{{ . | lower }}{{ end }}{{ else }}{{ .Params.therapeutic_area | default "" | lower }}{{ end }}"
@@ -60,7 +60,7 @@
         {{ end }}
 
         <h3 class="product-card__title">
-            {{ .Params.product_name | default .Title }}
+            {{  default .Title }}
         </h3>
 
         {{ $cardComp := "" }}

@@ -7,7 +7,38 @@
   /* Tablet landscape (768–1023px): stack gallery above, info below */
   @media (max-width: 1023px) {
     .ps-split-layout {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .ps-info-col, .ps-info-sticky {
+      display: contents;
+    }
+
+    .ps-info-header {
+      order: -1;
+      margin-bottom: 0.5rem;
+    }
+
+    .ps-gallery-col {
+      order: 0;
+      width: 100%;
+    }
+
+    .ps-authority-strip, 
+    .ps-comp-card, 
+    .ps-spec-panel, 
+    .ps-value-strip, 
+    .ps-cta-block, 
+    .ps-cert-strip {
+      order: 1;
+      width: 100%;
+    }
+
+    /* Hide the overlapping badges on the main image to save space and reduce clutter */
+    .ps-gallery-badges {
+      @apply hidden;
     }
 
     .ps-gallery-frame {
