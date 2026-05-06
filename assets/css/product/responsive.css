@@ -17,13 +17,41 @@
     }
 
     .ps-product-title {
-      @apply text-[28px];
+      @apply text-[26px];
     }
 
     .ps-info-sticky {
       position: static !important;
       max-height: none !important;
       overflow-y: visible !important;
+    }
+
+    .ps-console-sidebar {
+      @apply sticky top-[60px] bg-surface z-40 py-4 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 border-b border-line shadow-sm mb-6;
+    }
+
+    .ps-console-header {
+      @apply mb-4;
+    }
+    
+    .ps-console-frame {
+      @apply py-6 px-5;
+    }
+    
+    .ps-content-wrap {
+      @apply pt-12 pb-16;
+    }
+    
+    .ps-content-grid {
+      @apply gap-8;
+    }
+    
+    .ps-markdown-content {
+      @apply p-5;
+    }
+    
+    .ps-markdown-content h2 {
+      @apply mt-6 mb-4 text-[20px] pb-3;
     }
   }
 
@@ -70,7 +98,7 @@
     }
 
     .ps-product-title {
-      @apply text-[24px];
+      @apply text-[22px];
     }
 
     /* Lightbox full-screen on mobile */
@@ -101,6 +129,22 @@
       width: 38px;
       height: 38px;
     }
+
+    .ps-hbadge, .ps-meta-category {
+      @apply px-2 py-1 text-[9px] gap-1;
+    }
+    
+    .ps-hbadge [data-lucide], .ps-meta-category [data-lucide] {
+      @apply w-3 h-3;
+    }
+    
+    .ps-header-badges {
+      @apply gap-2 pt-1;
+    }
+    
+    .ps-product-subtitle {
+      @apply text-[13px];
+    }
   }
 
   /* Very small mobile (< 380px) */
@@ -123,15 +167,128 @@
     }
     
     .ps-authority-strip {
-      @apply flex-col;
+      @apply grid grid-cols-3;
     }
     
     .ps-authority-divider {
-      @apply w-full h-px my-0;
+      @apply hidden;
     }
     
     .ps-authority-item {
-      @apply py-4;
+      @apply py-3 px-2;
+    }
+
+    .ps-authority-num {
+      @apply text-[18px];
+    }
+    
+    .ps-authority-label {
+      @apply text-[8px] mt-1.5;
+    }
+
+    .ps-cta-primary {
+      @apply gap-3 px-4 py-3 rounded-xl;
+    }
+
+    .ps-cta-primary [data-lucide] {
+      @apply w-5 h-5;
+    }
+    
+    .ps-cta-primary__text strong {
+      @apply text-[14px];
+    }
+    
+    .ps-cta-primary__text small {
+      @apply text-[10px];
+    }
+
+    .ps-cta-wa, .ps-cta-browse {
+      @apply py-2.5 px-4 rounded-xl text-[12px] gap-2;
+    }
+
+    .ps-comp-card {
+      @apply p-4;
+    }
+
+    .ps-comp-card__formula {
+      @apply text-[16px];
+    }
+    
+    /* --- NEW SUBAGENT FIXES --- */
+    
+    /* 1. Headings & Typography */
+    .section-title {
+      @apply text-[24px] leading-tight;
+    }
+    .section-title--sm {
+      @apply text-[20px] leading-tight;
+    }
+    .ps-authority-title {
+      @apply text-[22px] leading-tight;
+    }
+    .faq-grid__card h3 {
+      @apply text-[16px] font-bold mb-2;
+    }
+    .ps-markdown-content h3 {
+      @apply text-[16px] mt-4 mb-2;
+    }
+
+    /* 2. Component Padding & Spacing */
+    .container {
+      @apply px-4 !important; /* Maximize usable width */
+    }
+    .ps-content-grid {
+      @apply gap-6;
+    }
+    .ps-comp-card {
+      @apply p-4;
+    }
+    .ps-comp-card__pres {
+      @apply mt-3 pt-3; 
+    }
+    .faq-grid__card {
+      @apply p-5;
+    }
+
+    /* 3. Tabs Navigation */
+    .ps-console-header {
+      @apply mb-2;
+    }
+    .ps-clinical-console .tab-btn {
+      @apply px-3 py-1.5 text-[12px] font-bold border-transparent shadow-none bg-transparent;
+    }
+    .ps-clinical-console .tab-btn.is-active {
+      @apply shadow-sm;
+    }
+
+    /* 4. Data Sheet / Spec Items */
+    .ps-spec-panel__head {
+      @apply px-4 py-3;
+    }
+    .ps-spec-item {
+      @apply px-4 py-3 gap-3;
+    }
+    .ps-spec-item__icon {
+      @apply w-6 h-6 rounded flex-shrink-0;
+    }
+    .ps-spec-item__icon [data-lucide] {
+      @apply w-3 h-3;
+    }
+    .ps-spec-item__key {
+      @apply text-[9px] font-bold tracking-wider;
+    }
+    .ps-spec-item__val {
+      @apply text-[12px] font-medium;
+    }
+
+    /* 5. Badges & Pills */
+    .ps-meta-category, .ps-hbadge, .ps-meta-live, .ps-cert-pill, .tag {
+      @apply px-2 py-1 text-[9px] tracking-widest gap-1;
+    }
+    
+    /* 6. Technical / Overflow Overrides */
+    .tab-visual-ring {
+      @apply hidden;
     }
   }
 

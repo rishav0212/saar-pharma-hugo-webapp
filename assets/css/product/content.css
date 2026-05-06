@@ -135,7 +135,12 @@
   }
 
   .ps-clinical-console .tab-nav {
-    @apply mt-2 max-lg:mt-0 flex flex-col gap-1.5;
+    @apply mt-2 max-lg:mt-0 flex lg:flex-col flex-row gap-1.5 max-lg:overflow-x-auto max-lg:pb-1;
+    scrollbar-width: none;
+  }
+
+  .ps-clinical-console .tab-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .ps-clinical-console .tab-panels {
@@ -167,7 +172,7 @@
   }
 
   .ps-clinical-console .tab-btn {
-    @apply px-5 py-2.5 text-[14px] rounded-xl transition-all duration-300 border border-transparent;
+    @apply px-5 py-2.5 text-[14px] rounded-xl transition-all duration-300 border border-transparent max-lg:whitespace-nowrap max-lg:px-4 max-lg:py-2 max-lg:text-[13px] max-lg:flex-shrink-0;
   }
 
   .ps-clinical-console .tab-btn.is-active {

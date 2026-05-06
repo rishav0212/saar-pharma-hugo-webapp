@@ -27,8 +27,8 @@
   }
 
   .faq-accordion__header {
-    @apply p-5.5 font-bold text-ink cursor-pointer flex items-center justify-between outline-none select-none;
-    @apply text-[16px] transition-colors duration-200;
+    @apply p-4 md:p-5.5 font-bold text-ink cursor-pointer flex items-center justify-between outline-none select-none;
+    @apply text-[15px] md:text-[16px] transition-colors duration-200;
   }
 
   .faq-accordion__item:hover .faq-accordion__header {
@@ -63,11 +63,11 @@
   }
 
   .faq-accordion__content {
-    @apply p-5.5 pt-0 text-[15px] text-muted leading-relaxed border-t border-line/30 bg-surface/20;
+    @apply p-4 md:p-5.5 pt-0 text-[14px] md:text-[15px] text-muted leading-relaxed border-t border-line/30 bg-surface/20;
   }
 
   .faq-accordion__content p {
-    @apply m-0 pt-5;
+    @apply m-0 pt-4 md:pt-5;
   }
 
 
@@ -79,12 +79,14 @@
   /* Handle FAQ grids inside dark sections (Elite Clinical Theme) */
   .section--deep-soft .faq-grid__card,
   .section--abyss .faq-grid__card {
-    @apply bg-white/[0.03] border-white/10 backdrop-blur-xl shadow-2xl;
-    background: linear-gradient(135deg, rgba(var(--color-white-rgb), 0.05) 0%, rgba(var(--color-white-rgb), 0.01) 100%);
+    @apply shadow-[0_12px_28px_rgba(14,48,56,0.2)];
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(12px);
   }
 
   .faq-grid__card {
-    @apply p-10 bg-white border border-brand-line/10 rounded-[40px] shadow-soft transition-all duration-500;
+    @apply p-6 md:p-10 bg-white border border-brand-line/10 rounded-[24px] md:rounded-[40px] shadow-soft transition-all duration-500;
   }
 
   .faq-grid__card:hover {
@@ -93,11 +95,13 @@
 
   .section--deep-soft .faq-grid__card:hover,
   .section--abyss .faq-grid__card:hover {
-    @apply bg-white/[0.08] border-brand/40 shadow-brand/10;
+    @apply shadow-[0_16px_36px_rgba(14,48,56,0.3)];
+    border-color: rgba(100, 212, 197, 0.3); /* brand-2 color at 30% */
+    transform: translateY(-4px);
   }
 
   .faq-grid__icon {
-    @apply w-14 h-14 rounded-2xl bg-brand/5 flex items-center justify-center mb-8 text-brand-3 transition-all duration-300;
+    @apply w-12 h-12 md:w-14 md:h-14 rounded-2xl md:rounded-3xl bg-brand/5 flex items-center justify-center mb-6 md:mb-8 text-brand-3 transition-all duration-300;
     @apply group-hover:bg-brand group-hover:text-white group-hover:scale-110;
   }
 
@@ -108,7 +112,7 @@
   }
 
   .faq-grid__card h3 {
-    @apply text-[20px] font-black text-ink mb-5 leading-tight group-hover:text-brand transition-colors;
+    @apply text-[18px] md:text-[20px] font-black text-ink mb-3 md:mb-5 leading-tight group-hover:text-brand transition-colors;
   }
 
   .section--deep-soft .faq-grid__card h3,
@@ -117,7 +121,7 @@
   }
 
   .faq-grid__answer {
-    @apply text-[15px] text-muted leading-relaxed opacity-90;
+    @apply text-[14px] md:text-[15px] text-muted leading-relaxed opacity-90;
   }
 
   .section--deep-soft .faq-grid__answer,
