@@ -1,6 +1,6 @@
 {{/*
-  partial: product/info-panel.html
-  Ultimate B2B Pharma Info Panel — High-Density Data Sheet
+partial: product/info-panel.html
+Ultimate B2B Pharma Info Panel — High-Density Data Sheet
 */}}
 <div class="ps-info-col" data-animate="slide-left">
   <div class="ps-info-sticky">
@@ -14,11 +14,11 @@
           <i data-lucide="layers"></i>
           {{ $primaryCat }}
           {{ if gt (len .Params.categories) 1 }}
-            <span class="opacity-40 px-1">/</span> {{ index .Params.categories 1 }}
+          <span class="opacity-40 px-1">/</span> {{ index .Params.categories 1 }}
           {{ end }}
         </span>
         {{ end }}
-        
+
         {{ if ne .Params.manufacturing_status "None" }}
         <span class="ps-meta-live">
           <span class="ps-badge-dot"></span>
@@ -34,7 +34,7 @@
       {{ if $tClass }}
       <p class="ps-product-subtitle">
         {{ with .Params.approved_name }}
-          <span class="ps-subtitle-name">{{ . }}</span> &middot;
+        <span class="ps-subtitle-name">{{ . }}</span> &middot;
         {{ end }}
         <span class="ps-subtitle-class">
           {{ if reflect.IsSlice $tClass }}{{ delimit $tClass ", " }}{{ else }}{{ $tClass }}{{ end }}
@@ -145,7 +145,8 @@
 
         {{ with .Params.storage_conditions }}
         <div class="ps-spec-item" role="row">
-          <div class="ps-spec-item__icon ps-spec-item__icon--blue" role="cell"><i data-lucide="thermometer-snowflake"></i></div>
+          <div class="ps-spec-item__icon ps-spec-item__icon--blue" role="cell"><i
+              data-lucide="thermometer-snowflake"></i></div>
           <div class="ps-spec-item__text">
             <span class="ps-spec-item__key">Storage Condition</span>
             <span class="ps-spec-item__val">{{ . }}</span>
@@ -155,7 +156,8 @@
 
         {{ with .Params.shelf_life }}
         <div class="ps-spec-item" role="row">
-          <div class="ps-spec-item__icon ps-spec-item__icon--muted" role="cell"><i data-lucide="calendar-check-2"></i></div>
+          <div class="ps-spec-item__icon ps-spec-item__icon--muted" role="cell"><i data-lucide="calendar-check-2"></i>
+          </div>
           <div class="ps-spec-item__text">
             <span class="ps-spec-item__key">Stability / Shelf Life</span>
             <span class="ps-spec-item__val">{{ . }}</span>
@@ -175,13 +177,14 @@
         {{ end }}
 
       </div>
-      
+
       <div class="ps-spec-footer">
         <div class="ps-spec-item ps-spec-item--full" role="row">
           <div class="ps-spec-item__icon ps-spec-item__icon--green" role="cell"><i data-lucide="clock-4"></i></div>
           <div class="ps-spec-item__text">
             <span class="ps-spec-item__key">Manufacturing Response</span>
-            <span class="ps-spec-item__val ps-spec-item__val--accent">{{ .Params.quote_priority | default "On Priority" }}</span>
+            <span class="ps-spec-item__val ps-spec-item__val--accent">{{ .Params.quote_priority | default "On Priority"
+              }}</span>
           </div>
         </div>
         <div class="ps-spec-item ps-spec-item--full" role="row">
@@ -204,7 +207,8 @@
 
     {{/* ── 6. CTA BLOCK (SYSTEM INTEGRATED) ────────────────────────── */}}
     <div class="ps-cta-block">
-      <button class="btn btn--primary w-full !min-h-[64px] !rounded-2xl" data-enquire-trigger data-product-name="{{ .Params.product_name | default .Title }}" id="ps-quote-btn">
+      <button class="btn btn--primary w-full !min-h-[64px] !rounded-2xl" data-enquire-trigger
+        data-product-name="{{ .Params.product_name | default .Title }}" id="ps-quote-btn">
         <i data-lucide="send" class="icon--sm"></i>
         <span class="flex flex-col text-left">
           <strong class="text-[16px] leading-tight">Request Manufacturing Quote</strong>
@@ -213,7 +217,10 @@
       </button>
 
       <div class="grid grid-cols-2 gap-3">
-        <a href="https://wa.me/{{ .Site.Params.phone | replaceRE `[^0-9]` `` }}" target="_blank" rel="noopener" class="btn btn--whatsapp !rounded-xl !min-h-[48px]">
+        {{ $waMsg := printf "Hi Saar Biotech, I am interested in the manufacturing of %s. Please provide more details."
+        (.Params.product_name | default .Title) }}
+        <a href="https://wa.me/{{ .Site.Params.phone | replaceRE `[^0-9]` `` }}?text={{ $waMsg | urlquery }}"
+          target="_blank" rel="noopener" class="btn btn--whatsapp !rounded-xl !min-h-[48px]">
           <i data-lucide="message-circle" class="icon--sm"></i>
           WhatsApp
         </a>

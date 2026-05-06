@@ -114,6 +114,7 @@
     gap: 10px;
     overflow-x: auto;
     padding-bottom: 4px;
+    justify-content: center;
     scrollbar-width: thin;
     scrollbar-color: rgba(21, 159, 145, 0.3) transparent;
   }
