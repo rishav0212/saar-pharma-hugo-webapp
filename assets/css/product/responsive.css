@@ -27,31 +27,51 @@
     }
 
     .ps-console-sidebar {
-      @apply sticky top-[60px] bg-surface z-40 py-4 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 border-b border-line shadow-sm mb-6;
+      @apply sticky top-[60px] bg-surface z-40 py-3 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 border-b border-line shadow-sm mb-6;
     }
 
+    /* ── KEY FIX: Hide verbose "Technical Details / Product Information" header ──
+       The tab chips themselves give enough context on mobile. Hiding this saves
+       ~100px vertical space from the sticky strip. */
     .ps-console-header {
-      @apply mb-4;
+      @apply hidden;
     }
-    
+
     .ps-console-frame {
       @apply py-6 px-5;
     }
-    
+
     .ps-content-wrap {
       @apply pt-12 pb-16;
     }
-    
+
     .ps-content-grid {
       @apply gap-8;
     }
-    
+
     .ps-markdown-content {
       @apply p-5;
     }
-    
+
     .ps-markdown-content h2 {
       @apply mt-6 mb-4 text-[20px] pb-3;
+    }
+
+    /* ── FIX: Remove sticky from faq aside on mobile to prevent CTA button
+       overlapping FAQ list items when user scrolls ── */
+    .faq-accordion__aside {
+      position: static !important;
+      top: auto !important;
+    }
+
+    /* Reduce gap between aside and FAQ list on mobile */
+    .faq-accordion {
+      @apply gap-8;
+    }
+
+    /* Reduce product FAQ section padding on mobile — page too long */
+    .ps-faq-section {
+      @apply !py-12;
     }
   }
 
@@ -133,15 +153,15 @@
     .ps-hbadge, .ps-meta-category {
       @apply px-2 py-1 text-[9px] gap-1;
     }
-    
+
     .ps-hbadge [data-lucide], .ps-meta-category [data-lucide] {
       @apply w-3 h-3;
     }
-    
+
     .ps-header-badges {
       @apply gap-2 pt-1;
     }
-    
+
     .ps-product-subtitle {
       @apply text-[13px];
     }
@@ -160,30 +180,31 @@
     }
   }
 
-  /* Spec Grid Stacking */
+  /* ── Spec Grid Stacking + Comprehensive Mobile Improvements ── */
   @media (max-width: 640px) {
     .ps-spec-grid {
       @apply grid-cols-1 divide-x-0;
     }
-    
+
     .ps-authority-strip {
       @apply grid grid-cols-3;
     }
-    
+
     .ps-authority-divider {
       @apply hidden;
     }
-    
+
+    /* ── Authority strip: tighter numbers on small screen ── */
     .ps-authority-item {
-      @apply py-3 px-2;
+      @apply py-3 px-1;
     }
 
     .ps-authority-num {
       @apply text-[18px];
     }
-    
+
     .ps-authority-label {
-      @apply text-[8px] mt-1.5;
+      @apply text-[8px] mt-1;
     }
 
     .ps-cta-primary {
@@ -193,11 +214,11 @@
     .ps-cta-primary [data-lucide] {
       @apply w-5 h-5;
     }
-    
+
     .ps-cta-primary__text strong {
       @apply text-[14px];
     }
-    
+
     .ps-cta-primary__text small {
       @apply text-[10px];
     }
@@ -213,83 +234,191 @@
     .ps-comp-card__formula {
       @apply text-[16px];
     }
-    
-    /* --- NEW SUBAGENT FIXES --- */
-    
-    /* 1. Headings & Typography */
+
+    /* ─── Headings & Typography ─── */
     .section-title {
       @apply text-[24px] leading-tight;
     }
+
     .section-title--sm {
       @apply text-[20px] leading-tight;
     }
+
     .ps-authority-title {
       @apply text-[22px] leading-tight;
     }
+
     .faq-grid__card h3 {
       @apply text-[16px] font-bold mb-2;
     }
+
     .ps-markdown-content h3 {
       @apply text-[16px] mt-4 mb-2;
     }
 
-    /* 2. Component Padding & Spacing */
+    /* ─── Component Padding & Spacing ─── */
     .container {
-      @apply !px-4; /* Maximize usable width */
+      @apply !px-4;
     }
+
+    /* Significantly reduce content-wrap padding — was pt-12 pb-16, now much tighter */
+    .ps-content-wrap {
+      @apply pt-8 pb-10;
+    }
+
     .ps-content-grid {
       @apply gap-6;
     }
+
     .ps-comp-card {
       @apply p-4;
     }
+
     .ps-comp-card__pres {
-      @apply mt-3 pt-3; 
+      @apply mt-3 pt-3;
     }
+
     .faq-grid__card {
       @apply p-5;
     }
 
-    /* 3. Tabs Navigation */
+    /* ─── Console Frame: tighter padding on small screens ─── */
+    .ps-console-frame {
+      @apply py-4 px-4 rounded-xl;
+    }
+
+    /* ─── Supply Dashboard: was mt-16 pt-10 — huge on mobile ─── */
+    .ps-supply-dashboard {
+      @apply mt-6 pt-5;
+    }
+
+    .ps-supply-title {
+      @apply text-[11px] tracking-widest mb-4;
+    }
+
+    .ps-supply-grid {
+      @apply gap-3;
+    }
+
+    .ps-supply-card {
+      @apply p-4;
+    }
+
+    .ps-supply-label {
+      @apply text-[10px] mb-1;
+    }
+
+    .ps-supply-value {
+      @apply text-[12px] font-bold;
+    }
+
+    /* ─── Product FAQ Sections: reduce section padding so page isn't so long ─── */
+    .ps-faq-section {
+      @apply !py-10;
+    }
+
+    /* ─── Tabs Navigation: chip-pill style for the horizontal tab strip ─── */
     .ps-console-header {
       @apply mb-2;
     }
+
+    /* Override existing transparent tab style with proper visible chips */
     .ps-clinical-console .tab-btn {
-      @apply px-3 py-1.5 text-[12px] font-bold border-transparent shadow-none bg-transparent;
-    }
-    .ps-clinical-console .tab-btn.is-active {
-      @apply shadow-sm;
+      @apply font-bold flex-shrink-0 whitespace-nowrap text-muted;
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: transparent;
+      border: 1px solid transparent;
     }
 
-    /* 4. Data Sheet / Spec Items */
+    /* Active chip: clearly visible white pill with brand border */
+    .ps-clinical-console .tab-btn.is-active {
+      @apply text-brand-3;
+      background: white;
+      background-image: none !important; /* Remove left-border gradient — doesn't work on a horizontal pill */
+      border-color: rgba(21, 159, 145, 0.25);
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ─── Data Sheet / Spec Items ─── */
     .ps-spec-panel__head {
       @apply px-4 py-3;
     }
+
     .ps-spec-item {
       @apply px-4 py-3 gap-3;
     }
+
     .ps-spec-item__icon {
       @apply w-6 h-6 rounded flex-shrink-0;
     }
+
     .ps-spec-item__icon [data-lucide] {
       @apply w-3 h-3;
     }
+
     .ps-spec-item__key {
       @apply text-[9px] font-bold tracking-wider;
     }
+
     .ps-spec-item__val {
       @apply text-[12px] font-medium;
     }
 
-    /* 5. Badges & Pills */
+    /* ─── Badges & Pills ─── */
     .ps-meta-category, .ps-hbadge, .ps-meta-live, .ps-cert-pill, .tag {
       @apply px-2 py-1 text-[9px] tracking-widest gap-1;
     }
-    
-    /* 6. Technical / Overflow Overrides */
+
+    /* Cert strip: tighter wrap gap */
+    .ps-cert-strip {
+      @apply gap-1 pt-3;
+    }
+
+    /* ─── Related Products Section: h2 too large on mobile ─── */
+    /* The related section uses inline Tailwind text-3xl (30px) — too large on phone */
+    .ps-related-hub .ps-related-row h2 {
+      font-size: 22px !important;
+      line-height: 1.2 !important;
+    }
+
+    /* Reduce related section padding too — it uses generic .section class */
+    .ps-related-hub .ps-related-row {
+      @apply !py-10;
+    }
+
+    /* ─── Technical overrides ─── */
     .tab-visual-ring {
       @apply hidden;
     }
+
+    /* PS Console footer: stack vertically on small screen */
+    .ps-console-footer {
+      @apply flex-col gap-3 pt-5 items-start;
+    }
+
+    /* Markdown content h2 inside tab panel: tighter on mobile */
+    .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content h2 {
+      @apply text-[18px] pb-2 mb-4 mt-5;
+    }
+
+    /* Related products section badge pills */
+    .ps-related-hub .inline-flex.items-center.gap-2.px-3.py-1 {
+      @apply text-[9px] px-2.5 py-1;
+    }
+  }
+
+  /* ─── Related Products — M12 Visibility Fix ─── */
+  .ps-related-section .product-card-wrap {
+    opacity: 1;
+    transform: none;
+    visibility: visible !important;
+  }
+
+  .ps-related-section .product-card-wrap.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
 }
