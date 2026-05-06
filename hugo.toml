@@ -44,3 +44,37 @@ enableRobotsTXT = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+# =====================================================================
+# Related Content Configuration
+# Automatically matches products based on shared attributes
+# =====================================================================
+[related]
+  threshold = 50
+  includeNewer = true
+  toLower = true
+
+  # 1. Exact molecule match (Highest Priority)
+  [[related.indices]]
+    name = "compositions"
+    weight = 100
+
+  # 2. Therapeutic area match (High Priority)
+  [[related.indices]]
+    name = "therapeutic_class"
+    weight = 80
+
+  # 3. Dosage Form match (Medium Priority)
+  [[related.indices]]
+    name = "dosage_form"
+    weight = 60
+
+  # 4. Category match (Medium Priority)
+  [[related.indices]]
+    name = "categories"
+    weight = 50
+
+  # 5. Drug Form match (Low Priority)
+  [[related.indices]]
+    name = "drug_form"
+    weight = 30

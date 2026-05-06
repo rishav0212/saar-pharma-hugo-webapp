@@ -31,11 +31,18 @@
     }
   },
   "additionalProperty": [
-    {{ if .Params.composition }}
+    {{ $jsonComp := "" }}
+    {{ if .Params.compositions }}
+      {{ $jsonComp = delimit .Params.compositions ", " }}
+    {{ else }}
+      {{ $jsonComp = .Params.composition }}
+    {{ end }}
+
+    {{ if $jsonComp }}
     {
       "@type": "PropertyValue",
       "name": "Composition",
-      "value": "{{ .Params.composition }}"
+      "value": "{{ $jsonComp }}"
     }
     {{ end }}
     {{ if .Params.therapeutic_class }}

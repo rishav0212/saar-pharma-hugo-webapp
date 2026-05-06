@@ -67,21 +67,60 @@ Ultimate B2B Pharma Info Panel — High-Density Data Sheet
       </div>
     </div>
 
-    {{/* ── 3. COMPOSITION CARD ─────────────────────────────────────── */}}
-    {{ if or .Params.composition .Params.presentation }}
+    {{/* ── 3. COMPOSITION CARD (Dynamic Structured Presentation) ── */}}
+    {{ if .Params.presentation }}
     <div class="ps-comp-card">
-      <div class="ps-comp-card__label">
-        <i data-lucide="flask-conical"></i>
-        <span>Active Pharma Composition</span>
-      </div>
-      {{ with .Params.composition }}
-      <p class="ps-comp-card__formula" itemprop="activeIngredient">{{ . }}</p>
-      {{ end }}
-      {{ with .Params.presentation }}
-      <div class="ps-comp-card__pres">
-        <i data-lucide="package-2"></i>
-        <span>{{ . }}</span>
-      </div>
+      {{ if reflect.IsMap .Params.presentation }}
+        {{/* NEW STRUCTURED WAY */}}
+        {{ with .Params.presentation.heading }}
+          <div class="ps-comp-card__label !mb-2">
+            <i data-lucide="flask-conical"></i>
+            <span>{{ . }}</span>
+          </div>
+        {{ else }}
+          <div class="ps-comp-card__label !mb-2">
+            <i data-lucide="flask-conical"></i>
+            <span>Active Pharma Composition</span>
+          </div>
+        {{ end }}
+
+        <div class="ps-comp-table-wrap mt-4">
+          {{ with .Params.presentation.base_unit }}
+            <div class="ps-comp-unit mb-4">{{ . }}</div>
+          {{ end }}
+          
+          <div class="ps-comp-table ml-10">
+            {{ range .Params.presentation.ingredients }}
+              {{ $isEq := in .salt "eq. to" }}
+              <div class="ps-comp-t-row">
+                <div class="ps-comp-t-cell ps-comp-t-cell--salt pb-4 pr-6">
+                  <div class="flex items-start gap-2.5">
+                    <span class="ps-comp-dot w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0 mt-1.5"></span>
+                    <div class="ps-comp-name-stack">
+                      {{ if $isEq }}
+                        {{ $parts := split .salt "eq. to" }}
+                        <span class="ps-comp-salt-base block text-[14px] font-bold text-ink leading-tight">{{ index $parts 0 }}</span>
+                        <span class="ps-comp-salt-eq block text-[12px] font-bold text-muted mt-1 italic pl-3 border-l-2 border-brand/20">eq. to {{ index $parts 1 }}</span>
+                      {{ else }}
+                        <span class="text-[14px] font-bold text-ink leading-tight">{{ .salt }}</span>
+                      {{ end }}
+                    </div>
+                  </div>
+                </div>
+                <div class="ps-comp-t-cell ps-comp-t-cell--strength pb-4 text-[13px] font-black text-brand-3 whitespace-nowrap leading-tight">
+                  {{ .strength }}
+                </div>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ else }}
+        {{/* LEGACY STRING WAY */}}
+        <div class="ps-comp-card__label !mb-2">
+          <i data-lucide="flask-conical"></i>
+          <span>Active Pharma Composition</span>
+        </div>
+        <p class="ps-comp-card__formula" itemprop="activeIngredient">{{ .Params.presentation }}</p>
       {{ end }}
     </div>
     {{ end }}

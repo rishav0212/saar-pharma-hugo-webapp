@@ -109,7 +109,7 @@
     @apply text-[10px] font-bold text-white/60 text-center uppercase tracking-[0.12em] mt-2 leading-none;
   }
 
-  /* ── 3. COMPOSITION CARD (TECHNICAL LOOK) ───────────────── */
+  /* ── 3. COMPOSITION CARD (ELITE CLINICAL) ───────────────── */
   .ps-comp-card {
     @apply relative rounded-2xl overflow-hidden bg-white border border-line p-5;
     box-shadow: 0 10px 40px -10px rgba(21, 159, 145, 0.08);
@@ -117,7 +117,35 @@
   }
 
   .ps-comp-card__label {
-    @apply relative z-10 flex items-center gap-2.5 mb-4 text-[11px] font-black uppercase tracking-[0.25em] text-brand opacity-80;
+    @apply relative z-10 flex items-center gap-2.5 mb-2 text-[11px] font-black uppercase tracking-[0.25em] text-brand;
+  }
+
+  .ps-comp-table {
+    display: table;
+    width: auto; /* Shrink to fit content */
+    margin-right: auto; /* Keep on the left */
+  }
+
+  .ps-comp-t-row {
+    display: table-row;
+  }
+
+  .ps-comp-t-cell {
+    display: table-cell;
+    vertical-align: top;
+    line-height: 1.25;
+  }
+
+  .ps-comp-t-cell--salt {
+    /* Padding handled in HTML */
+  }
+
+  .ps-comp-t-cell--strength {
+    text-align: right;
+  }
+
+  .ps-comp-dot {
+    @apply w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0;
   }
 
   .ps-comp-card__formula {
@@ -129,7 +157,26 @@
     @apply relative z-10 flex items-center gap-2 mt-5 pt-4 text-[13px] font-extrabold border-t border-line text-muted;
   }
 
-  /* ── 4. SPECIFICATION GRID (DATA SHEET) ──────────────────── */
+
+  .ps-comp-t-row:last-child .ps-comp-t-cell {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+
+/* ─── Related Products Visibility Fix (M12) ─── */
+/* Ensures cards are visible inside their animated containers */
+.ps-related-section .product-card-wrap {
+  opacity: 1;
+  transform: none;
+  visibility: visible !important;
+}
+
+.ps-related-section .product-card-wrap.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
   .ps-spec-panel {
     @apply bg-white border border-line rounded-2xl overflow-hidden shadow-sm;
   }

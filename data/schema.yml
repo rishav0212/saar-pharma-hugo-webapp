@@ -2,7 +2,6 @@
 # This file is the SINGLE SOURCE OF TRUTH for all product data.
 
 # 1. Broad Therapeutic Classes
-# (Consolidated for better UX filtering and SEO accuracy)
 therapeutic_class:
   - Antibiotics
   - Antibacterial
@@ -64,7 +63,7 @@ therapeutic_class:
   - Body Care
   - General Wellness
 
-# 2. Product Categories (Dosage Forms)
+# 2. Product Categories / Dosage Forms
 categories:
   - Tablets
   - Capsules
@@ -112,3 +111,300 @@ categories:
   - Surgical Items
   - Veterinary
   - Sanitizers & Wipes
+
+# 3. Drug Forms (Broad Physical State / Route of Administration)
+# Expanded to include specialized routes that behave differently in inventory/packaging
+drug_form:
+  - Solid
+  - Liquid
+  - Semi-Solid
+  - Powder / Granules
+  - Gaseous / Aerosol
+  - Injectable
+  - Topical
+  - Ophthalmic (Eye)
+  - Otic (Ear)
+  - Nasal
+  - Transdermal
+  - Suppository / Rectal
+  - Vaginal
+
+# 4. Master Molecules (For Composition Matching)
+# Add molecules here to ensure exact spelling across the site.
+# This list is alphabetized and covers the top 200+ most widely manufactured APIs.
+molecules:
+  - acarbose
+  - aceclofenac
+  - acetylcysteine
+  - acyclovir
+  - albendazole
+  - albuterol
+  - alfacalcidol
+  - allopurinol
+  - alprazolam
+  - ambroxol
+  - amikacin
+  - amlodipine
+  - amoxycillin
+  - amphotericin b
+  - ampicillin
+  - arthemeter
+  - ascorbic acid
+  - atenolol
+  - atorvastatin
+  - azelastine
+  - azithromycin
+  - beclomethasone
+  - betahistine
+  - betamethasone
+  - bilastine
+  - bisoprolol
+  - brimonidine
+  - bromhexine
+  - budesonide
+  - buprenorphine
+  - calcitriol
+  - calcium carbonate
+  - calcium citrate
+  - carbamazepine
+  - carbidopa
+  - carvedilol
+  - cefaclor
+  - cefadroxil
+  - cefdinir
+  - cefepime
+  - cefixime
+  - cefoperazone
+  - cefotaxime
+  - cefpodoxime
+  - ceftazidime
+  - ceftriaxone
+  - cefuroxime
+  - celecoxib
+  - cephalexin
+  - cetirizine
+  - chlordiazepoxide
+  - chlorhexidine
+  - chlorpheniramine
+  - cholecalciferol
+  - cilnidipine
+  - cinnarizine
+  - ciprofloxacin
+  - citalopram
+  - clavulanic acid
+  - clindamycin
+  - clobetasol
+  - clonazepam
+  - clopidogrel
+  - clotrimazole
+  - codeine
+  - coenzyme q10
+  - dapagliflozin
+  - deflazacort
+  - dexamethasone
+  - dexrabeprazole
+  - dextromethorphan
+  - diacerein
+  - diclofenac
+  - dicyclomine
+  - dienogest
+  - diltiazem
+  - diphenhydramine
+  - domperidone
+  - donepezil
+  - doxofylline
+  - doxycycline
+  - doxylamine
+  - drotaverine
+  - duloxetine
+  - dutasteride
+  - ebastine
+  - enalapril
+  - enoxaparin
+  - escitalopram
+  - esomeprazole
+  - etoricoxib
+  - famotidine
+  - febuxostat
+  - fenofibrate
+  - ferrous ascorbate
+  - ferrous fumarate
+  - ferrous sulphate
+  - fexofenadine
+  - finasteride
+  - fluconazole
+  - fluoxetine
+  - flupirtine
+  - fluticasone
+  - folic acid
+  - formoterol
+  - furosemide
+  - fusidic acid
+  - gabapentin
+  - gatifloxacin
+  - gemifloxacin
+  - gentamicin
+  - gliclazide
+  - glimepiride
+  - glipizide
+  - guaifenesin
+  - halobetasol
+  - heparin
+  - hydrochlorothiazide
+  - hydrocortisone
+  - hydroquinone
+  - hydroxychloroquine
+  - hydroxyzine
+  - hyoscine
+  - ibuprofen
+  - imipenem
+  - indapamide
+  - ipratropium
+  - irbesartan
+  - isotretinoin
+  - itopride
+  - itraconazole
+  - ivermectin
+  - ketoconazole
+  - ketorolac
+  - kojic acid
+  - labetalol
+  - lactulose
+  - lansoprazole
+  - levetiracetam
+  - levocarnitine
+  - levocetirizine
+  - levofloxacin
+  - levosalbutamol
+  - levosulpiride
+  - lidocaine
+  - linagliptin
+  - linezolid
+  - lisinopril
+  - loperamide
+  - loratadine
+  - lorazepam
+  - lornoxicam
+  - losartan
+  - luliconazole
+  - lumefantrine
+  - lycopene
+  - magaldrate
+  - magnesium
+  - mebendazole
+  - mecobalamin
+  - mefenamic acid
+  - melatonin
+  - meloxicam
+  - meropenem
+  - metformin
+  - methotrexate
+  - methylcobalamin
+  - methylprednisolone
+  - metoclopramide
+  - metoprolol
+  - metronidazole
+  - miconazole
+  - minoxidil
+  - mirtazapine
+  - mometasone
+  - montelukast
+  - moxifloxacin
+  - mupirocin
+  - mycophenolate
+  - naproxen
+  - nebivolol
+  - neomycin
+  - nifedipine
+  - nimesulide
+  - nitrofurantoin
+  - norfloxacin
+  - nortriptyline
+  - ofloxacin
+  - olanzapine
+  - olmesartan
+  - olopatadine
+  - omega 3 fatty acid
+  - omeprazole
+  - ondansetron
+  - ornidazole
+  - oseltamivir
+  - oxaceprol
+  - oxetacaine
+  - pantoprazole
+  - paracetamol
+  - paroxetine
+  - permethrin
+  - phenylephrine
+  - phenytoin
+  - pioglitazone
+  - piracetam
+  - piroxicam
+  - podophyllotoxin
+  - polymyxin b
+  - povidone iodine
+  - pramipexole
+  - prasugrel
+  - pregabalin
+  - progesterone
+  - promethazine
+  - propranolol
+  - pyrantel
+  - pyridoxine
+  - quetiapine
+  - rabeprazole
+  - racecadotril
+  - ramipril
+  - ranitidine
+  - repaglinide
+  - rifaximin
+  - risperidone
+  - rosuvastatin
+  - rupatadine
+  - salbutamol
+  - salicylic acid
+  - salmeterol
+  - secnidazole
+  - serratiopeptidase
+  - sertraline
+  - sildenafil
+  - silodosin
+  - silver sulfadiazine
+  - simethicone
+  - sitagliptin
+  - sodium alginate
+  - sodium picosulfate
+  - spironolactone
+  - sucralfate
+  - sulfasalazine
+  - sumatriptan
+  - tamsulosin
+  - tazobactam
+  - telmisartan
+  - teneligliptin
+  - terbinafine
+  - terbutaline
+  - theophylline
+  - thiocolchicoside
+  - ticagrelor
+  - tinidazole
+  - tizanidine
+  - tobramycin
+  - tolperisone
+  - topiramate
+  - torsemide
+  - tramadol
+  - tranexamic acid
+  - tretinoin
+  - triamcinolone
+  - trifluoperazine
+  - trihexyphenidyl
+  - trypsin
+  - ursodeoxycholic acid
+  - valacyclovir
+  - valproate
+  - valsartan
+  - vildagliptin
+  - voglibose
+  - xylometazoline
+  - zinc

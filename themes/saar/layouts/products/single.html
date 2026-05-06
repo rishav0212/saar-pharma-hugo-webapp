@@ -22,6 +22,20 @@
   {{- end -}}
 {{- end -}}
 
+{{- with .Params.drug_form -}}
+  {{- if not (in $schema.drug_form .) -}}
+    {{- errorf "DATA ERROR: Invalid drug_form '%s' found in %s. Must match exactly with data/schema.yml." . $.File.Path -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with .Params.compositions -}}
+  {{- range . -}}
+    {{- if not (in $schema.molecules .) -}}
+      {{- errorf "DATA ERROR: Invalid molecule '%s' found in %s. Please add it to data/schema.yml or fix the typo." . $.File.Path -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 <article class="ps-premium-page" itemscope itemtype="https://schema.org/Drug">
 
   {{/* ── DYNAMIC JSON-LD SCHEMA (Product + FAQPage) ── */}}
@@ -231,8 +245,8 @@
         </main>
       </div>
     </div>
-    </section>
-
+  </div> {{/* Closing ps-content-wrap */}}
+    
     {{/* ── STANDALONE FAQ SECTIONS ── */}}
     {{ if .Params.faq_clinical }}
     <section id="clinical-faq" class="ps-faq-section section section--deep-soft">
@@ -302,9 +316,8 @@
     </section>
     {{ end }}
 
-
-
-
+    {{/* ── DYNAMIC RELATED PRODUCTS (M1) ── */}}
+    {{ partial "product/related.html" . }}
 
 </article>
 

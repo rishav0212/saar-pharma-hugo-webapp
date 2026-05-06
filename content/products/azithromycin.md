@@ -32,8 +32,19 @@ categories: ["Suspensions"]
 therapeutic_class: ["Antibiotics", "Pediatric Care", "Infectious Diseases"]
 dosage_form: "Oral Suspension"
 drug_form: "Liquid"
-composition: "Azithromycin Dihydrate eq. to Azithromycin 100mg/200mg"
-presentation: "Each 5 ml contains: Eq to Azithromycin 100mg/200mg"
+
+# BACKEND MATCHING
+compositions: ["azithromycin"]
+
+# FRONTEND DISPLAY
+presentation:
+  heading: "SUSPENSION PRESENTATION:"
+  base_unit: "Each 5 ml contains :"
+  ingredients:
+    - salt: "Azithromycin Dihydrate IP eq. to Azithromycin"
+      strength: "100 mg / 200 mg"
+    - salt: "Excipients"
+      strength: "q.s."
 
 # 4. LOGISTICS & MANUFACTURING
 pack_sizes: ["15 ml", "30 ml", "60 ml"]

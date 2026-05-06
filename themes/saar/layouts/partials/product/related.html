@@ -1,0 +1,275 @@
+{{/*
+ELITE CLINICAL RELATED PRODUCTS ENGINE V20 (PRECISION AUTO-SLIDER)
+Logic: Multi-Field Scoring + Snap-Safe Auto-Navigation
+Feature: 3s Interval + ScrollBy Support + Overflow Detection
+*/}}
+
+{{ $current := . }}
+{{ $currentLink := .RelPermalink }}
+{{ $currentComps := .Params.compositions | default slice }}
+{{ $currentCats := .Params.categories | default slice }}
+{{ $currentTClass := .Params.therapeutic_class | default slice }}
+{{ $currentDClass := .Params.drug_class | default slice }}
+
+{{/* --- Dosage Form as String Handling --- */}}
+{{ $currentDosage := .Params.dosage_form | default .Params.dosage | default slice }}
+{{ if and $currentDosage (not (reflect.IsSlice $currentDosage)) }}
+{{ $currentDosage = slice $currentDosage }}
+{{ end }}
+
+{{/* Initialize Scratches */}}
+{{ .Scratch.Set "row1" slice }}
+{{ .Scratch.Set "row2" slice }}
+
+{{/* Fetch all product pages */}}
+{{ $allProducts := where .Site.RegularPages "Type" "products" }}
+
+{{/* --- 1. POPULATE ROW 1: MOLECULAR SYNC --- */}}
+{{ range $allProducts }}
+{{ if ne .RelPermalink $currentLink }}
+{{ if gt (len (intersect $currentComps .Params.compositions)) 0 }}
+{{ $.Scratch.Add "row1" . }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ $row1Final := first 8 (.Scratch.Get "row1") }}
+
+
+{{/* --- 2. POPULATE ROW 2: CLINICAL RANGE --- */}}
+{{ $row2Pool := slice }}
+{{ range $allProducts }}
+{{ if and (ne .RelPermalink $currentLink) (not (in $row1Final .)) }}
+{{ $score := 0 }}
+
+{{/* Therapeutic Class Match (+10) */}}
+{{ $score = add $score (mul (len (intersect $currentTClass .Params.therapeutic_class)) 10) }}
+
+{{/* Drug Class Match (+8) */}}
+{{ $score = add $score (mul (len (intersect $currentDClass .Params.drug_class)) 8) }}
+
+{{/* Category Match (+5) */}}
+{{ $score = add $score (mul (len (intersect $currentCats .Params.categories)) 5) }}
+
+{{/* Dosage Form Match (+3) */}}
+{{ $thisDosage := .Params.dosage_form | default .Params.dosage | default slice }}
+{{ if and $thisDosage (not (reflect.IsSlice $thisDosage)) }}
+{{ $thisDosage = slice $thisDosage }}
+{{ end }}
+{{ $score = add $score (mul (len (intersect $currentDosage $thisDosage)) 3) }}
+
+{{ if gt $score 0 }}
+{{ $row2Pool = $row2Pool | append (dict "page" . "score" $score) }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{ range (first 8 (sort $row2Pool "score" "desc")) }}
+{{ $.Scratch.Add "row2" .page }}
+{{ end }}
+
+{{/* --- 3. UNBREAKABLE FALLBACK --- */}}
+{{ if lt (len (.Scratch.Get "row2")) 1 }}
+{{ range (first 12 $allProducts) }}
+{{ if and (ne .RelPermalink $currentLink) (not (in $row1Final .)) }}
+{{ $.Scratch.Add "row2" . }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{ $row2Final := .Scratch.Get "row2" }}
+
+{{/* --- UI RENDER --- */}}
+<div class="ps-related-section ps-related-hub border-t border-line">
+
+  {{/* SECTION 1: MOLECULAR SYNC */}}
+  {{ if $row1Final }}
+  <section class="ps-related-row section bg-white relative overflow-hidden pb-12">
+    <div
+      class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2">
+    </div>
+    <div class="container relative z-10">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 mb-5">
+            <span class="w-2 h-2 rounded-full bg-brand animate-pulse"></span>
+            <span class="text-[10px] font-black text-brand-3 uppercase tracking-widest">Molecular Sync</span>
+          </div>
+          <h2 class="text-3xl lg:text-5xl font-display font-black text-ink mb-4 tracking-tight leading-tight">Similar
+            <span class="text-brand">Compositions</span></h2>
+          <p class="text-muted text-[17px]">Formulations sharing synchronized active ingredients and molecular profiles.
+          </p>
+        </div>
+
+        <div class="ps-nav-group flex items-center gap-3 opacity-0 pointer-events-none transition-opacity duration-300"
+          id="nav-mol-slider">
+          <button class="slider-nav-btn prev-btn" data-target="mol-slider" aria-label="Previous">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+          </button>
+          <button class="slider-nav-btn next-btn" data-target="mol-slider" aria-label="Next">
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="ps-slider-viewport overflow-x-auto hide-scrollbar snap-x snap-mandatory" id="mol-slider">
+        <div class="flex gap-8 pb-4">
+          {{ range $row1Final }}
+          <div class="ps-slider-item flex-shrink-0 w-[280px] md:w-[320px] snap-start product-card-wrap">
+            {{ partial "products/card.html" . }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* SECTION 2: CLINICAL RANGE */}}
+  <section class="ps-related-row section bg-paper relative overflow-hidden border-t border-line/50">
+    <div
+      class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-brand-2/5 rounded-full blur-[150px] pointer-events-none -translate-x-1/2 -translate-y-1/2">
+    </div>
+    <div class="container relative z-10">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
+        <div class="max-w-2xl">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-2/10 border border-brand-2/20 mb-5">
+            <span class="w-2 h-2 rounded-full bg-brand-2"></span>
+            <span class="text-[10px] font-black text-brand-2 uppercase tracking-widest">Therapeutic Range</span>
+          </div>
+          <h2 class="text-3xl lg:text-5xl font-display font-black text-ink mb-4 tracking-tight leading-tight">Explore
+            <span class="text-brand-2">Portfolio</span></h2>
+          <p class="text-muted text-[17px]">Intelligent mapping of formulations within related clinical categories.</p>
+        </div>
+
+        <div class="ps-nav-group flex items-center gap-3 opacity-0 pointer-events-none transition-opacity duration-300"
+          id="nav-clinical-slider">
+          <button class="slider-nav-btn prev-btn" data-target="clinical-slider" aria-label="Previous">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+          </button>
+          <button class="slider-nav-btn next-btn" data-target="clinical-slider" aria-label="Next">
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="ps-slider-viewport overflow-x-auto hide-scrollbar snap-x snap-mandatory" id="clinical-slider">
+        <div class="flex gap-8 pb-4">
+          {{ range $row2Final }}
+          <div class="ps-slider-item flex-shrink-0 w-[280px] md:w-[320px] snap-start product-card-wrap">
+            {{ partial "products/card.html" . }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .slider-nav-btn {
+    @apply w-12 h-12 rounded-full border border-line bg-white flex items-center justify-center text-muted transition-all duration-300;
+  }
+
+  .slider-nav-btn:hover {
+    @apply border-brand text-brand shadow-sm bg-brand/5;
+  }
+
+  .ps-slider-viewport {
+    scroll-behavior: smooth;
+  }
+
+  .ps-nav-group.is-visible {
+    @apply opacity-100 pointer-events-auto;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sliders = document.querySelectorAll('.ps-slider-viewport');
+
+    sliders.forEach(slider => {
+      const id = slider.id;
+      const navGroup = document.getElementById(`nav-${id}`);
+      if (!navGroup) return;
+
+      const nextBtn = navGroup.querySelector(`.next-btn`);
+      const prevBtn = navGroup.querySelector(`.prev-btn`);
+      let autoPlayInterval = null;
+
+      const getScrollStep = () => {
+        const item = slider.querySelector('.ps-slider-item');
+        return item ? (item.offsetWidth + 32) : 300;
+      };
+
+      const moveNext = () => {
+        const maxScroll = slider.scrollWidth - slider.clientWidth;
+        if (slider.scrollLeft >= maxScroll - 20) {
+          slider.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          slider.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        }
+      };
+
+      const movePrev = () => {
+        if (slider.scrollLeft <= 20) {
+          const maxScroll = slider.scrollWidth - slider.clientWidth;
+          slider.scrollTo({ left: maxScroll, behavior: 'smooth' });
+        } else {
+          slider.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        }
+      };
+
+      const startAutoPlay = () => {
+        if (autoPlayInterval) return;
+        autoPlayInterval = setInterval(moveNext, 3000); // 3-second interval
+      };
+
+      const stopAutoPlay = () => {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+      };
+
+      const checkOverflow = () => {
+        if (slider.scrollWidth > slider.clientWidth + 10) {
+          navGroup.classList.add('is-visible');
+          startAutoPlay();
+        } else {
+          navGroup.classList.remove('is-visible');
+          stopAutoPlay();
+        }
+      };
+
+      // Event Listeners
+      nextBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        moveNext();
+        setTimeout(startAutoPlay, 3000);
+      });
+
+      prevBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        movePrev();
+        setTimeout(startAutoPlay, 3000);
+      });
+
+      slider.addEventListener('mouseenter', stopAutoPlay);
+      slider.addEventListener('mouseleave', () => {
+        if (slider.scrollWidth > slider.clientWidth + 10) startAutoPlay();
+      });
+
+      // Periodic check for dynamic content or layout shifts
+      setTimeout(checkOverflow, 800);
+      window.addEventListener('resize', checkOverflow);
+    });
+  });
+</script>

@@ -6,29 +6,29 @@ export function initProducts() {
   const page = document.getElementById('products-page');
   if (!page) return;
 
-  const grid         = document.getElementById('products-grid');
-  const filterPills  = document.querySelectorAll('.filter-pill[data-filter]');
-  const mainSearch   = document.getElementById('products-search');
-  const heroSearch   = document.getElementById('hero-search');
-  const heroSelect   = document.getElementById('hero-cat-select');
+  const grid = document.getElementById('products-grid');
+  const filterPills = document.querySelectorAll('.filter-pill[data-filter]');
+  const mainSearch = document.getElementById('products-search');
+  const heroSearch = document.getElementById('hero-search');
+  const heroSelect = document.getElementById('hero-cat-select');
   const suggestionsBox = document.getElementById('search-suggestions');
   const suggestionItems = document.querySelectorAll('.suggestion-item');
-  const tickerItems    = document.querySelectorAll('[data-filter-ticker]');
-  
-  const cardWraps      = Array.from(document.querySelectorAll('.product-card-wrap'));
-  const countEl        = document.getElementById('products-count');
-  const activeLabel    = document.getElementById('products-active-label');
-  const emptyState     = document.getElementById('products-empty');
+  const tickerItems = document.querySelectorAll('[data-filter-ticker]');
+
+  const cardWraps = Array.from(document.querySelectorAll('.product-card-wrap'));
+  const countEl = document.getElementById('products-count');
+  const activeLabel = document.getElementById('products-active-label');
+  const emptyState = document.getElementById('products-empty');
 
   // Horizontal Scroll Elements
   const pillsContainer = document.getElementById('filter-pills-scroll');
-  const scrollLeftBtn  = document.getElementById('pills-scroll-left');
+  const scrollLeftBtn = document.getElementById('pills-scroll-left');
   const scrollRightBtn = document.getElementById('pills-scroll-right');
 
   if (!cardWraps.length) return;
 
   let currentFilter = 'all';
-  let currentQuery  = '';
+  let currentQuery = '';
   let searchTimeout = null;
 
   // ─── Pre-Index Data ────────────────────────────────────────────
@@ -64,20 +64,20 @@ export function initProducts() {
     const matches = [];
 
     productData.forEach(item => {
-      const itemCats = item.categorySlugs.split(' ').filter(Boolean); 
+      const itemCats = item.categorySlugs.split(' ').filter(Boolean);
       const passesCategory = (currentFilter === 'all') || itemCats.includes(currentFilter);
-      
+
       let score = 0;
       if (currentQuery) {
-        if (item.title.includes(currentQuery))       score += 2000;
-        if (item.categories.includes(currentQuery))  score += 1500;
-        if (item.desc.includes(currentQuery))        score += 500;
-        if (item.comp.includes(currentQuery))        score += 250;
-        if (item.dform.includes(currentQuery))       score += 220;
-        if (item.tclass.includes(currentQuery))      score += 200;
-        if (item.tarea.includes(currentQuery))       score += 180;
-        if (item.area.includes(currentQuery))        score += 100;
-        if (item.packs.includes(currentQuery))       score += 50;
+        if (item.title.includes(currentQuery)) score += 2000;
+        if (item.categories.includes(currentQuery)) score += 1500;
+        if (item.desc.includes(currentQuery)) score += 500;
+        if (item.comp.includes(currentQuery)) score += 250;
+        if (item.dform.includes(currentQuery)) score += 220;
+        if (item.tclass.includes(currentQuery)) score += 200;
+        if (item.tarea.includes(currentQuery)) score += 180;
+        if (item.area.includes(currentQuery)) score += 100;
+        if (item.packs.includes(currentQuery)) score += 50;
       } else {
         score = 1;
       }
@@ -96,8 +96,8 @@ export function initProducts() {
     setTimeout(() => {
       productData.forEach(item => {
         const itemCats = item.categorySlugs.split(' ').filter(Boolean);
-        const isMatch = (currentFilter === 'all' || itemCats.includes(currentFilter)) && 
-                        (!currentQuery || matches.some(m => m.item === item));
+        const isMatch = (currentFilter === 'all' || itemCats.includes(currentFilter)) &&
+          (!currentQuery || matches.some(m => m.item === item));
         item.el.classList.toggle('is-hidden', !isMatch);
       });
 
@@ -105,7 +105,7 @@ export function initProducts() {
       matches.sort((a, b) => b.score - a.score);
       matches.forEach(({ item }, index) => {
         item.el.style.order = index;
-        
+
         if (animate) {
           // Faster staggered ripple in
           setTimeout(() => {
@@ -170,7 +170,7 @@ export function initProducts() {
   if (mainSearch) {
     mainSearch.addEventListener('input', (e) => handleSearchInput(e, false));
     mainSearch.addEventListener('focus', showSuggestions);
-    
+
     // Mobile dismissal on Enter
     mainSearch.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -184,7 +184,7 @@ export function initProducts() {
 
   if (heroSearch) {
     heroSearch.addEventListener('input', (e) => handleSearchInput(e, true));
-    
+
     heroSearch.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         const gridTop = document.getElementById('products-grid-top');
@@ -196,10 +196,10 @@ export function initProducts() {
 
   if (heroSelect) {
     heroSelect.addEventListener('change', (e) => {
-    currentFilter = e.target.value.toLowerCase().trim();
-    updateInputs(currentQuery, currentFilter);
-    applyFilters(true);
-  });
+      currentFilter = e.target.value.toLowerCase().trim();
+      updateInputs(currentQuery, currentFilter);
+      applyFilters(true);
+    });
   }
 
   filterPills.forEach(pill => {

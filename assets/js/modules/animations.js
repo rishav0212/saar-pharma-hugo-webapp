@@ -6,7 +6,7 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export function initAnimations() {
-  const animated = document.querySelectorAll("[data-animate], .section-head, .bento-grid, .timeline, .unit-grid, .metric-grid, .faq-list, .article-grid, .copy-stack, .facility-board, .planner-shell, .product-autoplay-wrapper, .footer-content");
+  const animated = document.querySelectorAll("[data-animate], .section-head, .bento-grid, .timeline, .unit-grid, .metric-grid, .faq-list, .article-grid, .copy-stack, .facility-board, .planner-shell, .product-autoplay-wrapper, .footer-content, .product-card-wrap");
   if (!animated.length) return;
 
   // Single-Session Logic: Check if hero entrance has already played
@@ -17,10 +17,20 @@ export function initAnimations() {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const el = entry.target;
-        const delay = Number(el.getAttribute("data-delay") || 0);
+        
+        // Stagger Logic: Check if parent wants staggered children
+        const staggerGroup = el.closest('[data-animate-stagger]');
+        let delay = Number(el.getAttribute("data-delay") || 0);
+        
+        if (staggerGroup) {
+          const children = Array.from(staggerGroup.querySelectorAll('.product-card-wrap, [data-animate]'));
+          const index = children.indexOf(el);
+          if (index !== -1) {
+            delay += (index * 0.1); // 100ms stagger between items
+          }
+        }
         
         if (window.gsap && !reduceMotion) {
-          // Use GSAP for smoother, high-quality reveal (Rule 2)
           window.gsap.to(el, {
             opacity: 1,
             y: 0,

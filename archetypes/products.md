@@ -12,12 +12,21 @@ product_name: "{{ replace .Name "-" " " | title }}"
 approved_name: "" # e.g., Aceclofenac IP / BP / USP
 categories: ["Suspensions", "Antibiotics"] # First item = Main Badge, Second = Sub Badge
 
-# 3. CLINICAL DATA (Visible in Info Panel)
-therapeutic_class: ["Antibiotic"] # e.g., ["Analgesic", "Antipyretic"]
-dosage_form: ""      # Physical form (e.g., "Tablet", "Hard Gelatin Capsule")
-drug_form: ""        # Optional synonym (e.g., "Liquid", "Ointment")
-composition: ""      # Detailed formula (e.g., "Each 5ml contains...")
-presentation: ""      # Pack appearance description
+# 3. CLINICAL DATA & PRESENTATION
+therapeutic_class: ["Antibiotic"]
+dosage_form: ""      # e.g., "Oral Suspension", "Tablet"
+drug_form: ""        # e.g., "Liquid", "Solid"
+
+# BACKEND MATCHING (For Related Products Engine)
+compositions: []     # Base molecules only: e.g., ["azithromycin"]
+
+# FRONTEND DISPLAY (Unified Presentation)
+presentation:
+  heading: ""        # e.g., "SUSPENSION PRESENTATION:"
+  base_unit: ""      # e.g., "Each 5 ml contains:"
+  ingredients:
+    - salt: ""       # e.g., "Azithromycin Dihydrate IP"
+      strength: ""   # e.g., "250 mg"
 
 # 4. LOGISTICS & MANUFACTURING
 pack_sizes: ["1x10", "10x10"] # List all available dimensions
