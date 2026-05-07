@@ -1,0 +1,748 @@
+@layer components {
+
+  /* ═══════════════════════════════════════════════════════════════════
+     CATEGORY PAGES — Design System
+     All styles scoped to category-specific components.
+     Uses CSS tokens from base/variables.css (never hardcoded values).
+     ═══════════════════════════════════════════════════════════════════ */
+
+
+  /* ───────────────────────────────────────────────
+     1. CATEGORY HERO
+     A visually distinct dark hero that differs from
+     the products listing hero (.section--products-hero).
+     Uses a mesh grid + dual radial glows + floating rings.
+     ─────────────────────────────────────────────── */
+
+  .section--cat-hero {
+    @apply relative pt-[100px] pb-[80px] max-md:pt-[80px] max-md:pb-[50px] overflow-hidden;
+    background: linear-gradient(135deg, var(--color-ink-deep) 0%, #0c2a33 100%);
+  }
+
+  /* Subtle dot-matrix grid background with a moving light effect */
+  .cat-hero__bg-grid {
+    @apply absolute inset-0 z-0 pointer-events-none;
+    background-image:
+      radial-gradient(circle, rgba(var(--color-brand-2-rgb), 0.06) 1px, transparent 1px);
+    background-size: 54px 54px;
+    mask-image: radial-gradient(ellipse at center, black, transparent 85%);
+  }
+
+  /* Radial teal glow accents (unique to category hero) */
+  .cat-hero__bg-glow {
+    @apply absolute z-1 pointer-events-none rounded-full blur-3xl;
+  }
+
+  .cat-hero__bg-glow--1 {
+    width: 800px;
+    height: 800px;
+    top: -300px;
+    left: -200px;
+    background: radial-gradient(circle, rgba(var(--color-brand-rgb), 0.2) 0%, transparent 70%);
+    animation: catGlowPulse 15s ease-in-out infinite alternate;
+  }
+
+  .cat-hero__bg-glow--2 {
+    width: 600px;
+    height: 600px;
+    bottom: -200px;
+    right: -100px;
+    background: radial-gradient(circle, rgba(var(--color-brand-2-rgb), 0.15) 0%, transparent 70%);
+    animation: catGlowPulse 12s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes catGlowPulse {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.8;
+    }
+
+    100% {
+      transform: translate(30px, 20px) scale(1.1);
+      opacity: 1;
+    }
+  }
+
+  /* Floating decorative rings (different shape from products hero pills) */
+  .cat-hero__ring {
+    @apply absolute z-2 pointer-events-none rounded-full border border-brand-2/10;
+    animation: catRingPulse 12s ease-in-out infinite;
+  }
+
+  .cat-hero__ring--lg {
+    width: 500px;
+    height: 500px;
+    top: 50%;
+    right: -120px;
+    transform: translateY(-50%);
+    animation-delay: 0s;
+  }
+
+  .cat-hero__ring--sm {
+    width: 280px;
+    height: 280px;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+    border-color: rgba(var(--color-brand-2-rgb), 0.12);
+    animation-delay: -4s;
+  }
+
+  @keyframes catRingPulse {
+
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: translateY(-50%) scale(1);
+    }
+
+    50% {
+      opacity: 0.7;
+      transform: translateY(-50%) scale(1.04);
+    }
+  }
+
+  /* Large decorative icon inside the ring */
+  .cat-hero__molecule {
+    @apply absolute z-3 pointer-events-none flex items-center justify-center;
+    width: 120px;
+    height: 120px;
+    top: 50%;
+    right: 120px;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, rgba(var(--color-brand-rgb), 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: catMoleculeFloat 12s ease-in-out infinite;
+  }
+
+  .cat-hero__molecule i {
+    width: 56px;
+    height: 56px;
+    color: rgba(var(--color-brand-2-rgb), 0.35);
+  }
+
+  @keyframes catMoleculeFloat {
+
+    0%,
+    100% {
+      transform: translateY(-50%) translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-50%) translateY(-12px);
+    }
+  }
+
+  /* On mobile, hide rings and molecule */
+  @media (max-width: 1023px) {
+
+    .cat-hero__ring,
+    .cat-hero__molecule {
+      @apply hidden;
+    }
+  }
+
+  /* Grid Layout */
+  .cat-hero__grid {
+    @apply relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_520px] gap-16 items-center;
+  }
+
+  .cat-hero__content {
+    @apply max-w-[740px];
+  }
+
+  /* Category badge pill - enhanced with glassmorphism */
+  .cat-hero__badge {
+    @apply inline-flex items-center gap-2.5 px-4.5 py-2 rounded-full border border-brand-2/20 bg-white/5 text-brand-2 text-[10px] font-black uppercase tracking-[0.2em] mb-8;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(var(--color-brand-2-rgb), 0.1);
+  }
+
+  .cat-hero__badge i {
+    @apply text-brand-2 opacity-80;
+  }
+
+  /* H1 - with premium gradient */
+  .cat-hero__title {
+    font-size: clamp(42px, 7vw, 84px);
+    @apply leading-[0.9] font-display font-black tracking-tighter text-white mb-8;
+    background: linear-gradient(to bottom, #fff 40%, rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+  }
+
+  .cat-hero__title-accent {
+    background: linear-gradient(135deg, var(--color-brand-2) 0%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    @apply font-black;
+  }
+
+  /* Tagline */
+  .cat-hero__tagline {
+    font-size: clamp(16px, 1.5vw, 22px);
+    @apply text-white font-bold leading-tight mb-5 max-w-[650px];
+    letter-spacing: -0.01em;
+  }
+
+  /* Description paragraph */
+  .cat-hero__desc {
+    @apply text-[15px] text-white/60 leading-relaxed mb-12 max-w-[580px];
+  }
+
+  /* Stats row */
+  .cat-hero__stats {
+    @apply flex flex-wrap gap-5 mb-12;
+  }
+
+  .cat-hero__stat {
+    @apply flex flex-col items-start gap-1 px-6 py-4 bg-white/[0.03] border border-white/[0.06] rounded-2xl backdrop-blur-md transition-all duration-300;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .cat-hero__stat:hover {
+    @apply bg-white/[0.06] border-white/15 -translate-y-1;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .cat-hero__stat-value {
+    @apply text-[22px] font-display font-black text-brand-2 leading-none tracking-tight;
+    text-shadow: 0 0 20px rgba(var(--color-brand-2-rgb), 0.3);
+  }
+
+  .cat-hero__stat-label {
+    @apply text-[10px] font-black text-white/40 uppercase tracking-[0.15em] mt-0.5;
+  }
+
+  /* CTA group */
+  .cat-hero__cta-group {
+    @apply flex flex-wrap gap-3 mb-10;
+  }
+
+  .cat-hero__cta-primary {
+    @apply transition-all duration-300;
+    box-shadow: 0 20px 50px rgba(var(--color-brand-rgb),0.3);
+  }
+
+  .cat-hero__cta-primary:hover {
+    box-shadow: 0 25px 60px rgba(var(--color-brand-rgb),0.5);
+  }
+
+  .cat-hero__cta-ghost {
+    @apply border-white/[0.08] bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300;
+    backdrop-filter: blur(8px);
+  }
+
+  /* ─── GALLERY STYLES ─── */
+
+  /* ───────────────────────────────────────────────
+     GALLERY: PREMIUM IMAGE STACK
+     A unique, clinical 'product deck' layout that 
+     replaces the standard slider.
+     ─────────────────────────────────────────────── */
+  .cat-hero-gallery-wrap {
+    @apply relative hidden lg:flex items-center justify-center min-h-[500px];
+  }
+
+  .cat-hero-stack {
+    @apply relative w-full flex items-center justify-center py-10;
+  }
+
+  .cat-stack__container {
+    @apply relative w-[320px] h-[420px];
+    perspective: 1200px;
+  }
+
+  /* Decorative pulse behind the stack */
+  .cat-stack__pulse {
+    @apply absolute inset-[-60px] rounded-full z-0 opacity-20 pointer-events-none;
+    background: radial-gradient(circle, var(--color-brand-2) 0%, transparent 70%);
+    animation: catStackPulse 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes catStackPulse {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.15;
+    }
+
+    100% {
+      transform: scale(1.1);
+      opacity: 0.25;
+    }
+  }
+
+  .cat-stack__item {
+    @apply absolute inset-0 cursor-pointer select-none;
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform, opacity, z-index;
+  }
+
+  .cat-stack__card {
+    @apply w-full h-full rounded-[36px] overflow-hidden bg-white/5 border border-white/15 backdrop-blur-md;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.05);
+  }
+
+  .cat-stack__img {
+    @apply w-full h-full object-cover transition-transform duration-[6000ms] ease-linear;
+  }
+
+  /* Active/Top Card */
+  .cat-stack__item.is-top {
+    @apply z-30 opacity-100;
+    transform: translateZ(0) rotateX(0) rotateY(0);
+  }
+
+  .cat-stack__item.is-top .cat-stack__img {
+    @apply scale-110 grayscale-0;
+  }
+
+  /* Middle Card (Second in stack) */
+  .cat-stack__item.is-middle {
+    @apply z-20 opacity-60;
+    transform: translate3d(30px, 15px, -60px) rotate(4deg);
+  }
+
+  .cat-stack__item.is-middle .cat-stack__img {
+    @apply grayscale-[0.4] scale-100;
+  }
+
+  /* Bottom Card (Third in stack) */
+  .cat-stack__item.is-bottom {
+    @apply z-10 opacity-30;
+    transform: translate3d(60px, 30px, -120px) rotate(8deg);
+  }
+
+  .cat-stack__item.is-bottom .cat-stack__img {
+    @apply grayscale-[0.8] scale-100;
+  }
+
+  /* Hidden Cards (waiting in line) */
+  .cat-stack__item.is-hidden {
+    @apply z-0 opacity-0;
+    transform: translate3d(0, 40px, -200px) scale(0.8);
+  }
+
+  /* Slide-out animation class */
+  .cat-stack__item.is-exit {
+    @apply z-40 opacity-0;
+    transform: translate3d(-150px, -40px, 100px) rotate(-12deg);
+  }
+
+  /* Controls for the stack */
+  .cat-stack__controls {
+    @apply absolute -bottom-16 left-0 right-0 flex items-center justify-center gap-6 z-40;
+  }
+
+  .cat-stack__progress-ring {
+    @apply relative w-12 h-12 flex items-center justify-center;
+  }
+
+  .cat-stack__dots {
+    @apply flex gap-2;
+  }
+
+  .cat-stack__dot {
+    @apply w-1.5 h-1.5 rounded-full bg-white/20 transition-all duration-300 cursor-pointer;
+  }
+
+  .cat-stack__dot.is-active {
+    @apply w-5 bg-brand-2;
+    box-shadow: 0 0 10px var(--color-brand-2);
+  }
+
+  /* Fallback */
+  .cat-gallery-fallback {
+    @apply flex items-center justify-center min-h-[400px] bg-white/5 rounded-[32px] border border-white/10;
+  }
+
+  .cat-fallback-molecule {
+    @apply w-32 h-32 rounded-full bg-brand/10 border border-brand-2/30 flex items-center justify-center animate-pulse;
+  }
+
+  .cat-fallback-molecule i {
+    @apply w-12 h-12 text-brand-2;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     2. CATEGORY PRODUCT GRID SECTION
+     Extends the existing .products-grid system with
+     category-specific header/footer layout.
+     ─────────────────────────────────────────────── */
+
+  .cat-products-section {
+    @apply scroll-mt-[80px];
+  }
+
+  .cat-products__header {
+    @apply flex flex-col lg:flex-row lg:items-end justify-between gap-6;
+  }
+
+  .cat-products__header-left {
+    @apply flex-1;
+  }
+
+  .cat-products__header-count {
+    @apply flex flex-col items-start lg:items-end gap-0 shrink-0;
+  }
+
+  .cat-count-num {
+    font-size: clamp(40px, 5vw, 64px);
+    @apply font-display font-black text-brand leading-none tracking-tighter;
+  }
+
+  .cat-count-label {
+    @apply text-[11px] font-black text-muted uppercase tracking-widest leading-snug;
+  }
+
+  /* Empty state */
+  .cat-products-empty {
+    @apply flex flex-col items-center justify-center py-24 text-center bg-white border border-line rounded-3xl;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     3. CATEGORY AUTHORITY SECTION
+     Two-column: trust signal cards left, specs 
+     data panel right.
+     ─────────────────────────────────────────────── */
+
+  .cat-authority-section {
+    @apply scroll-mt-[80px];
+  }
+
+  .cat-authority__grid {
+    @apply grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-16 items-start;
+  }
+
+  /* Trust signal cards grid (2-col on left side) */
+  .cat-trust-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
+  }
+
+  .cat-trust-card {
+    @apply flex gap-4 p-5 bg-surface rounded-2xl border border-line transition-all duration-300 cursor-default;
+  }
+
+  .cat-trust-card:hover {
+    @apply border-brand-line shadow-soft -translate-y-1;
+  }
+
+  .cat-trust-card__icon {
+    @apply w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center shrink-0;
+    border: 1px solid var(--color-brand-line);
+  }
+
+  .cat-trust-card__icon i {
+    @apply w-5 h-5 text-brand;
+  }
+
+  .cat-trust-card__title {
+    @apply text-[14px] font-bold text-ink mb-1 leading-snug;
+  }
+
+  .cat-trust-card__desc {
+    @apply text-[12px] text-muted leading-relaxed;
+  }
+
+  /* Specs Panel (right column) */
+  .cat-specs-panel {
+    @apply bg-surface-2 border border-line rounded-[28px] p-8 sticky top-[100px];
+    box-shadow: var(--shadow-soft);
+  }
+
+  .cat-specs-panel__header {
+    @apply flex items-start gap-4 mb-6 pb-6 border-b border-line;
+  }
+
+  .cat-specs-panel__icon-wrap {
+    @apply w-12 h-12 rounded-2xl bg-brand/10 border border-brand-line flex items-center justify-center shrink-0;
+  }
+
+  .cat-specs-panel__icon-wrap i {
+    @apply w-6 h-6 text-brand;
+  }
+
+  .cat-specs-panel__list {
+    @apply flex flex-col gap-0;
+  }
+
+  .cat-spec-row {
+    @apply grid grid-cols-[1fr_auto] gap-4 py-3.5 border-b border-line/60 items-baseline;
+  }
+
+  .cat-spec-row:last-child {
+    @apply border-b-0;
+  }
+
+  .cat-spec-row__label {
+    @apply text-[12px] font-bold text-muted;
+  }
+
+  .cat-spec-row__value {
+    @apply text-[12px] font-black text-ink text-right;
+  }
+
+  .cat-specs-panel__footer {
+    @apply flex items-center gap-2 mt-6 pt-5 border-t border-line text-[11px] text-muted font-medium italic;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     4. CATEGORY PROCESS STRIP
+     Horizontal step flow on dark background.
+     On mobile: stacks vertically with connecting 
+     vertical line instead of horizontal.
+     ─────────────────────────────────────────────── */
+
+  .cat-process-section {
+    @apply scroll-mt-[80px];
+  }
+
+  .cat-process__header {
+    @apply text-center max-w-[700px] mx-auto mb-16;
+  }
+
+  .cat-process__strip {
+    @apply flex flex-row items-start justify-center gap-0 max-lg:flex-col max-lg:items-center max-lg:gap-0;
+  }
+
+  .cat-process__step {
+    @apply flex flex-col items-center text-center max-w-[180px] max-lg:max-w-[400px] relative;
+  }
+
+  .cat-process__step-num {
+    @apply text-[11px] font-black text-brand-2/60 tracking-widest uppercase mb-3;
+  }
+
+  .cat-process__step-icon-wrap {
+    @apply w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300;
+    background: rgba(var(--color-brand-rgb), 0.12);
+    border: 1px solid rgba(var(--color-brand-2-rgb), 0.25);
+  }
+
+  .cat-process__step:hover .cat-process__step-icon-wrap {
+    background: rgba(var(--color-brand-rgb), 0.22);
+    border-color: rgba(var(--color-brand-2-rgb), 0.5);
+    transform: translateY(-3px);
+  }
+
+  .cat-process__step-icon-wrap i {
+    @apply w-6 h-6;
+    color: var(--color-brand-2);
+  }
+
+  .cat-process__step-title {
+    @apply text-[14px] font-black text-white mb-2 leading-tight;
+  }
+
+  .cat-process__step-desc {
+    @apply text-[12px] text-white/50 leading-relaxed;
+  }
+
+  /* Connecting arrow between steps (desktop only) */
+  .cat-process__connector {
+    @apply flex items-center justify-center self-start mt-[74px] px-2 text-brand-2/30 max-lg:hidden;
+  }
+
+  .cat-process__connector i {
+    @apply w-5 h-5;
+  }
+
+  /* Mobile: vertical connector line */
+  @media (max-width: 1023px) {
+    .cat-process__step {
+      @apply flex-row text-left gap-5 max-w-none w-full px-4 py-5;
+    }
+
+    .cat-process__step-icon-wrap {
+      @apply shrink-0 mb-0;
+    }
+
+    .cat-process__step-num {
+      @apply mb-1;
+    }
+
+    .cat-process__step::after {
+      content: "";
+      @apply absolute left-[52px] bottom-0 w-[2px] h-5 opacity-30;
+      background: var(--color-brand-2);
+    }
+
+    .cat-process__step:last-child::after {
+      @apply hidden;
+    }
+  }
+
+  .cat-process__cta {
+    @apply flex flex-col sm:flex-row items-center justify-center gap-5 mt-16 pt-12 border-t border-white/10 text-center;
+  }
+
+  .cat-process__cta-btn {
+    @apply border-white/20 text-white bg-white/5 hover:bg-white/10 hover:border-white/40;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     5. CATEGORY BODY CONTENT
+     Optional markdown from _index.md — renders with 
+     the shared ps-markdown-content styles.
+     ─────────────────────────────────────────────── */
+
+  .cat-body__inner {
+    @apply max-w-[820px] mx-auto;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     6. CATEGORY FAQ SECTION
+     Reuses .faq-accordion styles from components/faq.css
+     with a two-column layout specific to category pages.
+     ─────────────────────────────────────────────── */
+
+  .cat-faq-section {
+    @apply scroll-mt-[80px];
+  }
+
+  .cat-faq__grid {
+    @apply grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-16 items-start;
+  }
+
+  .cat-faq__aside {
+    @apply sticky top-[100px];
+  }
+
+  .cat-faq__cta {
+    @apply border-white/20 text-white bg-white/5 hover:bg-white/10 hover:border-white/40;
+  }
+
+  .cat-faq__item {
+    @apply bg-white/5 border-white/10 rounded-2xl;
+  }
+
+  .cat-faq__item .faq-accordion__header {
+    @apply text-white/90;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     7. RELATED CATEGORIES GRID
+     Card grid of sibling category pages with icons,
+     descriptions, and product counts.
+     ─────────────────────────────────────────────── */
+
+  .cat-related-section {
+    @apply scroll-mt-[80px];
+  }
+
+  .cat-related__header {
+    @apply max-w-[600px];
+  }
+
+  .cat-related__grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .cat-related-card {
+    @apply flex items-start gap-5 p-6 bg-white border border-line rounded-2xl transition-all duration-300 cursor-pointer;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .cat-related-card:hover {
+    @apply border-brand-line -translate-y-1;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .cat-related-card:hover .cat-related-card__arrow {
+    @apply text-brand translate-x-1;
+  }
+
+  .cat-related-card__icon-wrap {
+    @apply w-11 h-11 rounded-xl bg-brand/8 border border-brand-line flex items-center justify-center shrink-0 transition-colors duration-300;
+  }
+
+  .cat-related-card:hover .cat-related-card__icon-wrap {
+    @apply bg-brand/15;
+  }
+
+  .cat-related-card__icon-wrap i {
+    @apply w-5 h-5 text-brand;
+  }
+
+  .cat-related-card__content {
+    @apply flex-1 min-w-0;
+  }
+
+  .cat-related-card__title {
+    @apply text-[15px] font-black text-ink mb-1.5 leading-tight transition-colors duration-300;
+  }
+
+  .cat-related-card:hover .cat-related-card__title {
+    @apply text-brand-3;
+  }
+
+  .cat-related-card__desc {
+    @apply text-[12px] text-muted leading-relaxed mb-2;
+  }
+
+  .cat-related-card__count {
+    @apply inline-block text-[10px] font-black text-brand uppercase tracking-widest bg-brand/5 border border-brand-line px-2 py-0.5 rounded-full;
+  }
+
+  .cat-related-card__arrow {
+    @apply w-5 h-5 text-muted/40 transition-all duration-300 mt-0.5 shrink-0;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     RESPONSIVE OVERRIDES
+     ─────────────────────────────────────────────── */
+
+  @media (max-width: 767px) {
+    .cat-hero__stats {
+      @apply gap-2;
+    }
+
+    .cat-hero__stat {
+      @apply px-4 py-2.5;
+    }
+
+    .cat-hero__cta-group {
+      @apply flex-col;
+    }
+
+    .cat-hero__cta-group .btn {
+      @apply w-full justify-center;
+    }
+
+    .cat-authority__grid {
+      @apply gap-10;
+    }
+
+    .cat-trust-grid {
+      @apply grid-cols-1;
+    }
+
+    .cat-specs-panel {
+      position: static;
+      top: auto;
+    }
+
+    .cat-related__grid {
+      @apply grid-cols-1;
+    }
+
+    .cat-faq__grid {
+      @apply gap-8;
+    }
+
+    .cat-faq__aside {
+      position: static;
+    }
+  }
+
+}
+
+/* end @layer components */

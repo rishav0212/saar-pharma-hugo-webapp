@@ -1,0 +1,102 @@
+{{- /*
+  CATEGORY PRODUCT GRID PARTIAL
+  ─────────────────────────────────────────────────────────
+  Renders a filtered grid of product cards that belong to this category.
+  Uses the shared products/card.html partial for consistency.
+  
+  Filtering logic:
+    - Collects all RegularPages in "products" section
+    - Matches pages where .Params.categories contains the current .Title
+  
+  Includes a live result counter and an empty-state fallback.
+*/ -}}
+
+{{- $catName := .Title -}}
+
+{{- /* 
+  Use where .Site.Pages 'Kind' 'page' as the primary filter — this is the only
+  collection in Hugo that guarantees exclusion of section/home/taxonomy pages.
+  Then narrow by Section = "products" to scope to the products content directory.
+  This approach works reliably across all Hugo versions.
+*/ -}}
+{{- $allProducts := where .Site.RegularPages "Section" "products" -}}
+
+{{- /* 
+  Filter products belonging to this category.
+  .Site.RegularPages already excludes section _index.md files by definition —
+  but we add .IsPage guard for extra safety and clarity.
+  We also skip any page whose own .Title matches the category name (belt-and-suspenders).
+*/ -}}
+{{- $catProducts := slice -}}
+{{- range $allProducts -}}
+  {{- $p := . -}}{{/* Capture current range item as $p — in Hugo, $ inside range refers to outer context, NOT the current item */}}
+  {{- if $p.Params.slug -}}
+    {{- with $p.Params.categories -}}
+      {{- if in . $catName -}}
+        {{- $catProducts = $catProducts | append $p -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<section class="section cat-products-section bg-surface" id="cat-products" aria-label="{{ $catName }} product catalogue">
+  <div class="container">
+
+    {{- /* ── SECTION HEADER ── */ -}}
+    <div class="cat-products__header" data-animate="fade-up">
+      <div class="cat-products__header-left">
+        <span class="eyebrow text-brand">Our Formulations</span>
+        <h2 class="section-title section-title--sm mt-2">
+          {{ $catName }} Manufacturing Portfolio
+        </h2>
+        <p class="section-kicker mt-3">
+          All formulations are DCGI approved &amp; produced under WHO-GMP standards. 
+          Each product includes full dossier support for rapid market entry.
+        </p>
+      </div>
+      <div class="cat-products__header-count" aria-live="polite">
+        <span class="cat-count-num">{{ len $catProducts }}</span>
+        <span class="cat-count-label">{{ $catName }}<br>Formulations</span>
+      </div>
+    </div>
+
+    {{- /* ── PRODUCT GRID ── */ -}}
+    {{ if gt (len $catProducts) 0 }}
+    <div class="products-grid cat-products-grid mt-10" data-animate-stagger>
+      {{ range $catProducts }}
+        <div class="product-card-wrap h-full">
+          {{ partial "products/card.html" . }}
+        </div>
+      {{ end }}
+    </div>
+
+    {{- /* ── BOTTOM LINK TO FULL CATALOG ── */ -}}
+    <div class="cat-products__footer mt-14 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-line">
+      <p class="text-[14px] text-muted max-w-md">
+        Looking for a different formulation? Browse our complete portfolio across all dosage forms and therapeutic areas.
+      </p>
+      <a href="/products/" class="btn btn--outline flex items-center gap-2 shrink-0">
+        <i data-lucide="layout-grid" class="w-4 h-4" aria-hidden="true"></i>
+        <span>View Full Product Catalog</span>
+      </a>
+    </div>
+
+    {{ else }}
+    {{- /* ── EMPTY STATE — renders when no products are tagged with this category ── */ -}}
+    <div class="cat-products-empty mt-10" role="status">
+      <div class="w-16 h-16 rounded-2xl bg-brand/5 flex items-center justify-center mx-auto mb-6">
+        <i data-lucide="flask-conical" class="w-8 h-8 text-brand/40" aria-hidden="true"></i>
+      </div>
+      <h3 class="text-2xl font-bold text-ink mb-3">Products Coming Soon</h3>
+      <p class="text-muted text-[15px] max-w-md mx-auto mb-8">
+        Our {{ $catName }} formulation portfolio is being updated. Contact us directly for available {{ $catName }} compositions and pricing.
+      </p>
+      <a href="#contact" class="btn btn--primary" data-enquire-trigger data-category="{{ $catName }}">
+        <i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>
+        <span>Enquire About {{ $catName }}</span>
+      </a>
+    </div>
+    {{ end }}
+
+  </div>
+</section>

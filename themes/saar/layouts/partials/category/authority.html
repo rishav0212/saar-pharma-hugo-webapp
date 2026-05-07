@@ -1,0 +1,160 @@
+{{- /*
+  CATEGORY AUTHORITY PARTIAL
+  ─────────────────────────────────────────────────────────
+  "Why Saar Biotech for [Category]?" trust-signal section.
+  
+  Frontmatter params read:
+    - .Params.authority_title     → optional override headline
+    - .Params.authority_desc      → supporting paragraph
+    - .Params.trust_signals       → list of {icon, title, desc} objects
+    - .Params.manufacturing_specs → list of {label, value} for the right panel
+  
+  Falls back to sensible defaults if params are not set.
+*/ -}}
+
+{{- $catName     := .Title -}}
+{{- $authTitle   := .Params.authority_title | default (printf "Why Saar Biotech for %s?" $catName) -}}
+{{- $authDesc    := .Params.authority_desc | default (printf "Our WHO-GMP certified Baddi facility delivers best-in-class %s formulations with complete dossier support, rigorous quality testing, and fast turnaround for B2B partners across India and globally." $catName) -}}
+
+<section class="section cat-authority-section bg-white border-t border-line/30" id="cat-why">
+  <div class="container">
+
+    <div class="cat-authority__grid">
+
+      {{- /* ── LEFT: TRUST SIGNALS ── */ -}}
+      <div class="cat-authority__left" data-animate="slide-right">
+
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-10 h-[2px] bg-brand" aria-hidden="true"></span>
+          <span class="text-[11px] font-black text-brand uppercase tracking-[0.2em]">Manufacturing Authority</span>
+        </div>
+
+        <h2 class="text-[clamp(26px,3.5vw,40px)] font-display font-black text-ink leading-[1.1] mb-5">
+          {{ $authTitle }}
+        </h2>
+        <p class="text-muted leading-relaxed text-[15px] mb-10">
+          {{ $authDesc }}
+        </p>
+
+        {{- /* Trust Signal Cards — from frontmatter or defaults */ -}}
+        <div class="cat-trust-grid">
+          {{ if .Params.trust_signals }}
+            {{ range .Params.trust_signals }}
+            <div class="cat-trust-card" data-animate-stagger>
+              <div class="cat-trust-card__icon">
+                <i data-lucide="{{ .icon | default "check-circle" }}" aria-hidden="true"></i>
+              </div>
+              <div>
+                <h3 class="cat-trust-card__title">{{ .title }}</h3>
+                <p class="cat-trust-card__desc">{{ .desc }}</p>
+              </div>
+            </div>
+            {{ end }}
+          {{ else }}
+          {{- /* Default trust signals (fallback) */ -}}
+          <div class="cat-trust-card">
+            <div class="cat-trust-card__icon">
+              <i data-lucide="shield-check" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h3 class="cat-trust-card__title">WHO-GMP Certified</h3>
+              <p class="cat-trust-card__desc">Every batch manufactured under stringent international quality protocols with complete batch documentation.</p>
+            </div>
+          </div>
+          <div class="cat-trust-card">
+            <div class="cat-trust-card__icon">
+              <i data-lucide="microscope" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h3 class="cat-trust-card__title">GLP Laboratory Testing</h3>
+              <p class="cat-trust-card__desc">Agilent-equipped labs with HPLC assay, dissolution profiling, and microbial limit tests on every batch.</p>
+            </div>
+          </div>
+          <div class="cat-trust-card">
+            <div class="cat-trust-card__icon">
+              <i data-lucide="file-check-2" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h3 class="cat-trust-card__title">Complete Dossier Support</h3>
+              <p class="cat-trust-card__desc">CTD/ACTD-ready technical files, stability data, and DCGI documentation provided with every product.</p>
+            </div>
+          </div>
+          <div class="cat-trust-card">
+            <div class="cat-trust-card__icon">
+              <i data-lucide="zap" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h3 class="cat-trust-card__title">30–45 Day Turnaround</h3>
+              <p class="cat-trust-card__desc">High-speed automatic filling lines with streamlined QC release cycles for fast market entry.</p>
+            </div>
+          </div>
+          {{ end }}
+        </div>
+
+        <a href="#contact" class="btn btn--primary mt-10 inline-flex items-center gap-2" 
+           data-enquire-trigger data-category="{{ $catName }}" 
+           data-product-name="{{ $catName }} Contract Manufacturing">
+          <i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>
+          <span>Get a Manufacturing Quote</span>
+        </a>
+      </div>
+
+      {{- /* ── RIGHT: MANUFACTURING SPECS PANEL ── */ -}}
+      <div class="cat-authority__right" data-animate="slide-left">
+        <div class="cat-specs-panel">
+          <div class="cat-specs-panel__header">
+            <div class="cat-specs-panel__icon-wrap">
+              <i data-lucide="factory" class="w-6 h-6" aria-hidden="true"></i>
+            </div>
+            <div>
+              <span class="text-[10px] font-black text-brand/70 uppercase tracking-widest">Manufacturing Unit</span>
+              <h3 class="text-[18px] font-black text-ink mt-0.5">{{ $catName }} Production Data</h3>
+            </div>
+          </div>
+
+          <dl class="cat-specs-panel__list">
+            {{ if .Params.manufacturing_specs }}
+              {{ range .Params.manufacturing_specs }}
+              <div class="cat-spec-row">
+                <dt class="cat-spec-row__label">{{ .label }}</dt>
+                <dd class="cat-spec-row__value">{{ .value }}</dd>
+              </div>
+              {{ end }}
+            {{ else }}
+            <div class="cat-spec-row">
+              <dt class="cat-spec-row__label">Manufacturing Location</dt>
+              <dd class="cat-spec-row__value">Baddi, Himachal Pradesh</dd>
+            </div>
+            <div class="cat-spec-row">
+              <dt class="cat-spec-row__label">Quality Standards</dt>
+              <dd class="cat-spec-row__value">WHO-GMP / ISO 9001:2015</dd>
+            </div>
+            <div class="cat-spec-row">
+              <dt class="cat-spec-row__label">Regulatory Compliance</dt>
+              <dd class="cat-spec-row__value">DCGI / Schedule M</dd>
+            </div>
+            <div class="cat-spec-row">
+              <dt class="cat-spec-row__label">Dossier Status</dt>
+              <dd class="cat-spec-row__value">CTD/ACTD Available</dd>
+            </div>
+            <div class="cat-spec-row">
+              <dt class="cat-spec-row__label">B2B Services</dt>
+              <dd class="cat-spec-row__value">Contract &amp; Third-Party Manufacturing</dd>
+            </div>
+            <div class="cat-spec-row">
+              <dt class="cat-spec-row__label">Batch Lead Time</dt>
+              <dd class="cat-spec-row__value">30–45 Days (Domestic)</dd>
+            </div>
+            {{ end }}
+          </dl>
+
+          <div class="cat-specs-panel__footer">
+            <i data-lucide="shield-check" class="w-4 h-4 text-brand" aria-hidden="true"></i>
+            <span>Technical &amp; Regulatory Integrity Verified</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

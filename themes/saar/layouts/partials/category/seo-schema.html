@@ -1,0 +1,95 @@
+{{- /*
+  CATEGORY PAGE JSON-LD SCHEMA
+  Outputs:
+    1. CollectionPage — The category landing page itself
+    2. ItemList      — Products belonging to this category
+    3. FAQPage       — FAQ items from frontmatter
+    4. BreadcrumbList — Home > Products > Category
+  All data is driven from the _index.md frontmatter.
+*/ -}}
+
+{{- $catTitle    := .Params.meta_title    | default .Title -}}
+{{- $catDesc     := .Params.meta_description | default .Description | default .Site.Params.description -}}
+{{- $catName     := .Title -}}
+{{- $catURL      := .Permalink -}}
+{{- $parentURL   := absURL "/products/" -}}
+
+{{- /* Filter products that belong to this category */ -}}
+{{- $allProducts := where (where .Site.Pages "Kind" "page") "Section" "products" -}}
+{{- $catProducts := slice -}}
+{{- range $allProducts -}}
+  {{- $p := . -}}
+  {{- if $p.Params.slug -}}
+    {{- with $p.Params.categories -}}
+      {{- if in . $catName -}}
+        {{- $catProducts = $catProducts | append $p -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ .Site.BaseURL }}#organization",
+      "name": "Saar Biotech Pvt. Ltd.",
+      "url": "{{ .Site.BaseURL }}",
+      "telephone": "{{ .Site.Params.phone }}",
+      "email": "{{ .Site.Params.email }}"
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "{{ $catURL }}#collection",
+      "url": "{{ $catURL }}",
+      "name": "{{ $catTitle }}",
+      "description": "{{ $catDesc }}",
+      "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" },
+      "breadcrumb": { "@id": "{{ $catURL }}#breadcrumb" },
+      "mainEntity": {
+        "@type": "ItemList",
+        "name": "{{ $catName }} Formulations by Saar Biotech",
+        "numberOfItems": {{ len $catProducts }},
+        "itemListElement": [
+          {{ range $i, $p := $catProducts -}}
+          {
+            "@type": "ListItem",
+            "position": {{ add $i 1 }},
+            "name": "{{ $p.Title }}",
+            "url": "{{ $p.Permalink }}"
+          }{{ if lt (add $i 1) (len $catProducts) }},{{ end }}
+          {{- end }}
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ $catURL }}#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ .Site.BaseURL }}" },
+        { "@type": "ListItem", "position": 2, "name": "Products", "item": "{{ $parentURL }}" },
+        { "@type": "ListItem", "position": 3, "name": "{{ $catName }}", "item": "{{ $catURL }}" }
+      ]
+    }
+    {{ if .Params.faqs }}
+    ,{
+      "@type": "FAQPage",
+      "mainEntity": [
+        {{ range $i, $faq := .Params.faqs }}
+        {
+          "@type": "Question",
+          "name": "{{ $faq.q }}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ $faq.a | plainify }}"
+          }
+        }{{ if lt (add $i 1) (len $.Params.faqs) }},{{ end }}
+        {{ end }}
+      ]
+    }
+    {{ end }}
+  ]
+}
+</script>

@@ -3,6 +3,8 @@
   --color-ink-rgb: 16, 42, 67;
   --color-ink-2: #243b53;
   --color-ink-3: #334e68;
+  --color-ink-deep: #0e3038;
+  --color-ink-deep-rgb: 14, 48, 56;
   --color-abyss: #061121;
   --color-abyss-rgb: 6, 17, 33;
   --color-text: #102a43;
@@ -15,7 +17,9 @@
 
   /* Brand colors */
   --color-brand: #159f91;
+  --color-brand-rgb: 21, 159, 145;
   --color-brand-2: #64d4c5;
+  --color-brand-2-rgb: 100, 212, 197;
   --color-brand-3: #0a756b;
   --color-brand-line: rgba(21, 159, 145, 0.28);
   --color-line: rgba(16, 42, 67, 0.1);

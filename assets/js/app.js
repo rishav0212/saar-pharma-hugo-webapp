@@ -10,6 +10,7 @@ import { initProducts } from './modules/products';
 import { initEnquiryModal } from './modules/modal';
 import { initGallery } from './modules/gallery';
 import { initSliders } from './modules/slider';
+import { initCategorySlider } from './modules/categorySlider';
 
 
 function safeInit(name, fn) {
@@ -61,6 +62,7 @@ const initAll = () => {
   safeInit("Gallery", initGallery);
   safeInit("ScrollFades", initScrollFades);
   safeInit("Sliders", initSliders);
+  safeInit("CategorySlider", initCategorySlider);
 };
 
 if (document.readyState === "loading") {

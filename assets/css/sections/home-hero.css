@@ -47,7 +47,7 @@
   }
 
   .hero-eyebrow__dot {
-    @apply w-2 h-2 rounded-full bg-brand-2 shadow-[0_0_0_4px_rgba(100,212,197,0.08)];
+    @apply w-2 h-2 rounded-full bg-brand-2 shadow-[0_0_0_4px_rgba(var(--color-brand-2-rgb),0.08)];
   }
 
   .hero-title {
@@ -56,7 +56,7 @@
 
   .hero-title .text-accent {
     color: var(--color-brand-2);
-    text-shadow: 0 0 30px rgba(100, 212, 197, 0.25);
+    text-shadow: 0 0 30px rgba(var(--color-brand-2-rgb), 0.25);
   }
 
   .hero-subtitle {
@@ -142,7 +142,7 @@
   }
 
   .molecule-core {
-    @apply relative w-[116px] h-[116px] grid place-items-center border border-brand-2/35 rounded-lg bg-brand/20 text-white shadow-[inset_0_0_44px_rgba(100,212,197,0.16),0_24px_44px_rgba(14,48,56,0.24)];
+    @apply relative w-[116px] h-[116px] grid place-items-center border border-brand-2/35 rounded-lg bg-brand/20 text-white shadow-[inset_0_0_44px_rgba(var(--color-brand-2-rgb),0.16),0_24px_44px_rgba(var(--color-ink-deep-rgb),0.24)];
   }
 
   .molecule-core .icon {
@@ -150,7 +150,7 @@
   }
 
   .signal-node {
-    @apply absolute w-3.5 h-3.5 rounded-full bg-brand-2/80 shadow-[0_0_0_6px_rgba(100,212,197,0.1)];
+    @apply absolute w-3.5 h-3.5 rounded-full bg-brand-2/80 shadow-[0_0_0_6px_rgba(var(--color-brand-2-rgb),0.1)];
   }
 
   .signal-node--one {
@@ -181,7 +181,7 @@
 
   .board-panel__num {
     @apply text-brand-2 font-display text-[22px] font-extrabold leading-none mb-1;
-    text-shadow: 0 0 20px rgba(100, 212, 197, 0.4);
+    text-shadow: 0 0 20px rgba(var(--color-brand-2-rgb), 0.4);
   }
 
   .board-panel__text {

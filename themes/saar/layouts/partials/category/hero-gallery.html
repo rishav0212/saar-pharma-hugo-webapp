@@ -1,0 +1,50 @@
+{{- $catName := .Title -}}
+{{- $allProducts := where .Site.RegularPages "Section" "products" -}}
+{{- $catImages := slice -}}
+
+{{- /* 1. GATHER ONE UNIQUE IMAGE FROM EACH PRODUCT IN THIS CATEGORY */ -}}
+{{- range $allProducts -}}
+  {{- if in .Params.categories $catName -}}
+    {{- with .Params.images -}}
+      {{- $catImages = $catImages | append (index . 0) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Limit to 8 diverse products for the hero performance */ -}}
+{{- $catImages = uniq $catImages | first 8 -}}
+
+<div class="cat-hero-stack" id="cat-hero-slider" data-animate="fade-in">
+  <div class="cat-stack__pulse" aria-hidden="true"></div>
+  
+  {{- if gt (len $catImages) 0 -}}
+    <div class="cat-stack__container">
+      {{- range $index, $img := $catImages -}}
+        <div class="cat-stack__item {{ if eq $index 0 }}is-top{{ else if eq $index 1 }}is-middle{{ else if eq $index 2 }}is-bottom{{ else }}is-hidden{{ end }}" data-index="{{ $index }}">
+          <div class="cat-stack__card">
+            <img src="/images/products/{{ $img }}" alt="{{ $catName }} product formulation" loading="eager" class="cat-stack__img">
+            <div class="cat-stack__overlay"></div>
+          </div>
+        </div>
+      {{- end -}}
+    </div>
+    
+    {{- if gt (len $catImages) 1 -}}
+    <div class="cat-stack__controls">
+      <div class="cat-stack__dots">
+        {{ range $index, $img := $catImages }}
+          <span class="cat-stack__dot {{ if eq $index 0 }}is-active{{ end }}" data-goto="{{ $index }}"></span>
+        {{ end }}
+      </div>
+    </div>
+    {{- end -}}
+
+  {{- else -}}
+    {{- /* Fallback: Large decorative icon if no product images found */ -}}
+    <div class="cat-gallery-fallback">
+      <div class="cat-fallback-molecule">
+        <i data-lucide="{{ .Params.hero_icon | default "flask-conical" }}"></i>
+      </div>
+    </div>
+  {{- end -}}
+</div>
