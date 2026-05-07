@@ -1,0 +1,48 @@
+{{- $src := .src | default "" -}}
+{{- $path := replaceRE "^/" "" $src -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $id := .id | default "" -}}
+{{- $pictureClass := .pictureClass | default "" -}}
+{{- $width := .width | default 800 -}}
+{{- $height := .height | default 0 -}}
+{{- $loading := .loading | default "lazy" -}}
+{{- $decoding := .decoding | default "async" -}}
+{{- $fetchPriority := .fetchpriority | default "" -}}
+
+{{- if and hugo.IsExtended (resources.Get $path) -}}
+  {{- with resources.Get $path -}}
+  {{- $targetWidth := $width -}}
+  {{- if lt .Width $targetWidth -}}
+    {{- $targetWidth = .Width -}}
+  {{- end -}}
+  {{- $resize := printf "resize %dx" $targetWidth -}}
+  {{- $avif := .Process (printf "%s avif q70" $resize) -}}
+  {{- $webp := .Process (printf "%s webp q75" $resize) -}}
+  {{- $fallback := .Process $resize -}}
+  <picture{{ with $pictureClass }} class="{{ . }}"{{ end }}>
+    <source srcset="{{ $avif.RelPermalink }}" type="image/avif">
+    <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+    <img{{ with $id }} id="{{ . }}"{{ end }}{{ with $class }} class="{{ . }}"{{ end }}
+      src="{{ $fallback.RelPermalink }}"
+      width="{{ $fallback.Width }}"
+      height="{{ $fallback.Height }}"
+      alt="{{ $alt }}"
+      loading="{{ $loading }}"
+      decoding="{{ $decoding }}"{{ with $fetchPriority }}
+      fetchpriority="{{ . }}"{{ end }}>
+  </picture>
+  {{- end -}}
+{{- else -}}
+  {{- if and hugo.IsExtended (not (resources.Get $path)) -}}
+    {{- warnf "Optimized image '%s' not found in assets. Falling back to static URL." $path -}}
+  {{- end -}}
+  <img{{ with $id }} id="{{ . }}"{{ end }}{{ with $class }} class="{{ . }}"{{ end }}
+    src="{{ $src | relURL }}"
+    width="{{ $width }}"{{ if $height }}
+    height="{{ $height }}"{{ end }}
+    alt="{{ $alt }}"
+    loading="{{ $loading }}"
+    decoding="{{ $decoding }}"{{ with $fetchPriority }}
+    fetchpriority="{{ . }}"{{ end }}>
+{{- end -}}

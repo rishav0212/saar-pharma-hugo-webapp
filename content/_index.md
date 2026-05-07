@@ -3,6 +3,9 @@ title: "Saar Biotech | WHO-GMP Third Party Pharma Manufacturer in India"
 description: "Saar Biotech is a leading WHO-GMP & ISO 9001:2015 certified third-party pharmaceutical manufacturer in Baddi, India. Specializing in Syrups, Suspensions, Ointments, and Oral Liquids for global pharma brands."
 keywords: ["third party pharma manufacturer India", "pharmaceutical contract manufacturing", "WHO GMP manufacturer", "pharma manufacturer Baddi", "syrup manufacturer India", "ointment manufacturer India", "Saar Biotech"]
 type: "page"
+hero_subtitle: "Oral liquids, suspensions, syrups, ointments, topical solutions, and sprays manufactured with COA support, regulatory documentation, and first-batch dispatch in 35–45 days."
+hero_image: "/images/products/hero-bg.webp"
+hero_image_alt: "Saar Biotech pharmaceutical quality control lab for third-party manufacturing"
 
 # Homepage Data (Migrated from data/home.json)
 categories:

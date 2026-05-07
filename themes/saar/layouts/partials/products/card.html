@@ -43,7 +43,15 @@
         {{ end }}
 
         {{ if $productImg }}
-        <img src="/images/products/{{ $productImg }}" alt="{{ .Title }}" class="product-card__image" loading="lazy">
+        {{ partial "shared/optimized-image.html" (dict
+            "src" (printf "images/products/%s" $productImg)
+            "alt" .Title
+            "width" 520
+            "height" 347
+            "loading" "lazy"
+            "class" "product-card__image"
+            "pictureClass" "product-card__picture"
+        ) }}
         {{ else }}
         <div class="text-teal-600/10">
             <i data-lucide="{{ default " pill" .Params.icon }}" class="w-16 h-16"></i>

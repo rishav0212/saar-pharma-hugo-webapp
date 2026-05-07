@@ -1,0 +1,15 @@
+{{- $src := .src | default "" -}}
+{{- $path := replaceRE "^/" "" $src -}}
+{{- $width := .width | default 900 -}}
+{{- $fallback := $src | relURL -}}
+{{- if and hugo.IsExtended (resources.Get $path) -}}
+  {{- with resources.Get $path -}}
+  {{- $targetWidth := $width -}}
+  {{- if lt .Width $targetWidth -}}
+    {{- $targetWidth = .Width -}}
+  {{- end -}}
+  {{- $webp := .Process (printf "resize %dx webp q75" $targetWidth) -}}
+  {{- $fallback = $webp.RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+{{- return $fallback -}}

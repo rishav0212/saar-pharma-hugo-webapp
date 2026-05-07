@@ -64,10 +64,15 @@
     padding: 20px;
   }
 
+  .ps-main-picture,
   .ps-main-img {
     @apply w-full h-full object-contain block;
     transition: opacity 0.22s ease, transform 0.22s ease;
     max-height: 100%;
+  }
+
+  .ps-main-picture img {
+    @apply w-full h-full object-contain block;
   }
 
   .ps-gallery-frame:hover .ps-main-img {
@@ -133,6 +138,7 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   }
 
+  .ps-filmstrip-thumb picture,
   .ps-filmstrip-thumb img {
     @apply w-full h-full object-contain block;
     border-radius: 6px;

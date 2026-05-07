@@ -17,13 +17,17 @@
 
     {{ if .Params.images }}
       <div class="ps-gallery-img-wrap">
-        <img
-          id="ps-main-img"
-          src="/images/products/{{ index .Params.images 0 }}"
-          alt="{{ .Params.product_name | default .Title }}"
-          loading="eager"
-          class="ps-main-img"
-        >
+        {{ partial "shared/optimized-image.html" (dict
+          "src" (printf "images/products/%s" (index .Params.images 0))
+          "alt" (.Params.product_name | default .Title)
+          "width" 900
+          "height" 900
+          "loading" "eager"
+          "fetchpriority" "high"
+          "id" "ps-main-img"
+          "class" "ps-main-img"
+          "pictureClass" "ps-main-picture"
+        ) }}
       </div>
     {{ else }}
       <div class="ps-no-image">
@@ -43,14 +47,22 @@
     <div class="ps-filmstrip-wrap">
       <div class="ps-filmstrip" id="ps-filmstrip" role="list" aria-label="Product images">
         {{ range $i, $img := .Params.images }}
+        {{ $thumbSrc := partial "shared/image-url.html" (dict "src" (printf "images/products/%s" $img) "width" 900) }}
         <button
           class="ps-filmstrip-thumb {{ if eq $i 0 }}active{{ end }}"
-          data-src="/images/products/{{ $img }}"
+          data-src="{{ $thumbSrc }}"
           data-index="{{ $i }}"
           aria-label="View image {{ add $i 1 }}"
           role="listitem"
         >
-          <img src="/images/products/{{ $img }}" alt="{{ $.Title }} view {{ add $i 1 }}" loading="lazy">
+          {{ partial "shared/optimized-image.html" (dict
+            "src" (printf "images/products/%s" $img)
+            "alt" (printf "%s view %d" $.Title (add $i 1))
+            "width" 180
+            "height" 180
+            "loading" "lazy"
+            "pictureClass" "ps-thumb-picture"
+          ) }}
         </button>
         {{ end }}
       </div>
