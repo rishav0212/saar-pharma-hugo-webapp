@@ -71,29 +71,5 @@
 
         </div>
 
-        <!-- SEO Quick Links: Therapeutic Categories -->
-        <div class="mt-20 pt-16 border-t border-line/20" data-animate="fade-up">
-            <div class="flex items-center gap-4 mb-10">
-                <span class="text-[11px] font-black text-ink uppercase tracking-[0.2em]">Therapeutic Navigation</span>
-                <div class="flex-1 h-[1px] bg-line/20"></div>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-8 gap-y-6">
-                {{ $allCats := slice }}
-                {{ range (where .Site.RegularPages "Section" "products") }}
-                    {{ if .Params.categories }}
-                        {{ range .Params.categories }}
-                            {{ $allCats = $allCats | append . }}
-                        {{ end }}
-                    {{ end }}
-                {{ end }}
-                {{ range ($allCats | uniq | sort) }}
-                <a href="/products/#{{ . | urlize }}" class="group flex flex-col gap-1 transition-all duration-300">
-                    <span class="text-[13px] font-bold text-ink group-hover:text-brand transition-colors">{{ . }}</span>
-                    <span class="text-[10px] text-muted font-medium uppercase tracking-tight opacity-60">View Formulations</span>
-                </a>
-                {{ end }}
-            </div>
-        </div>
     </div>
 </section>

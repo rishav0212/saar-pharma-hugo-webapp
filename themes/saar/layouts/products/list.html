@@ -9,19 +9,42 @@
         {{ partial "products/grid.html" . }}
     </div>
 
-    {{ if .Content }}
-    <section class="section section--paper">
-        <div class="container">
-            <div class="prose prose-teal max-w-none ps-markdown-content">
-                {{ .Content }}
-            </div>
-        </div>
-    </section>
-    {{ end }}
 
     {{ partial "products/dosage-authority.html" . }}
     {{ partial "products/authority.html" . }}
-    {{ partial "products/faq.html" . }}
+    {{/* FAQ Section: Standardized B2B Accordion (Matching Product Single & Category Pages) */}}
+    <section class="section section--paper section-rail" id="products-faq">
+        <div class="container">
+            <div class="faq-accordion">
+                <div class="faq-accordion__aside" data-animate="slide-right">
+                    <span class="eyebrow">Manufacturing Support</span>
+                    <h2 class="section-title section-title--sm">B2B Manufacturing Guide for {{ .Title }}</h2>
+                    <p class="section-kicker">Detailed insights on MOQs, lead times, and regulatory dossier support for contract manufacturing partners.</p>
+                    <button class="btn btn--outline mt-8" data-enquire-trigger>
+                        Request Commercial Quotation
+                        <i data-lucide="arrow-right" class="icon"></i>
+                    </button>
+                </div>
+
+                <div class="faq-accordion__list" data-animate-stagger>
+                    {{ range $index, $item := .Params.faqs }}
+                    <div class="faq-accordion__item{{ if eq $index 0 }} is-active{{ end }}">
+                        <div class="faq-accordion__header">
+                            <span>{{ $item.q }}</span>
+                        </div>
+                        <div class="faq-accordion__answer">
+                            <div class="faq-accordion__inner">
+                                <div class="faq-accordion__content">
+                                    <p>{{ $item.a | markdownify }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Integrated Global Enquiry Section -->
     <div class="mt-0">
