@@ -1,10 +1,10 @@
-<section class="section section--cloud section-rail" id="why-choose-us" aria-labelledby="why-title">
+<section class="section section--paper section-rail" id="why-choose-us" aria-labelledby="why-title">
   <div class="container">
     <div class="section-head section-head--center" data-animate data-animate-type="slide-left">
-      <span class="eyebrow">Why choose Saar</span>
-      <h2 id="why-title" class="section-title">Why pharma marketing companies continue with Saar Biotech</h2>
+      <span class="eyebrow">Built for pharma brands</span>
+      <h2 id="why-title" class="section-title">The Saar Advantage: Why Leading Pharma Brands Choose Us</h2>
       <p class="section-kicker">
-        The value is in clarity, consistency, documentation, and dependable supply discipline.
+        Beyond certifications, the value is in our unwavering commitment to batch purity, timeline discipline, and professional coordination.
       </p>
     </div>
 
@@ -15,7 +15,13 @@
           <i data-lucide="{{ $item.icon }}" class="icon icon--md" aria-hidden="true"></i>
         </div>
         <h3>{{ $item.title }}</h3>
-        <p>{{ $item.text }}</p>
+        {{ $text := $item.text }}
+        {{ $years := partial "shared/get-years.html" . }}
+        {{ $text = replace $text "{founded}" .Site.Params.founded }}
+        {{ $text = replace $text "{years}" (printf "%d+" $years) }}
+        {{ $text = replace $text "{products}" .Site.Params.products }}
+        {{ $text = replace $text "{clients}" .Site.Params.clients }}
+        <p>{{ $text }}</p>
         <div class="bento-cell__glow" aria-hidden="true"></div>
       </div>
       {{ end }}

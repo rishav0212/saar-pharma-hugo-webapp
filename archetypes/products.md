@@ -100,7 +100,7 @@ Our formulation is engineered to treat the following conditions with clinical pr
 ## B2B & Third-Party Manufacturing Info {#manufacturing}
 We offer specialized **Contract Manufacturing (CMO)** services for this formulation from our Baddi facility:
 *   **Capacity**: High-speed automatic filling lines.
-*   **Quality**: Agilent-equipped GLP laboratories for rigorous assay testing.
+*   **Quality**: Agilent and Shimadzu equipped GLP laboratories for rigorous assay testing.
 *   **Turnaround**: Standard 30-45 days for new batch production.
 
 ## Storage & Reconstitution Intelligence {#storage}
@@ -109,7 +109,7 @@ We offer specialized **Contract Manufacturing (CMO)** services for this formulat
 2. Protect from direct sunlight and moisture.
 
 ## Quality Control & Compliance {#quality}
-Every batch at Saar Biotech undergoes rigorous testing in our **Agilent-equipped GLP laboratories** to ensure 100% therapeutic efficacy and safety:
+Every batch at Saar Biotech undergoes rigorous testing in our **Agilent and Shimadzu equipped GLP laboratories** to ensure 100% therapeutic efficacy and safety:
 - **Assay Testing**: Ensuring 100% label claim accuracy through high-performance liquid chromatography (HPLC).
 - **Dissolution Profile**: Verifying rapid and consistent drug release in biological environments.
 - **Microbial Limit Test (MLT)**: Guaranteeing absolute purity and safety.

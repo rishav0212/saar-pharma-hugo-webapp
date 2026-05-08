@@ -130,7 +130,7 @@ The pharmacokinetic profile of our Azithromycin formulation is specifically engi
 ## B2B & Third-Party Manufacturing Info {#manufacturing}
 We offer specialized **Contract Manufacturing (CMO)** services for Azithromycin Suspension from our Baddi facility:
 *   **Capacity**: High-speed automatic liquid filling lines.
-*   **Quality**: Agilent-equipped GLP laboratories for rigorous assay testing.
+*   **Quality**: GLP-certified laboratories with advanced analytical instrumentation.
 *   **Turnaround**: Standard 30-45 days for new batch production.
 *   **Packaging**: Available in 15ml, 30ml, and 60ml with customized mono-cartons and measuring cups.
 
@@ -140,7 +140,7 @@ We offer specialized **Contract Manufacturing (CMO)** services for Azithromycin 
 3.  **Post-Reconstitution**: The suspension remains stable for 10-14 days when stored correctly.
 
 ## Quality Control & Compliance {#quality}
-Every batch of Azithromycin at Saar Biotech undergoes rigorous testing in our **Agilent-equipped GLP laboratories** to ensure 100% therapeutic efficacy and safety:
+Every batch of Azithromycin at Saar Biotech undergoes rigorous testing in our **GLP-certified laboratories with advanced analytical instrumentation** to ensure 100% therapeutic efficacy and safety:
 - **Assay Testing**: Ensuring 100% label claim accuracy through high-performance liquid chromatography (HPLC).
 - **Dissolution Profile**: Verifying rapid and consistent drug release in biological environments.
 - **Microbial Limit Test (MLT)**: Guaranteeing absolute purity and safety for pediatric care formulations.

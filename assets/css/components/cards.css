@@ -3,7 +3,7 @@
   .split-grid,
   .facility-layout,
   .contact-layout {
-    @apply grid grid-cols-[0.95fr_1.05fr] gap-[58px] items-center max-lg:grid-cols-1 max-lg:gap-10;
+    @apply grid grid-cols-[0.95fr_1.05fr] gap-[84px] items-center max-lg:grid-cols-1 max-lg:gap-10;
   }
   
 
@@ -119,7 +119,20 @@
   }
 
   .console-row {
-    @apply grid grid-cols-[44px_1fr_auto] gap-3.5 items-center p-4 border border-line rounded-lg bg-white shadow-soft max-md:grid-cols-[auto_1fr];
+    @apply grid grid-cols-[44px_1fr_auto] gap-4 items-center p-5 border border-line rounded-lg bg-white shadow-soft max-md:grid-cols-[auto_1fr] max-md:items-start max-md:p-4;
+  }
+
+  .console-summary {
+    @apply flex items-end justify-between gap-4 p-4 border border-brand-line rounded-lg;
+    background: linear-gradient(135deg, rgba(var(--color-brand-rgb), 0.10), rgba(var(--color-brand-2-rgb), 0.08));
+  }
+
+  .console-summary span {
+    @apply block text-[11px] font-extrabold uppercase text-brand-3;
+  }
+
+  .console-summary strong {
+    @apply block mt-1 text-ink text-[15px] leading-snug;
   }
 
   .console-icon {
@@ -132,12 +145,16 @@
   }
 
   .console-text {
-    @apply mt-1 text-muted text-[13px];
+    @apply mt-1.5 text-muted text-[13px] leading-relaxed;
   }
 
   .console-state {
-    @apply px-2.5 py-1.5 rounded-full text-brand-3 text-xs font-extrabold max-md:col-start-2 max-md:w-max;
+    @apply px-3 py-1.5 rounded-full text-brand-3 text-xs font-extrabold whitespace-nowrap max-md:col-start-2 max-md:w-max;
     background-color: rgba(21, 159, 145, 0.10);
+  }
+
+  .console-note {
+    @apply mt-1 text-[12px] leading-relaxed text-muted;
   }
 
   /* Trust Marquee & Metrics */
@@ -203,6 +220,10 @@
 
   .metric span {
     @apply block mt-2 text-muted text-[13px] font-extrabold;
+  }
+
+  .metric small {
+    @apply block mt-1.5 text-muted text-[12px] leading-snug;
   }
 
   /* Testimonials */
@@ -297,15 +318,24 @@
   
   /* Feature List */
   .feature-list {
-    @apply grid gap-3.5 m-0 p-0 list-none;
+    @apply grid gap-4 m-0 p-0 list-none;
   }
 
   .feature-list li {
-    @apply grid grid-cols-[24px_1fr] gap-3 text-text;
+    @apply grid grid-cols-[24px_1fr] gap-3.5 p-4 border border-line rounded-xl bg-white/80 backdrop-blur-sm text-text leading-relaxed transition-all duration-300;
+  }
+
+  .feature-list li:hover {
+    @apply -translate-y-1 shadow-soft border-brand-line;
+    background-color: var(--color-white);
   }
 
   .feature-list .icon {
-    @apply w-6 h-6 text-brand-3;
+    @apply w-6 h-6 text-brand-3 mt-0.5;
+  }
+
+  .feature-list strong {
+    @apply text-ink font-extrabold;
   }
   
   /* Article Card */

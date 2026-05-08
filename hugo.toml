@@ -11,7 +11,7 @@ enableRobotsTXT = true
   home = ["HTML", "RSS", "JSON"]
 
 [params]
-  description = "Saar Biotech is a leading WHO-GMP & ISO certified third-party pharmaceutical manufacturer in Baddi, India. 20+ years of expertise in specialized Nasal Sprays, Oral Liquids, Suspensions, and Topical Gels for 1700+ global clients."
+  description = "Saar Biotech is a leading WHO-GMP & ISO certified third-party pharmaceutical manufacturer in Baddi, India. {years} years of expertise in specialized Nasal Sprays, Oral Liquids, Suspensions, and Topical Gels for {clients} pharma partners across India."
   keywords = ["third party pharma manufacturer Baddi", "WHO-GMP pharma company India", "contract manufacturing nasal sprays", "oral liquid manufacturer", "Saar Biotech manufacturing", "pharma exports India", "DCGI approved pharma products"]
   phone = "+91 9357690454"
   email = "quotation@saarbiotech.com"

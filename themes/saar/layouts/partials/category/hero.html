@@ -71,7 +71,7 @@ The product count is computed live from all products in this section.
         {{- /* ── LIVE STATS ROW ── */ -}}
         <div class="cat-hero__stats" data-animate="fade-up">
           <div class="cat-hero__stat">
-            <span class="cat-hero__stat-value">{{ if gt $productCount 0 }}{{ $productCount }}{{ else }}240+{{ end }}</span>
+            <span class="cat-hero__stat-value">{{ if gt $productCount 0 }}{{ $productCount }}{{ else }}{{ .Site.Params.products }}{{ end }}</span>
             <span class="cat-hero__stat-label">{{ if gt $productCount 0 }}{{ $catName }} Items{{ else }}Total Products{{ end }}</span>
           </div>
           {{ range .Params.hero_stats }}

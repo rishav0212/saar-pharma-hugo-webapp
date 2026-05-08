@@ -3,8 +3,9 @@
     {{ range seq 1 2 }}
       <span class="marquee__item">WHO-GMP Certified Manufacturer</span>
       <span class="marquee__item">ISO 9001:2015 Quality Systems</span>
-      <span class="marquee__item">Established Since 2005</span>
-      <span class="marquee__item">Baddi, Himachal Pradesh</span>
+      <span class="marquee__item">Established Since {{ $.Site.Params.founded }}</span>
+      <span class="marquee__item">Head Office: Chandigarh</span>
+      <span class="marquee__item">Manufacturing Units: Baddi (H.P.)</span>
       <span class="marquee__item">Third-Party Pharma Manufacturing</span>
       <span class="marquee__item">GLP-Compliant Lab Testing</span>
       <span class="marquee__item">Schedule M Compliant</span>
@@ -15,11 +16,12 @@
   </div>
 </div>
 
+{{ $years := partial "shared/get-years.html" . }}
 {{ $metrics := slice 
-  (dict "count" .Site.Params.client_count "suffix" "+" "value" .Site.Params.clients "label" "Clients and pharma partners")
-  (dict "count" .Site.Params.product_count "suffix" "+" "value" .Site.Params.products "label" "Product formulations")
-  (dict "count" "80000" "suffix" "+" "value" "80,000+" "label" "Sq ft manufacturing campus")
-  (dict "count" "20" "suffix" "+" "value" "20+" "label" "Years of manufacturing focus")
+  (dict "count" .Site.Params.client_count "suffix" "+" "value" .Site.Params.clients "label" "Pharma partners" "context" "Served across Indian pharma markets")
+  (dict "count" .Site.Params.product_count "suffix" "+" "value" .Site.Params.products "label" "DCGI-approved formulations" "context" "Across 10 dosage form categories")
+  (dict "count" "80000" "suffix" "+" "value" "80,000+" "label" "Sq ft manufacturing campus" "context" (printf "With %s dedicated production units" .Site.Params.units))
+  (dict "count" $years "suffix" "+" "value" (printf "%d+" $years) "label" "Years of manufacturing focus" "context" "Supporting repeat third-party supply")
 }}
 {{ partial "shared/metrics.html" (dict "items" $metrics "class" "") }}
 

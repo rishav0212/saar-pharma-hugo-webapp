@@ -1,11 +1,11 @@
 ---
 title: "Saar Biotech | WHO-GMP Third Party Pharma Manufacturer in India"
-description: "Saar Biotech is a leading WHO-GMP & ISO 9001:2015 certified third-party pharmaceutical manufacturer in Baddi, India. Specializing in Syrups, Suspensions, Ointments, and Oral Liquids for global pharma brands."
+description: "Saar Biotech is a leading WHO-GMP & ISO 9001:2015 certified third-party pharmaceutical manufacturer in Baddi, India. Specializing in Syrups, Suspensions, Ointments, and Oral Liquids for pharma marketing brands across India."
 keywords: ["third party pharma manufacturer India", "pharmaceutical contract manufacturing", "WHO GMP manufacturer", "pharma manufacturer Baddi", "syrup manufacturer India", "ointment manufacturer India", "Saar Biotech"]
 type: "page"
 hero_subtitle: "Oral liquids, suspensions, syrups, ointments, topical solutions, and sprays manufactured with COA support, regulatory documentation, and first-batch dispatch in 35–45 days."
 hero_image: "/images/products/hero-bg.webp"
-hero_image_alt: "Saar Biotech pharmaceutical quality control lab for third-party manufacturing"
+hero_image_alt: "Saar Biotech pharmaceutical manufacturing unit in Baddi and head office in Chandigarh for third-party pharma production"
 
 # Homepage Data (Migrated from data/home.json)
 categories:
@@ -31,7 +31,7 @@ categories:
     url: "/products/"
   - icon: "package-check"
     title: "Global Contract Manufacturing"
-    text: "End-to-end third-party manufacturing solutions for 2050+ global clients with 240+ DCGI-approved products."
+    text: "End-to-end third-party manufacturing solutions for 2050+ pharma partners across India with 240+ DCGI-approved products."
     tags: ["Contract Pharma", "Global Export", "Baddi Unit"]
     url: "/products/"
   - icon: "shield-check"
@@ -41,24 +41,24 @@ categories:
     url: "/manufacturing-unit/"
 
 why:
-  - icon: "history"
-    title: "20+ Years of Expertise"
-    text: "Established in 2005, we bring two decades of pharmaceutical excellence and trusted manufacturing legacy to every batch."
-  - icon: "factory"
-    title: "80,000 Sq. Ft. Facility"
-    text: "Operating 4 state-of-the-art units in Baddi, Asia's largest pharma hub, with massive production scale and precision."
+  - icon: "shield-check"
+    title: "Unwavering Quality"
+    text: "Excellence in every formulation. We maintain absolute batch integrity through established QC protocols and stringent process controls in our Baddi units since {founded}."
+  - icon: "truck"
+    title: "On-time Delivery"
+    text: "Reliable supply chain supported by a 50,000 units/day liquid production capacity, ensuring your brand stays stocked and market-ready."
+  - icon: "flask-conical"
+    title: "Pioneering Innovation"
+    text: "{products} DCGI-approved formulations spanning 12 therapeutic categories, ready for immediate third-party production and rapid market entry."
+  - icon: "award"
+    title: "Certified Infrastructure"
+    text: "Our 80,000 Sq. Ft. manufacturing campus meets international regulatory standards with {years} of expertise and active WHO-GMP certifications."
   - icon: "microscope"
-    title: "Advanced QC Lab"
-    text: "Equipped with world-class Agilent and Waters analytical machinery for rigorous GLP-certified quality control."
+    title: "Strong Quality Control"
+    text: "Equipped with advanced GLP-certified analytical instrumentation (HPLC & UV). We perform rigorous assay and MLT testing on every batch."
   - icon: "users"
-    title: "2050+ Global Clients"
-    text: "Demonstrated trust across international markets, serving procurement managers and pharma brands with unyielding reliability."
-  - icon: "clipboard-check"
-    title: "240+ Formulations"
-    text: "A massive formulation bank of DCGI-approved products across all therapeutic segments for fast market entry."
-  - icon: "globe"
-    title: "Baddi Pharma Hub"
-    text: "Strategic location in Baddi, Himachal Pradesh, offering cost-effective production and seamless logistics connectivity."
+    title: "Experienced Team"
+    text: "Trusted by {clients} pharma marketing companies and distributors across India for professional third-party manufacturing and supply."
 
 products:
   - type: "Nasal Care"
@@ -170,7 +170,7 @@ articles:
 
 faqs:
   - q: "What makes Saar Biotech a leading WHO-GMP pharma manufacturer in India?"
-    a: "Saar Biotech combines 20 years of expertise with a massive 80,000 sq. ft. infrastructure in Baddi. Our WHO-GMP and GLP certifications, along with advanced analytical machinery from Agilent and Shimadzu, ensure elite quality for 2050+ global clients."
+    a: "Saar Biotech combines 20 years of expertise with a massive 80,000 sq. ft. infrastructure in Baddi. Our WHO-GMP and GLP certifications, along with advanced analytical machinery from Agilent and Shimadzu, ensure reliable quality for 2050+ pharma partners across India."
   - q: "Which product categories do you specialize in for third-party manufacturing?"
     a: "We specialize in high-demand formulations including Fluticasone Nasal Sprays, Sodium Alginate Suspensions, Diclofenac Sprays, Pediatric Oral Drops, and a full range of Dermacare ointments and gels."
   - q: "Do you provide support for DCGI-approved new drugs?"

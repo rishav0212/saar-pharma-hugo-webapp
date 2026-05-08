@@ -5,6 +5,7 @@
       <div class="metric">
         <strong data-count="{{ .count }}" data-suffix="{{ .suffix }}">{{ .value }}</strong>
         <span>{{ .label }}</span>
+        {{ with .context }}<small>{{ . }}</small>{{ end }}
       </div>
       {{ end }}
     </div>

@@ -120,6 +120,10 @@
     @apply min-h-[38px] px-3.5 py-1.5 text-[13px] gap-2;
   }
 
+  .btn--lg {
+    @apply min-h-[54px] px-8 py-4 text-[16px] gap-3;
+  }
+
   .btn--whatsapp {
     background-color: #25D366 !important;
     color: white !important;
@@ -151,11 +155,14 @@
 }
 
 /* ─── Universal Horizontal Scroll Utilities ─── */
-.js-scroll-fade.is-dragging {
-  cursor: grabbing !important;
+.js-scroll-fade {
+  cursor: grab;
 }
-.js-scroll-fade.is-dragging * {
-  pointer-events: none;
+.js-scroll-fade:active {
+  cursor: grabbing;
+}
+.js-scroll-fade::-webkit-scrollbar {
+  display: none;
 }
 
 /* Animations */

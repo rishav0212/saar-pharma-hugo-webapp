@@ -7,6 +7,10 @@
 
   {{ $title := .Params.meta_title | default .Title }}
   {{ $description := .Params.meta_description | default .Description | default .Site.Params.description }}
+  {{ $years := partial "shared/get-years.html" . }}
+  {{ $description = replace $description "{years}" (printf "%d+" $years) }}
+  {{ $description = replace $description "{clients}" .Site.Params.clients }}
+  {{ $description = replace $description "{products}" .Site.Params.products }}
   {{ $keywords := .Params.keywords | default .Site.Params.keywords }}
 
   <title>{{ $title }}</title>

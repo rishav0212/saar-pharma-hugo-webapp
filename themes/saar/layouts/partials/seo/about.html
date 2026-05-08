@@ -8,7 +8,8 @@
     "alternateName": "Saar Biotech",
     "url": "https://saarbiotech.in/about/",
     "logo": "https://saarbiotech.in/logo.png",
-    "foundingDate": "2005",
+    {{ $years := partial "shared/get-years.html" . }}
+    "foundingDate": "{{ .Site.Params.founded }}",
     "founders": [
       {
         "@type": "Person",
@@ -19,7 +20,7 @@
         "name": "Mr. Anil Kumar"
       }
     ],
-    "description": "WHO-GMP & ISO certified pharmaceutical manufacturer with 20+ years of expertise in third-party contract manufacturing.",
+    "description": "WHO-GMP & ISO certified pharmaceutical manufacturer with {{ $years }}+ years of expertise in third-party contract manufacturing.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Plot No. 125-126, EPIP, Phase-1",
