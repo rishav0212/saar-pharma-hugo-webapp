@@ -88,7 +88,7 @@
             {{ if (gt (len (trim $intro " \n\r")) 0) }}
               {{ $sections = $sections | append (dict 
                 "title" "Product Profile" 
-                "id" "overview" 
+                "id" "product-profile" 
                 "icon" "info" 
                 "content" (printf `
                   <div class="ps-markdown-content !p-0 border-0 shadow-none mb-12">
