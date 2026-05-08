@@ -231,6 +231,7 @@
 /* Page Sections */
 @import "./assets/css/home/hero.css";
 @import "./assets/css/home/categories.css";
+@import "./assets/css/home/products.css";
 @import "./assets/css/home/planner.css";
 @import "./assets/css/sections/about.css";
 @import "./assets/css/sections/about-timeline.css";

@@ -72,31 +72,8 @@ why:
     title: "Experienced Team"
     text: "Trusted by {clients} pharma marketing companies and distributors across India for professional third-party manufacturing and supply."
 
-products:
-  - type: "Nasal Care"
-    title: "Fluticasone Nasal Sprays"
-    text: "Leading nasal delivery solutions with specialized packing in Amber glass and HDPE formats for maximum stability."
-    url: "/products/sprays/"
-  - type: "Digestive Health"
-    title: "Sodium Alginate Suspensions"
-    text: "Fast-acting oral suspensions providing 3-minute symptomatic relief for acidity and digestive wellness."
-    url: "/products/suspensions/"
-  - type: "Topical Relief"
-    title: "Diclofenac 4X Sprays"
-    text: "High-concentration pain relief sprays and roll-ons for dermatological and orthopedic therapeutic segments."
-    url: "/products/ointments/"     # Fixes Ointment route to match products dir
-  - type: "Oral Wellness"
-    title: "Vitamin D3 & Immunity Sprays"
-    text: "Innovative sublingual and oral sprays for modern supplement portfolios and fast-moving wellness brands."
-    url: "/products/sprays/"
-  - type: "Pediatric Range"
-    title: "Oral Drops & Syrups"
-    text: "Safety-focused pediatric formulations with precision droppers and taste-optimized wellness profiles."
-    url: "/products/"
-  - type: "Derma Care"
-    title: "Antifungal Gels & Creams"
-    text: "Specialized dermatological pastes, shampoos, and topical solutions for global private-label distribution."
-    url: "/products/topical-solutions/"
+featured_products:
+  - "azithromycin"
 
 process:
   - num: "01"

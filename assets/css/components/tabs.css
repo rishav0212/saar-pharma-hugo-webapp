@@ -125,16 +125,6 @@
     @apply w-9 h-9;
   }
 
-  /* Product scroll card icon inner */
-  .product-scroll-card__icon-inner {
-    @apply absolute inset-0 grid place-items-center;
-    color: var(--color-brand-3);
-  }
-
-  .product-scroll-card__icon-inner .icon {
-    @apply w-7 h-7;
-  }
-
   .tag-list {
     @apply flex flex-wrap gap-2 mt-5;
   }

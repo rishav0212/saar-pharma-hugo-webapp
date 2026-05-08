@@ -1,84 +1,56 @@
-<section class="section section--paper section-rail" id="products" aria-labelledby="products-title">
+<section class="section section--paper section-rail !py-16" id="products" aria-labelledby="products-title">
   <div class="container">
-    <div class="section-head" data-animate>
+    <div class="section-head mb-8" data-animate>
       <div>
         <span class="eyebrow">Featured compositions</span>
         <h2 id="products-title" class="section-title">Featured composition and dosage families</h2>
       </div>
-      <div>
-        <p class="section-kicker">
-          A focused view of high-demand product families before moving into the complete catalogue.
+      <div class="text-right">
+        <p class="section-kicker !m-0 !max-w-none">
+          Explore our premier therapeutic families and specialized formulations, engineered for high-demand market success and seamless third-party manufacturing.
         </p>
-        <div class="mt-4.5">
-          <a class="btn btn--outline" href="/products/">View Full Product Range</a>
+      </div>
+
+      <!-- Action Row: Separated for cleaner hierarchy -->
+      <div class="col-span-2 flex items-center justify-end gap-6 mt-5">
+        <div class="scroll-controls !mt-0">
+          <button id="products-prev" class="scroll-btn" aria-label="Previous products">
+            <i data-lucide="chevron-left" class="icon"></i>
+          </button>
+          <button id="products-next" class="scroll-btn" aria-label="Next products">
+            <i data-lucide="chevron-right" class="icon"></i>
+          </button>
         </div>
+        <a class="btn btn--outline btn--small" href="/products/">View Full Catalogue</a>
       </div>
     </div>
 
     <div class="scroll-track-wrapper">
-      <div id="products-scroll-track" class="product-autoplay-wrapper scroll-track" data-animate aria-label="Featured product families">
+      <div id="products-scroll-track" class="product-autoplay-wrapper scroll-track" data-animate
+        aria-label="Featured product families">
         <div class="product-autoplay-track">
           <!-- Original Items -->
           {{ range .items }}
-          <article class="product-scroll-card w-[320px] flex-shrink-0">
-            <div class="product-scroll-card__top">
-              <div class="product-scroll-card__icon" aria-hidden="true">
-                <div class="product-scroll-card__ring"></div>
-                <div class="product-scroll-card__ring product-scroll-card__ring--2"></div>
-                <div class="product-scroll-card__icon-inner">
-                  <i data-lucide="flask-conical" class="icon" aria-hidden="true"></i>
-                </div>
-              </div>
-              <span class="product-type">{{ .type }}</span>
-            </div>
-            <div class="product-scroll-card__body">
-              <h3>{{ .title }}</h3>
-              <p>{{ .text }}</p>
-            </div>
-            <div class="product-actions">
-              <a class="btn btn--outline btn--small" href="{{ .url }}">View Range</a>
-              <a class="btn btn--primary btn--small" href="#contact">Enquire</a>
-            </div>
-          </article>
+          {{ $p := site.GetPage (printf "products/%s" .) }}
+          {{ if $p }}
+          <div class="product-scroll-card flex-shrink-0">
+            {{ partial "products/card.html" $p }}
+          </div>
+          {{ end }}
           {{ end }}
 
           <!-- Duplicated Items for seamless infinite scroll (Desktop) -->
+          {{ if gt (len .items) 2 }}
           {{ range .items }}
-          <article class="product-scroll-card w-[320px] flex-shrink-0 marquee-only" aria-hidden="true">
-            <div class="product-scroll-card__top">
-              <div class="product-scroll-card__icon">
-                <div class="product-scroll-card__ring"></div>
-                <div class="product-scroll-card__ring product-scroll-card__ring--2"></div>
-                <div class="product-scroll-card__icon-inner">
-                  <i data-lucide="flask-conical" class="icon"></i>
-                </div>
-              </div>
-              <span class="product-type">{{ .type }}</span>
-            </div>
-            <div class="product-scroll-card__body">
-              <h3>{{ .title }}</h3>
-              <p>{{ .text }}</p>
-            </div>
-            <div class="product-actions">
-              <a class="btn btn--outline btn--small" href="{{ .url }}" tabindex="-1">View Range</a>
-              <a class="btn btn--primary btn--small" href="#contact" tabindex="-1">Enquire</a>
-            </div>
-          </article>
+          {{ $p := site.GetPage (printf "products/%s" .) }}
+          {{ if $p }}
+          <div class="product-scroll-card flex-shrink-0 marquee-only" aria-hidden="true">
+            {{ partial "products/card.html" $p }}
+          </div>
+          {{ end }}
+          {{ end }}
           {{ end }}
         </div>
-      </div>
-      
-      <!-- Scroll Controls (Affordance) -->
-      <div class="scroll-controls">
-        <button id="products-prev" class="scroll-btn" aria-label="Previous products">
-          <i data-lucide="chevron-left" class="icon"></i>
-        </button>
-        <div class="scroll-indicator">
-          <div class="scroll-indicator__bar"></div>
-        </div>
-        <button id="products-next" class="scroll-btn" aria-label="Next products">
-          <i data-lucide="chevron-right" class="icon"></i>
-        </button>
       </div>
     </div>
   </div>

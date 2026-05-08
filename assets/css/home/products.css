@@ -1,0 +1,154 @@
+@layer components {
+  /* Horizontal Scroll Track (Carousel) */
+  .scroll-track-wrapper {
+    @apply relative mt-12;
+  }
+
+  .scroll-track {
+    @apply flex gap-6 overflow-x-auto pb-8 pt-3 px-3 -mx-3 scroll-smooth max-lg:-mx-3.5 max-lg:px-3.5;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scroll-track::-webkit-scrollbar {
+    @apply hidden; /* Chrome/Safari */
+  }
+
+  .product-scroll-card {
+    @apply flex-[0_0_380px] flex flex-col min-h-[400px] transition-all duration-300 max-lg:flex-[0_0_85vw] max-lg:min-h-[340px];
+    scroll-snap-align: start;
+  }
+
+  .product-scroll-card:hover {
+    @apply -translate-y-2 shadow-lift;
+    border-color: rgba(21, 159, 145, 0.28);
+  }
+
+  .product-scroll-card__top {
+    @apply flex justify-between items-start mb-8;
+  }
+
+  .product-scroll-card__icon {
+    @apply relative w-20 h-20;
+  }
+
+  .product-scroll-card__ring {
+    @apply absolute inset-0 rounded-full border-2 transition-transform duration-400;
+    border-color: rgba(21, 159, 145, 0.20);
+  }
+
+  .product-scroll-card__ring--2 {
+    @apply inset-2.5;
+    border-color: rgba(21, 159, 145, 0.40);
+  }
+
+  .product-scroll-card:hover .product-scroll-card__ring {
+    @apply scale-110;
+  }
+  
+  .product-scroll-card:hover .product-scroll-card__ring--2 {
+    @apply scale-90;
+  }
+
+  .product-scroll-card__icon-inner {
+    @apply absolute inset-0 grid place-items-center rounded-full text-brand z-10;
+  }
+
+  .product-scroll-card__icon-inner .icon {
+    @apply w-8 h-8;
+  }
+
+  .scroll-arrow {
+    @apply absolute top-1/2 -translate-y-1/2 w-14 h-14 grid place-items-center rounded-full bg-white border border-line text-ink shadow-soft cursor-pointer z-10 transition-all duration-200 max-lg:hidden;
+  }
+
+  .scroll-arrow:hover {
+    @apply bg-brand text-white border-brand;
+  }
+
+  .scroll-arrow--left {
+    @apply -left-7;
+  }
+
+  .scroll-arrow--right {
+    @apply -right-7;
+  }
+  
+  .product-type {
+    @apply text-brand-3 text-[12px] font-extrabold tracking-normal uppercase;
+  }
+  
+  .product-actions {
+    @apply flex gap-2.5 mt-5 max-md:flex-col max-md:items-stretch;
+  }
+
+  /* ─── Product auto-scroll marquee / scroll track ─── */
+  .product-autoplay-wrapper {
+    @apply relative overflow-hidden cursor-grab active:cursor-grabbing py-8 -my-8;
+    /* Fade edges */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    scroll-behavior: smooth;
+    user-select: none;
+  }
+
+  .product-autoplay-wrapper.is-dragging {
+    scroll-behavior: auto;
+  }
+
+  .product-autoplay-track {
+    @apply flex gap-6;
+    width: max-content;
+    animation: product-scroll 36s linear infinite;
+  }
+
+  @media (max-width: 1023px) {
+    .product-autoplay-track {
+      width: max-content;
+      animation: product-scroll 45s linear infinite;
+    }
+
+    .product-autoplay-wrapper {
+      @apply overflow-x-auto pb-4 -mx-6 px-6;
+      -webkit-mask-image: none;
+      mask-image: none;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .product-autoplay-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* ─── Interaction Pause States ─── */
+  .product-autoplay-wrapper:hover .product-autoplay-track,
+  .product-autoplay-wrapper.is-paused .product-autoplay-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes product-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── Scroll Controls (Header Optimized) ─── */
+  .scroll-controls {
+    @apply flex items-center gap-3;
+  }
+
+  .scroll-btn {
+    @apply grid place-items-center w-11 h-11 rounded-lg bg-white border border-line text-brand-3 shadow-soft transition-all duration-200 cursor-pointer outline-none;
+  }
+
+  .scroll-btn:hover {
+    @apply border-brand bg-brand text-white shadow-lift -translate-y-0.5;
+  }
+
+  @media (max-width: 1023px) {
+    /* Ensure controls remain visible if needed, or adjust padding */
+    .scroll-controls {
+      @apply mt-6 justify-center;
+    }
+  }
+}

@@ -7,7 +7,7 @@
 {{ partial "home/categories.html" (dict "context" . "items" .Params.categories) }}
 {{ partial "home/manufacturing.html" (dict "units" .Params.units) }}
 {{ partial "home/process.html" (dict "items" .Params.process) }}
-{{ partial "home/products.html" (dict "items" .Params.products) }}
+{{ partial "home/products.html" (dict "items" .Params.featured_products) }}
 {{ partial "home/certifications.html" (dict "items" .Params.certs) }}
 {{ partial "home/testimonials.html" (dict "items" .Params.testimonials) }}
 {{ partial "home/articles.html" (dict "items" .Params.articles) }}

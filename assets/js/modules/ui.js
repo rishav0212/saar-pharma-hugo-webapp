@@ -139,6 +139,17 @@ export function initProductScroll() {
   const nextBtn = document.getElementById('products-next');
   if (!track) return;
 
+  let pauseTimeout;
+  const PAUSE_DURATION = 4000; // 4 seconds
+
+  const triggerPause = () => {
+    track.classList.add('is-paused');
+    clearTimeout(pauseTimeout);
+    pauseTimeout = setTimeout(() => {
+      track.classList.remove('is-paused');
+    }, PAUSE_DURATION);
+  };
+
   const getScrollAmount = () => {
     if (window.innerWidth < 768) return track.clientWidth * 0.85;
     const card = track.querySelector('.product-scroll-card');
@@ -146,10 +157,12 @@ export function initProductScroll() {
   };
 
   if (prevBtn) prevBtn.addEventListener('click', () => {
+    triggerPause();
     track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
   });
 
   if (nextBtn) nextBtn.addEventListener('click', () => {
+    triggerPause();
     track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
   });
 
@@ -160,6 +173,7 @@ export function initProductScroll() {
 
   const startDragging = (e) => {
     isDown = true;
+    triggerPause();
     track.classList.add('is-dragging');
     startX = (e.pageX || e.touches[0].pageX) - track.offsetLeft;
     scrollLeft = track.scrollLeft;
@@ -172,6 +186,7 @@ export function initProductScroll() {
 
   const move = (e) => {
     if (!isDown) return;
+    triggerPause(); // Keep pausing as long as we move
     e.preventDefault();
     const x = (e.pageX || e.touches[0].pageX) - track.offsetLeft;
     const walk = (x - startX) * 2;

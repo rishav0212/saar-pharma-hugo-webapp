@@ -411,81 +411,17 @@
   }
 }
 
-/* ─── Product auto-scroll marquee / scroll track ─── */
-.product-autoplay-wrapper {
-  @apply relative overflow-hidden cursor-grab active:cursor-grabbing;
-  /* Fade edges */
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
-  scroll-behavior: smooth;
-  user-select: none;
-}
-
-.product-autoplay-wrapper.is-dragging {
-  scroll-behavior: auto;
-}
-
-.product-autoplay-track {
-  @apply flex gap-6;
-  width: max-content;
-  animation: product-scroll 36s linear infinite;
-}
-
-@media (max-width: 1023px) {
-  .product-autoplay-track {
-    width: max-content;
-    animation: product-scroll 45s linear infinite;
+  .footer-bottom {
+    @apply flex items-center justify-between gap-5 mt-14 pt-6 text-[13px] max-md:flex-col max-md:items-start;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    color: rgba(255, 255, 255, 0.50);
   }
-  
-  .product-autoplay-wrapper {
-    @apply overflow-x-auto pb-4 -mx-6 px-6;
-    -webkit-mask-image: none;
-    mask-image: none;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-  
-  .product-autoplay-wrapper::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* marquee-only items now visible for mobile auto-scroll */
-}
 
-.product-autoplay-wrapper:hover .product-autoplay-track {
-  animation-play-state: paused;
-}
 
-@keyframes product-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.scroll-controls {
-  @apply relative z-20 flex items-center justify-center gap-6 mt-10;
-}
-
-.scroll-btn {
-  @apply grid place-items-center w-12 h-12 rounded-full bg-white border border-line text-brand-3 shadow-soft transition-all duration-200 cursor-pointer outline-none;
-}
-
-.scroll-btn:hover {
-  @apply border-brand bg-brand text-white shadow-lift -translate-y-0.5;
-}
-
-.scroll-indicator {
-  @apply relative w-32 h-1 rounded-full bg-line overflow-hidden;
-}
-
-.scroll-indicator__bar {
-  @apply absolute left-0 top-0 h-full bg-brand transition-all duration-300;
-  width: 30%; /* Default width */
-}
-
-@media (min-width: 1024px) {
-  .scroll-controls {
-    display: none;
-  }
+/* Pulse Dot Animation */
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(21, 159, 145, 0.5); }
+  60%       { box-shadow: 0 0 0 5px rgba(21, 159, 145, 0); }
 }
 
 /* ─── Contact section animated orbs ─── */
