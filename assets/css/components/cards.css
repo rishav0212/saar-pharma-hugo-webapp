@@ -391,34 +391,106 @@
   .cert-layout {
     @apply grid grid-cols-[360px_1fr] gap-[60px] items-center max-lg:grid-cols-1 max-lg:gap-10;
   }
+  
+  /* Article Card */
+  .article-grid {
+    @apply grid grid-cols-3 gap-4.5 max-lg:grid-cols-2 max-md:flex max-md:overflow-x-auto max-md:pb-6 max-md:-mx-6 max-md:px-6;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .article-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .article-card {
+    @apply rounded-lg shadow-[0_12px_28px_rgba(14,48,56,0.2)] transition-all duration-300 overflow-hidden max-md:flex-[0_0_280px] max-md:mr-4;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(12px);
+    scroll-snap-align: start;
+  }
+
+  .article-card:hover {
+    @apply -translate-y-1.5 shadow-lift;
+    border-color: rgba(21, 159, 145, 0.28);
+  }
+
+  .article-visual {
+    @apply grid place-items-center h-[150px] bg-white/5 text-brand-2;
+  }
+
+  .article-visual .icon {
+    @apply w-[42px] h-[42px];
+  }
+
+  .article-body {
+    @apply p-5.5;
+  }
+
+  .article-category {
+    @apply inline-flex px-2 py-1 rounded-full text-brand-3 text-[11px] font-extrabold;
+    background-color: rgba(21, 159, 145, 0.10);
+  }
+
+  .article-card h3 {
+    @apply mt-3 text-[19px] leading-tight text-white;
+  }
+
+  .article-card p {
+    @apply mt-3 text-white/60 text-[14px];
+  }
+  
+  /* Certifications Badge Layout */
+  .cert-layout {
+    @apply grid grid-cols-[360px_1fr] gap-[60px] items-center max-lg:grid-cols-1 max-lg:gap-10;
+  }
 
   .cert-badges {
-    @apply grid grid-cols-2 gap-5 max-md:grid-cols-1 max-md:gap-4;
+    @apply grid gap-5;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
 
   .cert-badge {
-    @apply flex items-center gap-4 p-5 rounded-lg transition-all duration-300 max-md:p-4;
+    @apply flex items-center gap-4 p-5 rounded-lg transition-all duration-300 max-md:p-4 no-underline;
     border: 1px solid rgba(255, 255, 255, 0.10);
     background-color: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
   }
 
   .cert-badge:hover {
     background-color: rgba(255, 255, 255, 0.10);
-    transform: translateX(6px);
+    transform: translateY(-4px);
     border-color: rgba(21, 159, 145, 0.40);
   }
 
   .cert-badge__icon {
-    @apply grid place-items-center w-12 h-12 rounded-full text-brand-2;
+    @apply grid place-items-center w-12 h-12 rounded-full text-brand-2 flex-shrink-0;
     background-color: rgba(21, 159, 145, 0.15);
   }
 
+  .cert-badge__icon img {
+    @apply w-7 h-7 object-contain;
+  }
+
+  .cert-badge__body {
+    @apply flex-1;
+  }
+
   .cert-badge__body strong {
-    @apply block text-white text-[16px];
+    @apply block text-white text-[16px] leading-tight;
   }
 
   .cert-badge__body span {
-    @apply text-white/60 text-[13px];
+    @apply block mt-1 text-white/60 text-[13px] leading-snug;
+  }
+
+  .cert-badge__arrow {
+    @apply text-white/20 transition-all duration-300;
+  }
+
+  .cert-badge:hover .cert-badge__arrow {
+    @apply text-brand-2 translate-x-1;
   }
 }
 
