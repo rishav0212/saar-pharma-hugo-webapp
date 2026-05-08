@@ -156,6 +156,37 @@ export function initProductScroll() {
     return card ? card.offsetWidth + 24 : 344;
   };
 
+  // ─── Infinite Seamless Logic ───
+  const handleInfiniteScroll = () => {
+    const halfWidth = track.scrollWidth / 2;
+    if (track.scrollLeft >= halfWidth) {
+      track.scrollLeft -= halfWidth;
+      if (typeof currentScrollPos !== 'undefined') currentScrollPos = track.scrollLeft;
+    } else if (track.scrollLeft <= 0) {
+      track.scrollLeft += halfWidth;
+      if (typeof currentScrollPos !== 'undefined') currentScrollPos = track.scrollLeft;
+    }
+  };
+
+  track.addEventListener('scroll', handleInfiniteScroll);
+
+  // High-Performance Autoplay (requestAnimationFrame)
+  let currentScrollPos = track.scrollLeft;
+  let autoplaySpeed = 1.5; // Slightly faster for more dynamic feel
+
+  const step = () => {
+    if (!track.classList.contains('is-paused') && !track.classList.contains('is-dragging')) {
+      currentScrollPos += autoplaySpeed;
+      track.scrollLeft = currentScrollPos;
+    } else {
+      currentScrollPos = track.scrollLeft; // Keep in sync while paused/dragging
+    }
+    requestAnimationFrame(step);
+  };
+
+  // Start the loop
+  requestAnimationFrame(step);
+
   if (prevBtn) prevBtn.addEventListener('click', () => {
     triggerPause();
     track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
@@ -164,6 +195,12 @@ export function initProductScroll() {
   if (nextBtn) nextBtn.addEventListener('click', () => {
     triggerPause();
     track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+  });
+
+  // Pause only when hovering over specific cards
+  track.querySelectorAll('.product-scroll-card').forEach(card => {
+    card.addEventListener('mouseenter', () => track.classList.add('is-paused'));
+    card.addEventListener('mouseleave', () => track.classList.remove('is-paused'));
   });
 
   // Custom Draggable / Swipe Support
