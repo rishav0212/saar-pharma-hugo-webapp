@@ -4,7 +4,7 @@
     <div class="hero-copy" data-animate>
       <div class="hero-eyebrow">
         <span class="hero-eyebrow__dot" aria-hidden="true"></span>
-        Saar Biotech Pvt. Ltd. · Certified manufacturing since {{ .Site.Params.founded }}
+        Saar Biotech Pvt. Ltd. · Certified manufacturing since {{ site.Params.founded }}
       </div>
       <h1 id="hero-title" class="hero-title">
         Third-Party Pharmaceutical Manufacturing in Baddi — <span class="text-accent">Syrups, Suspensions &amp; Topicals</span>
@@ -22,7 +22,7 @@
           <i data-lucide="boxes" class="icon" aria-hidden="true"></i>
         </a>
       </div>
-      {{ $phoneDisplay := .Site.Params.phone }}
+      {{ $phoneDisplay := site.Params.phone }}
       {{ $phoneHref := replaceRE "[^0-9+]" "" $phoneDisplay }}
       {{ $whatsappNumber := replaceRE "\\D" "" $phoneDisplay }}
       <div class="hero-contact" aria-label="Direct enquiry contact options">
@@ -37,7 +37,7 @@
       </div>
       <div class="hero-proof" aria-label="Company highlights">
         <span class="proof-pill"><i data-lucide="shield-check" class="icon" aria-hidden="true"></i> WHO-GMP &amp; ISO</span>
-        <span class="proof-pill"><i data-lucide="users" class="icon" aria-hidden="true"></i> {{ .Site.Params.clients }} pharma brands served</span>
+        <span class="proof-pill"><i data-lucide="users" class="icon" aria-hidden="true"></i> {{ site.Params.clients }} pharma brands served</span>
         <span class="proof-pill"><i data-lucide="timer" class="icon" aria-hidden="true"></i> 24 Hr Quote Response</span>
       </div>
     </div>

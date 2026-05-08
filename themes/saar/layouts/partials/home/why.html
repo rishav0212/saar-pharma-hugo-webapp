@@ -4,7 +4,8 @@
       <span class="eyebrow">Built for pharma brands</span>
       <h2 id="why-title" class="section-title">The Saar Advantage: Why Leading Pharma Brands Choose Us</h2>
       <p class="section-kicker">
-        Beyond certifications, the value is in our unwavering commitment to batch purity, timeline discipline, and professional coordination.
+        Beyond certifications, the value is in our unwavering commitment to batch purity, timeline discipline, and
+        professional coordination.
       </p>
     </div>
 
@@ -16,11 +17,11 @@
         </div>
         <h3>{{ $item.title }}</h3>
         {{ $text := $item.text }}
-        {{ $years := partial "shared/get-years.html" . }}
-        {{ $text = replace $text "{founded}" .Site.Params.founded }}
+        {{ $years := partial "shared/get-years.html" .context }}
+        {{ $text = replace $text "{founded}" site.Params.founded }}
         {{ $text = replace $text "{years}" (printf "%d+" $years) }}
-        {{ $text = replace $text "{products}" .Site.Params.products }}
-        {{ $text = replace $text "{clients}" .Site.Params.clients }}
+        {{ $text = replace $text "{products}" site.Params.products }}
+        {{ $text = replace $text "{clients}" site.Params.clients }}
         <p>{{ $text }}</p>
         <div class="bento-cell__glow" aria-hidden="true"></div>
       </div>

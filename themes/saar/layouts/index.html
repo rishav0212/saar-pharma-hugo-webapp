@@ -3,8 +3,8 @@
 {{ partial "home/hero.html" . }}
 {{ partial "home/trust-band.html" . }}
 {{ partial "home/about-intro.html" . }}
-{{ partial "home/why.html" (dict "items" .Params.why) }}
-{{ partial "home/categories.html" (dict "items" .Params.categories) }}
+{{ partial "home/why.html" (dict "context" . "items" .Params.why) }}
+{{ partial "home/categories.html" (dict "context" . "items" .Params.categories) }}
 {{ partial "home/manufacturing.html" (dict "units" .Params.units) }}
 {{ partial "home/process.html" (dict "items" .Params.process) }}
 {{ partial "home/products.html" (dict "items" .Params.products) }}
