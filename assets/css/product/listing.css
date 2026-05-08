@@ -317,4 +317,16 @@
   /* Utilities */
   .is-hidden { display: none !important; }
   .products-empty { @apply flex flex-col items-center justify-center py-20 text-center bg-surface rounded-3xl border border-line; }
+
+  /* ─── Show More Section ─── */
+  .products-show-more {
+    @apply flex justify-center mt-16 relative py-4;
+  }
+  .products-show-more::before {
+    content: '';
+    @apply absolute top-1/2 left-0 right-0 h-px bg-line -z-1;
+  }
+  .products-show-more .btn {
+    @apply shadow-xl shadow-brand/20;
+  }
 }

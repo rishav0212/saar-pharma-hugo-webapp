@@ -14,12 +14,12 @@
           <div class="cert-badge__icon">
             {{ if $item.logo }}
               <!-- Logo placeholder - will fallback to icon if image not found -->
-              <img src="{{ $item.logo }}" alt="{{ $item.title }}" class="icon icon--md" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'">
+              <img src="{{ $item.logo }}" alt="{{ $item.title }}" class="icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'">
               <div class="icon-fallback" style="display:none;">
-                <i data-lucide="{{ $item.icon }}" class="icon icon--md" aria-hidden="true"></i>
+                <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
               </div>
             {{ else }}
-              <i data-lucide="{{ $item.icon }}" class="icon icon--md" aria-hidden="true"></i>
+              <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
             {{ end }}
           </div>
           <div class="cert-badge__body">

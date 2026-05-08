@@ -74,7 +74,11 @@ why:
 
 featured_products:
   - "azithromycin"
-
+  - "sodium-chloride-benzalkonium"
+  - "sodium-alginate"
+  - "paracetamol-125-250-suspension"
+  - "cholecalciferol-vitamin-d3-nano-shots"
+  - "levosalbutamol-ambroxol-guaiphenesin-syrup"
 process:
   - num: "01"
     title: "Strategic Enquiry"

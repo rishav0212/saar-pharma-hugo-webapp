@@ -19,6 +19,8 @@ export function initProducts() {
   const countEl = document.getElementById('products-count');
   const activeLabel = document.getElementById('products-active-label');
   const emptyState = document.getElementById('products-empty');
+  const showMoreContainer = document.getElementById('products-show-more');
+  const showMoreBtn = document.getElementById('show-more-btn');
 
   // Horizontal Scroll Elements
   const pillsContainer = document.getElementById('filter-pills-scroll');
@@ -29,6 +31,7 @@ export function initProducts() {
 
   let currentFilter = 'all';
   let currentQuery = '';
+  let isExpanded = false;
   let searchTimeout = null;
 
   // ─── Pre-Index Data ────────────────────────────────────────────
@@ -94,12 +97,36 @@ export function initProducts() {
     });
 
     setTimeout(() => {
+      let shownInGrid = 0;
+      const MAX_INITIAL = 12;
+
       productData.forEach(item => {
         const itemCats = item.categorySlugs.split(' ').filter(Boolean);
+        const matchData = matches.find(m => m.item === item);
         const isMatch = (currentFilter === 'all' || itemCats.includes(currentFilter)) &&
-          (!currentQuery || matches.some(m => m.item === item));
-        item.el.classList.toggle('is-hidden', !isMatch);
+          (!currentQuery || !!matchData);
+        
+        // Handle "Show More" visibility
+        let shouldHideForPagination = false;
+        if (isMatch && !isExpanded) {
+          // Find index in matches array to see if it's beyond the limit
+          const matchIndex = matches.findIndex(m => m.item === item);
+          if (matchIndex >= MAX_INITIAL) {
+            shouldHideForPagination = true;
+          } else {
+            shownInGrid++;
+          }
+        } else if (isMatch) {
+          shownInGrid++;
+        }
+
+        item.el.classList.toggle('is-hidden', !isMatch || shouldHideForPagination);
       });
+
+      // Show/Hide "Show More" Button
+      if (showMoreContainer) {
+        showMoreContainer.style.display = (visibleCount > MAX_INITIAL && !isExpanded) ? 'flex' : 'none';
+      }
 
       // Sort and Reveal Matches
       matches.sort((a, b) => b.score - a.score);
@@ -240,6 +267,19 @@ export function initProducts() {
   if (pillsContainer) {
     if (scrollLeftBtn) scrollLeftBtn.onclick = () => pillsContainer.scrollBy({ left: -300, behavior: 'smooth' });
     if (scrollRightBtn) scrollRightBtn.onclick = () => pillsContainer.scrollBy({ left: 300, behavior: 'smooth' });
+  }
+
+  // ─── Show More Click ───
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', () => {
+      isExpanded = true;
+      applyFilters(true);
+      // Smooth scroll a bit to show newly revealed items
+      setTimeout(() => {
+        const firstHidden = document.querySelector('.product-card-wrap:not(.is-hidden)');
+        // (Optional) Scroll logic here if needed
+      }, 300);
+    });
   }
 
   // Initial Load (Fast Stagger)
