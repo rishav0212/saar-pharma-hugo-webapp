@@ -83,14 +83,6 @@
 
           <div class="tab-dosage-body">
             <div class="tab-dosage-meta">
-              {{ $sectionPath := strings.TrimSuffix "/" $item.url }}
-              {{ $section := site.GetPage $sectionPath }}
-              {{ $count := 0 }}
-              {{ if $section }}
-              {{ $count = len $section.RegularPagesRecursive }}
-              {{ end }}
-              <span class="badge badge--teal">{{ if gt $count 0 }}{{ $count }}+ Formulations{{ else }}Clinical
-                Portfolio{{ end }}</span>
               <span class="tab-dosage-eyebrow">Manufacturing Range</span>
             </div>
 

@@ -64,7 +64,8 @@
   .tab-dosage-visual {
     @apply relative h-full min-h-[460px] flex items-center justify-center p-12 max-lg:min-h-[380px] max-lg:p-6;
     perspective: 2000px;
-    overflow: visible; /* Unlock the album so it can fan out */
+    overflow: visible;
+    /* Unlock the album so it can fan out */
   }
 
   .tab-dosage-visual__bg {
@@ -81,7 +82,7 @@
   }
 
   /* ─── The Dossier Shuffle Logic ─── */
-  
+
   /* Reset Base States for All Layers */
   .tab-dosage-visual__img,
   .tab-dosage-portfolio__page {
@@ -93,7 +94,7 @@
   }
 
   /* Fallback for missing images */
-  .tab-dosage-portfolio__page img[src=""], 
+  .tab-dosage-portfolio__page img[src=""],
   .tab-dosage-portfolio__page img:not([src]) {
     @apply opacity-0;
   }
@@ -109,12 +110,14 @@
     z-index: 20;
     transform: translateZ(100px);
   }
+
   .tab-dosage-portfolio .tab-dosage-portfolio__page--0,
   .tab-dosage-portfolio[data-active-index="0"] .tab-dosage-portfolio__page--0 {
     z-index: 5;
     transform: rotate(-10deg) translate(-45px, -15px) translateZ(-50px);
     @apply opacity-90;
   }
+
   .tab-dosage-portfolio .tab-dosage-portfolio__page--1,
   .tab-dosage-portfolio[data-active-index="0"] .tab-dosage-portfolio__page--1 {
     z-index: 4;
@@ -128,10 +131,12 @@
     transform: translateZ(100px);
     @apply opacity-100;
   }
+
   .tab-dosage-portfolio[data-active-index="1"] .tab-dosage-visual__img {
     z-index: 5;
     transform: rotate(8deg) translate(40px, 25px) translateZ(-50px);
   }
+
   .tab-dosage-portfolio[data-active-index="1"] .tab-dosage-portfolio__page--1 {
     z-index: 4;
     transform: rotate(-10deg) translate(-45px, -15px) translateZ(-80px);
@@ -143,10 +148,12 @@
     transform: translateZ(100px);
     @apply opacity-100;
   }
+
   .tab-dosage-portfolio[data-active-index="2"] .tab-dosage-portfolio__page--0 {
     z-index: 5;
     transform: rotate(8deg) translate(40px, 25px) translateZ(-50px);
   }
+
   .tab-dosage-portfolio[data-active-index="2"] .tab-dosage-visual__img {
     z-index: 4;
     transform: rotate(-10deg) translate(-45px, -15px) translateZ(-80px);
@@ -168,6 +175,7 @@
       @apply opacity-100 shadow-2xl;
       z-index: 30;
     }
+
     .tab-dosage-visual:hover [data-active-index="0"] .tab-dosage-portfolio__page--1 {
       transform: rotateY(-15deg) rotateX(5deg) rotateZ(10deg) translate(150px, 30px) scale(0.9);
       @apply opacity-100 shadow-xl;
@@ -180,6 +188,7 @@
       @apply opacity-100 shadow-2xl;
       z-index: 30;
     }
+
     .tab-dosage-visual:hover [data-active-index="1"] .tab-dosage-portfolio__page--1 {
       transform: rotateY(-15deg) rotateX(5deg) rotateZ(10deg) translate(150px, 30px) scale(0.9);
       @apply opacity-100 shadow-xl;
@@ -192,6 +201,7 @@
       @apply opacity-100 shadow-2xl;
       z-index: 30;
     }
+
     .tab-dosage-visual:hover [data-active-index="2"] .tab-dosage-visual__img {
       transform: rotateY(-15deg) rotateX(5deg) rotateZ(10deg) translate(150px, 30px) scale(0.9);
       @apply opacity-100 shadow-xl;
@@ -246,12 +256,12 @@
     /* Keep a subtle hint of the stack visible on mobile without hover */
     .tab-dosage-portfolio[data-active-index] .tab-dosage-visual__img,
     .tab-dosage-portfolio[data-active-index] .tab-dosage-portfolio__page {
-       transition-duration: 500ms;
+      transition-duration: 500ms;
     }
 
     /* Scale down the fan-out for mobile if tapped */
     .tab-dosage-visual:active .tab-dosage-portfolio {
-       transform: scale(0.96);
+      transform: scale(0.96);
     }
 
     .tab-dosage-dossier {
@@ -264,10 +274,11 @@
 
     /* Small "peek" logic for mobile when active */
     .tab-panel.is-active .tab-dosage-portfolio__page--0 {
-       transform: rotate(-6deg) translate(-20px, -8px) translateZ(-10px);
+      transform: rotate(-6deg) translate(-20px, -8px) translateZ(-10px);
     }
+
     .tab-panel.is-active .tab-dosage-portfolio__page--1 {
-       transform: rotate(5deg) translate(18px, 12px) translateZ(-20px);
+      transform: rotate(5deg) translate(18px, 12px) translateZ(-20px);
     }
   }
 

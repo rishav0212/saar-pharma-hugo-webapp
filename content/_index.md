@@ -11,46 +11,46 @@ hero_image_alt: "Saar Biotech pharmaceutical manufacturing unit in Baddi and hea
 categories:
   - icon: "beaker"
     title: "Suspensions"
-    text: "Precise liquid medications formulated for maximum stability and therapeutic efficacy, including antacids and antibiotic suspensions."
-    tags: ["Antacids", "Antibiotics", "Liquid Dosage"]
+    text: "Stable, high-quality suspensions that stay mixed and deliver the exact dose every time—ideal for pediatric and antibiotic ranges."
+    tags: ["Micronized API", "Stability Tested", "Antibiotic CMO"]
     url: "/products/suspensions/"
     image: "/images/categories/suspensions.png"
     gallery: ["/images/categories/suspensions_clinical.png", "/images/categories/suspensions_lab.png"]
   - icon: "droplets"
     title: "Syrups"
-    text: "Fast-relief formulations with taste-optimized profiles, including pediatric drops and wellness syrups for third-party supply."
-    tags: ["Pediatric", "Wellness", "Formulations"]
+    text: "Clear, great-tasting syrups that patients actually like taking. We specialize in taste-masking and smooth textures for better compliance."
+    tags: ["Taste-Masked", "Private Label", "Wellness Syrups"]
     url: "/products/syrups/"
     image: "/images/categories/syrups.png"
     gallery: ["/images/categories/syrups_clinical.png", "/images/categories/syrups_detail.png"]
   - icon: "container"
     title: "Ointments"
-    text: "Healing topical solutions for dermatological therapeutic segments, including antifungal gels and specialized creams."
-    tags: ["Derma Gels", "Healing Creams", "Topical Relief"]
+    text: "Smooth, effective creams and gels that absorb quickly. Great for everything from antifungal treatments to intensive healing balms."
+    tags: ["Derma Gels", "High Penetration", "Contract Manufacturing"]
     url: "/products/ointments/"
-    image: "/images/categories/sprays.png" # Using spray/tube asset
-    gallery: []
+    image: "/images/categories/sprays.png" 
+    gallery: ["/images/categories/suspensions_clinical.png", "/images/categories/suspensions_lab.png"]
   - icon: "layers"
     title: "Topical Solutions"
-    text: "Targeted applications including shampoos, lotions, and specialized medicinal solutions for clinical use."
-    tags: ["Shampoos", "Lotions", "Targeted Care"]
+    text: "Targeted skin and scalp solutions like shampoos and lotions. They’re effective, non-greasy, and perfect for clinical or retail use."
+    tags: ["Clinical Grade", "Scalp Care", "B2B Solutions"]
     url: "/products/topical-solutions/"
     image: "/images/categories/liquids.png"
-    gallery: []
+    gallery: ["/images/categories/suspensions_clinical.png", "/images/categories/suspensions_lab.png"]
   - icon: "flask-conical"
-    title: "Oral Liquids"
-    text: "Optimized bioavailability for liquid dosage forms, ensuring rapid therapeutic effect and consistent batch integrity."
-    tags: ["Bioavailability", "Liquid Meds", "Quality Production"]
+    title: "Oral Liquids & Drops"
+    text: "Fast-acting oral liquids and clinical drops. We ensure precise dosing and rapid relief for pediatric and general healthcare."
+    tags: ["Bioavailability", "Sterile Prep", "Pediatric Drops"]
     url: "/products/oral-liquids/"
     image: "/images/categories/liquids.png"
-    gallery: []
+    gallery: ["/images/categories/suspensions_clinical.png", "/images/categories/suspensions_lab.png"]
   - icon: "spray-can"
     title: "Sprays"
-    text: "Immediate relief solutions including Nasal, Mouth, and Body sprays with advanced delivery mechanisms."
-    tags: ["Nasal Sprays", "Mouth Sprays", "Body Sprays"]
+    text: "Precision nasal and mouth sprays that work fast. Our spray systems deliver a fine, consistent mist for immediate relief."
+    tags: ["Nasal Sprays", "Mouth Sprays", "Advanced Delivery"]
     url: "/products/sprays/"
     image: "/images/categories/sprays.png"
-    gallery: []
+    gallery: ["/images/categories/suspensions_clinical.png", "/images/categories/suspensions_lab.png"]
 
 why:
   - icon: "shield-check"
