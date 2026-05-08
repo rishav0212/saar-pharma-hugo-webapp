@@ -150,7 +150,17 @@
   .console-row {
     @apply grid grid-cols-[auto_1fr_auto] gap-4 p-5 border border-line rounded-lg bg-white shadow-soft transition-all duration-300 max-md:gap-3 max-md:p-4;
   }
+
+  /* ─── Badge System ─── */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider;
+  }
   
+  .badge--teal {
+    background-color: rgba(21, 159, 145, 0.10);
+    color: var(--color-brand-3);
+    border: 1px solid rgba(21, 159, 145, 0.20);
+  }
 
 }
 
@@ -219,8 +229,9 @@
 @import "./assets/css/components/forms.css";
 
 /* Page Sections */
-@import "./assets/css/sections/home-hero.css";
-@import "./assets/css/sections/home-planner.css";
+@import "./assets/css/home/hero.css";
+@import "./assets/css/home/categories.css";
+@import "./assets/css/home/planner.css";
 @import "./assets/css/sections/about.css";
 @import "./assets/css/sections/about-timeline.css";
 @import "./assets/css/product/listing.css";

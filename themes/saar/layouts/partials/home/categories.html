@@ -6,22 +6,18 @@
         <h2 id="capabilities-title" class="section-title">Core dosage categories for third-party manufacturing</h2>
       </div>
       <p class="section-kicker">
-        Syrups, suspensions, topicals, drops, sprays, and private-label supply — scan by category to find your product range.
+        Syrups, suspensions, topicals, drops, sprays, and private-label supply — scan by category to find your product
+        range.
       </p>
     </div>
 
     <div class="tab-block" data-animate data-delay="0.1">
-      <div class="relative max-lg:-mx-6 max-lg:px-6">
-        <div class="tab-nav js-scroll-fade max-lg:mx-0 max-lg:px-0" role="tablist" aria-label="Dosage category tabs">
+      <div class="tab-nav-container">
+        <div class="tab-nav js-scroll-fade" role="tablist" aria-label="Dosage category tabs">
           {{ range $index, $item := .items }}
-          <button
-            type="button"
-            class="tab-btn{{ if eq $index 0 }} is-active{{ end }}"
-            role="tab"
-            aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
-            aria-controls="tab-panel-{{ $index }}"
-            id="tab-{{ $index }}"
-            data-tab="{{ $index }}">
+          <button type="button" class="tab-btn{{ if eq $index 0 }} is-active{{ end }}" role="tab"
+            aria-selected="{{ if eq $index 0 }}true{{ else }}false{{ end }}" aria-controls="tab-panel-{{ $index }}"
+            id="tab-{{ $index }}" data-tab="{{ $index }}">
             <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
             <span>{{ $item.title }}</span>
           </button>
@@ -31,36 +27,91 @@
 
       <div class="tab-panels">
         {{ range $index, $item := .items }}
-        <div
-          class="tab-panel{{ if eq $index 0 }} is-active{{ end }}"
-          role="tabpanel"
-          id="tab-panel-{{ $index }}"
-          aria-labelledby="tab-{{ $index }}"
-          data-tab="{{ $index }}"
-          {{ if ne $index 0 }}hidden{{ end }}>
-          <div class="tab-panel__icon">
-            <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
+        <div class="tab-panel{{ if eq $index 0 }} is-active{{ end }}" role="tabpanel" id="tab-panel-{{ $index }}"
+          aria-labelledby="tab-{{ $index }}" data-tab="{{ $index }}" {{ if ne $index 0 }}hidden{{ end }}>
+
+          <div class="tab-dosage-visual" aria-hidden="true">
+            <div class="tab-dosage-visual__bg"></div>
+
+            {{/* The "Portfolio Album" Stack */}}
+            <div class="tab-dosage-portfolio" data-active-index="0">
+              {{/* Secondary Gallery Images (The background pages) */}}
+              {{ range $gIndex, $gImage := $item.gallery }}
+              <div class="tab-dosage-portfolio__page tab-dosage-portfolio__page--{{ $gIndex }}">
+                {{ partial "shared/optimized-image.html" (dict
+                "src" $gImage
+                "alt" (printf "%s clinical detail %d" $item.title (add $gIndex 1))
+                "class" "w-full h-full object-cover rounded-xl"
+                ) }}
+              </div>
+              {{ end }}
+
+              {{/* Floating Technical Card (The "Album" peek) */}}
+              <div class="tab-dosage-dossier" data-animate data-animate-type="slide-right">
+                <div class="tab-dosage-dossier__line"></div>
+                <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">Tech-Dossier</span>
+                <div class="mt-2 space-y-1">
+                  <div class="h-1 w-12 bg-brand/20 rounded"></div>
+                  <div class="h-1 w-8 bg-brand/10 rounded"></div>
+                </div>
+              </div>
+
+              {{/* Main Clinical Render */}}
+              <div class="tab-dosage-visual__img">
+                {{ if $item.image }}
+                {{ partial "shared/optimized-image.html" (dict
+                "src" $item.image
+                "alt" (printf "%s clinical render" $item.title)
+                "class" "w-full h-full object-contain"
+                ) }}
+                {{ else }}
+                <div class="tab-visual-icon">
+                  <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
+                </div>
+                {{ end }}
+              </div>
+
+              {{/* Floating Quality Seal */}}
+              <div class="tab-dosage-seal">
+                <i data-lucide="award" class="w-4 h-4 text-brand"></i>
+                <span class="text-[9px] font-black uppercase">WHO-GMP</span>
+              </div>
+            </div>
+
+            <div class="tab-dosage-reflection"></div>
           </div>
-          <div class="tab-panel__body">
-            <h3>{{ $item.title }}</h3>
-            <p>{{ $item.text }}</p>
-            <div class="tag-list">
+
+          <div class="tab-dosage-body">
+            <div class="tab-dosage-meta">
+              {{ $sectionPath := strings.TrimSuffix "/" $item.url }}
+              {{ $section := site.GetPage $sectionPath }}
+              {{ $count := 0 }}
+              {{ if $section }}
+              {{ $count = len $section.RegularPagesRecursive }}
+              {{ end }}
+              <span class="badge badge--teal">{{ if gt $count 0 }}{{ $count }}+ Formulations{{ else }}Clinical
+                Portfolio{{ end }}</span>
+              <span class="tab-dosage-eyebrow">Manufacturing Range</span>
+            </div>
+
+            <h3 class="tab-dosage-title">{{ $item.title }}</h3>
+            <p class="tab-dosage-text">{{ $item.text }}</p>
+
+            <div class="tag-list tab-dosage-tags">
               {{ range $item.tags }}<span class="tag">{{ . }}</span>{{ end }}
             </div>
-            <a class="btn btn--primary" href="{{ $item.url }}">
-              Explore category
-              <i data-lucide="arrow-right" class="icon" aria-hidden="true"></i>
-            </a>
-          </div>
-          <div class="tab-panel__visual" aria-hidden="true">
-            <div class="tab-visual-ring tab-visual-ring--1"></div>
-            <div class="tab-visual-ring tab-visual-ring--2"></div>
-            <div class="tab-visual-dots">
-              <span></span><span></span><span></span>
-              <span></span><span></span><span></span>
-            </div>
-            <div class="tab-visual-icon">
-              <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
+
+            <div class="tab-dosage-actions">
+              <div class="tab-dosage-btns">
+                <a class="btn btn--primary" href="{{ $item.url }}">
+                  Explore {{ $item.title }} range
+                  <i data-lucide="arrow-right" class="icon--sm ml-1" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn--outline" href="#manufacturing">
+                  Quality Standards
+                  <i data-lucide="shield-check" class="icon--sm ml-1" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>

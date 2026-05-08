@@ -44,17 +44,26 @@ export function initTabs() {
       panel.removeAttribute("hidden");
       
       if (window.gsap) {
-        window.gsap.fromTo(panel, { opacity: 0, x: 15 }, { opacity: 1, x: 0, duration: 0.4 });
+        // Target inner content for smooth glide without whole-card flicker
+        const innerItems = panel.querySelectorAll('.tab-panel__body, .tab-panel__visual, .tab-dosage-visual, .planner-panel__body, .planner-panel__visual');
+        if (innerItems.length > 0) {
+          window.gsap.fromTo(innerItems, 
+            { opacity: 0, y: 15 }, 
+            { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" }
+          );
+        } else {
+          window.gsap.fromTo(panel, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4 });
+        }
       }
 
-      // 3. Smart Scroll (Product Page Only)
+      // 3. Smart Scroll (Universal)
       if (!isPlanner && btn.classList.contains('tab-btn')) {
-        const consoleSection = container.closest(".ps-clinical-console");
-        if (consoleSection) {
-          const rect = consoleSection.getBoundingClientRect();
+        const scrollContainer = container.closest(".ps-clinical-console, .section");
+        if (scrollContainer) {
+          const rect = scrollContainer.getBoundingClientRect();
           const headerHeight = document.querySelector(".site-header")?.offsetHeight || 80;
           
-          // Only scroll if the console top is already scrolled off-screen
+          // Only scroll if the container top is already scrolled off-screen or too high
           if (rect.top < -20) {
             const scrollTarget = window.scrollY + rect.top - headerHeight - 15;
             window.scrollTo({ 

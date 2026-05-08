@@ -9,36 +9,48 @@ hero_image_alt: "Saar Biotech pharmaceutical manufacturing unit in Baddi and hea
 
 # Homepage Data (Migrated from data/home.json)
 categories:
-  - icon: "droplets"
-    title: "WHO-GMP Syrups & Liquids"
-    text: "Specialized pediatric drops, wellness syrups, and high-efficacy oral liquids manufactured in ISO-certified environments."
-    tags: ["Pediatric Drops", "Wellness Syrups", "Oral Liquids"]
-    url: "/categories/syrups/"
   - icon: "beaker"
-    title: "Advanced Suspensions"
-    text: "Innovative sodium alginate and therapeutic suspensions with 3-minute relief profiles and superior stability."
-    tags: ["Antacids", "Antibiotics", "Stable Formats"]
-    url: "/categories/suspensions/"
+    title: "Suspensions"
+    text: "Precise liquid medications formulated for maximum stability and therapeutic efficacy, including antacids and antibiotic suspensions."
+    tags: ["Antacids", "Antibiotics", "Liquid Dosage"]
+    url: "/products/suspensions/"
+    image: "/images/categories/suspensions.png"
+    gallery: ["/images/categories/suspensions_clinical.png", "/images/categories/suspensions_lab.png"]
+  - icon: "droplets"
+    title: "Syrups"
+    text: "Fast-relief formulations with taste-optimized profiles, including pediatric drops and wellness syrups for third-party supply."
+    tags: ["Pediatric", "Wellness", "Formulations"]
+    url: "/products/syrups/"
+    image: "/images/categories/syrups.png"
+    gallery: ["/images/categories/syrups_clinical.png", "/images/categories/syrups_detail.png"]
+  - icon: "container"
+    title: "Ointments"
+    text: "Healing topical solutions for dermatological therapeutic segments, including antifungal gels and specialized creams."
+    tags: ["Derma Gels", "Healing Creams", "Topical Relief"]
+    url: "/products/ointments/"
+    image: "/images/categories/sprays.png" # Using spray/tube asset
+    gallery: []
+  - icon: "layers"
+    title: "Topical Solutions"
+    text: "Targeted applications including shampoos, lotions, and specialized medicinal solutions for clinical use."
+    tags: ["Shampoos", "Lotions", "Targeted Care"]
+    url: "/products/topical-solutions/"
+    image: "/images/categories/liquids.png"
+    gallery: []
+  - icon: "flask-conical"
+    title: "Oral Liquids"
+    text: "Optimized bioavailability for liquid dosage forms, ensuring rapid therapeutic effect and consistent batch integrity."
+    tags: ["Bioavailability", "Liquid Meds", "Quality Production"]
+    url: "/products/oral-liquids/"
+    image: "/images/categories/liquids.png"
+    gallery: []
   - icon: "spray-can"
-    title: "Topical Gels & Nasal Sprays"
-    text: "Market-leading Fluticasone nasal sprays, Diclofenac sprays, and specialized Derma-care ointments."
-    tags: ["Nasal Sprays", "Derma Gels", "Pain Sprays"]
-    url: "/categories/ointments/"
-  - icon: "eye"
-    title: "Sterile Drops & Pediatric Care"
-    text: "Precision-dosed eye, ear, and vitamin drops supported by advanced analytical testing and documentation."
-    tags: ["Eye Drops", "Ear Drops", "Vitamin D3"]
-    url: "/products/"
-  - icon: "package-check"
-    title: "Global Contract Manufacturing"
-    text: "End-to-end third-party manufacturing solutions for 2050+ pharma partners across India with 240+ DCGI-approved products."
-    tags: ["Contract Pharma", "Global Export", "Baddi Unit"]
-    url: "/products/"
-  - icon: "shield-check"
-    title: "Regulatory & QC Excellence"
-    text: "GLP-compliant labs equipped with Agilent and Shimadzu machinery ensuring absolute batch-to-batch consistency."
-    tags: ["GLP Certified", "QC Excellence", "Batch Integrity"]
-    url: "/manufacturing-unit/"
+    title: "Sprays"
+    text: "Immediate relief solutions including Nasal, Mouth, and Body sprays with advanced delivery mechanisms."
+    tags: ["Nasal Sprays", "Mouth Sprays", "Body Sprays"]
+    url: "/products/sprays/"
+    image: "/images/categories/sprays.png"
+    gallery: []
 
 why:
   - icon: "shield-check"
@@ -64,19 +76,19 @@ products:
   - type: "Nasal Care"
     title: "Fluticasone Nasal Sprays"
     text: "Leading nasal delivery solutions with specialized packing in Amber glass and HDPE formats for maximum stability."
-    url: "/categories/sprays/"
+    url: "/products/sprays/"
   - type: "Digestive Health"
     title: "Sodium Alginate Suspensions"
     text: "Fast-acting oral suspensions providing 3-minute symptomatic relief for acidity and digestive wellness."
-    url: "/categories/suspensions/"
+    url: "/products/suspensions/"
   - type: "Topical Relief"
     title: "Diclofenac 4X Sprays"
     text: "High-concentration pain relief sprays and roll-ons for dermatological and orthopedic therapeutic segments."
-    url: "/categories/ointments/"
+    url: "/products/ointments/"     # Fixes Ointment route to match products dir
   - type: "Oral Wellness"
     title: "Vitamin D3 & Immunity Sprays"
     text: "Innovative sublingual and oral sprays for modern supplement portfolios and fast-moving wellness brands."
-    url: "/categories/sprays/"
+    url: "/products/sprays/"
   - type: "Pediatric Range"
     title: "Oral Drops & Syrups"
     text: "Safety-focused pediatric formulations with precision droppers and taste-optimized wellness profiles."
@@ -84,7 +96,7 @@ products:
   - type: "Derma Care"
     title: "Antifungal Gels & Creams"
     text: "Specialized dermatological pastes, shampoos, and topical solutions for global private-label distribution."
-    url: "/categories/topical-solutions/"
+    url: "/products/topical-solutions/"
 
 process:
   - num: "01"
