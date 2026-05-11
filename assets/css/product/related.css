@@ -10,9 +10,11 @@
 
 .ps-slider-viewport {
   scroll-behavior: smooth;
-  @apply py-4 -my-4; /* Offset the clipping area */
+  @apply py-4 -my-4 max-md:py-0 max-md:my-0; /* Offset the clipping area only on desktop */
 }
 
 .ps-nav-group.is-visible {
   @apply opacity-100 pointer-events-auto;
 }
+
+/* Scroll track is handled by global .product-scroll-card in card.css */

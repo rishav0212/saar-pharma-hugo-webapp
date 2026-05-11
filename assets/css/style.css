@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "./assets/css/base/variables.css";
-@import "./assets/css/components/modal.css";
 
 @theme {
   --breakpoint-xl: 1140px;
@@ -227,7 +226,9 @@
 @import "./assets/css/components/search.css";
 @import "./assets/css/components/layout.css";
 @import "./assets/css/components/forms.css";
+@import "./assets/css/components/modal.css";
 @import "./assets/css/components/fab.css";
+@import "./assets/css/product/card.css";
 @import "./assets/css/components/back-to-top.css";
 
 /* Page Sections */

@@ -423,7 +423,7 @@
 
     /* Reduce related section padding too — it uses generic .section class */
     .ps-related-hub .ps-related-row {
-      @apply !py-12 !px-0;
+      @apply !px-0;
     }
 
     /* ─── Technical overrides ─── */

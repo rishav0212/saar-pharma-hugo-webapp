@@ -83,7 +83,7 @@ Feature: 3s Interval + ScrollBy Support + Overflow Detection
 
   {{/* SECTION 1: MOLECULAR SYNC */}}
   {{ if $row1Final }}
-  <section class="ps-related-row section bg-white relative overflow-hidden pt-8 pb-16">
+  <section class="ps-related-row section bg-white relative overflow-hidden pt-4 pb-8 max-md:pt-2 max-md:pb-6">
     <div
       class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2">
     </div>
@@ -115,9 +115,9 @@ Feature: 3s Interval + ScrollBy Support + Overflow Detection
       </div>
 
       <div class="ps-slider-viewport overflow-x-auto hide-scrollbar snap-x snap-mandatory" id="mol-slider">
-        <div class="flex items-stretch gap-6 pt-10 pb-4">
+        <div class="flex items-stretch gap-6">
           {{ range $row1Final }}
-          <div class="ps-slider-item flex-shrink-0 w-[280px] md:w-[320px] max-md:w-[calc(100vw-32px)] max-md:max-w-[440px] snap-start product-card-wrap">
+          <div class="product-scroll-card flex-shrink-0 w-[280px] md:w-[320px] max-md:w-[280px] snap-start product-card-wrap">
             {{ partial "products/card.html" . }}
           </div>
           {{ end }}
@@ -128,7 +128,7 @@ Feature: 3s Interval + ScrollBy Support + Overflow Detection
   {{ end }}
 
   {{/* SECTION 2: CLINICAL RANGE */}}
-  <section class="ps-related-row section bg-paper relative overflow-hidden border-t border-line/50 pt-8 pb-16">
+  <section class="ps-related-row section bg-paper relative overflow-hidden border-t border-line/50 pt-4 pb-8 max-md:pt-2 max-md:pb-6">
     <div
       class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-brand-2/5 rounded-full blur-[150px] pointer-events-none -translate-x-1/2 -translate-y-1/2">
     </div>
@@ -161,9 +161,9 @@ Feature: 3s Interval + ScrollBy Support + Overflow Detection
       </div>
 
       <div class="ps-slider-viewport overflow-x-auto hide-scrollbar snap-x snap-mandatory" id="clinical-slider">
-        <div class="flex items-stretch gap-6 pt-10 pb-4">
+        <div class="flex items-stretch gap-6">
           {{ range $row2Final }}
-          <div class="ps-slider-item flex-shrink-0 w-[280px] md:w-[320px] max-md:w-[calc(100vw-32px)] max-md:max-w-[440px] snap-start product-card-wrap">
+          <div class="product-scroll-card flex-shrink-0 w-[280px] md:w-[320px] max-md:w-[280px] snap-start product-card-wrap">
             {{ partial "products/card.html" . }}
           </div>
           {{ end }}

@@ -1,0 +1,267 @@
+@layer components {
+  /* ─── Product Card Component ─── */
+  .product-card {
+    @apply relative flex flex-col bg-white border border-line rounded-[20px] md:rounded-[28px] overflow-hidden h-full transition-all duration-500;
+    box-shadow: var(--shadow-soft);
+  }
+
+  @media (hover: hover) {
+    .product-card:hover {
+      @apply -translate-y-2 md:-translate-y-3 border-brand-2/30;
+      box-shadow: var(--shadow-lift);
+    }
+  }
+
+  .product-card::before {
+    content: "";
+    @apply absolute top-0 left-0 right-0 h-1 z-20 transition-all duration-300 bg-brand opacity-0;
+  }
+
+  @media (hover: hover) {
+    .product-card:hover::before {
+      @apply opacity-100;
+    }
+  }
+
+  .product-card__cat-group {
+    @apply absolute top-4 left-4 flex flex-wrap gap-1.5 z-30;
+  }
+
+  .product-card__cat-badge {
+    @apply px-2.5 py-1 bg-white/95 backdrop-blur-md text-brand-3 text-[8px] font-black uppercase tracking-wider rounded-full shadow-sm transition-all duration-300 border border-brand-line;
+  }
+
+  .product-card__cat-badge--sub {
+    @apply opacity-70 border-dashed bg-white/60;
+  }
+
+  @media (hover: hover) {
+    .product-card:hover .product-card__cat-badge {
+      @apply bg-brand-3 text-white border-brand-3 shadow-md;
+    }
+  }
+
+  .product-card__image-container {
+    @apply relative w-full aspect-[3/2] overflow-hidden bg-brand/5 flex items-center justify-center border-b border-line;
+    /* Fallback for missing images */
+    background-image: radial-gradient(circle at center, rgba(21, 159, 145, 0.05) 0%, transparent 70%);
+  }
+
+  .product-card__image-container picture,
+  .product-card__image-container img {
+    @apply w-full h-full object-contain p-2 transition-transform duration-700 ease-out;
+  }
+
+  .product-card__image-container picture {
+    @apply block;
+  }
+
+  .product-card__image-container picture img {
+    @apply p-0;
+  }
+
+  .product-card__image-container .text-teal-600\/10 {
+    @apply flex items-center justify-center w-full h-full;
+  }
+
+  @media (hover: hover) {
+    .product-card:hover .product-card__image-container img {
+      @apply scale-110;
+    }
+  }
+
+  .product-card__content {
+    @apply flex-1 p-6 flex flex-col;
+  }
+
+  .product-card__dosage {
+    @apply inline-block px-2 py-0.5 bg-surface-2 text-muted text-[9px] font-black uppercase tracking-wider rounded-md mb-2.5 transition-colors duration-300;
+  }
+
+  .product-card:hover .product-card__dosage {
+    @apply bg-brand-2/10 text-brand-3;
+  }
+
+  .product-card__title {
+    @apply text-[15px] md:text-xl font-bold text-ink mb-2 leading-tight transition-colors duration-300 min-h-[44px] md:min-h-[56px] flex items-center;
+  }
+
+  .product-card:hover .product-card__title {
+    @apply text-brand-3;
+  }
+
+  .product-card__composition-tag {
+    @apply flex items-start gap-2.5 p-3 rounded-xl transition-all duration-300 bg-surface text-[12.5px] font-bold text-ink mb-3.5 leading-snug min-h-[68px] border border-transparent;
+  }
+
+  .product-card:hover .product-card__composition-tag {
+    @apply border-brand-line bg-surface-2;
+  }
+
+  .product-card__composition-tag i {
+    @apply mt-1 text-brand flex-shrink-0;
+  }
+
+  .product-card__packs {
+    @apply flex flex-wrap gap-1.5 mb-4;
+  }
+
+  .product-card__pack {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-line rounded-lg text-[9px] font-black text-muted uppercase tracking-wider transition-colors duration-300;
+  }
+
+  .product-card:hover .product-card__pack {
+    @apply border-brand-line text-ink;
+  }
+
+  .product-card__pack i {
+    @apply text-brand/50;
+  }
+
+  .product-card__desc {
+    @apply text-muted text-[12.5px] leading-relaxed line-clamp-2 mb-3;
+  }
+
+  .product-card__footer {
+    @apply mt-auto pt-3 border-t border-line flex items-center justify-between;
+  }
+
+  .product-card__cta {
+    @apply inline-flex items-center gap-1.5 text-[11px] font-black text-brand uppercase tracking-widest transition-all duration-300;
+  }
+
+  .product-card:hover .product-card__cta {
+    @apply text-brand-3;
+  }
+
+  .product-card:hover .product-card__cta i {
+    @apply translate-x-1;
+  }
+
+  .product-card__cta i {
+    @apply transition-transform duration-300;
+  }
+
+  .product-card__enquire-icon {
+    @apply w-10 h-10 rounded-full flex items-center justify-center bg-surface border border-line text-brand transition-all duration-300 relative z-30;
+  }
+
+  .product-card__enquire-icon:hover {
+    @apply bg-brand-3 text-white shadow-lift border-transparent;
+  }
+
+  /* ─── Premium Horizontal Cards (Mobile Only) ─── */
+  @media (max-width: 639px) {
+    .product-card {
+      flex-direction: row;
+      align-items: stretch;
+      min-height: 140px;
+      display: flex;
+      border-radius: 20px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .product-card__image-container {
+      @apply w-[30%] aspect-auto border-b-0 border-r border-line bg-surface/40 p-0 shrink-0;
+      max-height: 200px;
+    }
+
+    .product-card__image-container img {
+      @apply p-0 object-contain;
+    }
+
+    .product-card__content {
+      @apply w-[70%] p-3.5 flex flex-col justify-start overflow-hidden;
+    }
+
+    .product-card__title {
+      @apply text-[16px] font-black min-h-0 mb-1 leading-tight;
+      letter-spacing: -0.01em;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .product-card__composition-tag {
+      @apply text-[10.5px] font-bold min-h-0 p-2 mb-1.5 bg-brand/5 border border-brand/10 rounded-xl flex items-center gap-2;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .product-card__dosage {
+      @apply mb-1.5 py-0.5 px-2 bg-brand/10 text-brand-3 rounded-full text-[8px] w-max;
+    }
+
+    .product-card__desc {
+      @apply hidden;
+    }
+
+    .product-card__packs {
+      @apply flex flex-wrap gap-1 mb-1.5;
+    }
+
+    .product-card__pack {
+      @apply text-[8px] px-2 py-0.5 border-line/40;
+    }
+
+    .product-card__footer {
+      @apply pt-1 border-t-0 flex items-center mt-auto;
+    }
+
+    .product-card__cta {
+      @apply hidden;
+    }
+
+    .product-card__enquire-icon {
+      @apply relative w-10 h-10 bg-brand text-white shadow-lift border-transparent rounded-full flex items-center justify-center shrink-0 ml-auto;
+      position: relative !important;
+      bottom: auto !important;
+      right: auto !important;
+      transform: none !important;
+    }
+
+    .product-card__cat-group {
+      @apply top-2 left-2;
+    }
+
+    .product-card__cat-badge {
+      @apply text-[7px] px-2 py-0.5 rounded-md;
+    }
+  }
+
+  /* ─── Carousel / Scroll Variant Overrides ─── */
+  .product-scroll-card {
+    @apply flex-[0_0_380px] flex flex-col min-h-[400px] transition-all duration-300;
+    @apply max-lg:flex-[0_0_300px] max-lg:min-h-0;
+    @apply max-md:flex-[0_0_280px];
+    scroll-snap-align: start;
+  }
+
+  /* Force Vertical Layout in Carousel even on Mobile */
+  @media (max-width: 639px) {
+    .product-scroll-card .product-card {
+      @apply !flex-col !min-h-0 !h-full !w-full;
+    }
+
+    .product-scroll-card .product-card__image-container {
+      @apply !w-full !aspect-[2/1] !bg-brand/5 !max-h-none !border-b !border-r-0;
+    }
+
+    .product-scroll-card .product-card__content {
+      @apply !w-full !p-3.5 !flex-grow;
+    }
+
+    .product-scroll-card .product-card__cat-group {
+      @apply !top-2 !left-2;
+    }
+
+    .product-scroll-card .product-card__title {
+      @apply !text-[15px] !mb-1 !min-h-0;
+    }
+
+    .product-scroll-card .product-card__footer {
+      @apply !pt-1 !mt-auto;
+    }
+  }
+}
+
