@@ -25,6 +25,10 @@
         <p class="footer-copy" itemprop="description">
           WHO-GMP and ISO certified third-party pharmaceutical manufacturer serving brands, distributors, and healthcare companies across India.
         </p>
+
+        <div class="mt-8">
+          {{ partial "shared/social-links.html" . }}
+        </div>
       </div>
 
       <nav aria-label="Footer company links">
@@ -51,13 +55,35 @@
       </nav>
 
       <address class="not-italic">
-        <h2 class="footer-title">Contact</h2>
+        <h2 class="footer-title">Locations</h2>
         <ul class="footer-list">
-          <li><span itemprop="address">{{ .Site.Params.address }}</span></li>
-          <li><a href="tel:{{ .Site.Params.phone | urlize }}" itemprop="telephone">{{ .Site.Params.phone }}</a></li>
-          <li><a href="mailto:{{ .Site.Params.email }}" itemprop="email">{{ .Site.Params.email }}</a></li>
-          <li><span>{{ .Site.Params.plant }}</span></li>
+          <li>
+            <span class="block text-white text-sm mb-1 font-medium">Corporate Office</span>
+            <span itemprop="address">{{ .Site.Params.address }}</span>
+          </li>
+          <li class="mt-4">
+            <span class="block text-white text-sm mb-1 font-medium">Manufacturing Plant</span>
+            <span>{{ .Site.Params.plant }}</span>
+          </li>
         </ul>
+      </address>
+
+      <address class="not-italic">
+        <h2 class="footer-title">Key Contacts</h2>
+        <div class="mb-5">
+          <strong class="block text-white text-sm mb-1.5">Mr. Abhinav Aggrawal <span class="opacity-70 font-normal text-xs">(COO)</span></strong>
+          <ul class="footer-list">
+            <li><a href="tel:+919357888588">+91 9357 888 588</a></li>
+            <li><a href="mailto:abhinav@dmpharma.org">abhinav@dmpharma.org</a></li>
+          </ul>
+        </div>
+        <div>
+          <strong class="block text-white text-sm mb-1.5">Mr. Vijay <span class="opacity-70 font-normal text-xs">(Marketing Manager)</span></strong>
+          <ul class="footer-list">
+            <li><a href="tel:+919357690454">+91 9357 690 454</a></li>
+            <li><a href="mailto:quotation@saarbiotech.com">quotation@saarbiotech.com</a></li>
+          </ul>
+        </div>
       </address>
     </div>
 

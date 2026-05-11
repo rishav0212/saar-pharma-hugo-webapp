@@ -1,79 +1,196 @@
-<section class="section section--paper section-rail" id="offices">
+{{- /*
+  CONTACT OFFICES & MAP SECTION
+  Side-by-side grid of locations (Corporate & Manufacturing)
+  Both locations are visible simultaneously as requested.
+*/ -}}
+<section class="section contact-offices-section bg-surface" id="offices" aria-labelledby="offices-title">
   <div class="container">
-    <div class="text-center max-w-3xl mx-auto mb-16" data-animate="fade-up">
-      <span class="eyebrow">Physical Presence</span>
-      <h2 class="section-title">Our Registered Offices & Manufacturing Units</h2>
-      <p class="section-kicker">Visit our corporate headquarters for business meetings or our state-of-the-art plant in Baddi for technical audits.</p>
+
+    {{- /* Section Header */ -}}
+    <div class="section-head--center mb-12" data-animate="fade-up">
+      <span class="eyebrow">Our Locations</span>
+      <h2 id="offices-title" class="section-title section-title--sm">
+        Headquarters &amp; Production Campus
+      </h2>
+      <p class="section-kicker max-w-[700px] mx-auto mt-4">
+        Strategic administrative hub in Chandigarh and WHO-GMP certified manufacturing facility in Baddi, Himachal Pradesh.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <div class="contact-locations__grid" data-animate-stagger>
       {{ range .Params.offices }}
-      <div class="office-card bg-white rounded-2xl shadow-soft border border-line overflow-hidden flex flex-col" data-animate="fade-up">
-        <div class="p-8 md:p-10 flex-grow">
-          <div class="flex justify-between items-start mb-8">
-            <div>
-              <span class="badge badge--{{ .badge_color | default "teal" }} mb-4">{{ .label }}</span>
-              <h3 class="text-2xl font-display font-extrabold text-ink leading-tight">{{ .name }}</h3>
-            </div>
-            <div class="w-14 h-14 rounded-2xl bg-surface text-brand flex items-center justify-center flex-shrink-0">
-              <i data-lucide="{{ .icon }}" class="w-7 h-7"></i>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <div class="space-y-6">
-              <div class="flex gap-4">
-                <i data-lucide="map-pin" class="w-5 h-5 text-brand flex-shrink-0 mt-1"></i>
-                <div class="text-sm">
-                  <strong class="block text-ink mb-1">Postal Address</strong>
-                  <p class="text-muted leading-relaxed">{{ .address }}</p>
-                  <p class="text-muted">{{ .city }}, {{ .state }} - {{ .pin }}</p>
-                </div>
-              </div>
-              <div class="flex gap-4">
-                <i data-lucide="clock" class="w-5 h-5 text-brand flex-shrink-0 mt-1"></i>
-                <div class="text-sm">
-                  <strong class="block text-ink mb-1">Business Hours</strong>
-                  <p class="text-muted">{{ .hours }}</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="space-y-3">
-              <strong class="text-[11px] font-bold uppercase tracking-wider text-muted block mb-2">Facility Highlights</strong>
-              {{ range .highlights }}
-              <div class="flex items-center gap-2.5 text-sm text-ink-2">
-                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand"></i>
-                <span>{{ . }}</span>
-              </div>
-              {{ end }}
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-4 pt-4 border-t border-line/50">
-            <a href="tel:{{ $.Site.Params.phone | urlize }}" class="btn btn--small btn--outline gap-2.5">
-              <i data-lucide="phone" class="w-4 h-4"></i> Call Office
-            </a>
-            <a href="{{ .map_link }}" target="_blank" rel="noopener noreferrer" class="btn btn--small btn--primary gap-2.5">
-              <i data-lucide="external-link" class="w-4 h-4"></i> Get Directions
-            </a>
-          </div>
-        </div>
-
-        <!-- Integrated Map -->
-        <div class="h-80 bg-surface border-t border-line group-hover:opacity-100 transition-opacity">
-          <iframe 
-            src="{{ .map_embed }}" 
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            title="Location map for {{ .name }}">
+      <div class="contact-location-card" data-animate="fade-up">
+        
+        {{- /* 1. Map Frame (Top) */ -}}
+        <div class="contact-map-frame">
+          <iframe
+            src="{{ .map_embed }}"
+            title="Map showing {{ .name }}"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            aria-label="Google Maps showing {{ .name }}">
           </iframe>
+
+          {{- /* Map overlay badges */ -}}
+          <div class="contact-map-badge">
+            <i data-lucide="map-pin" aria-hidden="true"></i>
+            <span>{{ .city }}, {{ .state }}</span>
+          </div>
+
+          <a href="{{ .map_link }}"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="contact-map-open"
+             aria-label="Open {{ .name }} in Google Maps">
+            <i data-lucide="external-link" class="w-3.5 h-3.5" aria-hidden="true"></i>
+            <span>Open in Maps</span>
+          </a>
         </div>
+
+        <div class="contact-location-card__body">
+          {{- /* 2. Identity Header */ -}}
+          <div class="flex items-center justify-between gap-4 mb-6">
+            <div class="flex items-center gap-3">
+              <div class="contact-location-card__icon-wrap">
+                <i data-lucide="{{ .icon | default "building-2" }}" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="contact-location-card__label">{{ .label }}</div>
+                <h3 class="contact-location-card__name">{{ .city }} Unit</h3>
+              </div>
+            </div>
+            {{ $color := .badge_color | default "teal" }}
+            {{ with .badge }}
+            <span class="office-badge office-badge--{{ $color }}">{{ . }}</span>
+            {{ end }}
+          </div>
+
+          {{- /* 3. Details Grid */ -}}
+          <div class="contact-office-info">
+            <div class="contact-info-row">
+              <div class="contact-info-row__icon">
+                <i data-lucide="map-pin" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="contact-info-row__label">Address</div>
+                <div class="contact-info-row__value">
+                  {{ .address }}, {{ .pin }}
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-info-row">
+              <div class="contact-info-row__icon">
+                <i data-lucide="clock" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="contact-info-row__label">Business Hours</div>
+                <div class="contact-info-row__value">{{ .hours }}</div>
+              </div>
+            </div>
+
+            {{ $phone := .phone | default $.Site.Params.phone }}
+            <div class="contact-info-row">
+              <div class="contact-info-row__icon">
+                <i data-lucide="phone-call" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="contact-info-row__label">Direct Line</div>
+                <a href="tel:{{ $phone | urlize }}" class="contact-info-row__value no-underline hover:text-brand transition-colors">
+                  {{ $phone }}
+                </a>
+              </div>
+            </div>
+
+            {{ $email := .email | default $.Site.Params.email }}
+            <div class="contact-info-row">
+              <div class="contact-info-row__icon">
+                <i data-lucide="mail" aria-hidden="true"></i>
+              </div>
+              <div>
+                <div class="contact-info-row__label">Support Email</div>
+                <a href="mailto:{{ $email }}" class="contact-info-row__value no-underline hover:text-brand transition-colors truncate block">
+                  {{ $email }}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {{- /* 4. Highlights / Functions */ -}}
+          {{ $title := .highlights_title | default "Key Operations" }}
+          {{ with .highlights }}
+          <div class="contact-office-highlights mt-8 pt-6 border-t border-line">
+            <div class="contact-office-highlights__title">
+              <i data-lucide="check-circle-2" class="w-3.5 h-3.5 inline mr-1 text-brand"></i>
+              {{ $title }}
+            </div>
+            <ul class="contact-office-highlights__list">
+              {{ range . }}
+              <li class="contact-office-highlights__item">{{ . }}</li>
+              {{ end }}
+            </ul>
+          </div>
+          {{ end }}
+        </div>
+
       </div>
       {{ end }}
     </div>
+
+    {{- /* 5. Key Personnel */ -}}
+    <div class="mt-16 pt-16 border-t border-line/50">
+      <div class="section-head--center mb-10" data-animate="fade-up">
+        <h3 class="text-2xl font-bold text-ink">Key Personnel</h3>
+        <p class="section-kicker max-w-[600px] mx-auto mt-3">
+          Reach out directly to our leadership and marketing teams for immediate assistance.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto" data-animate-stagger>
+        <div class="p-5 md:p-8 rounded-2xl bg-white border border-line shadow-sm hover:shadow-md transition-shadow flex items-start gap-4 md:gap-5">
+          <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-brand/10 text-brand flex items-center justify-center shrink-0">
+            <i data-lucide="user-check" class="w-5 h-5 md:w-6 md:h-6"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-[10px] md:text-xs font-extrabold text-brand tracking-wider uppercase mb-1">Chief Operating Officer</div>
+            <h4 class="text-lg md:text-xl font-bold text-ink mb-4">Mr. Abhinav Aggrawal</h4>
+            
+            <div class="flex flex-col gap-3">
+              <a href="tel:+919357888588" class="flex items-center gap-2.5 text-ink hover:text-brand transition-colors font-medium text-sm">
+                <i data-lucide="phone" class="w-4 h-4 text-brand shrink-0"></i> 
+                <span class="truncate block w-full">+91 9357 888 588</span>
+              </a>
+              <a href="mailto:abhinav@dmpharma.org" class="flex items-center gap-2.5 text-ink hover:text-brand transition-colors font-medium text-sm">
+                <i data-lucide="mail" class="w-4 h-4 text-brand shrink-0"></i> 
+                <span class="truncate block w-full">abhinav@dmpharma.org</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 md:p-8 rounded-2xl bg-white border border-line shadow-sm hover:shadow-md transition-shadow flex items-start gap-4 md:gap-5">
+          <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-500/10 text-blue-600 flex items-center justify-center shrink-0">
+            <i data-lucide="user" class="w-5 h-5 md:w-6 md:h-6"></i>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-[10px] md:text-xs font-extrabold text-blue-600 tracking-wider uppercase mb-1">Marketing Manager</div>
+            <h4 class="text-lg md:text-xl font-bold text-ink mb-4">Mr. Vijay</h4>
+            
+            <div class="flex flex-col gap-3">
+              <a href="tel:+919357690454" class="flex items-center gap-2.5 text-ink hover:text-blue-600 transition-colors font-medium text-sm">
+                <i data-lucide="phone" class="w-4 h-4 text-blue-600 shrink-0"></i> 
+                <span class="truncate block w-full">+91 9357 690 454</span>
+              </a>
+              <a href="mailto:quotation@saarbiotech.com" class="flex items-center gap-2.5 text-ink hover:text-blue-600 transition-colors font-medium text-sm">
+                <i data-lucide="mail" class="w-4 h-4 text-blue-600 shrink-0"></i> 
+                <span class="truncate block w-full">quotation@saarbiotech.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>

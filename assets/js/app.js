@@ -14,6 +14,7 @@ import { initSliders } from './modules/slider';
 import { initCategorySlider } from './modules/categorySlider';
 import { initFAB } from './modules/fab';
 import { initBackToTop } from './modules/back-to-top';
+import { initContactPage } from './modules/contact';
 
 
 function safeInit(name, fn) {
@@ -69,6 +70,7 @@ const initAll = () => {
   safeInit("CategorySlider", initCategorySlider);
   safeInit("ContactFAB", initFAB);
   safeInit("BackToTop", initBackToTop);
+  safeInit("ContactPage", initContactPage);
 };
 
 if (document.readyState === "loading") {

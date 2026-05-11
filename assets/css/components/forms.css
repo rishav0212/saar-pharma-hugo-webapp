@@ -1,7 +1,7 @@
 @layer components {
   /* Forms */
   .contact-form {
-    @apply grid gap-5 p-8 rounded-lg shadow-soft max-md:p-5;
+    @apply grid gap-5 p-8 rounded-[24px] shadow-soft max-md:p-6;
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: linear-gradient(165deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
     backdrop-filter: blur(24px);
@@ -17,30 +17,30 @@
   }
 
   .form-field label {
-    @apply text-white/90 text-[13px] font-extrabold tracking-normal uppercase;
+    @apply text-white/90 text-[12px] font-black tracking-widest uppercase;
   }
 
   .form-control {
-    @apply w-full h-[48px] px-4 border border-white/20 rounded-lg bg-white/10 text-white text-[15px] font-medium transition-all duration-200 outline-none;
+    @apply w-full h-[52px] px-5 border border-white/20 rounded-xl bg-white/10 text-white text-[15px] font-medium transition-all duration-300 outline-none;
   }
 
   .form-control:focus {
-    @apply border-brand-2 bg-white/20 shadow-[0_0_0_4px_rgba(100,212,197,0.1)];
+    @apply border-brand-2 bg-white/18 shadow-[0_0_0_5px_rgba(100,212,197,0.12)];
   }
 
   .form-control::placeholder {
-    @apply text-white/50;
+    @apply text-white/40;
   }
 
   textarea.form-control {
-    @apply min-h-[120px] py-3 resize-y;
+    @apply min-h-[140px] py-4 resize-y;
   }
 
   select.form-control {
     @apply appearance-none cursor-pointer;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 1rem center;
+    background-position: right 1.25rem center;
     background-size: 16px;
   }
   
@@ -49,36 +49,53 @@
   }
 
   .form-note {
-    @apply m-0 text-center text-white/60 text-[13px];
+    @apply m-0 text-center text-white/50 text-[13px] font-medium;
   }
   
-  /* Contact Layout */
+  /* Contact Layout & Detail Lists (typically in dark sections) */
   .contact-list {
-    @apply grid gap-3.5 mt-8;
+    @apply flex flex-col gap-8;
   }
 
   .contact-item {
-    @apply grid grid-cols-[40px_1fr] gap-3 items-start;
+    @apply flex items-start gap-5;
   }
 
   .contact-item .icon {
-    @apply w-10 h-10 p-2.5 rounded-lg bg-white/10 text-white;
+    @apply w-10 h-10 flex items-center justify-center shrink-0 text-brand-2 transition-all duration-300;
   }
 
-  .contact-item span,
-  .contact-item a {
-    @apply text-white/80 text-[14px];
+  .contact-item:hover .icon {
+    @apply scale-110 text-brand-2;
+    filter: drop-shadow(0 0 8px rgba(100, 212, 197, 0.4));
+  }
+
+  .contact-item > div {
+    @apply flex-1 min-w-0;
   }
 
   .contact-item strong {
-    @apply block mb-1 text-white text-[13px];
+    @apply block text-[11px] font-black text-white/50 uppercase tracking-widest mb-1.5;
+  }
+
+  .contact-item a, 
+  .contact-item span {
+    @apply text-[18px] lg:text-[20px] font-bold text-white no-underline transition-colors duration-200 truncate block w-full;
+  }
+
+  .contact-item a:hover {
+    @apply text-brand-2;
   }
 
   .contact-chips {
-    @apply flex flex-wrap gap-2.5 mt-6.5;
+    @apply flex flex-wrap gap-2.5 mt-4;
   }
 
   .contact-chip {
-    @apply px-3 py-2 border border-white/20 rounded-full bg-white/10 text-white/80 text-[12px] font-extrabold;
+    @apply px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white/70 text-[12px] font-medium transition-colors;
+  }
+
+  .contact-chip:hover {
+    @apply bg-white/10 border-white/20 text-white;
   }
 }

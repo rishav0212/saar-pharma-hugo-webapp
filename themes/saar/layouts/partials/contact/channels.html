@@ -1,6 +1,11 @@
-<section class="contact-channels relative z-30 pt-0 -mt-12">
+{{- /*
+  CONTACT CHANNELS STRIP
+  4 floating channel cards (phone, email, WhatsApp, hours).
+  Rendered as an elevated strip over the dark hero bottom edge.
+*/ -}}
+<section class="contact-channels-section section--compact" aria-label="Contact channels">
   <div class="container">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="contact-channels__grid" data-animate="fade-up">
       {{ range .Params.channels }}
       {{ $val := .value }}
       {{ $href := .href }}
@@ -14,15 +19,22 @@
         {{ $val = "Chat on WhatsApp" }}
         {{ $href = printf "https://wa.me/%s" (replace $.Site.Params.phone " " "") }}
       {{ end }}
-      <a href="{{ $href }}" class="channel-card group bg-white p-7 rounded-2xl shadow-soft border border-line hover:border-brand/30 transition-all duration-300" data-animate="fade-up">
-        <div class="flex items-center gap-4 mb-5">
-          <div class="w-12 h-12 rounded-xl bg-{{ .color | default "brand" }}/10 text-{{ .color | default "brand" }} flex items-center justify-center group-hover:bg-{{ .color | default "brand" }} group-hover:text-white transition-all duration-300">
-            <i data-lucide="{{ .icon }}" class="w-6 h-6"></i>
-          </div>
-          <span class="badge badge--{{ .color | default "teal" }} text-[10px]">{{ .badge }}</span>
+      <a href="{{ $href | safeURL }}"
+         class="contact-channel-card"
+         {{ if or (hasPrefix $href "https") (hasPrefix $href "tel") (hasPrefix $href "mailto") }}
+         {{ if hasPrefix $href "https" }}target="_blank" rel="noopener noreferrer"{{ end }}
+         {{ end }}
+         aria-label="{{ .label }}: {{ $val }}">
+        <div class="contact-channel-card__icon contact-channel-card__icon--{{ .color }}">
+          <i data-lucide="{{ .icon }}" aria-hidden="true"></i>
         </div>
-        <h3 class="text-[11px] font-bold text-muted uppercase tracking-widest mb-1.5">{{ .label }}</h3>
-        <p class="text-lg font-bold text-ink truncate">{{ $val }}</p>
+        <div class="contact-channel-card__body">
+          <div class="contact-channel-card__label">{{ .label }}</div>
+          <div class="contact-channel-card__value">{{ $val }}</div>
+          {{ with .badge }}
+          <span class="contact-channel-card__badge">{{ . }}</span>
+          {{ end }}
+        </div>
       </a>
       {{ end }}
     </div>

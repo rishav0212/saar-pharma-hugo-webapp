@@ -30,11 +30,15 @@ enableRobotsTXT = true
   noindex = true
 
   # Social Links
-  social_facebook = "https://facebook.com/saarbiotech"
-  social_linkedin = "https://linkedin.com/company/saar-biotech-pvt-ltd"
+  social_facebook = "https://www.facebook.com/SaarBiotechP"
+  social_linkedin = "https://linkedin.com/company/saarbiotech"
   social_instagram = "https://instagram.com/saarbiotech"
-  social_google_business = "https://g.page/saar-biotech-chandigarh"
-  social_google_maps_plant = "https://goo.gl/maps/baddi-location"
+  social_twitter = "https://x.com/SaarBiotech"
+  social_indiamart = "https://www.indiamart.com/saar-biotech/"
+  social_google_business_corp = "https://share.google/bmkUorFOUKpM9KNrg"
+  social_google_business_plant = "https://share.google/z8AGlMEb0Wzv2HUew"
+  social_google_business = "https://share.google/bmkUorFOUKpM9KNrg" # Default to Corporate
+  social_google_maps_plant = "https://share.google/z8AGlMEb0Wzv2HUew"
 
 [taxonomies]
   category    = "categories"

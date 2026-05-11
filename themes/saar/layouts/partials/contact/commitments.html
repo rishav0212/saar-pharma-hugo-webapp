@@ -1,42 +1,28 @@
-<section class="section section--deep section-rail bg-ink-deep text-white overflow-hidden" id="commitments">
-  <!-- Subtle decorative elements -->
-  <div class="absolute inset-0 opacity-5 pointer-events-none">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] border border-white rounded-full"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] border border-white rounded-full"></div>
-  </div>
+{{- /*
+  CONTACT COMMITMENTS STRIP
+  4 trust-signal cards showing response promise, confidentiality, etc.
+*/ -}}
+<section class="section bg-surface section-rail" aria-labelledby="commitments-title">
+  <div class="container">
 
-  <div class="container relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div data-animate="slide-right">
-        <span class="badge badge--teal mb-6">Our Promise</span>
-        <h2 class="text-4xl md:text-5xl font-display font-extrabold mb-8 leading-tight">A Commitment to Seamless B2B Partnerships</h2>
-        <p class="text-lg text-white/70 leading-relaxed mb-10">
-          At Saar Biotech, we understand that reliability and transparency are the foundations of successful pharmaceutical contract manufacturing.
-        </p>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          {{ range .Params.commitments }}
-          <div class="commitment-item group">
-            <div class="w-12 h-12 rounded-xl bg-white/10 text-brand flex items-center justify-center mb-5 group-hover:bg-brand group-hover:text-white transition-all duration-300">
-              <i data-lucide="{{ .icon }}" class="w-6 h-6"></i>
-            </div>
-            <h3 class="text-xl font-bold mb-3">{{ .title }}</h3>
-            <p class="text-sm text-white/60 leading-relaxed">{{ .desc }}</p>
-          </div>
-          {{ end }}
-        </div>
-      </div>
-
-      <div class="relative" data-animate="slide-left">
-        <div class="rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-          {{ partial "shared/optimized-image.html" (dict "src" "/images/about/facility-hero.webp" "alt" "Saar Biotech high-tech manufacturing facility" "class" "w-full h-auto") }}
-        </div>
-        <!-- Floating Badge -->
-        <div class="absolute -bottom-10 -left-10 bg-brand p-8 rounded-2xl shadow-xl max-md:hidden">
-          <div class="text-4xl font-display font-extrabold mb-1">24Hr</div>
-          <div class="text-sm font-bold uppercase tracking-wider opacity-80">Enquiry Turnaround</div>
-        </div>
-      </div>
+    <div class="section-head--center mb-12" data-animate="fade-up">
+      <span class="eyebrow">Our Promise</span>
+      <h2 id="commitments-title" class="section-title section-title--sm">
+        What to Expect When You Reach Out
+      </h2>
     </div>
+
+    <div class="contact-commitments__grid" data-animate-stagger>
+      {{ range .Params.commitments }}
+      <div class="contact-commitment-card">
+        <div class="contact-commitment-card__icon">
+          <i data-lucide="{{ .icon }}" aria-hidden="true"></i>
+        </div>
+        <h3 class="contact-commitment-card__title">{{ .title }}</h3>
+        <p class="contact-commitment-card__desc">{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+
   </div>
 </section>

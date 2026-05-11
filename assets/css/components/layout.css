@@ -361,7 +361,7 @@
 
   .footer-grid {
     @apply grid gap-10;
-    grid-template-columns: 1.25fr 0.75fr 0.85fr 1fr;
+    grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr 1.2fr;
   }
 
   @media (max-width: 1024px) {
@@ -465,4 +465,41 @@
 @keyframes orb-drift-contact-2 {
   0%   { transform: translate(0, 0) scale(1); }
   100% { transform: translate(60px, -40px) scale(1.15); }
+}
+
+/* ─── Social Links ─── */
+.social-links-wrap {
+  @apply flex flex-col gap-3.5;
+}
+
+.social-links-title {
+  @apply text-xs font-black uppercase tracking-widest text-white/50;
+}
+
+.social-links-grid {
+  @apply flex items-center gap-6 mt-2;
+}
+
+.social-links-grid a {
+  @apply transition-all duration-300 opacity-80;
+}
+
+.social-links-grid a:hover {
+  @apply opacity-100 scale-110;
+}
+
+/* Official Brand Colors */
+.social-links-grid a[aria-label*="Twitter"]:hover { color: #ffffff; filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); }
+.social-links-grid a[aria-label*="Facebook"]:hover { color: #1877F2; filter: drop-shadow(0 0 8px rgba(24,119,242,0.4)); }
+.social-links-grid a[aria-label*="LinkedIn"]:hover { color: #0A66C2; filter: drop-shadow(0 0 8px rgba(10,102,194,0.4)); }
+.social-links-grid a[aria-label*="Instagram"]:hover { color: #E4405F; filter: drop-shadow(0 0 8px rgba(228,64,95,0.4)); }
+
+/* Handle colors on light background (Contact Page) */
+.contact-profiles-section .social-links-grid a {
+  @apply text-muted;
+}
+.contact-profiles-section .social-links-grid a:hover[aria-label*="Twitter"] { color: #000000; }
+
+.social-links-grid svg {
+  @apply w-[22px] h-[22px];
 }

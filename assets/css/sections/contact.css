@@ -1,96 +1,508 @@
-/* Contact Page Styles */
+@layer components {
 
-.contact-page {
-  --contact-shadow: 0 20px 40px rgba(6, 17, 33, 0.08);
-}
+  /* ═══════════════════════════════════════════════════════════════════
+     CONTACT PAGE — Design System
+     All styles scoped to contact-specific components.
+     Uses CSS tokens from base/variables.css (never hardcoded values).
+     ═══════════════════════════════════════════════════════════════════ */
 
-.contact-hero {
-  background: linear-gradient(135deg, var(--color-ink) 0%, var(--color-abyss) 100%);
-}
 
-/* Channel Cards */
-.channel-card {
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-.channel-card:hover {
-  transform: translateY(-8px);
-  @apply border-brand/40 shadow-lift;
-}
+  /* ───────────────────────────────────────────────
+     1. CONTACT HERO
+     Premium dark hero with animated gradient orbs
+     and floating trust signal chips.
+     ─────────────────────────────────────────────── */
 
-/* Office Cards */
-.office-card {
-  transition: all 0.4s ease;
-}
-.office-card:hover {
-  transform: translateY(-4px);
-  @apply shadow-lift;
-}
-.office-card iframe {
-  filter: grayscale(0.5) contrast(1.1);
-  transition: filter 0.5s ease;
-}
-.office-card:hover iframe {
-  filter: grayscale(0) contrast(1);
-}
-
-/* Profile Cards */
-.profile-card {
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-.profile-card:hover {
-  transform: translateY(-10px);
-}
-
-/* FAQ Accordion */
-.faq-accordion {
-  @apply grid grid-cols-1 lg:grid-cols-12 gap-16;
-}
-.faq-accordion__aside {
-  @apply lg:col-span-4;
-}
-.faq-accordion__list {
-  @apply lg:col-span-8 space-y-4;
-}
-.faq-accordion__item {
-  @apply border border-line rounded-xl overflow-hidden bg-white transition-all duration-300;
-}
-.faq-accordion__header {
-  @apply p-6 cursor-pointer font-bold text-ink-2 flex justify-between items-center;
-}
-.faq-accordion__header::after {
-  content: "+";
-  @apply text-brand text-2xl font-light transition-transform duration-300;
-}
-.faq-accordion__item.is-active .faq-accordion__header::after {
-  transform: rotate(45deg);
-}
-.faq-accordion__answer {
-  @apply max-h-0 overflow-hidden transition-all duration-300;
-}
-.faq-accordion__item.is-active .faq-accordion__answer {
-  @apply max-h-[500px] border-t border-line/50;
-}
-.faq-accordion__inner {
-  @apply p-6 text-muted leading-relaxed;
-}
-
-/* Commitments */
-.commitment-item {
-  @apply p-2;
-}
-
-.contact-page .form-group label {
-  @apply font-bold text-ink-2 mb-2;
-}
-
-.contact-page .form-control {
-  @apply bg-surface border-line-strong focus:bg-white;
-}
-
-@media (max-width: 1023px) {
-  .contact-page .container {
-    max-width: 100% !important;
+  .section--contact-hero {
+    @apply relative overflow-hidden text-white;
+    padding-top: 140px;
+    padding-bottom: 120px;
+    background: linear-gradient(140deg, var(--color-abyss) 0%, var(--color-ink-deep) 55%, var(--color-ink-2) 100%);
   }
+
+  @media (max-width: 767px) {
+    .section--contact-hero {
+      padding-top: 110px;
+      padding-bottom: 80px;
+    }
+  }
+
+  /* Mesh grid overlay */
+  .contact-hero__grid {
+    @apply absolute inset-0 z-0 pointer-events-none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 80%);
+  }
+
+  /* Animated radial glows */
+  .contact-hero__glow {
+    @apply absolute rounded-full pointer-events-none blur-[120px];
+  }
+
+  .contact-hero__glow--1 {
+    width: 700px;
+    height: 700px;
+    top: -200px;
+    left: -150px;
+    background: radial-gradient(circle, rgba(var(--color-brand-rgb), 0.25) 0%, transparent 70%);
+    animation: chGlowDrift 18s ease-in-out infinite alternate;
+  }
+
+  .contact-hero__glow--2 {
+    width: 500px;
+    height: 500px;
+    bottom: -100px;
+    right: -80px;
+    background: radial-gradient(circle, rgba(var(--color-brand-2-rgb), 0.18) 0%, transparent 70%);
+    animation: chGlowDrift 14s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes chGlowDrift {
+    0%   { transform: translate(0, 0) scale(1); opacity: 0.7; }
+    100% { transform: translate(40px, 30px) scale(1.12); opacity: 1; }
+  }
+
+  /* Hero inner layout */
+  .contact-hero__inner {
+    @apply relative z-10 text-center;
+  }
+
+  .contact-hero__eyebrow {
+    @apply inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-brand-2/30 bg-white/8 text-brand-2 text-[11px] font-black uppercase tracking-[0.22em] mb-8;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .contact-hero__eyebrow-dot {
+    @apply w-2 h-2 rounded-full bg-brand-2;
+    box-shadow: 0 0 0 4px rgba(var(--color-brand-2-rgb), 0.15);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  .contact-hero__title {
+    font-size: clamp(38px, 6.5vw, 76px);
+    @apply font-display font-black text-white leading-[1] tracking-tighter mb-6;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+  }
+
+  .contact-hero__title-accent {
+    background: linear-gradient(135deg, var(--color-brand-2) 0%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .contact-hero__desc {
+    @apply text-[18px] text-white/70 leading-relaxed max-w-[680px] mx-auto mb-12;
+  }
+
+  /* Trust chips row */
+  .contact-hero__chips {
+    @apply flex flex-wrap justify-center gap-4;
+  }
+
+  .contact-hero__chip {
+    @apply inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-white/10 bg-white/6 text-white text-[13px] font-bold transition-all duration-300;
+    backdrop-filter: blur(8px);
+  }
+
+  .contact-hero__chip:hover {
+    @apply bg-white/12 border-brand-2/40 -translate-y-1;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  }
+
+  .contact-hero__chip i {
+    @apply text-brand-2 w-4 h-4;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     2. CONTACT CHANNELS STRIP
+     A horizontal row of 4 contact method cards
+     with icon, label, value, and badge.
+     ─────────────────────────────────────────────── */
+
+  .contact-channels-section {
+    @apply relative z-20 -mt-12;
+  }
+
+  .contact-channels__grid {
+    @apply grid grid-cols-4 gap-5 max-lg:grid-cols-2 max-md:grid-cols-1;
+  }
+
+  .contact-channel-card {
+    @apply flex items-center gap-4.5 p-6 bg-white border border-line rounded-[20px] transition-all duration-400 no-underline;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .contact-channel-card:hover {
+    @apply -translate-y-2 border-brand/30;
+    box-shadow: 0 25px 50px -12px rgba(var(--color-brand-rgb), 0.12);
+  }
+
+  .contact-channel-card__icon {
+    @apply w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-300;
+  }
+
+  .contact-channel-card:hover .contact-channel-card__icon {
+    transform: scale(1.05) rotate(-3deg);
+  }
+
+  .contact-channel-card__icon--brand {
+    background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-3) 100%);
+    color: white;
+    box-shadow: 0 10px 20px rgba(var(--color-brand-rgb), 0.25);
+  }
+
+  .contact-channel-card__icon--blue {
+    background: linear-gradient(135deg, #4f83cc 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+  }
+
+  .contact-channel-card__icon--green {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+  }
+
+  .contact-channel-card__icon--muted {
+    @apply bg-surface border border-line text-muted;
+  }
+
+  .contact-channel-card__icon i {
+    @apply w-7 h-7;
+  }
+
+  .contact-channel-card__body {
+    @apply flex-1 min-w-0;
+  }
+
+  .contact-channel-card__label {
+    @apply text-[10px] font-black text-muted uppercase tracking-widest mb-1;
+  }
+
+  .contact-channel-card__value {
+    @apply text-[15px] font-bold text-ink leading-tight truncate block w-full;
+  }
+
+  .contact-channel-card__badge {
+    @apply inline-block mt-1.5 px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-brand/8 text-brand-3 border border-brand-line/50;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     3. OFFICES & LOCATIONS GRID
+     Side-by-side cards for Chandigarh & Baddi.
+     ─────────────────────────────────────────────── */
+
+  .contact-offices-section {
+    @apply scroll-mt-[80px] bg-[#FDFDFD];
+  }
+
+  .contact-locations__grid {
+    @apply grid grid-cols-2 gap-10 max-lg:grid-cols-1;
+  }
+
+  .contact-location-card {
+    @apply flex flex-col bg-white border border-line rounded-[28px] overflow-hidden transition-all duration-500;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .contact-location-card:hover {
+    @apply border-brand-line;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .contact-map-frame {
+    @apply relative w-full overflow-hidden bg-surface;
+    height: 340px;
+  }
+
+  .contact-map-frame iframe {
+    @apply w-full h-full;
+    border: 0;
+    filter: grayscale(15%) contrast(1.05);
+    transition: filter 0.5s ease;
+  }
+
+  .contact-location-card:hover .contact-map-frame iframe {
+    filter: grayscale(0%) contrast(1);
+  }
+
+  .contact-location-card__body {
+    @apply p-8 lg:p-10 flex-1 flex flex-col;
+  }
+
+  .contact-location-card__icon-wrap {
+    @apply w-12 h-12 rounded-2xl bg-brand/5 border border-brand-line/30 flex items-center justify-center shrink-0;
+  }
+
+  .contact-location-card__icon-wrap i {
+    @apply w-6 h-6 text-brand;
+  }
+
+  .contact-location-card__label {
+    @apply text-[11px] font-black text-brand uppercase tracking-widest mb-0.5;
+  }
+
+  .contact-location-card__name {
+    @apply text-[22px] lg:text-[26px] font-black text-ink leading-tight;
+  }
+
+  /* Info Rows */
+  .contact-office-info {
+    @apply grid grid-cols-1 gap-5;
+  }
+
+  .contact-info-row {
+    @apply flex items-start gap-4.5;
+  }
+
+  .contact-info-row__icon {
+    @apply w-6 h-6 flex items-center justify-center shrink-0 mt-1 rounded-lg bg-surface border border-line;
+  }
+
+  .contact-info-row__icon i {
+    @apply w-3.5 h-3.5 text-brand;
+  }
+
+  .contact-info-row__label {
+    @apply text-[11px] font-black text-muted uppercase tracking-widest mb-1;
+  }
+
+  .contact-info-row__value {
+    @apply text-[15px] font-semibold text-ink-2 leading-relaxed;
+  }
+
+  /* Highlights */
+  .contact-office-highlights {
+    @apply bg-surface/50 p-6 rounded-2xl;
+  }
+
+  .contact-office-highlights__title {
+    @apply text-[11px] font-black text-ink uppercase tracking-[0.15em] mb-4 flex items-center gap-2;
+  }
+
+  .contact-office-highlights__list {
+    @apply grid grid-cols-1 gap-2.5;
+  }
+
+  .contact-office-highlights__item {
+    @apply flex items-center gap-3 text-[13px] font-medium text-muted transition-colors duration-200;
+  }
+
+  .contact-office-highlights__item:hover {
+    @apply text-ink;
+  }
+
+  .contact-office-highlights__item::before {
+    content: '';
+    @apply w-1.5 h-1.5 rounded-full bg-brand/40 flex-shrink-0;
+  }
+
+  /* Overlay elements */
+  .contact-map-badge {
+    @apply absolute bottom-5 left-5 flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white/95 backdrop-blur-xl border border-line text-ink text-[12px] font-bold shadow-soft;
+  }
+
+  .contact-map-badge i {
+    @apply w-4 h-4 text-brand;
+  }
+
+  .contact-map-open {
+    @apply absolute bottom-5 right-5 flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-ink text-white text-[12px] font-black uppercase tracking-wider no-underline transition-all duration-300 shadow-lift;
+  }
+
+  .contact-map-open:hover {
+    @apply bg-brand -translate-y-1;
+    box-shadow: 0 15px 30px rgba(var(--color-brand-rgb), 0.35);
+  }
+
+  /* Badge styling */
+  .office-badge {
+    @apply inline-flex px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest;
+  }
+
+  .office-badge--teal {
+    @apply bg-brand/8 text-brand-3 border border-brand-line/50;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     4. BUSINESS PROFILES / SOCIAL GRID
+     ─────────────────────────────────────────────── */
+
+  .contact-profiles-section {
+    @apply scroll-mt-[80px];
+  }
+
+  .contact-profiles__grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+
+  .contact-profile-card {
+    @apply relative flex flex-col p-8 rounded-[24px] border border-line bg-white transition-all duration-400 no-underline overflow-hidden;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .contact-profile-card:hover {
+    @apply -translate-y-2 border-transparent;
+    box-shadow: 0 30px 60px -15px rgba(0,0,0,0.12);
+  }
+
+  /* Dynamic wash background */
+  .contact-profile-card::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-400 pointer-events-none;
+    background: radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--profile-color, var(--color-brand)) 12%, transparent), transparent 70%);
+  }
+
+  .contact-profile-card:hover::after {
+    @apply opacity-100;
+  }
+
+  .contact-profile-card__icon {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center mb-6 shrink-0 transition-all duration-300 border shadow-sm relative z-10;
+    background-color: color-mix(in srgb, var(--profile-color, var(--color-brand)) 8%, #ffffff);
+    color: var(--profile-color, var(--color-brand));
+    border-color: color-mix(in srgb, var(--profile-color, var(--color-brand)) 15%, #eef0f3);
+  }
+
+  .contact-profile-card:hover .contact-profile-card__icon {
+    @apply border-transparent scale-110;
+    background: var(--profile-color, var(--color-brand));
+    color: #ffffff;
+    box-shadow: 0 10px 20px color-mix(in srgb, var(--profile-color, var(--color-brand)) 30%, transparent);
+  }
+
+  .contact-profile-card__icon i,
+  .contact-profile-card__icon svg {
+    @apply w-6 h-6 transition-colors duration-300;
+  }
+
+  .contact-profile-card:hover .contact-profile-card__icon i,
+  .contact-profile-card:hover .contact-profile-card__icon svg {
+    @apply text-white;
+  }
+
+  .contact-profile-card__platform {
+    @apply text-[11px] font-black uppercase tracking-[0.2em] mb-2 relative z-10;
+    color: var(--profile-color, var(--color-brand));
+  }
+
+  .contact-profile-card__handle {
+    @apply text-[17px] font-black text-ink mb-3 leading-tight relative z-10 truncate block w-full;
+  }
+
+  .contact-profile-card__desc {
+    @apply text-[13px] text-muted leading-relaxed mb-6 flex-1 relative z-10;
+  }
+
+  .contact-profile-card__cta {
+    @apply inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest transition-all duration-300 relative z-10;
+    color: var(--profile-color, var(--color-brand));
+  }
+
+  .contact-profile-card__cta i {
+    @apply w-4 h-4 transition-transform duration-300;
+  }
+
+  .contact-profile-card:hover .contact-profile-card__cta {
+    @apply gap-3;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     5. RESPONSE COMMITMENTS STRIP
+     4 trust signal cards on light background.
+     ─────────────────────────────────────────────── */
+
+  .contact-commitments__grid {
+    @apply grid grid-cols-4 gap-6 max-lg:grid-cols-2 max-md:grid-cols-1;
+  }
+
+  .contact-commitment-card {
+    @apply flex flex-col gap-4 p-8 rounded-[24px] bg-white border border-line transition-all duration-400;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .contact-commitment-card:hover {
+    @apply border-brand-line -translate-y-1.5;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .contact-commitment-card__icon {
+    @apply w-12 h-12 rounded-xl bg-brand/8 border border-brand-line/30 flex items-center justify-center mb-2;
+  }
+
+  .contact-commitment-card__icon i {
+    @apply w-6 h-6 text-brand;
+  }
+
+  .contact-commitment-card__title {
+    @apply text-[17px] font-black text-ink leading-tight;
+  }
+
+  .contact-commitment-card__desc {
+    @apply text-[14px] text-muted leading-relaxed;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     6. ENQUIRY FORM SECTION REFINEMENTS
+     ─────────────────────────────────────────────── */
+
+  .contact-page-form-section {
+    @apply scroll-mt-[80px] py-32;
+  }
+
+  .contact-layout {
+    @apply grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-start;
+  }
+
+
+  /* ───────────────────────────────────────────────
+     6. RESPONSIVE OVERRIDES
+     ─────────────────────────────────────────────── */
+
+  @media (max-width: 1023px) {
+    .contact-layout {
+      @apply gap-16;
+    }
+
+    .contact-channels__grid {
+      @apply gap-4;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .contact-layout {
+      @apply gap-10;
+    }
+    .contact-hero__title {
+      @apply mb-4;
+    }
+
+    .contact-location-card__body {
+      @apply p-6;
+    }
+
+    .contact-map-frame {
+      height: 280px;
+    }
+
+    .contact-profiles__grid {
+      @apply grid-cols-1;
+    }
+
+    .contact-item a, 
+    .contact-item span {
+      @apply text-[16px];
+    }
+  }
+
 }
-
-
+/* end @layer components */

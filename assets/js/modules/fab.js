@@ -11,14 +11,25 @@ export function initFAB() {
 
   let closeTimeout;
 
-  // --- Scroll Logic: Only show after Hero ---
+  let isFooterVisible = false;
+  const footer = document.querySelector('.site-footer');
+
+  if (footer) {
+    const observer = new IntersectionObserver((entries) => {
+      isFooterVisible = entries[0].isIntersecting;
+      handleScroll();
+    }, { rootMargin: "0px" });
+    observer.observe(footer);
+  }
+
+  // --- Scroll Logic: Only show after Hero, hide at Footer ---
   const handleScroll = () => {
-    // Show after scrolling 400px (typically past hero)
-    if (window.scrollY > 400) {
+    // Show after scrolling 400px (typically past hero) AND footer is not visible
+    if (window.scrollY > 400 && !isFooterVisible) {
       fab.classList.add('is-visible');
     } else {
       fab.classList.remove('is-visible');
-      fab.classList.remove('contact-fab--active'); // Close menu if scrolled back to top
+      fab.classList.remove('contact-fab--active'); // Close menu if hidden
     }
   };
 

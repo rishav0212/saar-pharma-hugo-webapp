@@ -17,7 +17,10 @@
   {{- /* ── 2. CHANNEL CARDS (elevated over hero bottom edge) ── */ -}}
   {{ partial "contact/channels.html" . }}
 
-  {{- /* ── 3. ENQUIRY FORM (dark section — reuses shared/contact.html) ── */ -}}
+  {{- /* ── 3. OFFICES & MAP (Light break) ── */ -}}
+  {{ partial "contact/offices.html" . }}
+
+  {{- /* ── 4. ENQUIRY FORM (dark section — reuses shared/contact.html) ── */ -}}
   <section class="section section--deep-soft section-rail relative overflow-hidden contact-page-form-section" id="enquiry">
     <!-- Animated Background Orbs (reused class from layout.css) -->
     <div class="contact-orbs" aria-hidden="true">
@@ -55,27 +58,13 @@
             <i data-lucide="{{ .icon }}" class="icon" aria-hidden="true"></i>
             <div>
               <strong>{{ .label }}</strong>
-              <a href="{{ $href }}"
+              <a href="{{ $href | safeURL }}"
                  {{ if hasPrefix $href "https" }}target="_blank" rel="noopener noreferrer"{{ end }}
                  data-copy="{{ $val }}">{{ $val }}</a>
             </div>
           </div>
           {{ end }}
           {{ end }}
-          <div class="contact-item">
-            <i data-lucide="map-pin" class="icon" aria-hidden="true"></i>
-            <div>
-              <strong>Corporate Office</strong>
-              <span itemprop="address">{{ .Site.Params.address }}</span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <i data-lucide="factory" class="icon" aria-hidden="true"></i>
-            <div>
-              <strong>Manufacturing Plant</strong>
-              <span>{{ .Site.Params.plant }}</span>
-            </div>
-          </div>
         </div>
 
         {{- /* Quick-info chips */ -}}
@@ -92,9 +81,6 @@
 
     </div>
   </section>
-
-  {{- /* ── 4. OFFICES & MAP ── */ -}}
-  {{ partial "contact/offices.html" . }}
 
   {{- /* ── 5. BUSINESS PROFILES / SOCIAL ── */ -}}
   {{ partial "contact/profiles.html" . }}

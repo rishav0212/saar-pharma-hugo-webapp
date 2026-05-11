@@ -1,62 +1,107 @@
+{{- /*
+  CONTACT PAGE — JSON-LD SCHEMA
+  Outputs: LocalBusiness, ContactPage, FAQPage, BreadcrumbList
+*/ -}}
+{{ $years := partial "helpers/get-years.html" . }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Saar Biotech Pvt. Ltd.",
-  "image": "{{ .Site.BaseURL }}images/logo-dark.png",
-  "@id": "{{ .Permalink }}",
-  "url": "{{ .Permalink }}",
-  "telephone": "{{ .Site.Params.phone }}",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "SCO-165, Sector-38C",
-    "addressLocality": "Chandigarh",
-    "postalCode": "160038",
-    "addressCountry": "IN"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 30.7333,
-    "longitude": 76.7794
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ],
-    "opens": "09:00",
-    "closes": "18:00"
-  },
-  "sameAs": [
-    "https://www.linkedin.com/company/saarbiotech",
-    "https://facebook.com/saarbiotech"
-  ]
-}
-</script>
-
-{{ if .Params.faqs }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {{ range $index, $item := .Params.faqs }}
-    {{ if $index }},{{ end }}
+  "@graph": [
     {
-      "@type": "Question",
-      "name": {{ $item.q | jsonify }},
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": {{ $item.a | jsonify }}
+      "@type": ["LocalBusiness", "Organization"],
+      "@id": "{{ .Site.BaseURL }}#organization",
+      "name": "Saar Biotech Pvt. Ltd.",
+      "alternateName": "Saar Biotech",
+      "url": "{{ .Site.BaseURL }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ "favicon.png" | absURL }}"
+      },
+      "description": "WHO-GMP and ISO 9001:2015 certified third-party pharmaceutical manufacturer in Baddi, Himachal Pradesh. {{ $years }}+ years of expertise in oral liquids, suspensions, ointments, and specialty topical formulations.",
+      "foundingDate": "{{ .Site.Params.founded }}",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "minValue": 100
+      },
+      "telephone": "{{ .Site.Params.phone }}",
+      "email": "{{ .Site.Params.email }}",
+      "sameAs": [
+        "https://www.linkedin.com/company/saarbiotech",
+        "https://www.indiamart.com/saarbiotech/"
+      ],
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "name": "Corporate Headquarters",
+          "streetAddress": "SCO-165, Sector-38C",
+          "addressLocality": "Chandigarh",
+          "addressRegion": "Chandigarh",
+          "postalCode": "160038",
+          "addressCountry": "IN"
+        },
+        {
+          "@type": "PostalAddress",
+          "name": "Manufacturing Plant",
+          "streetAddress": "Plot No. 125-126, EPIP, Phase-1",
+          "addressLocality": "Baddi",
+          "addressRegion": "Himachal Pradesh",
+          "postalCode": "173205",
+          "addressCountry": "IN"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "hasMap": "https://maps.google.com/?q=SCO-165+Sector+38C+Chandigarh",
+      "hasCredential": [
+        { "@type": "EducationalOccupationalCredential", "name": "WHO-GMP Certification" },
+        { "@type": "EducationalOccupationalCredential", "name": "ISO 9001:2015" },
+        { "@type": "EducationalOccupationalCredential", "name": "GLP Certified Laboratory" },
+        { "@type": "EducationalOccupationalCredential", "name": "DCGI Approved" }
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
       }
+    },
+    {
+      "@type": "ContactPage",
+      "@id": "{{ .Permalink }}#contactpage",
+      "url": "{{ .Permalink }}",
+      "name": "{{ .Params.meta_title | default .Title }}",
+      "description": "{{ .Params.meta_description | default .Description }}",
+      "isPartOf": { "@id": "{{ .Site.BaseURL }}#website" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ .Permalink }}#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ .Site.BaseURL }}" },
+        { "@type": "ListItem", "position": 2, "name": "Contact Us", "item": "{{ .Permalink }}" }
+      ]
+    }
+    {{ if .Params.faqs }}
+    ,{
+      "@type": "FAQPage",
+      "mainEntity": [
+        {{ range $i, $faq := .Params.faqs }}
+        {
+          "@type": "Question",
+          "name": "{{ $faq.q }}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ $faq.a | plainify }}"
+          }
+        }{{ if lt (add $i 1) (len $.Params.faqs) }},{{ end }}
+        {{ end }}
+      ]
     }
     {{ end }}
   ]
 }
 </script>
-{{ end }}

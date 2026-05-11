@@ -1,29 +1,86 @@
-<section class="section border-t border-line" id="profiles">
+{{- /*
+  CONTACT BUSINESS PROFILES & SOCIAL
+  Grid of platform cards: LinkedIn, IndiaMART, Google Business, website.
+  Uses frontmatter data from .Params.profiles.
+*/ -}}
+<section class="section contact-profiles-section bg-white" id="profiles" aria-labelledby="profiles-title">
   <div class="container">
-    <div class="text-center max-w-2xl mx-auto mb-16" data-animate="fade-up">
-      <span class="eyebrow">Digital Footprint</span>
-      <h2 class="section-title">Ecosystem & Marketplace Platforms</h2>
-      <p class="section-kicker">Connect with our leadership team on LinkedIn or browse our verified catalog on IndiaMART.</p>
+
+    <div class="section-head--center mb-12" data-animate="fade-up">
+      <span class="eyebrow">Find Us Online</span>
+      <h2 id="profiles-title" class="section-title section-title--sm">
+        Our Business Profiles
+      </h2>
+      <p class="section-kicker max-w-[560px] mx-auto mt-3">
+        Connect with Saar Biotech across professional networks, marketplaces, and business directories for real-time updates and product enquiries.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="contact-profiles__grid" data-animate-stagger>
       {{ range .Params.profiles }}
-      <a href="{{ .href }}" target="_blank" rel="noopener noreferrer" class="profile-card group bg-white p-8 rounded-2xl shadow-soft border border-line hover:shadow-lift transition-all duration-500" data-animate="fade-up">
-        <div class="flex items-center gap-4 mb-6">
-          <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-lg" style="background-color: {{ .color }};">
-            <i data-lucide="{{ .icon }}" class="w-8 h-8"></i>
-          </div>
-          <div>
-            <h3 class="font-display font-bold text-xl text-ink leading-none mb-1.5">{{ .label }}</h3>
-            <p class="text-sm text-muted">{{ .handle }}</p>
-          </div>
+      <a href="{{ .href }}"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="contact-profile-card"
+         aria-label="{{ .platform }}: {{ .handle }}"
+         style="--profile-color: {{ .color }};">
+
+        <div class="contact-profile-card__icon">
+          {{ if .image }}
+            <img src="{{ .image }}" alt="{{ .label }} Logo" class="w-7 h-7 object-contain" />
+          {{ else if .svg }}
+            {{ .svg | safeHTML }}
+          {{ else if .icon }}
+            <i data-lucide="{{ .icon }}" class="w-6 h-6" aria-hidden="true"></i>
+          {{ else }}
+            <i data-lucide="share-2" class="w-6 h-6" aria-hidden="true"></i>
+          {{ end }}
         </div>
-        <p class="text-muted text-sm leading-relaxed mb-6">{{ .desc }}</p>
-        <div class="flex items-center gap-2 text-sm font-bold text-ink group-hover:text-brand transition-colors">
-          Visit Profile <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+
+        <div class="contact-profile-card__platform">
+          {{ .platform }}
+        </div>
+
+        {{- /* Avoid repeating platform name if label is identical */ -}}
+        <div class="contact-profile-card__handle">
+          {{ if ne .label .platform }}
+            {{ .label }}
+          {{ else }}
+            {{ .handle }}
+          {{ end }}
+        </div>
+
+        <p class="contact-profile-card__desc">{{ .desc }}</p>
+
+        <div class="contact-profile-card__cta">
+          <span>{{ if eq .label .platform }}Visit Profile{{ else }}{{ .handle }}{{ end }}</span>
+          <i data-lucide="arrow-up-right" aria-hidden="true"></i>
         </div>
       </a>
       {{ end }}
     </div>
+    
+
+
+    {{- /* Google Business CTA strip */ -}}
+    <div class="mt-12 p-6 bg-surface rounded-2xl border border-line flex flex-col sm:flex-row items-center justify-between gap-5" data-animate="fade-up">
+      <div class="flex items-center gap-4 text-left">
+        <div class="w-12 h-12 rounded-xl bg-white border border-line flex items-center justify-center shadow-soft shrink-0">
+          <i data-lucide="star" class="w-6 h-6 text-amber-400" aria-hidden="true"></i>
+        </div>
+        <div>
+          <div class="text-[15px] font-bold text-ink">Verified on Google Business</div>
+          <div class="text-[13px] text-muted">Search "Saar Biotech" on Google for reviews, photos &amp; real-time business info.</div>
+        </div>
+      </div>
+      <a href="https://maps.google.com/?q=Saar+Biotech+Chandigarh"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn btn--outline btn--small shrink-0 flex items-center gap-2">
+        <i data-lucide="search" class="w-4 h-4" aria-hidden="true"></i>
+        <span>View on Google</span>
+      </a>
+    </div>
+
   </div>
 </section>

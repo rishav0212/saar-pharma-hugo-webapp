@@ -1,19 +1,63 @@
-<section class="contact-hero relative overflow-hidden pt-36 pb-24 max-md:pt-28 max-md:pb-16 bg-ink text-white">
-  <!-- Subtle patterns -->
-  <div class="absolute inset-0 opacity-10 pointer-events-none">
-    <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-brand rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2"></div>
-    <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-2 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2"></div>
-  </div>
+{{- /* ─────────────────────────────────────────────────────────
+  CONTACT HERO PARTIAL
+  Renders the premium dark hero for the Contact page.
+  All content driven from content/contact/index.md frontmatter.
+  ───────────────────────────────────────────────────────── */ -}}
+<section class="section--contact-hero" aria-labelledby="contact-page-title">
 
-  <div class="container relative z-10">
-    <div class="max-w-4xl" data-animate="fade-up">
-      <span class="badge badge--teal mb-6 inline-block">{{ .Params.hero_tagline | default "Get in Touch" }}</span>
-      <h1 class="text-5xl md:text-7xl font-display font-extrabold mb-8 leading-[1.05] tracking-tight">
-        {{ .Title | default "Partner with India's Premier WHO-GMP Manufacturer" }}
+  {{- /* Background decoration */ -}}
+  <div class="contact-hero__grid" aria-hidden="true"></div>
+  <div class="contact-hero__glow contact-hero__glow--1" aria-hidden="true"></div>
+  <div class="contact-hero__glow contact-hero__glow--2" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="contact-hero__inner" data-animate="fade-up">
+
+      {{- /* Eyebrow badge */ -}}
+      <div class="contact-hero__eyebrow">
+        <span class="contact-hero__eyebrow-dot" aria-hidden="true"></span>
+        Top Pharmaceutical Manufacturing Company in India
+      </div>
+
+      {{- /* H1 */ -}}
+      <h1 id="contact-page-title" class="contact-hero__title">
+        {{ if in .Params.hero_tagline "Together" }}
+          {{ replace .Params.hero_tagline "Together" "<span class='contact-hero__title-accent'>Together</span>" | safeHTML }}
+        {{ else }}
+          {{ .Params.hero_tagline | default "Let's Build Something" }}
+          <br>
+          <span class="contact-hero__title-accent">Together</span>
+        {{ end }}
       </h1>
-      <p class="text-xl text-white/70 leading-relaxed max-w-2xl">
-        {{ .Params.hero_desc | default "From initial enquiry to commercial supply — our technical team is ready to respond with practical manufacturing solutions within 24 hours." }}
+
+      <p class="contact-hero__desc">
+        {{ .Params.hero_desc | default "Reach our team for manufacturing enquiries, B2B quotations, and regulatory support." }}
       </p>
+
+      {{- /* Trust chips */ -}}
+      <div class="contact-hero__chips" data-animate="fade-up" data-delay="0.15">
+        <div class="contact-hero__chip">
+          <i data-lucide="shield-check" class="w-4 h-4" aria-hidden="true"></i>
+          <span>WHO-GMP Certified</span>
+        </div>
+        <div class="contact-hero__chip">
+          <i data-lucide="zap" class="w-4 h-4" aria-hidden="true"></i>
+          <span>24-Hour Response</span>
+        </div>
+        <div class="contact-hero__chip">
+          <i data-lucide="map-pin" class="w-4 h-4" aria-hidden="true"></i>
+          <span>2 Locations in India</span>
+        </div>
+        <div class="contact-hero__chip">
+          <i data-lucide="file-check" class="w-4 h-4" aria-hidden="true"></i>
+          <span>NDA Confidentiality</span>
+        </div>
+        <div class="contact-hero__chip">
+          <i data-lucide="users" class="w-4 h-4" aria-hidden="true"></i>
+          <span>{{ .Site.Params.clients }} B2B Partners</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
