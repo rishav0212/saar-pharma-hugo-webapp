@@ -347,7 +347,7 @@
   }
 
   .bento-cell {
-    @apply relative p-8 border border-line rounded-lg bg-white overflow-hidden transition-all duration-300 max-md:p-6;
+    @apply relative p-8 border border-line rounded-lg bg-white overflow-hidden transition-all duration-300 max-md:p-5;
   }
 
   .bento-cell:hover {
@@ -361,8 +361,23 @@
   }
 
   .bento-cell__icon {
-    @apply grid place-items-center w-12 h-12 mb-6 rounded-lg text-brand-3;
+    @apply grid place-items-center w-12 h-12 mb-6 rounded-lg text-brand-3 transition-all duration-300;
     background-color: rgba(21, 159, 145, 0.10);
+  }
+
+  @media (max-width: 767px) {
+    .bento-cell__icon {
+      @apply w-10 h-10 mb-4;
+    }
+    .bento-cell__icon .icon {
+      @apply w-5 h-5;
+    }
+    .bento-cell h3 {
+      @apply text-[18px] mb-2;
+    }
+    .bento-cell p {
+      @apply text-[14px];
+    }
   }
 
   .bento-cell h3 {
