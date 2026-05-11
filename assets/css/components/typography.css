@@ -1,11 +1,11 @@
 @layer components {
   /* Typography */
   .section-title {
-    @apply text-[42px] leading-tight max-w-[800px] text-ink font-extrabold max-md:text-[30px];
+    @apply text-[clamp(28px,4vw,42px)] leading-[1.1] max-w-[800px] text-ink font-extrabold;
   }
   
   .section-title--sm {
-    @apply text-[36px] max-md:text-[24px];
+    @apply text-[clamp(24px,3.5vw,36px)];
   }
 
   .section-kicker {

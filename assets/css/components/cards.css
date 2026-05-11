@@ -1,11 +1,12 @@
 @layer components {
+
   /* Grids */
   .split-grid,
   .facility-layout,
   .contact-layout {
     @apply grid grid-cols-[0.95fr_1.05fr] gap-[84px] items-center max-lg:grid-cols-1 max-lg:gap-10;
   }
-  
+
 
   .unit-grid {
     @apply grid grid-cols-4 gap-3.5 mt-8 max-lg:grid-cols-2 max-md:grid-cols-2 max-md:gap-2.5;
@@ -45,7 +46,8 @@
 
   .unit-card:hover {
     @apply shadow-[0_16px_36px_rgba(14,48,56,0.3)];
-    border-color: rgba(21, 159, 145, 0.3); /* brand-2 color at 30% */
+    border-color: rgba(21, 159, 145, 0.3);
+    /* brand-2 color at 30% */
     transform: translateY(-4px);
   }
 
@@ -119,7 +121,30 @@
   }
 
   .console-row {
-    @apply grid grid-cols-[44px_1fr_auto] gap-4 items-center p-5 border border-line rounded-lg bg-white shadow-soft max-md:grid-cols-[auto_1fr] max-md:items-start max-md:p-4;
+    @apply grid grid-cols-[44px_1fr_auto] gap-4 items-center p-5 border border-line rounded-lg bg-white shadow-soft transition-all duration-300;
+  }
+
+  @media (max-width: 767px) {
+    .console-row {
+      @apply grid-cols-[36px_1fr] p-3 gap-3;
+    }
+    .console-icon {
+      @apply w-9 h-9;
+    }
+    .console-icon .icon {
+      @apply w-5 h-5;
+    }
+    .console-title {
+      @apply text-[14px];
+    }
+
+    .console-state {
+      @apply col-start-2 justify-self-start mt-1;
+    }
+
+    .console-text {
+      @apply text-[12px];
+    }
   }
 
   .console-summary {
@@ -140,6 +165,10 @@
     background-color: rgba(21, 159, 145, 0.10);
   }
 
+  .console-icon .icon {
+    @apply w-6 h-6;
+  }
+
   .console-title {
     @apply text-ink font-extrabold;
   }
@@ -149,7 +178,7 @@
   }
 
   .console-state {
-    @apply px-3 py-1.5 rounded-full text-brand-3 text-xs font-extrabold whitespace-nowrap max-md:col-start-2 max-md:w-max;
+    @apply px-3 py-1.5 rounded-full text-brand-3 text-[11px] font-extrabold whitespace-nowrap;
     background-color: rgba(21, 159, 145, 0.10);
   }
 
@@ -203,7 +232,7 @@
   .metric {
     @apply p-6.5 border-r border-b border-line transition-colors duration-300;
   }
-  
+
   .metric:nth-child(2),
   .metric:nth-child(4) {
     @apply border-r-0;
@@ -215,11 +244,19 @@
   }
 
   @media (min-width: 1024px) {
-    .metric:nth-child(2) { @apply border-r; }
-    .metric:nth-child(3) { @apply border-b-0; }
-    .metric:nth-child(4) { @apply border-b-0; }
+    .metric:nth-child(2) {
+      @apply border-r;
+    }
+
+    .metric:nth-child(3) {
+      @apply border-b-0;
+    }
+
+    .metric:nth-child(4) {
+      @apply border-b-0;
+    }
   }
-  
+
   .metric:last-child {
     @apply border-r-0 border-b-0;
   }
@@ -228,12 +265,15 @@
     .metric {
       @apply p-4 text-center;
     }
+
     .metric strong {
       @apply text-[26px];
     }
+
     .metric span {
       @apply text-[11px] mt-1.5;
     }
+
     .metric small {
       @apply text-[10px] mt-1 leading-tight line-clamp-2;
     }
@@ -288,10 +328,11 @@
   .testimonial-card__footer span {
     @apply text-muted text-[13px];
   }
-  
+
   .stars {
     @apply flex gap-1;
-    color: #f59e0b; /* amber-400 — authentic gold star color */
+    color: #f59e0b;
+    /* amber-400 — authentic gold star color */
   }
 
   .star-icon {
@@ -340,7 +381,7 @@
   .bento-cell:hover .bento-cell__glow {
     @apply scale-150;
   }
-  
+
   /* Feature List */
   .feature-list {
     @apply grid gap-4 m-0 p-0 list-none;
@@ -362,7 +403,7 @@
   .feature-list strong {
     @apply text-ink font-extrabold;
   }
-  
+
   /* Article Card */
   .article-grid {
     @apply grid grid-cols-3 gap-4.5 max-lg:grid-cols-2 max-md:flex max-md:overflow-x-auto max-md:pb-6 max-md:-mx-6 max-md:px-6;
@@ -411,12 +452,12 @@
   .article-card p {
     @apply mt-3 text-white/60 text-[14px];
   }
-  
+
   /* Certifications Badge Layout */
   .cert-layout {
     @apply grid grid-cols-[360px_1fr] gap-[60px] items-center max-lg:grid-cols-1 max-lg:gap-10;
   }
-  
+
   /* Article Card */
   .article-grid {
     @apply grid grid-cols-3 gap-4.5 max-lg:grid-cols-2 max-md:flex max-md:overflow-x-auto max-md:pb-6 max-md:-mx-6 max-md:px-6;
@@ -465,7 +506,7 @@
   .article-card p {
     @apply mt-3 text-white/60 text-[14px];
   }
-  
+
   /* Certifications Badge Layout */
   .cert-layout {
     @apply grid grid-cols-[360px_1fr] gap-[60px] items-center max-lg:grid-cols-1 max-lg:gap-10;
@@ -531,6 +572,11 @@
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }

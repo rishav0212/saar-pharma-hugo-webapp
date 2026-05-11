@@ -121,7 +121,7 @@
   }
 
   .btn--lg {
-    @apply min-h-[54px] px-8 py-4 text-[16px] gap-3;
+    @apply min-h-[54px] px-8 py-4 text-[16px] gap-3 max-md:min-h-[48px] max-md:px-6 max-md:py-3 max-md:text-sm;
   }
 
   .btn--whatsapp {
