@@ -1,0 +1,96 @@
+/* Contact Page Styles */
+
+.contact-page {
+  --contact-shadow: 0 20px 40px rgba(6, 17, 33, 0.08);
+}
+
+.contact-hero {
+  background: linear-gradient(135deg, var(--color-ink) 0%, var(--color-abyss) 100%);
+}
+
+/* Channel Cards */
+.channel-card {
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.channel-card:hover {
+  transform: translateY(-8px);
+  @apply border-brand/40 shadow-lift;
+}
+
+/* Office Cards */
+.office-card {
+  transition: all 0.4s ease;
+}
+.office-card:hover {
+  transform: translateY(-4px);
+  @apply shadow-lift;
+}
+.office-card iframe {
+  filter: grayscale(0.5) contrast(1.1);
+  transition: filter 0.5s ease;
+}
+.office-card:hover iframe {
+  filter: grayscale(0) contrast(1);
+}
+
+/* Profile Cards */
+.profile-card {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.profile-card:hover {
+  transform: translateY(-10px);
+}
+
+/* FAQ Accordion */
+.faq-accordion {
+  @apply grid grid-cols-1 lg:grid-cols-12 gap-16;
+}
+.faq-accordion__aside {
+  @apply lg:col-span-4;
+}
+.faq-accordion__list {
+  @apply lg:col-span-8 space-y-4;
+}
+.faq-accordion__item {
+  @apply border border-line rounded-xl overflow-hidden bg-white transition-all duration-300;
+}
+.faq-accordion__header {
+  @apply p-6 cursor-pointer font-bold text-ink-2 flex justify-between items-center;
+}
+.faq-accordion__header::after {
+  content: "+";
+  @apply text-brand text-2xl font-light transition-transform duration-300;
+}
+.faq-accordion__item.is-active .faq-accordion__header::after {
+  transform: rotate(45deg);
+}
+.faq-accordion__answer {
+  @apply max-h-0 overflow-hidden transition-all duration-300;
+}
+.faq-accordion__item.is-active .faq-accordion__answer {
+  @apply max-h-[500px] border-t border-line/50;
+}
+.faq-accordion__inner {
+  @apply p-6 text-muted leading-relaxed;
+}
+
+/* Commitments */
+.commitment-item {
+  @apply p-2;
+}
+
+.contact-page .form-group label {
+  @apply font-bold text-ink-2 mb-2;
+}
+
+.contact-page .form-control {
+  @apply bg-surface border-line-strong focus:bg-white;
+}
+
+@media (max-width: 1023px) {
+  .contact-page .container {
+    max-width: 100% !important;
+  }
+}
+
+

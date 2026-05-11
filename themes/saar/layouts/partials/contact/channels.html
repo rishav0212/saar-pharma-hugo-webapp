@@ -1,0 +1,30 @@
+<section class="contact-channels relative z-30 pt-0 -mt-12">
+  <div class="container">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {{ range .Params.channels }}
+      {{ $val := .value }}
+      {{ $href := .href }}
+      {{ if eq .type "phone" }}
+        {{ $val = $.Site.Params.phone }}
+        {{ $href = printf "tel:%s" ($.Site.Params.phone | urlize) }}
+      {{ else if eq .type "email" }}
+        {{ $val = $.Site.Params.email }}
+        {{ $href = printf "mailto:%s" $.Site.Params.email }}
+      {{ else if eq .type "whatsapp" }}
+        {{ $val = "Chat on WhatsApp" }}
+        {{ $href = printf "https://wa.me/%s" (replace $.Site.Params.phone " " "") }}
+      {{ end }}
+      <a href="{{ $href }}" class="channel-card group bg-white p-7 rounded-2xl shadow-soft border border-line hover:border-brand/30 transition-all duration-300" data-animate="fade-up">
+        <div class="flex items-center gap-4 mb-5">
+          <div class="w-12 h-12 rounded-xl bg-{{ .color | default "brand" }}/10 text-{{ .color | default "brand" }} flex items-center justify-center group-hover:bg-{{ .color | default "brand" }} group-hover:text-white transition-all duration-300">
+            <i data-lucide="{{ .icon }}" class="w-6 h-6"></i>
+          </div>
+          <span class="badge badge--{{ .color | default "teal" }} text-[10px]">{{ .badge }}</span>
+        </div>
+        <h3 class="text-[11px] font-bold text-muted uppercase tracking-widest mb-1.5">{{ .label }}</h3>
+        <p class="text-lg font-bold text-ink truncate">{{ $val }}</p>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>

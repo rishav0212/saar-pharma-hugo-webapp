@@ -1,0 +1,152 @@
+{{/* ═══════════════════════════════════════════════════════════════════
+  CONTACT PAGE LAYOUT
+  URL: /contact/
+  Renders: hero → channels → form → offices → profiles →
+           commitments → faq → cta
+═══════════════════════════════════════════════════════════════════ */}}
+{{ define "main" }}
+
+{{- /* Inject page-specific JSON-LD */ -}}
+{{ partial "contact/seo-schema.html" . }}
+
+<div id="contact-page" itemscope itemtype="https://schema.org/LocalBusiness">
+
+  {{- /* ── 1. HERO ── */ -}}
+  {{ partial "contact/hero.html" . }}
+
+  {{- /* ── 2. CHANNEL CARDS (elevated over hero bottom edge) ── */ -}}
+  {{ partial "contact/channels.html" . }}
+
+  {{- /* ── 3. ENQUIRY FORM (dark section — reuses shared/contact.html) ── */ -}}
+  <section class="section section--deep-soft section-rail relative overflow-hidden contact-page-form-section" id="enquiry">
+    <!-- Animated Background Orbs (reused class from layout.css) -->
+    <div class="contact-orbs" aria-hidden="true">
+      <div class="contact-orb contact-orb--1"></div>
+      <div class="contact-orb contact-orb--2"></div>
+    </div>
+
+    <div class="container contact-layout relative z-10">
+
+      {{- /* Left: Intro & contact details */ -}}
+      <div data-animate="slide-right">
+        <span class="eyebrow">Manufacturing Enquiry</span>
+        <h2 class="section-title section-title--sm">Tell Us What You Want to Manufacture</h2>
+        <p class="section-kicker mt-5">
+          Share approved composition details, product category, dosage form, packing, quantity, and documentation needs. Our team responds with practical next steps within 24 hours.
+        </p>
+
+        {{- /* Contact detail rows */ -}}
+        <div class="contact-list mt-8" aria-label="Direct contact details">
+          {{ range .Params.channels }}
+          {{ if not (eq .icon "clock") }}
+          {{ $val := .value }}
+          {{ $href := .href }}
+          {{ if eq .type "phone" }}
+            {{ $val = $.Site.Params.phone }}
+            {{ $href = printf "tel:%s" ($.Site.Params.phone | urlize) }}
+          {{ else if eq .type "email" }}
+            {{ $val = $.Site.Params.email }}
+            {{ $href = printf "mailto:%s" $.Site.Params.email }}
+          {{ else if eq .type "whatsapp" }}
+            {{ $val = "Chat on WhatsApp" }}
+            {{ $href = printf "https://wa.me/%s" (replace $.Site.Params.phone " " "") }}
+          {{ end }}
+          <div class="contact-item">
+            <i data-lucide="{{ .icon }}" class="icon" aria-hidden="true"></i>
+            <div>
+              <strong>{{ .label }}</strong>
+              <a href="{{ $href }}"
+                 {{ if hasPrefix $href "https" }}target="_blank" rel="noopener noreferrer"{{ end }}
+                 data-copy="{{ $val }}">{{ $val }}</a>
+            </div>
+          </div>
+          {{ end }}
+          {{ end }}
+          <div class="contact-item">
+            <i data-lucide="map-pin" class="icon" aria-hidden="true"></i>
+            <div>
+              <strong>Corporate Office</strong>
+              <span itemprop="address">{{ .Site.Params.address }}</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i data-lucide="factory" class="icon" aria-hidden="true"></i>
+            <div>
+              <strong>Manufacturing Plant</strong>
+              <span>{{ .Site.Params.plant }}</span>
+            </div>
+          </div>
+        </div>
+
+        {{- /* Quick-info chips */ -}}
+        <div class="contact-chips mt-6.5" aria-label="Helpful enquiry checklist">
+          <span class="contact-chip">Product name or composition</span>
+          <span class="contact-chip">Dosage form &amp; pack size</span>
+          <span class="contact-chip">Expected volume</span>
+          <span class="contact-chip">Target market &amp; timeline</span>
+        </div>
+      </div>
+
+      {{- /* Right: Form */ -}}
+      {{ partial "shared/enquiry-form.html" (dict "id" "contact-page-form" "animate" true "Site" .Site) }}
+
+    </div>
+  </section>
+
+  {{- /* ── 4. OFFICES & MAP ── */ -}}
+  {{ partial "contact/offices.html" . }}
+
+  {{- /* ── 5. BUSINESS PROFILES / SOCIAL ── */ -}}
+  {{ partial "contact/profiles.html" . }}
+
+  {{- /* ── 6. RESPONSE COMMITMENTS ── */ -}}
+  {{ partial "contact/commitments.html" . }}
+
+  {{- /* ── 7. FAQ ── */ -}}
+  {{ if .Params.faqs }}
+  <section class="section section--paper section-rail" id="contact-faq" aria-labelledby="contact-faq-title">
+    <div class="container">
+      <div class="faq-accordion">
+
+        <div class="faq-accordion__aside" data-animate="slide-right">
+          <span class="eyebrow">Quick Answers</span>
+          <h2 id="contact-faq-title" class="section-title section-title--sm">
+            Common Questions Before Reaching Out
+          </h2>
+          <p class="section-kicker">
+            Everything you need to know about working with Saar Biotech as a manufacturing partner.
+          </p>
+          <a class="btn btn--outline mt-8" href="#enquiry">
+            Send Your Enquiry
+            <i data-lucide="arrow-right" class="icon" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <div class="faq-accordion__list" data-animate-stagger>
+          {{ range $index, $item := .Params.faqs }}
+          <div class="faq-accordion__item {{ if eq $index 0 }}is-active{{ end }}">
+            <div class="faq-accordion__header">
+              <span>{{ $item.q }}</span>
+            </div>
+            <div class="faq-accordion__answer">
+              <div class="faq-accordion__inner">
+                <div class="faq-accordion__content">
+                  <p>{{ $item.a }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{ end }}
+        </div>
+
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+  {{- /* ── 8. FINAL CTA ── */ -}}
+  {{ partial "shared/cta.html" . }}
+
+</div>
+
+{{ end }}

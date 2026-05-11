@@ -15,7 +15,7 @@
       <a href="/#categories">Categories</a>
       <a href="/products/" class="{{ if or (eq .Section "products") (eq .Section "product") }}active{{ end }}">Products</a>
       <a href="/manufacturing-unit/" class="{{ if eq .RelPermalink "/manufacturing-unit/" }}active{{ end }}">Manufacturing</a>
-      <a href="/#process">Process</a>
+      <a href="/contact/" class="{{ if eq .RelPermalink "/contact/" }}active{{ end }}">Contact Us</a>
       <a href="/articles/" class="{{ if eq .RelPermalink "/articles/" }}active{{ end }}">Articles</a>
     </nav>
 
@@ -44,7 +44,7 @@
     <a href="/about/" class="{{ if eq .RelPermalink "/about/" }}active{{ end }}">About</a>
     <a href="/manufacturing-unit/" class="{{ if eq .RelPermalink "/manufacturing-unit/" }}active{{ end }}">Manufacturing</a>
     <a href="/products/" class="{{ if or (eq .Section "products") (eq .Section "product") }}active{{ end }}">Product Range</a>
-    <a href="/#process">Process</a>
+    <a href="/contact/" class="{{ if eq .RelPermalink "/contact/" }}active{{ end }}">Contact Us</a>
     <a href="/articles/" class="{{ if eq .RelPermalink "/articles/" }}active{{ end }}">Articles</a>
     <a href="#" data-enquire-trigger>Enquire Now</a>
   </nav>

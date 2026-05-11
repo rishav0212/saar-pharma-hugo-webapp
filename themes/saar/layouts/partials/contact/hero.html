@@ -1,0 +1,19 @@
+<section class="contact-hero relative overflow-hidden pt-36 pb-24 max-md:pt-28 max-md:pb-16 bg-ink text-white">
+  <!-- Subtle patterns -->
+  <div class="absolute inset-0 opacity-10 pointer-events-none">
+    <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-brand rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-2 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2"></div>
+  </div>
+
+  <div class="container relative z-10">
+    <div class="max-w-4xl" data-animate="fade-up">
+      <span class="badge badge--teal mb-6 inline-block">{{ .Params.hero_tagline | default "Get in Touch" }}</span>
+      <h1 class="text-5xl md:text-7xl font-display font-extrabold mb-8 leading-[1.05] tracking-tight">
+        {{ .Title | default "Partner with India's Premier WHO-GMP Manufacturer" }}
+      </h1>
+      <p class="text-xl text-white/70 leading-relaxed max-w-2xl">
+        {{ .Params.hero_desc | default "From initial enquiry to commercial supply — our technical team is ready to respond with practical manufacturing solutions within 24 hours." }}
+      </p>
+    </div>
+  </div>
+</section>

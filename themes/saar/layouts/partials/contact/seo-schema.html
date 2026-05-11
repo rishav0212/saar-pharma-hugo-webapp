@@ -1,0 +1,62 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Saar Biotech Pvt. Ltd.",
+  "image": "{{ .Site.BaseURL }}images/logo-dark.png",
+  "@id": "{{ .Permalink }}",
+  "url": "{{ .Permalink }}",
+  "telephone": "{{ .Site.Params.phone }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "SCO-165, Sector-38C",
+    "addressLocality": "Chandigarh",
+    "postalCode": "160038",
+    "addressCountry": "IN"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 30.7333,
+    "longitude": 76.7794
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "opens": "09:00",
+    "closes": "18:00"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/saarbiotech",
+    "https://facebook.com/saarbiotech"
+  ]
+}
+</script>
+
+{{ if .Params.faqs }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{ range $index, $item := .Params.faqs }}
+    {{ if $index }},{{ end }}
+    {
+      "@type": "Question",
+      "name": {{ $item.q | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ $item.a | jsonify }}
+      }
+    }
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
