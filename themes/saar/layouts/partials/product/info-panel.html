@@ -256,10 +256,9 @@ Ultimate B2B Pharma Info Panel — High-Density Data Sheet
       </button>
 
       <div class="grid grid-cols-2 gap-3">
-        {{ $waMsg := printf "Hi Saar Biotech, I am interested in the manufacturing of %s. Please provide more details."
-        (.Params.product_name | default .Title) }}
-        <a href="https://wa.me/{{ .Site.Params.phone | replaceRE `[^0-9]` `` }}?text={{ $waMsg | urlquery }}"
-          target="_blank" rel="noopener" class="btn btn--whatsapp !rounded-xl !min-h-[48px]">
+        {{ $waMsg := partial "helpers/enquiry-text.html" . }}
+        {{ $whatsappNumber := .Site.Params.phone | replaceRE `[^0-9]` `` }}
+        <a class="btn btn--whatsapp !rounded-xl !min-h-[48px]" href="https://wa.me/{{ $whatsappNumber }}?text={{ $waMsg | urlquery }}" target="_blank" rel="noopener">
           <i data-lucide="message-circle" class="icon--sm"></i>
           WhatsApp
         </a>

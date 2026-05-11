@@ -1,0 +1,43 @@
+{{- $message := partial "helpers/enquiry-text.html" . -}}
+{{- $pageTitle := .Title -}}
+
+<div class="contact-fab" id="contact-fab">
+  <div class="contact-fab__menu" id="contact-fab-menu">
+    <a href="tel:{{ .Site.Params.phone | default "+919357690454" | urlize }}" class="contact-fab__item group" title="Call Us" data-animate-in>
+      <span class="contact-fab__label">Call Us</span>
+      <div class="contact-fab__icon contact-fab__icon--call">
+        <i data-lucide="phone" class="icon"></i>
+      </div>
+    </a>
+    
+    <a href="https://wa.me/{{ replace .Site.Params.phone " " "" | default "919357690454" }}?text={{ $message | urlquery }}" target="_blank" rel="noopener noreferrer" class="contact-fab__item group" title="WhatsApp" data-animate-in>
+      <span class="contact-fab__label">WhatsApp</span>
+      <div class="contact-fab__icon contact-fab__icon--whatsapp">
+        <i data-lucide="message-square" class="icon"></i>
+      </div>
+    </a>
+    
+    <a href="mailto:{{ .Site.Params.email | default "quotation@saarbiotech.com" }}?subject={{ (printf "Enquiry regarding %s" $pageTitle) | urlquery }}&body={{ $message | urlquery }}" class="contact-fab__item group" title="Email Us" data-animate-in>
+      <span class="contact-fab__label">Email</span>
+      <div class="contact-fab__icon contact-fab__icon--email">
+        <i data-lucide="mail" class="icon"></i>
+      </div>
+    </a>
+    
+    <button class="contact-fab__item group" title="Send Enquiry" data-enquire-trigger data-product-name="{{ $pageTitle }}" data-animate-in>
+      <span class="contact-fab__label">Enquiry</span>
+      <div class="contact-fab__icon contact-fab__icon--form">
+        <i data-lucide="file-text" class="icon"></i>
+      </div>
+    </button>
+  </div>
+  
+  <button class="contact-fab__trigger" id="contact-fab-trigger" aria-label="Contact Options">
+    <div class="contact-fab__status-dot"></div>
+    <div class="contact-fab__hint">Connect with Experts</div>
+    <div class="contact-fab__trigger-icon">
+      <i data-lucide="message-circle" class="icon icon-open"></i>
+      <i data-lucide="x" class="icon icon-close"></i>
+    </div>
+  </button>
+</div>

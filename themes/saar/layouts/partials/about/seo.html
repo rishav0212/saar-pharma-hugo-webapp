@@ -8,18 +8,7 @@
     "alternateName": "Saar Biotech",
     "url": "https://saarbiotech.in/about/",
     "logo": "https://saarbiotech.in/logo.png",
-    {{ $years := partial "shared/get-years.html" . }}
-    "foundingDate": "{{ .Site.Params.founded }}",
-    "founders": [
-      {
-        "@type": "Person",
-        "name": "Mr. Radhe Sham Goyal"
-      },
-      {
-        "@type": "Person",
-        "name": "Mr. Anil Kumar"
-      }
-    ],
+    {{ $years := partial "helpers/get-years.html" . }}
     "description": "WHO-GMP & ISO certified pharmaceutical manufacturer with {{ $years }}+ years of expertise in third-party contract manufacturing.",
     "address": {
       "@type": "PostalAddress",

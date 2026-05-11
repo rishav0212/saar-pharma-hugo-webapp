@@ -1,0 +1,16 @@
+{{- /* 
+  Centralized Enquiry Message Helper
+  Usage: {{ partial "helpers/enquiry-text.html" . }}
+*/ -}}
+
+{{- $pageTitle := .Title -}}
+{{- $section := .Section -}}
+{{- $message := "Hello SAAR Biotech, I am interested in pharmaceutical manufacturing services. Please share more details." -}}
+
+{{- if eq $section "products" -}}
+  {{- $message = printf "Hello SAAR Biotech, I am interested in Third-Party Manufacturing for %s. Please share the quotation and manufacturing timeline." $pageTitle -}}
+{{- else if eq $section "categories" -}}
+  {{- $message = printf "Hello SAAR Biotech, I am looking for a contract manufacturing partner for the %s category. Please share your product list." $pageTitle -}}
+{{- end -}}
+
+{{- $message -}}

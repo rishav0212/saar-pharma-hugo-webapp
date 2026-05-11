@@ -412,16 +412,18 @@
       @apply gap-1 pt-3;
     }
 
-    /* ─── Related Products Section: h2 too large on mobile ─── */
-    /* The related section uses inline Tailwind text-3xl (30px) — too large on phone */
+    /* ─── Related Products Section: matching home page featured style ─── */
     .ps-related-hub .ps-related-row h2 {
-      font-size: 22px !important;
-      line-height: 1.2 !important;
+      @apply !text-[26px] !font-black !leading-tight !mb-2;
+    }
+
+    .ps-related-hub .ps-related-row p {
+      @apply !text-[14px] !leading-relaxed !text-muted;
     }
 
     /* Reduce related section padding too — it uses generic .section class */
     .ps-related-hub .ps-related-row {
-      @apply !py-10;
+      @apply !py-12 !px-0;
     }
 
     /* ─── Technical overrides ─── */

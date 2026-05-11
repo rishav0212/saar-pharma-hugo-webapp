@@ -7,7 +7,7 @@
 
   {{ $title := .Params.meta_title | default .Title }}
   {{ $description := .Params.meta_description | default .Description | default .Site.Params.description }}
-  {{ $years := partial "shared/get-years.html" . }}
+  {{ $years := partial "helpers/get-years.html" . }}
   {{ $description = replace $description "{years}" (printf "%d+" $years) }}
   {{ $description = replace $description "{clients}" .Site.Params.clients }}
   {{ $description = replace $description "{products}" .Site.Params.products }}
@@ -63,15 +63,15 @@
   {{ $styles := $cssFiles | resources.Concat "css/app.css" | postCSS (dict "config" "./postcss.config.js") | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
 
-  {{ partial "seo/json-ld.html" . }}
+  {{ partial "shared/json-ld.html" . }}
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
-  {{ partial "header.html" . }}
+  {{ partial "shared/header.html" . }}
   <main id="main-content" tabindex="-1">
     {{ block "main" . }}{{ end }}
   </main>
-  {{ partial "footer.html" . }}
+  {{ partial "shared/footer.html" . }}
   
   <!-- Global Search Spotlight -->
   <div id="search-spotlight" class="search-spotlight" aria-hidden="true">
@@ -93,7 +93,13 @@
   </div>
 
   <!-- Global Enquiry Modal -->
-  {{ partial "ui/enquiry-modal.html" . }}
+  {{ partial "shared/enquiry-modal.html" . }}
+
+  <!-- Floating Contact Action -->
+  {{ partial "shared/contact-fab.html" . }}
+
+  <!-- Back to Top -->
+  {{ partial "shared/back-to-top.html" . }}
 
   <!-- Deferred enhancement libraries preserve dependency order without blocking HTML parsing. -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0" defer></script>

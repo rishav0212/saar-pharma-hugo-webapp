@@ -17,7 +17,7 @@
         </div>
         <h3>{{ $item.title }}</h3>
         {{ $text := $item.text }}
-        {{ $years := partial "shared/get-years.html" .context }}
+        {{ $years := partial "helpers/get-years.html" .context }}
         {{ $text = replace $text "{founded}" site.Params.founded }}
         {{ $text = replace $text "{years}" (printf "%d+" $years) }}
         {{ $text = replace $text "{products}" site.Params.products }}

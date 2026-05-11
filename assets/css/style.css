@@ -227,6 +227,8 @@
 @import "./assets/css/components/search.css";
 @import "./assets/css/components/layout.css";
 @import "./assets/css/components/forms.css";
+@import "./assets/css/components/fab.css";
+@import "./assets/css/components/back-to-top.css";
 
 /* Page Sections */
 @import "./assets/css/home/hero.css";

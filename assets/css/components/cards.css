@@ -197,11 +197,27 @@
   }
 
   .metric-grid {
-    @apply grid grid-cols-4 overflow-hidden border border-line rounded-lg bg-white shadow-soft max-lg:grid-cols-2 max-md:grid-cols-1;
+    @apply grid grid-cols-4 overflow-hidden border border-line rounded-lg bg-white shadow-soft max-lg:grid-cols-2 max-md:grid-cols-2;
   }
 
   .metric {
-    @apply p-6.5 border-r border-line max-lg:even:border-r-0 max-lg:border-b max-md:border-r-0 max-md:border-b;
+    @apply p-6.5 border-r border-b border-line transition-colors duration-300;
+  }
+  
+  .metric:nth-child(2),
+  .metric:nth-child(4) {
+    @apply border-r-0;
+  }
+
+  .metric:nth-child(3),
+  .metric:nth-child(4) {
+    @apply border-b-0;
+  }
+
+  @media (min-width: 1024px) {
+    .metric:nth-child(2) { @apply border-r; }
+    .metric:nth-child(3) { @apply border-b-0; }
+    .metric:nth-child(4) { @apply border-b-0; }
   }
   
   .metric:last-child {
@@ -210,7 +226,16 @@
 
   @media (max-width: 767px) {
     .metric {
-      @apply p-4.5;
+      @apply p-4 text-center;
+    }
+    .metric strong {
+      @apply text-[26px];
+    }
+    .metric span {
+      @apply text-[11px] mt-1.5;
+    }
+    .metric small {
+      @apply text-[10px] mt-1 leading-tight line-clamp-2;
     }
   }
 

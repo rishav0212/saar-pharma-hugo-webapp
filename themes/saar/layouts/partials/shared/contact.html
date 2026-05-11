@@ -57,6 +57,6 @@
     {{ if reflect.IsMap . }}
       {{ $formId = .id | default "contact-form" }}
     {{ end }}
-    {{ partial "ui/enquiry-form.html" (dict "id" $formId "animate" (ne $formId "modal-form") "Site" $.Site) }}
+    {{ partial "shared/enquiry-form.html" (dict "id" $formId "animate" (ne $formId "modal-form") "Site" $.Site) }}
   </div>
 </section>

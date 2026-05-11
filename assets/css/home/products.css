@@ -16,7 +16,9 @@
   }
 
   .product-scroll-card {
-    @apply flex-[0_0_380px] flex flex-col min-h-[400px] transition-all duration-300 max-lg:flex-[0_0_85vw] max-lg:min-h-[340px];
+    @apply flex-[0_0_380px] flex flex-col min-h-[400px] transition-all duration-300;
+    @apply max-lg:flex-[0_0_300px] max-lg:min-h-0;
+    @apply max-md:flex-[0_0_calc(100vw-32px)] max-md:max-w-[440px];
     scroll-snap-align: start;
   }
 
@@ -93,7 +95,7 @@
   }
 
   .product-autoplay-track {
-    @apply flex gap-6;
+    @apply flex items-stretch gap-6;
     width: max-content;
     /* Animation removed to be handled by JS for seamless button integration */
   }

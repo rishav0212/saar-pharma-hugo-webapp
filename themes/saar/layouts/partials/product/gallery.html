@@ -47,7 +47,7 @@
     <div class="ps-filmstrip-wrap">
       <div class="ps-filmstrip" id="ps-filmstrip" role="list" aria-label="Product images">
         {{ range $i, $img := .Params.images }}
-        {{ $thumbSrc := partial "shared/image-url.html" (dict "src" (printf "images/products/%s" $img) "width" 900) }}
+        {{ $thumbSrc := partial "helpers/image-url.html" (dict "src" (printf "images/products/%s" $img) "width" 900) }}
         <button
           class="ps-filmstrip-thumb {{ if eq $i 0 }}active{{ end }}"
           data-src="{{ $thumbSrc }}"

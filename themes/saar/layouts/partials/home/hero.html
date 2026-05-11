@@ -30,7 +30,8 @@
           <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
           Call {{ $phoneDisplay }}
         </a>
-        <a class="hero-contact__link hero-contact__link--whatsapp" href="https://wa.me/{{ $whatsappNumber }}" target="_blank" rel="noopener">
+        {{ $waMsg := partial "helpers/enquiry-text.html" . }}
+        <a class="hero-contact__link hero-contact__link--whatsapp" href="https://wa.me/{{ $whatsappNumber }}?text={{ $waMsg | urlquery }}" target="_blank" rel="noopener">
           <i data-lucide="message-circle" class="icon" aria-hidden="true"></i>
           WhatsApp Enquiry
         </a>

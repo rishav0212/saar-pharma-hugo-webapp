@@ -12,6 +12,8 @@ import { initGallery } from './modules/gallery';
 import { initDossierShuffle } from './modules/dossier';
 import { initSliders } from './modules/slider';
 import { initCategorySlider } from './modules/categorySlider';
+import { initFAB } from './modules/fab';
+import { initBackToTop } from './modules/back-to-top';
 
 
 function safeInit(name, fn) {
@@ -65,6 +67,8 @@ const initAll = () => {
   safeInit("ScrollFades", initScrollFades);
   safeInit("Sliders", initSliders);
   safeInit("CategorySlider", initCategorySlider);
+  safeInit("ContactFAB", initFAB);
+  safeInit("BackToTop", initBackToTop);
 };
 
 if (document.readyState === "loading") {

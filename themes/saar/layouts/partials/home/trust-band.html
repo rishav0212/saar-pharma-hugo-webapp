@@ -16,7 +16,7 @@
   </div>
 </div>
 
-{{ $years := partial "shared/get-years.html" . }}
+{{ $years := partial "helpers/get-years.html" . }}
 {{ $metrics := slice 
   (dict "count" .Site.Params.client_count "suffix" "+" "value" .Site.Params.clients "label" "Pharma partners" "context" "Served across Indian pharma markets")
   (dict "count" .Site.Params.product_count "suffix" "+" "value" .Site.Params.products "label" "DCGI-approved formulations" "context" "Across 10 dosage form categories")
