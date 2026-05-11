@@ -3,11 +3,12 @@
 
 {{ partial "about/hero.html" . }}
 
+{{ $years := partial "helpers/get-years.html" . }}
 {{ $metrics := slice 
-  (dict "count" "20" "suffix" "+" "value" "20+" "label" "Years of Excellence")
-  (dict "count" .Site.Params.client_count "suffix" "+" "value" .Site.Params.clients "label" "Global Partners")
-  (dict "count" .Site.Params.product_count "suffix" "+" "value" .Site.Params.products "label" "Approved Formulations")
-  (dict "count" "4" "suffix" "" "value" "4" "label" "Specialized Units")
+  (dict "count" $years "suffix" "+" "value" (printf "%d+" $years) "label" "Years of Manufacturing Excellence" "context" "Consistent supply since 2005")
+  (dict "count" .Site.Params.client_count "suffix" "+" "value" .Site.Params.clients "label" "Trusted Pharma Partners" "context" "Serving domestic & export markets")
+  (dict "count" .Site.Params.product_count "suffix" "+" "value" .Site.Params.products "label" "Approved Formulations" "context" "Spanning 10+ therapeutic categories")
+  (dict "count" .Site.Params.units "suffix" "" "value" .Site.Params.units "label" "Specialized Production Units" "context" "WHO-GMP & ISO certified facilities")
 }}
 {{ partial "shared/metrics.html" (dict "items" $metrics "class" "section--paper") }}
 
