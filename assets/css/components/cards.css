@@ -120,6 +120,33 @@
     @apply grid gap-3.5;
   }
 
+  @media (max-width: 767px) {
+    .quality-console {
+      @apply flex overflow-x-auto pb-8 -mx-6 px-6 gap-4;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .quality-console::-webkit-scrollbar {
+      display: none;
+    }
+    .console-summary {
+      @apply hidden; /* Hide summary header in horizontal mode to save space */
+    }
+    .console-row {
+      @apply flex-[0_0_280px] flex-col items-start p-6 text-left !grid-cols-1 !gap-4;
+      scroll-snap-align: center;
+    }
+    .console-state {
+      @apply order-first mb-2 col-auto justify-self-start !mt-0;
+    }
+    .console-icon {
+      @apply order-first mb-2;
+    }
+    .console-note {
+      @apply hidden;
+    }
+  }
+
   .console-row {
     @apply grid grid-cols-[44px_1fr_auto] gap-4 items-center p-5 border border-line rounded-lg bg-white shadow-soft transition-all duration-300;
   }
