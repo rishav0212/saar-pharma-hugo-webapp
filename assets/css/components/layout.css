@@ -1,8 +1,9 @@
 html,
 body {
-  @apply overflow-x-hidden w-full;
+  @apply w-full;
   position: relative;
-  max-width: 100vw;
+  max-width: 100vw !important;
+  box-sizing: border-box;
 }
 
 @layer components {
