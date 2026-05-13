@@ -5,7 +5,7 @@
 
   /* ─── Elite Scientific Hero ─── */
   .section--products-hero {
-    @apply relative pt-[140px] pb-[100px] max-md:pt-[100px] max-md:pb-[60px] text-white bg-abyss overflow-hidden;
+    @apply relative pt-[140px] pb-[100px] max-md:pt-[100px] max-md:pb-[60px] text-white bg-abyss;
   }
 
   .products-hero__bg {

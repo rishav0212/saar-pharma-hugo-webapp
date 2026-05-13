@@ -44,19 +44,6 @@
   /* ─── Results Area (Scrollable Grid) ─── */
   .search-spotlight__results {
     @apply max-h-[65vh] overflow-y-auto p-6 grid grid-cols-2 gap-4 max-md:grid-cols-1;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-brand) rgba(21, 159, 145, 0.05);
-  }
-
-  .search-spotlight__results::-webkit-scrollbar {
-    width: 6px;
-  }
-  .search-spotlight__results::-webkit-scrollbar-track {
-    background: rgba(21, 159, 145, 0.03);
-  }
-  .search-spotlight__results::-webkit-scrollbar-thumb {
-    background: var(--color-brand);
-    border-radius: 10px;
   }
 
   /* ─── Result Items (Information Rich) ─── */

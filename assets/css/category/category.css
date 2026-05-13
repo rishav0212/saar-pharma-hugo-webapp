@@ -15,7 +15,7 @@
      ─────────────────────────────────────────────── */
 
   .section--cat-hero {
-    @apply relative pt-[100px] pb-[80px] max-md:pt-[80px] max-md:pb-[50px] overflow-hidden;
+    @apply relative pt-[100px] pb-[80px] max-md:pt-[80px] max-md:pb-[50px];
     background: linear-gradient(135deg, var(--color-ink-deep) 0%, #0c2a33 100%);
   }
 

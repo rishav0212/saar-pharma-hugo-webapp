@@ -73,7 +73,7 @@
   }
   
   .section {
-    @apply relative overflow-hidden py-[84px] max-md:py-[52px];
+    @apply relative py-[84px] max-md:py-[52px];
     scroll-margin-top: 80px;
   }
 
@@ -181,6 +181,14 @@
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Universal blowout protection for grid/flex children — safe for mobile */
+.cat-trust-grid > *, .cat-related__grid > *, .cat-faq__grid > *, .faq-grid > *, .contact-profiles__grid > *,
+.about-facility-grid > *, .cert-layout > *, .tab-block > *, .planner-shell > *, .footer-grid > *,
+.bento-grid > *, .metric-grid > *, .unit-grid > *, .products-grid > *, .article-grid > *,
+.ps-supply-grid > *, .ps-authority-grid > *, .ps-cta-secondary-row > * {
+  min-width: 0;
+}
+
 /* Default: Fade Up */
 [data-animate], [data-animate="fade-up"], [data-animate-type="fade-up"] { transform: translateY(30px); }
 
@@ -196,6 +204,13 @@
 }
 
 /* Staggering for Grids */
+  /* Universal blowout protection for grid/flex children — safe for mobile */
+  .cat-trust-grid > *, .cat-related__grid > *, .cat-faq__grid > *, .faq-grid > *, .contact-profiles__grid > *,
+  .about-facility-grid > *, .cert-layout > *, .tab-block > *, .planner-shell > *, .footer-grid > *,
+  .bento-grid > *, .metric-grid > *, .unit-grid > *, .products-grid > *, .article-grid > *,
+  .ps-supply-grid > *, .ps-authority-grid > *, .ps-cta-secondary-row > * {
+    min-width: 0;
+  }
 .bento-grid > *, .unit-grid > *, .timeline-step, .metric, .article-card, .faq-item, .product-scroll-card, .footer-col {
   opacity: 0;
   transform: translateY(20px);

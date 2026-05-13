@@ -123,6 +123,10 @@ export function initHeroCanvas() {
   const canvasEl = document.getElementById("hero-canvas");
   if (!canvasEl || reduceMotion || !window.VANTA || !window.VANTA.NET) return;
 
+  const rootStyle = getComputedStyle(document.documentElement);
+  const brandColor = rootStyle.getPropertyValue('--color-brand').trim() || '#159f91';
+  const bgColor = rootStyle.getPropertyValue('--color-abyss').trim() || '#060f14';
+
   window.VANTA.NET({
     el: "#hero-canvas",
     mouseControls: true,
@@ -131,11 +135,12 @@ export function initHeroCanvas() {
     minWidth: 200.00,
     scale: 1.00,
     scaleMobile: 1.00,
-    color: 0x247c74,
-    backgroundColor: 0x060f14,
-    points: 8.00,
-    maxDistance: 20.00,
-    spacing: 18.00
+    color: brandColor,
+    backgroundColor: bgColor,
+    points: 10.00,
+    maxDistance: 18.00,
+    spacing: 17.00,
+    showDots: true
   });
 }
 
