@@ -78,18 +78,19 @@
   }
 
   .hero-eyebrow {
-    @apply flex flex-wrap items-center gap-2.5 mb-6 px-3.5 py-2.5 border border-brand-2/30 rounded-lg bg-white/10 text-white/80 text-xs font-extrabold tracking-normal uppercase backdrop-blur-md;
+    @apply inline-flex items-center gap-2.5 mb-6 px-3.5 py-2.5 border border-brand-2/30 rounded-lg bg-white/10 text-white/80 text-xs font-extrabold tracking-normal uppercase backdrop-blur-md;
     max-width: 100% !important;
+    width: fit-content;
     box-sizing: border-box !important;
   }
 
   @media (max-width: 767px) {
     .hero-eyebrow {
-      @apply mb-4 px-3 py-2 text-[10px] leading-tight;
+      @apply mb-4 px-3 py-2 text-[10px] leading-tight mx-auto;
       text-transform: none !important;
       letter-spacing: normal !important;
       justify-content: center;
-      gap: 1.5;
+      display: inline-flex;
     }
   }
 
@@ -130,6 +131,13 @@
   .hero-contact {
     @apply flex flex-wrap gap-4 mt-8 w-full max-w-full;
     justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .hero-actions .btn,
+  .hero-contact__link {
+    @apply flex-grow sm:flex-grow-0;
+    min-width: 0;
   }
 
   @media (max-width: 1140px) {
@@ -137,10 +145,6 @@
     .hero-proof,
     .hero-contact {
       @apply justify-center items-center gap-3 mt-6;
-    }
-    
-    .hero-proof {
-      @apply gap-2;
     }
 
     .hero-actions .btn {
@@ -151,6 +155,18 @@
       padding-left: 0.85rem;
       padding-right: 0.85rem;
       font-size: 13px !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-actions,
+    .hero-contact {
+      @apply flex-col;
+    }
+    
+    .hero-actions .btn,
+    .hero-contact__link {
+      @apply w-full;
     }
   }
 
@@ -266,6 +282,9 @@
 
   .hero-photo-caption {
     @apply absolute left-5 right-5 bottom-5 z-10 p-4 border border-white/20 rounded-lg bg-abyss/70 backdrop-blur-md max-sm:left-4 max-sm:right-4 max-sm:bottom-4;
+    @media (max-width: 767px) {
+      display: none !important;
+    }
   }
 
   .hero-photo-caption span {
