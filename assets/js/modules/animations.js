@@ -130,7 +130,7 @@ export function initHeroCanvas() {
   window.VANTA.NET({
     el: "#hero-canvas",
     mouseControls: true,
-    touchControls: true,
+    touchControls: false,
     minHeight: 200.00,
     minWidth: 200.00,
     scale: 1.00,
