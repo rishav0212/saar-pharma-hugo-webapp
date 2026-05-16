@@ -109,7 +109,7 @@ profiles:
     handle: "Saar Biotech, Baddi"
     href: "https://www.indiamart.com/saar-biotech/"
     icon: "store"
-    image: "/images/indiamart-logo.png"
+    image: "/images/indiamart-no-text.min.svg"
     desc: "Browse our complete product catalog and send direct B2B enquiries."
     color: "#9b2165"
   - platform: "Google Business"

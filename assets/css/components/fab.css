@@ -61,12 +61,12 @@
     @apply hidden;
   }
 
-  .contact-fab__menu {
-    @apply flex flex-col items-start gap-4 transition-all duration-300 opacity-0 pointer-events-none translate-y-8 pb-5;
-  }
-
   .contact-fab--active .contact-fab__menu {
     @apply opacity-100 pointer-events-auto translate-y-0;
+  }
+
+  .contact-fab__menu {
+    @apply absolute bottom-full left-0 flex flex-col items-start gap-4 transition-all duration-300 opacity-0 pointer-events-none translate-y-8 mb-5;
   }
 
   .contact-fab__item {
@@ -122,7 +122,8 @@
   }
 
   .contact-fab:hover .contact-fab__hint,
-  .contact-fab--active .contact-fab__hint {
+  .contact-fab--active .contact-fab__hint,
+  .contact-fab--show-hint .contact-fab__hint {
     @apply opacity-100 translate-x-0;
   }
 

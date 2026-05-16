@@ -9,7 +9,6 @@ export function initFAB() {
   
   if (!fab || !trigger) return;
 
-  let closeTimeout;
 
   let isFooterVisible = false;
   const footer = document.querySelector('.site-footer');
@@ -61,19 +60,30 @@ export function initFAB() {
     }
   });
 
-  // Handle Hover for Desktop
-  // Only open when hovering the trigger button specifically
-  trigger.addEventListener('mouseenter', () => {
-    if (window.innerWidth > 1024 && fab.classList.contains('is-visible')) {
-      clearTimeout(closeTimeout);
-      fab.classList.add('contact-fab--active');
-    }
-  });
+  // Handle Proximity Hover for Hint (Desktop only)
+  // This allows the hint to appear when the mouse is "near" the button
+  // without needing a large invisible container that blocks clicks.
+  if (window.innerWidth > 1024) {
+    document.addEventListener('mousemove', (e) => {
+      if (!fab.classList.contains('is-visible')) return;
+      
+      const rect = trigger.getBoundingClientRect();
+      const triggerX = rect.left + rect.width / 2;
+      const triggerY = rect.top + rect.height / 2;
+      
+      const distance = Math.sqrt(
+        Math.pow(e.clientX - triggerX, 2) + 
+        Math.pow(e.clientY - triggerY, 2)
+      );
 
-  // Stay open until the mouse leaves the whole container (including the menu)
-  fab.addEventListener('mouseleave', () => {
-    if (window.innerWidth > 1024) {
-      closeTimeout = setTimeout(closeFAB, 150); // Small grace period
-    }
-  });
+      // Show hint if within 150px proximity
+      if (distance < 150) {
+        fab.classList.add('contact-fab--show-hint');
+      } else {
+        fab.classList.remove('contact-fab--show-hint');
+      }
+    }, { passive: true });
+  }
+  // The menu now stays open until the user clicks away or clicks the trigger again.
+  // This is more standard for click-to-open components.
 }

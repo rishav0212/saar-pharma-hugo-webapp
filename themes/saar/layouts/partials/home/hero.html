@@ -46,12 +46,12 @@
       <div class="hero-contact" aria-label="Direct enquiry contact options">
         <a class="hero-contact__link" href="tel:{{ $phoneHref }}">
           <i data-lucide="phone-call" class="icon" aria-hidden="true"></i>
-          Call {{ $phoneDisplay }}
+          <span class="hidden sm:inline">Call </span>{{ $phoneDisplay }}
         </a>
         {{ $waMsg := partial "helpers/enquiry-text.html" . }}
         <a class="hero-contact__link hero-contact__link--whatsapp" href="https://wa.me/{{ $whatsappNumber }}?text={{ $waMsg | urlquery }}" target="_blank" rel="noopener">
           <i data-lucide="message-circle" class="icon" aria-hidden="true"></i>
-          WhatsApp Enquiry
+          WhatsApp<span class="hidden sm:inline"> Enquiry</span>
         </a>
       </div>
       <div class="hero-proof" aria-label="Company highlights">
