@@ -5,7 +5,7 @@
 
   /* ─── Elite Scientific Hero ─── */
   .section--products-hero {
-    @apply relative pt-[140px] pb-[100px] max-md:pt-[100px] max-md:pb-[60px] text-white bg-abyss;
+    @apply relative pt-[140px] pb-[100px] max-md:pt-[100px] max-md:pb-[60px] text-white bg-abyss z-[110];
   }
 
   .products-hero__bg {
@@ -93,50 +93,94 @@
 
   /* Hero Search Group (Consolidated) */
   .products-hero-search-group {
-    @apply flex items-center bg-white/10 border border-white/20 p-2 rounded-[24px] mb-14 max-w-[780px] mx-auto backdrop-blur-3xl transition-all duration-500;
-    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+    @apply flex flex-col md:flex-row items-stretch md:items-center bg-white/10 border border-white/20 p-1.5 md:p-2 rounded-xl md:rounded-full mb-8 md:mb-14 w-full max-w-[780px] mx-auto backdrop-blur-3xl transition-all duration-500 box-border relative z-[1000];
+    box-shadow: 0 30px 60px -15px rgba(var(--color-abyss-rgb), 0.3);
   }
 
   .products-hero-search-group:focus-within {
     @apply bg-white/15 border-brand-2/60;
-    box-shadow: 0 35px 70px -10px rgba(100, 212, 197, 0.2);
+    box-shadow: 0 35px 70px -10px rgba(var(--color-brand-2-rgb), 0.2);
   }
 
   .hero-search-wrap {
-    @apply relative flex-1 border-r border-white/15;
+    @apply relative w-full md:flex-1 border-b md:border-b-0 md:border-r border-white/10;
   }
 
   .hero-search-input {
-    @apply w-full h-[64px] bg-transparent border-none text-white pl-16 pr-6 text-[17px] outline-none placeholder:text-white/40 font-semibold;
+    @apply w-full h-[48px] md:h-[64px] bg-transparent border-none text-white pl-12 md:pl-16 pr-4 md:pr-6 text-[14px] md:text-[17px] outline-none placeholder:text-white/40 font-semibold box-border;
   }
 
   .hero-search-wrap .icon-search {
-    @apply absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-brand-2;
+    @apply absolute left-4 md:left-6 top-1/2 -translate-y-1/2 w-4.5 h-4.5 md:w-6 md:h-6 text-brand-2;
   }
 
   .hero-cat-wrap {
-    @apply relative w-[260px] max-md:hidden;
+    @apply relative w-full md:w-[260px] flex items-center bg-white/5 md:bg-transparent;
   }
 
-  .hero-cat-select {
-    @apply w-full h-[64px] bg-transparent border-none text-white/90 pl-6 pr-14 text-[15px] font-bold appearance-none outline-none cursor-pointer transition-colors duration-200;
+  /* Custom Dropdown Trigger */
+  .hero-cat-trigger {
+    @apply w-full h-[48px] md:h-[64px] flex items-center justify-between px-12 md:px-6 cursor-pointer text-white/90 transition-all duration-200;
   }
 
-  .hero-cat-select:hover {
+  .hero-cat-selected-text {
+    @apply text-[13px] md:text-[15px] font-bold truncate;
+  }
+
+  .hero-cat-trigger:hover {
     @apply text-white;
   }
 
-  .hero-cat-select option {
-    @apply bg-ink text-white;
+  .hero-cat-wrap .icon-chevron {
+    @apply absolute right-4 md:right-6 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-brand-2 pointer-events-none transition-transform duration-300;
   }
 
-  /* Deep blue instead of near-black */
-  .hero-cat-wrap .icon-chevron {
-    @apply absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-brand-2 pointer-events-none opacity-80;
+  .hero-cat-wrap.is-active .icon-chevron {
+    @apply rotate-180;
+  }
+
+  /* Custom Dropdown List */
+  .hero-cat-list-wrap {
+    @apply absolute top-[calc(100%+12px)] left-0 right-0 md:left-auto md:w-[320px] bg-ink border border-white/20 rounded-2xl shadow-2xl opacity-0 scale-95 pointer-events-none transition-all duration-300 z-[999] origin-top-right;
+  }
+
+  .hero-cat-wrap.is-active .hero-cat-list-wrap {
+    @apply opacity-100 scale-100 pointer-events-auto;
+  }
+
+  .hero-cat-list-wrap::after {
+    @apply content-[''] absolute inset-0 -z-1 bg-gradient-to-br from-brand/5 to-transparent pointer-events-none;
+  }
+
+  .hero-cat-list-wrap {
+    @apply max-h-[450px] md:max-h-[500px] overflow-y-auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--color-white-rgb), 0.2) transparent;
+    overscroll-behavior: contain;
+  }
+
+  .hero-cat-list-wrap::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .hero-cat-list-wrap::-webkit-scrollbar-thumb {
+    @apply bg-white/20 rounded-full;
+  }
+
+  .hero-cat-option {
+    @apply px-6 py-3.5 text-[13px] md:text-[14px] font-bold text-white/60 cursor-pointer transition-all duration-200 border-b border-white/5 last:border-0;
+  }
+
+  .hero-cat-option:hover {
+    @apply bg-white/5 text-brand-2 pl-8;
+  }
+
+  .hero-cat-option.is-active {
+    @apply text-brand-2 bg-brand-2/5;
   }
 
   .products-hero-stats {
-    @apply flex flex-wrap justify-center gap-6 mt-4;
+    @apply flex flex-wrap justify-center gap-3 md:gap-6 mt-4;
   }
 
   .products-hero-stat {

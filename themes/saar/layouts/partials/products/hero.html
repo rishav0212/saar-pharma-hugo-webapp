@@ -10,12 +10,12 @@
     <div class="container">
         <div class="products-hero__inner" data-animate="fade-up">
              <h1 class="text-white">
-                Pharmaceutical <br>
-                <span class="text-teal-400">Compositions List</span>
+                Pharmaceutical <br class="max-md:hidden">
+                <span class="text-teal-400">Formulation Portfolio</span>
             </h1>
             
             <p>
-                Precision-engineered medical formulations produced in our state-of-the-art WHO-GMP certified facilities.
+                Explore <strong>Saar Biotech's</strong> comprehensive directory of high-efficacy medical compositions and DCGI-approved molecules, precision-crafted for elite third-party manufacturing and global B2B pharma partnerships.
             </p>
 
             <!-- Hero Search with Category Dropdown -->
@@ -25,8 +25,15 @@
                     <input type="text" id="hero-search" aria-label="Search formulations" placeholder="Search all products or compositions..." class="hero-search-input">
                 </div>
                 
-                <div class="hero-cat-wrap w-full md:w-[260px] border-t md:border-t-0 border-white/15 md:border-l">
-                    <select id="hero-cat-select" class="hero-cat-select" aria-label="Select Category">
+                <div class="hero-cat-wrap w-full md:w-[260px] border-t md:border-t-0 border-white/15 md:border-l" id="hero-cat-custom-dropdown">
+                    <!-- Custom Dropdown Trigger -->
+                    <div class="hero-cat-trigger" id="hero-cat-trigger">
+                        <span class="hero-cat-selected-text">All Categories</span>
+                        <i data-lucide="chevron-down" class="icon-chevron"></i>
+                    </div>
+
+                    <!-- Hidden Native Select (kept for sync/accessibility if needed, but we'll use custom list) -->
+                    <select id="hero-cat-select" class="hidden">
                         <option value="all">All Categories</option>
                         {{- $products := where .Site.RegularPages "Section" "products" -}}
                         {{- $appliedTerms := slice -}}
@@ -38,7 +45,14 @@
                         <option value="{{ . | urlize }}">{{ . }}</option>
                         {{- end -}}
                     </select>
-                    <i data-lucide="chevron-down" class="icon-chevron"></i>
+
+                    <!-- Custom Dropdown List -->
+                    <div class="hero-cat-list-wrap" id="hero-cat-list" data-lenis-prevent>
+                        <div class="hero-cat-option is-active" data-value="all">All Categories</div>
+                        {{- range (uniq $appliedTerms | sort) -}}
+                        <div class="hero-cat-option" data-value="{{ . | urlize }}">{{ . }}</div>
+                        {{- end -}}
+                    </div>
                 </div>
             </div>
 

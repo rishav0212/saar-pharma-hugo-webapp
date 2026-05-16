@@ -222,10 +222,60 @@ export function initProducts() {
   }
 
   if (heroSelect) {
+    const customDropdown = document.getElementById('hero-cat-custom-dropdown');
+    const trigger = document.getElementById('hero-cat-trigger');
+    const triggerText = trigger?.querySelector('.hero-cat-selected-text');
+    const list = document.getElementById('hero-cat-list');
+    const options = list?.querySelectorAll('.hero-cat-option');
+
+    const toggleDropdown = (e) => {
+      e.stopPropagation();
+      customDropdown?.classList.toggle('is-active');
+    };
+
+    const closeDropdown = () => {
+      customDropdown?.classList.remove('is-active');
+    };
+
+    trigger?.addEventListener('click', toggleDropdown);
+
+    options?.forEach(opt => {
+      opt.addEventListener('click', () => {
+        const val = opt.getAttribute('data-value');
+        const text = opt.textContent;
+
+        // Update selection state
+        options.forEach(o => o.classList.remove('is-active'));
+        opt.classList.add('is-active');
+
+        // Update trigger text
+        if (triggerText) triggerText.textContent = text;
+
+        // Sync with hidden native select and trigger change
+        heroSelect.value = val;
+        heroSelect.dispatchEvent(new Event('change'));
+
+        closeDropdown();
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (customDropdown && !customDropdown.contains(e.target)) {
+        closeDropdown();
+      }
+    });
+
     heroSelect.addEventListener('change', (e) => {
       currentFilter = e.target.value.toLowerCase().trim();
       updateInputs(currentQuery, currentFilter);
       applyFilters(true);
+
+      // Also update custom dropdown text if changed from elsewhere (e.g. pills)
+      const selectedOption = Array.from(options || []).find(o => o.getAttribute('data-value') === currentFilter);
+      if (selectedOption && triggerText) {
+        triggerText.textContent = selectedOption.textContent;
+        options?.forEach(o => o.classList.toggle('is-active', o === selectedOption));
+      }
     });
   }
 
