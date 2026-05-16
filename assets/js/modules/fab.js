@@ -9,8 +9,8 @@ export function initFAB() {
   
   if (!fab || !trigger) return;
 
-
   let isFooterVisible = false;
+  let closeTimeout;
   const footer = document.querySelector('.site-footer');
 
   if (footer) {
@@ -23,17 +23,16 @@ export function initFAB() {
 
   // --- Scroll Logic: Only show after Hero, hide at Footer ---
   const handleScroll = () => {
-    // Show after scrolling 400px (typically past hero) AND footer is not visible
     if (window.scrollY > 400 && !isFooterVisible) {
       fab.classList.add('is-visible');
     } else {
       fab.classList.remove('is-visible');
-      fab.classList.remove('contact-fab--active'); // Close menu if hidden
+      fab.classList.remove('contact-fab--active'); 
     }
   };
 
   window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll(); // Initial check
+  handleScroll(); 
 
   const toggleFAB = (e) => {
     e.stopPropagation();
@@ -46,24 +45,43 @@ export function initFAB() {
 
   trigger.addEventListener('click', toggleFAB);
 
-  // Close on outside click
   document.addEventListener('click', (e) => {
     if (!fab.contains(e.target)) {
       closeFAB();
     }
   });
 
-  // Close on Esc key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeFAB();
     }
   });
 
-  // Handle Proximity Hover for Hint (Desktop only)
-  // This allows the hint to appear when the mouse is "near" the button
-  // without needing a large invisible container that blocks clicks.
+  // --- Desktop Interactions (Hover & Proximity) ---
   if (window.innerWidth > 1024) {
+    const menu = document.getElementById('contact-fab-menu');
+
+    // 1. Auto-open menu on trigger hover
+    trigger.addEventListener('mouseenter', () => {
+      if (fab.classList.contains('is-visible')) {
+        clearTimeout(closeTimeout);
+        fab.classList.add('contact-fab--active');
+      }
+    });
+
+    // 2. Keep open when hovering the menu itself
+    if (menu) {
+      menu.addEventListener('mouseenter', () => {
+        clearTimeout(closeTimeout);
+      });
+    }
+
+    // 3. Auto-close menu when leaving the whole FAB container
+    fab.addEventListener('mouseleave', () => {
+      closeTimeout = setTimeout(closeFAB, 400); // 400ms grace period
+    });
+
+    // 3. Proximity hint ("Connect with Experts")
     document.addEventListener('mousemove', (e) => {
       if (!fab.classList.contains('is-visible')) return;
       
@@ -76,14 +94,11 @@ export function initFAB() {
         Math.pow(e.clientY - triggerY, 2)
       );
 
-      // Show hint if within 150px proximity
-      if (distance < 150) {
+      if (distance < 160) {
         fab.classList.add('contact-fab--show-hint');
       } else {
         fab.classList.remove('contact-fab--show-hint');
       }
     }, { passive: true });
   }
-  // The menu now stays open until the user clicks away or clicks the trigger again.
-  // This is more standard for click-to-open components.
 }
