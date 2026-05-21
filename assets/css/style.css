@@ -248,6 +248,9 @@
 @import "./assets/css/product/card.css";
 @import "./assets/css/components/back-to-top.css";
 
+/* Components */
+@import "./assets/css/components/breadcrumb.css";
+
 /* Page Sections */
 @import "./assets/css/home/hero.css";
 @import "./assets/css/home/categories.css";

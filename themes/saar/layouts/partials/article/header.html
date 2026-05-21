@@ -25,7 +25,9 @@
       <div class="article-header__inner">
 
         {{/* Breadcrumb — shared component (on-dark variant) */}}
-        {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Articles" "url" "/articles/") (dict "label" (.Title | truncate 42)))) }}
+        <div class="mb-3 w-full flex justify-start">
+          {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Articles" "url" "/articles/") (dict "label" (.Title | truncate 42)))) }}
+        </div>
 
         {{/* Category pill */}}
         <div class="article-header__eyebrow">
