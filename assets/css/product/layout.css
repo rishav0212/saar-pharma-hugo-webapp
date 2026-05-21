@@ -5,7 +5,7 @@
      ────────────────────────────────────────────────────────────────────────── */
 
   .ps-premium-page {
-    @apply bg-[#F8FAFC] pb-24 w-full;
+    @apply bg-[#F8FAFC] pb-24 w-full pt-[72px] max-md:pt-[60px];
   }
 
   /* ── BREADCRUMBS ── */
@@ -13,7 +13,7 @@
 
   /* ── UPPER SECTION SPLIT LAYOUT ── */
   .ps-upper-section {
-    @apply pt-10 pb-12;
+    @apply pt-4 max-md:pt-3 pb-12;
   }
 
   /* Two-column split: narrower gallery, wider info */

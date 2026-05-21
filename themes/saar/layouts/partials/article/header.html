@@ -22,12 +22,12 @@
     <div class="article-header__glow" aria-hidden="true"></div>
 
     <div class="container">
-      <div class="article-header__inner">
+      {{/* Breadcrumb — shared component (on-dark variant) */}}
+      <div class="mb-2 w-full flex justify-start">
+        {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Articles" "url" "/articles/") (dict "label" (.Title | truncate 42)))) }}
+      </div>
 
-        {{/* Breadcrumb — shared component (on-dark variant) */}}
-        <div class="mb-3 w-full flex justify-start">
-          {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Articles" "url" "/articles/") (dict "label" (.Title | truncate 42)))) }}
-        </div>
+      <div class="article-header__inner">
 
         {{/* Category pill */}}
         <div class="article-header__eyebrow">

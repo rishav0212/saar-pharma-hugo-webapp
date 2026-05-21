@@ -52,7 +52,7 @@ The product count is computed live from all products in this section.
       <div class="cat-hero__content">
         
         {{- /* ── BREADCRUMB ── */ -}}
-        <div class="mb-3 w-full flex justify-start">
+        <div class="mb-2 w-full flex justify-start">
           {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Products" "url" "/products/") (dict "label" "Categories" "url" "/products/categories/") (dict "label" $catName))) }}
         </div>
 

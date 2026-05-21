@@ -8,6 +8,11 @@
     <div class="floating-asset floating-asset--3"></div>
     
     <div class="container">
+        {{- /* ── BREADCRUMB ── */ -}}
+        <div class="mb-2 w-full flex justify-start relative z-20">
+            {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Products"))) }}
+        </div>
+        
         <div class="products-hero__inner" data-animate="fade-up">
              <h1 class="text-white">
                 Pharmaceutical <br class="max-md:hidden">
