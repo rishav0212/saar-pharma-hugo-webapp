@@ -706,6 +706,9 @@
     max-height: calc(100vh - 108px);
     overflow-y: auto;
     scrollbar-width: none;
+    /* Add padding so the last item and hover shadows aren't clipped by overflow */
+    padding: 4px 4px 2rem 4px;
+    margin: -4px -4px 0 -4px;
   }
 
   .article-sidebar::-webkit-scrollbar { display: none; }
@@ -871,7 +874,7 @@
   /* ── H3 links — indented, smaller ── */
   .article-toc nav > ul > li > ul > li > a {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.375rem;
     padding: 3px 6px;
     border-radius: 5px;
@@ -893,6 +896,7 @@
     border-radius: 50%;
     background: var(--color-line-strong);
     transition: background 0.15s;
+    margin-top: 6px; /* Aligns with the first line of text */
   }
 
   .article-toc nav > ul > li > ul > li > a:hover {

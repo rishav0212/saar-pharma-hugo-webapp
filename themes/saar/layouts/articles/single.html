@@ -51,6 +51,30 @@
             {{ .Content }}
           </div>
 
+          {{/* About Saar Biotech (Moved from Sidebar) */}}
+          <div class="article-stats-grid mt-10 p-6 rounded-2xl border" style="background: rgba(var(--color-brand-rgb), 0.02); border-color: rgba(var(--color-brand-rgb), 0.1);">
+            <div class="w-full mb-4 flex items-center gap-2 text-brand-3 text-[11px] font-black tracking-widest uppercase">
+              <i data-lucide="shield-check" class="icon--sm"></i>
+              About Saar Biotech
+            </div>
+            <div class="article-stat-item">
+              <span class="article-stat-value">WHO-GMP</span>
+              <span class="article-stat-label">Certified</span>
+            </div>
+            <div class="article-stat-item">
+              <span class="article-stat-value">150+</span>
+              <span class="article-stat-label">B2B Partners</span>
+            </div>
+            <div class="article-stat-item">
+              <span class="article-stat-value">500+</span>
+              <span class="article-stat-label">Products</span>
+            </div>
+            <div class="article-stat-item">
+              <span class="article-stat-value">Baddi</span>
+              <span class="article-stat-label">Facility</span>
+            </div>
+          </div>
+
           {{/* Tag chips */}}
           {{ if .Params.tags }}
           <div class="article-tags" aria-label="Article tags">
