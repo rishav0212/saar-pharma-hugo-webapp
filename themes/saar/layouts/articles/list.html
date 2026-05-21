@@ -1,0 +1,54 @@
+{{/*
+  ARTICLES LIST PAGE (Blog / News Hub)
+  ─────────────────────────────────────────────────────────────────
+  Uses the standard catlist-hero for the top section (dark theme).
+  Uses the .article-grid and .article-card classes (reused from homepage).
+*/}}
+
+{{ define "main" }}
+
+<section class="catlist-hero">
+  <div class="catlist-hero__bg" aria-hidden="true">
+    <div class="catlist-hero__glow"></div>
+  </div>
+  <div class="container relative z-10">
+    <div class="catlist-hero__inner">
+      <div class="mb-3 w-full flex justify-start">
+        {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Articles"))) }}
+      </div>
+      <span class="eyebrow catlist-hero__eyebrow" data-animate="fade-in">
+        <i data-lucide="book-open" class="icon--sm" aria-hidden="true"></i>
+        Insights & News
+      </span>
+      <h1 class="catlist-hero__title" data-animate="fade-up" data-delay="0.1">
+        {{ .Title | default "Pharmaceutical Manufacturing Insights" }}
+      </h1>
+      <p class="catlist-hero__desc" data-animate="fade-up" data-delay="0.2">
+        {{ .Params.description | default "Expert articles on contract manufacturing, WHO-GMP compliance, drug formulations, and B2B pharma strategy from Saar Biotech." }}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="container">
+    <div class="article-grid" data-animate data-animate-stagger>
+      {{ range .Pages }}
+      <a class="article-card" href="{{ .RelPermalink }}">
+        <div class="article-visual" aria-hidden="true">
+          {{/* Reuse the icon from frontmatter if available, otherwise fallback */}}
+          {{ $icon := .Params.icon | default "file-text" }}
+          <i data-lucide="{{ $icon }}" class="icon icon--xl"></i>
+        </div>
+        <div class="article-body">
+          <span class="article-category">{{ .Params.category | default "Articles" }}</span>
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Summary | truncate 120 }}</p>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+{{ end }}
