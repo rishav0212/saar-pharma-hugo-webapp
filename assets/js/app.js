@@ -9,7 +9,7 @@ import { initSearch } from './modules/search';
 import { initProducts } from './modules/products';
 import { initEnquiryModal } from './modules/modal';
 import { initGallery } from './modules/gallery';
-import { initDossierShuffle } from './modules/dossier';
+import { initCategoryGallery } from './modules/category';
 import { initSliders } from './modules/slider';
 import { initCategorySlider } from './modules/categorySlider';
 import { initFAB } from './modules/fab';
@@ -64,7 +64,7 @@ const initAll = () => {
   safeInit("Products", initProducts);
   safeInit("EnquiryModal", initEnquiryModal);
   safeInit("Gallery", initGallery);
-  safeInit("DossierShuffle", initDossierShuffle);
+  safeInit("CategoryGallery", initCategoryGallery);
   safeInit("ScrollFades", initScrollFades);
   safeInit("Sliders", initSliders);
   safeInit("CategorySlider", initCategorySlider);

@@ -38,8 +38,12 @@ The product count is computed live from all products in this section.
   <div class="cat-hero__bg-glow cat-hero__bg-glow--1" aria-hidden="true"></div>
   <div class="cat-hero__bg-glow cat-hero__bg-glow--2" aria-hidden="true"></div>
 
-  {{- /* Floating decorative rings - simplified and moved to background */ -}}
+  {{- /* Floating decorative rings and dynamic 3D molecular assets */ -}}
   <div class="cat-hero__ring cat-hero__ring--lg" aria-hidden="true"></div>
+  <div class="cat-hero__ring cat-hero__ring--sm" aria-hidden="true"></div>
+  <div class="cat-hero__molecule" aria-hidden="true">
+    <i data-lucide="{{ $catIcon }}"></i>
+  </div>
 
   <div class="container">
     <div class="cat-hero__grid py-4">
@@ -84,16 +88,17 @@ The product count is computed live from all products in this section.
 
         {{- /* ── CTA BUTTONS ── */ -}}
         <div class="cat-hero__cta-group" data-animate="fade-up">
-          <a href="#cat-products" class="btn btn--primary cat-hero__cta-primary">
+          <a href="#cat-products" class="btn btn--primary">
             <i data-lucide="layout-grid" class="w-4 h-4" aria-hidden="true"></i>
             <span>Browse Compositions</span>
           </a>
-          <a href="#contact" class="btn btn--ghost cat-hero__cta-ghost" data-enquire-trigger
+          <a href="#contact" class="btn btn--ghost" data-enquire-trigger
             data-category="{{ $catName }}" data-product-name="{{ $catName }} Manufacturing Enquiry">
             <i data-lucide="send" class="w-4 h-4" aria-hidden="true"></i>
             <span>Request Quotation</span>
           </a>
         </div>
+
       </div>
 
       {{- /* RIGHT COLUMN: Dynamic Gallery */ -}}

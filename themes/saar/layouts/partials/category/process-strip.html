@@ -1,0 +1,50 @@
+{{- $steps := .Params.process_steps -}}
+{{- if not $steps -}}
+  {{- /* Fallback to Site/Home process flow */ -}}
+  {{- $steps = .Site.Home.Params.process -}}
+{{- end -}}
+
+{{- if $steps -}}
+<section class="section section--deep-soft cat-process-section" id="cat-process">
+  {{- /* Subtle dot-matrix grid background with a moving light effect */ -}}
+  <div class="cat-hero__bg-grid" aria-hidden="true" style="opacity: 0.5;"></div>
+  
+  <div class="container">
+    <div class="cat-process__header" data-animate="fade-up">
+      <span class="eyebrow">Seamless Integration</span>
+      <h2 class="section-title">Our Formulation & Manufacturing Process</h2>
+      <p class="section-kicker">From commercial enquiry to GLP-certified QC batch release, we handle every step with technical precision.</p>
+    </div>
+
+
+    <div class="cat-process__strip">
+      {{- range $index, $step := $steps -}}
+        {{- if gt $index 0 -}}
+        <div class="cat-process__connector" aria-hidden="true">
+          <i data-lucide="arrow-right"></i>
+        </div>
+        {{- end -}}
+        
+        <div class="cat-process__step" data-animate="fade-up" data-delay="{{ mul $index 0.1 }}">
+          <span class="cat-process__step-num">Step {{ printf "%02d" (add $index 1) }}</span>
+          <div class="cat-process__step-icon-wrap">
+            <i data-lucide="{{ $step.icon | default "check-circle" }}" aria-hidden="true"></i>
+          </div>
+          <h3 class="cat-process__step-title">{{ $step.title }}</h3>
+          <p class="cat-process__step-desc">{{ $step.desc | default $step.text }}</p>
+        </div>
+      {{- end -}}
+    </div>
+
+    <div class="cat-process__cta" data-animate="fade-up">
+      <p class="text-white/60 text-sm font-medium">Ready to discuss your dosage composition and packaging requirements?</p>
+      <a href="#contact" class="btn btn--primary inline-flex items-center gap-2" data-enquire-trigger
+         data-category="{{ $.Title }}" data-product-name="{{ $.Title }} Manufacturing Process Enquiry">
+        <span>Initialize Technical Briefing</span>
+        <i data-lucide="arrow-right" class="icon--sm" aria-hidden="true"></i>
+      </a>
+    </div>
+
+  </div>
+</section>
+{{- end -}}

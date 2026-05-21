@@ -7,25 +7,28 @@
 
 # 1. SEO METADATA
 title: "Tablets"
-meta_title: "Pharmaceutical Tablet Manufacturer in Baddi | Solid Dosage Contract Manufacturing | Saar Biotech"
-meta_description: "WHO-GMP certified tablet manufacturer in Baddi, HP. Saar Biotech offers third-party contract manufacturing for film-coated, enteric-coated, SR, and plain tablets across all therapeutic categories with complete dossier support."
-description: "Third-party contract manufacturing of DCGI-approved pharmaceutical tablets — film-coated, enteric-coated, SR/ER, and plain solid dosage forms — from our WHO-GMP Baddi facility."
+meta_title: "Pharma Tablet Contract Manufacturing in Baddi, India | Saar Biotech"
+meta_description: "Schedule M compliant pharmaceutical tablet contract manufacturing in Baddi, India. Saar Biotech offers third-party compression for film-coated, enteric-coated, sustained-release, and plain tablets with complete DCGI dossier support."
+description: "Third-party contract manufacturing of DCGI-approved pharmaceutical tablets in Baddi, India — film-coated, enteric-coated, sustained-release (SR), and plain solid dosage forms with fast turnaround."
 keywords:
-  - "tablet manufacturer Baddi"
-  - "solid dosage contract manufacturing India"
-  - "film-coated tablet manufacturer HP"
-  - "enteric coated tablet third party manufacturing"
-  - "SR tablet manufacturer Baddi"
-  - "tablet CMO WHO-GMP India"
+  - "solid oral dosage contract manufacturing India"
+  - "film-coated tablet contract manufacturer Baddi"
+  - "enteric coated tablets third-party supplier Baddi, India"
+  - "sustained release and bilayer tablet compression India"
+  - "pharma tablet manufacturer in Baddi, India"
   - "tablet third party manufacturing Himachal Pradesh"
-  - "pharmaceutical solid dosage forms manufacturer"
+  - "Schedule M tablet formulation company India"
 
 layout: "category"
 
 # 2. HERO SECTION CONTENT
 hero_icon: "pill"
-tagline: "High-precision solid dosage form manufacturing — plain, film-coated, enteric-coated, and sustained-release tablets from our WHO-GMP Baddi facility."
-hero_description: "Saar Biotech's dedicated tablet compression and coating facility produces a comprehensive range of solid dosage forms with Blister, Alu-Alu, and strip packaging options for third-party brands."
+image: "/images/products/aceclofenac-rabeprazole.webp"
+gallery:
+  - "/images/categories/suspensions_clinical.png"
+  - "/images/categories/suspensions_lab.png"
+tagline: "High-quality pharmaceutical tablet manufacturing — plain, film-coated, enteric-coated, and sustained-release tablets from our advanced Baddi, India facility."
+hero_description: "Saar Biotech's dedicated tablet compression and coating facility produces a comprehensive range of solid dosage forms with Alu-Alu, Blister, and strip packaging options for leading brands in India."
 hero_stats:
   - value: "WHO-GMP"
     label: "Certified Facility"
@@ -35,74 +38,75 @@ hero_stats:
     label: "Day Turnaround"
 
 # 3. AUTHORITY SECTION
-authority_title: "Why Saar Biotech for Tablet Manufacturing?"
-authority_desc: "Our Baddi solid dosage facility houses multi-punch rotary tablet presses, automated film-coating pans, and aqueous enteric coating systems — giving B2B partners access to the full spectrum of solid dosage manufacturing technology under a single WHO-GMP roof."
+authority_title: "Why Saar Biotech for Tablet Manufacturing in India?"
+authority_desc: "Our advanced facility in Baddi, India houses modern high-speed tablet presses, automated coating systems, and strict quality control labs — giving our partners complete access to premium tablet manufacturing services under a single Schedule M compliant roof."
 trust_signals:
   - icon: "layers"
-    title: "Full Coating Capability"
-    desc: "Film coating, enteric coating, and sugar coating in automated pans with precise weight gain control and coating uniformity."
+    title: "Advanced Coating"
+    desc: "Smooth film, sugar, and stomach-friendly protective coatings applied using automated systems for perfect consistency and swallowing comfort."
   - icon: "clock"
-    title: "SR / ER Technology"
-    desc: "Sustained and extended release tablet manufacturing using HPMC matrix and press-coating techniques for modified-release profiles."
+    title: "Modified Release (SR)"
+    desc: "Sustained and extended-release tablets that release their active ingredients gradually over time for longer-lasting, convenient dosage."
   - icon: "shield-check"
-    title: "Dissolution Validated"
-    desc: "Every tablet batch undergoes USP-compliant dissolution profiling to confirm in-vitro release kinetics before batch release."
+    title: "Tested for Efficacy"
+    desc: "Every tablet batch is thoroughly tested to guarantee fast absorption and reliable, consistent performance for patients."
   - icon: "package"
-    title: "Multiple Pack Formats"
-    desc: "Blister, Alu-Alu, and strip packing options — with custom mono-carton and shipper design compliant with Schedule M labeling."
+    title: "High-Speed Packaging"
+    desc: "Automated Alu-Alu, blister, and strip packing lines with online visual leak detection and printing systems."
 
 manufacturing_specs:
   - label: "Manufacturing Location"
-    value: "Baddi, Himachal Pradesh"
+    value: "Baddi, Himachal Pradesh (India)"
   - label: "Quality Standards"
-    value: "WHO-GMP / ISO 9001:2015"
+    value: "Schedule M / ISO 9001:2015"
   - label: "Regulatory Compliance"
-    value: "DCGI / Schedule M"
+    value: "DCGI / CDSCO Guidelines"
   - label: "Dossier Status"
-    value: "CTD/ACTD Available"
+    value: "CTD Format Available"
   - label: "Tablet Types"
-    value: "Plain / Film / EC / SR / Chewable"
+    value: "Plain / Film / Enteric / Sustained-Release"
   - label: "Pack Formats"
-    value: "Blister / Alu-Alu / Strip"
+    value: "Alu-Alu / Blister / Strip Packing"
   - label: "MOQ (Pilot)"
     value: "10,000 Units"
   - label: "Batch Lead Time"
-    value: "30–45 Days (Domestic)"
+    value: "30–45 Days (India-Wide)"
 
 # 5. FAQ SECTION
 faqs:
-  - q: "What types of pharmaceutical tablets can Saar Biotech manufacture for third-party clients?"
-    a: "We manufacture the full spectrum of solid dosage tablets including **plain (uncoated), film-coated, enteric-coated (EC), sustained-release (SR), extended-release (ER), and chewable tablets**. Our facility handles simple single-molecule tablets as well as complex multi-layer and bilayer combination tablets across all therapeutic categories."
-  - q: "What packaging options are available for tablet contract manufacturing?"
-    a: "We offer **Blister packaging (PVC/PVDC), Alu-Alu (cold-form) packaging** for moisture-sensitive molecules, and traditional **strip packing**. All packaging is customized with your brand's mono-carton and label designs, and every element is verified for compliance with DCGI Schedule M labeling requirements."
-  - q: "Does Saar Biotech manufacture enteric-coated tablets for acid-sensitive drugs?"
-    a: "Yes. Our aqueous enteric coating system applies **HPMC phthalate and Eudragit-based coatings** with precise pH-threshold dissolution control. This ensures acid resistance in gastric pH (1.2) with complete release in intestinal pH (6.8) — critical for molecules like Rabeprazole, Pantoprazole, and Diclofenac Sodium."
-  - q: "Can you manufacture combination tablets with fixed-dose combinations (FDC)?"
-    a: "Yes. We specialize in **fixed-dose combination (FDC) tablet manufacturing** including bilayer tablets, layered compression, and granulation-based combinations. Our R&D team provides formulation development support to ensure compatibility, stability, and regulatory compliance for all FDC products."
-  - q: "What quality tests are conducted on each tablet manufacturing batch?"
-    a: "Every tablet batch undergoes: **Hardness, Friability, Disintegration, Dissolution Profile, Assay (HPLC/UV), Uniformity of Weight, Microbial Limit Tests, and Content Uniformity testing** as per IP/USP specifications. A complete COA and batch manufacturing record is provided for every released batch."
+  - q: "What types of pharmaceutical tablets can Saar Biotech manufacture for third-party brands in India?"
+    a: "We manufacture the entire range of solid oral dosages including **plain uncoated tablets, film-coated tablets, enteric-coated (EC) tablets, sustained-release (SR) / extended-release (ER) tablets, and chewable tablets**. Our facility compresses single-molecule tablets as well as multi-layer and bilayer combination tablets under Schedule M guidelines in Baddi, India."
+  - q: "What solid dosage packaging options are available for contract manufacturing?"
+    a: "We provide high-speed **Alu-Alu (cold-form) blister packaging** for moisture-sensitive formulations, **PVC/PVDC blister packaging**, and **strip packaging**. All packaging materials are sourced from quality certified vendors and fully comply with DCGI labeling guidelines for domestic marketing."
+  - q: "Does Saar Biotech manufacture enteric-coated tablets for acid-sensitive medicines?"
+    a: "Yes. We use advanced, automated coating systems to apply protective layers that safely bypass the stomach. This ensures the medicine is released only in the intestines where it is absorbed, preventing stomach irritation and protecting sensitive active ingredients like Pantoprazole, Rabeprazole, and Diclofenac."
+  - q: "Can you manufacture bilayer tablets or fixed-dose combination tablets (FDCs) in India?"
+    a: "Yes. We specialize in combining two different medicines into a single tablet using advanced double-layer compression technology. Our modern equipment ensures each ingredient is perfectly measured and kept separate during production, preventing any mixing or contamination and ensuring exact dosage ratios."
+  - q: "What quality control parameters are checked for each tablet batch?"
+    a: "Every tablet batch is thoroughly tested for hardness, strength, fast and reliable dissolution, uniform weight, and correct ingredient dosage. We provide a complete Certificate of Analysis (COA) with every commercial shipment across India to guarantee absolute safety and consistent quality."
 ---
 
-## Pharmaceutical Tablet Contract Manufacturing in Baddi, HP
+## Pharmaceutical Tablet Contract Manufacturing in Baddi, India
 
-Saar Biotech is a **WHO-GMP and ISO 9001:2015 certified solid dosage form manufacturer** in Baddi, Himachal Pradesh. Our dedicated tablet manufacturing facility produces the full spectrum of pharmaceutical tablets — from simple uncoated plain tablets to complex **enteric-coated, sustained-release, and fixed-dose combination (FDC)** formulations — for third-party and contract manufacturing clients across India and global export markets.
+Saar Biotech is a leading **pharmaceutical tablet contract manufacturing company in Baddi, India**. Our dedicated solid oral dosage plant produces plain, film-coated, enteric-coated, sustained-release, and bilayer tablets under Schedule M guidelines and ISO 9001:2015 standards, catering to prominent pharma brands across India.
 
-## Tablet Manufacturing Capabilities
+## Modern Tablet Manufacturing Technology in Baddi
 
-Our Baddi facility is equipped with:
-- **Multi-punch Rotary Tablet Presses** for high-volume production across all tablet sizes and shapes.
-- **Automated Coating Pans** for aqueous film coating, enteric coating, and sugar coating with precise weight-gain monitoring.
-- **High-Shear Wet Granulation** and **Dry Granulation (Roller Compaction)** systems for pre-compression processing.
-- **Blister, Alu-Alu, and Strip Packing Lines** with integrated leak testing and print inspection systems.
+Our solid dosage facility in Baddi, India is equipped with modern, high-speed machinery:
 
-## Tablet Categories We Manufacture
+- **Rotary Compression Presses**: High-performance machines that produce tablets with perfectly uniform shape, weight, and consistency at a large scale.
+- **Automated Coating Systems**: Computerized coating equipment that ensures a perfectly smooth finish for film-coated and stomach-friendly enteric-coated tablets.
+- **Advanced Granulation Processing**: Modern mixing and drying equipment that creates consistent, high-quality mixtures for solid and durable tablets.
+- **High-Speed Packaging Lines**: Automated Alu-Alu, blister, and strip packing lines with smart camera check systems to prevent leaks and ensure secure packaging.
 
-| Type | Technology | Key Molecules |
-|---|---|---|
-| **Film-Coated** | Aqueous HPMC coating | Aceclofenac, Metformin, Atorvastatin |
-| **Enteric-Coated** | Eudragit / HPMC-P | Pantoprazole, Rabeprazole, Diclofenac |
-| **Sustained-Release** | HPMC matrix, Press-coat | Tramadol SR, Metformin SR, Diltiazem SR |
-| **FDC Combinations** | Bilayer / Granulation | Aceclofenac + Rabeprazole, Metformin + Glimepiride |
-| **Chewable** | Flavoured direct compression | Calcium, Vitamin D3, Antacid |
+## Key Solid Oral Dosage Categories
 
-[Enquire about Tablet Manufacturing](/products/tablets/#contact) | [View All Products](/products/) | [Explore Capsules](/products/capsules/)
+| Tablet Type | Technology | Key Molecules | Target Therapeutic Area |
+|---|---|---|---|
+| **Film-Coated** | Smooth protective coating | Aceclofenac, Paracetamol, Metformin | Pain, Diabetes |
+| **Enteric-Coated** | Stomach-safe enteric layer | Pantoprazole, Rabeprazole, Diclofenac | Gastro-Resistant / NSAID |
+| **Sustained-Release** | Gradual-release formula | Glimepiride SR, Metformin SR, Tramadol SR | Chronic Therapy / Pain |
+| **Bilayer / FDC** | Double-layer compression | Aceclofenac + Rabeprazole | Combination Therapy |
+| **Chewable** | Chewable taste formulation | Calcium + Vitamin D3, Chewable Antacids | Nutritional Supplement |
+
+[Enquire about pharmaceutical tablet contract manufacturing in Baddi, India](/products/tablets/#contact) | [View All Products](/products/) | [Explore Oral Liquids](/products/syrups/)

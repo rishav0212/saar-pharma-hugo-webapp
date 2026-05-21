@@ -14,9 +14,9 @@
 
 {{- $catName     := .Title -}}
 {{- $authTitle   := .Params.authority_title | default (printf "Why Saar Biotech for %s?" $catName) -}}
-{{- $authDesc    := .Params.authority_desc | default (printf "Our WHO-GMP certified Baddi facility delivers best-in-class %s formulations with complete dossier support, rigorous quality testing, and fast turnaround for B2B partners across India and globally." $catName) -}}
+{{- $authDesc    := .Params.authority_desc | default (printf "Our advanced Baddi facility delivers best-in-class %s formulations with complete CDSCO technical support, rigorous quality testing, and fast turnaround for B2B partners across India." $catName) -}}
 
-<section class="section cat-authority-section bg-white border-t border-line/30" id="cat-why">
+<section class="section section--cloud cat-authority-section" id="cat-why">
   <div class="container">
 
     <div class="cat-authority__grid">
@@ -24,9 +24,12 @@
       {{- /* ── LEFT: TRUST SIGNALS ── */ -}}
       <div class="cat-authority__left" data-animate="slide-right">
 
-        <div class="flex items-center gap-3 mb-6">
-          <span class="w-10 h-[2px] bg-brand" aria-hidden="true"></span>
-          <span class="text-[11px] font-black text-brand uppercase tracking-[0.2em]">Manufacturing Authority</span>
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 mb-6 rounded-full bg-brand/8 border border-brand-line/45 shadow-[0_2px_12px_rgba(21,159,145,0.06)]">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
+          </span>
+          <span class="text-[10px] font-black text-brand uppercase tracking-[0.15em]">Manufacturing Authority</span>
         </div>
 
         <h2 class="text-[clamp(26px,3.5vw,40px)] font-display font-black text-ink leading-[1.1] mb-5">
@@ -57,8 +60,8 @@
               <i data-lucide="shield-check" aria-hidden="true"></i>
             </div>
             <div>
-              <h3 class="cat-trust-card__title">WHO-GMP Certified</h3>
-              <p class="cat-trust-card__desc">Every batch manufactured under stringent international quality protocols with complete batch documentation.</p>
+              <h3 class="cat-trust-card__title">Schedule M Compliant</h3>
+              <p class="cat-trust-card__desc">Every batch manufactured under stringent Schedule M quality standards with complete batch records and documentation.</p>
             </div>
           </div>
           <div class="cat-trust-card">
@@ -127,7 +130,7 @@
             </div>
             <div class="cat-spec-row">
               <dt class="cat-spec-row__label">Quality Standards</dt>
-              <dd class="cat-spec-row__value">WHO-GMP / ISO 9001:2015</dd>
+              <dd class="cat-spec-row__value">Schedule M / ISO 9001:2015</dd>
             </div>
             <div class="cat-spec-row">
               <dt class="cat-spec-row__label">Regulatory Compliance</dt>

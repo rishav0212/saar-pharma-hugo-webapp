@@ -1,0 +1,59 @@
+{{- $currentTitle := .Title -}}
+{{- /* Get all category pages (pages in products section that have layout "category") */ -}}
+{{- $categories := where (where .Site.Pages "Section" "products") "Params.layout" "category" -}}
+{{- /* Sibling categories exclude the current page */ -}}
+{{- $siblings := slice -}}
+{{- range $categories -}}
+  {{- if ne .Title $currentTitle -}}
+    {{- $siblings = $siblings | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if gt (len $siblings) 0 -}}
+<section class="section section--cloud cat-related-section" id="cat-related">
+  <div class="container">
+    <div class="cat-products__header mb-12" data-animate="fade-up">
+      <div class="cat-products__header-left">
+        <span class="eyebrow">Explore Capabilities</span>
+        <h2 class="section-title section-title--sm mt-2">Other Manufacturing Dosage Strengths</h2>
+        <p class="section-kicker mt-3">Explore our other WHO-GMP dosage capabilities, featuring state-of-the-art facilities in Baddi.</p>
+      </div>
+    </div>
+
+    <div class="cat-related__grid" data-animate-stagger>
+      {{- range $siblings -}}
+        {{- $siblingName := .Title -}}
+        
+        {{- /* Compute live product count for this sibling category */ -}}
+        {{- $allProducts := where (where .Site.Pages "Kind" "page") "Section" "products" -}}
+        {{- $catProducts := slice -}}
+        {{- range $allProducts -}}
+          {{- $p := . -}}
+          {{- if $p.Params.slug -}}
+            {{- with $p.Params.categories -}}
+              {{- if in . $siblingName -}}
+                {{- $catProducts = $catProducts | append $p -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- $productCount := len $catProducts -}}
+        
+        <a href="{{ .RelPermalink }}" class="cat-related-card" data-animate="fade-up">
+          <div class="cat-related-card__icon-wrap">
+            <i data-lucide="{{ .Params.hero_icon | default "flask-conical" }}" aria-hidden="true"></i>
+          </div>
+          <div class="cat-related-card__content">
+            <h3 class="cat-related-card__title">{{ .Title }}</h3>
+            <p class="cat-related-card__desc">{{ .Params.description | default .Description | truncate 100 }}</p>
+            <span class="cat-related-card__count">
+              {{ if gt $productCount 0 }}{{ $productCount }} Items{{ else }}Explore Range{{ end }}
+            </span>
+          </div>
+          <i data-lucide="arrow-right" class="cat-related-card__arrow" aria-hidden="true"></i>
+        </a>
+      {{- end -}}
+    </div>
+  </div>
+</section>
+{{- end -}}

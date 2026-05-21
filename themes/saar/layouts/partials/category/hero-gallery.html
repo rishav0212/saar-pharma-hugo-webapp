@@ -1,50 +1,84 @@
 {{- $catName := .Title -}}
-{{- $allProducts := where .Site.RegularPages "Section" "products" -}}
-{{- $catImages := slice -}}
+{{- $image := .Params.image -}}
+{{- $gallery := .Params.gallery -}}
 
-{{- /* 1. GATHER ONE UNIQUE IMAGE FROM EACH PRODUCT IN THIS CATEGORY */ -}}
-{{- range $allProducts -}}
-  {{- if in .Params.categories $catName -}}
-    {{- with .Params.images -}}
-      {{- $catImages = $catImages | append (index . 0) -}}
+{{- /* 1. TRY TO FETCH DYNAMICALLY FROM CENTRAL HOMEPAGE CONFIGURATION IF NOT DEFINED */ -}}
+{{- if not $image -}}
+  {{- $homePage := .Site.Home -}}
+  {{- $homeCats := $homePage.Params.categories -}}
+  {{- range $homeCats -}}
+    {{- if eq (lower .title) (lower $catName) -}}
+      {{- $image = .image -}}
+      {{- $gallery = .gallery -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
 
-{{- /* Limit to 8 diverse products for the hero performance */ -}}
-{{- $catImages = uniq $catImages | first 8 -}}
-
-<div class="cat-hero-stack" id="cat-hero-slider" data-animate="fade-in">
-  <div class="cat-stack__pulse" aria-hidden="true"></div>
-  
-  {{- if gt (len $catImages) 0 -}}
-    <div class="cat-stack__container">
-      {{- range $index, $img := $catImages -}}
-        <div class="cat-stack__item {{ if eq $index 0 }}is-top{{ else if eq $index 1 }}is-middle{{ else if eq $index 2 }}is-bottom{{ else }}is-hidden{{ end }}" data-index="{{ $index }}">
-          <div class="cat-stack__card">
-            <img src="/images/products/{{ $img }}" alt="{{ $catName }} product formulation" loading="eager" class="cat-stack__img">
-            <div class="cat-stack__overlay"></div>
-          </div>
-        </div>
-      {{- end -}}
-    </div>
-    
-    {{- if gt (len $catImages) 1 -}}
-    <div class="cat-stack__controls">
-      <div class="cat-stack__dots">
-        {{ range $index, $img := $catImages }}
-          <span class="cat-stack__dot {{ if eq $index 0 }}is-active{{ end }}" data-goto="{{ $index }}"></span>
-        {{ end }}
-      </div>
-    </div>
-    {{- end -}}
-
+{{- /* 2. SAFE TRIPLE-REDUNDANT LOGICAL FALLBACKS */ -}}
+{{- if not $image -}}
+  {{- if eq (lower $catName) "tablets" -}}
+    {{- $image = "/images/products/aceclofenac-rabeprazole.webp" -}}
+    {{- $gallery = slice "/images/categories/suspensions_clinical.png" "/images/categories/suspensions_lab.png" -}}
+  {{- else if eq (lower $catName) "suspensions" -}}
+    {{- $image = "/images/categories/suspensions.png" -}}
+    {{- $gallery = slice "/images/categories/suspensions_clinical.png" "/images/categories/suspensions_lab.png" -}}
+  {{- else if eq (lower $catName) "syrups" -}}
+    {{- $image = "/images/categories/syrups.png" -}}
+    {{- $gallery = slice "/images/categories/syrups_clinical.png" "/images/categories/syrups_detail.png" -}}
   {{- else -}}
-    {{- /* Fallback: Large decorative icon if no product images found */ -}}
-    <div class="cat-gallery-fallback">
-      <div class="cat-fallback-molecule">
-        <i data-lucide="{{ .Params.hero_icon | default "flask-conical" }}"></i>
+    {{- $image = "/images/categories/liquids.png" -}}
+    {{- $gallery = slice "/images/categories/suspensions_clinical.png" "/images/categories/suspensions_lab.png" -}}
+  {{- end -}}
+{{- end -}}
+
+<div class="tab-dosage-visual w-full max-w-[420px]" aria-hidden="true" style="overflow: visible; perspective: 2000px; background-image: none;" data-animate="fade-in">
+  <div class="tab-dosage-visual__bg"></div>
+
+  {{/* The "Portfolio Album" Stack */}}
+  <div class="tab-dosage-portfolio" data-active-index="0" id="cat-portfolio-deck">
+    
+    {{/* Secondary Gallery Images (The background pages) */}}
+    {{ range $gIndex, $gImage := $gallery }}
+    <div class="tab-dosage-portfolio__page tab-dosage-portfolio__page--{{ $gIndex }}">
+      {{ partial "shared/optimized-image.html" (dict
+      "src" $gImage
+      "alt" (printf "%s clinical detail %d" $catName (add $gIndex 1))
+      "class" "w-full h-full object-cover rounded-xl"
+      ) }}
+    </div>
+    {{ end }}
+
+    {{/* Floating Technical Card (The "Album" peek) */}}
+    <div class="tab-dosage-dossier" data-animate data-animate-type="slide-right">
+      <div class="tab-dosage-dossier__line"></div>
+      <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">Tech-Dossier</span>
+      <div class="mt-2 space-y-1">
+        <div class="h-1 w-12 bg-brand/20 rounded"></div>
+        <div class="h-1 w-8 bg-brand/10 rounded"></div>
       </div>
     </div>
-  {{- end -}}
+
+    {{/* Main Clinical Render */}}
+    <div class="tab-dosage-visual__img">
+      {{ if $image }}
+        {{ partial "shared/optimized-image.html" (dict
+        "src" $image
+        "alt" (printf "%s clinical render" $catName)
+        "class" "w-full h-full object-contain"
+        ) }}
+      {{ else }}
+        <div class="tab-visual-icon">
+          <i data-lucide="{{ .Params.hero_icon | default "flask-conical" }}" class="icon" aria-hidden="true"></i>
+        </div>
+      {{ end }}
+    </div>
+
+    {{/* Floating Quality Seal */}}
+    <div class="tab-dosage-seal">
+      <i data-lucide="award" class="w-4 h-4 text-brand"></i>
+      <span class="text-[9px] font-black uppercase">WHO-GMP</span>
+    </div>
+  </div>
+
+  <div class="tab-dosage-reflection"></div>
 </div>

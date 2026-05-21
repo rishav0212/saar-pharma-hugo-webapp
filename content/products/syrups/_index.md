@@ -7,59 +7,62 @@
 
 # 1. SEO METADATA
 title: "Syrups"
-meta_title: "Pharmaceutical Syrup Manufacturer in Baddi | Third-Party Contract Manufacturing | Saar Biotech"
-meta_description: "WHO-GMP certified pharma syrup manufacturer in Baddi. Saar Biotech provides contract manufacturing for cough, antacid, hematinic & pediatric syrups with custom flavouring, private label, and full dossier support."
-description: "Third-party contract manufacturing of DCGI-approved pharmaceutical syrups — cough, antacid, pediatric, and hematinic formulations — from our WHO-GMP Baddi facility."
+meta_title: "Pharmaceutical Syrup Contract Manufacturing in Baddi, India | Saar Biotech"
+meta_description: "Schedule M compliant pharmaceutical syrup contract manufacturing in Baddi, India. Saar Biotech offers third-party services for pediatric, cough, and antacid syrups with custom flavouring and DCGI dossier support."
+description: "Third-party contract manufacturing of DCGI-approved pharmaceutical syrups in Baddi, India — cough, antacid, pediatric, and hematinic formulations with custom flavouring and fast turnaround."
 keywords:
-  - "syrup manufacturer Baddi"
-  - "pharmaceutical syrup contract manufacturing"
-  - "cough syrup third party manufacturing India"
-  - "pediatric syrup manufacturer HP"
-  - "antacid syrup contract manufacturing"
-  - "syrup CMO India WHO-GMP"
-  - "custom flavored syrup manufacturer"
-  - "hematinic syrup manufacturer Baddi"
+  - "pharmaceutical syrup third-party manufacturer Baddi, India"
+  - "cough syrup private label manufacturing India"
+  - "sugar-free liquid oral formulations Baddi"
+  - "custom-flavored pediatric syrup CMO India"
+  - "liquid syrup manufacturing company in India"
+  - "syrup third party manufacturing Himachal Pradesh"
+  - "Schedule M cough syrup manufacturer India"
 
 layout: "category"
 
 # 2. HERO SECTION CONTENT
 hero_icon: "flask-conical"
-tagline: "Custom-flavoured, palatability-optimised pharmaceutical syrups manufactured under WHO-GMP standards for third-party brands across India."
-hero_description: "Saar Biotech's dedicated syrup manufacturing lines combine precision mixing, advanced filtration, and custom flavouring systems to deliver market-ready syrup formulations with high patient compliance."
+image: "/images/categories/syrups.png"
+gallery:
+  - "/images/categories/syrups_clinical.png"
+  - "/images/categories/syrups_detail.png"
+tagline: "Custom-flavored and delicious pharmaceutical syrup contract manufacturing — produced under Schedule M standards for third-party brands in Baddi, India."
+hero_description: "Saar Biotech's specialized liquid filling lines combine high-volume mixing, advanced filtration, and premium flavor laboratories to deliver market-ready syrups with excellent taste and quality across India."
 hero_stats:
   - value: "WHO-GMP"
     label: "Certified Facility"
   - value: "Custom"
-    label: "Flavour Systems"
+    label: "Flavor Systems"
   - value: "30–45"
     label: "Day Turnaround"
 
 # 3. AUTHORITY SECTION
-authority_title: "Why Saar Biotech for Syrup Manufacturing?"
-authority_desc: "Our WHO-GMP Baddi facility features high-capacity syrup mixing tanks with integrated filtration systems, automated liquid filling lines, and a dedicated flavouring laboratory — enabling consistent, palatable syrups at commercial scale."
+authority_title: "Why Saar Biotech for Syrup Manufacturing in India?"
+authority_desc: "Our modern facility in Baddi, India is equipped with large-capacity mixing tanks, automatic high-speed bottling lines, and an in-house flavoring lab — ensuring smooth, delicious, and highly effective syrups for your brand across India."
 trust_signals:
   - icon: "flask-conical"
     title: "High-Capacity Mixing"
-    desc: "Large-volume mixing tanks with temperature-controlled jacketing ensure uniform API dispersion and consistent viscosity."
+    desc: "Our large, temperature-controlled mixing systems ensure ingredients are perfectly blended for consistent thickness, taste, and quality."
   - icon: "droplets"
-    title: "Custom Flavour Lab"
-    desc: "Dedicated flavouring systems including Mango, Orange, Peppermint, and Mixed Fruit to maximize patient acceptability."
+    title: "Custom Flavor Lab"
+    desc: "Our in-house flavoring experts develop delicious flavors like Mango, Orange, and Mint to ensure children accept the syrup easily."
   - icon: "shield-check"
-    title: "Preservative Optimization"
-    desc: "Precise antimicrobial preservative selection and challenge testing ensure extended shelf life without therapeutic compromise."
+    title: "Safe Formulation"
+    desc: "We use only the safest, high-grade ingredients to ensure your syrup stays fresh and effective throughout its shelf life."
   - icon: "package"
-    title: "Flexible Packaging"
-    desc: "Available in 60ml, 100ml, 200ml bottles with measured dosing caps, pilfer-proof closures, and custom mono-carton designs."
+    title: "Versatile Packaging"
+    desc: "High-speed bottling lines for 60ml, 100ml, and 200ml formats with calibrated measuring caps and pilfer-proof closures."
 
 manufacturing_specs:
   - label: "Manufacturing Location"
-    value: "Baddi, Himachal Pradesh"
+    value: "Baddi, Himachal Pradesh (India)"
   - label: "Quality Standards"
-    value: "WHO-GMP / ISO 9001:2015"
+    value: "Schedule M / ISO 9001:2015"
   - label: "Regulatory Compliance"
-    value: "DCGI / Schedule M"
+    value: "DCGI / CDSCO Guidelines"
   - label: "Dossier Status"
-    value: "CTD/ACTD Available"
+    value: "CTD Format Available"
   - label: "Flavouring Systems"
     value: "Mango, Orange, Peppermint, Mixed Fruit"
   - label: "Pack Sizes Available"
@@ -67,42 +70,42 @@ manufacturing_specs:
   - label: "MOQ (Pilot)"
     value: "5,000 Units"
   - label: "Batch Lead Time"
-    value: "30–45 Days (Domestic)"
+    value: "30–45 Days (India-Wide)"
 
 # 5. FAQ SECTION
 faqs:
-  - q: "What categories of pharmaceutical syrups does Saar Biotech manufacture?"
-    a: "We produce a wide range of pharmaceutical syrups including **cough & cold syrups** (Dextromethorphan, Bromhexine, Ambroxol combinations), **antacid syrups** (Magaldrate, Sucralfate), **hematinic syrups** (Ferrous Ascorbate, Folic Acid), **pediatric vitamin syrups**, and **analgesic syrups** — all manufactured under DCGI approval and WHO-GMP standards."
-  - q: "Can Saar Biotech formulate sugar-free or diabetic-friendly syrups?"
-    a: "Yes. We specialize in **sugar-free syrup formulations** using FDA-approved sweeteners like Sucralose, Aspartame, and Sorbitol — ideal for diabetic patients and health-conscious consumers. Our R&D team ensures correct sweetener balance so that palatability is maintained without any therapeutic compromise."
+  - q: "What categories of oral syrups does Saar Biotech manufacture in India?"
+    a: "We produce an extensive range of oral syrups including **cough & cold syrups** (combinations of Ambroxol, Dextromethorphan), **stomach and antacid syrups**, **iron tonic syrups** (Ferrous Ascorbate + Folic Acid), and **pediatric vitamins**. All are produced under DCGI approval and Schedule M guidelines in our Baddi, India facility."
+  - q: "Can Saar Biotech formulate sugar-free or diabetic-friendly syrups for the Indian market?"
+    a: "Yes. We formulate premium sugar-free syrups using safe, high-quality sweetening alternatives like Sucralose and Sorbitol, which are highly popular for diabetic products in India. Our R&D team ensures the syrup keeps its rich texture and delicious taste."
   - q: "What custom flavouring options are available for private label syrup manufacturing?"
-    a: "Our dedicated flavouring laboratory offers **Mango, Orange, Peppermint, Lemon, Strawberry, and Mixed Fruit** flavour systems. We calibrate flavour intensity based on API bitterness profile to ensure maximum patient compliance — particularly critical for pediatric formulations and cough syrups."
-  - q: "What are the packaging options for Saar Biotech's syrup products?"
-    a: "We offer pharmaceutical syrups in **60ml, 100ml, and 200ml** amber PET and glass bottles with measured dosing caps (5ml/10ml calibrated), pilfer-proof closures, and hermetically sealed packaging. Custom mono-carton and label designs compliant with Schedule M labeling requirements are available for all private label partners."
-  - q: "How does Saar Biotech maintain syrup quality across large production batches?"
-    a: "Our large-volume manufacturing uses temperature-controlled jacketed mixing vessels with inline viscosity monitoring. Every batch undergoes **pH, viscosity, assay (HPLC), microbial limit tests, and preservative efficacy testing** before COA issuance. This ensures consistent quality from the first bottle to the last in every commercial batch."
+    a: "Our flavoring lab offers **Mango, Orange, Mint, Lemon, Strawberry, and Mixed Fruit** options. We are experts at masking bitter or metallic tastes, ensuring a delicious and highly pleasant syrup that customers across India love."
+  - q: "What packaging and bottle configurations are available for contract manufacturing?"
+    a: "We offer amber PET and glass bottles in **60ml, 100ml, and 200ml** sizes. Each bottle includes a clear measuring cap (2.5ml/5ml/10ml), secure leak-proof caps, and custom-designed outer cartons that meet all Indian packaging guidelines."
+  - q: "How does Saar Biotech maintain consistent quality across large syrup batches?"
+    a: "Our Baddi, India facility uses automated temperature-controlled mixers to keep batches perfectly uniform. Every single batch is thoroughly checked for sweetness, thickness, and ingredient strength. We provide a complete Certificate of Analysis (COA) with every shipment."
 ---
 
-## Pharmaceutical Syrup Contract Manufacturing in Baddi, HP
+## Pharmaceutical Syrup Contract Manufacturing in Baddi, India
 
-Saar Biotech is a **WHO-GMP and ISO 9001:2015 certified pharmaceutical syrup manufacturer** in Baddi, the recognized pharmaceutical manufacturing hub of India. Our state-of-the-art liquid formulation facility produces a diverse portfolio of high-quality **cough syrups, antacid syrups, hematinic syrups, and pediatric vitamin syrups** for third-party and private label clients across India and international markets.
+Saar Biotech is a leading **pharmaceutical syrup contract manufacturer in Baddi, India**. Our state-of-the-art liquid formulation facility produces a diverse portfolio of high-quality **cough syrups, antacid syrups, hematinic syrups, and pediatric vitamin syrups** under Schedule M guidelines and ISO 9001:2015 standards, catering to leading pharmaceutical brands across the country.
 
-## Our Syrup Manufacturing Capabilities
+## Our Modern Syrup Manufacturing Capabilities in Baddi, India
 
-- **High-Capacity Production**: Large-volume mixing tanks with temperature-controlled jacketing for uniform API dispersion.
-- **Advanced Filtration**: Multi-stage filtration systems ensuring absolute clarity and particulate removal.
-- **Custom Flavour Laboratory**: Dedicated flavouring station with controlled addition systems for batch-to-batch flavour consistency.
-- **Automated Liquid Filling**: High-speed filling lines with automatic ROPP capping for pilfer-proof packaging.
-- **Sugar-Free Formulation**: Specialized sweetener expertise for diabetic-friendly and low-calorie syrup variants.
+- **High-Capacity Mixing**: Large-scale mixers with precise temperature controls that ensure all ingredients are perfectly and evenly distributed.
+- **Advanced Product Filtration**: Multi-stage filtering systems that ensure every bottle of syrup is crystal-clear and completely free from any residue.
+- **Flavor & Taste Calibration**: An in-house tasting lab that guarantees every single batch has the exact same delicious flavor, which is key for pediatric medicines.
+- **Automated Bottling & Capping**: High-speed filling lines equipped with secure, child-safe, and leak-proof caps to guarantee fresh delivery.
+- **Sugar-Free Formulation**: Specialized recipes using high-quality sweeteners to produce excellent syrups for diabetic health segments in India.
 
-## Key Syrup Categories
+## High-Demand Syrup Categories
 
-| Category | Example Formulations |
-|---|---|
-| **Cough & Cold** | Dextromethorphan + Phenylephrine, Ambroxol + Guaifenesin |
-| **Antacid & GI** | Magaldrate + Simethicone, Sucralfate, Lactulose |
-| **Hematinic** | Ferrous Ascorbate + Folic Acid, Carbonyl Iron |
-| **Pediatric Vitamins** | Multivitamin + Minerals, Vitamin B Complex |
-| **Analgesic** | Paracetamol, Ibuprofen, Mefenamic Acid |
+| Category | Example Formulations | Target Segment |
+|---|---|---|
+| **Cough & Cold** | Dextromethorphan + Phenylephrine, Ambroxol + Guaifenesin | Bronchial & Respiratory Relief |
+| **Antacid & GI** | Magaldrate + Simethicone, Sucralfate Gel | GI and Ulcer Care |
+| **Hematinic** | Ferrous Ascorbate + Folic Acid | Iron Deficiency & Anemia |
+| **Pediatric Vitamins** | Multivitamin + Minerals, Vitamin B-Complex | Pediatric Nutritional Support |
+| **Analgesic Liquids** | Paracetamol, Ibuprofen, Mefenamic Acid | Pediatric Pain & Fever |
 
-[Enquire about Syrup Manufacturing](/products/syrups/#contact) | [View All Products](/products/) | [Explore Suspensions](/products/suspensions/)
+[Enquire about pharmaceutical syrup contract manufacturing in Baddi, India](/products/syrups/#contact) | [View All Products](/products/) | [Explore Oral Suspensions](/products/suspensions/)
