@@ -10,7 +10,7 @@ body {
 
   /* ─── Site Header ─── */
   .site-header {
-    @apply fixed inset-x-0 top-0 z-50 h-[72px] text-white max-md:h-[60px];
+    @apply fixed inset-x-0 top-0 z-[120] h-[72px] text-white max-md:h-[60px];
   }
 
   .site-header::before {
@@ -332,7 +332,7 @@ body {
     top: 72px;
     left: 0;
     right: 0;
-    z-index: 49;
+    z-index: 119;
     gap: 4px;
     padding: 16px 20px 24px;
     border-top: 1px solid rgba(255, 255, 255, 0.10);

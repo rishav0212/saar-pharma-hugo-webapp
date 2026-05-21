@@ -207,7 +207,7 @@
   .product-filter-bar {
     background-color: rgba(237, 247, 246, 0.95);
     /* var(--color-surface) */
-    @apply backdrop-blur-md border-b border-line sticky top-[72px] z-[100] transition-all duration-300;
+    @apply backdrop-blur-md border-b border-line sticky top-[72px] z-[130] transition-all duration-300;
     box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.05);
   }
 
