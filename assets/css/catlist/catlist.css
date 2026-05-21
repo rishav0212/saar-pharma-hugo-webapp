@@ -122,12 +122,7 @@
     margin: 0 auto;
   }
 
-  /* Breadcrumb — tighter margin below (was mb-6 → mb-3) */
-  /* Replaced by shared components/breadcrumb.css */
-  .breadcrumb__list {
-    margin-bottom: 0.75rem; /* Equivalent to mb-3 */
-    justify-content: center; /* Center horizontally in the hero */
-  }
+  /* Breadcrumb wrapper logic handled in HTML via tailwind classes for left alignment */
 
   /* Eyebrow — tighter margin below (was mb-6 → mb-4) */
   .catlist-hero__eyebrow {

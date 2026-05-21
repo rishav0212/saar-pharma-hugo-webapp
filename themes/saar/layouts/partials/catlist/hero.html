@@ -47,7 +47,9 @@ STAT BAR: All values computed dynamically — never hardcoded.
     <div class="catlist-hero__inner">
 
       {{/* Breadcrumb */}}
-      {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Products" "url" "/products/") (dict "label" "Categories"))) }}
+      <div class="mb-8 w-full flex justify-start">
+        {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Products" "url" "/products/") (dict "label" "Categories"))) }}
+      </div>
 
       {{/* Eyebrow */}}
       <span class="eyebrow catlist-hero__eyebrow" data-animate="fade-in">
