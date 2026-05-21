@@ -5,6 +5,18 @@
 */}}
 <div class="breadcrumb-bar">
   <div class="container">
-    {{ partial "shared/breadcrumb.html" (dict "variant" "on-light" "items" (slice (dict "label" "Products" "url" "/products/") (dict "label" (.Params.product_name | default .Title)))) }}
+    {{ $items := slice (dict "label" "Products" "url" "/products/") }}
+    
+    {{ if .Params.categories }}
+      {{ $catName := index .Params.categories 0 }}
+      {{ $catSlug := $catName | urlize }}
+      {{ $items = $items | append (dict "label" $catName "url" (printf "/products/%s/" $catSlug)) }}
+    {{ else if .Params.dosage_form }}
+      {{ $items = $items | append (dict "label" .Params.dosage_form) }}
+    {{ end }}
+    
+    {{ $items = $items | append (dict "label" (.Params.product_name | default .Title)) }}
+    
+    {{ partial "shared/breadcrumb.html" (dict "variant" "on-light" "items" $items) }}
   </div>
 </div>
