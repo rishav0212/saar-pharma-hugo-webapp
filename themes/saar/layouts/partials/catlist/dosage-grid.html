@@ -1,0 +1,114 @@
+{{- /*
+CATLIST DOSAGE FORM BENTO GRID PARTIAL
+─────────────────────────────────────────────────────────────────────
+Dynamically fetches ALL category pages from the products section
+(any page with layout: "category") and renders them as an asymmetric
+bento grid with full-bleed image cards.
+
+Bento layout (lg+):
+  Col 1 (wide): Cat 1 spans 2 rows — tall featured card
+  Col 2: Cat 2 (top) + Cat 3 (bottom)
+  Col 3 (wide): Cat 4 spans 2 rows — tall featured card
+  Any 5th+ card: flows into a new auto row
+
+Product count is computed live, same logic as related-categories.html.
+Image falls back to a branded gradient if not set in frontmatter.
+*/ -}}
+
+{{- $categories := where (where .Site.Pages "Params.layout" "category") "Section" "products" -}}
+
+{{ if gt (len $categories) 0 }}
+<section class="section section--paper catlist-dosage-section" id="dosage-categories" aria-labelledby="dosage-grid-title">
+  <div class="container">
+
+    {{/* Section header — 2-column: title left, description + CTA right */}}
+    <div class="catlist-section-head" data-animate="fade-up">
+
+      {{/* LEFT: eyebrow + H2 only — strong anchor */}}
+      <div class="catlist-section-head__left">
+        <span class="eyebrow">Manufacturing by Dosage Form</span>
+        <h2 id="dosage-grid-title" class="section-title mt-2">Pharmaceutical Contract Manufacturing &mdash; By Dosage Form</h2>
+      </div>
+
+      {{/* RIGHT: description + CTA — fills the empty right-side space */}}
+      <div class="catlist-section-head__right">
+        <p class="section-kicker">
+          Our WHO-GMP and Schedule M certified facility in Baddi, India operates dedicated, physically segregated manufacturing lines for each dosage form &mdash; oral liquids, solid orals, dry syrups, and topicals &mdash; ensuring batch purity and zero cross-contamination.
+        </p>
+        <a href="/products/" class="btn btn--outline catlist-section-head__link">
+          View All Products
+          <i data-lucide="arrow-right" class="icon--sm" aria-hidden="true"></i>
+        </a>
+      </div>
+
+    </div>
+
+    {{/* Bento grid — CSS handles the asymmetric layout via nth-child selectors */}}
+    <div class="catlist-bento" data-animate-stagger>
+
+      {{- range $idx, $cat := $categories -}}
+
+        {{/* Compute live product count for this category */}}
+        {{- $catName := $cat.Title -}}
+        {{- $allProducts := where (where $.Site.Pages "Kind" "page") "Section" "products" -}}
+        {{- $catProducts := slice -}}
+        {{- range $allProducts -}}
+          {{- $p := . -}}
+          {{- if $p.Params.slug -}}
+            {{- with $p.Params.categories -}}
+              {{- if in . $catName -}}
+                {{- $catProducts = $catProducts | append $p -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- $productCount := len $catProducts -}}
+
+        <a href="{{ $cat.RelPermalink }}"
+           class="catlist-bento-card"
+           aria-label="{{ $cat.Title }} manufacturing — {{ if gt $productCount 0 }}{{ $productCount }} products{{ else }}explore range{{ end }}"
+           data-animate="fade-up">
+
+          {{/* Full-cover background image */}}
+          {{ if $cat.Params.image }}
+          <div class="catlist-bento-card__bg" style="background-image: url('{{ $cat.Params.image }}');" aria-hidden="true"></div>
+          {{ else }}
+          {{/* Fallback: teal gradient background if no image set */}}
+          <div class="catlist-bento-card__bg catlist-bento-card__bg--gradient" aria-hidden="true"></div>
+          {{ end }}
+
+          {{/* Darkening gradient overlay for text legibility */}}
+          <div class="catlist-bento-card__overlay" aria-hidden="true"></div>
+
+          {{/* Content positioned at bottom */}}
+          <div class="catlist-bento-card__content">
+
+            {{/* Icon + category badge */}}
+            <div class="catlist-bento-card__badge">
+              <i data-lucide="{{ $cat.Params.hero_icon | default "flask-conical" }}" aria-hidden="true"></i>
+              <span>{{ $cat.Title }}</span>
+            </div>
+
+            {{/* Product count chip */}}
+            <span class="catlist-bento-card__count">
+              {{ if gt $productCount 0 }}{{ $productCount }} Products{{ else }}Explore Range{{ end }}
+            </span>
+
+            {{/* Short description */}}
+            <p class="catlist-bento-card__desc">{{ $cat.Params.description | truncate 90 }}</p>
+
+            {{/* Explore CTA arrow */}}
+            <span class="catlist-bento-card__cta">
+              Explore {{ $cat.Title }}
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </span>
+
+          </div>
+        </a>
+
+      {{- end -}}
+
+    </div>
+  </div>
+</section>
+{{ end }}

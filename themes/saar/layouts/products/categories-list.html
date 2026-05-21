@@ -1,0 +1,78 @@
+{{/* ═════════════════════════════════════════════════════════════════
+     CATEGORIES HUB PAGE LAYOUT
+     URL: /products/categories/
+     Triggered by: layout: "categories-list" in content/products/categories/_index.md
+     Layout lookup: themes/saar/layouts/products/categories-list.html
+     
+     Architecture: Unique page — NOT the products grid, NOT the category single.
+     Sections: Hero → Dosage Form Bento → Therapeutic Areas → Why Saar → FAQ → CTA
+     ═════════════════════════════════════════════════════════════════ */}}
+{{ define "main" }}
+
+{{/* Inject page-specific JSON-LD before content */}}
+{{ partial "catlist/seo-schema.html" . }}
+
+<div id="categories-hub-page">
+
+    {{/* ── SECTION 1: Hero ── */}}
+    {{ partial "catlist/hero.html" . }}
+
+    {{/* ── SECTION 2: Dosage Form Bento Grid ── */}}
+    {{ partial "catlist/dosage-grid.html" . }}
+
+    {{/* ── INTER-SECTION SEPARATOR: Keyword marquee strip between grids ──
+         Reuses the global .marquee / .marquee__track component from products/marquee.html.
+         The marquee here lists key therapeutic + certification keywords for SEO
+         signal density between the two main content grids.
+    ── */}}
+    <div class="marquee catlist-marquee" aria-hidden="true">
+      <div class="marquee__track">
+        {{ range seq 1 3 }}
+          <span class="marquee__item">WHO-GMP Certified Facility</span>
+          <span class="marquee__item">Antibiotics Manufacturing</span>
+          <span class="marquee__item">Pediatric Syrups &amp; Drops</span>
+          <span class="marquee__item">ISO 9001:2015 Quality</span>
+          <span class="marquee__item">Analgesics &amp; NSAIDs</span>
+          <span class="marquee__item">Schedule M Compliant</span>
+          <span class="marquee__item">Gastroenterology Formulations</span>
+          <span class="marquee__item">GLP Lab Testing</span>
+          <span class="marquee__item">Respiratory &amp; Nasal Sprays</span>
+          <span class="marquee__item">Contract Manufacturing Baddi India</span>
+          <span class="marquee__item">DCGI Approved Molecules</span>
+          <span class="marquee__item">Dermatology &amp; Topicals</span>
+          <span class="marquee__item">Gynaecology Range</span>
+          <span class="marquee__item">Vitamins &amp; Nutraceuticals</span>
+        {{ end }}
+      </div>
+    </div>
+
+    {{/* ── SECTION 3: Therapeutic Areas ── */}}
+    {{ partial "catlist/therapeutic-grid.html" . }}
+
+    {{/* ── SECTION 4: FAQ ── */}}
+    {{ partial "catlist/faq.html" . }}
+
+    {{/* ── SECTION 6: CTA Strip (reuses global section--brand + cta-panel) ── */}}
+    <section class="section section--brand section--compact" aria-label="Start a manufacturing partnership">
+      <div class="container">
+        <div class="cta-panel" data-animate>
+          <div>
+            <h2 class="section-title section-title--sm">Ready to start your manufacturing partnership?</h2>
+            <p class="section-kicker">Share your dosage form, therapeutic area, molecule, and target volume — our team will respond with a quotation and roadmap within 24 hours.</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href="/contact/" class="btn btn--light" data-enquire-trigger>
+              Get a Free Quote
+              <i data-lucide="send" class="icon" aria-hidden="true"></i>
+            </a>
+            <a href="/products/" class="btn btn--ghost">
+              Browse All Products
+              <i data-lucide="layout-grid" class="icon" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+</div>
+{{ end }}

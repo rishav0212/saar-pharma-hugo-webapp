@@ -1,0 +1,146 @@
+{{- /*
+CATLIST THERAPEUTIC AREAS GRID PARTIAL
+─────────────────────────────────────────────────────────────────────
+Renders a 3-column (desktop) grid of therapeutic area cards.
+Data comes from .Params.therapeutic_areas in the _index.md frontmatter.
+
+SMART LINKING (build-time):
+Each card now resolves its destination at Hugo build time:
+1. Check if a dedicated category page exists at /products/<slug>/
+  (e.g. /products/antibiotics/) — if yes, the card title links there.
+  2. If no dedicated page exists, the CTA deep-links to the products
+  listing page with a pre-applied URL filter:
+  /products/?filter=<slug>
+    The products.js reads this ?filter param on load and auto-applies
+    the matching filter pill + scrolls to the grid.
+
+    This allows seamless navigation to both dedicated pages (where built)
+    and to the smart-filtered product listing for all other categories.
+    */ -}}
+
+    {{ with .Params.therapeutic_areas }}
+    <section class="section section--cloud section-rail catlist-therapeutic-section" id="therapeutic-areas"
+      aria-labelledby="therapeutic-title">
+      <div class="container">
+
+        {{/* Section header — 2-column: title left, description right */}}
+    <div class="catlist-section-head" data-animate="fade-up">
+
+      {{/* LEFT: eyebrow + H2 — visual anchor */}}
+      <div class="catlist-section-head__left">
+        <span class="eyebrow">Manufacturing by Therapeutic Area</span>
+        <h2 id="therapeutic-title" class="section-title mt-2">Pharmaceutical Contract Manufacturing by Therapeutic Category</h2>
+      </div>
+
+      {{/* RIGHT: description — fills empty space with scannable context */}}
+      <div class="catlist-section-head__right">
+        <p class="section-kicker">
+          Saar Biotech serves B2B pharma partners across 9+ major therapeutic categories — with specialized formulation expertise, dedicated raw material sourcing, and stringent DCGI-compliant QA protocols for each area. All manufactured under WHO-GMP standards in Baddi, India.
+        </p>
+      </div>
+
+    </div>
+
+        {{/* 3-column card grid — CSS handles responsive breakpoints */}}
+        <div class="catlist-therapeutic-grid" data-animate-stagger>
+
+          {{ range . }}
+          {{- /*
+        SMART LINK RESOLUTION (Hugo build-time, defensive):
+        $.Site.GetPage returns non-nil in edge cases even when the page doesn't exist.
+        Guards:
+          1. Use `with` (nil-safe in Hugo templates)
+          2. RelPermalink must be non-empty
+          3. RelPermalink must differ from the current page (prevents self-link)
+        If all pass → link to dedicated category page.
+        Otherwise → sessionStorage hand-off to /products/ filter.
+      */ -}}
+      {{- $slug     := .title | urlize -}}
+      {{- $dest     := printf "/products/?filter=%s" $slug -}}
+      {{- $isPage   := false -}}
+      {{- with $.Site.GetPage (printf "/products/%s" $slug) -}}
+        {{- if and .RelPermalink (ne .RelPermalink $.RelPermalink) -}}
+          {{- $dest   = .RelPermalink -}}
+          {{- $isPage = true -}}
+        {{- end -}}
+      {{- end -}}
+
+            <div class="catlist-therapeutic-card" data-animate="fade-up">
+
+              <div class="catlist-therapeutic-card__icon-wrap" aria-hidden="true">
+                <i data-lucide="{{ .icon | default "flask-conical" }}"></i>
+              </div>
+
+              {{/* Title — links to dedicated page OR sets sessionStorage + goes to /products/ */}}
+              <h3 class="catlist-therapeutic-card__title">
+                <a href="{{ if $isPage }}{{ $dest }}{{ else }}/products/{{ end }}"
+                   {{- if not $isPage }} onclick="sessionStorage.setItem('productsPreFilter','{{ $slug }}')"{{ end }}
+                   class="catlist-therapeutic-card__title-link">
+                  {{ .title }}
+                  {{- if $isPage }}
+                  <i data-lucide="arrow-right" class="catlist-therapeutic-card__title-arrow icon--xs" aria-hidden="true"></i>
+                  {{- end }}
+                </a>
+              </h3>
+
+              {{/* Description */}}
+              <p class="catlist-therapeutic-card__desc">{{ .desc }}</p>
+
+              {{/* Molecule tags */}}
+              {{ if .molecules }}
+              <div class="catlist-therapeutic-card__molecules" aria-label="Key molecules in this category">
+                {{ range .molecules }}
+                <span class="catlist-therapeutic-card__molecule">{{ . }}</span>
+                {{ end }}
+              </div>
+              {{ end }}
+
+              {{/* CTA row — Browse Products (sessionStorage) + Enquire (modal) */}}
+              <div class="catlist-therapeutic-card__actions">
+                {{- if $isPage }}
+                {{/* Dedicated page exists → direct link */}}
+                <a href="{{ $dest }}"
+                   class="btn btn--small btn--outline catlist-therapeutic-card__cta">
+                  View Category
+                  <i data-lucide="arrow-right" class="icon--sm" aria-hidden="true"></i>
+                </a>
+                {{- else }}
+                {{/* No dedicated page → /products/ + sessionStorage filter hand-off.
+                     href is the clean /products/ URL (Google sees only this).
+                     onclick fires before navigation and sets the filter key. */}}
+                <a href="/products/"
+                   class="btn btn--small btn--outline catlist-therapeutic-card__cta"
+                   onclick="sessionStorage.setItem('productsPreFilter','{{ $slug }}')">
+                  Browse Products
+                  <i data-lucide="layout-grid" class="icon--sm" aria-hidden="true"></i>
+                </a>
+                {{- end }}
+
+                {{/* Enquire — pre-fills modal with therapeutic area context */}}
+                <button class="catlist-therapeutic-card__cta btn btn--small btn--primary" data-enquire-trigger
+                  data-category="{{ .title }}" data-product-name="{{ .title }} — Contract Manufacturing Enquiry">
+                  Enquire
+                  <i data-lucide="send" class="icon--sm" aria-hidden="true"></i>
+                </button>
+              </div>
+
+            </div>
+            {{ end }}
+
+        </div>
+
+        {{/* SEO anchor text: internal links to related dosage form categories */}}
+        <div class="catlist-therapeutic-footer" data-animate="fade-up">
+          <p class="text-muted text-sm text-center mt-10">
+            Looking for a specific dosage form?
+            <a href="/products/suspensions/" class="text-brand font-semibold hover:underline">Suspensions</a>,
+            <a href="/products/tablets/" class="text-brand font-semibold hover:underline">Tablets</a>,
+            <a href="/products/syrups/" class="text-brand font-semibold hover:underline">Syrups</a>, and
+            <a href="/products/dry-syrups/" class="text-brand font-semibold hover:underline">Dry Syrups</a>
+            are all manufactured at our Baddi, India facility under WHO-GMP and Schedule M standards.
+          </p>
+        </div>
+
+      </div>
+    </section>
+    {{ end }}

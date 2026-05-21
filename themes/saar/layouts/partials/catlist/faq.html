@@ -1,0 +1,52 @@
+{{- /*
+CATLIST FAQ SECTION
+─────────────────────────────────────────────────────────────────────
+FAQ accordion for the /products/categories/ hub page.
+Reuses the site-wide .faq-accordion component (same HTML structure
+as products list.html and category.html) — zero new CSS needed here.
+Questions are page-specific (dosage form + therapeutic area selection 
+focus) — distinct from any other FAQ on the site.
+*/ -}}
+
+{{ if .Params.faqs }}
+<section class="section section--paper section-rail catlist-faq-section" id="catlist-faq" aria-labelledby="catlist-faq-title">
+  <div class="container">
+    <div class="faq-accordion">
+
+      {{/* Aside / Left Column */}}
+      <div class="faq-accordion__aside" data-animate="slide-right">
+        <span class="eyebrow">Manufacturer's Guide</span>
+        <h2 id="catlist-faq-title" class="section-title section-title--sm mt-2">
+          B2B Manufacturing FAQs — Dosage Forms &amp; Therapeutic Categories
+        </h2>
+        <p class="section-kicker mt-4">
+          Common questions from pharma marketing companies and B2B partners looking to start contract manufacturing across multiple product categories in India.
+        </p>
+        <a href="/contact/" class="btn btn--outline mt-8" data-enquire-trigger>
+          Start Your Enquiry
+          <i data-lucide="arrow-right" class="icon" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      {{/* FAQ Items */}}
+      <div class="faq-accordion__list" data-animate-stagger>
+        {{ range $index, $item := .Params.faqs }}
+        <div class="faq-accordion__item{{ if eq $index 0 }} is-active{{ end }}">
+          <div class="faq-accordion__header">
+            <span>{{ $item.q }}</span>
+          </div>
+          <div class="faq-accordion__answer">
+            <div class="faq-accordion__inner">
+              <div class="faq-accordion__content">
+                <p>{{ $item.a | markdownify }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+
+    </div>
+  </div>
+</section>
+{{ end }}

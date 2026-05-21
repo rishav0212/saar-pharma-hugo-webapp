@@ -332,6 +332,36 @@ export function initProducts() {
     });
   }
 
+  // ─── sessionStorage Pre-Filter (from /products/categories/ hub) ───────────
+  // When a user clicks "Browse Products" on a therapeutic area card, we store
+  // a filter slug in sessionStorage BEFORE navigating (no URL change).
+  // This is read here, applied once, and immediately cleared.
+  // Google NEVER sees any query param or different URL — /products/ stays clean.
+  const preFilter = sessionStorage.getItem('productsPreFilter');
+  if (preFilter) {
+    sessionStorage.removeItem('productsPreFilter'); // one-shot: clear immediately
+    const normalizedFilter = preFilter.toLowerCase().trim();
+    // Find matching pill by data-filter attribute
+    const matchingPill = Array.from(filterPills).find(
+      p => p.dataset.filter.toLowerCase().trim() === normalizedFilter
+    );
+    if (matchingPill) {
+      currentFilter = normalizedFilter;
+      updateInputs(currentQuery, currentFilter);
+      // Scroll the active pill into view in the horizontal strip
+      setTimeout(() => {
+        matchingPill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        // Also scroll page down to the product grid for better UX
+        const gridTop = document.getElementById('products-grid-top');
+        if (gridTop) gridTop.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    } else {
+      // Slug didn't match a pill exactly — use as a text search query instead
+      currentQuery = preFilter.toLowerCase().trim();
+      updateInputs(currentQuery, 'all');
+    }
+  }
+
   // Initial Load (Fast Stagger)
   setTimeout(() => applyFilters(true), 100);
 }

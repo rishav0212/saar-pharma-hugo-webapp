@@ -1,0 +1,124 @@
+{{- /*
+CATLIST HERO PARTIAL
+─────────────────────────────────────────────────────────
+Unique hero for the /products/categories/ hub page.
+Design intent: Centered layout (contrast with category single which is left+gallery split,
+and products/list hero which has a search bar).
+Uses the dark abyss→ink-deep gradient family but with a teal radial bloom at center.
+
+STAT BAR: All values computed dynamically — never hardcoded.
+  • Dosage Forms → live count of pages with layout: "category" in products section
+  • Therapeutic Areas → live count from .Params.therapeutic_areas in this page's frontmatter
+  • Years Active → computed from site.Params.founded via get-years.html helper
+  • B2B Partners → .Site.Params.clients (defined in hugo.toml)
+*/ -}}
+
+{{- $heroTagline := .Params.hero_tagline | default "Pharmaceutical Contract Manufacturing — Every Dosage Form & Therapeutic Area" -}}
+{{- $heroDesc    := .Params.hero_desc    | default "India's trusted WHO-GMP certified pharma manufacturer in Baddi, Himachal Pradesh — covering the full B2B manufacturing spectrum across dosage forms and therapeutic areas." -}}
+
+{{/* ── DYNAMIC STAT COMPUTATION ─────────────────────────────────────
+     All 4 stats are computed at build time from live site data.
+     This mirrors the pattern used in trust-band.html and the category single hero.
+     ─────────────────────────────────────────────────────────────── */}}
+
+{{/* Stat 1: Live count of dosage-form category pages in /products/ section */}}
+{{- $allCats := where (where .Site.Pages "Params.layout" "category") "Section" "products" -}}
+{{- $catCount := len $allCats -}}
+
+{{/* Stat 2: Count of therapeutic areas defined in this page's frontmatter */}}
+{{- $therapeuticCount := len .Params.therapeutic_areas -}}
+
+{{/* Stat 3: Years active — computed from .Site.Params.founded (matches trust-band pattern) */}}
+{{- $years := partial "helpers/get-years.html" . -}}
+
+{{/* Stat 4: B2B clients — from hugo.toml site params (same source as footer / trust-band) */}}
+{{- $clients := .Site.Params.clients -}}
+
+<section class="catlist-hero" aria-labelledby="catlist-hero-title">
+
+  {{/* Background layers: dot-grid + dual radial glows + floating rings */}}
+  <div class="catlist-hero__bg-grid" aria-hidden="true"></div>
+  <div class="catlist-hero__glow catlist-hero__glow--center" aria-hidden="true"></div>
+  <div class="catlist-hero__glow catlist-hero__glow--left" aria-hidden="true"></div>
+  <div class="catlist-hero__ring catlist-hero__ring--lg" aria-hidden="true"></div>
+  <div class="catlist-hero__ring catlist-hero__ring--sm" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="catlist-hero__inner">
+
+      {{/* Breadcrumb */}}
+      <nav class="catlist-hero__breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/products/">Products</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Categories</span>
+      </nav>
+
+      {{/* Eyebrow */}}
+      <span class="eyebrow catlist-hero__eyebrow" data-animate="fade-in">
+        Saar Biotech Manufacturing Hub
+      </span>
+
+      {{/* H1 — keyword-rich via hero_tagline in frontmatter */}}
+      <h1 id="catlist-hero-title" class="catlist-hero__title" data-animate="fade-up">
+        {{ $heroTagline }}
+      </h1>
+
+      {{/* Description */}}
+      <p class="catlist-hero__desc" data-animate="fade-up">
+        {{ $heroDesc }}
+      </p>
+
+      {{/* CTA Row */}}
+      <div class="catlist-hero__cta-group" data-animate="fade-up">
+        <a href="#dosage-categories" class="btn btn--primary btn--lg">
+          <i data-lucide="layout-grid" class="icon--sm" aria-hidden="true"></i>
+          Explore Dosage Forms
+        </a>
+        <a href="#therapeutic-areas" class="btn btn--ghost btn--lg">
+          <i data-lucide="stethoscope" class="icon--sm" aria-hidden="true"></i>
+          Browse Therapeutic Areas
+        </a>
+      </div>
+
+      {{/* ── 4-CELL STAT BAR ──────────────────────────────────────────
+           All values live-computed above. Uses data-count for optional
+           count-up animation (same attribute pattern as shared/metrics.html).
+           ──────────────────────────────────────────────────────────── */}}
+      <div class="catlist-hero__stats" role="list" data-animate="fade-up">
+
+        {{/* Cell 1: Dosage Forms — live page count */}}
+        <div class="catlist-hero__stat" role="listitem">
+          <span class="catlist-hero__stat-value"
+                data-count="{{ $catCount }}"
+                data-suffix="+">{{ $catCount }}+</span>
+          <span class="catlist-hero__stat-label">Dosage Forms</span>
+        </div>
+
+        {{/* Cell 2: Therapeutic Areas — live frontmatter count */}}
+        <div class="catlist-hero__stat" role="listitem">
+          <span class="catlist-hero__stat-value"
+                data-count="{{ $therapeuticCount }}"
+                data-suffix="+">{{ $therapeuticCount }}+</span>
+          <span class="catlist-hero__stat-label">Therapeutic Areas</span>
+        </div>
+
+        {{/* Cell 3: Years active — get-years.html helper (2025 - founded year) */}}
+        <div class="catlist-hero__stat" role="listitem">
+          <span class="catlist-hero__stat-value"
+                data-count="{{ $years }}"
+                data-suffix="+">{{ printf "%d+" $years }}</span>
+          <span class="catlist-hero__stat-label">Years in Manufacturing</span>
+        </div>
+
+        {{/* Cell 4: B2B partners — hugo.toml site param */}}
+        <div class="catlist-hero__stat" role="listitem">
+          <span class="catlist-hero__stat-value">{{ $clients }}</span>
+          <span class="catlist-hero__stat-label">B2B Partners Served</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

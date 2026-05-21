@@ -25,8 +25,8 @@ layout: "category"
 hero_icon: "pill"
 image: "/images/products/aceclofenac-rabeprazole.webp"
 gallery:
-  - "/images/categories/suspensions_clinical.png"
-  - "/images/categories/suspensions_lab.png"
+  - "/images/products/paracetamol.webp"
+  - "/images/products/azithromycin.webp"
 tagline: "High-quality pharmaceutical tablet manufacturing — plain, film-coated, enteric-coated, and sustained-release tablets from our advanced Baddi, India facility."
 hero_description: "Saar Biotech's dedicated tablet compression and coating facility produces a comprehensive range of solid dosage forms with Alu-Alu, Blister, and strip packaging options for leading brands in India."
 hero_stats:
@@ -85,28 +85,3 @@ faqs:
   - q: "What quality control parameters are checked for each tablet batch?"
     a: "Every tablet batch is thoroughly tested for hardness, strength, fast and reliable dissolution, uniform weight, and correct ingredient dosage. We provide a complete Certificate of Analysis (COA) with every commercial shipment across India to guarantee absolute safety and consistent quality."
 ---
-
-## Pharmaceutical Tablet Contract Manufacturing in Baddi, India
-
-Saar Biotech is a leading **pharmaceutical tablet contract manufacturing company in Baddi, India**. Our dedicated solid oral dosage plant produces plain, film-coated, enteric-coated, sustained-release, and bilayer tablets under Schedule M guidelines and ISO 9001:2015 standards, catering to prominent pharma brands across India.
-
-## Modern Tablet Manufacturing Technology in Baddi
-
-Our solid dosage facility in Baddi, India is equipped with modern, high-speed machinery:
-
-- **Rotary Compression Presses**: High-performance machines that produce tablets with perfectly uniform shape, weight, and consistency at a large scale.
-- **Automated Coating Systems**: Computerized coating equipment that ensures a perfectly smooth finish for film-coated and stomach-friendly enteric-coated tablets.
-- **Advanced Granulation Processing**: Modern mixing and drying equipment that creates consistent, high-quality mixtures for solid and durable tablets.
-- **High-Speed Packaging Lines**: Automated Alu-Alu, blister, and strip packing lines with smart camera check systems to prevent leaks and ensure secure packaging.
-
-## Key Solid Oral Dosage Categories
-
-| Tablet Type | Technology | Key Molecules | Target Therapeutic Area |
-|---|---|---|---|
-| **Film-Coated** | Smooth protective coating | Aceclofenac, Paracetamol, Metformin | Pain, Diabetes |
-| **Enteric-Coated** | Stomach-safe enteric layer | Pantoprazole, Rabeprazole, Diclofenac | Gastro-Resistant / NSAID |
-| **Sustained-Release** | Gradual-release formula | Glimepiride SR, Metformin SR, Tramadol SR | Chronic Therapy / Pain |
-| **Bilayer / FDC** | Double-layer compression | Aceclofenac + Rabeprazole | Combination Therapy |
-| **Chewable** | Chewable taste formulation | Calcium + Vitamin D3, Chewable Antacids | Nutritional Supplement |
-
-[Enquire about pharmaceutical tablet contract manufacturing in Baddi, India](/products/tablets/#contact) | [View All Products](/products/) | [Explore Oral Liquids](/products/syrups/)

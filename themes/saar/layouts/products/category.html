@@ -41,8 +41,32 @@
         </div>
     </section>
 
-    {{ partial "category/related-categories.html" . }}
+    {{/* ── POST-FAQ CONVERSION CTA STRIP ────────────────────────────────────────
+         Reuses the premium global .section--brand and .cta-panel design pattern 
+         from the homepage to ensure complete brand consistency and DRY logic.
+    ─────────────────────────────────────────────────────────────────────────── */}}
+    <section class="section section--brand section--compact" aria-label="Manufacturing enquiry call to action">
+      <div class="container">
+        <div class="cta-panel" data-animate>
+          <div>
+            <h2 class="section-title section-title--sm">Ready to launch your {{ .Title }} brand?</h2>
+            <p class="section-kicker">Our team can start formulation planning and send you a customised quote within 24 hours — no commitment needed.</p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href="#contact" class="btn btn--light" data-enquire-trigger
+               data-category="{{ .Title }}" data-product-name="{{ .Title }} Manufacturing Enquiry">
+              Get a Free Quote
+              <i data-lucide="send" class="icon" aria-hidden="true"></i>
+            </a>
+            <a href="/products/" class="btn btn--ghost">
+              Browse All Products
+              <i data-lucide="layout-grid" class="icon" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    {{ partial "shared/contact.html" . }}
+    {{ partial "category/related-categories.html" . }}
 </div>
 {{ end }}

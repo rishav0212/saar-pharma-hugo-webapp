@@ -19,6 +19,29 @@
 <section class="section section--cloud cat-authority-section" id="cat-why">
   <div class="container">
 
+    {{- /* ── SOCIAL PROOF MINI-BAR — live stats pulled from site params ── */}}
+    <div class="cat-proof-bar" data-animate="fade-up">
+      <div class="cat-proof-bar__item">
+        <span class="cat-proof-bar__value">{{ .Site.Params.clients }}</span>
+        <span class="cat-proof-bar__label">Pharma Partners Across India</span>
+      </div>
+      <span class="cat-proof-bar__divider" aria-hidden="true"></span>
+      <div class="cat-proof-bar__item">
+        <span class="cat-proof-bar__value">20+</span>
+        <span class="cat-proof-bar__label">Years of Formulation Expertise</span>
+      </div>
+      <span class="cat-proof-bar__divider" aria-hidden="true"></span>
+      <div class="cat-proof-bar__item">
+        <span class="cat-proof-bar__value">{{ .Site.Params.products }}</span>
+        <span class="cat-proof-bar__label">Approved Formulations</span>
+      </div>
+      <span class="cat-proof-bar__divider" aria-hidden="true"></span>
+      <div class="cat-proof-bar__item">
+        <span class="cat-proof-bar__value">Schedule M</span>
+        <span class="cat-proof-bar__label">Compliant Manufacturing</span>
+      </div>
+    </div>
+
     <div class="cat-authority__grid">
 
       {{- /* ── LEFT: TRUST SIGNALS ── */ -}}

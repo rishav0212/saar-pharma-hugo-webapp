@@ -50,8 +50,12 @@
           {{ $catName }} Manufacturing Portfolio
         </h2>
         <p class="section-kicker mt-3">
-          All formulations are DCGI approved &amp; produced under WHO-GMP standards. 
-          Each product includes full dossier support for rapid market entry.
+          {{ if .Params.products_kicker }}
+            {{ .Params.products_kicker }}
+          {{ else }}
+            All formulations are DCGI approved &amp; produced under Schedule M compliant quality standards.
+            Each product includes complete dossier support for rapid market entry across India.
+          {{ end }}
         </p>
       </div>
       <div class="cat-products__header-count" aria-live="polite">

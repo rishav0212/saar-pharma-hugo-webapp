@@ -1,0 +1,608 @@
+@layer components {
+
+  /* ═══════════════════════════════════════════════════════════════════
+     CATEGORIES HUB PAGE — Design System (catlist)
+     URL: /products/categories/
+     
+     Token rules:
+     - All colors via CSS variables from base/variables.css
+     - All shadows via --shadow-soft / --shadow-lift
+     - All typography via font-display / font-sans
+     - No hardcoded hex values
+     ═══════════════════════════════════════════════════════════════════ */
+
+
+  /* ─────────────────────────────────────────────────────────────────
+     1. HERO — Centered dark hero, distinct from:
+        • .section--cat-hero (left-content + gallery-right split)
+        • .section--products-hero (search bar layout)
+     Uses a centered column layout with teal radial bloom at center.
+     ───────────────────────────────────────────────────────────────── */
+
+  .catlist-hero {
+    @apply relative overflow-hidden;
+    /* Tighter, denser hero — was 100→160px top, reduced for a more compact premium feel */
+    padding-top: clamp(72px, 8vw, 110px);
+    padding-bottom: clamp(48px, 6vw, 80px);
+    /* Teal bloom at center against deep dark — unique from the off-center category hero glow */
+    background:
+      radial-gradient(ellipse at 50% 60%, rgba(var(--color-brand-rgb), 0.18) 0%, transparent 55%),
+      linear-gradient(160deg, var(--color-ink-deep) 0%, var(--color-abyss) 100%);
+  }
+
+  /* Subtle dot-matrix grid — same pattern as cat-hero but centered mask */
+  .catlist-hero__bg-grid {
+    @apply absolute inset-0 z-0 pointer-events-none;
+    background-image:
+      radial-gradient(circle, rgba(var(--color-brand-2-rgb), 0.09) 1.5px, transparent 1.5px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 90%);
+  }
+
+  /* Radial glow blobs — uses brand token colors */
+  .catlist-hero__glow {
+    @apply absolute pointer-events-none rounded-full;
+    filter: blur(90px);
+  }
+
+  .catlist-hero__glow--center {
+    width: 700px;
+    height: 700px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(var(--color-brand-rgb), 0.14) 0%, rgba(var(--color-brand-2-rgb), 0.04) 60%, transparent 80%);
+    animation: catlistGlowPulse 16s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  .catlist-hero__glow--left {
+    width: 500px;
+    height: 500px;
+    bottom: -100px;
+    left: -80px;
+    background: radial-gradient(circle, rgba(var(--color-brand-2-rgb), 0.10) 0%, transparent 70%);
+    animation: catlistGlowPulse 12s ease-in-out infinite alternate-reverse;
+    z-index: 0;
+  }
+
+  @keyframes catlistGlowPulse {
+    0%   { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50%  { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+  }
+
+  .catlist-hero__glow--left {
+    /* Override the translate for non-centered glow */
+    animation: catlistGlowFloat 14s ease-in-out infinite alternate;
+  }
+
+  @keyframes catlistGlowFloat {
+    0%   { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    100% { transform: translate(30px, -40px) scale(1.1); opacity: 0.9; }
+  }
+
+  /* Decorative floating rings — same visual language as category hero */
+  .catlist-hero__ring {
+    @apply absolute pointer-events-none rounded-full border border-brand-2/12;
+    box-shadow: 0 0 60px rgba(var(--color-brand-2-rgb), 0.04), inset 0 0 60px rgba(var(--color-brand-2-rgb), 0.04);
+    animation: catlistRingSpin 24s linear infinite;
+    z-index: 0;
+  }
+
+  .catlist-hero__ring--lg {
+    width: 680px;
+    height: 680px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-direction: normal;
+  }
+
+  .catlist-hero__ring--sm {
+    width: 380px;
+    height: 380px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-color: rgba(var(--color-brand-2-rgb), 0.16);
+    animation-direction: reverse;
+    animation-duration: 18s;
+  }
+
+  @keyframes catlistRingSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Inner content — centered column, max-width constrained */
+  .catlist-hero__inner {
+    @apply relative z-10 flex flex-col items-center text-center;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* Breadcrumb — tighter margin below (was mb-6 → mb-3) */
+  .catlist-hero__breadcrumb {
+    @apply flex items-center gap-2 text-[11px] font-bold text-white/40 uppercase tracking-widest mb-3;
+  }
+
+  .catlist-hero__breadcrumb a {
+    @apply text-white/40 hover:text-brand-2 transition-colors duration-200;
+  }
+
+  .catlist-hero__breadcrumb span[aria-current] {
+    @apply text-brand-2/70;
+  }
+
+  /* Eyebrow — tighter margin below (was mb-6 → mb-4) */
+  .catlist-hero__eyebrow {
+    color: var(--color-brand-2);
+    @apply mb-4;
+  }
+
+  /* H1 — slightly smaller max cap, tighter bottom margin (was mb-5 → mb-3) */
+  .catlist-hero__title {
+    font-size: clamp(28px, 4.8vw, 58px);
+    @apply leading-[1.0] font-display font-black tracking-tighter text-white mb-3;
+    /* Premium multi-layer white gradient text — same technique as category hero H1 */
+    background: linear-gradient(to bottom, var(--color-white) 40%, rgba(var(--color-white-rgb), 0.70) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
+  }
+
+  /* Description — tighter line-height and bottom margin (was mb-8 → mb-5) */
+  .catlist-hero__desc {
+    @apply text-[15px] leading-[1.65] mb-5 max-w-[600px] mx-auto;
+    color: rgba(var(--color-white-rgb), 0.62);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* CTA group — tighter bottom gap before stat bar (was mb-12 → mb-7) */
+  .catlist-hero__cta-group {
+    @apply flex flex-wrap items-center justify-center gap-3 mb-7;
+  }
+
+  /* 4-cell stat bar — horizontal row below CTAs */
+  .catlist-hero__stats {
+    @apply flex flex-wrap items-center justify-center w-full;
+    background: rgba(var(--color-white-rgb), 0.04);
+    border: 1px solid rgba(var(--color-white-rgb), 0.08);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Stat cells — tighter vertical padding (was py-5 → py-3.5) */
+  .catlist-hero__stat {
+    @apply flex flex-col items-center gap-0.5 py-3.5 flex-1 min-w-[110px] relative;
+  }
+
+  .catlist-hero__stat + .catlist-hero__stat::before {
+    content: "";
+    @apply absolute left-0 top-1/4 h-1/2;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(var(--color-white-rgb), 0.15), transparent);
+  }
+
+  /* Stat value — tighter font size range (was 20→30px) */
+  .catlist-hero__stat-value {
+    font-size: clamp(18px, 2.4vw, 26px);
+    @apply font-display font-black leading-none tracking-tight;
+    color: var(--color-brand-2);
+    text-shadow: 0 0 20px rgba(var(--color-brand-2-rgb), 0.40);
+  }
+
+  .catlist-hero__stat-label {
+    @apply text-[10px] font-bold text-white/40 uppercase tracking-[0.12em] text-center;
+  }
+
+  /* Mobile: wrap stats to 2 columns */
+  @media (max-width: 640px) {
+    .catlist-hero__stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .catlist-hero__stat:nth-child(1),
+    .catlist-hero__stat:nth-child(2) {
+      border-bottom: 1px solid rgba(var(--color-white-rgb), 0.08);
+    }
+
+    /* Reset the pseudo dividers on mobile; grid borders replace them */
+    .catlist-hero__stat + .catlist-hero__stat::before {
+      display: none;
+    }
+
+    .catlist-hero__stat:nth-child(odd)::after {
+      content: "";
+      @apply absolute right-0 top-1/4 h-1/2;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(var(--color-white-rgb), 0.15), transparent);
+    }
+  }
+
+
+  /* ─────────────────────────────────────────────────────────────────
+     2. SECTION HEADERS (shared by dosage + therapeutic sections)
+     2-column split layout:
+       LEFT  (.catlist-section-head__left)  — eyebrow + H2 title
+       RIGHT (.catlist-section-head__right) — description paragraph + optional CTA
+     Fills the previously empty right-side space for a premium editorial feel.
+     Stacks to a single column on mobile.
+     ───────────────────────────────────────────────────────────────── */
+
+  .catlist-section-head {
+    @apply flex flex-wrap items-start justify-between gap-8 mb-14 max-md:mb-10;
+  }
+
+  /* Left column: eyebrow + H2 — takes ~48% at desktop */
+  .catlist-section-head__left {
+    @apply flex flex-col gap-2;
+    flex: 0 1 46%;
+    min-width: 260px;
+  }
+
+  /* Right column: description + CTA — takes up to ~45% at desktop */
+  .catlist-section-head__right {
+    @apply flex flex-col gap-4 justify-center;
+    flex: 0 1 46%;
+    max-width: 500px;
+  }
+
+  /* Description text inside the right column — inherits section-kicker styles
+     but we nudge the top alignment down slightly to align with H2 baseline */
+  .catlist-section-head__right .section-kicker {
+    @apply mt-0;
+  }
+
+  /* Full-width on mobile — both columns stack naturally */
+  @media (max-width: 767px) {
+    .catlist-section-head__left,
+    .catlist-section-head__right {
+      flex: none;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  /* Deprecated: kept for backward compat if used elsewhere */
+  .catlist-section-head__link {
+    @apply shrink-0;
+  }
+
+
+  /* ─────────────────────────────────────────────────────────────────
+     3. DOSAGE FORM BENTO GRID
+     Asymmetric 3-column bento: tall-left | stacked-center | tall-right
+     This is UNIQUE to the catlist page — not used anywhere else.
+     
+     Layout at lg+:
+       [Cat 1 — tall, col 1] [Cat 2 — top, col 2] [Cat 4 — tall, col 3]
+       [Cat 1 — tall, col 1] [Cat 3 — bot, col 2] [Cat 4 — tall, col 3]
+     
+     Mobile: Single column stack.
+     Tablet (md): 2-column, all same height.
+     Desktop (lg+): 3-column asymmetric bento.
+     ───────────────────────────────────────────────────────────────── */
+
+  .catlist-bento {
+    @apply grid gap-5;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .catlist-bento {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .catlist-bento {
+      /* 3 columns: wider outer + narrower center */
+      grid-template-columns: 1.25fr 1fr 1.25fr;
+      grid-template-rows: 340px 340px;
+      gap: 1.25rem;
+    }
+
+    /* Card 1: spans both rows on the left — TALL featured */
+    .catlist-bento-card:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+
+    /* Card 2: top of center column */
+    .catlist-bento-card:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    /* Card 3: bottom of center column */
+    .catlist-bento-card:nth-child(3) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    /* Card 4: spans both rows on the right — TALL featured */
+    .catlist-bento-card:nth-child(4) {
+      grid-column: 3;
+      grid-row: 1 / 3;
+    }
+
+    /* Any 5th+ card: auto-flow in a new row, equal thirds */
+    .catlist-bento-card:nth-child(n+5) {
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+
+  /* Base card styles — image-cover with text overlay */
+  .catlist-bento-card {
+    @apply relative overflow-hidden rounded-2xl cursor-pointer no-underline block;
+    min-height: 320px;
+    border: 1px solid rgba(var(--color-white-rgb), 0.06);
+    /* Transition for the hover lift + glow */
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20);
+  }
+
+  .catlist-bento-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(var(--color-brand-2-rgb), 0.25);
+  }
+
+  /* Background image — full cover */
+  .catlist-bento-card__bg {
+    @apply absolute inset-0 w-full h-full bg-cover bg-center;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .catlist-bento-card:hover .catlist-bento-card__bg {
+    transform: scale(1.06);
+  }
+
+  /* Gradient fallback background when no image */
+  .catlist-bento-card__bg--gradient {
+    background: linear-gradient(135deg, var(--color-brand-3) 0%, var(--color-ink-deep) 100%);
+    background-image: none !important;
+  }
+
+  /* Dark overlay — gradient from bottom for text legibility */
+  .catlist-bento-card__overlay {
+    @apply absolute inset-0 z-10;
+    background:
+      linear-gradient(to top, rgba(var(--color-abyss-rgb), 0.92) 0%, rgba(var(--color-abyss-rgb), 0.45) 50%, rgba(var(--color-abyss-rgb), 0.15) 100%);
+    transition: background 0.4s ease;
+  }
+
+  .catlist-bento-card:hover .catlist-bento-card__overlay {
+    background:
+      linear-gradient(to top, rgba(var(--color-abyss-rgb), 0.95) 0%, rgba(var(--color-abyss-rgb), 0.55) 55%, rgba(var(--color-abyss-rgb), 0.25) 100%);
+  }
+
+  /* Content pinned to bottom */
+  .catlist-bento-card__content {
+    @apply absolute bottom-0 left-0 right-0 z-20 p-6 flex flex-col gap-2;
+  }
+
+  /* Category badge pill (icon + name) */
+  .catlist-bento-card__badge {
+    @apply inline-flex items-center gap-2 text-brand-2 text-[10px] font-black uppercase tracking-[0.2em] mb-1;
+  }
+
+  .catlist-bento-card__badge i {
+    @apply w-3.5 h-3.5;
+    filter: drop-shadow(0 0 6px rgba(var(--color-brand-2-rgb), 0.6));
+  }
+
+  /* Product count chip */
+  .catlist-bento-card__count {
+    @apply inline-flex self-start text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full;
+    background: rgba(var(--color-brand-2-rgb), 0.18);
+    border: 1px solid rgba(var(--color-brand-2-rgb), 0.30);
+    color: var(--color-brand-2);
+    backdrop-filter: blur(8px);
+    transition: background 0.3s ease;
+  }
+
+  .catlist-bento-card:hover .catlist-bento-card__count {
+    background: rgba(var(--color-brand-2-rgb), 0.28);
+  }
+
+  /* Description */
+  .catlist-bento-card__desc {
+    @apply text-[13px] text-white/68 leading-snug m-0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+    opacity: 0;
+  }
+
+  /* Reveal description on hover (desktop only to avoid tap-to-hover issues on mobile) */
+  @media (hover: hover) {
+    .catlist-bento-card:hover .catlist-bento-card__desc {
+      max-height: 80px;
+      opacity: 1;
+    }
+  }
+
+  /* Arrow CTA — bottom row of card */
+  .catlist-bento-card__cta {
+    @apply flex items-center gap-2 text-white font-bold text-[13px] mt-1;
+    transition: gap 0.3s ease, color 0.3s ease;
+  }
+
+  .catlist-bento-card__cta i {
+    @apply w-4 h-4;
+    transition: transform 0.3s ease;
+  }
+
+  .catlist-bento-card:hover .catlist-bento-card__cta {
+    color: var(--color-brand-2);
+    gap: 10px;
+  }
+
+  .catlist-bento-card:hover .catlist-bento-card__cta i {
+    transform: translateX(4px);
+  }
+
+
+  /* ─────────────────────────────────────────────────────────────────
+     4. THERAPEUTIC AREAS GRID
+     3-column white cards on desktop, 2 on tablet, 1 on mobile.
+     Intentionally lighter and more clinical than the bento cards —
+     different section rhythm through color/weight contrast.
+     ───────────────────────────────────────────────────────────────── */
+
+  .catlist-therapeutic-section {
+    /* Uses .section--cloud via HTML class */
+  }
+
+  .catlist-therapeutic-grid {
+    @apply grid gap-6;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .catlist-therapeutic-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .catlist-therapeutic-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Individual therapeutic card */
+  .catlist-therapeutic-card {
+    @apply flex flex-col gap-3 p-6 bg-white rounded-2xl border border-line transition-all duration-300;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .catlist-therapeutic-card:hover {
+    @apply border-brand-line -translate-y-1.5;
+    box-shadow: var(--shadow-lift);
+  }
+
+  /* Icon orb */
+  .catlist-therapeutic-card__icon-wrap {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center shrink-0 self-start transition-all duration-300;
+    /* Subtle teal tint — uses brand-rgb token */
+    background: rgba(var(--color-brand-rgb), 0.08);
+    border: 1px solid rgba(var(--color-brand-rgb), 0.14);
+  }
+
+  .catlist-therapeutic-card__icon-wrap i {
+    @apply w-5 h-5;
+    color: var(--color-brand-3);
+  }
+
+  .catlist-therapeutic-card:hover .catlist-therapeutic-card__icon-wrap {
+    background: rgba(var(--color-brand-rgb), 0.15);
+    border-color: rgba(var(--color-brand-rgb), 0.25);
+  }
+
+  .catlist-therapeutic-card:hover .catlist-therapeutic-card__icon-wrap i {
+    color: var(--color-brand);
+  }
+
+  /* Title */
+  .catlist-therapeutic-card__title {
+    @apply text-[16px] font-display font-black text-ink leading-tight m-0;
+    transition: color 0.2s ease;
+  }
+
+  .catlist-therapeutic-card:hover .catlist-therapeutic-card__title {
+    color: var(--color-brand-3);
+  }
+
+  /* Description */
+  .catlist-therapeutic-card__desc {
+    @apply text-[13px] text-muted leading-relaxed m-0 flex-1;
+  }
+
+  /* Molecule pills container */
+  .catlist-therapeutic-card__molecules {
+    @apply flex flex-wrap gap-1.5;
+  }
+
+  /* Individual molecule pill */
+  .catlist-therapeutic-card__molecule {
+    @apply inline-block text-[10px] font-bold text-brand-3 uppercase tracking-wide px-2.5 py-1 rounded-full;
+    background: rgba(var(--color-brand-rgb), 0.07);
+    border: 1px solid rgba(var(--color-brand-rgb), 0.14);
+  }
+
+  /* CTA button — overrides base btn sizing for compact card fit */
+  .catlist-therapeutic-card__cta {
+    @apply self-start;
+  }
+
+
+  /* ─────────────────────────────────────────────────────────────────
+     5. KEYWORD MARQUEE SEPARATOR
+     Reuses global .marquee / .marquee__track components.
+     Scoped override (.catlist-marquee) adds a subtle teal tint to 
+     distinguish it from the products listing page marquee.
+     No new animation — the global marquee keyframe handles it.
+     ───────────────────────────────────────────────────────────────── */
+
+  .catlist-marquee {
+    /* Override the products-page marquee background with a lighter surface tint */
+    background: rgba(var(--color-brand-rgb), 0.05);
+    border-top: 1px solid rgba(var(--color-brand-rgb), 0.10);
+    border-bottom: 1px solid rgba(var(--color-brand-rgb), 0.10);
+  }
+
+  .catlist-marquee .marquee__item {
+    /* Use teal text instead of the default muted/ink color */
+    color: var(--color-brand-3);
+    opacity: 0.8;
+  }
+
+
+  /* ─────────────────────────────────────────────────────────────────
+     6. RESPONSIVE SAFETY
+     Prevent any overflow from the bento grid or therapeutic grid
+     on narrow viewports.
+     ───────────────────────────────────────────────────────────────── */
+
+  .catlist-bento > *,
+  .catlist-therapeutic-grid > * {
+    min-width: 0;
+  }
+
+  @media (max-width: 767px) {
+    .catlist-bento {
+      grid-template-columns: 1fr;
+    }
+
+    .catlist-bento-card {
+      min-height: 260px;
+    }
+
+    /* Always show description on mobile (no hover state) */
+    .catlist-bento-card__desc {
+      max-height: 80px;
+      opacity: 1;
+    }
+
+    .catlist-section-head {
+      @apply flex-col items-start;
+    }
+
+    .catlist-hero__cta-group {
+      @apply flex-col w-full;
+    }
+
+    .catlist-hero__cta-group .btn {
+      @apply w-full justify-center;
+    }
+  }
+
+} /* end @layer components */
+

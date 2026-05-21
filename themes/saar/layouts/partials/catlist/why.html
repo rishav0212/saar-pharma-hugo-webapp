@@ -1,0 +1,71 @@
+{{- /*
+CATLIST WHY SAAR BIOTECH SECTION
+─────────────────────────────────────────────────────────────────────
+4-column trust signal strip — compact, punchy, distinct from any
+"why" section on other pages. Uses a light surface background between
+the therapeutic grid and the FAQ to provide visual breathing room.
+
+Data from .Params.why_choose in _index.md (with hardcoded fallbacks
+so the section always renders even if frontmatter is missing).
+*/ -}}
+
+{{- $items := .Params.why_choose -}}
+{{- if not $items -}}
+  {{- $items = slice
+    (dict "icon" "award"         "title" "WHO-GMP Certified"          "desc" "All dosage forms manufactured under WHO-GMP and ISO 9001:2015 in Baddi, India.")
+    (dict "icon" "clock"         "title" "30–45 Day Turnaround"       "desc" "From artwork approval to first dispatch — delivered on time, India-wide.")
+    (dict "icon" "file-check-2"  "title" "Complete Dossier Support"   "desc" "DCGI licensing, state permissions, COA issuance — handled by our team.")
+    (dict "icon" "shield-check"  "title" "Segregated Lines"           "desc" "Dedicated Beta-Lactam and Non-Beta-Lactam manufacturing blocks for absolute purity.")
+  -}}
+{{- end -}}
+
+<section class="section catlist-why-section" aria-labelledby="catlist-why-title">
+  <div class="container">
+
+    <div class="catlist-why-head" data-animate="fade-up">
+      <span class="eyebrow">Manufacturing Assurance</span>
+      <h2 id="catlist-why-title" class="section-title mt-2">
+        Why Choose Saar Biotech as Your<br class="hidden lg:block"> Contract Manufacturing Partner?
+      </h2>
+      <p class="section-kicker mt-3 max-w-[680px]">
+        Across every dosage form and every therapeutic area, Saar Biotech maintains the same uncompromising standards — because your brand's reputation depends on it.
+      </p>
+    </div>
+
+    <div class="catlist-why-grid" data-animate-stagger>
+      {{ range $items }}
+      <div class="catlist-why-card" data-animate="fade-up">
+        <div class="catlist-why-card__icon-wrap" aria-hidden="true">
+          <i data-lucide="{{ .icon }}"></i>
+        </div>
+        <h3 class="catlist-why-card__title">{{ .title }}</h3>
+        <p class="catlist-why-card__desc">{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+
+    {{/* Proof bar — reuses the existing cat-proof-bar design system */}}
+    <div class="cat-proof-bar mt-16" data-animate="fade-up">
+      <div class="cat-proof-bar__item">
+        <span class="cat-proof-bar__value">{{ .Site.Params.products }}</span>
+        <span class="cat-proof-bar__label">Approved Formulations</span>
+      </div>
+      <span class="cat-proof-bar__divider" aria-hidden="true"></span>
+      <div class="cat-proof-bar__item">
+        <span class="cat-proof-bar__value">{{ .Site.Params.clients }}</span>
+        <span class="cat-proof-bar__label">B2B Partners Served</span>
+      </div>
+      <span class="cat-proof-bar__divider" aria-hidden="true"></span>
+      <div class="cat-proof-bar__item">
+        <span class="cat-proof-bar__value">Schedule M</span>
+        <span class="cat-proof-bar__label">Compliant Manufacturing</span>
+      </div>
+      <span class="cat-proof-bar__divider" aria-hidden="true"></span>
+      <div class="cat-proof-bar__item">
+        <span class="cat-proof-bar__value">30–45</span>
+        <span class="cat-proof-bar__label">Day Turnaround (Days)</span>
+      </div>
+    </div>
+
+  </div>
+</section>
