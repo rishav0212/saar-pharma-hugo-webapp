@@ -14,16 +14,21 @@
       <a href="/" class="breadcrumb__link">Home</a>
     </li>
 
-    {{ range .items }}
+    {{ $len := len .items }}
+    {{ range $index, $item := .items }}
       <li class="breadcrumb__sep" aria-hidden="true">
         <i data-lucide="chevron-right"></i>
       </li>
 
       <li class="breadcrumb__item">
-        {{ if .url }}
-          <a href="{{ .url }}" class="breadcrumb__link">{{ .label }}</a>
-        {{ else }}
+        {{ if eq (add $index 1) $len }}
           <span class="breadcrumb__current" aria-current="page">{{ .label }}</span>
+        {{ else }}
+          {{ if .url }}
+            <a href="{{ .url }}" class="breadcrumb__link">{{ .label }}</a>
+          {{ else }}
+            <span class="breadcrumb__link" style="opacity: 0.7; cursor: default;">{{ .label }}</span>
+          {{ end }}
         {{ end }}
       </li>
     {{ end }}
