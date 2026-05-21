@@ -1,0 +1,137 @@
+@layer components {
+
+  /* ═══════════════════════════════════════════════════════════════════
+     SHARED BREADCRUMB COMPONENT
+     ─────────────────────────────────────────────────────────────────
+     Single source of truth for all breadcrumb navigation across the
+     entire site. Replaces the three separate implementations that
+     previously existed in article, product, and catlist CSS files.
+
+     HTML is rendered via partial "shared/breadcrumb.html".
+     Two theme variants handle dark and light backgrounds.
+     One wrapper modifier (.breadcrumb-bar) handles the product-page
+     full-width bar with border-bottom.
+
+     Variants:
+       .breadcrumb--on-dark   white/muted text → dark headers (articles, catlist)
+       .breadcrumb--on-light  ink/muted text   → light backgrounds (product pages)
+
+     Wrapper:
+       .breadcrumb-bar        full-width white bar with bottom border
+     ═══════════════════════════════════════════════════════════════════ */
+
+
+  /* ── Base list layout ─────────────────────────────────────────────── */
+
+  .breadcrumb__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.125rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    line-height: 1;
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+  }
+
+  /* ── Separator — chevron-right Lucide icon ────────────────────────── */
+  .breadcrumb__sep {
+    display: flex;
+    align-items: center;
+    padding: 0 0.1rem;
+    opacity: 0.3; /* toned down relative to parent text color */
+  }
+
+  .breadcrumb__sep [data-lucide] {
+    width: 11px;
+    height: 11px;
+  }
+
+  /* ── Link (non-current items) ─────────────────────────────────────── */
+  .breadcrumb__link {
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  /* ── Current (last item — the active page) ────────────────────────── */
+  .breadcrumb__current {
+    /* Color set per variant below; no underline, no hover */
+    font-weight: 700;
+  }
+
+
+  /* ── on-dark variant — white/muted text on ink-deep backgrounds ──── */
+  /*
+    Used in: article header banner, catlist hero section.
+    All text is rendered in semi-transparent white to read on dark.
+  */
+
+  .breadcrumb--on-dark .breadcrumb__link {
+    color: rgba(var(--color-white-rgb), 0.42);
+  }
+
+  .breadcrumb--on-dark .breadcrumb__link:hover {
+    color: var(--color-brand-2);
+    opacity: 1;
+  }
+
+  .breadcrumb--on-dark .breadcrumb__sep {
+    /* Override base opacity — separator tinted via rgba already */
+    color: rgba(var(--color-white-rgb), 0.25);
+    opacity: 1;
+  }
+
+  .breadcrumb--on-dark .breadcrumb__current {
+    color: rgba(var(--color-white-rgb), 0.6);
+  }
+
+
+  /* ── on-light variant — ink/muted text on white/paper backgrounds ── */
+  /*
+    Used in: product single page breadcrumb bar.
+  */
+
+  .breadcrumb--on-light .breadcrumb__link {
+    color: var(--color-muted);
+  }
+
+  .breadcrumb--on-light .breadcrumb__link:hover {
+    color: var(--color-brand-3);
+  }
+
+  .breadcrumb--on-light .breadcrumb__sep {
+    color: var(--color-muted);
+  }
+
+  .breadcrumb--on-light .breadcrumb__current {
+    color: var(--color-ink);
+    font-weight: 800;
+  }
+
+
+  /* ── .breadcrumb-bar — full-width white bar wrapper ─────────────── */
+  /*
+    Wraps the breadcrumb nav in a full-width white bar with a bottom
+    border. Used on the product single page (replaces .ps-breadcrumb-bar).
+    z-index: 20 keeps it above product gallery on scroll.
+  */
+
+  .breadcrumb-bar {
+    position: relative;
+    z-index: 20;
+    border-bottom: 1px solid var(--color-line);
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    background-color: var(--color-white);
+  }
+
+} /* end @layer components */

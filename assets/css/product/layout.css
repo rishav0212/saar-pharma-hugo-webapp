@@ -9,25 +9,7 @@
   }
 
   /* ── BREADCRUMBS ── */
-  .ps-breadcrumb-bar {
-    @apply relative z-20 border-b border-line py-3.5 bg-white;
-  }
-
-  .ps-breadcrumbs {
-    @apply flex items-center gap-2.5 text-[12px] font-bold text-muted flex-wrap;
-  }
-
-  .ps-breadcrumbs a {
-    @apply hover:text-brand transition-colors no-underline text-muted;
-  }
-
-  .ps-breadcrumbs [data-lucide] {
-    @apply w-3.5 h-3.5 opacity-30;
-  }
-
-  .ps-breadcrumbs .current {
-    @apply text-ink font-black;
-  }
+  /* Replaced by shared components/breadcrumb.css */
 
   /* ── UPPER SECTION SPLIT LAYOUT ── */
   .ps-upper-section {

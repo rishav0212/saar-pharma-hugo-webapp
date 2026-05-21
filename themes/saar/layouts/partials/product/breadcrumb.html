@@ -3,14 +3,8 @@
   Purpose: Renders the breadcrumb navigation bar for the product single page.
   Context: Full Hugo page context (.)
 */}}
-<div class="ps-breadcrumb-bar">
+<div class="breadcrumb-bar">
   <div class="container">
-    <nav class="ps-breadcrumbs" aria-label="Breadcrumb">
-      <a href="/">Home</a>
-      <i data-lucide="chevron-right"></i>
-      <a href="/products/">Products</a>
-      <i data-lucide="chevron-right"></i>
-      <span class="current">{{ .Params.product_name | default .Title }}</span>
-    </nav>
+    {{ partial "shared/breadcrumb.html" (dict "variant" "on-light" "items" (slice (dict "label" "Products" "url" "/products/") (dict "label" (.Params.product_name | default .Title)))) }}
   </div>
 </div>

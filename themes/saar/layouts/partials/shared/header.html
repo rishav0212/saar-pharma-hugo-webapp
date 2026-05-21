@@ -16,7 +16,7 @@
       <a href="/products/" class="{{ if and (or (eq .Section "products") (eq .Section "product")) (ne .RelPermalink "/products/categories/") }}active{{ end }}">Products</a>
       <a href="/manufacturing-unit/" class="{{ if eq .RelPermalink "/manufacturing-unit/" }}active{{ end }}">Manufacturing</a>
       <a href="/contact/" class="{{ if eq .RelPermalink "/contact/" }}active{{ end }}">Contact Us</a>
-      <a href="/articles/" class="{{ if eq .RelPermalink "/articles/" }}active{{ end }}">Articles</a>
+      <a href="/articles/" class="{{ if or (eq .RelPermalink "/articles/") (eq .Section "articles") }}active{{ end }}">Articles</a>
     </nav>
 
     <div class="header-actions">
@@ -46,7 +46,7 @@
     <a href="/products/categories/" class="{{ if eq .RelPermalink "/products/categories/" }}active{{ end }}">Categories</a>
     <a href="/products/" class="{{ if and (or (eq .Section "products") (eq .Section "product")) (ne .RelPermalink "/products/categories/") }}active{{ end }}">Product Range</a>
     <a href="/contact/" class="{{ if eq .RelPermalink "/contact/" }}active{{ end }}">Contact Us</a>
-    <a href="/articles/" class="{{ if eq .RelPermalink "/articles/" }}active{{ end }}">Articles</a>
+    <a href="/articles/" class="{{ if or (eq .RelPermalink "/articles/") (eq .Section "articles") }}active{{ end }}">Articles</a>
     <a href="#" data-enquire-trigger>Enquire Now</a>
   </nav>
 </header>

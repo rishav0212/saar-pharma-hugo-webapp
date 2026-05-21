@@ -58,6 +58,14 @@ enableRobotsTXT = true
     [markup.goldmark.renderer]
       unsafe = true
 
+  # Auto-generate Table of Contents for article pages
+  # startLevel: 2 = start from H2 (H1 is the page title)
+  # endLevel: 4 = include up to H4
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 4
+    ordered    = false
+
 # =====================================================================
 # Related Content Configuration
 # Automatically matches products based on shared attributes

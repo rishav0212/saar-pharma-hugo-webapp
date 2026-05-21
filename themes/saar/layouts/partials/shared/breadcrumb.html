@@ -1,0 +1,31 @@
+{{/*
+  partial: shared/breadcrumb.html
+  Usage:
+  {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Products" "url" "/products/") (dict "label" "Categories"))) }}
+
+  Variant options:
+  - on-dark: for dark backgrounds like hero banners (white/muted text)
+  - on-light: for light backgrounds like product pages (ink/muted text)
+*/}}
+
+<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb__list breadcrumb--{{ .variant | default "on-light" }}">
+    <li class="breadcrumb__item">
+      <a href="/" class="breadcrumb__link">Home</a>
+    </li>
+
+    {{ range .items }}
+      <li class="breadcrumb__sep" aria-hidden="true">
+        <i data-lucide="chevron-right"></i>
+      </li>
+
+      <li class="breadcrumb__item">
+        {{ if .url }}
+          <a href="{{ .url }}" class="breadcrumb__link">{{ .label }}</a>
+        {{ else }}
+          <span class="breadcrumb__current" aria-current="page">{{ .label }}</span>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ol>
+</nav>

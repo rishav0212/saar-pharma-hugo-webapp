@@ -1,0 +1,100 @@
+{{/*
+  ARTICLE JSON-LD SCHEMA
+  ─────────────────────────────────────────────────────────────────────
+  Outputs two schema types for maximum SERP impact:
+  
+  1. Article — tells Google this is editorial content from a known
+     publisher (Saar Biotech), with a verified author, date, and topic.
+     This enables "Top Stories" carousel eligibility.
+  
+  2. BreadcrumbList — enables breadcrumb SERP display (shows
+     Home > Articles > Title in search results, improving CTR).
+  
+  Both are injected via the shared json-ld slot in baseof.html.
+  All values are dynamic — no hardcoded content here.
+*/}}
+
+{{- $title       := .Params.meta_title | default .Title -}}
+{{- $description := .Params.meta_description | default .Description -}}
+{{- $datePublish := .Date.Format "2006-01-02T15:04:05Z07:00" -}}
+{{- $dateModify  := .Lastmod.Format "2006-01-02T15:04:05Z07:00" -}}
+{{- $author      := .Params.author | default "Saar Biotech Editorial Team" -}}
+{{- $coverImage  := .Params.cover_image -}}
+{{- $ogImage     := "images/og-image.png" | absURL -}}
+{{- $imageURL    := cond (ne $coverImage "") ($coverImage | absURL) $ogImage -}}
+{{- $category    := .Params.category | default "Pharmaceutical Manufacturing" -}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "{{ .Permalink }}#article",
+      "headline": {{ $title | jsonify }},
+      "description": {{ $description | jsonify }},
+      "image": {
+        "@type": "ImageObject",
+        "url": {{ $imageURL | jsonify }},
+        "width": 1200,
+        "height": 630
+      },
+      "datePublished": {{ $datePublish | jsonify }},
+      "dateModified": {{ $dateModify | jsonify }},
+      "author": {
+        "@type": "Organization",
+        "name": {{ $author | jsonify }},
+        "url": "{{ .Site.BaseURL }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Saar Biotech Pvt. Ltd.",
+        "url": "{{ .Site.BaseURL }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ "images/logo.png" | absURL }}",
+          "width": 200,
+          "height": 60
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": {{ .Permalink | jsonify }}
+      },
+      "articleSection": {{ $category | jsonify }},
+      "keywords": {{ if .Params.keywords }}{{ delimit .Params.keywords ", " | jsonify }}{{ else }}{{ $category | jsonify }}{{ end }},
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "{{ .Site.BaseURL }}#website",
+        "name": "Saar Biotech",
+        "url": "{{ .Site.BaseURL }}"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ .Permalink }}#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ .Site.BaseURL }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Articles",
+          "item": "{{ "articles/" | absURL }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": {{ .Title | jsonify }},
+          "item": {{ .Permalink | jsonify }}
+        }
+      ]
+    }
+  ]
+}
+</script>

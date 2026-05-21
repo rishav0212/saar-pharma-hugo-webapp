@@ -1,0 +1,124 @@
+{{ define "main" }}
+{{/*
+  ARTICLE SINGLE PAGE TEMPLATE
+  ─────────────────────────────────────────────────────────────────────
+  Layout: Breadcrumb + Article Header → 2-column body (content + sidebar)
+  
+  Hugo auto-builds this for every .md file in content/articles/.
+  Just drop a new markdown file → page is live on next build.
+
+  Frontmatter keys:
+    title, date, category, tags, author, read_time,
+    cover_image, related_products, meta_title, meta_description
+*/}}
+
+<div class="article-page" id="article-main">
+
+  {{/* Thin reading-progress bar — filled by article.js as user scrolls */}}
+  <div class="article-progress-bar" id="article-progress" aria-hidden="true"></div>
+
+  {{/* Article header: breadcrumb + cover + H1 + meta */}}
+  {{ partial "article/header.html" . }}
+
+  {{/* Two-column body: article prose left, sticky sidebar right */}}
+  <div class="article-body-wrap">
+    <div class="container">
+      <div class="article-layout">
+
+        {{/* ── LEFT: Main Content ──────────────────────────────────── */}}
+        <main class="article-content" id="article-content">
+
+          {{/* Table of Contents — mobile only (shows above content on mobile) */}}
+          {{ if .TableOfContents }}
+          <div class="article-toc-mobile" aria-label="Table of Contents">
+            <button class="article-toc-mobile__toggle" id="toc-mobile-toggle" aria-expanded="false">
+              <i data-lucide="list" class="icon--sm" aria-hidden="true"></i>
+              In This Article
+              <i data-lucide="chevron-down" class="icon--sm article-toc-mobile__arrow" aria-hidden="true"></i>
+            </button>
+            {{/*
+              article-toc class is added here so all the counter-numbered H2
+              and dot-indented H3 styles apply on mobile — avoids CSS duplication.
+            */}}
+            <div class="article-toc-mobile__body article-toc" id="toc-mobile-body" hidden>
+              {{ .TableOfContents }}
+            </div>
+          </div>
+          {{ end }}
+
+          {{/* Article prose body — styled via .article-prose */}}
+          <div class="article-prose" id="article-prose">
+            {{ .Content }}
+          </div>
+
+          {{/* Tag chips */}}
+          {{ if .Params.tags }}
+          <div class="article-tags" aria-label="Article tags">
+            <i data-lucide="tag" class="icon--sm text-muted" aria-hidden="true"></i>
+            {{ range .Params.tags }}
+            <a href="/articles/" class="article-tag">{{ . }}</a>
+            {{ end }}
+          </div>
+          {{ end }}
+
+          {{/* Author card */}}
+          <div class="article-author">
+            <div class="article-author__avatar" aria-hidden="true">
+              <i data-lucide="user-circle" class="icon--lg"></i>
+            </div>
+            <div class="article-author__info">
+              <span class="article-author__name">{{ .Params.author | default "Saar Biotech Editorial Team" }}</span>
+              <span class="article-author__role">Pharmaceutical Manufacturing Experts · Baddi, India</span>
+              <p class="article-author__bio">
+                The Saar Biotech editorial team comprises regulatory affairs specialists, production pharmacists, and quality assurance managers with a combined {{ partial "helpers/get-years.html" . }}+ years of pharmaceutical manufacturing experience.
+              </p>
+            </div>
+          </div>
+
+          {{/* Prev / Next article navigation */}}
+          {{ $pages := where .Site.RegularPages "Section" "articles" }}
+          {{ $prev := .Prev }}
+          {{ $next := .Next }}
+          {{ if or $prev $next }}
+          <nav class="article-prevnext" aria-label="Article navigation">
+            <div class="article-prevnext__inner">
+              {{ if $prev }}
+              <a href="{{ $prev.RelPermalink }}" class="article-prevnext__item article-prevnext__item--prev">
+                <span class="article-prevnext__label">
+                  <i data-lucide="arrow-left" class="icon--sm" aria-hidden="true"></i>
+                  Previous Article
+                </span>
+                <span class="article-prevnext__title">{{ $prev.Title }}</span>
+              </a>
+              {{ else }}<div></div>{{ end }}
+
+              {{ if $next }}
+              <a href="{{ $next.RelPermalink }}" class="article-prevnext__item article-prevnext__item--next">
+                <span class="article-prevnext__label">
+                  Next Article
+                  <i data-lucide="arrow-right" class="icon--sm" aria-hidden="true"></i>
+                </span>
+                <span class="article-prevnext__title">{{ $next.Title }}</span>
+              </a>
+              {{ end }}
+            </div>
+          </nav>
+          {{ end }}
+
+        </main>
+
+        {{/* ── RIGHT: Sticky Sidebar ───────────────────────────────── */}}
+        <aside class="article-sidebar" aria-label="Article sidebar">
+          {{ partial "article/sidebar.html" . }}
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{{/* JSON-LD schema for Article + BreadcrumbList */}}
+{{ partial "article/schema.html" . }}
+
+{{ end }}

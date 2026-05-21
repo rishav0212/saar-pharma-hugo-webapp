@@ -123,16 +123,10 @@
   }
 
   /* Breadcrumb — tighter margin below (was mb-6 → mb-3) */
-  .catlist-hero__breadcrumb {
-    @apply flex items-center gap-2 text-[11px] font-bold text-white/40 uppercase tracking-widest mb-3;
-  }
-
-  .catlist-hero__breadcrumb a {
-    @apply text-white/40 hover:text-brand-2 transition-colors duration-200;
-  }
-
-  .catlist-hero__breadcrumb span[aria-current] {
-    @apply text-brand-2/70;
+  /* Replaced by shared components/breadcrumb.css */
+  .breadcrumb__list {
+    margin-bottom: 0.75rem; /* Equivalent to mb-3 */
+    justify-content: center; /* Center horizontally in the hero */
   }
 
   /* Eyebrow — tighter margin below (was mb-6 → mb-4) */

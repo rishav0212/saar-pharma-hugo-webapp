@@ -1,0 +1,84 @@
+{{/*
+  ARTICLE HEADER PARTIAL — Redesigned
+  ─────────────────────────────────────────────────────────────────────
+  Dark banner header (matching the site's ink-deep/abyss design language)
+  with breadcrumb, category pill, H1, and meta row rendered in white.
+
+  Cover image is ONLY rendered when cover_image is set in frontmatter.
+  No fallback placeholder — if no image, the dark banner transitions
+  directly into the body content.
+*/}}
+
+{{- $category   := .Params.category | default "Articles" -}}
+{{- $author     := .Params.author | default "Saar Biotech Editorial Team" -}}
+{{- $coverImage := .Params.cover_image -}}
+{{- $date       := .Date.Format "2 January 2006" -}}
+
+<header class="article-header">
+
+  {{/* ── Dark banner: breadcrumb → category → H1 → meta ──────────── */}}
+  <div class="article-header__banner">
+    {{/* Decorative ambient glow — teal radial at top */}}
+    <div class="article-header__glow" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="article-header__inner">
+
+        {{/* Breadcrumb — shared component (on-dark variant) */}}
+        {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Articles" "url" "/articles/") (dict "label" (.Title | truncate 42)))) }}
+
+        {{/* Category pill */}}
+        <div class="article-header__eyebrow">
+          <span class="article-category-pill">
+            <i data-lucide="layers" class="icon--xs" aria-hidden="true"></i>
+            {{ $category }}
+          </span>
+        </div>
+
+        {{/* H1 — white, large, editorial. Single H1 per page for SEO */}}
+        <h1 class="article-header__title">{{ .Title }}</h1>
+
+        {{/* Meta row: author · date · reading time (Hugo auto-calculates) */}}
+        <div class="article-header__meta" aria-label="Article metadata">
+          <span class="article-meta-item">
+            <i data-lucide="user" class="icon--xs" aria-hidden="true"></i>
+            {{ $author }}
+          </span>
+          <span class="article-meta-sep" aria-hidden="true">·</span>
+          <span class="article-meta-item">
+            <i data-lucide="calendar" class="icon--xs" aria-hidden="true"></i>
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ $date }}</time>
+          </span>
+          <span class="article-meta-sep" aria-hidden="true">·</span>
+          <span class="article-meta-item">
+            <i data-lucide="clock" class="icon--xs" aria-hidden="true"></i>
+            {{ .ReadingTime }} min read
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {{/*
+    Cover image — rendered ONLY when cover_image is set in frontmatter.
+    No fallback rendered. If no image, banner transitions straight to body.
+    The negative margin pulls the image up to overlap the dark banner,
+    creating a premium layered effect.
+  */}}
+  {{ if $coverImage }}
+  <div class="article-header__cover-wrap">
+    <div class="container">
+      <figure class="article-header__cover" aria-label="Article cover image">
+        <img src="{{ $coverImage }}"
+             alt="{{ .Title }}"
+             class="article-header__cover-img"
+             loading="lazy"
+             width="1120"
+             height="630">
+      </figure>
+    </div>
+  </div>
+  {{ end }}
+
+</header>

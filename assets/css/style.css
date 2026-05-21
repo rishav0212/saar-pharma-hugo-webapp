@@ -139,6 +139,7 @@
     @apply w-6 h-6 flex-shrink-0;
   }
 
+  .icon--xs { @apply w-3 h-3; }
   .icon--sm { @apply w-4 h-4; }
   .icon--md { @apply w-8 h-8; }
   .icon--lg { @apply w-10 h-10; }
@@ -239,6 +240,7 @@
 @import "./assets/css/components/cards.css";
 @import "./assets/css/components/tabs.css";
 @import "./assets/css/components/search.css";
+@import "./assets/css/components/breadcrumb.css";
 @import "./assets/css/components/layout.css";
 @import "./assets/css/components/forms.css";
 @import "./assets/css/components/modal.css";
@@ -265,6 +267,7 @@
 @import "./assets/css/category/category.css";
 @import "./assets/css/sections/contact.css";
 @import "./assets/css/catlist/catlist.css";
+@import "./assets/css/articles/articles.css";
 
 
 

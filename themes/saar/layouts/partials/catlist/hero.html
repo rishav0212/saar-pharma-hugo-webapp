@@ -47,13 +47,7 @@ STAT BAR: All values computed dynamically — never hardcoded.
     <div class="catlist-hero__inner">
 
       {{/* Breadcrumb */}}
-      <nav class="catlist-hero__breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a>
-        <span aria-hidden="true">/</span>
-        <a href="/products/">Products</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">Categories</span>
-      </nav>
+      {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Products" "url" "/products/") (dict "label" "Categories"))) }}
 
       {{/* Eyebrow */}}
       <span class="eyebrow catlist-hero__eyebrow" data-animate="fade-in">
