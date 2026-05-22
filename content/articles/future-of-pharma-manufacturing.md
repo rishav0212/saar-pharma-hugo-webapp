@@ -8,7 +8,7 @@ cover_image: "/images/articles/pharma-quality-control.png"
 category: "Industry Insights"
 tags: ["Future Trends", "Manufacturing", "Innovation", "Automation"]
 author: "Saar Biotech Strategy Team"
-related_products: ["azithromycin", "cholecalciferol-vitamin-d3-shot"]
+related_products: ["azithromycin-oral-solution", "cholecalciferol-vitamin-d3-nano-shots"]
 faqs:
   - q: "What is continuous manufacturing?"
     a: "Continuous manufacturing is a process where raw materials are continuously fed into a manufacturing line, and finished products are continuously removed, rather than processing in distinct batches. It improves efficiency and reduces human error."
@@ -35,7 +35,7 @@ For brand owners, partnering with a CMO that embraces continuous manufacturing m
 
 Data integrity is the cornerstone of regulatory compliance. The days of paper-based batch records are fading.
 
-{{< product-card "azithromycin" >}}
+{{< product-card "azithromycin-oral-solution" >}}
 
 Modern facilities, like Saar Biotech's Baddi plant, are heavily investing in **21 CFR Part 11 compliant systems**. Automation in the quality control laboratory—where instruments like HPLC and GC directly interface with ERP systems—ensures that testing data cannot be manipulated.
 
@@ -57,7 +57,7 @@ As the market for generic blockbusters saturates, pharma marketing companies are
 *   **Nutraceutical & Pharma Hybrids:** High-demand products combining vitamins with active pharmaceutical ingredients.
 *   **Liquid Orals and Syrups:** Advanced suspensions with perfectly masked taste profiles for pediatric compliance.
 
-{{< product-card "paracetamol-125-250-suspension" >}}
+{{< product-card "paracetamol-suspension" >}}
 
 ## Conclusion
 

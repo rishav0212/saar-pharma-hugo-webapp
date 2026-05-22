@@ -1,0 +1,11 @@
+{{ $faqs := .Page.Params.faqs }}
+{{ if $faqs }}
+## Frequently Asked Questions
+
+{{ range $faqs }}
+### {{ .q }}
+
+{{ .a }}
+
+{{ end }}
+{{ end }}

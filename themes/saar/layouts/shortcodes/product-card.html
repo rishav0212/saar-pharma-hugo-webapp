@@ -1,0 +1,25 @@
+{{- $slug := .Get 0 -}}
+{{- $product := false -}}
+{{- range where .Site.RegularPages "Params.slug" $slug -}}
+  {{- $product = . -}}
+{{- end -}}
+
+{{- if $product -}}
+<div class="article-inline-product">
+  <div class="inline-product-inner">
+    <div class="inline-product-icon">
+      <i data-lucide="flask-conical"></i>
+    </div>
+    <div class="inline-product-info">
+      <span class="inline-product-label">Featured Product</span>
+      <a href="{{ $product.RelPermalink }}" class="inline-product-title">{{ $product.Title }}</a>
+    </div>
+    <a href="{{ $product.RelPermalink }}" class="inline-product-btn">
+      View Details
+      <i data-lucide="arrow-right"></i>
+    </a>
+  </div>
+</div>
+{{- else -}}
+<!-- Product '{{ $slug }}' not found -->
+{{- end -}}

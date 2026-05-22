@@ -1,0 +1,92 @@
+{{/* 
+  BOTTOM RELATED SECTION
+  Automatically pulls Related Products and Related Articles at the bottom of the post.
+*/}}
+
+{{- $relatedProductSlugs := .Params.related_products | default slice -}}
+{{- $relatedProducts     := slice -}}
+{{- range $relatedProductSlugs -}}
+  {{- $slug := . -}}
+  {{- range where $.Site.RegularPages "Params.slug" $slug -}}
+    {{- $relatedProducts = $relatedProducts | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $currentCategory := .Params.category | default "" -}}
+{{- $currentTags     := .Params.tags | default slice -}}
+{{- $allArticles     := where .Site.RegularPages "Section" "articles" -}}
+{{- $related         := slice -}}
+
+{{- range $allArticles -}}
+  {{- if ne .RelPermalink $.RelPermalink -}}
+    {{- $score := 0 -}}
+    {{- if and $currentCategory (eq .Params.category $currentCategory) -}}
+      {{- $score = add $score 3 -}}
+    {{- end -}}
+    {{- $sharedTags := intersect $currentTags (.Params.tags | default slice) -}}
+    {{- $score = add $score (len $sharedTags) -}}
+    {{- if gt $score 0 -}}
+      {{- $related = $related | append (dict "page" . "score" $score) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $relatedFinal := slice -}}
+{{- range (first 3 (sort $related "score" "desc")) -}}
+  {{- $relatedFinal = $relatedFinal | append .page -}}
+{{- end -}}
+{{- if lt (len $relatedFinal) 1 -}}
+  {{- range (first 3 (where $allArticles "RelPermalink" "ne" .RelPermalink)) -}}
+    {{- $relatedFinal = $relatedFinal | append . -}}
+  {{- end -}}
+{{- end -}}
+
+
+<div class="article-bottom-blocks">
+
+  {{/* ── Related Products ── */}}
+  {{ if $relatedProducts }}
+  <div class="article-bottom-section">
+    <h3 class="article-bottom-title">
+      <i data-lucide="flask-conical"></i>
+      Featured Products
+    </h3>
+    <div class="article-bottom-grid">
+      {{ range $relatedProducts }}
+      <a href="{{ .RelPermalink }}" class="bottom-product-card">
+        <div class="bottom-product-card__icon">
+          <i data-lucide="package"></i>
+        </div>
+        <div class="bottom-product-card__info">
+          <span class="bottom-product-card__cat">{{ index .Params.categories 0 | default "Product" }}</span>
+          <span class="bottom-product-card__name">{{ .Title }}</span>
+        </div>
+        <i data-lucide="arrow-right" class="bottom-product-card__arrow"></i>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+  {{/* ── Related Articles ── */}}
+  {{ if $relatedFinal }}
+  <div class="article-bottom-section mt-10">
+    <h3 class="article-bottom-title">
+      <i data-lucide="book-open"></i>
+      Further Reading
+    </h3>
+    <div class="article-bottom-grid">
+      {{ range $relatedFinal }}
+      <a href="{{ .RelPermalink }}" class="bottom-article-card">
+        <span class="bottom-article-card__cat">{{ .Params.category | default "Articles" }}</span>
+        <span class="bottom-article-card__name">{{ .Title }}</span>
+        {{ if .ReadingTime }}
+        <span class="bottom-article-card__meta"><i data-lucide="clock"></i> {{ .ReadingTime }}m</span>
+        {{ end }}
+      </a>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+</div>

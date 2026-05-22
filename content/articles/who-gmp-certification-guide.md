@@ -8,7 +8,7 @@ cover_image: ""
 category: "Regulatory Insights"
 tags: ["WHO-GMP", "GMP Compliance", "Contract Manufacturing", "Regulatory", "Baddi"]
 author: "Saar Biotech Editorial Team"
-related_products: ["azithromycin", "paracetamol-125-250-suspension"]
+related_products: ["azithromycin-oral-solution", "paracetamol-suspension"]
 faqs:
   - q: "What does WHO-GMP certification mean for third-party manufacturing?"
     a: "WHO-GMP certification ensures that the third-party manufacturer adheres to strict international quality standards, covering facility design, raw material testing, production processes, and documentation. This guarantees the safety and efficacy of the final product."
@@ -115,7 +115,7 @@ Before signing a manufacturing agreement, ask these:
 
 WHO-GMP certification is the floor — not the ceiling — of pharmaceutical quality. For third-party pharma manufacturing in India, it means your product is produced in a legally compliant, regularly inspected, documented facility where quality failures can be traced, investigated, and corrected.
 
-{{< product-card "azithromycin" >}}
+{{< product-card "azithromycin-oral-solution" >}}
 
 {{% faqs %}}
 
