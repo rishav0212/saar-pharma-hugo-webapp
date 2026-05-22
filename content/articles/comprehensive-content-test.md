@@ -101,6 +101,8 @@ print(batch_status)
 
 Partnering with a third-party manufacturer requires absolute trust. That trust must be backed by transparent, documented, and scientifically rigorous quality control procedures. By maintaining a state-of-the-art QC laboratory and strictly adhering to WHO-GMP standards, Saar Biotech ensures that every formulation bearing your brand name is safe, effective, and fully compliant.
 
+{{% faqs %}}
+
 ---
 
 *For inquiries regarding our manufacturing capabilities or to request a product-specific dossier, please contact our business development team.*
