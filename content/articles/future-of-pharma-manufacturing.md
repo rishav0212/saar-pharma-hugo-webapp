@@ -35,7 +35,7 @@ For brand owners, partnering with a CMO that embraces continuous manufacturing m
 
 Data integrity is the cornerstone of regulatory compliance. The days of paper-based batch records are fading.
 
-{{< product-card "azithromycin-oral-solution" >}}
+*[View manufacturing details for azithromycin-oral-solution](/products/azithromycin-oral-solution/)*
 
 Modern facilities, like Saar Biotech's Baddi plant, are heavily investing in **21 CFR Part 11 compliant systems**. Automation in the quality control laboratory—where instruments like HPLC and GC directly interface with ERP systems—ensures that testing data cannot be manipulated.
 
@@ -57,7 +57,7 @@ As the market for generic blockbusters saturates, pharma marketing companies are
 *   **Nutraceutical & Pharma Hybrids:** High-demand products combining vitamins with active pharmaceutical ingredients.
 *   **Liquid Orals and Syrups:** Advanced suspensions with perfectly masked taste profiles for pediatric compliance.
 
-{{< product-card "paracetamol-suspension" >}}
+*[View manufacturing details for paracetamol-suspension](/products/paracetamol-suspension/)*
 
 ## Conclusion
 

@@ -469,12 +469,12 @@
   /* Individual therapeutic card */
   .catlist-therapeutic-card {
     @apply flex flex-col gap-3 p-6 bg-white rounded-2xl border border-line transition-all duration-300;
-    box-shadow: var(--shadow-soft);
+
   }
 
   .catlist-therapeutic-card:hover {
     @apply border-brand-line -translate-y-1.5;
-    box-shadow: var(--shadow-lift);
+
   }
 
   /* Icon orb */
@@ -593,5 +593,76 @@
     }
   }
 
-} /* end @layer components */
+  /* ─────────────────────────────────────────────────────────────────
+     7. WHY CHOOSE SAAR BIOTECH
+     4-column trust signal strip.
+     ───────────────────────────────────────────────────────────────── */
+  .catlist-why-section {
+    @apply relative py-16;
+  }
+  
+  .catlist-why-head {
+    @apply text-center flex flex-col items-center justify-center mb-12;
+  }
+  
+  .catlist-why-grid {
+    @apply grid gap-6;
+    grid-template-columns: 1fr;
+  }
+  
+  @media (min-width: 640px) {
+    .catlist-why-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .catlist-why-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 
+  .catlist-why-card {
+    @apply flex flex-col gap-3 p-6 bg-white rounded-2xl border border-line text-center items-center transition-all duration-300;
+
+  }
+
+  .catlist-why-card:hover {
+    @apply border-brand-line -translate-y-1.5;
+
+  }
+
+  .catlist-why-card__icon-wrap {
+    @apply w-14 h-14 rounded-full flex items-center justify-center mb-2 transition-all duration-300;
+    background: rgba(var(--color-brand-rgb), 0.08);
+    border: 1px solid rgba(var(--color-brand-rgb), 0.14);
+  }
+
+  .catlist-why-card__icon-wrap i {
+    @apply w-6 h-6;
+    color: var(--color-brand-3);
+  }
+
+  .catlist-why-card:hover .catlist-why-card__icon-wrap {
+    background: rgba(var(--color-brand-rgb), 0.15);
+    border-color: rgba(var(--color-brand-rgb), 0.25);
+  }
+
+  .catlist-why-card:hover .catlist-why-card__icon-wrap i {
+    color: var(--color-brand);
+  }
+
+  .catlist-why-card__title {
+    @apply text-[16px] font-display font-black text-ink leading-tight m-0;
+  }
+
+  .catlist-why-card__desc {
+    @apply text-[13px] text-muted leading-relaxed m-0;
+  }
+  
+  /* Mobile protection */
+  .catlist-why-grid > * {
+    min-width: 0;
+  }
+
+} /* end @layer components */

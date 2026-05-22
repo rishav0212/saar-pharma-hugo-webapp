@@ -1,0 +1,50 @@
+{{/*
+  KEY TAKEAWAYS SHORTCODE — At-a-Glance Summary Box
+  ─────────────────────────────────────────────────────────────────────
+  Usage (reads from frontmatter — preferred):
+    {{< key-takeaways >}}
+
+  Usage (inline content):
+    {{< key-takeaways >}}
+    - First takeaway point
+    - Second takeaway point
+    {{< /key-takeaways >}}
+
+  When no inner content, reads `key_takeaways` array from page frontmatter:
+    key_takeaways:
+      - "First point"
+      - "Second point"
+
+  SEO benefit: At-a-glance boxes are a known trigger for Google's
+  "Featured Snippet" (position zero) when structured as bullet lists.
+  The section is wrapped with an id for TOC linking.
+
+  NOTE: Uses {{< >}} syntax (not {{% %}}) because inner content is
+  optional. When using with inner markdown, use {{< key-takeaways >}}
+  content {{< /key-takeaways >}} and the inner content must be raw HTML
+  or use markdownify via Hugo's .Inner. For frontmatter-only usage,
+  just {{< key-takeaways >}} (self-closing).
+*/}}
+
+{{- $items := .Page.Params.key_takeaways -}}
+{{- $hasInner := .Inner | strings.TrimSpace -}}
+
+{{- if or $items $hasInner }}
+<div class="article-key-takeaways" id="key-takeaways" role="complementary" aria-label="Key takeaways">
+  <div class="article-key-takeaways__header">
+    <i data-lucide="star" aria-hidden="true"></i>
+    <span>Key Takeaways</span>
+  </div>
+  <div class="article-key-takeaways__body">
+    {{- if $hasInner }}
+      {{ .Inner | markdownify }}
+    {{- else if $items }}
+    <ul class="article-key-takeaways__list">
+      {{- range $items }}
+      <li>{{ . | markdownify }}</li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </div>
+</div>
+{{- end }}

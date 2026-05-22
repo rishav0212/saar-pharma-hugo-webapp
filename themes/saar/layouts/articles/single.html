@@ -2,15 +2,18 @@
 {{/*
   ARTICLE SINGLE PAGE TEMPLATE
   ─────────────────────────────────────────────────────────────────────
-  Layout: Progress Bar → Article Header → 2-column body (content + sidebar)
-  
+  Layout: Progress Bar → Article Header → Key Takeaways → 2-column body
+          (content + sidebar) → Bottom Related → Why Choose Saar
+
   Hugo auto-builds this for every .md file in content/articles/.
   Just drop a new markdown file → page is live on next build.
 
   Frontmatter keys:
-    title, date, category, tags, author, read_time,
-    cover_image, related_products, meta_title, meta_description
+    title, date, last_updated, category, tags, author, read_time,
+    cover_image, related_products, meta_title, meta_description,
+    key_takeaways, external_refs, faqs
 */}}
+
 
 <div class="article-page" id="article-main">
 
@@ -19,6 +22,32 @@
 
   {{/* Article header: breadcrumb + cover + H1 + meta */}}
   {{ partial "article/header.html" . }}
+
+  {{/*
+    Key Takeaways box — rendered BELOW cover image, ABOVE the two-column body.
+    This placement is intentional: it appears between the cinematic cover image
+    and the content — maximising visibility as a featured-snippet trigger.
+    Only rendered when `key_takeaways` is set in frontmatter.
+  */}}
+  {{ if .Params.key_takeaways }}
+  <div class="article-key-takeaways-wrap">
+    <div class="container">
+      <div class="article-key-takeaways" id="key-takeaways" role="complementary" aria-label="Key takeaways">
+        <div class="article-key-takeaways__header">
+          <i data-lucide="star" aria-hidden="true"></i>
+          <span>Key Takeaways</span>
+        </div>
+        <div class="article-key-takeaways__body">
+          <ul class="article-key-takeaways__list">
+            {{ range .Params.key_takeaways }}
+            <li>{{ . | markdownify }}</li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ end }}
 
   {{/* Two-column body: article prose left, sticky sidebar right */}}
   <div class="article-body-wrap">
@@ -68,11 +97,11 @@
                 <span class="article-stat-label">Certified</span>
               </div>
               <div class="article-stat-item">
-                <span class="article-stat-value">150+</span>
+                <span class="article-stat-value">2050+</span>
                 <span class="article-stat-label">B2B Partners</span>
               </div>
               <div class="article-stat-item">
-                <span class="article-stat-value">500+</span>
+                <span class="article-stat-value">240+</span>
                 <span class="article-stat-label">Products</span>
               </div>
               <div class="article-stat-item">
@@ -156,7 +185,7 @@
 
 </div>
 
-{{/* JSON-LD schema for Article + BreadcrumbList */}}
+{{/* JSON-LD schema for Article + BreadcrumbList + FAQPage */}}
 {{ partial "article/schema.html" . }}
 
 {{ end }}

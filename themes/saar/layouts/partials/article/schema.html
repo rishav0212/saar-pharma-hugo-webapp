@@ -1,16 +1,19 @@
 {{/*
   ARTICLE JSON-LD SCHEMA
   ─────────────────────────────────────────────────────────────────────
-  Outputs two schema types for maximum SERP impact:
-  
+  Outputs three schema types for maximum SERP impact:
+
   1. Article — tells Google this is editorial content from a known
      publisher (Saar Biotech), with a verified author, date, and topic.
-     This enables "Top Stories" carousel eligibility.
-  
+     Includes timeRequired (reading time) and wordCount for rich signals.
+
   2. BreadcrumbList — enables breadcrumb SERP display (shows
      Home > Articles > Title in search results, improving CTR).
-  
-  Both are injected via the shared json-ld slot in baseof.html.
+
+  3. FAQPage (conditional) — when `faqs` frontmatter is present,
+     outputs structured FAQ data enabling "People Also Ask" rich results
+     and Featured Snippet eligibility.
+
   All values are dynamic — no hardcoded content here.
 */}}
 
@@ -23,6 +26,10 @@
 {{- $ogImage     := "images/og-image.png" | absURL -}}
 {{- $imageURL    := cond (ne $coverImage "") ($coverImage | absURL) $ogImage -}}
 {{- $category    := .Params.category | default "Pharmaceutical Manufacturing" -}}
+{{- $keywords    := .Params.keywords | default slice -}}
+{{- $faqs        := .Params.faqs -}}
+{{- $readingMins := .ReadingTime -}}
+{{- $wordCount   := .WordCount -}}
 
 <script type="application/ld+json">
 {
@@ -42,9 +49,13 @@
       "datePublished": {{ $datePublish | jsonify }},
       "dateModified": {{ $dateModify | jsonify }},
       "author": {
-        "@type": "Organization",
+        "@type": "Person",
         "name": {{ $author | jsonify }},
-        "url": "{{ .Site.BaseURL }}"
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Saar Biotech Pvt. Ltd.",
+          "url": "{{ .Site.BaseURL }}"
+        }
       },
       "publisher": {
         "@type": "Organization",
@@ -62,8 +73,14 @@
         "@id": {{ .Permalink | jsonify }}
       },
       "articleSection": {{ $category | jsonify }},
-      "keywords": {{ if .Params.keywords }}{{ delimit .Params.keywords ", " | jsonify }}{{ else }}{{ $category | jsonify }}{{ end }},
+      "keywords": {{ if $keywords }}{{ delimit $keywords ", " | jsonify }}{{ else }}{{ $category | jsonify }}{{ end }},
+      "wordCount": {{ $wordCount }},
+      "timeRequired": "PT{{ $readingMins }}M",
       "inLanguage": "en-IN",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".article-key-takeaways", ".article-prose > p:first-of-type"]
+      },
       "isPartOf": {
         "@type": "WebSite",
         "@id": "{{ .Site.BaseURL }}#website",
@@ -95,6 +112,25 @@
         }
       ]
     }
+    {{- if $faqs }},
+    {
+      "@type": "FAQPage",
+      "@id": "{{ .Permalink }}#faq",
+      "mainEntity": [
+        {{- range $i, $faq := $faqs }}
+        {{- if $i }},{{ end }}
+        {
+          "@type": "Question",
+          "name": {{ .q | jsonify }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ .a | jsonify }}
+          }
+        }
+        {{- end }}
+      ]
+    }
+    {{- end }}
   ]
 }
 </script>

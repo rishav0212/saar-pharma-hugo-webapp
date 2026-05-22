@@ -1,13 +1,13 @@
 @layer components {
 
   /* ═══════════════════════════════════════════════════════════════════
-     ARTICLES — Single Page Design System (Fully Revamped)
+     ARTICLES — Single Page Design System (Complete Overhaul)
      URL pattern: /articles/<slug>/
 
      Design principles:
      — Premium dark hero banner with animated rings + glow (matches
        category hero and catlist hero visual language exactly)
-     — Light body with optimized prose typography for long reading
+     — Light body with optimised prose typography for long reading
      — Sticky sidebar on desktop (hidden on mobile), TOC toggle on mobile
      — All colors, shadows, fonts via CSS tokens — zero raw hex
      — Scroll-animate integration via [data-animate] global system
@@ -20,7 +20,7 @@
 
   .article-page {
     background-color: var(--color-paper);
-    /* 
+    /*
       CRITICAL: Never put overflow: hidden/auto/scroll on an ancestor
       of the sticky sidebar, or sticky will completely break.
       The decorative elements should be self-contained or clipped locally.
@@ -63,7 +63,6 @@
     background:
       radial-gradient(ellipse at 50% 100%, rgba(var(--color-brand-rgb), 0.18) 0%, transparent 55%),
       linear-gradient(160deg, var(--color-ink-deep) 0%, var(--color-abyss) 100%);
-    /* Mesh grid overlay — same as .section--cat-hero::after */
     width: 100%;
     box-sizing: border-box;
   }
@@ -80,7 +79,6 @@
       linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
     background-size: 54px 54px;
-    /* Elliptical mask — fades to transparent at edges */
     mask-image: radial-gradient(ellipse at center, black 25%, transparent 80%);
     -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 80%);
   }
@@ -142,10 +140,6 @@
   }
 
   /* ── Decorative floating rings (desktop only) — matches cat-hero ─ */
-  /*
-    Two concentric rings at top-right, pulsing and rotating slowly.
-    Hidden below 1024px to keep mobile clean.
-  */
   .article-header__ring {
     position: absolute;
     z-index: 2;
@@ -192,15 +186,11 @@
   /* ── Inner content wrapper — sits above all decorative layers ───── */
   .article-header__inner {
     position: relative;
-    z-index: 10; /* above rings (z:2), glow (z:1), grid (z:0), mesh (z:1) */
-    max-width: 720px; /* matches 1fr prose column width at desktop */
+    z-index: 10;
+    max-width: 720px;
   }
 
   /* ── Eyebrow: category pill ────────────────────────────────────── */
-  /*
-    Uses glassmorphism + teal glow — same language as cat-hero__badge.
-    Unique to article pages: layered pill with icon + text.
-  */
   .article-header__eyebrow {
     margin-bottom: 1.25rem;
   }
@@ -215,7 +205,6 @@
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    /* Glassmorphic teal — matches cat-hero__badge exactly */
     background: rgba(var(--color-brand-rgb), 0.12);
     color: var(--color-brand-2);
     border: 1px solid rgba(var(--color-brand-2-rgb), 0.28);
@@ -223,29 +212,16 @@
     box-shadow:
       0 4px 16px rgba(0, 0, 0, 0.18),
       inset 0 0 10px rgba(var(--color-brand-2-rgb), 0.12);
-    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .article-category-pill:hover {
-    background: rgba(var(--color-brand-rgb), 0.18);
-    border-color: rgba(var(--color-brand-2-rgb), 0.45);
-    box-shadow:
-      0 4px 24px rgba(var(--color-brand-2-rgb), 0.15),
-      inset 0 0 15px rgba(var(--color-brand-2-rgb), 0.2);
+transition: border-color 0.25s ease;
   }
 
   .article-category-pill [data-lucide] {
     width: 11px;
     height: 11px;
-    /* Soft glow on the icon — same as cat-hero badge icon */
     filter: drop-shadow(0 0 6px rgba(var(--color-brand-2-rgb), 0.55));
   }
 
   /* ── H1 ─────────────────────────────────────────────────────────── */
-  /*
-    Premium gradient text — white-to-white/70 gradient (same as catlist-hero__title).
-    clamp() keeps it fluid: 28px on mobile, up to 50px on wide screens.
-  */
   .article-header__title {
     font-size: clamp(28px, 4.5vw, 50px);
     line-height: 1.06;
@@ -254,7 +230,6 @@
     letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
     max-width: 56ch;
-    /* Gradient text — matches catlist-hero__title technique */
     background: linear-gradient(to bottom, var(--color-white) 40%, rgba(var(--color-white-rgb), 0.72) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -264,7 +239,7 @@
     hyphens: auto;
   }
 
-  /* ── Meta row — author · date · reading time ──────────────────── */
+  /* ── Meta row — author · date · reading time · updated ──────────── */
   .article-header__meta {
     display: flex;
     flex-wrap: wrap;
@@ -288,17 +263,22 @@
     opacity: 0.7;
   }
 
+  /* Updated badge — slightly brighter to distinguish from published date */
+  .article-meta-item--updated {
+    color: rgba(var(--color-brand-2-rgb), 0.7);
+  }
+
   .article-meta-sep {
     color: rgba(var(--color-white-rgb), 0.18);
     font-size: 14px;
     line-height: 1;
   }
 
-  /* ── Cover image — negative margin creates layered overlap ──────── */
+  /* ── Cover image — full-width cinematic with negative overlap ──── */
   /*
     Shown ONLY when cover_image frontmatter key is set.
-    The -3rem pull creates a premium overlap of image onto the
-    dark banner — the same technique used on product page hero.
+    object-fit: cover fills the container cleanly — no distortion.
+    The -3rem pull creates a premium overlap onto the dark banner.
   */
   .article-header__cover-wrap {
     position: relative;
@@ -314,29 +294,153 @@
 
   .article-header__cover {
     width: 100%;
-    max-height: 600px;
-    aspect-ratio: 16 / 9;
-    @media (min-width: 1024px) {
-      aspect-ratio: 21 / 9; /* More cinematic aspect ratio on desktop */
-    }
     border-radius: 16px;
     overflow: hidden;
     margin: 0 auto;
     border: 1px solid rgba(var(--color-white-rgb), 0.08);
-    box-shadow: var(--shadow-lift);
+
+    /* Fixed aspect ratio — cinematic 21:9 on desktop, 16:9 on mobile */
+    aspect-ratio: 21 / 9;
+    max-height: 560px;
+  }
+
+  @media (max-width: 767px) {
+    .article-header__cover {
+      aspect-ratio: 16 / 9;
+      border-radius: 10px;
+    }
   }
 
   .article-header__cover-img {
     width: 100%;
     height: 100%;
+    /* object-fit: cover fills the container without distortion */
     object-fit: cover;
+    object-position: center;
     display: block;
   }
 
 
   /* ─────────────────────────────────────────────────────────────────
-     3. BODY LAYOUT — 2-column on desktop, stacked on mobile
-        Matches the .section rhythm of other pages (pt-20 pb-24 pattern)
+     3. KEY TAKEAWAYS BOX
+        Featured-snippet bait: structured bullet summary before content.
+        Placed between header and body columns for maximum visibility.
+     ───────────────────────────────────────────────────────────────── */
+
+  .article-key-takeaways-wrap {
+    padding-top: 2rem;
+    padding-bottom: 0.5rem;
+    background-color: var(--color-paper);
+  }
+
+  .article-key-takeaways {
+    border-radius: 16px;
+    border: 1px solid rgba(var(--color-brand-rgb), 0.18);
+    background: linear-gradient(135deg, rgba(var(--color-brand-rgb), 0.04) 0%, var(--color-white) 100%);
+    overflow: hidden;
+
+    /* Max width matches the prose column — keeps it visually aligned */
+    max-width: 100%;
+transition: border-color 0.25s ease;
+  }
+
+  .article-key-takeaways:hover {
+
+  }
+
+  .article-key-takeaways__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 10.5px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--color-brand-3);
+    background: rgba(var(--color-brand-rgb), 0.06);
+    border-bottom: 1px solid rgba(var(--color-brand-rgb), 0.12);
+  }
+
+  .article-key-takeaways__header [data-lucide] {
+    width: 13px;
+    height: 13px;
+    color: var(--color-brand);
+  }
+
+  .article-key-takeaways__body {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .article-key-takeaways__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .article-key-takeaways__list li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--color-ink);
+  }
+
+  /* Teal checkmark bullet — consistent with article-prose ul */
+  .article-key-takeaways__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23159f91' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  /* Inside shortcode version (used in content) */
+  .article-key-takeaways__body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .article-key-takeaways__body ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--color-ink);
+  }
+
+  .article-key-takeaways__body ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23159f91' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  @media (max-width: 767px) {
+    .article-key-takeaways__body {
+      padding: 1rem 1.125rem;
+    }
+  }
+
+
+  /* ─────────────────────────────────────────────────────────────────
+     4. BODY LAYOUT — 2-column on desktop, stacked on mobile
      ───────────────────────────────────────────────────────────────── */
 
   .article-body-wrap {
@@ -345,7 +449,7 @@
     background-color: var(--color-paper);
   }
 
-  /* Grid: flexible prose + 400px sidebar — wider editorial rail */
+  /* Grid: flexible prose + 360px sidebar */
   .article-layout {
     display: grid;
     grid-template-columns: 1fr 400px;
@@ -373,16 +477,12 @@
   }
 
 
-
   /* ─────────────────────────────────────────────────────────────────
-     4. ARTICLE PROSE — optimised long-form reading typography
-        Uses the site's design tokens for every color and font.
-        Headings use the same teal left-bar as other content sections.
+     5. ARTICLE PROSE — optimised long-form reading typography
      ───────────────────────────────────────────────────────────────── */
 
   .article-prose {
-    max-width: 720px; /* Slightly wider for better text flow */
-    font-size: 16.5px; /* Increased base size for better readability */
+    font-size: 16.5px;
     line-height: 1.85;
     color: var(--color-ink);
     font-family: var(--font-sans);
@@ -391,12 +491,12 @@
   }
 
   .article-prose * {
-    max-width: 100%; /* Force images and objects to stay inside */
+    max-width: 100%;
   }
 
-  /* Lead paragraph — elevated weight, separated by border */
+  /* Lead paragraph — elevated weight, border separator */
   .article-prose > p:first-of-type {
-    font-size: 18.5px; /* Bigger lead paragraph */
+    font-size: 18.5px;
     line-height: 1.7;
     font-weight: 500;
     color: var(--color-ink);
@@ -407,7 +507,7 @@
 
   /* ── Headings ── */
   .article-prose h2 {
-    font-size: clamp(22px, 2.5vw, 28px); /* Bigger H2 */
+    font-size: clamp(22px, 2.5vw, 28px);
     font-family: var(--font-display);
     font-weight: 800;
     color: var(--color-ink) !important;
@@ -415,16 +515,12 @@
     line-height: 1.25;
     margin-top: 3.5rem;
     margin-bottom: 1.25rem;
-    /*
-      Teal left accent bar — consistent with product content sections
-      and the site's section heading visual language.
-    */
     padding-left: 1.25rem;
     border-left: 4px solid var(--color-brand);
   }
 
   .article-prose h3 {
-    font-size: clamp(18px, 2vw, 22px); /* Bigger H3 */
+    font-size: clamp(18px, 2vw, 22px);
     font-family: var(--font-display);
     font-weight: 700;
     color: var(--color-ink) !important;
@@ -446,11 +542,11 @@
 
   /* ── Body text ── */
   .article-prose p {
-    margin-bottom: 1.5rem; /* Increased spacing between paragraphs */
-    color: rgba(var(--color-ink-rgb), 0.85); /* Slightly darker for contrast */
+    margin-bottom: 1.5rem;
+    color: rgba(var(--color-ink-rgb), 0.85);
   }
 
-  /* ── Links — teal, underline-offset, transition ── */
+  /* ── Links ── */
   .article-prose a {
     color: var(--color-brand-3);
     font-weight: 500;
@@ -475,31 +571,30 @@
     font-style: italic;
   }
 
-  /* ── Blockquote — elevated teal card (upgraded style) ── */
+  /* ── Blockquote ── */
   .article-prose blockquote {
     position: relative;
-    margin: 3rem 0; /* More breathing room */
-    padding: 1.75rem 2rem; /* Larger padding */
-    border-left: 5px solid var(--color-brand); /* Thicker accent */
+    margin: 3rem 0;
+    padding: 1.75rem 2rem;
+    border-left: 5px solid var(--color-brand);
     border-radius: 0 16px 16px 0;
     background: rgba(var(--color-brand-rgb), 0.04);
     border-top: 1px solid rgba(var(--color-brand-rgb), 0.1);
     border-bottom: 1px solid rgba(var(--color-brand-rgb), 0.1);
     border-right: 1px solid rgba(var(--color-brand-rgb), 0.1);
-    /* Subtle ambient glow to lift blockquotes from the page */
     box-shadow: 0 8px 32px rgba(var(--color-brand-rgb), 0.05);
   }
 
   .article-prose blockquote p {
     margin-bottom: 0;
-    font-size: 16.5px; /* Larger blockquote text */
+    font-size: 16.5px;
     line-height: 1.8;
     font-style: italic;
     font-weight: 500;
-    color: var(--color-ink-deep); /* Darker ink for emphasis */
+    color: var(--color-ink-deep);
   }
 
-  /* ── Bullet lists — custom teal checkmark ── */
+  /* ── Bullet lists — teal checkmark ── */
   .article-prose ul {
     list-style: none;
     padding: 0;
@@ -528,7 +623,18 @@
     background-repeat: no-repeat;
   }
 
-  /* ── Ordered lists — premium typography ── */
+  /* Nested lists inside prose should use a dot instead of checkmark */
+  .article-prose ul ul li::before {
+    width: 6px;
+    height: 6px;
+    top: 8px;
+    left: 2px;
+    background-image: none;
+    background-color: var(--color-brand);
+    border-radius: 50%;
+  }
+
+  /* ── Ordered lists ── */
   .article-prose ol {
     list-style: decimal;
     padding-left: 1.5rem;
@@ -551,16 +657,16 @@
     font-size: 1.1em;
   }
 
-  /* ── Tables — scannable, dark header ── */
+  /* ── Tables ── */
   .article-prose table {
     width: 100%;
-    font-size: 14.5px; /* Increased table font size */
+    font-size: 14.5px;
     margin-bottom: 2.5rem;
     border-collapse: collapse;
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-soft);
+
   }
 
   .article-prose thead {
@@ -568,7 +674,7 @@
   }
 
   .article-prose thead th {
-    padding: 14px 18px; /* Increased padding */
+    padding: 14px 18px;
     text-align: left;
     font-size: 11.5px;
     font-weight: 900;
@@ -595,7 +701,7 @@
   }
 
   .article-prose tbody td {
-    padding: 14px 18px; /* Increased padding */
+    padding: 14px 18px;
     vertical-align: top;
     color: rgba(var(--color-ink-rgb), 0.88);
     line-height: 1.6;
@@ -623,7 +729,7 @@
     background: var(--color-ink-deep);
     color: rgba(var(--color-white-rgb), 0.88);
     border: 1px solid rgba(var(--color-white-rgb), 0.07);
-    box-shadow: var(--shadow-lift);
+
   }
 
   .article-prose pre code {
@@ -634,25 +740,28 @@
     font-size: inherit;
   }
 
-  /* ── Images ── */
+  /* ── Images — proper sizing, centered, no distortion ── */
   .article-prose img {
-    width: auto;
+    width: 100%;
     max-width: 100%;
-    max-height: 500px;
-    object-fit: contain;
+    height: auto;
+    /* Fixed max height — prevents tiny or giant images */
+    max-height: 480px;
+    object-fit: cover;
+    object-position: center;
     border-radius: 14px;
-    margin: 2.5rem auto 0.5rem; /* Centered, more top margin, tight bottom for caption */
+    margin: 2.5rem auto 0.5rem;
     border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-soft);
+
     display: block;
-    transition: box-shadow 0.25s ease;
+transition: border-color 0.25s ease;
   }
 
   .article-prose img:hover {
-    box-shadow: var(--shadow-lift);
+
   }
 
-  /* Image Captions (Standard markdown *italic* directly following an image, or figcaption) */
+  /* Image captions — italic text or figcaption after image */
   .article-prose img + em,
   .article-prose figcaption {
     display: block;
@@ -661,6 +770,7 @@
     color: rgba(var(--color-ink-rgb), 0.6);
     font-style: normal;
     margin-bottom: 2.5rem;
+    padding-top: 0.5rem;
   }
 
   /* ── Horizontal rule ── */
@@ -672,22 +782,266 @@
 
 
   /* ─────────────────────────────────────────────────────────────────
-     5. MOBILE TABLE OF CONTENTS TOGGLE
+     6. INLINE CALLOUT BOXES (shortcode: callout)
+        5 types: info (teal), tip (light teal), warning (amber),
+        danger (rose), success (green)
+     ───────────────────────────────────────────────────────────────── */
+
+  .article-callout {
+    margin: 2rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid;
+
+  }
+
+  .article-callout__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .article-callout__header [data-lucide] {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+
+  .article-callout__body {
+    padding: 1rem 1.25rem;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  .article-callout__body p:last-child { margin-bottom: 0; }
+
+  /* ── Info (brand teal) ── */
+  .article-callout--info {
+    border-color: rgba(var(--color-brand-rgb), 0.2);
+    background: rgba(var(--color-brand-rgb), 0.04);
+  }
+  .article-callout--info .article-callout__header {
+    background: rgba(var(--color-brand-rgb), 0.08);
+    color: var(--color-brand-3);
+    border-bottom: 1px solid rgba(var(--color-brand-rgb), 0.12);
+  }
+  .article-callout--info .article-callout__body { color: var(--color-ink); }
+
+  /* ── Tip (brand-2, lighter teal) ── */
+  .article-callout--tip {
+    border-color: rgba(var(--color-brand-2-rgb), 0.25);
+    background: rgba(var(--color-brand-2-rgb), 0.04);
+  }
+  .article-callout--tip .article-callout__header {
+    background: rgba(var(--color-brand-2-rgb), 0.1);
+    color: var(--color-brand);
+    border-bottom: 1px solid rgba(var(--color-brand-2-rgb), 0.15);
+  }
+  .article-callout--tip .article-callout__body { color: var(--color-ink); }
+
+  /* ── Warning (amber) ── */
+  .article-callout--warning {
+    border-color: rgba(217, 152, 0, 0.25);
+    background: rgba(254, 243, 199, 0.4);
+  }
+  .article-callout--warning .article-callout__header {
+    background: rgba(217, 152, 0, 0.1);
+    color: #92620a;
+    border-bottom: 1px solid rgba(217, 152, 0, 0.15);
+  }
+  .article-callout--warning .article-callout__body { color: #78510a; }
+
+  /* ── Danger (rose) ── */
+  .article-callout--danger {
+    border-color: rgba(220, 38, 38, 0.2);
+    background: rgba(254, 226, 226, 0.3);
+  }
+  .article-callout--danger .article-callout__header {
+    background: rgba(220, 38, 38, 0.08);
+    color: #b91c1c;
+    border-bottom: 1px solid rgba(220, 38, 38, 0.12);
+  }
+  .article-callout--danger .article-callout__body { color: #991b1b; }
+
+  /* ── Success (green) ── */
+  .article-callout--success {
+    border-color: rgba(22, 163, 74, 0.2);
+    background: rgba(220, 252, 231, 0.35);
+  }
+  .article-callout--success .article-callout__header {
+    background: rgba(22, 163, 74, 0.08);
+    color: #15803d;
+    border-bottom: 1px solid rgba(22, 163, 74, 0.12);
+  }
+  .article-callout--success .article-callout__body { color: #166534; }
+
+
+  /* ─────────────────────────────────────────────────────────────────
+     7. FAQ ACCORDION
+        Premium animated accordion for the {{% faqs %}} shortcode.
+        Uses button/aria-expanded pattern for accessibility.
+     ───────────────────────────────────────────────────────────────── */
+
+  /* Section wrapper — anchor for TOC + visual separation */
+  .article-faq-section {
+    margin-top: 3.5rem;
+    scroll-margin-top: 100px;
+  }
+
+  /* H2 heading — matches .article-prose h2 exactly (teal left bar) */
+  .article-faq-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: clamp(22px, 2.5vw, 28px);
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--color-ink) !important;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    margin-bottom: 1.75rem;
+    padding-left: 1.25rem;
+    border-left: 4px solid var(--color-brand);
+    -webkit-text-fill-color: var(--color-ink);
+  }
+
+  .article-faq-heading [data-lucide] {
+    width: 22px;
+    height: 22px;
+    color: var(--color-brand);
+    flex-shrink: 0;
+  }
+
+  /* FAQ list container */
+  .article-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Individual accordion item */
+  .faq-accordion-item {
+    border: 1px solid var(--color-line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--color-white);
+transition: border-color 0.25s ease;
+  }
+
+  .faq-accordion-item:has(.faq-accordion-trigger[aria-expanded="true"]) {
+    border-color: rgba(var(--color-brand-rgb), 0.25);
+    box-shadow: 0 4px 20px rgba(var(--color-brand-rgb), 0.08);
+  }
+
+  /* Trigger button — the clickable FAQ question */
+  .faq-accordion-trigger {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    text-align: left;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .faq-accordion-trigger:hover {
+    background: rgba(var(--color-brand-rgb), 0.03);
+  }
+
+  .faq-accordion-trigger[aria-expanded="true"] {
+    background: rgba(var(--color-brand-rgb), 0.04);
+    border-bottom: 1px solid rgba(var(--color-brand-rgb), 0.1);
+  }
+
+  /* Question text */
+  .faq-accordion-trigger__q {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    line-height: 1.45;
+    text-align: left;
+  }
+
+  /* Chevron icon wrapper */
+  .faq-accordion-trigger__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(var(--color-brand-rgb), 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    transition: background 0.2s ease, transform 0.25s ease;
+  }
+
+  .faq-accordion-trigger__icon [data-lucide] {
+    width: 13px;
+    height: 13px;
+    color: var(--color-brand);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Rotate chevron when expanded */
+  .faq-accordion-trigger[aria-expanded="true"] .faq-accordion-trigger__icon {
+    background: rgba(var(--color-brand-rgb), 0.15);
+  }
+
+  .faq-accordion-trigger[aria-expanded="true"] .faq-accordion-trigger__icon [data-lucide] {
+    transform: rotate(180deg);
+  }
+
+  /* Panel — hidden state uses display:none override via JS removing `hidden` */
+  .faq-accordion-panel {
+    overflow: hidden;
+    /* Panel height animates via JS adding inline max-height */
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .faq-accordion-panel[hidden] {
+    display: none;
+  }
+
+  .faq-accordion-panel__inner {
+    padding: 1rem 1.25rem 1.25rem;
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(var(--color-ink-rgb), 0.8);
+  }
+
+  .faq-accordion-panel__inner p:last-child {
+    margin-bottom: 0;
+  }
+
+
+  /* ─────────────────────────────────────────────────────────────────
+     8. MOBILE TABLE OF CONTENTS TOGGLE
         Shown above prose on mobile (< 1024px).
-        Uses same dark ink gradient as sidebar headers for consistency.
      ───────────────────────────────────────────────────────────────── */
 
   .article-toc-mobile {
     position: sticky;
-    top: 72px; /* 60px mobile header + 12px gap */
+    top: 72px;
     z-index: 40;
     margin-bottom: 2rem;
     border-radius: 14px;
-    overflow-y: auto; /* Allow scrolling if TOC is tall */
+    overflow-y: auto;
     overflow-x: hidden;
     max-height: calc(100vh - 84px);
     border: 1px solid rgba(var(--color-brand-rgb), 0.15);
-    box-shadow: var(--shadow-lift); /* Slightly stronger shadow to lift it off the text */
+
     background: var(--color-paper);
   }
 
@@ -704,10 +1058,6 @@
     letter-spacing: 0.14em;
     color: rgba(var(--color-white-rgb), 0.9);
     text-align: left;
-    /*
-      Dark gradient header — same as .article-sidebar-block__header,
-      so all TOC headers look visually identical across mobile/desktop.
-    */
     background: linear-gradient(105deg, var(--color-ink-deep) 0%, var(--color-ink-3) 100%);
     cursor: pointer;
     overflow: hidden;
@@ -715,7 +1065,6 @@
     outline: none;
   }
 
-  /* Teal ambient glow — matches sidebar block header decoration */
   .article-toc-mobile__toggle::after {
     content: "";
     position: absolute;
@@ -752,23 +1101,19 @@
     background: var(--color-white);
   }
 
-  /* Desktop: sidebar handles TOC — hide mobile version */
+  /* Desktop: sidebar handles TOC */
   @media (min-width: 1024px) {
     .article-toc-mobile { display: none; }
   }
 
 
   /* ─────────────────────────────────────────────────────────────────
-     6. ARTICLE STATS GRID (About Saar Biotech widget in prose area)
-        2×2 grid of credibility stats — teal values, muted labels.
-        Upgraded: now uses a border + glassmorphic teal tint consistent
-        with the .cat-proof-bar / .catlist-hero__stats design language.
+     9. ABOUT SAAR STATS WIDGET
      ───────────────────────────────────────────────────────────────── */
 
   .article-stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* Remove the old mt-10 inline class — handled in single.html */
   }
 
   .article-stat-item {
@@ -787,17 +1132,14 @@
     background: rgba(var(--color-brand-rgb), 0.04);
   }
 
-  /* Remove right border on even (right-column) items */
   .article-stat-item:nth-child(2n) {
     border-right: none;
   }
 
-  /* Remove bottom border on last two items */
   .article-stat-item:nth-last-child(-n+2) {
     border-bottom: none;
   }
 
-  /* Large teal value number */
   .article-stat-value {
     font-size: 16px;
     font-family: var(--font-display);
@@ -805,11 +1147,9 @@
     letter-spacing: -0.015em;
     color: var(--color-brand-3);
     line-height: 1.1;
-    /* Subtle teal glow on the number — matches catlist stat values */
     text-shadow: 0 0 18px rgba(var(--color-brand-rgb), 0.3);
   }
 
-  /* Small muted label */
   .article-stat-label {
     font-size: 9.5px;
     font-weight: 800;
@@ -820,23 +1160,21 @@
     line-height: 1.3;
   }
 
-  /* The stats grid wrapper card — scoped to prose area */
   .article-stats-card {
     margin-top: 2.5rem;
     border-radius: 16px;
     border: 1px solid rgba(var(--color-brand-rgb), 0.12);
     background: rgba(var(--color-brand-rgb), 0.025);
     overflow: hidden;
-    box-shadow: var(--shadow-soft);
-    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+
+transition: border-color 0.25s ease;
   }
 
   .article-stats-card:hover {
-    box-shadow: var(--shadow-lift);
+
     border-color: rgba(var(--color-brand-rgb), 0.22);
   }
 
-  /* Header row inside the stats card */
   .article-stats-card__header {
     display: flex;
     align-items: center;
@@ -856,7 +1194,6 @@
     height: 13px;
   }
 
-  /* Footer link at bottom of stats card */
   .article-stats-footer {
     display: flex;
     align-items: center;
@@ -888,7 +1225,7 @@
 
 
   /* ─────────────────────────────────────────────────────────────────
-     7. ARTICLE TAGS
+     10. ARTICLE TAGS
      ───────────────────────────────────────────────────────────────── */
 
   .article-tags {
@@ -924,9 +1261,7 @@
 
 
   /* ─────────────────────────────────────────────────────────────────
-     8. AUTHOR CARD — Premium dark card (consistent with site sections)
-        Uses same ink-deep gradient as article header, sidebar headers,
-        and other dark section elements across the site.
+     11. AUTHOR CARD
      ───────────────────────────────────────────────────────────────── */
 
   .article-author {
@@ -939,10 +1274,9 @@
     overflow: hidden;
     background: linear-gradient(145deg, var(--color-ink-deep) 0%, var(--color-abyss) 100%);
     border: 1px solid rgba(var(--color-brand-rgb), 0.2);
-    box-shadow: var(--shadow-lift);
+
   }
 
-  /* Decorative teal glow — top-right corner (same as other dark cards) */
   .article-author::before {
     content: "";
     position: absolute;
@@ -955,7 +1289,6 @@
     pointer-events: none;
   }
 
-  /* Dot grid decoration — bottom left (matches sidebar CTA) */
   .article-author::after {
     content: "";
     position: absolute;
@@ -983,7 +1316,6 @@
     background: rgba(var(--color-brand-rgb), 0.16);
     color: var(--color-brand-2);
     border: 1px solid rgba(var(--color-brand-rgb), 0.32);
-    /* Multi-ring glow — same as sidebar CTA icon ring */
     box-shadow:
       0 0 0 5px rgba(var(--color-brand-rgb), 0.07),
       0 0 18px rgba(var(--color-brand-rgb), 0.2);
@@ -1020,7 +1352,6 @@
     margin-bottom: 0;
   }
 
-  /* Stack author avatar + info vertically on very small screens */
   @media (max-width: 480px) {
     .article-author {
       flex-direction: column;
@@ -1030,8 +1361,7 @@
 
 
   /* ─────────────────────────────────────────────────────────────────
-     9. PREV / NEXT ARTICLE NAVIGATION
-        Two cards side by side — matching .info-card hover language.
+     12. PREV / NEXT ARTICLE NAVIGATION
      ───────────────────────────────────────────────────────────────── */
 
   .article-prevnext {
@@ -1062,12 +1392,11 @@
     transition: all 0.22s ease;
     background: linear-gradient(180deg, var(--color-white) 0%, var(--color-paper) 100%);
     border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-soft);
+
   }
 
   .article-prevnext__item:hover {
     border-color: var(--color-brand-line);
-    /* Teal-tinted surface on hover — matches .info-card hover */
     background: linear-gradient(135deg, var(--color-white) 0%, var(--color-surface) 100%);
     transform: translateY(-2px);
     box-shadow:
@@ -1117,82 +1446,96 @@
   }
 
 
-
-
   /* ─────────────────────────────────────────────────────────────────
-     10. SIDEBAR — unified editorial rail
-         Redesigned from separate chunky cards → one cohesive panel.
-
-         Visual hierarchy:
-         - Single white/paper panel with a faint teal left border rail
-         - Sections separated by hairline dividers
-         - Each section has a compact label tab (icon + uppercase text)
-         - TOC, article list, product list, stats, and CTA all within
-           the same visual container for a longer, editorial feel.
+     13. SIDEBAR — unified editorial rail
      ─────────────────────────────────────────────────────────────────  */
 
-
-
-  /* ── Sticky outer aside ── */
-  /*
-    position: sticky works when:
-      1. The parent grid has align-items: start (done above)
-      2. No ancestor has overflow: hidden/auto/scroll
-      3. The sidebar itself has align-self: start
-    The rail panel itself uses overflow: hidden only to clip the
-    rounded corners of children — this is fine because overflow:hidden
-    on the sidebar element (not a parent) does NOT break sticky.
-  */
   .article-sidebar {
     position: sticky;
-    top: 88px; /* 72px site-header + 16px breathing room */
+    top: 88px;
     align-self: start;
     display: flex;
     flex-direction: column;
-    /* Rail panel: single card with teal left accent border */
     background: var(--color-white);
     border: 1px solid var(--color-line);
     border-left: 3px solid var(--color-brand);
     border-radius: 16px;
-    overflow: hidden; /* safe here — does not break sticky on the element itself */
-    box-shadow: var(--shadow-soft);
-    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+
+transition: border-color 0.25s ease;
+    /* Max height so very-long sidebars don't overflow the viewport */
+    max-height: calc(100vh - 108px);
+    overflow-y: auto;
+    
   }
 
   .article-sidebar:hover {
-    box-shadow: var(--shadow-lift);
+
+    border-left-color: var(--color-brand);
     border-color: rgba(var(--color-brand-rgb), 0.3);
   }
 
-  /* Tablet/mobile: unstick, show as full-width below prose */
+  /* Scrollbar styling for sidebar */
+  .article-sidebar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .article-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .article-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-brand-rgb), 0.2);
+    border-radius: 2px;
+  }
+  .article-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--color-brand-rgb), 0.4);
+  }
+
+  /* Internal TOC scrolling (keeps other widgets visible) */
+  .sb-toc-scroll {
+    max-height: 35vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 8px;
+    margin-right: -8px;
+  }
+  
+  .sb-toc-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  .sb-toc-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .sb-toc-scroll::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-brand-rgb), 0.2);
+    border-radius: 2px;
+  }
+  .sb-toc-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--color-brand-rgb), 0.4);
+  }
+
   @media (max-width: 1023px) {
     .article-sidebar {
       position: static;
       border-radius: 14px;
+      max-height: none;
+      overflow-y: visible;
     }
   }
 
 
-  /* ════════════════════════════════════════════════════════════════
+  /* ══════════════════════════════════════════════════════════════
      SIDEBAR SECTION — universal container for each content block
-     ════════════════════════════════════════════════════════════════ */
+     ══════════════════════════════════════════════════════════════ */
 
   .sb-section {
-    /* Hairline divider between sections */
     border-bottom: 1px solid var(--color-line);
+    flex-shrink: 0;
   }
 
   .sb-section:last-child {
     border-bottom: none;
   }
 
-
-  /* ── Section label tab — icon + uppercase tiny text ── */
-  /*
-    Replaces the heavy dark-header-strip. A compact, lightweight label
-    sits above each section's content. Uses a subtle teal tint background
-    instead of the heavy ink-deep gradient of the old design.
-  */
+  /* ── Section label tab ── */
   .sb-label {
     display: flex;
     align-items: center;
@@ -1214,16 +1557,166 @@
     opacity: 0.8;
   }
 
+  /* TOC section — scrollable */
+  .sb-toc-scroll {
+    max-height: 320px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 
-  /* ════════════════════════════════════════════════════════════════
-     TOC SECTION
-     ════════════════════════════════════════════════════════════════ */
+  .sb-toc-scroll::-webkit-scrollbar {
+    width: 3px;
+  }
+  .sb-toc-scroll::-webkit-scrollbar-thumb {
+    background: rgba(var(--color-brand-rgb), 0.2);
+    border-radius: 2px;
+  }
+
+
+  /* ══════════════════════════════════════════════════════════════
+     ARTICLE FACTS STRIP
+     ══════════════════════════════════════════════════════════════ */
+
+  .sb-facts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0.5rem;
+    gap: 0.25rem;
+  }
+
+  .sb-fact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.6rem 0.4rem;
+    border-radius: 8px;
+    transition: background 0.15s ease;
+  }
+
+  .sb-fact:hover {
+    background: rgba(var(--color-brand-rgb), 0.04);
+  }
+
+  .sb-fact [data-lucide] {
+    width: 13px;
+    height: 13px;
+    color: var(--color-brand);
+    opacity: 0.7;
+    margin-bottom: 3px;
+  }
+
+  .sb-fact__value {
+    font-size: 12px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--color-ink);
+    line-height: 1.2;
+  }
+
+  .sb-fact__label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    margin-top: 1px;
+  }
+
+
+  /* ══════════════════════════════════════════════════════════════
+     SOCIAL SHARE BAR
+     ══════════════════════════════════════════════════════════════ */
+
+  .sb-share-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.75rem 0.875rem;
+  }
+
+  .sb-share-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.625rem;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .sb-share-btn svg {
+    flex-shrink: 0;
+  }
+
+  /* LinkedIn */
+  .sb-share-btn--linkedin {
+    background: rgba(10, 102, 194, 0.08);
+    color: #0a66c2;
+    border: 1px solid rgba(10, 102, 194, 0.18);
+  }
+  .sb-share-btn--linkedin:hover {
+    background: #0a66c2;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 102, 194, 0.3);
+  }
+
+  /* WhatsApp */
+  .sb-share-btn--whatsapp {
+    background: rgba(37, 211, 102, 0.08);
+    color: #1a8f44;
+    border: 1px solid rgba(37, 211, 102, 0.2);
+  }
+  .sb-share-btn--whatsapp:hover {
+    background: #25d366;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  }
+
+  /* Twitter / X */
+  .sb-share-btn--twitter {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--color-ink-3);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .sb-share-btn--twitter:hover {
+    background: var(--color-ink);
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  /* Copy Link */
+  .sb-share-btn--copy {
+    background: rgba(var(--color-brand-rgb), 0.07);
+    color: var(--color-brand-3);
+    border: 1px solid rgba(var(--color-brand-rgb), 0.15);
+  }
+  .sb-share-btn--copy:hover {
+    background: rgba(var(--color-brand-rgb), 0.15);
+    transform: translateY(-1px);
+  }
+  .sb-share-btn--copy [data-lucide] {
+    width: 13px;
+    height: 13px;
+  }
+
+
+  /* ══════════════════════════════════════════════════════════════
+     TOC SECTION STYLES
+     ══════════════════════════════════════════════════════════════ */
 
   .sb-section--toc .article-toc {
     padding: 0.5rem 0.625rem 0.75rem;
   }
 
-  /* Top-level UL — counter reset, column flex */
+  /* Top-level UL */
   .article-toc nav > ul,
   .article-toc > ul {
     counter-reset: toc-h2;
@@ -1235,12 +1728,11 @@
     gap: 1px;
   }
 
-  /* All list items — no marker */
   .article-toc li {
     list-style: none;
   }
 
-  /* Nested UL (H3 and below) — indented with teal left bar */
+  /* Nested UL (H3) — indented with teal left bar */
   .article-toc ul ul {
     list-style: none;
     padding: 0 0 0 0.75rem;
@@ -1251,7 +1743,7 @@
     gap: 1px;
   }
 
-  /* ── H2 level links — numbered badge ── */
+  /* H2 level links */
   .article-toc nav > ul > li > a,
   .article-toc > ul > li > a {
     counter-increment: toc-h2;
@@ -1300,7 +1792,7 @@
     color: var(--color-brand);
   }
 
-  /* ── H3 level links — dot indicator ── */
+  /* H3 level links */
   .article-toc ul ul li a {
     display: flex;
     align-items: flex-start;
@@ -1320,7 +1812,7 @@
     content: "";
     display: inline-block;
     flex-shrink: 0;
-    width: 4px;
+    width: 8px;
     height: 4px;
     border-radius: 50%;
     background: rgba(var(--color-brand-rgb), 0.35);
@@ -1338,7 +1830,7 @@
     transform: scale(1.5);
   }
 
-  /* Active TOC item — IntersectionObserver sets .is-active via article.js */
+  /* Active TOC item */
   .article-toc a.is-active {
     background: rgba(var(--color-brand-rgb), 0.09);
     color: var(--color-brand-3);
@@ -1361,15 +1853,15 @@
     transform: scale(1.4);
   }
 
-  /* Hide sidebar TOC on mobile — mobile toggle handles it */
+  /* Hide sidebar TOC on mobile */
   @media (max-width: 1023px) {
     .sb-section--toc { display: none; }
   }
 
 
-  /* ════════════════════════════════════════════════════════════════
+  /* ══════════════════════════════════════════════════════════════
      RELATED READING — compact article list rows
-     ════════════════════════════════════════════════════════════════ */
+     ══════════════════════════════════════════════════════════════ */
 
   .sb-article-list {
     list-style: none;
@@ -1391,12 +1883,11 @@
     gap: 2px;
     padding: 0.625rem 1rem;
     text-decoration: none;
-    transition: background 0.15s ease, box-shadow 0.15s ease;
+transition: border-color 0.25s ease;
   }
 
   .sb-article-row:hover {
     background: rgba(var(--color-brand-rgb), 0.04);
-    /* Teal left accent bar — no layout shift, uses inset shadow */
     box-shadow: inset 3px 0 0 var(--color-brand);
   }
 
@@ -1445,9 +1936,9 @@
   }
 
 
-  /* ════════════════════════════════════════════════════════════════
+  /* ══════════════════════════════════════════════════════════════
      RELATED PRODUCTS — compact product list rows
-     ════════════════════════════════════════════════════════════════ */
+     ══════════════════════════════════════════════════════════════ */
 
   .sb-product-list {
     list-style: none;
@@ -1469,7 +1960,7 @@
     gap: 0.625rem;
     padding: 0.625rem 1rem;
     text-decoration: none;
-    transition: background 0.15s ease, box-shadow 0.15s ease;
+transition: border-color 0.25s ease;
   }
 
   .sb-product-row:hover {
@@ -1477,7 +1968,6 @@
     box-shadow: inset 3px 0 0 var(--color-brand);
   }
 
-  /* Teal animated dot */
   .sb-product-row__dot {
     width: 6px;
     height: 6px;
@@ -1535,77 +2025,17 @@
   }
 
 
-  /* ════════════════════════════════════════════════════════════════
-     CREDIBILITY STATS — compact 2×2 grid inside the rail
-     ════════════════════════════════════════════════════════════════ */
-
-  .sb-stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .sb-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0.875rem 0.5rem;
-    border-right: 1px solid var(--color-line);
-    border-bottom: 1px solid var(--color-line);
-    transition: background 0.15s ease;
-  }
-
-  .sb-stat:hover {
-    background: rgba(var(--color-brand-rgb), 0.03);
-  }
-
-  /* Right column — no right border */
-  .sb-stat:nth-child(2n) {
-    border-right: none;
-  }
-
-  /* Bottom row — no bottom border */
-  .sb-stat:nth-last-child(-n+2) {
-    border-bottom: none;
-  }
-
-  .sb-stat__value {
-    font-size: 15px;
-    font-family: var(--font-display);
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    color: var(--color-brand-3);
-    line-height: 1.1;
-    /* Subtle teal glow — consistent with catlist stat values */
-    text-shadow: 0 0 16px rgba(var(--color-brand-rgb), 0.28);
-  }
-
-  .sb-stat__label {
-    font-size: 9px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-muted);
-    margin-top: 3px;
-    line-height: 1.3;
-  }
-
-
-  /* ════════════════════════════════════════════════════════════════
+  /* ══════════════════════════════════════════════════════════════
      CTA SECTION — compact dark block at rail bottom
-     Dark gradient background with teal glow — echoes the hero banner.
-     Decorative elements via ::before (glow) and ::after (dot grid).
-     ════════════════════════════════════════════════════════════════ */
+     ══════════════════════════════════════════════════════════════ */
 
   .sb-section--cta {
     position: relative;
     overflow: hidden;
     background: linear-gradient(145deg, var(--color-ink-deep) 0%, var(--color-abyss) 100%);
-    border-bottom: none; /* last section, no divider needed */
+    border-bottom: none;
   }
 
-  /* Radial teal glow orb — top-right */
   .sb-section--cta::before {
     content: "";
     position: absolute;
@@ -1618,7 +2048,6 @@
     pointer-events: none;
   }
 
-  /* Dot-grid decoration — bottom-left corner */
   .sb-section--cta::after {
     content: "";
     position: absolute;
@@ -1633,7 +2062,6 @@
     -webkit-mask-image: radial-gradient(ellipse at 0% 100%, black 0%, transparent 70%);
   }
 
-  /* Override the sb-label for CTA — needs dark-mode text */
   .sb-section--cta .sb-label {
     background: rgba(var(--color-brand-rgb), 0.12);
     border-bottom-color: rgba(var(--color-brand-rgb), 0.18);
@@ -1642,7 +2070,7 @@
 
   .sb-cta {
     position: relative;
-    z-index: 1; /* sit above ::before and ::after decorations */
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -1686,7 +2114,6 @@
     margin: 0;
   }
 
-  /* Primary CTA button — reuses site btn--primary token styles */
   .sb-cta__btn {
     display: flex;
     align-items: center;
@@ -1700,11 +2127,10 @@
     cursor: pointer;
     border: none;
     outline: none;
-    /* Teal gradient — same technique as site's .btn--primary */
     background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-3) 100%);
     color: var(--color-white);
     box-shadow: 0 4px 16px rgba(var(--color-brand-rgb), 0.38);
-    transition: opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+transition: border-color 0.25s ease;
   }
 
   .sb-cta__btn:hover {
@@ -1723,7 +2149,6 @@
     transform: translateX(2px);
   }
 
-  /* Secondary link — muted, below button */
   .sb-cta__link {
     display: flex;
     align-items: center;
@@ -1752,47 +2177,23 @@
 
 
   /* ─────────────────────────────────────────────────────────────────
-     11. RESPONSIVE — Mobile & Tablet safety nets
-     ─────────────────────────────────────────────────────────────────  */
-
-  /* Prevent table overflow on mobile */
-  @media (max-width: 767px) {
-    .article-prose table {
-      display: block;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* Article header on mobile — tighter vertical padding */
-    .article-header__banner {
-      padding-top: clamp(72px, 12vw, 90px);
-      padding-bottom: clamp(36px, 6vw, 52px);
-    }
-
-    /* Author card on mobile — tighter */
-    .article-author {
-      padding: 1.25rem;
-      gap: 1rem;
-    }
-
-    /* Tags wrap more tightly on mobile */
-    .article-tags {
-      margin-top: 2rem;
-      padding-top: 1.25rem;
-    }
-  }
-
-  /* ─────────────────────────────────────────────────────────────────
-     11. INLINE PRODUCT CARD (Shortcode)
+     14. INLINE PRODUCT CARD (Shortcode: product-card)
      ───────────────────────────────────────────────────────────────── */
+
   .article-inline-product {
     margin: 2.5rem 0;
     padding: 1.25rem 1.5rem;
-    border-radius: 12px;
-    background: linear-gradient(to right, rgba(var(--color-brand-rgb), 0.05), transparent);
+    border-radius: 14px;
+    background: linear-gradient(to right, rgba(var(--color-brand-rgb), 0.05), rgba(var(--color-brand-rgb), 0.02));
     border: 1px solid rgba(var(--color-brand-rgb), 0.15);
     border-left: 4px solid var(--color-brand);
-    box-shadow: var(--shadow-soft);
+
+transition: border-color 0.25s ease;
+  }
+
+  .article-inline-product:hover {
+
+    border-color: rgba(var(--color-brand-rgb), 0.28);
   }
 
   .inline-product-inner {
@@ -1819,6 +2220,12 @@
     justify-content: center;
     color: var(--color-brand);
     flex-shrink: 0;
+    border: 1px solid rgba(var(--color-brand-rgb), 0.15);
+  }
+
+  .inline-product-icon [data-lucide] {
+    width: 22px;
+    height: 22px;
   }
 
   .inline-product-info {
@@ -1843,237 +2250,127 @@
     text-decoration: none !important;
     font-family: var(--font-display);
     transition: color 0.15s ease;
+    line-height: 1.3;
   }
 
   .inline-product-title:hover {
     color: var(--color-brand);
   }
 
+  /* Tags row below product name */
+  .inline-product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: 0.25rem;
+  }
+
+  .inline-product-tag {
+    display: inline-flex;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 9.5px;
+    font-weight: 700;
+    background: rgba(var(--color-brand-rgb), 0.07);
+    color: var(--color-brand-3);
+    border: 1px solid rgba(var(--color-brand-rgb), 0.14);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .inline-product-tag--dosage {
+    background: rgba(var(--color-ink-rgb), 0.05);
+    color: var(--color-muted);
+    border-color: var(--color-line);
+  }
+
+  /* Right: action buttons */
+  .inline-product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 639px) {
+    .inline-product-actions {
+      flex-direction: row;
+    }
+  }
+
   .inline-product-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.625rem 1.25rem;
+    padding: 0.5rem 1rem;
     background: var(--color-ink);
     color: var(--color-white) !important;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-radius: 8px;
-    text-decoration: none !important;
-    transition: background 0.15s ease;
-  }
-
-  .inline-product-btn:hover {
-    background: var(--color-brand);
-    font-family: var(--font-display);
-    font-weight: 800;
-    line-height: 1.2;
-    color: var(--color-white);
-    margin: 0;
-  }
-
-  .sb-cta__text {
     font-size: 11.5px;
-    line-height: 1.62;
-    color: rgba(var(--color-white-rgb), 0.52);
-    margin: 0;
-  }
-
-  /* Primary CTA button — reuses site btn--primary token styles */
-  .sb-cta__btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.375rem;
-    width: 100%;
-    padding: 0.625rem 1rem;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 800;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    /* Teal gradient — same technique as site's .btn--primary */
-    background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-3) 100%);
-    color: var(--color-white);
-    box-shadow: 0 4px 16px rgba(var(--color-brand-rgb), 0.38);
-    transition: opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-  }
-
-  .sb-cta__btn:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(var(--color-brand-rgb), 0.48);
-  }
-
-  .sb-cta__btn [data-lucide] {
-    width: 14px;
-    height: 14px;
-    transition: transform 0.18s ease;
-  }
-
-  .sb-cta__btn:hover [data-lucide] {
-    transform: translateX(2px);
-  }
-
-  /* Secondary link — muted, below button */
-  .sb-cta__link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    font-size: 11px;
-    font-weight: 600;
-    text-decoration: none;
-    color: rgba(var(--color-white-rgb), 0.3);
-    transition: color 0.15s ease;
-  }
-
-  .sb-cta__link:hover {
-    color: var(--color-brand-2);
-  }
-
-  .sb-cta__link [data-lucide] {
-    width: 11px;
-    height: 11px;
-    transition: transform 0.15s ease;
-  }
-
-  .sb-cta__link:hover [data-lucide] {
-    transform: translateX(2px);
-  }
-
-
-  /* ─────────────────────────────────────────────────────────────────
-     11. RESPONSIVE — Mobile & Tablet safety nets
-     ─────────────────────────────────────────────────────────────────  */
-
-  /* Prevent table overflow on mobile */
-  @media (max-width: 767px) {
-    .article-prose table {
-      display: block;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* Article header on mobile — tighter vertical padding */
-    .article-header__banner {
-      padding-top: clamp(72px, 12vw, 90px);
-      padding-bottom: clamp(36px, 6vw, 52px);
-    }
-
-    /* Author card on mobile — tighter */
-    .article-author {
-      padding: 1.25rem;
-      gap: 1rem;
-    }
-
-    /* Tags wrap more tightly on mobile */
-    .article-tags {
-      margin-top: 2rem;
-      padding-top: 1.25rem;
-    }
-  }
-
-  /* ─────────────────────────────────────────────────────────────────
-     11. INLINE PRODUCT CARD (Shortcode)
-     ───────────────────────────────────────────────────────────────── */
-  .article-inline-product {
-    margin: 2.5rem 0;
-    padding: 1.25rem 1.5rem;
-    border-radius: 12px;
-    background: linear-gradient(to right, rgba(var(--color-brand-rgb), 0.05), transparent);
-    border: 1px solid rgba(var(--color-brand-rgb), 0.15);
-    border-left: 4px solid var(--color-brand);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .inline-product-inner {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
-  @media (max-width: 639px) {
-    .inline-product-inner {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-  }
-
-  .inline-product-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(var(--color-brand-rgb), 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-brand);
-    flex-shrink: 0;
-  }
-
-  .inline-product-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .inline-product-label {
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-muted);
-  }
-
-  .inline-product-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-ink);
-    text-decoration: none !important;
-    font-family: var(--font-display);
-    transition: color 0.15s ease;
-  }
-
-  .inline-product-title:hover {
-    color: var(--color-brand);
-  }
-
-  .inline-product-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1.25rem;
-    background: var(--color-ink);
-    color: var(--color-white) !important;
-    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     border-radius: 8px;
     text-decoration: none !important;
-    transition: background 0.15s ease;
-  }
-
-  .inline-product-btn:hover {
-    background: var(--color-brand);
+    transition: background 0.15s ease, transform 0.15s ease;
+    white-space: nowrap;
   }
 
   .inline-product-btn [data-lucide] {
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
+    transition: transform 0.15s ease;
   }
 
+  .inline-product-btn:hover {
+    background: var(--color-brand);
+    transform: translateY(-1px);
+  }
+
+  .inline-product-btn:hover [data-lucide] {
+    transform: translateX(2px);
+  }
+
+  .inline-product-enquire {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background: rgba(var(--color-brand-rgb), 0.08);
+    color: var(--color-brand-3);
+    font-size: 11.5px;
+    font-weight: 700;
+    border-radius: 8px;
+    border: 1px solid rgba(var(--color-brand-rgb), 0.2);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .inline-product-enquire:hover {
+    background: var(--color-brand);
+    color: white;
+    border-color: var(--color-brand);
+    transform: translateY(-1px);
+  }
+
+
   /* ─────────────────────────────────────────────────────────────────
-     12. AUTOMATED BOTTOM RELATED SECTION
+     15. BOTTOM RELATED SECTION
      ───────────────────────────────────────────────────────────────── */
+
   .article-bottom-blocks {
-    margin-top: 4rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-line);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .article-bottom-section {
+    /* mt-12 utility class applied inline via Hugo template when stacking */
+  }
+
+  .article-bottom-section.mt-12 {
+    margin-top: 3rem;
     padding-top: 3rem;
     border-top: 1px solid var(--color-line);
   }
@@ -2082,10 +2379,10 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     color: var(--color-ink);
     margin-bottom: 1.5rem;
   }
@@ -2098,7 +2395,7 @@
 
   .article-bottom-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.25rem;
   }
 
@@ -2108,17 +2405,17 @@
     align-items: center;
     gap: 1rem;
     padding: 1.25rem;
-    border-radius: 12px;
+    border-radius: 14px;
     background: var(--color-white);
     border: 1px solid var(--color-line);
     text-decoration: none !important;
-    box-shadow: var(--shadow-soft);
+
     transition: all 0.2s ease;
   }
 
   .bottom-product-card:hover {
     border-color: rgba(var(--color-brand-rgb), 0.3);
-    box-shadow: var(--shadow-lift);
+
     transform: translateY(-2px);
   }
 
@@ -2160,6 +2457,12 @@
     color: var(--color-brand);
   }
 
+  .bottom-product-card__dosage {
+    font-size: 11px;
+    color: var(--color-brand-3);
+    font-weight: 600;
+  }
+
   .bottom-product-card__arrow {
     width: 14px;
     height: 14px;
@@ -2177,16 +2480,18 @@
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
-    border-radius: 12px;
-    background: rgba(var(--color-brand-rgb), 0.02);
-    border: 1px solid rgba(var(--color-brand-rgb), 0.1);
+    border-radius: 14px;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
     text-decoration: none !important;
+
     transition: all 0.2s ease;
   }
 
   .bottom-article-card:hover {
-    background: rgba(var(--color-brand-rgb), 0.05);
+    background: var(--color-white);
     border-color: rgba(var(--color-brand-rgb), 0.25);
+
     transform: translateY(-2px);
   }
 
@@ -2224,6 +2529,140 @@
   .bottom-article-card__meta [data-lucide] {
     width: 12px;
     height: 12px;
+  }
+
+  /* External References Grid */
+  .article-external-refs .article-bottom-title {
+    color: var(--color-ink-3);
+  }
+
+  .article-refs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.875rem;
+  }
+
+  .article-ref-card {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 0.875rem 1rem;
+    border-radius: 12px;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    text-decoration: none !important;
+    transition: all 0.18s ease;
+
+  }
+
+  .article-ref-card:hover {
+    border-color: rgba(var(--color-brand-rgb), 0.25);
+
+    transform: translateY(-1px);
+  }
+
+  .article-ref-card__icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(var(--color-brand-rgb), 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brand);
+    flex-shrink: 0;
+  }
+
+  .article-ref-card__icon [data-lucide] {
+    width: 15px;
+    height: 15px;
+  }
+
+  .article-ref-card__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .article-ref-card__source {
+    font-size: 9.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-brand-3);
+  }
+
+  .article-ref-card__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.35;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: color 0.15s;
+  }
+
+  .article-ref-card:hover .article-ref-card__title {
+    color: var(--color-brand-3);
+  }
+
+  .article-ref-card__arrow {
+    width: 14px;
+    height: 14px;
+    color: var(--color-muted);
+    flex-shrink: 0;
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+
+  .article-ref-card:hover .article-ref-card__arrow {
+    transform: translate(2px, -2px);
+    color: var(--color-brand);
+  }
+
+
+  /* ─────────────────────────────────────────────────────────────────
+     16. RESPONSIVE — Mobile & Tablet safety nets
+     ─────────────────────────────────────────────────────────────────  */
+
+  @media (max-width: 767px) {
+    /* Prevent table overflow on mobile */
+    .article-prose table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Article header on mobile — tighter vertical padding */
+    .article-header__banner {
+      padding-top: clamp(72px, 12vw, 90px);
+      padding-bottom: clamp(36px, 6vw, 52px);
+    }
+
+    /* Author card on mobile — tighter */
+    .article-author {
+      padding: 1.25rem;
+      gap: 1rem;
+    }
+
+    /* Tags wrap more tightly on mobile */
+    .article-tags {
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+    }
+
+    /* Key takeaways on mobile */
+    .article-key-takeaways-wrap {
+      padding-top: 1.25rem;
+    }
+
+    /* Bottom grid — single column on mobile */
+    .article-bottom-grid,
+    .article-refs-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
 } /* end @layer components */

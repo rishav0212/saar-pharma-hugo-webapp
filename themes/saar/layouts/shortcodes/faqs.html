@@ -1,11 +1,91 @@
-{{ $faqs := .Page.Params.faqs }}
-{{ if $faqs }}
-## Frequently Asked Questions
+{{/*
+  FAQS SHORTCODE — Premium Accordion + FAQPage JSON-LD Schema
+  ─────────────────────────────────────────────────────────────────────
+  Usage: {{% faqs %}} inside any article markdown file.
 
-{{ range $faqs }}
-### {{ .q }}
+  Reads `faqs` array from the page's frontmatter:
+    faqs:
+      - q: "Question text"
+        a: "Answer text"
 
-{{ .a }}
+  What this renders:
+  1. A styled H2 heading with teal left-bar (for SEO hierarchy + TOC)
+  2. An accessible FAQ accordion (details/summary or button-based)
+  3. FAQPage JSON-LD schema block for Google Featured Snippet eligibility
 
-{{ end }}
-{{ end }}
+  SEO notes:
+  - The H2 is rendered as a proper DOM heading so Hugo's TOC picks it up
+    (use {{% faqs %}} not {{< faqs >}} to allow markdown in content)
+  - The id="faqs" anchor enables direct TOC deep-linking
+  - FAQPage schema is output inline here so it is co-located with content
+*/}}
+
+{{- $faqs := .Page.Params.faqs -}}
+{{- if $faqs }}
+
+{{/* ── Styled H2 Heading — visible in TOC ──────────────────────────── */}}
+<div class="article-faq-section" id="faqs">
+  <h2 class="article-faq-heading">
+    <i data-lucide="help-circle" aria-hidden="true"></i>
+    Frequently Asked Questions
+  </h2>
+
+  {{/* ── Accordion Items ─────────────────────────────────────────────── */}}
+  <div class="article-faq-list" role="list">
+    {{- range $i, $faq := $faqs }}
+    <div class="faq-accordion-item" role="listitem">
+      <button
+        class="faq-accordion-trigger"
+        id="faq-trigger-{{ $i }}"
+        aria-expanded="false"
+        aria-controls="faq-panel-{{ $i }}"
+        data-faq-trigger
+      >
+        <span class="faq-accordion-trigger__q">{{ .q }}</span>
+        <span class="faq-accordion-trigger__icon" aria-hidden="true">
+          <i data-lucide="chevron-down"></i>
+        </span>
+      </button>
+      <div
+        class="faq-accordion-panel"
+        id="faq-panel-{{ $i }}"
+        role="region"
+        aria-labelledby="faq-trigger-{{ $i }}"
+        hidden
+      >
+        <div class="faq-accordion-panel__inner">
+          {{ .a | markdownify }}
+        </div>
+      </div>
+    </div>
+    {{- end }}
+  </div>
+</div>
+
+{{/* ── FAQPage JSON-LD — Embedded inline for Google structured data ─── */}}
+{{/*
+  FAQPage schema enables the "People Also Ask" rich result in Google SERP.
+  Co-locating it with the content (rather than in baseof.html) is acceptable
+  per Google guidelines — multiple ld+json blocks on one page are valid.
+*/}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{- range $i, $faq := $faqs }}
+    {{- if $i }},{{ end }}
+    {
+      "@type": "Question",
+      "name": {{ .q | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ .a | jsonify }}
+      }
+    }
+    {{- end }}
+  ]
+}
+</script>
+
+{{- end }}

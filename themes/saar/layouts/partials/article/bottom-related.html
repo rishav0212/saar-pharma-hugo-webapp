@@ -1,8 +1,17 @@
-{{/* 
+{{/*
   BOTTOM RELATED SECTION
-  Automatically pulls Related Products and Related Articles at the bottom of the post.
+  ─────────────────────────────────────────────────────────────────────
+  Full-width section below the 2-column article body. Renders:
+    1. Related Products (from frontmatter related_products slugs)
+    2. Further Reading (score-based related articles)
+    3. External References (from frontmatter external_refs array)
+
+  All wrapped in the global .container for proper gutters.
+  The outer .article-bottom-section has its own light surface background
+  to visually separate it from the article body.
 */}}
 
+{{/* ── Compute: Related Products ──────────────────────────────────── */}}
 {{- $relatedProductSlugs := .Params.related_products | default slice -}}
 {{- $relatedProducts     := slice -}}
 {{- range $relatedProductSlugs -}}
@@ -12,6 +21,7 @@
   {{- end -}}
 {{- end -}}
 
+{{/* ── Compute: Related Articles (score-based) ────────────────────── */}}
 {{- $currentCategory := .Params.category | default "" -}}
 {{- $currentTags     := .Params.tags | default slice -}}
 {{- $allArticles     := where .Site.RegularPages "Section" "articles" -}}
@@ -41,52 +51,99 @@
   {{- end -}}
 {{- end -}}
 
+{{/* ── External References ─────────────────────────────────────────── */}}
+{{- $externalRefs := .Params.external_refs | default slice -}}
 
-<div class="article-bottom-blocks">
+{{/*
+  Only render the entire block if there is at least ONE section to show.
+  Avoids an empty div rendering when an article has no related content.
+*/}}
+{{- $hasContent := or $relatedProducts $relatedFinal $externalRefs -}}
+{{- if $hasContent }}
 
-  {{/* ── Related Products ── */}}
-  {{ if $relatedProducts }}
-  <div class="article-bottom-section">
-    <h3 class="article-bottom-title">
-      <i data-lucide="flask-conical"></i>
-      Featured Products
-    </h3>
-    <div class="article-bottom-grid">
-      {{ range $relatedProducts }}
-      <a href="{{ .RelPermalink }}" class="bottom-product-card">
-        <div class="bottom-product-card__icon">
-          <i data-lucide="package"></i>
-        </div>
-        <div class="bottom-product-card__info">
-          <span class="bottom-product-card__cat">{{ index .Params.categories 0 | default "Product" }}</span>
-          <span class="bottom-product-card__name">{{ .Title }}</span>
-        </div>
-        <i data-lucide="arrow-right" class="bottom-product-card__arrow"></i>
-      </a>
-      {{ end }}
-    </div>
-  </div>
-  {{ end }}
+<section class="article-bottom-blocks" aria-label="Related content">
+  <div class="container">
 
-  {{/* ── Related Articles ── */}}
-  {{ if $relatedFinal }}
-  <div class="article-bottom-section mt-10">
-    <h3 class="article-bottom-title">
-      <i data-lucide="book-open"></i>
-      Further Reading
-    </h3>
-    <div class="article-bottom-grid">
-      {{ range $relatedFinal }}
-      <a href="{{ .RelPermalink }}" class="bottom-article-card">
-        <span class="bottom-article-card__cat">{{ .Params.category | default "Articles" }}</span>
-        <span class="bottom-article-card__name">{{ .Title }}</span>
-        {{ if .ReadingTime }}
-        <span class="bottom-article-card__meta"><i data-lucide="clock"></i> {{ .ReadingTime }}m</span>
+    {{/* ── Related Products ─────────────────────────────────────── */}}
+    {{ if $relatedProducts }}
+    <div class="article-bottom-section">
+      <h3 class="article-bottom-title">
+        <i data-lucide="flask-conical"></i>
+        Featured Products
+      </h3>
+      <div class="article-bottom-grid">
+        {{ range $relatedProducts }}
+        <a href="{{ .RelPermalink }}" class="bottom-product-card">
+          <div class="bottom-product-card__icon">
+            <i data-lucide="package"></i>
+          </div>
+          <div class="bottom-product-card__info">
+            <span class="bottom-product-card__cat">{{ index .Params.categories 0 | default "Product" }}</span>
+            <span class="bottom-product-card__name">{{ .Title }}</span>
+            {{ if .Params.dosage_form }}
+            <span class="bottom-product-card__dosage">{{ .Params.dosage_form }}</span>
+            {{ end }}
+          </div>
+          <i data-lucide="arrow-right" class="bottom-product-card__arrow"></i>
+        </a>
         {{ end }}
-      </a>
-      {{ end }}
+      </div>
     </div>
-  </div>
-  {{ end }}
+    {{ end }}
 
-</div>
+    {{/* ── Further Reading ───────────────────────────────────────── */}}
+    {{ if $relatedFinal }}
+    <div class="article-bottom-section {{ if $relatedProducts }}mt-12{{ end }}">
+      <h3 class="article-bottom-title">
+        <i data-lucide="book-open"></i>
+        Further Reading
+      </h3>
+      <div class="article-bottom-grid">
+        {{ range $relatedFinal }}
+        <a href="{{ .RelPermalink }}" class="bottom-article-card">
+          <span class="bottom-article-card__cat">{{ .Params.category | default "Articles" }}</span>
+          <span class="bottom-article-card__name">{{ .Title }}</span>
+          {{ if .ReadingTime }}
+          <span class="bottom-article-card__meta"><i data-lucide="clock"></i> {{ .ReadingTime }}m read</span>
+          {{ end }}
+        </a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+
+    {{/* ── External References ───────────────────────────────────── */}}
+    {{/*
+      External refs are critical for E-E-A-T (Experience, Expertise,
+      Authoritativeness, Trustworthiness). Linking to authoritative
+      sources like WHO, CDSCO, PharmaCompass signals to Google that
+      this article is well-researched and credible.
+    */}}
+    {{ if $externalRefs }}
+    <div class="article-bottom-section article-external-refs {{ if or $relatedProducts $relatedFinal }}mt-12{{ end }}">
+      <h3 class="article-bottom-title">
+        <i data-lucide="external-link"></i>
+        References & Further Resources
+      </h3>
+      <div class="article-refs-grid">
+        {{ range $externalRefs }}
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer nofollow"
+           class="article-ref-card">
+          <div class="article-ref-card__icon" aria-hidden="true">
+            <i data-lucide="link-2"></i>
+          </div>
+          <div class="article-ref-card__body">
+            <span class="article-ref-card__source">{{ .source }}</span>
+            <span class="article-ref-card__title">{{ .title }}</span>
+          </div>
+          <i data-lucide="arrow-up-right" class="article-ref-card__arrow" aria-hidden="true"></i>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+
+  </div>
+</section>
+
+{{- end }}

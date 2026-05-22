@@ -1,3 +1,17 @@
+{{/*
+  PRODUCT CARD SHORTCODE — Inline Featured Product in Article Prose
+  ─────────────────────────────────────────────────────────────────────
+  Usage: {{< product-card "product-slug" >}}
+
+  Fetches the product page by Params.slug and renders a rich card with:
+  - Product name (linked)
+  - Category + dosage form tags
+  - Enquire CTA button
+  - View Details link
+
+  If the slug is not found, renders nothing (silent fail via HTML comment).
+*/}}
+
 {{- $slug := .Get 0 -}}
 {{- $product := false -}}
 {{- range where .Site.RegularPages "Params.slug" $slug -}}
@@ -5,21 +19,41 @@
 {{- end -}}
 
 {{- if $product -}}
-<div class="article-inline-product">
+<div class="article-inline-product" role="complementary" aria-label="Featured product: {{ $product.Title }}">
   <div class="inline-product-inner">
-    <div class="inline-product-icon">
+
+    {{/* Left: icon bubble */}}
+    <div class="inline-product-icon" aria-hidden="true">
       <i data-lucide="flask-conical"></i>
     </div>
+
+    {{/* Centre: product info */}}
     <div class="inline-product-info">
       <span class="inline-product-label">Featured Product</span>
       <a href="{{ $product.RelPermalink }}" class="inline-product-title">{{ $product.Title }}</a>
+      <div class="inline-product-tags">
+        {{- if $product.Params.categories }}
+        <span class="inline-product-tag">{{ index $product.Params.categories 0 }}</span>
+        {{- end }}
+        {{- if $product.Params.dosage_form }}
+        <span class="inline-product-tag inline-product-tag--dosage">{{ $product.Params.dosage_form }}</span>
+        {{- end }}
+      </div>
     </div>
-    <a href="{{ $product.RelPermalink }}" class="inline-product-btn">
-      View Details
-      <i data-lucide="arrow-right"></i>
-    </a>
+
+    {{/* Right: CTAs */}}
+    <div class="inline-product-actions">
+      <a href="{{ $product.RelPermalink }}" class="inline-product-btn">
+        View Details
+        <i data-lucide="arrow-right"></i>
+      </a>
+      <button class="inline-product-enquire" data-enquire-trigger data-product="{{ $product.Title }}">
+        Enquire
+      </button>
+    </div>
+
   </div>
 </div>
 {{- else -}}
-<!-- Product '{{ $slug }}' not found -->
+<!-- Product '{{ $slug }}' not found — check slug in frontmatter matches Params.slug -->
 {{- end -}}

@@ -1,0 +1,47 @@
+{{/*
+  CALLOUT SHORTCODE — Inline Alert/Notice Boxes in Article Prose
+  ─────────────────────────────────────────────────────────────────────
+  Usage:
+    {{< callout type="info" title="Important Note" >}}
+    Your callout content here, supports **markdown**.
+    {{< /callout >}}
+
+  Available types: info | tip | warning | danger | success
+  Title is optional — if omitted, a default title is used for the type.
+
+  Each type has a distinct teal-adjacent color: 
+  - info    → brand teal
+  - tip     → brand-2 (light teal)  
+  - warning → amber/gold
+  - danger  → rose/red
+  - success → green
+
+  These are intentionally subtle and consistent with the site's muted palette.
+*/}}
+
+{{- $type  := .Get "type"  | default "info" -}}
+{{- $title := .Get "title" -}}
+
+{{- if eq $title "" -}}
+  {{- if eq $type "tip"     -}}{{- $title = "Pro Tip" -}}{{- end -}}
+  {{- if eq $type "warning" -}}{{- $title = "Important" -}}{{- end -}}
+  {{- if eq $type "danger"  -}}{{- $title = "Caution" -}}{{- end -}}
+  {{- if eq $type "success" -}}{{- $title = "Key Point" -}}{{- end -}}
+  {{- if eq $type "info"    -}}{{- $title = "Note" -}}{{- end -}}
+{{- end -}}
+
+{{- $icon := "info" -}}
+{{- if eq $type "tip"     -}}{{- $icon = "lightbulb" -}}{{- end -}}
+{{- if eq $type "warning" -}}{{- $icon = "triangle-alert" -}}{{- end -}}
+{{- if eq $type "danger"  -}}{{- $icon = "octagon-x" -}}{{- end -}}
+{{- if eq $type "success" -}}{{- $icon = "check-circle-2" -}}{{- end -}}
+
+<div class="article-callout article-callout--{{ $type }}" role="note">
+  <div class="article-callout__header">
+    <i data-lucide="{{ $icon }}" aria-hidden="true"></i>
+    <span class="article-callout__title">{{ $title }}</span>
+  </div>
+  <div class="article-callout__body">
+    {{ .Inner | markdownify }}
+  </div>
+</div>

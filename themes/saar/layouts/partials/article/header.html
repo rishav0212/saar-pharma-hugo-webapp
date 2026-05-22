@@ -7,6 +7,7 @@
   - Decorative floating rings — desktop only (.article-header__ring)
   - Mesh grid overlay via CSS ::after on .article-header__banner
   - Breadcrumb (on-dark variant) → category pill → H1 → meta row
+  - Optional key_takeaways box (SEO: featured snippet bait)
 
   Cover image is ONLY rendered when cover_image is set in frontmatter.
   No fallback placeholder — if no image, banner flows directly to body.
@@ -16,6 +17,8 @@
 {{- $author     := .Params.author | default "Saar Biotech Editorial Team" -}}
 {{- $coverImage := .Params.cover_image -}}
 {{- $date       := .Date.Format "2 January 2006" -}}
+{{- $takeaways  := .Params.key_takeaways -}}
+{{- $lastUpdated := .Params.last_updated -}}
 
 <header class="article-header">
 
@@ -54,7 +57,7 @@
         {{/* H1 — gradient white text, single per page for SEO */}}
         <h1 class="article-header__title">{{ .Title }}</h1>
 
-        {{/* Meta row: author · date · reading time */}}
+        {{/* Meta row: author · date · reading time · optional updated */}}
         <div class="article-header__meta" aria-label="Article metadata">
           <span class="article-meta-item">
             <i data-lucide="user" aria-hidden="true"></i>
@@ -70,6 +73,13 @@
             <i data-lucide="clock" aria-hidden="true"></i>
             {{ .ReadingTime }} min read
           </span>
+          {{- if $lastUpdated }}
+          <span class="article-meta-sep" aria-hidden="true">·</span>
+          <span class="article-meta-item article-meta-item--updated">
+            <i data-lucide="refresh-cw" aria-hidden="true"></i>
+            Updated {{ $lastUpdated }}
+          </span>
+          {{- end }}
         </div>
 
       </div>
@@ -78,8 +88,8 @@
 
   {{/*
     Cover image — rendered ONLY when cover_image frontmatter is set.
-    The negative top-margin in CSS pulls the image up to overlap the
-    dark banner, creating a premium layered feel.
+    Full-width cinematic banner with negative top-margin overlap.
+    object-fit: cover ensures proper fill without distortion.
   */}}
   {{ if $coverImage }}
   <div class="article-header__cover-wrap">
@@ -88,8 +98,8 @@
         <img src="{{ $coverImage }}"
              alt="{{ .Title }}"
              class="article-header__cover-img"
-             loading="lazy"
-             width="1120"
+             loading="eager"
+             width="1200"
              height="630">
       </figure>
     </div>
