@@ -23,7 +23,7 @@ The pharmaceutical contract manufacturing organization (CMO) landscape is underg
 
 This article explores the key trends shaping the future of third-party manufacturing in India and globally.
 
-## 1. The Shift to Continuous Manufacturing
+## The Shift to Continuous Manufacturing
 
 For decades, pharma manufacturing has relied on batch processing. However, the FDA and other global regulators are strongly encouraging a shift toward **continuous manufacturing**.
 
@@ -31,7 +31,7 @@ For decades, pharma manufacturing has relied on batch processing. However, the F
 
 For brand owners, partnering with a CMO that embraces continuous manufacturing means faster turnaround times and significantly reduced risk of batch rejection.
 
-## 2. Automation and Data Integrity
+## Automation and Data Integrity
 
 Data integrity is the cornerstone of regulatory compliance. The days of paper-based batch records are fading.
 
@@ -49,7 +49,7 @@ function monitorLineTemperature(sensorData) {
 }
 ```
 
-## 3. Advanced and Specialized Dosage Forms
+## Advanced and Specialized Dosage Forms
 
 As the market for generic blockbusters saturates, pharma marketing companies are looking for differentiation. This means a move away from simple uncoated tablets toward:
 

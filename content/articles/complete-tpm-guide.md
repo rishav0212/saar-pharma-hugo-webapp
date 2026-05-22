@@ -51,7 +51,7 @@ The Indian pharmaceutical industry processed **₹4.2 lakh crore worth of formul
 This guide covers everything you need to know — from regulatory framework to partner due diligence to product development timelines.
 
 
-## 1. The Indian Third-Party Pharma Manufacturing Landscape
+## The Indian Third-Party Pharma Manufacturing Landscape
 
 ### Why the Industry Runs on Third-Party Manufacturing
 
@@ -81,7 +81,7 @@ While pharmaceutical manufacturing exists across India, five major clusters domi
 Baddi-based manufacturers like Saar Biotech benefit from **Himachal Pradesh's industrial policy incentives** which historically included excise exemptions (now transitioned under GST). Combined with the cluster's regulatory familiarity — HP State Drug Authority inspectors have deep GMP expertise — Baddi is the preferred TPM destination for 4,000+ pharma companies across India.
 {{< /callout >}}
 
-## 2. Regulatory Framework for Third-Party Manufacturing in India
+## Regulatory Framework for Third-Party Manufacturing in India
 
 ### The Drugs & Cosmetics Act, 1940
 
@@ -105,7 +105,7 @@ All pharmaceutical manufacturing in India is governed by the **Drugs & Cosmetics
 The **drug license must be in your company's name**, not just the CMO's name. Under loan license manufacturing, both the brand owner (licensee) and the CMO (licensor) hold separate, valid drug manufacturing licenses. If your partner CMO's license lapses, every batch manufactured after that date is considered **unlicensed — and unsaleable**.
 {{< /callout >}}
 
-## 3. Choosing the Right Contract Manufacturing Partner
+## Choosing the Right Contract Manufacturing Partner
 
 This is the decision that will define your brand's quality, reliability, and ultimately, its success. Here is the structured evaluation framework used by professional pharma procurement teams:
 
@@ -165,7 +165,7 @@ Verify that the manufacturer can actually produce your specific product:
 
 *[View manufacturing details for azithromycin-oral-solution](/products/azithromycin-oral-solution/)*
 
-## 4. Product Development & Formulation
+## Product Development & Formulation
 
 ### From Brief to Batch: The Development Timeline
 
@@ -193,7 +193,7 @@ Not all pharma products are created equal. These dosage forms consistently comma
 
 *[View manufacturing details for sodium-chloride-benzalkonium-nasal-spray](/products/sodium-chloride-benzalkonium-nasal-spray/)*
 
-## 5. Pricing, MOQ, and Commercial Terms
+## Pricing, MOQ, and Commercial Terms
 
 ### Understanding CMO Pricing Models
 
@@ -225,7 +225,7 @@ A robust third-party manufacturing agreement must include:
 
 *[View manufacturing details for levosalbutamol-ambroxol-guaiphenesin-syrup](/products/levosalbutamol-ambroxol-guaiphenesin-syrup/)*
 
-## 6. Building a Long-Term CMO Partnership
+## Building a Long-Term CMO Partnership
 
 The most successful pharma marketing companies in India treat their contract manufacturer not as a vendor, but as a **strategic manufacturing partner**. This means:
 

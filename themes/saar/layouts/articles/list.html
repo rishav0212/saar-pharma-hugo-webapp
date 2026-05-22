@@ -2,7 +2,7 @@
   ARTICLES LIST PAGE (Blog / News Hub)
   ─────────────────────────────────────────────────────────────────
   Uses the standard catlist-hero for the top section (dark theme).
-  Uses the .article-grid and .article-card classes (reused from homepage).
+  Uses a premium B2B Featured Spot, Search & Filters, and Editorial grid.
 */}}
 
 {{ define "main" }}
@@ -33,22 +33,132 @@
 
 <section class="section section--paper">
   <div class="container">
-    <div class="article-grid" data-animate data-animate-stagger>
-      {{ range .Pages }}
-      <a class="article-card" href="{{ .RelPermalink }}">
-        <div class="article-visual" aria-hidden="true">
-          {{/* Reuse the icon from frontmatter if available, otherwise fallback */}}
-          {{ $icon := .Params.icon | default "file-text" }}
-          <i data-lucide="{{ $icon }}" class="icon icon--xl"></i>
+    
+    {{/* 1. FEATURED ARTICLE SPOTLIGHT */}}
+    {{ $allPages := .Pages }}
+    {{ if gt (len $allPages) 0 }}
+      {{ $featured := index $allPages 0 }}
+      <div class="featured-article-wrap" data-animate="fade-up">
+        <div class="featured-article">
+          <div class="featured-article__visual">
+            {{ if $featured.Params.cover_image }}
+              <img src="{{ $featured.Params.cover_image }}" alt="{{ $featured.Title }}" class="featured-article__img" loading="eager">
+            {{ else }}
+              <div class="featured-article__placeholder-grad">
+                <i data-lucide="book-open" class="icon icon--lg text-white/30" aria-hidden="true"></i>
+              </div>
+            {{ end }}
+            <span class="featured-article__badge">Featured Insight</span>
+          </div>
+          <div class="featured-article__body">
+            <div class="featured-article__cat-row">
+              <span class="editorial-cat-badge">{{ $featured.Params.category | default "Articles" }}</span>
+              <span class="featured-article__time">
+                <i data-lucide="clock" class="icon--xs" aria-hidden="true"></i>
+                {{ $featured.ReadingTime }} min read
+              </span>
+            </div>
+            <h2 class="featured-article__title">
+              <a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a>
+            </h2>
+            <p class="featured-article__summary">{{ $featured.Summary | truncate 180 }}</p>
+            <div class="featured-article__footer">
+              <div class="featured-article__author">
+                <span class="featured-article__author-label">Author</span>
+                <strong class="featured-article__author-name">{{ $featured.Params.author | default "Saar Biotech Editorial" }}</strong>
+              </div>
+              <a href="{{ $featured.RelPermalink }}" class="featured-article__btn btn btn--primary btn--small">
+                Read Article
+                <i data-lucide="arrow-right" class="icon--sm" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="article-body">
-          <span class="article-category">{{ .Params.category | default "Articles" }}</span>
-          <h3>{{ .Title }}</h3>
-          <p>{{ .Summary | truncate 120 }}</p>
+      </div>
+    {{ end }}
+
+    {{/* 2. SEARCH & FILTER CONTROL PANEL */}}
+    <div class="articles-control-panel" data-animate="fade-up" data-delay="0.1">
+      <div class="articles-search-box">
+        <i data-lucide="search" class="articles-search-icon" aria-hidden="true"></i>
+        <input type="text" id="articles-search-input" placeholder="Search B2B insights (e.g., WHO-GMP, contract manufacturing, Baddi...)" aria-label="Search articles">
+        <button id="articles-search-clear" class="articles-search-clear-btn" aria-label="Clear search" hidden>
+          <i data-lucide="x" class="icon--sm" aria-hidden="true"></i>
+        </button>
+      </div>
+      
+      <div class="articles-filters-wrap">
+        <div class="articles-filters js-scroll-fade">
+          <button class="filter-pill is-active" data-filter="all">All Insights</button>
+          {{ $categories := slice }}
+          {{ range $allPages }}
+            {{ if .Params.category }}
+              {{ $categories = $categories | append .Params.category }}
+            {{ end }}
+          {{ end }}
+          {{ range uniq $categories }}
+            <button class="filter-pill" data-filter="{{ . | lower }}">{{ . }}</button>
+          {{ end }}
         </div>
-      </a>
-      {{ end }}
+      </div>
     </div>
+
+    {{/* 3. ARTICLES GRID */}}
+    <div class="editorial-grid-wrap">
+      <div class="editorial-grid" id="articles-list-grid" data-animate="fade-up" data-delay="0.2">
+        {{ range $allPages }}
+        <a class="editorial-card" href="{{ .RelPermalink }}" 
+           data-title="{{ .Title | lower }}"
+           data-category="{{ .Params.category | default "Articles" | lower }}"
+           data-tags="{{ if .Params.tags }}{{ delimit .Params.tags ", " | lower }}{{ end }}"
+           data-summary="{{ .Summary | lower }}">
+          <div class="editorial-card__visual">
+            {{ if .Params.cover_image }}
+              <img src="{{ .Params.cover_image }}" alt="{{ .Title }}" class="editorial-card__img" loading="lazy">
+            {{ else }}
+              <div class="editorial-card__placeholder">
+                <i data-lucide="file-text" class="icon icon--lg text-white/30" aria-hidden="true"></i>
+              </div>
+            {{ end }}
+          </div>
+          <div class="editorial-card__body">
+            <div class="editorial-card__cat-row">
+              <span class="editorial-cat-badge">{{ .Params.category | default "Articles" }}</span>
+              <span class="editorial-card__date">
+                {{ .Date.Format "Jan 02, 2006" }}
+              </span>
+            </div>
+            <h3 class="editorial-card__title">{{ .Title }}</h3>
+            <p class="editorial-card__summary">{{ .Summary | truncate 110 }}</p>
+            <div class="editorial-card__footer">
+              <span class="editorial-card__read-time">
+                <i data-lucide="clock" class="icon--xs" aria-hidden="true"></i>
+                {{ .ReadingTime }} min read
+              </span>
+              <span class="editorial-card__action">
+                Read Article
+                <i data-lucide="chevron-right" class="editorial-card__arrow icon--sm" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </a>
+        {{ end }}
+      </div>
+
+      {{/* 4. EMPTY STATE (No results fallback) */}}
+      <div id="articles-empty-state" class="articles-empty-state" hidden>
+        <div class="articles-empty-icon-wrap">
+          <i data-lucide="alert-circle" class="icon icon--lg" aria-hidden="true"></i>
+        </div>
+        <h3 class="articles-empty-title">No matching insights found</h3>
+        <p class="articles-empty-text">We couldn't find any articles matching your search or filter selection. Try adjusting your keywords or resetting filters.</p>
+        <button id="articles-reset-btn" class="btn btn--outline btn--small mt-4">
+          <i data-lucide="rotate-ccw" class="icon--sm" aria-hidden="true"></i>
+          Reset Search & Filters
+        </button>
+      </div>
+    </div>
+
   </div>
 </section>
 

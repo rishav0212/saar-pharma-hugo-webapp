@@ -51,7 +51,7 @@ In the pharmaceutical industry, quality is not a feature—it is a legal mandate
 This guide provides a definitive, expert-level walkthrough of the rigorous, multi-layered quality control systems required to maintain WHO-GMP compliance in modern Indian pharmaceutical contract manufacturing.
 
 
-## 1. The Core Pillars of Pharmaceutical Quality Control
+## The Core Pillars of Pharmaceutical Quality Control
 
 A robust QC system does not begin when the finished tablet comes off the press; it begins the moment a raw material enters the facility — and it ends only when the product has been consumed by the patient and the stability data file closed.
 
@@ -77,7 +77,7 @@ A critical distinction: **Quality Control (QC)** is the laboratory testing funct
 | Quality Assurance (QA) | SOPs, audit, change control, CAPA | BMR, BPR, Deviation Reports |
 | Regulatory Affairs | Licensing, filings, authority liaison | Drug License, DMF, Dossiers |
 
-## 2. Raw Material Control — The Foundation of Quality
+## Raw Material Control — The Foundation of Quality
 
 Human error and substandard raw materials account for the majority of pharmaceutical quality failures globally. This is why WHO-GMP places **vendor qualification** as one of its most critical requirements.
 
@@ -104,7 +104,7 @@ When choosing a contract manufacturer, always ask to see their **Approved Vendor
 | Microbiological | TAMC, TYMC, absence of pathogens | IP/BP/EP |
 | Heavy Metals | ICP-MS (for critical APIs) | ICH Q3D |
 
-## 3. In-Process Quality Control (IPQC)
+## In-Process Quality Control (IPQC)
 
 ### Why IPQC Matters
 
@@ -129,7 +129,7 @@ Our manufacturing areas are monitored for:
 
 Any excursion from environmental limits triggers an immediate deviation report, investigation, and CAPA (Corrective and Preventive Action).
 
-## 4. Analytical Instrumentation & Testing Methods
+## Analytical Instrumentation & Testing Methods
 
 ### The Gold Standard: HPLC
 
@@ -152,7 +152,7 @@ Depending on the target market and regulatory filing, products are tested agains
 | pH (liquids) | Within ±0.2 of spec | Potentiometry | pH Meter |
 | Microbial Limits | Per IP/USP spec | Membrane filtration | Laminar Airflow + Incubator |
 
-## 5. Batch Manufacturing Records (BMR) — The Legal Backbone
+## Batch Manufacturing Records (BMR) — The Legal Backbone
 
 The Batch Manufacturing Record is not administrative paperwork — it is the **legal backbone of pharmaceutical accountability**. Under WHO-GMP, Schedule M, and every major pharmacopoeia, every batch must have a complete, accurate, contemporaneous BMR.
 
@@ -171,7 +171,7 @@ A complete BMR for a single batch of oral suspension at Saar Biotech includes:
 Insist on reviewing a **sample BMR** before signing a manufacturing contract. A manufacturer's BMR quality tells you everything about their operational discipline and regulatory readiness.
 {{< /callout >}}
 
-## 6. Data Integrity — The New Frontier of GMP Compliance
+## Data Integrity — The New Frontier of GMP Compliance
 
 Data integrity is now the primary focus of CDSCO, WHO, USFDA, and MHRA inspections globally. Dozens of Indian pharmaceutical companies have received import alerts and warning letters not for quality failures — but for **data integrity violations**.
 
@@ -256,7 +256,7 @@ print(batch_status)
 When evaluating contract manufacturers, ask: **"What system do you use for electronic data capture?"** Any answer involving standalone Excel sheets or scanned handwritten forms is a significant compliance risk in today's regulatory environment.
 {{< /callout >}}
 
-## 7. Finished Product Testing & Batch Release
+## Finished Product Testing & Batch Release
 
 ### The Certificate of Analysis (COA)
 
@@ -281,7 +281,7 @@ A COA reflects the batch quality at time of manufacture. But pharmaceutical prod
 
 Saar Biotech maintains a dedicated stability chamber program for all products. Stability data is part of every product dossier provided to licensing clients.
 
-## 8. Quality Control for Specialised Dosage Forms
+## Quality Control for Specialised Dosage Forms
 
 ### Nasal Sprays & Liquid Orals
 
