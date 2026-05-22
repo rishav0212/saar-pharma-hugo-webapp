@@ -11,17 +11,20 @@
 @layer base {
   html {
     @apply antialiased;
-    overflow-x: clip;
   }
 
   body {
     background-color: var(--color-paper);
     color: var(--color-text);
     @apply font-sans text-[15px] leading-[1.65] min-w-[320px] antialiased;
-    overflow-x: clip;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: var(--color-ink);
     @apply m-0 font-display font-extrabold tracking-normal leading-[1.06];
   }
@@ -29,6 +32,7 @@
   [id] {
     scroll-margin-top: 100px;
   }
+
   @media (max-width: 767px) {
     [id] {
       scroll-margin-top: 80px;
@@ -71,7 +75,7 @@
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
-  
+
   .section {
     @apply relative py-[84px] max-md:py-[52px];
     scroll-margin-top: 80px;
@@ -80,23 +84,23 @@
   .btn {
     @apply inline-flex items-center justify-center gap-2.5 min-h-[46px] px-4.5 py-3 rounded-lg text-sm font-extrabold leading-none transition-all duration-200;
   }
-  
+
   .btn:hover {
     @apply -translate-y-1 shadow-lift;
   }
-  
+
   .btn--primary {
     @apply bg-brand text-white shadow-[0_14px_28px_rgba(21,159,145,0.26)];
   }
-  
+
   .btn--primary:hover {
     @apply bg-brand-3 shadow-[0_18px_36px_rgba(21,159,145,0.34)];
   }
-  
+
   .btn--light {
     @apply bg-white text-ink;
   }
-  
+
   .btn--ghost {
     border: 1px solid rgba(255, 255, 255, 0.35);
     background-color: rgba(255, 255, 255, 0.08);
@@ -108,13 +112,13 @@
     background-color: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.6);
   }
-  
+
   .btn--outline {
     border: 1px solid var(--color-brand-line);
     background-color: var(--color-white);
     color: var(--color-ink);
   }
-  
+
   .btn--small {
     @apply min-h-[38px] px-3.5 py-1.5 text-[13px] gap-2;
   }
@@ -139,10 +143,22 @@
     @apply w-6 h-6 flex-shrink-0;
   }
 
-  .icon--xs { @apply w-3 h-3; }
-  .icon--sm { @apply w-4 h-4; }
-  .icon--md { @apply w-8 h-8; }
-  .icon--lg { @apply w-10 h-10; }
+  .icon--xs {
+    @apply w-3 h-3;
+  }
+
+  .icon--sm {
+    @apply w-4 h-4;
+  }
+
+  .icon--md {
+    @apply w-8 h-8;
+  }
+
+  .icon--lg {
+    @apply w-10 h-10;
+  }
+
   .quality-console {
     @apply grid gap-3.5 max-md:gap-2.5;
   }
@@ -155,7 +171,7 @@
   .badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider;
   }
-  
+
   .badge--teal {
     background-color: rgba(21, 159, 145, 0.10);
     color: var(--color-brand-3);
@@ -168,9 +184,11 @@
 .js-scroll-fade {
   cursor: grab;
 }
+
 .js-scroll-fade:active {
   cursor: grabbing;
 }
+
 .js-scroll-fade::-webkit-scrollbar {
   display: none;
 }
@@ -183,21 +201,54 @@
 }
 
 /* Universal blowout protection for grid/flex children — safe for mobile */
-.cat-trust-grid > *, .cat-related__grid > *, .cat-faq__grid > *, .faq-grid > *, .contact-profiles__grid > *,
-.about-facility-grid > *, .cert-layout > *, .tab-block > *, .planner-shell > *, .footer-grid > *,
-.bento-grid > *, .metric-grid > *, .unit-grid > *, .products-grid > *, .article-grid > *,
-.ps-supply-grid > *, .ps-authority-grid > *, .ps-cta-secondary-row > * {
+.cat-trust-grid>*,
+.cat-related__grid>*,
+.cat-faq__grid>*,
+.faq-grid>*,
+.contact-profiles__grid>*,
+.about-facility-grid>*,
+.cert-layout>*,
+.tab-block>*,
+.planner-shell>*,
+.footer-grid>*,
+.bento-grid>*,
+.metric-grid>*,
+.unit-grid>*,
+.products-grid>*,
+.article-grid>*,
+.ps-supply-grid>*,
+.ps-authority-grid>*,
+.ps-cta-secondary-row>* {
   min-width: 0;
 }
 
 /* Default: Fade Up */
-[data-animate], [data-animate="fade-up"], [data-animate-type="fade-up"] { transform: translateY(30px); }
+[data-animate],
+[data-animate="fade-up"],
+[data-animate-type="fade-up"] {
+  transform: translateY(30px);
+}
 
 /* Other Types */
-[data-animate="slide-right"], [data-animate-type="slide-right"] { transform: translateX(-40px); }
-[data-animate="slide-left"], [data-animate-type="slide-left"] { transform: translateX(40px); }
-[data-animate="scale-in"], [data-animate-type="scale-in"] { transform: scale(0.97); }
-[data-animate="fade-in"], [data-animate-type="fade-in"] { transform: translateY(0); }
+[data-animate="slide-right"],
+[data-animate-type="slide-right"] {
+  transform: translateX(-40px);
+}
+
+[data-animate="slide-left"],
+[data-animate-type="slide-left"] {
+  transform: translateX(40px);
+}
+
+[data-animate="scale-in"],
+[data-animate-type="scale-in"] {
+  transform: scale(0.97);
+}
+
+[data-animate="fade-in"],
+[data-animate-type="fade-in"] {
+  transform: translateY(0);
+}
 
 [data-animate].is-visible {
   opacity: 1;
@@ -205,35 +256,96 @@
 }
 
 /* Staggering for Grids */
-  /* Universal blowout protection for grid/flex children — safe for mobile */
-  .cat-trust-grid > *, .cat-related__grid > *, .cat-faq__grid > *, .faq-grid > *, .contact-profiles__grid > *,
-  .about-facility-grid > *, .cert-layout > *, .tab-block > *, .planner-shell > *, .footer-grid > *,
-  .bento-grid > *, .metric-grid > *, .unit-grid > *, .products-grid > *, .article-grid > *,
-  .ps-supply-grid > *, .ps-authority-grid > *, .ps-cta-secondary-row > * {
-    min-width: 0;
-  }
-.bento-grid > *, .unit-grid > *, .timeline-step, .metric, .article-card, .faq-item, .product-scroll-card, .footer-col {
+/* Universal blowout protection for grid/flex children — safe for mobile */
+.cat-trust-grid>*,
+.cat-related__grid>*,
+.cat-faq__grid>*,
+.faq-grid>*,
+.contact-profiles__grid>*,
+.about-facility-grid>*,
+.cert-layout>*,
+.tab-block>*,
+.planner-shell>*,
+.footer-grid>*,
+.bento-grid>*,
+.metric-grid>*,
+.unit-grid>*,
+.products-grid>*,
+.article-grid>*,
+.ps-supply-grid>*,
+.ps-authority-grid>*,
+.ps-cta-secondary-row>* {
+  min-width: 0;
+}
+
+.bento-grid>*,
+.unit-grid>*,
+.timeline-step,
+.metric,
+.article-card,
+.faq-item,
+.product-scroll-card,
+.footer-col {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Stagger Delays (CSS Only) */
-.is-visible .bento-grid > *:nth-child(1), .is-visible .unit-grid > *:nth-child(1), .is-visible.timeline > *:nth-child(1), .is-visible .metric-grid > *:nth-child(1) { transition-delay: 0.1s; }
-.is-visible .bento-grid > *:nth-child(2), .is-visible .unit-grid > *:nth-child(2), .is-visible.timeline > *:nth-child(2), .is-visible .metric-grid > *:nth-child(2) { transition-delay: 0.25s; }
-.is-visible .bento-grid > *:nth-child(3), .is-visible .unit-grid > *:nth-child(3), .is-visible.timeline > *:nth-child(3), .is-visible .metric-grid > *:nth-child(3) { transition-delay: 0.4s; }
-.is-visible .bento-grid > *:nth-child(4), .is-visible .unit-grid > *:nth-child(4), .is-visible.timeline > *:nth-child(4), .is-visible .metric-grid > *:nth-child(4) { transition-delay: 0.55s; }
+.is-visible .bento-grid>*:nth-child(1),
+.is-visible .unit-grid>*:nth-child(1),
+.is-visible.timeline>*:nth-child(1),
+.is-visible .metric-grid>*:nth-child(1) {
+  transition-delay: 0.1s;
+}
 
-.is-visible .bento-grid > *, .is-visible .unit-grid > *, .is-visible .timeline-step, .is-visible .metric, .is-visible .article-card, .is-visible .faq-item, .is-visible .product-scroll-card, .is-visible .footer-col,
-.is-visible.bento-grid > *, .is-visible.unit-grid > *, .is-visible.timeline-step {
+.is-visible .bento-grid>*:nth-child(2),
+.is-visible .unit-grid>*:nth-child(2),
+.is-visible.timeline>*:nth-child(2),
+.is-visible .metric-grid>*:nth-child(2) {
+  transition-delay: 0.25s;
+}
+
+.is-visible .bento-grid>*:nth-child(3),
+.is-visible .unit-grid>*:nth-child(3),
+.is-visible.timeline>*:nth-child(3),
+.is-visible .metric-grid>*:nth-child(3) {
+  transition-delay: 0.4s;
+}
+
+.is-visible .bento-grid>*:nth-child(4),
+.is-visible .unit-grid>*:nth-child(4),
+.is-visible.timeline>*:nth-child(4),
+.is-visible .metric-grid>*:nth-child(4) {
+  transition-delay: 0.55s;
+}
+
+.is-visible .bento-grid>*,
+.is-visible .unit-grid>*,
+.is-visible .timeline-step,
+.is-visible .metric,
+.is-visible .article-card,
+.is-visible .faq-item,
+.is-visible .product-scroll-card,
+.is-visible .footer-col,
+.is-visible.bento-grid>*,
+.is-visible.unit-grid>*,
+.is-visible.timeline-step {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* pulse-dot — used by product page CMO availability badge, available globally */
 @keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(21, 159, 145, 0.5); }
-  60%       { box-shadow: 0 0 0 5px rgba(21, 159, 145, 0); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(21, 159, 145, 0.5);
+  }
+
+  60% {
+    box-shadow: 0 0 0 5px rgba(21, 159, 145, 0);
+  }
 }
 
 @import "./assets/css/components/typography.css";
@@ -271,6 +383,3 @@
 @import "./assets/css/sections/contact.css";
 @import "./assets/css/catlist/catlist.css";
 @import "./assets/css/articles/articles.css";
-
-
-

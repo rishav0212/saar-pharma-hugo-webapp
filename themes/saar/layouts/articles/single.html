@@ -2,7 +2,7 @@
 {{/*
   ARTICLE SINGLE PAGE TEMPLATE
   ─────────────────────────────────────────────────────────────────────
-  Layout: Breadcrumb + Article Header → 2-column body (content + sidebar)
+  Layout: Progress Bar → Article Header → 2-column body (content + sidebar)
   
   Hugo auto-builds this for every .md file in content/articles/.
   Just drop a new markdown file → page is live on next build.
@@ -51,34 +51,45 @@
             {{ .Content }}
           </div>
 
-          {{/* About Saar Biotech (Moved from Sidebar) */}}
-          <div class="article-stats-grid mt-10 p-6 rounded-2xl border" style="background: rgba(var(--color-brand-rgb), 0.02); border-color: rgba(var(--color-brand-rgb), 0.1);">
-            <div class="w-full mb-4 flex items-center gap-2 text-brand-3 text-[11px] font-black tracking-widest uppercase">
-              <i data-lucide="shield-check" class="icon--sm"></i>
+          {{/*
+            About Saar Biotech credibility stats widget.
+            Uses the .article-stats-card wrapper (proper semantic card) with
+            .article-stats-card__header as a full-width non-grid row above
+            .article-stats-grid (the 2×2 data grid).
+          */}}
+          <div class="article-stats-card">
+            <div class="article-stats-card__header">
+              <i data-lucide="shield-check"></i>
               About Saar Biotech
             </div>
-            <div class="article-stat-item">
-              <span class="article-stat-value">WHO-GMP</span>
-              <span class="article-stat-label">Certified</span>
+            <div class="article-stats-grid">
+              <div class="article-stat-item">
+                <span class="article-stat-value">WHO-GMP</span>
+                <span class="article-stat-label">Certified</span>
+              </div>
+              <div class="article-stat-item">
+                <span class="article-stat-value">150+</span>
+                <span class="article-stat-label">B2B Partners</span>
+              </div>
+              <div class="article-stat-item">
+                <span class="article-stat-value">500+</span>
+                <span class="article-stat-label">Products</span>
+              </div>
+              <div class="article-stat-item">
+                <span class="article-stat-value">Baddi</span>
+                <span class="article-stat-label">Facility</span>
+              </div>
             </div>
-            <div class="article-stat-item">
-              <span class="article-stat-value">150+</span>
-              <span class="article-stat-label">B2B Partners</span>
-            </div>
-            <div class="article-stat-item">
-              <span class="article-stat-value">500+</span>
-              <span class="article-stat-label">Products</span>
-            </div>
-            <div class="article-stat-item">
-              <span class="article-stat-value">Baddi</span>
-              <span class="article-stat-label">Facility</span>
-            </div>
+            <a href="/about/" class="article-stats-footer">
+              Learn about our facility
+              <i data-lucide="arrow-right"></i>
+            </a>
           </div>
 
           {{/* Tag chips */}}
           {{ if .Params.tags }}
           <div class="article-tags" aria-label="Article tags">
-            <i data-lucide="tag" class="icon--sm text-muted" aria-hidden="true"></i>
+            <i data-lucide="tag" class="icon--sm" aria-hidden="true"></i>
             {{ range .Params.tags }}
             <a href="/articles/" class="article-tag">{{ . }}</a>
             {{ end }}
@@ -100,7 +111,6 @@
           </div>
 
           {{/* Prev / Next article navigation */}}
-          {{ $pages := where .Site.RegularPages "Section" "articles" }}
           {{ $prev := .Prev }}
           {{ $next := .Next }}
           {{ if or $prev $next }}
@@ -139,6 +149,10 @@
       </div>
     </div>
   </div>
+
+  {{/* ── Bottom Sections (Optional) ───────────────────────────── */}}
+  {{ partial "catlist/why.html" . }}
+  {{ partial "catlist/faq.html" . }}
 
 </div>
 

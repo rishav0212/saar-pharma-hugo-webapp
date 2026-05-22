@@ -1,12 +1,15 @@
 {{/*
-  ARTICLE HEADER PARTIAL — Redesigned
+  ARTICLE HEADER PARTIAL — Premium redesign
   ─────────────────────────────────────────────────────────────────────
-  Dark banner header (matching the site's ink-deep/abyss design language)
-  with breadcrumb, category pill, H1, and meta row rendered in white.
+  Dark banner hero matching the site's category/catlist hero language:
+  - Animated radial glow blobs (.article-header__glow)
+  - Dot-matrix background grid (.article-header__bg-grid)
+  - Decorative floating rings — desktop only (.article-header__ring)
+  - Mesh grid overlay via CSS ::after on .article-header__banner
+  - Breadcrumb (on-dark variant) → category pill → H1 → meta row
 
   Cover image is ONLY rendered when cover_image is set in frontmatter.
-  No fallback placeholder — if no image, the dark banner transitions
-  directly into the body content.
+  No fallback placeholder — if no image, banner flows directly to body.
 */}}
 
 {{- $category   := .Params.category | default "Articles" -}}
@@ -16,44 +19,55 @@
 
 <header class="article-header">
 
-  {{/* ── Dark banner: breadcrumb → category → H1 → meta ──────────── */}}
+  {{/* ── Dark banner: decorative layers → content ──────────────── */}}
   <div class="article-header__banner">
-    {{/* Decorative ambient glow — teal radial at top */}}
-    <div class="article-header__glow" aria-hidden="true"></div>
 
+    {{/* Layer 0: dot-matrix background grid (same as cat-hero__bg-grid) */}}
+    <div class="article-header__bg-grid" aria-hidden="true"></div>
+
+    {{/* Layer 1: animated radial glow blobs (primary + secondary) */}}
+    <div class="article-header__glow article-header__glow--primary" aria-hidden="true"></div>
+    <div class="article-header__glow article-header__glow--secondary" aria-hidden="true"></div>
+
+    {{/* Layer 2: decorative floating rings — desktop only, CSS hides on mobile */}}
+    <div class="article-header__ring article-header__ring--lg" aria-hidden="true"></div>
+    <div class="article-header__ring article-header__ring--sm" aria-hidden="true"></div>
+
+    {{/* Layer 3: content — sits at z-index:10, above all decorative layers */}}
     <div class="container">
-      {{/* Breadcrumb — shared component (on-dark variant) */}}
-      <div class="mb-2 w-full flex justify-start">
+
+      {{/* Breadcrumb — shared component, on-dark variant */}}
+      <div class="mb-4 w-full flex justify-start" style="position: relative; z-index: 10;">
         {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Articles" "url" "/articles/") (dict "label" (.Title | truncate 42)))) }}
       </div>
 
       <div class="article-header__inner">
 
-        {{/* Category pill */}}
+        {{/* Category pill — glassmorphic, teal, matching cat-hero__badge */}}
         <div class="article-header__eyebrow">
           <span class="article-category-pill">
-            <i data-lucide="layers" class="icon--xs" aria-hidden="true"></i>
+            <i data-lucide="layers" aria-hidden="true"></i>
             {{ $category }}
           </span>
         </div>
 
-        {{/* H1 — white, large, editorial. Single H1 per page for SEO */}}
+        {{/* H1 — gradient white text, single per page for SEO */}}
         <h1 class="article-header__title">{{ .Title }}</h1>
 
-        {{/* Meta row: author · date · reading time (Hugo auto-calculates) */}}
+        {{/* Meta row: author · date · reading time */}}
         <div class="article-header__meta" aria-label="Article metadata">
           <span class="article-meta-item">
-            <i data-lucide="user" class="icon--xs" aria-hidden="true"></i>
+            <i data-lucide="user" aria-hidden="true"></i>
             {{ $author }}
           </span>
           <span class="article-meta-sep" aria-hidden="true">·</span>
           <span class="article-meta-item">
-            <i data-lucide="calendar" class="icon--xs" aria-hidden="true"></i>
+            <i data-lucide="calendar" aria-hidden="true"></i>
             <time datetime="{{ .Date.Format "2006-01-02" }}">{{ $date }}</time>
           </span>
           <span class="article-meta-sep" aria-hidden="true">·</span>
           <span class="article-meta-item">
-            <i data-lucide="clock" class="icon--xs" aria-hidden="true"></i>
+            <i data-lucide="clock" aria-hidden="true"></i>
             {{ .ReadingTime }} min read
           </span>
         </div>
@@ -63,10 +77,9 @@
   </div>
 
   {{/*
-    Cover image — rendered ONLY when cover_image is set in frontmatter.
-    No fallback rendered. If no image, banner transitions straight to body.
-    The negative margin pulls the image up to overlap the dark banner,
-    creating a premium layered effect.
+    Cover image — rendered ONLY when cover_image frontmatter is set.
+    The negative top-margin in CSS pulls the image up to overlap the
+    dark banner, creating a premium layered feel.
   */}}
   {{ if $coverImage }}
   <div class="article-header__cover-wrap">
