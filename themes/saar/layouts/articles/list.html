@@ -157,6 +157,22 @@
           Reset Search & Filters
         </button>
       </div>
+
+      {{/* 5. SMART PROGRESSIVE BATCH PAGINATION */}}
+      <div id="articles-pagination-container" class="articles-pagination-wrap" hidden>
+        <div class="articles-pagination-progress">
+          <span class="pagination-progress-text">
+            Showing <span id="pagination-visible-count" class="font-extrabold text-ink">0</span> of <span id="pagination-total-count" class="font-extrabold text-ink">0</span> Insights
+          </span>
+          <div class="pagination-progress-bar">
+            <div id="pagination-progress-fill" class="pagination-progress-fill"></div>
+          </div>
+        </div>
+        <button id="articles-load-more-btn" class="btn btn--outline">
+          Load More Insights
+          <i data-lucide="plus" class="icon--sm" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
 
   </div>

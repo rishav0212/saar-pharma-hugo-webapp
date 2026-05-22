@@ -20,6 +20,7 @@ export function initArticle() {
   initFaqAccordion();
   initCopyLink();
   initArticlesList();
+  initHomepageArticlesCarousel();
 }
 
 /* ── Reading Progress Bar ─────────────────────────────────────────── */
@@ -308,14 +309,23 @@ function initArticlesList() {
   const cards       = document.querySelectorAll('#articles-list-grid .editorial-card');
   const emptyState  = document.getElementById('articles-empty-state');
   const resetBtn    = document.getElementById('articles-reset-btn');
+
+  // Progressive Batch Pagination Elements
+  const paginationContainer = document.getElementById('articles-pagination-container');
+  const visibleCountEl      = document.getElementById('pagination-visible-count');
+  const totalCountEl        = document.getElementById('pagination-total-count');
+  const progressFillEl      = document.getElementById('pagination-progress-fill');
+  const loadMoreBtn         = document.getElementById('articles-load-more-btn');
   
   if (!searchInput && !filterPills.length && !cards.length) return;
 
+  const itemsPerPage = 6;
+  let visibleLimit = itemsPerPage;
   let searchQuery = '';
   let activeFilter = 'all';
 
   const filterArticles = () => {
-    let visibleCount = 0;
+    let totalMatches = 0;
     const query = searchQuery.trim().toLowerCase();
 
     cards.forEach((card) => {
@@ -333,9 +343,14 @@ function initArticlesList() {
       const matchesCategory = activeFilter === 'all' || category === activeFilter;
 
       if (matchesSearch && matchesCategory) {
-        card.style.display = '';
-        card.classList.remove('is-hidden');
-        visibleCount++;
+        totalMatches++;
+        if (totalMatches <= visibleLimit) {
+          card.style.display = '';
+          card.classList.remove('is-hidden');
+        } else {
+          card.style.display = 'none';
+          card.classList.add('is-hidden');
+        }
       } else {
         card.style.display = 'none';
         card.classList.add('is-hidden');
@@ -344,12 +359,40 @@ function initArticlesList() {
 
     // Toggle empty state fallback smoothly
     if (emptyState) {
-      emptyState.hidden = (visibleCount > 0);
+      emptyState.hidden = (totalMatches > 0);
     }
     
     // Toggle grid view display state (fade out briefly if needed)
     if (grid) {
-      grid.style.opacity = (visibleCount > 0) ? '1' : '0';
+      grid.style.opacity = (totalMatches > 0) ? '1' : '0';
+    }
+
+    // Update smart progressive pagination details
+    if (paginationContainer) {
+      if (totalMatches > itemsPerPage) {
+        paginationContainer.hidden = false;
+        paginationContainer.style.display = 'flex';
+
+        const displayedCount = Math.min(visibleLimit, totalMatches);
+        if (visibleCountEl) visibleCountEl.textContent = displayedCount;
+        if (totalCountEl) totalCountEl.textContent = totalMatches;
+        
+        if (progressFillEl) {
+          const percentage = (displayedCount / totalMatches) * 100;
+          progressFillEl.style.width = `${percentage}%`;
+        }
+
+        if (loadMoreBtn) {
+          if (visibleLimit >= totalMatches) {
+            loadMoreBtn.style.display = 'none';
+          } else {
+            loadMoreBtn.style.display = '';
+          }
+        }
+      } else {
+        paginationContainer.hidden = true;
+        paginationContainer.style.display = 'none';
+      }
     }
   };
 
@@ -360,6 +403,7 @@ function initArticlesList() {
       if (clearBtn) {
         clearBtn.hidden = !searchQuery;
       }
+      visibleLimit = itemsPerPage; // Reset page batch limit upon new searches
       filterArticles();
     });
   }
@@ -371,6 +415,7 @@ function initArticlesList() {
       searchQuery = '';
       clearBtn.hidden = true;
       searchInput.focus();
+      visibleLimit = itemsPerPage; // Reset page batch limit
       filterArticles();
     });
   }
@@ -381,6 +426,7 @@ function initArticlesList() {
       filterPills.forEach((p) => p.classList.remove('is-active'));
       pill.classList.add('is-active');
       activeFilter = (pill.getAttribute('data-filter') || 'all').toLowerCase();
+      visibleLimit = itemsPerPage; // Reset page batch limit upon new category filter
       filterArticles();
     });
   });
@@ -403,7 +449,326 @@ function initArticlesList() {
         }
       });
       activeFilter = 'all';
+      visibleLimit = itemsPerPage; // Reset page batch limit
       filterArticles();
     });
   }
+
+  // Load More Button Event Listener
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      visibleLimit += itemsPerPage;
+      filterArticles();
+    });
+  }
+
+  // Initial execution to apply limits and setup pagination
+  filterArticles();
+}
+
+/* ── B2B Insights Hub Dashboard Carousel ─────────────────────────── */
+function initHomepageArticlesCarousel() {
+  const hub = document.querySelector('.insights-hub');
+  if (!hub) return;
+
+  const spotlightDisplay = document.getElementById('spotlight-display');
+  const spotlightCat = document.getElementById('spotlight-cat');
+  const spotlightTimeVal = document.getElementById('spotlight-time-val');
+  const spotlightTitle = document.getElementById('spotlight-title');
+  const spotlightSummary = document.getElementById('spotlight-summary');
+  const spotlightLink = document.getElementById('spotlight-link');
+  const progressFill = document.getElementById('spotlight-progress-fill');
+  const spotlightVisualContainer = document.getElementById('spotlight-visual-container');
+  const spotlightTakeawayContainer = document.getElementById('spotlight-takeaway-container');
+  const spotlightTakeaway = document.getElementById('spotlight-takeaway');
+
+  const viewport = document.getElementById('insights-stream-viewport');
+  const track = document.getElementById('insights-stream-track');
+  
+  if (!track || !viewport) return;
+  
+  const items = Array.from(track.querySelectorAll('.insights-stream__item'));
+  const dots = Array.from(document.querySelectorAll('.insights-dot'));
+  const prevBtn = document.getElementById('insights-prev');
+  const nextBtn = document.getElementById('insights-next');
+  
+  if (!items.length) return;
+
+  let currentIndex = 0;
+  const totalItems = items.length;
+  const rotationDuration = 6000; // 6 seconds auto-rotation timer
+  let lastTime = 0;
+  let accumulatedTime = 0;
+  let isPaused = false;
+  let rafId = null;
+
+  // Viewport grab cursor styling
+  viewport.style.cursor = 'grab';
+
+  const scrollTrackTo = (index) => {
+    const viewportWidth = viewport.clientWidth;
+    const trackWidth = track.scrollWidth;
+    const item = items[index];
+    if (!item) return;
+
+    const itemWidth = item.offsetWidth;
+    const itemOffsetLeft = item.offsetLeft;
+    
+    // Center active item
+    let targetScroll = itemOffsetLeft - (viewportWidth / 2) + (itemWidth / 2);
+    
+    // Handle bounds
+    const maxScroll = trackWidth - viewportWidth;
+    if (targetScroll < 0) targetScroll = 0;
+    if (targetScroll > maxScroll && maxScroll > 0) targetScroll = maxScroll;
+    
+    track.style.transform = `translate3d(${-targetScroll}px, 0, 0)`;
+  };
+
+  const updateSpotlight = (index) => {
+    if (index === currentIndex) return;
+
+    spotlightDisplay.classList.add('is-transitioning');
+    
+    items[currentIndex].classList.remove('is-active');
+    dots[currentIndex]?.classList.remove('is-active');
+    
+    currentIndex = index;
+    
+    items[currentIndex].classList.add('is-active');
+    dots[currentIndex]?.classList.add('is-active');
+
+    const targetItem = items[currentIndex];
+    const title = targetItem.getAttribute('data-title');
+    const url = targetItem.getAttribute('data-url');
+    const category = targetItem.getAttribute('data-category');
+    const readTime = targetItem.getAttribute('data-read-time');
+    const summary = targetItem.getAttribute('data-summary');
+    const image = targetItem.getAttribute('data-image');
+    const takeaway = targetItem.getAttribute('data-takeaway');
+
+    setTimeout(() => {
+      if (spotlightCat) spotlightCat.textContent = category;
+      if (spotlightTimeVal) spotlightTimeVal.textContent = readTime;
+      if (spotlightTitle) spotlightTitle.innerHTML = `<a href="${url}">${title}</a>`;
+      if (spotlightSummary) spotlightSummary.innerHTML = summary;
+      if (spotlightLink) {
+        spotlightLink.setAttribute('href', url);
+      }
+      
+      // Dynamic Spotlight Cover Image Swap
+      if (spotlightVisualContainer) {
+        if (image) {
+          spotlightVisualContainer.innerHTML = `<img src="${image}" alt="${title}" class="insights-spotlight__img" id="spotlight-img">`;
+        } else {
+          spotlightVisualContainer.innerHTML = `
+            <div class="insights-spotlight__placeholder" id="spotlight-placeholder">
+              <i data-lucide="file-text" class="text-white/20" aria-hidden="true"></i>
+            </div>`;
+        }
+      }
+
+      // Dynamic Key Highlight Takeaway Swap
+      if (spotlightTakeawayContainer && spotlightTakeaway) {
+        if (takeaway && takeaway.trim() !== '') {
+          spotlightTakeaway.innerHTML = takeaway;
+        } else {
+          spotlightTakeaway.innerHTML = 'Explore custom formulations, strict regulatory compliance, and WHO-GMP manufacturing excellence. Saar Biotech serves as a strategic third-party contract partner, streamlining your commercial pipelines.';
+        }
+        spotlightTakeawayContainer.style.display = '';
+      }
+      
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+
+      spotlightDisplay.classList.remove('is-transitioning');
+    }, 200);
+
+    scrollTrackTo(currentIndex);
+  };
+
+  const selectIndex = (index) => {
+    accumulatedTime = 0;
+    if (progressFill) progressFill.style.width = '0%';
+    updateSpotlight(index);
+  };
+
+  // RAF loop for smooth 60fps timer ticking
+  const tick = (timestamp) => {
+    if (!lastTime) lastTime = timestamp;
+    const elapsed = timestamp - lastTime;
+    lastTime = timestamp;
+
+    if (!isPaused) {
+      accumulatedTime += elapsed;
+      if (accumulatedTime >= rotationDuration) {
+        accumulatedTime = 0;
+        const nextIndex = (currentIndex + 1) % totalItems;
+        updateSpotlight(nextIndex);
+      }
+      
+      const percentage = (accumulatedTime / rotationDuration) * 100;
+      if (progressFill) {
+        progressFill.style.width = `${percentage}%`;
+      }
+    }
+
+    rafId = requestAnimationFrame(tick);
+  };
+
+  // Start ticker loop
+  rafId = requestAnimationFrame(tick);
+
+  // Pause on hover
+  hub.addEventListener('mouseenter', () => {
+    isPaused = true;
+  });
+  hub.addEventListener('mouseleave', () => {
+    isPaused = false;
+    lastTime = 0;
+  });
+
+  // Clicking cards
+  items.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      selectIndex(index);
+    });
+    
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectIndex(index);
+      }
+    });
+  });
+
+  // Clicking dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      selectIndex(index);
+    });
+  });
+
+  // Prev / Next button binds
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      const target = (currentIndex - 1 + totalItems) % totalItems;
+      selectIndex(target);
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const target = (currentIndex + 1) % totalItems;
+      selectIndex(target);
+    });
+  }
+
+  // Window Resize adjustment
+  window.addEventListener('resize', () => {
+    scrollTrackTo(currentIndex);
+  });
+
+  // Center on load
+  setTimeout(() => {
+    scrollTrackTo(0);
+  }, 100);
+
+  // ── Drag & Swipe Mechanics (Mouse & Touch) ──
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
+  let startTransform = 0;
+
+  const parseTransformX = (el) => {
+    try {
+      const style = window.getComputedStyle(el);
+      const transform = style.transform || style.webkitTransform;
+      if (!transform || transform === 'none') return 0;
+      const matrix = window.DOMMatrix ? new DOMMatrix(transform) : new WebKitCSSMatrix(transform);
+      return matrix.m41 || matrix.e;
+    } catch {
+      return 0;
+    }
+  };
+
+  // Touch triggers
+  viewport.addEventListener('touchstart', (e) => {
+    isPaused = true;
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    track.style.transition = 'none';
+    startTransform = parseTransformX(track);
+  }, { passive: true });
+
+  viewport.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    currentX = e.touches[0].clientX;
+    const diff = currentX - startX;
+    track.style.transform = `translate3d(${startTransform + diff}px, 0, 0)`;
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.transition = '';
+    
+    const diff = currentX - startX;
+    isPaused = false;
+    lastTime = 0;
+    
+    if (Math.abs(diff) > 50) {
+      if (diff < 0) {
+        const nextIdx = (currentIndex + 1) % totalItems;
+        selectIndex(nextIdx);
+      } else {
+        const prevIdx = (currentIndex - 1 + totalItems) % totalItems;
+        selectIndex(prevIdx);
+      }
+    } else {
+      scrollTrackTo(currentIndex);
+    }
+  });
+
+  // Mouse triggers
+  viewport.addEventListener('mousedown', (e) => {
+    if (e.target.closest('a, button')) return; // let buttons/links handle their clicks normally
+    if (e.button !== 0) return;
+    isPaused = true;
+    startX = e.clientX;
+    isDragging = true;
+    track.style.transition = 'none';
+    startTransform = parseTransformX(track);
+    viewport.style.cursor = 'grabbing';
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    currentX = e.clientX;
+    const diff = currentX - startX;
+    track.style.transform = `translate3d(${startTransform + diff}px, 0, 0)`;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.transition = '';
+    viewport.style.cursor = 'grab';
+    
+    const diff = currentX - startX;
+    isPaused = false;
+    lastTime = 0;
+    
+    if (Math.abs(diff) > 60) {
+      if (diff < 0) {
+        const nextIdx = (currentIndex + 1) % totalItems;
+        selectIndex(nextIdx);
+      } else {
+        const prevIdx = (currentIndex - 1 + totalItems) % totalItems;
+        selectIndex(prevIdx);
+      }
+    } else {
+      scrollTrackTo(currentIndex);
+    }
+  });
 }

@@ -1,30 +1,148 @@
 <section class="section section--deep-soft section-rail" id="articles" aria-labelledby="articles-title">
   <div class="container">
+    
+    <!-- Section Head -->
     <div class="section-head">
       <div data-animate>
-        <span class="eyebrow">Knowledge hub</span>
-        <h2 id="articles-title" class="section-title">Useful reads for pharma brands evaluating manufacturing partners.</h2>
+        <span class="eyebrow">B2B Pharma Insights</span>
+        <h2 id="articles-title" class="section-title">Strategic Insights for Pharma Brands Evaluating Third-Party Contract Manufacturing.</h2>
       </div>
       <div data-animate data-delay="0.1">
         <p class="section-kicker">
-          Practical reads on compliance, product planning, and third-party manufacturing decisions.
+          Actionable expertise on WHO-GMP compliance, custom formulation scaling, and commercial supply chain optimization to accelerate your pharmaceutical pipelines.
         </p>
         <div class="mt-4.5">
           <a class="btn btn--outline" href="/articles/">View Articles</a>
         </div>
       </div>
     </div>
-    <div class="article-grid" data-animate data-animate-stagger>
-      {{ range $index, $item := .items }}
-      <a class="article-card" href="{{ $item.url }}">
-        <div class="article-visual" aria-hidden="true"><i data-lucide="{{ $item.icon }}" class="icon icon--xl"></i></div>
-        <div class="article-body">
-          <span class="article-category">{{ $item.cat }}</span>
-          <h3>{{ $item.title }}</h3>
-          <p>{{ $item.desc }}</p>
+
+    <!-- The B2B Insights Hub Layout (Dynamic Showcase & Infinite Loop Track) -->
+    <div class="insights-hub" data-animate>
+      {{ $articles := first 10 ((where site.RegularPages "Section" "articles").ByDate.Reverse) }}
+      {{ if gt (len $articles) 0 }}
+        {{ $first := index $articles 0 }}
+        
+        <!-- Left Spotlight Panel: Dynamic Highlighted Article -->
+        <div class="insights-spotlight">
+          <div class="insights-spotlight__backdrop"></div>
+          
+          <div class="insights-spotlight__content">
+            
+            <!-- Animated spotlight content updated by JS -->
+            <div id="spotlight-display" class="insights-spotlight__display">
+              <!-- Initial state rendered by Hugo for instant loading (SEO + Speed) -->
+              <div class="insights-spotlight__meta">
+                <span class="editorial-cat-badge" id="spotlight-cat">{{ $first.Params.category | default "Articles" }}</span>
+                <span class="insights-spotlight__read-time" id="spotlight-time">
+                  <i data-lucide="clock" class="icon--xs" aria-hidden="true"></i>
+                  <span id="spotlight-time-val">{{ $first.ReadingTime }}</span> min read
+                </span>
+              </div>
+              
+              <h3 class="insights-spotlight__title" id="spotlight-title">
+                <a href="{{ $first.RelPermalink }}">{{ $first.Title }}</a>
+              </h3>
+              
+              <!-- Description 1: Main Summary -->
+              <p class="insights-spotlight__summary" id="spotlight-summary">
+                {{ $first.Summary | plainify | truncate 180 }}
+              </p>
+
+              <!-- Description 2: Key Takeaway (Displays highlighted key B2B insight) -->
+              <div class="insights-spotlight__takeaway-wrap" id="spotlight-takeaway-container">
+                <span class="insights-spotlight__takeaway-label">
+                  <i data-lucide="sparkles" class="icon--xs mr-1" aria-hidden="true"></i>
+                  Strategic B2B Takeaway
+                </span>
+                <p class="insights-spotlight__takeaway" id="spotlight-takeaway">
+                  {{ if $first.Params.key_takeaways }}{{ index $first.Params.key_takeaways 0 | markdownify }}{{ else }}Explore custom formulations, strict regulatory compliance, and WHO-GMP manufacturing excellence. Saar Biotech serves as a strategic third-party contract partner, streamlining your commercial pipelines.{{ end }}
+                </p>
+              </div>
+              
+              <div class="insights-spotlight__footer">
+                <a class="btn btn--brand btn--sm" id="spotlight-link" href="{{ $first.RelPermalink }}">
+                  Read Article
+                  <i data-lucide="arrow-right" class="icon--xs ml-1.5" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            
+            <!-- Dynamic Ticking Progress Line Indicator -->
+            <div class="insights-spotlight__timeline">
+              <div class="insights-spotlight__progress" id="spotlight-progress-fill"></div>
+            </div>
+
+          </div>
         </div>
-      </a>
+
+        <!-- Right Stream Panel: Horizontal Loop Carousel Track of All Articles -->
+        <div class="insights-stream">
+          <div class="insights-stream__viewport" id="insights-stream-viewport">
+            <div class="insights-stream__track" id="insights-stream-track">
+              
+              {{ range $index, $article := $articles }}
+              <!-- Structured data elements with safe htmlEscape to prevent attribute clashing -->
+              <div class="insights-stream__item {{ if eq $index 0 }}is-active{{ end }}" 
+                   data-index="{{ $index }}"
+                   data-title="{{ $article.Title }}"
+                   data-url="{{ $article.RelPermalink }}"
+                   data-category="{{ $article.Params.category | default "Articles" }}"
+                   data-read-time="{{ $article.ReadingTime }}"
+                   data-summary="{{ $article.Summary | plainify | truncate 180 }}"
+                   data-image="{{ $article.Params.cover_image | default "" }}"
+                   data-takeaway="{{ if $article.Params.key_takeaways }}{{ index $article.Params.key_takeaways 0 | markdownify }}{{ end }}"
+                   role="button"
+                   tabindex="0"
+                   aria-label="View {{ $article.Title }}">
+                   
+                <div class="insights-stream-card">
+                  <div class="insights-stream-card__visual">
+                    {{ if $article.Params.cover_image }}
+                      <img src="{{ $article.Params.cover_image }}" alt="{{ $article.Title }}" class="insights-stream-card__img" loading="lazy">
+                    {{ else }}
+                      <div class="insights-stream-card__placeholder">
+                        <i data-lucide="file-text" class="text-white/20" aria-hidden="true"></i>
+                      </div>
+                    {{ end }}
+                    <span class="insights-stream-card__index-badge">0{{ add $index 1 }}</span>
+                  </div>
+                  
+                  <div class="insights-stream-card__body">
+                    <div>
+                      <span class="insights-stream-card__cat">{{ $article.Params.category | default "Articles" }}</span>
+                      <h4 class="insights-stream-card__title">{{ $article.Title }}</h4>
+                      <p class="insights-stream-card__summary">{{ $article.Summary | plainify | truncate 90 }}</p>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              {{ end }}
+
+            </div>
+          </div>
+          
+          <!-- Navigation controls, dots, and indicators -->
+          <div class="insights-stream__controls">
+            <button class="insights-ctrl-btn" id="insights-prev" aria-label="Previous insight">
+              <i data-lucide="chevron-left" class="icon--sm" aria-hidden="true"></i>
+            </button>
+            <div class="insights-stream__dots" id="insights-dots">
+              {{ range $index, $article := $articles }}
+                <button class="insights-dot {{ if eq $index 0 }}is-active{{ end }}" data-index="{{ $index }}" aria-label="Go to slide {{ add $index 1 }}"></button>
+              {{ end }}
+            </div>
+            <button class="insights-ctrl-btn" id="insights-next" aria-label="Next insight">
+              <i data-lucide="chevron-right" class="icon--sm" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+      {{ else }}
+        <p class="text-center text-white/50 py-12">No articles found.</p>
       {{ end }}
     </div>
+
   </div>
 </section>
