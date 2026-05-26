@@ -71,11 +71,11 @@
   }
 
   .product-card__content {
-    @apply flex-1 p-6 flex flex-col;
+    @apply flex-1 p-5 flex flex-col;
   }
 
   .product-card__dosage {
-    @apply inline-block px-2 py-0.5 bg-surface-2 text-muted text-[9px] font-black uppercase tracking-wider rounded-md mb-2.5 transition-colors duration-300;
+    @apply inline-block px-2 py-0.5 bg-surface-2 text-muted text-[9px] font-black uppercase tracking-wider rounded-md mb-2 transition-colors duration-300;
   }
 
   .product-card:hover .product-card__dosage {
@@ -83,7 +83,7 @@
   }
 
   .product-card__title {
-    @apply text-[15px] md:text-xl font-bold text-ink mb-2 leading-tight transition-colors duration-300 min-h-[44px] md:min-h-[56px] flex items-center;
+    @apply text-[15px] md:text-[18px] font-bold text-ink mb-1.5 leading-tight transition-colors duration-300 min-h-[38px] md:min-h-[48px] flex items-center;
   }
 
   .product-card:hover .product-card__title {
@@ -91,7 +91,7 @@
   }
 
   .product-card__composition-tag {
-    @apply flex items-start gap-2.5 p-3 rounded-xl transition-all duration-300 bg-surface text-[12.5px] font-bold text-ink mb-3.5 leading-snug min-h-[68px] border border-transparent;
+    @apply flex items-start gap-2 p-2.5 rounded-xl transition-all duration-300 bg-surface text-[12px] font-bold text-ink mb-2.5 leading-snug min-h-[56px] border border-transparent;
   }
 
   .product-card:hover .product-card__composition-tag {
@@ -99,11 +99,11 @@
   }
 
   .product-card__composition-tag i {
-    @apply mt-1 text-brand flex-shrink-0;
+    @apply mt-0.5 text-brand flex-shrink-0;
   }
 
   .product-card__packs {
-    @apply flex flex-wrap gap-1.5 mb-4;
+    @apply flex flex-wrap gap-1.5 mb-3 mt-auto;
   }
 
   .product-card__pack {
@@ -119,11 +119,11 @@
   }
 
   .product-card__desc {
-    @apply text-muted text-[12.5px] leading-relaxed line-clamp-2 mb-3;
+    @apply text-muted text-[12px] leading-relaxed line-clamp-2 mb-2.5;
   }
 
   .product-card__footer {
-    @apply mt-auto pt-3 border-t border-line flex items-center justify-between;
+    @apply mt-auto pt-2.5 border-t border-line flex items-center justify-between;
   }
 
   .product-card__cta {

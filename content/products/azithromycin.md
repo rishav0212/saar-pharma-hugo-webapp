@@ -59,8 +59,6 @@ custom_specs:
     value: "Baddi, Himachal Pradesh"
   - label: "Compliance"
     value: "DCGI Approved / Schedule M"
-  - label: "Dossier Status"
-    value: "CTD/ACTD Available"
 
 # 6. DUAL-LAYER FAQ
 faq_clinical:

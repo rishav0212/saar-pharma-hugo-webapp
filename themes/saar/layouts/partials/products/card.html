@@ -10,8 +10,8 @@
 {{ end }}
 {{ end }}
 
-<article class="product-card product-card-wrap h-full group"
-    data-title="{{ .Title | lower }}" data-category-slugs="{{ delimit $safeCats " " }}"
+<article class="product-card product-card-wrap h-full group" data-title="{{ .Title | lower }}"
+    data-category-slugs="{{ delimit $safeCats " " }}"
     data-categories="{{ with .Params.categories }}{{ delimit . " " | lower }}{{ end }}"
     data-composition="{{ with .Params.compositions }}{{ delimit . " " | lower }}{{ else }}{{ .Params.composition | lower }}{{ end }}"
     data-area="{{ with .Params.therapeutic_class }}{{ if reflect.IsSlice . }}{{ delimit . " " | lower }}{{ else }}{{ . | lower }}{{ end }}{{ else }}{{ .Params.therapeutic_area | default "" | lower }}{{ end }}"
@@ -44,13 +44,13 @@
 
         {{ if $productImg }}
         {{ partial "shared/optimized-image.html" (dict
-            "src" (printf "images/products/%s" $productImg)
-            "alt" .Title
-            "width" 520
-            "height" 347
-            "loading" "lazy"
-            "class" "product-card__image"
-            "pictureClass" "product-card__picture"
+        "src" (printf "images/products/%s" $productImg)
+        "alt" .Title
+        "width" 520
+        "height" 347
+        "loading" "lazy"
+        "class" "product-card__image"
+        "pictureClass" "product-card__picture"
         ) }}
         {{ else }}
         <div class="text-teal-600/10">
@@ -60,12 +60,14 @@
     </div>
 
     <div class="product-card__content flex-1 flex flex-col">
+        {{/* Commented out dosage form tag under the image to prevent duplicate category names on the card
         {{ $dosage := .Params.dosage_form | default .Params.drug_form | default (index .Params.categories 0) }}
         {{ if $dosage }}
         <div>
             <span class="product-card__dosage">{{ $dosage }}</span>
         </div>
         {{ end }}
+        */}}
 
         <h3 class="product-card__title">
             {{ .Title }}
@@ -78,12 +80,13 @@
         {{ $cardComp = .Params.composition | truncate 60 }}
         {{ end }}
 
-        {{ if $cardComp }}
+        {{/* ── Premium Clinical Highlight: Always render 2-line Description inside the Microscope Box ── */}}
         <div class="product-card__composition-tag">
-            <i data-lucide="microscope" class="w-3.5 h-3.5"></i>
-            <span>{{ $cardComp }}</span>
+            <i data-lucide="microscope" class="w-3.5 h-3.5 mt-0.5 flex-shrink-0"></i>
+            <span class="text-muted text-[11.5px] leading-relaxed line-clamp-2">
+                {{ .Description | default .Summary | plainify }}
+            </span>
         </div>
-        {{ end }}
 
         {{ with .Params.pack_sizes }}
         <div class="product-card__packs">
@@ -100,13 +103,13 @@
         </div>
         {{ end }}
 
+        {{/*
         <p class="product-card__desc">
-            {{/* Strip "Description" heading if Hugo includes it in summary */}}
             {{ $rawDesc := .Description | default .Summary | plainify }}
             {{ $cleanDesc := replace $rawDesc "Description" "" }}
             {{ $cleanDesc | truncate 120 }}
-
         </p>
+        */}}
 
         <!-- Pushed to bottom via flex-1 + mt-auto -->
         <div class="product-card__footer mt-auto">
@@ -120,5 +123,5 @@
                 data-category="{{ with .Params.categories }}{{ index . 0 }}{{ else }}{{ .Params.category | default "" }}{{ end }}">
                 <i data-lucide="mail" class="w-5 h-5"></i>
             </a>
-    </div>
+        </div>
 </article>
