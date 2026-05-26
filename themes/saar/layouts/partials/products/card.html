@@ -10,16 +10,65 @@
 {{ end }}
 {{ end }}
 
+{{- /* Build a highly-comprehensive unified search index string for this product using proper validated keys */ -}}
+{{- $searchIndexSlice := slice -}}
+{{- $searchIndexSlice = $searchIndexSlice | append (.Title | lower) -}}
+{{- $searchIndexSlice = $searchIndexSlice | append (.Description | default .Summary | plainify | lower) -}}
+{{- with .Params.approved_name -}}{{ $searchIndexSlice = $searchIndexSlice | append (. | lower) }}{{ end -}}
+{{- with .Params.compositions -}}{{ range . }}{{ $searchIndexSlice = $searchIndexSlice | append (. | lower) }}{{ end }}{{ end -}}
+{{- with .Params.dosage_form -}}{{ $searchIndexSlice = $searchIndexSlice | append (. | lower) }}{{ end -}}
+{{- with .Params.drug_form -}}{{ $searchIndexSlice = $searchIndexSlice | append (. | lower) }}{{ end -}}
+{{- with .Params.therapeutic_class -}}{{ range . }}{{ $searchIndexSlice = $searchIndexSlice | append (. | lower) }}{{ end }}{{ end -}}
+{{- with .Params.quality_standards -}}{{ $searchIndexSlice = $searchIndexSlice | append (. | lower) }}{{ end -}}
+{{- with .Params.pack_sizes -}}{{ range . }}{{ $searchIndexSlice = $searchIndexSlice | append (. | lower) }}{{ end }}{{ end -}}
+{{- with .Params.manufacturing_status -}}{{ $searchIndexSlice = $searchIndexSlice | append (. | lower) }}{{ end -}}
+{{- with .Params.storage_conditions -}}{{ $searchIndexSlice = $searchIndexSlice | append (. | lower) }}{{ end -}}
+{{- with .Params.shelf_life -}}{{ $searchIndexSlice = $searchIndexSlice | append (. | lower) }}{{ end -}}
+
+{{- /* Extract all detailed ingredients salts and strengths from presentation specifications */ -}}
+{{- with .Params.presentation -}}
+  {{- with .ingredients -}}
+    {{- range . -}}
+      {{- $searchIndexSlice = $searchIndexSlice | append (.salt | lower) -}}
+      {{- $searchIndexSlice = $searchIndexSlice | append (.strength | lower) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Extract from B2B and clinical custom specifications */ -}}
+{{- with .Params.custom_specs -}}
+  {{- range . -}}
+    {{- $searchIndexSlice = $searchIndexSlice | append (.label | lower) -}}
+    {{- $searchIndexSlice = $searchIndexSlice | append (.value | lower) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Extract keywords to capture B2B intent, localizations, and generic synonyms */ -}}
+{{- with .Params.keywords -}}
+  {{- range . -}}
+    {{- $searchIndexSlice = $searchIndexSlice | append (. | lower) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $searchIndex := delimit $searchIndexSlice " " -}}
+
 <article class="product-card product-card-wrap h-full group" data-title="{{ .Title | lower }}"
+    data-search-index="{{ $searchIndex }}"
     data-category-slugs="{{ delimit $safeCats " " }}"
     data-categories="{{ with .Params.categories }}{{ delimit . " " | lower }}{{ end }}"
     data-composition="{{ with .Params.compositions }}{{ delimit . " " | lower }}{{ else }}{{ .Params.composition | lower }}{{ end }}"
-    data-area="{{ with .Params.therapeutic_class }}{{ if reflect.IsSlice . }}{{ delimit . " " | lower }}{{ else }}{{ . | lower }}{{ end }}{{ else }}{{ .Params.therapeutic_area | default "" | lower }}{{ end }}"
+    data-area="{{ with .Params.therapeutic_class }}{{ if reflect.IsSlice . }}{{ delimit . " " | lower }}{{ else }}{{ . | lower }}{{ end }}{{ end }}"
     data-therapeutic-class="{{ with .Params.therapeutic_class }}{{ if reflect.IsSlice . }}{{ delimit . " " | lower }}{{ else }}{{ . | lower }}{{ end }}{{ end }}"
-    data-therapeutic-area="{{ .Params.therapeutic_area | default "" | lower }}"
     data-drug-form="{{ .Params.dosage_form | default .Params.drug_form | default "" | lower }}"
     data-desc="{{ .Description | default .Summary | plainify | lower }}"
-    data-packs="{{ with .Params.pack_sizes }}{{ if reflect.IsSlice . }}{{ delimit . " " | lower }}{{ else }}{{ . | lower }}{{ end }}{{ end }}">
+    data-packs="{{ with .Params.pack_sizes }}{{ if reflect.IsSlice . }}{{ delimit . " " | lower }}{{ else }}{{ . | lower }}{{ end }}{{ end }}"
+    data-approved-name="{{ .Params.approved_name | default "" | lower }}"
+    data-keywords="{{ with .Params.keywords }}{{ delimit . " " | lower }}{{ end }}"
+    data-custom-specs="{{ with .Params.custom_specs }}{{ range . }}{{ .label | lower }} {{ .value | lower }} {{ end }}{{ end }}"
+    data-quality-standards="{{ .Params.quality_standards | default "" | lower }}"
+    data-manufacturing-status="{{ .Params.manufacturing_status | default "" | lower }}"
+    data-storage-conditions="{{ .Params.storage_conditions | default "" | lower }}"
+    data-shelf-life="{{ .Params.shelf_life | default "" | lower }}">
 
     <!-- Main Overlay Link -->
     <a href="{{ .RelPermalink }}" class="absolute inset-0 z-10" aria-label="View {{ .Title }} details"></a>

@@ -26,7 +26,7 @@
       </p>
       <div class="unit-grid" data-animate data-animate-stagger>
         {{ range .units }}
-        <div class="unit-card">
+        <div class="unit-card" id="manufacturing-{{ .name | urlize }}">
           <small>{{ .name }}</small>
           <strong>{{ .focus }}</strong>
           <span>{{ .capacity }}</span>

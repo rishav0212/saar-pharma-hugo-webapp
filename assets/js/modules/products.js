@@ -43,10 +43,17 @@ export function initProducts() {
     comp: (el.dataset.composition || '').toLowerCase(),
     area: (el.dataset.area || '').toLowerCase(),
     tclass: (el.dataset.therapeuticClass || '').toLowerCase(),
-    tarea: (el.dataset.therapeuticArea || '').toLowerCase(),
     dform: (el.dataset.drugForm || '').toLowerCase(),
     desc: (el.dataset.desc || '').toLowerCase(),
-    packs: (el.dataset.packs || '').toLowerCase()
+    packs: (el.dataset.packs || '').toLowerCase(),
+    approvedName: (el.dataset.approvedName || '').toLowerCase(),
+    keywords: (el.dataset.keywords || '').toLowerCase(),
+    customSpecs: (el.dataset.customSpecs || '').toLowerCase(),
+    qstandards: (el.dataset.qualityStandards || '').toLowerCase(),
+    mstatus: (el.dataset.manufacturingStatus || '').toLowerCase(),
+    sconditions: (el.dataset.storageConditions || '').toLowerCase(),
+    slife: (el.dataset.shelfLife || '').toLowerCase(),
+    searchIndex: (el.dataset.searchIndex || '').toLowerCase()
   }));
 
   // ─── Sync Logic ───────────────────────────────────────────────
@@ -72,15 +79,52 @@ export function initProducts() {
 
       let score = 0;
       if (currentQuery) {
-        if (item.title.includes(currentQuery)) score += 2000;
-        if (item.categories.includes(currentQuery)) score += 1500;
-        if (item.desc.includes(currentQuery)) score += 500;
-        if (item.comp.includes(currentQuery)) score += 250;
-        if (item.dform.includes(currentQuery)) score += 220;
-        if (item.tclass.includes(currentQuery)) score += 200;
-        if (item.tarea.includes(currentQuery)) score += 180;
-        if (item.area.includes(currentQuery)) score += 100;
-        if (item.packs.includes(currentQuery)) score += 50;
+        // Multi-term support: split query into individual search tokens
+        const terms = currentQuery.split(/\s+/).filter(Boolean);
+        if (terms.length > 0) {
+          // A product is a match only if EVERY typed term is found somewhere in its comprehensive searchIndex.
+          // This implements high-precision AND matching across all properties (dosage, name, composition, strengths, custom specs, keywords, quality, etc.).
+          const allTermsMatch = terms.every(term => item.searchIndex.includes(term));
+          
+          if (allTermsMatch) {
+            // Base score for successfully matching all search terms
+            score += 500;
+            
+            // Apply targeted score boosts based on which high-importance fields contain each specific term
+            terms.forEach(term => {
+              if (item.title.includes(term)) score += 300;
+              if (item.approvedName.includes(term)) score += 280; // Boost approved pharmacopoeial name!
+              if (item.comp.includes(term)) score += 250;
+              if (item.categories.includes(term)) score += 200;
+              if (item.dform.includes(term)) score += 180;
+              if (item.tclass.includes(term)) score += 150;
+              if (item.area.includes(term)) score += 100;
+              if (item.qstandards.includes(term)) score += 95;    // Boost quality standards!
+              if (item.mstatus.includes(term)) score += 90;       // Boost manufacturing status!
+              if (item.keywords.includes(term)) score += 80;      // Boost matching keywords!
+              if (item.customSpecs.includes(term)) score += 60;   // Boost matching custom specs!
+              if (item.sconditions.includes(term)) score += 55;   // Boost storage conditions!
+              if (item.slife.includes(term)) score += 50;         // Boost shelf life!
+              if (item.desc.includes(term)) score += 40;
+              if (item.packs.includes(term)) score += 30;
+            });
+            
+            // Extra massive boost if the entire contiguous query is matched exactly in main fields (maintaining exact-match relevance ordering)
+            if (item.title.includes(currentQuery)) score += 2000;
+            if (item.approvedName.includes(currentQuery)) score += 1800; // Boost exact pharmacopoeia name match!
+            if (item.categories.includes(currentQuery)) score += 1500;
+            if (item.comp.includes(currentQuery)) score += 1000;
+            if (item.dform.includes(currentQuery)) score += 800;
+            if (item.keywords.includes(currentQuery)) score += 500;
+            if (item.qstandards.includes(currentQuery)) score += 450;
+            if (item.mstatus.includes(currentQuery)) score += 420;
+            if (item.customSpecs.includes(currentQuery)) score += 400;
+            if (item.desc.includes(currentQuery)) score += 300;
+            if (item.sconditions.includes(currentQuery)) score += 250;
+            if (item.slife.includes(currentQuery)) score += 200;
+            if (item.searchIndex.includes(currentQuery)) score += 150;
+          }
+        }
       } else {
         score = 1;
       }

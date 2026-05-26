@@ -61,12 +61,12 @@
 {{- $hasContent := or $relatedProducts $relatedFinal $externalRefs -}}
 {{- if $hasContent }}
 
-<section class="article-bottom-blocks" aria-label="Related content">
+<section id="related-insights" class="article-bottom-blocks" aria-label="Related content">
   <div class="container">
 
     {{/* ── Related Products ─────────────────────────────────────── */}}
     {{ if $relatedProducts }}
-    <div class="article-bottom-section">
+    <div id="related-products" class="article-bottom-section">
       <h3 class="article-bottom-title">
         <i data-lucide="flask-conical"></i>
         Featured Products
@@ -93,7 +93,7 @@
 
     {{/* ── Further Reading ───────────────────────────────────────── */}}
     {{ if $relatedFinal }}
-    <div class="article-bottom-section {{ if $relatedProducts }}mt-12{{ end }}">
+    <div id="further-reading" class="article-bottom-section {{ if $relatedProducts }}mt-12{{ end }}">
       <h3 class="article-bottom-title">
         <i data-lucide="book-open"></i>
         Further Reading
@@ -120,7 +120,7 @@
       this article is well-researched and credible.
     */}}
     {{ if $externalRefs }}
-    <div class="article-bottom-section article-external-refs {{ if or $relatedProducts $relatedFinal }}mt-12{{ end }}">
+    <div id="references" class="article-bottom-section article-external-refs {{ if or $relatedProducts $relatedFinal }}mt-12{{ end }}">
       <h3 class="article-bottom-title">
         <i data-lucide="external-link"></i>
         References & Further Resources

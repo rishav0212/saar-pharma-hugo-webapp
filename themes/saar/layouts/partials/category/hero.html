@@ -31,7 +31,7 @@ The product count is computed live from all products in this section.
 {{- end -}}
 {{- $productCount := len $catProducts -}}
 
-<section class="section--cat-hero" aria-label="{{ $catName }} manufacturing hero">
+<section id="category-hero" class="section--cat-hero" aria-label="{{ $catName }} manufacturing hero">
 
   {{- /* Background mesh & gradient overlays */ -}}
   <div class="cat-hero__bg-grid" aria-hidden="true"></div>

@@ -3,26 +3,109 @@
 {{/* 1. Standard Pages & Articles (Enhanced with Product Deep-Indexing) */}}
 {{- range .Site.AllPages -}}
   {{- if and (ne .Kind "taxonomy") (ne .Kind "term") (ne .Title "") -}}
-    {{- $summary := .Summary | plainify -}}
+    {{- $summary := .Params.description | default .Params.meta_description | default .Summary | plainify -}}
     {{- if .IsHome -}}{{- $summary = "Leading WHO-GMP & ISO certified pharmaceutical manufacturer specializing in oral liquids, ointments, and drops." -}}{{- end -}}
     
-    {{/* Combine technical content for deep searching */}}
+    {{/* Combine technical content and keywords for deep searching */}}
     {{- $deepContent := .Plain -}}
+    
+    {{- /* Universal Keywords & Metadata Indexing */ -}}
+    {{- $keywords := "" -}}{{- with .Params.keywords }}{{ if reflect.IsSlice . }}{{ $keywords = delimit . " " }}{{ else }}{{ $keywords = . }}{{ end }}{{ end -}}
+    {{- $deepContent = printf "%s %s %s %s" $deepContent $keywords (.Params.meta_title | default "") (.Params.meta_description | default "") -}}
+    
+    {{- /* Product-Specific Deep Indexing */ -}}
     {{- if eq .Type "products" -}}
       {{- $cats := "" -}}{{- with .Params.categories }}{{ $cats = delimit . " " }}{{ end -}}
       {{- $tClass := "" -}}{{- with .Params.therapeutic_class }}{{ if reflect.IsSlice . }}{{ $tClass = delimit . " " }}{{ else }}{{ $tClass = . }}{{ end }}{{ end -}}
+      
+      {{- /* Parse compositions (plural and singular support) */ -}}
+      {{- $compositions := "" -}}
+      {{- with .Params.compositions -}}
+        {{- if reflect.IsSlice . }}{{ $compositions = delimit . " " }}{{ else }}{{ $compositions = . }}{{ end -}}
+      {{- else -}}
+        {{- $compositions = .Params.composition | default "" -}}
+      {{- end -}}
+
+      {{- /* Parse packaging sizes and details */ -}}
+      {{- $packs := "" -}}{{- with .Params.pack_sizes }}{{ if reflect.IsSlice . }}{{ $packs = delimit . " " }}{{ else }}{{ $packs = . }}{{ end }}{{ end -}}
       
       {{- /* Deep search through custom specs */ -}}
       {{- $specs := "" -}}
       {{- range .Params.custom_specs }}{{ $specs = printf "%s %s %s" $specs .label .value }}{{ end -}}
       
-      {{- $deepContent = printf "%s %s %s %s %s %s %s %s" $deepContent $cats $tClass (.Params.composition | default "") (.Params.dosage_form | default "") (.Params.drug_form | default "") (.Params.approved_name | default "") $specs -}}
+      {{- /* Deep search through product clinical and B2B FAQs */ -}}
+      {{- $productFaqs := "" -}}
+      {{- range .Params.faq_clinical }}{{ $productFaqs = printf "%s %s %s" $productFaqs .question .answer }}{{ end -}}
+      {{- range .Params.faq_b2b }}{{ $productFaqs = printf "%s %s %s" $productFaqs .question .answer }}{{ end -}}
       
-      {{- /* Search result snippet (molecule + primary dosage) */ -}}
-      {{- $summary = printf "%s • %s" (.Params.composition | default "") (.Params.dosage_form | default (index .Params.categories 0) | default "") -}}
+      {{- /* Merge everything into deepContent index for Fuse.js search */ -}}
+      {{- $deepContent = printf "%s %s %s %s %s %s %s %s %s %s %s %s %s %s" $deepContent $cats $tClass $compositions (.Params.dosage_form | default "") (.Params.drug_form | default "") (.Params.approved_name | default "") $specs $packs (.Params.quality_standards | default "") (.Params.manufacturing_status | default "") (.Params.storage_conditions | default "") (.Params.shelf_life | default "") $productFaqs -}}
+      
+      {{- /* Highly professional search result snippet (molecule + primary dosage) */ -}}
+      {{- $displayComp := "" -}}
+      {{- with .Params.compositions -}}
+        {{- $displayComp = delimit . " + " | title -}}
+      {{- else -}}
+        {{- $displayComp = .Params.composition | default .Title | title -}}
+      {{- end -}}
+      {{- $summary = printf "%s • %s" $displayComp (.Params.dosage_form | default (index .Params.categories 0) | default "") -}}
     {{- end -}}
 
-    {{- $item := dict "title" .Title "permalink" .RelPermalink "summary" $summary "content" ($deepContent | truncate 2000) "type" .Type "weight" 1 -}}
+    {{- /* Article-Specific Deep Indexing */ -}}
+    {{- if eq .Type "articles" -}}
+      {{- $tags := "" -}}{{- with .Params.tags }}{{ $tags = delimit . " " }}{{ end -}}
+      {{- $takeaways := "" -}}{{- with .Params.key_takeaways }}{{ $takeaways = delimit . " " }}{{ end -}}
+      {{- $articleFaqs := "" -}}
+      {{- range .Params.faqs }}{{ $articleFaqs = printf "%s %s %s" $articleFaqs .q .a }}{{ end -}}
+      {{- $deepContent = printf "%s %s %s %s %s" $deepContent (.Params.category | default "") $tags $takeaways $articleFaqs -}}
+    {{- end -}}
+
+    {{- /* Contact-Specific Deep Indexing */ -}}
+    {{- if eq .Type "contact" -}}
+      {{- $offices := "" -}}
+      {{- range .Params.offices -}}
+        {{- $highlights := "" -}}{{- with .highlights }}{{ $highlights = delimit . " " }}{{ end -}}
+        {{- $offices = printf "%s %s %s %s %s %s %s %s" $offices .name .address .city .state .pin .hours $highlights -}}
+      {{- end -}}
+      {{- $commitments := "" -}}
+      {{- range .Params.commitments -}}
+        {{- $commitments = printf "%s %s %s" $commitments .title .desc -}}
+      {{- end -}}
+      {{- $contactFaqs := "" -}}
+      {{- range .Params.faqs -}}
+        {{- $contactFaqs = printf "%s %s %s" $contactFaqs .q .a -}}
+      {{- end -}}
+      {{- $deepContent = printf "%s %s %s %s %s %s" $deepContent (.Params.hero_tagline | default "") (.Params.hero_desc | default "") $offices $commitments $contactFaqs -}}
+    {{- end -}}
+
+    {{- /* Category / List pages specific index */ -}}
+    {{- if or (eq .Kind "section") (eq .Params.layout "category") (eq .Params.layout "categories-list") -}}
+      {{- $specs := "" -}}{{- range .Params.manufacturing_specs }}{{ $specs = printf "%s %s %s" $specs .label .value }}{{ end -}}
+      {{- $signals := "" -}}{{- range .Params.trust_signals }}{{ $signals = printf "%s %s %s" $signals .title .desc }}{{ end -}}
+      {{- $catFaqs := "" -}}{{- range .Params.faqs }}{{ $catFaqs = printf "%s %s %s" $catFaqs .q .a }}{{ end -}}
+      {{- $deepContent = printf "%s %s %s %s %s %s %s %s" $deepContent (.Params.tagline | default "") (.Params.hero_description | default "") (.Params.authority_title | default "") (.Params.authority_desc | default "") $specs $signals $catFaqs -}}
+    {{- end -}}
+
+    {{- $type := .Type | title -}}
+    {{- if or (eq .Params.layout "categories-list") (eq .Params.layout "category") -}}
+      {{- $type = "Category" -}}
+    {{- else if eq .Kind "section" -}}
+      {{- if eq .Type "products" -}}
+        {{- $type = "Category" -}}
+      {{- else if eq .Type "articles" -}}
+        {{- $type = "Insights" -}}
+      {{- else if eq .Type "contact" -}}
+        {{- $type = "Contact" -}}
+      {{- else -}}
+        {{- $type = "Section" -}}
+      {{- end -}}
+    {{- else if eq .Type "products" -}}
+      {{- $type = "Product" -}}
+    {{- else if eq .Type "articles" -}}
+      {{- $type = "Article" -}}
+    {{- end -}}
+    
+    {{- $item := dict "title" .Title "permalink" .RelPermalink "summary" $summary "content" ($deepContent | truncate 3000) "type" $type "weight" 1 -}}
     {{- $index = $index | append $item -}}
   {{- end -}}
 {{- end -}}
@@ -30,40 +113,44 @@
 {{/* 2. Deep Sections from Homepage (Migrated to Params) */}}
 {{- $home := .Site.Home.Params -}}
 
-{{- range $home.categories -}}
-  {{- $tags := "" -}}{{- if .tags }}{{ $tags = delimit .tags " " }}{{ end -}}
-  {{- $item := dict "title" .title "permalink" (.url | default "/#categories") "summary" .text "content" $tags "type" "Category" "weight" 10 -}}
-  {{- $index = $index | append $item -}}
-{{- end -}}
-
 {{- range $home.products -}}
   {{- $item := dict "title" .title "permalink" (.url | default "/#products") "summary" .text "content" .type "type" "Range" "weight" 10 -}}
   {{- $index = $index | append $item -}}
 {{- end -}}
 
 {{- range $home.why -}}
-  {{- $item := dict "title" .title "permalink" "/#why" "summary" .text "content" "" "type" "Advantage" "weight" 10 -}}
+  {{- $slug := .title | urlize -}}
+  {{- $item := dict "title" .title "permalink" (printf "/#why-choose-us-%s" $slug) "summary" .text "content" "" "type" "Advantage" "weight" 10 -}}
   {{- $index = $index | append $item -}}
 {{- end -}}
 
 {{- range $home.units -}}
-  {{- $item := dict "title" .name "permalink" "/#manufacturing" "summary" (printf "%s - %s" .focus .capacity) "content" "" "type" "Unit" "weight" 10 -}}
+  {{- $slug := .name | urlize -}}
+  {{- $item := dict "title" .name "permalink" (printf "/#manufacturing-%s" $slug) "summary" (printf "%s - %s" .focus .capacity) "content" "" "type" "Unit" "weight" 10 -}}
   {{- $index = $index | append $item -}}
 {{- end -}}
 
 {{- range $home.process -}}
-  {{- $item := dict "title" .title "permalink" "/#process" "summary" .text "content" "" "type" "Process" "weight" 10 -}}
-  {{- $index = $index | append $item -}}
-{{- end -}}
-
-{{- range $home.articles -}}
-  {{- $item := dict "title" .title "permalink" .url "summary" .desc "content" .cat "type" "Article" "weight" 10 -}}
+  {{- $slug := .title | urlize -}}
+  {{- $item := dict "title" .title "permalink" (printf "/#process-%s" $slug) "summary" .text "content" "" "type" "Process" "weight" 10 -}}
   {{- $index = $index | append $item -}}
 {{- end -}}
 
 {{- range $home.faqs -}}
-  {{- $item := dict "title" .q "permalink" "/#faq" "summary" .a "content" "" "type" "FAQ" "weight" 10 -}}
+  {{- $slug := .q | urlize -}}
+  {{- $item := dict "title" .q "permalink" (printf "/#faq-%s" $slug) "summary" .a "content" "" "type" "FAQ" "weight" 10 -}}
   {{- $index = $index | append $item -}}
+{{- end -}}
+
+{{/* 3. Deep Therapeutic Categories (Dynamically Indexed from Products Categories Hub) */}}
+{{- $categoriesHub := .Site.GetPage "/products/categories" -}}
+{{- if $categoriesHub -}}
+  {{- range $categoriesHub.Params.therapeutic_areas -}}
+    {{- $molecules := "" -}}{{- with .molecules }}{{ $molecules = delimit . " " }}{{ end -}}
+    {{- $slug := .title | urlize -}}
+    {{- $item := dict "title" (printf "%s Category" .title) "permalink" (printf "%s#%s" $categoriesHub.RelPermalink $slug) "summary" .desc "content" $molecules "type" "Category" "weight" 5 -}}
+    {{- $index = $index | append $item -}}
+  {{- end -}}
 {{- end -}}
 
 {{- $index | jsonify -}}

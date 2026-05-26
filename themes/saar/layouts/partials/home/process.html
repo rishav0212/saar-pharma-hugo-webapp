@@ -10,7 +10,7 @@
 
     <div class="timeline" data-animate data-animate-stagger>
       {{ range $index, $item := .items }}
-      <div class="timeline-step">
+      <div class="timeline-step" id="process-{{ $item.title | urlize }}">
         <div class="timeline-step__track">
           <div class="timeline-step__num">{{ $item.num }}</div>
           {{ if ne $index 5 }}<div class="timeline-step__line"></div>{{ end }}

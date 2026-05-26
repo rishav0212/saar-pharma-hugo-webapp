@@ -65,7 +65,7 @@ Each card now resolves its destination at Hugo build time:
         {{- end -}}
       {{- end -}}
 
-            <div class="catlist-therapeutic-card" data-animate="fade-up">
+            <div class="catlist-therapeutic-card" id="{{ $slug }}" data-animate="fade-up">
 
               <div class="catlist-therapeutic-card__icon-wrap" aria-hidden="true">
                 <i data-lucide="{{ .icon | default "flask-conical" }}"></i>

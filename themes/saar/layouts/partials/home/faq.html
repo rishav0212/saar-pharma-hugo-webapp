@@ -11,7 +11,7 @@
     </div>
     <div class="faq-accordion__list" data-animate data-animate-stagger>
       {{ range $index, $item := .items }}
-      <div class="faq-accordion__item{{ if eq $index 0 }} is-active{{ end }}">
+      <div class="faq-accordion__item{{ if eq $index 0 }} is-active{{ end }}" id="faq-{{ $item.q | urlize }}">
         <div class="faq-accordion__header">
           <span>{{ $item.q }}</span>
         </div>

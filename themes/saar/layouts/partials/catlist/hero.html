@@ -34,7 +34,7 @@ STAT BAR: All values computed dynamically — never hardcoded.
 {{/* Stat 4: B2B clients — from hugo.toml site params (same source as footer / trust-band) */}}
 {{- $clients := .Site.Params.clients -}}
 
-<section class="catlist-hero" aria-labelledby="catlist-hero-title">
+<section id="categories-hero" class="catlist-hero" aria-labelledby="catlist-hero-title">
 
   {{/* Background layers: dot-grid + dual radial glows + floating rings */}}
   <div class="catlist-hero__bg-grid" aria-hidden="true"></div>

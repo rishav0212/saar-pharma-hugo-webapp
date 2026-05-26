@@ -1,4 +1,4 @@
-<section class="section section--paper section-rail" id="why-choose-us" aria-labelledby="why-title">
+<section class="section section--paper section-rail" id="why" aria-labelledby="why-title">
   <div class="container">
     <div class="section-head section-head--center" data-animate data-animate-type="slide-left">
       <span class="eyebrow">Built for pharma brands</span>
@@ -11,7 +11,7 @@
 
     <div class="bento-grid" data-animate data-animate-stagger>
       {{ range $index, $item := .items }}
-      <div class="bento-cell bento-cell--{{ $index }}">
+      <div class="bento-cell bento-cell--{{ $index }}" id="why-choose-us-{{ $item.title | urlize }}">
         <div class="bento-cell__icon">
           <i data-lucide="{{ $item.icon }}" class="icon icon--md" aria-hidden="true"></i>
         </div>
