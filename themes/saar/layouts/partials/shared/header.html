@@ -10,7 +10,7 @@
       </span>
     </a>
 
-    <nav class="site-nav" aria-label="Main navigation">
+    <nav id="site-navigation" class="site-nav" aria-label="Main navigation">
       <a href="/about/" class="{{ if eq .RelPermalink "/about/" }}active{{ end }}">About</a>
       <a href="/products/categories/" class="{{ if eq .RelPermalink "/products/categories/" }}active{{ end }}">Categories</a>
       <a href="/products/" class="{{ if and (or (eq .Section "products") (eq .Section "product")) (ne .RelPermalink "/products/categories/") }}active{{ end }}">Products</a>
@@ -19,7 +19,7 @@
       <a href="/articles/" class="{{ if or (eq .RelPermalink "/articles/") (eq .Section "articles") }}active{{ end }}">Articles</a>
     </nav>
 
-    <div class="header-actions">
+    <div id="header-actions" class="header-actions">
       <button id="search-toggle" class="header-action-btn" type="button" aria-label="Open Search">
         <i data-lucide="search" class="icon" aria-hidden="true"></i>
       </button>
