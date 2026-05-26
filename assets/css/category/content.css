@@ -1,0 +1,16 @@
+﻿@layer components {
+
+  /*
+     5. CATEGORY BODY CONTENT
+     Optional markdown from _index.md â€” renders with 
+     the shared ps-markdown-content styles.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .cat-body__inner {
+    @apply max-w-[820px] mx-auto;
+  }
+
+
+
+
+}

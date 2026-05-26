@@ -1,0 +1,26 @@
+﻿@layer components {
+
+  /*
+     5. KEYWORD MARQUEE SEPARATOR
+     Reuses global .marquee / .marquee__track components.
+     Scoped override (.catlist-marquee) adds a subtle teal tint to 
+     distinguish it from the products listing page marquee.
+     No new animation â€” the global marquee keyframe handles it.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .catlist-marquee {
+    /* Override the products-page marquee background with a lighter surface tint */
+    background: rgba(var(--color-brand-rgb), 0.05);
+    border-top: 1px solid rgba(var(--color-brand-rgb), 0.10);
+    border-bottom: 1px solid rgba(var(--color-brand-rgb), 0.10);
+  }
+
+  .catlist-marquee .marquee__item {
+    /* Use teal text instead of the default muted/ink color */
+    color: var(--color-brand-3);
+    opacity: 0.8;
+  }
+
+
+
+}

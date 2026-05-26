@@ -1,0 +1,73 @@
+﻿@layer components {
+
+  /*
+     7. RELATED CATEGORIES GRID
+     Card grid of sibling category pages with icons,
+     descriptions, and product counts.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .cat-related-section {
+    @apply scroll-mt-[80px];
+  }
+
+  .cat-related__header {
+    @apply max-w-[600px];
+  }
+
+  .cat-related__grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  .cat-related-card {
+    @apply flex items-start gap-5 p-6 bg-white border border-line rounded-2xl transition-all duration-300 cursor-pointer;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .cat-related-card:hover {
+    @apply border-brand-line -translate-y-1;
+    box-shadow: var(--shadow-lift);
+  }
+
+  .cat-related-card:hover .cat-related-card__arrow {
+    @apply text-brand translate-x-1;
+  }
+
+  .cat-related-card__icon-wrap {
+    @apply w-11 h-11 rounded-xl bg-brand/8 border border-brand-line flex items-center justify-center shrink-0 transition-colors duration-300;
+  }
+
+  .cat-related-card:hover .cat-related-card__icon-wrap {
+    @apply bg-brand/15;
+  }
+
+  .cat-related-card__icon-wrap i {
+    @apply w-5 h-5 text-brand;
+  }
+
+  .cat-related-card__content {
+    @apply flex-1 min-w-0;
+  }
+
+  .cat-related-card__title {
+    @apply text-[15px] font-black text-ink mb-1.5 leading-tight transition-colors duration-300;
+  }
+
+  .cat-related-card:hover .cat-related-card__title {
+    @apply text-brand-3;
+  }
+
+  .cat-related-card__desc {
+    @apply text-[12px] text-muted leading-relaxed mb-2;
+  }
+
+  .cat-related-card__count {
+    @apply inline-block text-[10px] font-black text-brand uppercase tracking-widest bg-brand/5 border border-brand-line px-2 py-0.5 rounded-full;
+  }
+
+  .cat-related-card__arrow {
+    @apply w-5 h-5 text-muted/40 transition-all duration-300 mt-0.5 shrink-0;
+  }
+
+
+
+}

@@ -218,6 +218,21 @@
     background-color: rgba(21, 159, 145, 0.50);
   }
 
+  /* Count badge displayed next to therapeutic class name in the marquee */
+  .marquee__item-count {
+    @apply inline-flex items-center justify-center min-w-[20px] h-[20px] px-1.5 rounded-full text-[9px] font-black leading-none;
+    background-color: rgba(21, 159, 145, 0.14);
+    color: var(--color-brand-3);
+    border: 1px solid rgba(21, 159, 145, 0.22);
+    /* Sits between label text and the ::after dot — no extra margin needed */
+  }
+
+  .marquee__item:hover .marquee__item-count {
+    background-color: rgba(21, 159, 145, 0.22);
+    color: var(--color-brand);
+    border-color: rgba(21, 159, 145, 0.40);
+  }
+
   .metric-band {
     @apply py-12;
     background-color: var(--color-white);

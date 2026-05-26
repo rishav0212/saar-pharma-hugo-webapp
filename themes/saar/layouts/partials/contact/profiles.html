@@ -27,7 +27,14 @@
 
         <div class="contact-profile-card__icon">
           {{ if .image }}
-            <img src="{{ .image }}" alt="{{ .label }} Logo" class="w-7 h-7 object-contain" />
+            {{ partial "shared/optimized-image.html" (dict
+              "src" .image
+              "alt" (printf "%s Logo" .label)
+              "class" "w-7 h-7 object-contain"
+              "width" 56
+              "height" 56
+              "loading" "lazy"
+            ) }}
           {{ else if .svg }}
             {{ .svg | safeHTML }}
           {{ else if .icon }}

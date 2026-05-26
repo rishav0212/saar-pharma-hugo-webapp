@@ -1,0 +1,180 @@
+﻿@layer components {
+
+  /*
+     3. DOSAGE FORM BENTO GRID
+     Asymmetric 3-column bento: tall-left | stacked-center | tall-right
+     This is UNIQUE to the catlist page â€” not used anywhere else.
+     
+     Layout at lg+:
+       [Cat 1 â€” tall, col 1] [Cat 2 â€” top, col 2] [Cat 4 â€” tall, col 3]
+       [Cat 1 â€” tall, col 1] [Cat 3 â€” bot, col 2] [Cat 4 â€” tall, col 3]
+     
+     Mobile: Single column stack.
+     Tablet (md): 2-column, all same height.
+     Desktop (lg+): 3-column asymmetric bento.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .catlist-bento {
+    @apply grid gap-5;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .catlist-bento {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .catlist-bento {
+      /* 3 columns: wider outer + narrower center */
+      grid-template-columns: 1.25fr 1fr 1.25fr;
+      grid-template-rows: 340px 340px;
+      gap: 1.25rem;
+    }
+
+    /* Card 1: spans both rows on the left â€” TALL featured */
+    .catlist-bento-card:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+
+    /* Card 2: top of center column */
+    .catlist-bento-card:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    /* Card 3: bottom of center column */
+    .catlist-bento-card:nth-child(3) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    /* Card 4: spans both rows on the right â€” TALL featured */
+    .catlist-bento-card:nth-child(4) {
+      grid-column: 3;
+      grid-row: 1 / 3;
+    }
+
+    /* Any 5th+ card: auto-flow in a new row, equal thirds */
+    .catlist-bento-card:nth-child(n+5) {
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+
+  /* Base card styles â€” image-cover with text overlay */
+  .catlist-bento-card {
+    @apply relative overflow-hidden rounded-2xl cursor-pointer no-underline block;
+    min-height: 320px;
+    border: 1px solid rgba(var(--color-white-rgb), 0.06);
+    /* Transition for the hover lift + glow */
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 8px 32px rgba(var(--color-abyss-rgb), 0.20);
+  }
+
+  .catlist-bento-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 20px 60px rgba(var(--color-abyss-rgb), 0.35), 0 0 0 1px rgba(var(--color-brand-2-rgb), 0.25);
+  }
+
+  /* Background image â€” full cover */
+  .catlist-bento-card__bg {
+    @apply absolute inset-0 w-full h-full bg-cover bg-center;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .catlist-bento-card:hover .catlist-bento-card__bg {
+    transform: scale(1.06);
+  }
+
+  /* Gradient fallback background when no image */
+  .catlist-bento-card__bg--gradient {
+    background: linear-gradient(135deg, var(--color-brand-3) 0%, var(--color-ink-deep) 100%);
+    background-image: none !important;
+  }
+
+  /* Dark overlay â€” gradient from bottom for text legibility */
+  .catlist-bento-card__overlay {
+    @apply absolute inset-0 z-10;
+    background:
+      linear-gradient(to top, rgba(var(--color-abyss-rgb), 0.92) 0%, rgba(var(--color-abyss-rgb), 0.45) 50%, rgba(var(--color-abyss-rgb), 0.15) 100%);
+    transition: background 0.4s ease;
+  }
+
+  .catlist-bento-card:hover .catlist-bento-card__overlay {
+    background:
+      linear-gradient(to top, rgba(var(--color-abyss-rgb), 0.95) 0%, rgba(var(--color-abyss-rgb), 0.55) 55%, rgba(var(--color-abyss-rgb), 0.25) 100%);
+  }
+
+  /* Content pinned to bottom */
+  .catlist-bento-card__content {
+    @apply absolute bottom-0 left-0 right-0 z-20 p-6 flex flex-col gap-2;
+  }
+
+  /* Category badge pill (icon + name) */
+  .catlist-bento-card__badge {
+    @apply inline-flex items-center gap-2 text-brand-2 text-[10px] font-black uppercase tracking-[0.2em] mb-1;
+  }
+
+  .catlist-bento-card__badge i {
+    @apply w-3.5 h-3.5;
+    filter: drop-shadow(0 0 6px rgba(var(--color-brand-2-rgb), 0.6));
+  }
+
+  /* Product count chip */
+  .catlist-bento-card__count {
+    @apply inline-flex self-start text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full;
+    background: rgba(var(--color-brand-2-rgb), 0.18);
+    border: 1px solid rgba(var(--color-brand-2-rgb), 0.30);
+    color: var(--color-brand-2);
+    backdrop-filter: blur(8px);
+    transition: background 0.3s ease;
+  }
+
+  .catlist-bento-card:hover .catlist-bento-card__count {
+    background: rgba(var(--color-brand-2-rgb), 0.28);
+  }
+
+  /* Description */
+  .catlist-bento-card__desc {
+    @apply text-[13px] text-white/68 leading-snug m-0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+    opacity: 0;
+  }
+
+  /* Reveal description on hover (desktop only to avoid tap-to-hover issues on mobile) */
+  @media (hover: hover) {
+    .catlist-bento-card:hover .catlist-bento-card__desc {
+      max-height: 80px;
+      opacity: 1;
+    }
+  }
+
+  /* Arrow CTA â€” bottom row of card */
+  .catlist-bento-card__cta {
+    @apply flex items-center gap-2 text-white font-bold text-[13px] mt-1;
+    transition: gap 0.3s ease, color 0.3s ease;
+  }
+
+  .catlist-bento-card__cta i {
+    @apply w-4 h-4;
+    transition: transform 0.3s ease;
+  }
+
+  .catlist-bento-card:hover .catlist-bento-card__cta {
+    color: var(--color-brand-2);
+    gap: 10px;
+  }
+
+  .catlist-bento-card:hover .catlist-bento-card__cta i {
+    transform: translateX(4px);
+  }
+
+
+
+}
+

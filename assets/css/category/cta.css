@@ -1,0 +1,78 @@
+﻿@layer components {
+
+  /*
+     9. POST-FAQ CTA STRIP
+     Full-bleed teal strip between FAQs and Related Categories.
+     Uses the existing .section--brand class pattern (teal bg, white text).
+     Buttons reuse global .btn--light and .btn--ghost â€” no new btn classes.
+     The ::before mesh overlay reuses the same pattern as the hero section.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .cat-cta-strip {
+    @apply relative overflow-hidden;
+    /* Matches .section--brand background but adds a dark-teal gradient depth */
+    background: linear-gradient(
+      135deg,
+      var(--color-brand) 0%,
+      var(--color-brand-3) 60%,
+      var(--color-ink-deep) 100%
+    );
+    padding: clamp(48px, 6vw, 80px) 0;
+  }
+
+  /* Mesh grid overlay â€” same pattern as .section--cat-hero::after, uses --color-white-rgb token */
+  .cat-cta-strip::before {
+    content: "";
+    @apply absolute inset-0 z-0 pointer-events-none opacity-[0.07];
+    background-image:
+      linear-gradient(rgba(var(--color-white-rgb), 0.6) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--color-white-rgb), 0.6) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, rgba(var(--color-abyss-rgb), 1) 30%, transparent 85%);
+  }
+
+  .cat-cta-strip__inner {
+    @apply relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8;
+  }
+
+  .cat-cta-strip__text {
+    @apply text-center lg:text-left max-w-[640px];
+  }
+
+  /* Heading inherits white from .section--brand context; text-shadow uses --color-abyss-rgb */
+  .cat-cta-strip__heading {
+    font-size: clamp(22px, 3.2vw, 38px);
+    @apply font-display font-black text-white leading-tight mb-3;
+    text-shadow: 0 2px 15px rgba(var(--color-abyss-rgb), 0.4);
+  }
+
+  .cat-cta-strip__sub {
+    /* white/75 matches the .section--brand .section-kicker pattern */
+    @apply text-[15px] leading-relaxed;
+    color: rgba(var(--color-white-rgb), 0.80);
+  }
+
+  .cat-cta-strip__actions {
+    @apply flex flex-wrap items-center justify-center gap-4 shrink-0;
+  }
+
+  /* Mobile: stack buttons full-width */
+  @media (max-width: 640px) {
+    .cat-cta-strip__inner {
+      @apply text-center;
+    }
+
+    .cat-cta-strip__actions {
+      @apply flex-col w-full;
+    }
+
+    /* Target the reused global btn classes directly */
+    .cat-cta-strip__actions .btn {
+      @apply w-full justify-center;
+    }
+  }
+
+
+
+}
+

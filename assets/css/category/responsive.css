@@ -1,0 +1,50 @@
+﻿@layer components {
+
+  /*
+     RESPONSIVE OVERRIDES
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  @media (max-width: 767px) {
+    .cat-hero__stats {
+      @apply gap-2;
+    }
+
+    .cat-hero__stat {
+      @apply px-4 py-2.5;
+    }
+
+    .cat-hero__cta-group {
+      @apply flex-col;
+    }
+
+    .cat-hero__cta-group .btn {
+      @apply w-full justify-center;
+    }
+
+    .cat-authority__grid {
+      @apply gap-10;
+    }
+
+    .cat-trust-grid {
+      @apply grid-cols-1;
+    }
+
+    .cat-specs-panel {
+      position: static;
+      top: auto;
+    }
+
+    .cat-related__grid {
+      @apply grid-cols-1;
+    }
+
+    .cat-faq__grid {
+      @apply gap-8;
+    }
+
+    .cat-faq__aside {
+      position: static;
+    }
+  }
+
+}

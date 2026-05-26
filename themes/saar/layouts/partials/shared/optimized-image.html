@@ -9,6 +9,8 @@
 {{- $loading := .loading | default "lazy" -}}
 {{- $decoding := .decoding | default "async" -}}
 {{- $fetchPriority := .fetchpriority | default "" -}}
+{{- $onerror := .onerror | default "" -}}
+{{- $staticPath := printf "static/%s" $path -}}
 
 {{- if and hugo.IsExtended (resources.Get $path) -}}
   {{- with resources.Get $path -}}
@@ -30,11 +32,12 @@
       alt="{{ $alt }}"
       loading="{{ $loading }}"
       decoding="{{ $decoding }}"{{ with $fetchPriority }}
-      fetchpriority="{{ . }}"{{ end }}>
+      fetchpriority="{{ . }}"{{ end }}{{ with $onerror }}
+      onerror="{{ . }}"{{ end }}>
   </picture>
   {{- end -}}
 {{- else -}}
-  {{- if and hugo.IsExtended (not (resources.Get $path)) -}}
+  {{- if and hugo.IsExtended (not (resources.Get $path)) (not (fileExists $staticPath)) -}}
     {{- warnf "Optimized image '%s' not found in assets. Falling back to static URL." $path -}}
   {{- end -}}
   <img{{ with $id }} id="{{ . }}"{{ end }}{{ with $class }} class="{{ . }}"{{ end }}
@@ -44,5 +47,6 @@
     alt="{{ $alt }}"
     loading="{{ $loading }}"
     decoding="{{ $decoding }}"{{ with $fetchPriority }}
-    fetchpriority="{{ . }}"{{ end }}>
+    fetchpriority="{{ . }}"{{ end }}{{ with $onerror }}
+    onerror="{{ . }}"{{ end }}>
 {{- end -}}

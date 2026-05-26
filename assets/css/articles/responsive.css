@@ -1,0 +1,46 @@
+﻿@layer components {
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     16. RESPONSIVE â€” Mobile & Tablet safety nets
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€  */
+
+  @media (max-width: 767px) {
+    /* Prevent table overflow on mobile */
+    .article-prose table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Article header on mobile â€” tighter vertical padding */
+    .article-header__banner {
+      padding-top: clamp(72px, 12vw, 90px);
+      padding-bottom: clamp(36px, 6vw, 52px);
+    }
+
+    /* Author card on mobile â€” tighter */
+    .article-author {
+      padding: 1.25rem;
+      gap: 1rem;
+    }
+
+    /* Tags wrap more tightly on mobile */
+    .article-tags {
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+    }
+
+    /* Key takeaways on mobile */
+    .article-key-takeaways-wrap {
+      padding-top: 1.25rem;
+    }
+
+    /* Bottom grid â€” single column on mobile */
+    .article-bottom-grid,
+    .article-refs-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+}

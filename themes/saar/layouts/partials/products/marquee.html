@@ -1,20 +1,39 @@
-<!-- Animated Category Marquee -->
+{{- /*
+  MARQUEE — Therapeutic Classes Only, with product count badge.
+  Intentionally excludes dosage-form categories (those live in the filter bar pills).
+  Each item shows the therapeutic class name + how many products belong to it.
+  Duplicated 4× for a seamless infinite scroll loop.
+*/ -}}
+{{- $schema := site.Data.schema -}}
+{{- $products := where .Site.RegularPages "Section" "products" -}}
+
+{{- /* Build a flat list of every applied therapeutic class across all products */ -}}
+{{- $appliedClasses := slice -}}
+{{- range $products -}}
+    {{- with .Params.therapeutic_class -}}{{ range . }}{{ $appliedClasses = $appliedClasses | append . }}{{ end }}{{ end -}}
+{{- end -}}
+
+{{- /* Use schema order, skip any class with zero products */ -}}
+{{- $schemaClasses := $schema.therapeutic_class -}}
+
+<!-- Animated Therapeutic Class Marquee (with counts) -->
 <div class="marquee">
     <div class="marquee__track">
-        {{- $products := where .Site.RegularPages "Section" "products" -}}
-        {{- $appliedTerms := slice -}}
-        {{- range $products -}}
-            {{- with .Params.categories -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
-            {{- with .Params.therapeutic_class -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
-        {{- end -}}
-        {{- $uniqueCats := $appliedTerms | uniq | sort -}}
-        
-        {{/* Duplicate for seamless loop */}}
+        {{/* Duplicate 4× for seamless infinite scroll */}}
         {{ range (seq 4) }}
-            {{ range $uniqueCats }}
+            {{ range $schemaClasses }}
+                {{ $className := . }}
+                {{ $count := 0 }}
+                {{ range $appliedClasses }}
+                    {{ if eq . $className }}{{ $count = add $count 1 }}{{ end }}
+                {{ end }}
+
+                {{ if gt $count 0 }}
                 <button class="marquee__item cursor-pointer" data-filter-ticker="{{ . | urlize }}">
                     {{ . }}
+                    <span class="marquee__item-count">{{ $count }}</span>
                 </button>
+                {{ end }}
             {{ end }}
         {{ end }}
     </div>

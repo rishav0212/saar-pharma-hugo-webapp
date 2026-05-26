@@ -1,0 +1,53 @@
+﻿@layer components {
+
+  /*
+     2. SECTION HEADERS (shared by dosage + therapeutic sections)
+     2-column split layout:
+       LEFT  (.catlist-section-head__left)  â€” eyebrow + H2 title
+       RIGHT (.catlist-section-head__right) â€” description paragraph + optional CTA
+     Fills the previously empty right-side space for a premium editorial feel.
+     Stacks to a single column on mobile.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .catlist-section-head {
+    @apply flex flex-wrap items-start justify-between gap-8 mb-14 max-md:mb-10;
+  }
+
+  /* Left column: eyebrow + H2 â€” takes ~48% at desktop */
+  .catlist-section-head__left {
+    @apply flex flex-col gap-2;
+    flex: 0 1 46%;
+    min-width: 260px;
+  }
+
+  /* Right column: description + CTA â€” takes up to ~45% at desktop */
+  .catlist-section-head__right {
+    @apply flex flex-col gap-4 justify-center;
+    flex: 0 1 46%;
+    max-width: 500px;
+  }
+
+  /* Description text inside the right column â€” inherits section-kicker styles
+     but we nudge the top alignment down slightly to align with H2 baseline */
+  .catlist-section-head__right .section-kicker {
+    @apply mt-0;
+  }
+
+  /* Full-width on mobile â€” both columns stack naturally */
+  @media (max-width: 767px) {
+    .catlist-section-head__left,
+    .catlist-section-head__right {
+      flex: none;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  /* Deprecated: kept for backward compat if used elsewhere */
+  .catlist-section-head__link {
+    @apply shrink-0;
+  }
+
+
+
+}

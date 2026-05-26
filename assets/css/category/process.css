@@ -1,0 +1,95 @@
+﻿@layer components {
+
+  /*
+     4. CATEGORY PROCESS STRIP
+     Horizontal step flow on dark background.
+     On mobile: stacks vertically with connecting 
+     vertical line instead of horizontal.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .cat-process-section {
+    @apply scroll-mt-[80px];
+  }
+
+  .cat-process__header {
+    @apply text-center max-w-[700px] mx-auto mb-16;
+  }
+
+  .cat-process__strip {
+    @apply flex flex-row items-start justify-center gap-0 max-lg:flex-col max-lg:items-center max-lg:gap-0;
+  }
+
+  .cat-process__step {
+    @apply flex flex-col items-center text-center max-w-[180px] max-lg:max-w-[400px] relative;
+  }
+
+  .cat-process__step-num {
+    @apply text-[11px] font-black text-brand-2/60 tracking-widest uppercase mb-3;
+  }
+
+  .cat-process__step-icon-wrap {
+    @apply w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300;
+    background: rgba(var(--color-brand-rgb), 0.12);
+    border: 1px solid rgba(var(--color-brand-2-rgb), 0.25);
+  }
+
+  .cat-process__step:hover .cat-process__step-icon-wrap {
+    background: rgba(var(--color-brand-rgb), 0.22);
+    border-color: rgba(var(--color-brand-2-rgb), 0.5);
+    transform: translateY(-3px);
+  }
+
+  .cat-process__step-icon-wrap i {
+    @apply w-6 h-6;
+    color: var(--color-brand-2);
+  }
+
+  .cat-process__step-title {
+    @apply text-[14px] font-black text-white mb-2 leading-tight;
+  }
+
+  .cat-process__step-desc {
+    @apply text-[12px] text-white/50 leading-relaxed;
+  }
+
+  /* Connecting arrow between steps (desktop only) */
+  .cat-process__connector {
+    @apply flex items-center justify-center self-start mt-[74px] px-2 text-brand-2/30 max-lg:hidden;
+  }
+
+  .cat-process__connector i {
+    @apply w-5 h-5;
+  }
+
+  /* Mobile: vertical connector line */
+  @media (max-width: 1023px) {
+    .cat-process__step {
+      @apply flex-row text-left gap-5 max-w-none w-full px-4 py-5;
+    }
+
+    .cat-process__step-icon-wrap {
+      @apply shrink-0 mb-0;
+    }
+
+    .cat-process__step-num {
+      @apply mb-1;
+    }
+
+    .cat-process__step::after {
+      content: "";
+      @apply absolute left-[52px] bottom-0 w-[2px] h-5 opacity-30;
+      background: var(--color-brand-2);
+    }
+
+    .cat-process__step:last-child::after {
+      @apply hidden;
+    }
+  }
+
+  .cat-process__cta {
+    @apply flex flex-col sm:flex-row items-center justify-center gap-5 mt-16 pt-12 border-t border-white/10 text-center;
+  }
+
+
+
+}

@@ -33,29 +33,41 @@
                 <div class="hero-cat-wrap w-full md:w-[260px] border-t md:border-t-0 border-white/15 md:border-l" id="hero-cat-custom-dropdown">
                     <!-- Custom Dropdown Trigger -->
                     <div class="hero-cat-trigger" id="hero-cat-trigger">
-                        <span class="hero-cat-selected-text">All Categories</span>
+                        <span class="hero-cat-selected-text">All Dosage Forms</span>
                         <i data-lucide="chevron-down" class="icon-chevron"></i>
                     </div>
 
-                    <!-- Hidden Native Select (kept for sync/accessibility if needed, but we'll use custom list) -->
+                    {{- /* Collect only dosage-form categories (not therapeutic_class) for the hero dropdown */ -}}
+                    {{- $products := where .Site.RegularPages "Section" "products" -}}
+                    {{- $appliedCats := slice -}}
+                    {{- range $products -}}
+                        {{- with .Params.categories -}}{{ range . }}{{ $appliedCats = $appliedCats | append . }}{{ end }}{{ end -}}
+                    {{- end -}}
+                    {{- $schemaCats := site.Data.schema.categories -}}
+
+                    <!-- Hidden Native Select (accessibility / JS sync) -->
                     <select id="hero-cat-select" class="hidden">
-                        <option value="all">All Categories</option>
-                        {{- $products := where .Site.RegularPages "Section" "products" -}}
-                        {{- $appliedTerms := slice -}}
-                        {{- range $products -}}
-                            {{- with .Params.categories -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
-                            {{- with .Params.therapeutic_class -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
-                        {{- end -}}
-                        {{- range (uniq $appliedTerms | sort) -}}
+                        <option value="all">All Dosage Forms</option>
+                        {{- range $schemaCats -}}
+                            {{- $catName := . -}}
+                            {{- $count := 0 -}}
+                            {{- range $appliedCats -}}{{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}{{- end -}}
+                            {{- if gt $count 0 -}}
                         <option value="{{ . | urlize }}">{{ . }}</option>
+                            {{- end -}}
                         {{- end -}}
                     </select>
 
-                    <!-- Custom Dropdown List -->
+                    <!-- Custom Dropdown List — Dosage Forms only -->
                     <div class="hero-cat-list-wrap" id="hero-cat-list" data-lenis-prevent>
-                        <div class="hero-cat-option is-active" data-value="all">All Categories</div>
-                        {{- range (uniq $appliedTerms | sort) -}}
+                        <div class="hero-cat-option is-active" data-value="all">All Dosage Forms</div>
+                        {{- range $schemaCats -}}
+                            {{- $catName := . -}}
+                            {{- $count := 0 -}}
+                            {{- range $appliedCats -}}{{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}{{- end -}}
+                            {{- if gt $count 0 -}}
                         <div class="hero-cat-option" data-value="{{ . | urlize }}">{{ . }}</div>
+                            {{- end -}}
                         {{- end -}}
                     </div>
                 </div>

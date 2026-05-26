@@ -1,7 +1,78 @@
-/*
-  INLINE PRODUCT CARD STYLES — Moved to articles.css
-  ─────────────────────────────────────────────────────────────────────
-  All .article-inline-product, .inline-product-* styles are now
-  defined in articles/articles.css under section 14.
-  This file is kept as a placeholder to avoid broken imports.
-*/
+@layer components {
+  .article-inline-product {
+    @apply my-10 px-6 py-5 rounded-[14px] border border-brand/15 border-l-4 border-l-brand transition-colors duration-200;
+    background: linear-gradient(to right, rgba(var(--color-brand-rgb), 0.05), rgba(var(--color-brand-rgb), 0.02));
+  }
+
+  .article-inline-product:hover {
+    @apply border-brand/30;
+  }
+
+  .inline-product-inner {
+    @apply flex items-center gap-5 max-sm:flex-col max-sm:items-start max-sm:gap-4;
+  }
+
+  .inline-product-icon {
+    @apply flex shrink-0 items-center justify-center w-12 h-12 rounded-full bg-brand/10 text-brand border border-brand/15;
+  }
+
+  .inline-product-icon [data-lucide] {
+    @apply w-[22px] h-[22px];
+  }
+
+  .inline-product-info {
+    @apply flex flex-1 flex-col gap-1;
+  }
+
+  .inline-product-label {
+    @apply text-[10px] font-extrabold uppercase tracking-[0.12em] text-muted;
+  }
+
+  .inline-product-title {
+    @apply font-display text-base font-bold text-ink !no-underline leading-snug transition-colors duration-150;
+  }
+
+  .inline-product-title:hover {
+    @apply text-brand;
+  }
+
+  .inline-product-tags {
+    @apply flex flex-wrap gap-1.5 mt-1;
+  }
+
+  .inline-product-tag {
+    @apply inline-flex px-2 py-0.5 rounded-full text-[9.5px] font-bold uppercase tracking-[0.06em] bg-brand/10 text-brand-3 border border-brand/15;
+  }
+
+  .inline-product-tag--dosage {
+    @apply bg-ink/5 text-muted border-line;
+  }
+
+  .inline-product-actions {
+    @apply flex shrink-0 flex-col gap-2 max-sm:flex-row;
+  }
+
+  .inline-product-btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-ink !text-white text-[11.5px] font-bold uppercase tracking-[0.05em] !no-underline whitespace-nowrap transition-[background,transform] duration-150;
+  }
+
+  .inline-product-btn [data-lucide] {
+    @apply w-[13px] h-[13px] transition-transform duration-150;
+  }
+
+  .inline-product-btn:hover {
+    @apply -translate-y-px bg-brand;
+  }
+
+  .inline-product-btn:hover [data-lucide] {
+    @apply translate-x-0.5;
+  }
+
+  .inline-product-enquire {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg bg-brand/10 text-brand-3 text-[11.5px] font-bold border border-brand/20 cursor-pointer whitespace-nowrap transition-all duration-150;
+  }
+
+  .inline-product-enquire:hover {
+    @apply -translate-y-px bg-brand text-white border-brand;
+  }
+}

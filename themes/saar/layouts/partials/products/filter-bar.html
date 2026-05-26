@@ -1,72 +1,111 @@
-{{- /* 
-  UNIFIED TAXONOMY COLLECTION 
-  Pulls from data/schema.yml and counts across both categories and therapeutic_class
+{{- /*
+  FILTER BAR — Dosage Form Categories Only
+  Pills + search suggestions show only schema.categories (dosage forms).
+  Therapeutic classes are intentionally excluded here — they live in the marquee.
+  Count is computed by matching product `.Params.categories` only.
 */ -}}
 {{- $schema := site.Data.schema -}}
 {{- $products := where .Site.RegularPages "Section" "products" -}}
 
-{{- /* Collect all applied terms from all products for accurate counting */ -}}
-{{- $appliedTerms := slice -}}
+{{- /* Build a flat list of every applied dosage-form category across all products */ -}}
+{{- $appliedCats := slice -}}
 {{- range $products -}}
-    {{- with .Params.categories -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
-    {{- with .Params.therapeutic_class -}}{{ range . }}{{ $appliedTerms = $appliedTerms | append . }}{{ end }}{{ end -}}
+    {{- with .Params.categories -}}{{ range . }}{{ $appliedCats = $appliedCats | append . }}{{ end }}{{ end -}}
 {{- end -}}
 
-{{- /* Merge schema lists for the UI Pills */ -}}
-{{- $uniqueCats := $schema.therapeutic_class | append $schema.categories | uniq | sort -}}
+{{- /* Use schema order, but only keep dosage-form categories that have at least one product */ -}}
+{{- $schemaCats := $schema.categories -}}
+
+{{- /* Build flat list of applied therapeutic classes */ -}}
+{{- $appliedClasses := slice -}}
+{{- range $products -}}
+    {{- with .Params.therapeutic_class -}}{{ range . }}{{ $appliedClasses = $appliedClasses | append . }}{{ end }}{{ end -}}
+{{- end -}}
+{{- $schemaClasses := $schema.therapeutic_class -}}
 
 <!-- Floating Global Filter & Search Bar -->
 <nav class="product-filter-bar shadow-sm sticky top-0 md:top-[72px]">
     <div class="container">
         <div class="product-filter-bar__inner">
-            <!-- Inline Search & Dropdown -->
-            <!-- Premium Smart Search -->
+
+            <!-- Premium Smart Search — suggestions show only dosage-form categories -->
             <div class="product-filter-search-group">
                 <div class="filter-search-wrap">
                     <i data-lucide="search" class="icon-search"></i>
-                    <input type="text" id="products-search" autocomplete="off" aria-label="Search products" placeholder="Search by category, name, or composition..." class="filter-search-input">
-                    
-                    <!-- Custom Suggestions Dropdown -->
+                    <input type="text" id="products-search" autocomplete="off" aria-label="Search products" placeholder="Search by dosage form, name, or composition..." class="filter-search-input">
+
+                    <!-- Suggestions Dropdown — Dosage Forms + Therapeutic Areas -->
                     <div id="search-suggestions" class="search-suggestions is-hidden">
-                        <div class="suggestions-header">Therapeutic Categories</div>
-                        <div class="suggestions-list">
-                            {{ range $uniqueCats }}
-                                {{ $catName := . }}
-                                {{ $count := 0 }}
-                                {{ range $appliedTerms }}
-                                    {{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}
-                                {{ end }}
-                                
-                                {{ if gt $count 0 }}
-                                <div class="suggestion-item" data-value="{{ . }}">
-                                    <i data-lucide="tag" class="w-3.5 h-3.5 opacity-50"></i>
-                                    <div class="flex justify-between items-center w-full pr-2">
-                                        <span>{{ . }}</span>
-                                        <span class="text-[10px] opacity-40 font-black">{{ $count }} Items</span>
-                                    </div>
+                        <div class="search-suggestions-scroll max-h-[380px] overflow-y-auto no-scrollbar">
+                            
+                            <!-- Dosage Forms Section -->
+                            <div class="suggestions-group" id="group-dosage-forms">
+                                <div class="suggestions-header">Dosage Forms</div>
+                                <div class="suggestions-list py-1" style="max-height: none; overflow-y: visible;">
+                                    {{ range $schemaCats }}
+                                        {{ $catName := . }}
+                                        {{ $count := 0 }}
+                                        {{ range $appliedCats }}
+                                            {{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}
+                                        {{ end }}
+
+                                        {{ if gt $count 0 }}
+                                        <div class="suggestion-item" data-value="{{ . }}">
+                                            <i data-lucide="layers" class="w-3.5 h-3.5 opacity-50"></i>
+                                            <div class="flex justify-between items-center w-full pr-2">
+                                                <span>{{ . }}</span>
+                                                <span class="text-[10px] opacity-40 font-black">{{ $count }} Items</span>
+                                            </div>
+                                        </div>
+                                        {{ end }}
+                                    {{ end }}
                                 </div>
-                                {{ end }}
-                            {{ end }}
+                            </div>
+
+                            <!-- Therapeutic Areas Section -->
+                            <div class="suggestions-group" id="group-therapeutic-areas">
+                                <div class="suggestions-header border-t border-line/40">Therapeutic Areas</div>
+                                <div class="suggestions-list py-1" style="max-height: none; overflow-y: visible;">
+                                    {{ range $schemaClasses }}
+                                        {{ $className := . }}
+                                        {{ $count := 0 }}
+                                        {{ range $appliedClasses }}
+                                            {{ if eq . $className }}{{ $count = add $count 1 }}{{ end }}
+                                        {{ end }}
+
+                                        {{ if gt $count 0 }}
+                                        <div class="suggestion-item" data-value="{{ . }}">
+                                            <i data-lucide="activity" class="w-3.5 h-3.5 opacity-50"></i>
+                                            <div class="flex justify-between items-center w-full pr-2">
+                                                <span>{{ . }}</span>
+                                                <span class="text-[10px] opacity-40 font-black">{{ $count }} Items</span>
+                                            </div>
+                                        </div>
+                                        {{ end }}
+                                    {{ end }}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Category Slider -->
+            <!-- Category Pills — Dosage Forms only -->
             <div class="product-filter-pills-wrap">
                 <button class="filter-nav-btn filter-nav-btn--left" id="pills-scroll-left" aria-label="Scroll Left">
                     <i data-lucide="chevron-left"></i>
                 </button>
-                
+
                 <div class="filter-pills no-scrollbar js-scroll-fade" id="filter-pills-scroll">
                     <button class="filter-pill is-active" data-filter="all" aria-pressed="true">
                         <span class="filter-pill__label">All <span class="opacity-50 ml-1">({{ len (where .Site.RegularPages "Section" "products") }})</span></span>
                     </button>
 
-                    {{ range $uniqueCats }}
+                    {{ range $schemaCats }}
                         {{ $catName := . }}
                         {{ $count := 0 }}
-                        {{ range $appliedTerms }}
+                        {{ range $appliedCats }}
                             {{ if eq . $catName }}{{ $count = add $count 1 }}{{ end }}
                         {{ end }}
 

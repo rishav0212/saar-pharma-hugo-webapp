@@ -1,9 +1,7 @@
 html,
 body {
-  @apply w-full;
-  position: relative;
+  @apply relative w-full box-border;
   max-width: 100vw !important;
-  box-sizing: border-box;
 }
 
 @layer components {
@@ -15,15 +13,11 @@ body {
 
   .site-header::before {
     content: "";
-    position: absolute;
-    inset: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    @apply absolute inset-0 z-0 border-b border-white/10 backdrop-blur-[10px] transition-[background-color,box-shadow] duration-300;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     background-color: rgba(var(--color-abyss-rgb), 0.90);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    z-index: 0;
   }
 
   .site-header.nav-active::before {
@@ -32,23 +26,13 @@ body {
   }
 
   .site-header__inner {
-    @apply w-full mx-auto px-4 flex items-center justify-between;
+    @apply relative z-[1] flex items-center justify-between w-full max-w-full h-[72px] max-md:h-[60px] min-w-0 mx-auto px-4;
     gap: clamp(6px, 1vw, 22px);
-    height: 72px; 
-    @media (max-width: 767px) {
-      height: 60px;
-    }
-    min-width: 0;
-    max-width: 100%;
-    position: relative;
-    z-index: 1;
   }
 
   /* ─── Brand / Logo ─── */
   .brand {
-    @apply inline-flex items-center gap-2 md:gap-3 transition-transform duration-200;
-    min-width: 0;
-    flex-shrink: 1;
+    @apply inline-flex items-center gap-2 md:gap-3 min-w-0 shrink transition-transform duration-200;
   }
 
   .brand:hover {
@@ -65,17 +49,13 @@ body {
   }
 
   .brand__text {
-    @apply flex flex-col justify-center;
-    min-width: 0;
+    @apply flex flex-col justify-center min-w-0;
     line-height: 1.2;
   }
 
   .brand__name {
-    @apply text-[17px] font-black tracking-tight text-white;
+    @apply overflow-hidden text-ellipsis whitespace-nowrap text-[17px] font-black tracking-tight text-white;
     line-height: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     background: linear-gradient(to bottom, var(--color-white) 0%, var(--color-brand-2) 150%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -83,15 +63,9 @@ body {
   }
 
   .brand__meta {
-    color: var(--color-brand-2);
-    @apply font-sans text-[11px] font-extrabold tracking-[0.1em] uppercase;
+    @apply mt-[5px] overflow-hidden text-ellipsis whitespace-nowrap font-sans text-[11px] font-extrabold uppercase tracking-[0.12em] text-brand-2 opacity-100;
     margin-top: 5px;
-    letter-spacing: 0.12em;
-    opacity: 1;
     filter: drop-shadow(0 0 8px rgba(100, 212, 197, 0.3));
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
 
@@ -115,10 +89,10 @@ body {
 
   /* ─── Navigation ─── */
   .site-nav {
-    @apply flex items-center;
+    @apply flex items-center min-w-0;
     gap: clamp(8px, 1.2vw, 20px);
-    min-width: 0;
   }
+
 
   @media (max-width: 1140px) {
     .site-nav {
@@ -126,20 +100,14 @@ body {
     }
   }
 
-  .section {
-    @apply relative py-[100px] max-lg:py-[80px] max-md:py-[48px];
-    scroll-margin-top: 80px;
-  }
-
+  /* NOTE: .section base is defined in style.css — do NOT redefine padding here. */
+  /* Only layout-specific modifiers belong in this file. */
   .section--compact {
     @apply !py-[24px];
   }
 
   .section--abyss {
-    background-color: var(--color-abyss);
-    color: #ffffff;
-    position: relative;
-    z-index: 1;
+    @apply relative z-[1] bg-abyss text-white;
   }
 
   .section--abyss::before {
@@ -201,35 +169,21 @@ body {
   }
 
   .site-nav a {
-    position: relative;
-    font-size: 14px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.80);
-    text-decoration: none;
-    transition: color 0.15s ease;
-    white-space: nowrap;
+    @apply relative whitespace-nowrap text-sm font-bold text-white/80 no-underline transition-colors duration-150;
   }
 
   .site-nav a:hover {
-    color: #ffffff;
+    @apply text-white;
   }
 
   .site-nav a.active {
-    color: #ffffff;
+    @apply text-white;
   }
 
   .site-nav a::after {
     content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -10px;
-    height: 2px;
-    border-radius: 9999px;
-    background-color: var(--color-brand-2);
-    transform: scaleX(0);
+    @apply absolute left-0 right-0 bottom-[-10px] h-0.5 rounded-full bg-brand-2 scale-x-0 transition-transform duration-200;
     transform-origin: left;
-    transition: transform 0.2s ease;
   }
 
   .site-nav a:hover::after,
@@ -260,50 +214,26 @@ body {
   }
 
   .header-call {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-    color: rgba(255, 255, 255, 0.82);
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: background-color 0.15s ease, color 0.15s ease;
-    white-space: nowrap;
+    @apply inline-flex items-center gap-2 px-3 py-[7px] rounded-lg border border-white/15 text-white/80 text-[13px] font-bold no-underline whitespace-nowrap transition-colors duration-150;
   }
 
   .header-call:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    color: #ffffff;
+    @apply bg-white/10 text-white;
   }
 
   .header-call .icon {
-    color: var(--color-brand-2);
-    width: 16px;
-    height: 16px;
+    @apply w-4 h-4 text-brand-2;
   }
 
 
 
   /* ─── Mobile Menu Toggle ─── */
   .menu-toggle {
-    display: none;
-    width: 42px;
-    height: 42px;
-    place-items: center;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.10);
-    color: #ffffff;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    transition: background-color 0.15s ease;
+    @apply hidden w-[42px] h-[42px] place-items-center rounded-lg bg-white/10 text-white cursor-pointer border-0 outline-none transition-colors duration-150;
   }
 
   .menu-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.16);
+    @apply bg-white/15;
   }
 
   @media (max-width: 1140px) {
@@ -327,20 +257,8 @@ body {
 
   /* ─── Mobile Nav ─── */
   .mobile-nav {
-    display: none;
-    position: fixed;
-    top: 72px;
-    left: 0;
-    right: 0;
-    z-index: 119;
-    gap: 4px;
-    padding: 16px 20px 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    @apply fixed top-[72px] left-0 right-0 z-[119] hidden gap-1 px-5 pt-4 pb-6 border-t border-white/10 opacity-0 pointer-events-none -translate-y-3.5 transition-[transform,opacity] duration-200;
     background-color: rgba(14, 48, 56, 0.98);
-    transform: translateY(-14px);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
   }
 
   @media (max-width: 1140px) {
@@ -350,36 +268,24 @@ body {
   }
 
   .mobile-nav.open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
+    @apply translate-y-0 opacity-100 pointer-events-auto;
   }
 
   .mobile-nav a {
-    display: block;
-    padding: 12px 10px;
-    border-radius: 8px;
-    color: rgba(255, 255, 255, 0.80);
-    font-weight: 800;
-    text-decoration: none;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    @apply block px-2.5 py-3 rounded-lg text-white/80 font-extrabold no-underline transition-colors duration-150;
   }
 
   .mobile-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    color: #ffffff;
+    @apply bg-white/10 text-white;
   }
 
   .mobile-nav a.active {
-    background-color: rgba(100, 212, 197, 0.12);
-    color: var(--color-brand-2);
+    @apply bg-brand-2/10 text-brand-2;
   }
 
   /* ─── Footer ─── */
   .site-footer {
-    @apply relative;
-    background-color: var(--color-abyss);
-    color: rgba(255, 255, 255, 0.70);
+    @apply relative bg-abyss text-white/70;
   }
 
   .site-footer::before {
@@ -400,18 +306,15 @@ body {
 
   .footer-cta {
     @apply grid grid-cols-[1fr_auto] gap-6 items-center mb-14 p-8 rounded-lg max-lg:p-6 max-md:grid-cols-1 max-md:items-start max-md:p-6;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(100, 212, 197, 0.18);
+    @apply bg-white/5 border border-brand-2/20;
   }
 
   .footer-cta h2 {
-    @apply text-[28px] max-md:text-[22px];
-    color: #ffffff;
+    @apply text-[28px] max-md:text-[22px] text-white;
   }
 
   .footer-cta p {
-    @apply mt-2 max-w-[650px] max-md:text-sm;
-    color: rgba(255, 255, 255, 0.70);
+    @apply mt-2 max-w-[650px] max-md:text-sm text-white/70;
   }
 
   .footer-cta .btn {
@@ -456,41 +359,20 @@ body {
   }
 
   .footer-list a {
-    @apply text-sm transition-colors duration-200;
-    color: rgba(255, 255, 255, 0.70);
-    text-decoration: none;
+    @apply text-sm text-white/70 no-underline transition-colors duration-200;
   }
 
   .footer-list a:hover {
-    color: #ffffff;
+    @apply text-white;
   }
 
   .footer-bottom {
     @apply flex items-center justify-between gap-5 mt-14 pt-6 text-[13px] max-md:flex-col max-md:items-start;
-    border-top: 1px solid rgba(255, 255, 255, 0.10);
-    color: rgba(255, 255, 255, 0.50);
+    @apply border-t border-white/10 text-white/50;
   }
 }
 
-.footer-bottom {
-  @apply flex items-center justify-between gap-5 mt-14 pt-6 text-[13px] max-md:flex-col max-md:items-start;
-  border-top: 1px solid rgba(255, 255, 255, 0.10);
-  color: rgba(255, 255, 255, 0.50);
-}
-
-
-/* Pulse Dot Animation */
-@keyframes pulse-dot {
-
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(21, 159, 145, 0.5);
-  }
-
-  60% {
-    box-shadow: 0 0 0 5px rgba(21, 159, 145, 0);
-  }
-}
+/* pulse-dot keyframe is defined globally in style.css — not duplicated here */
 
 /* ─── Contact section animated orbs ─── */
 .contact-orbs {

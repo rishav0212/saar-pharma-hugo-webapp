@@ -1,0 +1,13 @@
+@layer components {
+  .article-body-wrap {
+    @apply bg-paper pt-[clamp(2.5rem,5vw,4rem)] pb-[clamp(3rem,6vw,5rem)];
+  }
+
+  .article-layout {
+    @apply grid grid-cols-1 lg:grid-cols-[1fr_440px] gap-10 lg:gap-12 items-start max-w-[1280px] mx-auto;
+  }
+
+  .article-layout > * {
+    @apply min-w-0;
+  }
+}

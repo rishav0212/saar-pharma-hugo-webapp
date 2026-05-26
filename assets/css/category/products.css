@@ -1,0 +1,41 @@
+﻿@layer components {
+
+  /*
+     2. CATEGORY PRODUCT GRID SECTION
+     Extends the existing .products-grid system with
+     category-specific header/footer layout.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .cat-products-section {
+    @apply scroll-mt-[80px];
+  }
+
+  .cat-products__header {
+    @apply flex flex-col lg:flex-row lg:items-end justify-between gap-6;
+  }
+
+  .cat-products__header-left {
+    @apply flex-1;
+  }
+
+  .cat-products__header-count {
+    @apply flex flex-col items-start lg:items-end gap-0 shrink-0;
+  }
+
+  .cat-count-num {
+    font-size: clamp(40px, 5vw, 64px);
+    @apply font-display font-black text-brand leading-none tracking-tighter;
+  }
+
+  .cat-count-label {
+    @apply text-[11px] font-black text-muted uppercase tracking-widest leading-snug;
+  }
+
+  /* Empty state */
+  .cat-products-empty {
+    @apply flex flex-col items-center justify-center py-24 text-center bg-white border border-line rounded-3xl;
+  }
+
+
+
+}

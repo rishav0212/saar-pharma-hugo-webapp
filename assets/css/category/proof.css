@@ -1,0 +1,67 @@
+﻿@layer components {
+
+  /*
+     8. SOCIAL PROOF MINI-BAR
+     Row of 4 live-stat cells above the Authority grid.
+     Uses dividers for a clean data-table feel.
+     Values use --color-brand; labels use --color-muted.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .cat-proof-bar {
+    @apply flex flex-wrap items-center justify-between gap-0 mb-14 rounded-2xl border border-brand-line overflow-hidden;
+    /* Subtle teal-tinted surface â€” uses existing surface token */
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .cat-proof-bar__item {
+    @apply flex flex-col items-center justify-center gap-1 py-6 flex-1 min-w-[130px] transition-all duration-300;
+  }
+
+  .cat-proof-bar__item:hover {
+    /* Lightest teal tint on hover â€” uses brand-rgb token, no raw hex */
+    background: rgba(var(--color-brand-rgb), 0.04);
+  }
+
+  .cat-proof-bar__value {
+    /* Reuses text-brand Tailwind alias which maps to --color-brand */
+    @apply text-[22px] font-display font-black text-brand leading-none tracking-tight;
+  }
+
+  .cat-proof-bar__label {
+    /* Reuses text-muted Tailwind alias which maps to --color-muted */
+    @apply text-[11px] font-bold text-muted uppercase tracking-[0.12em] text-center leading-tight;
+  }
+
+  /* Vertical pipe dividers between cells â€” uses existing --color-brand-line token */
+  .cat-proof-bar__divider {
+    @apply block self-stretch;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent 15%, var(--color-brand-line) 50%, transparent 85%);
+  }
+
+  @media (max-width: 767px) {
+    .cat-proof-bar {
+      @apply grid grid-cols-2;
+    }
+
+    /* Hide dividers on mobile â€” grid borders replace them */
+    .cat-proof-bar__divider {
+      @apply hidden;
+    }
+
+    /* Grid borders using existing --color-brand-line token */
+    .cat-proof-bar__item:nth-child(1),
+    .cat-proof-bar__item:nth-child(3) {
+      border-right: 1px solid var(--color-brand-line);
+    }
+
+    .cat-proof-bar__item:nth-child(1),
+    .cat-proof-bar__item:nth-child(2) {
+      border-bottom: 1px solid var(--color-brand-line);
+    }
+  }
+
+
+
+}

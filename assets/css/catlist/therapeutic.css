@@ -1,0 +1,98 @@
+﻿@layer components {
+
+  /*
+     4. THERAPEUTIC AREAS GRID
+     3-column white cards on desktop, 2 on tablet, 1 on mobile.
+     Intentionally lighter and more clinical than the bento cards â€”
+     different section rhythm through color/weight contrast.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .catlist-therapeutic-section {
+    /* Uses .section--cloud via HTML class */
+  }
+
+  .catlist-therapeutic-grid {
+    @apply grid gap-6;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .catlist-therapeutic-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .catlist-therapeutic-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Individual therapeutic card */
+  .catlist-therapeutic-card {
+    @apply flex flex-col gap-3 p-6 bg-white rounded-2xl border border-line transition-all duration-300;
+
+  }
+
+  .catlist-therapeutic-card:hover {
+    @apply border-brand-line -translate-y-1.5;
+
+  }
+
+  /* Icon orb */
+  .catlist-therapeutic-card__icon-wrap {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center shrink-0 self-start transition-all duration-300;
+    /* Subtle teal tint â€” uses brand-rgb token */
+    background: rgba(var(--color-brand-rgb), 0.08);
+    border: 1px solid rgba(var(--color-brand-rgb), 0.14);
+  }
+
+  .catlist-therapeutic-card__icon-wrap i {
+    @apply w-5 h-5;
+    color: var(--color-brand-3);
+  }
+
+  .catlist-therapeutic-card:hover .catlist-therapeutic-card__icon-wrap {
+    background: rgba(var(--color-brand-rgb), 0.15);
+    border-color: rgba(var(--color-brand-rgb), 0.25);
+  }
+
+  .catlist-therapeutic-card:hover .catlist-therapeutic-card__icon-wrap i {
+    color: var(--color-brand);
+  }
+
+  /* Title */
+  .catlist-therapeutic-card__title {
+    @apply text-[16px] font-display font-black text-ink leading-tight m-0;
+    transition: color 0.2s ease;
+  }
+
+  .catlist-therapeutic-card:hover .catlist-therapeutic-card__title {
+    color: var(--color-brand-3);
+  }
+
+  /* Description */
+  .catlist-therapeutic-card__desc {
+    @apply text-[13px] text-muted leading-relaxed m-0 flex-1;
+  }
+
+  /* Molecule pills container */
+  .catlist-therapeutic-card__molecules {
+    @apply flex flex-wrap gap-1.5;
+  }
+
+  /* Individual molecule pill */
+  .catlist-therapeutic-card__molecule {
+    @apply inline-block text-[10px] font-bold text-brand-3 uppercase tracking-wide px-2.5 py-1 rounded-full;
+    background: rgba(var(--color-brand-rgb), 0.07);
+    border: 1px solid rgba(var(--color-brand-rgb), 0.14);
+  }
+
+  /* CTA button â€” overrides base btn sizing for compact card fit */
+  .catlist-therapeutic-card__cta {
+    @apply self-start;
+  }
+
+
+
+}

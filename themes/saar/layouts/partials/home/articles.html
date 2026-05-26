@@ -99,7 +99,13 @@
                 <div class="insights-stream-card">
                   <div class="insights-stream-card__visual">
                     {{ if $article.Params.cover_image }}
-                      <img src="{{ $article.Params.cover_image }}" alt="{{ $article.Title }}" class="insights-stream-card__img" loading="lazy">
+                      {{ partial "shared/optimized-image.html" (dict
+                        "src" $article.Params.cover_image
+                        "alt" $article.Title
+                        "class" "insights-stream-card__img"
+                        "width" 420
+                        "loading" "lazy"
+                      ) }}
                     {{ else }}
                       <div class="insights-stream-card__placeholder">
                         <i data-lucide="file-text" class="text-white/20" aria-hidden="true"></i>

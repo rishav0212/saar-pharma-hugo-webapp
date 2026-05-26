@@ -1,0 +1,228 @@
+@layer components {
+  /* ─── Homepage Clients & Partners Section CSS ─── */
+
+  .section-clients {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .clients-layout {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Premium Client Showcase Grid */
+  .clients-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+    perspective: 1000px;
+    width: 100%;
+  }
+
+  /* Premium Card Container */
+  .client-card {
+    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-paper) 100%);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 8px 24px rgba(6, 17, 33, 0.04);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+    min-width: 0; /* Blowout protection */
+  }
+
+  /* Landscape Logo Container - Fits horizontal/landscape logos beautifully */
+  .client-card__logo-wrapper {
+    width: 100%;
+    height: 84px;
+    border-radius: 12px;
+    background-color: var(--color-white);
+    border: 1px solid rgba(21, 159, 145, 0.10);
+    box-shadow: inset 0 2px 6px rgba(6, 17, 33, 0.02), 0 4px 12px rgba(6, 17, 33, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    z-index: 3;
+  }
+
+  .client-card__logo-wrapper img {
+    max-width: 100% !important;
+    max-height: 52px !important;
+    object-fit: contain !important;
+    filter: grayscale(1) opacity(0.85);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Card details with premium typographic hierarchy */
+  .client-card__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    position: relative;
+    z-index: 3;
+    width: 100%;
+  }
+
+  .client-card__name {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+    line-height: 1.3;
+  }
+
+  .client-card__niche {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 9.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 3.5px 10px;
+    border-radius: 9999px;
+    background-color: rgba(21, 159, 145, 0.06);
+    color: var(--color-brand-3);
+    border: 1px solid rgba(21, 159, 145, 0.12);
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .client-card__desc {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    color: var(--color-muted);
+    line-height: 1.55;
+    margin: 0;
+    flex-grow: 1;
+    transition: color 0.3s ease;
+  }
+
+  /* Background Glow Highlight */
+  .client-card__glow {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.6);
+    width: 180px;
+    height: 180px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(21, 159, 145, 0.12) 0%, rgba(21, 159, 145, 0) 70%);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 2;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ─── Premium Hover States & Animations ─── */
+  .client-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(21, 159, 145, 0.35);
+    box-shadow: 0 16px 36px rgba(21, 159, 145, 0.12);
+    background: var(--color-white);
+  }
+
+  .client-card:hover .client-card__logo-wrapper {
+    border-color: rgba(21, 159, 145, 0.28);
+    background-color: var(--color-white);
+    box-shadow: 0 8px 20px rgba(21, 159, 145, 0.08);
+  }
+
+  .client-card:hover .client-card__logo-wrapper img {
+    filter: grayscale(0) opacity(1);
+    transform: scale(1.03);
+  }
+
+  .client-card:hover .client-card__name {
+    color: var(--color-brand-3);
+  }
+
+  .client-card:hover .client-card__niche {
+    background-color: var(--color-brand);
+    color: var(--color-white);
+    border-color: var(--color-brand);
+    box-shadow: 0 4px 10px rgba(21, 159, 145, 0.2);
+  }
+
+  .client-card:hover .client-card__desc {
+    color: var(--color-ink-2);
+  }
+
+  .client-card:hover .client-card__glow {
+    transform: translateX(-50%) scale(1.15);
+    opacity: 1;
+  }
+
+  /* ─── Responsive Breakpoints ─── */
+  @media (max-width: 1200px) {
+    .clients-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      gap: 20px !important;
+    }
+  }
+
+  @media (max-width: 991px) {
+    .clients-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      gap: 16px !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .clients-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 14px !important;
+    }
+    .client-card {
+      padding: 20px 16px;
+    }
+    .client-card__logo-wrapper {
+      height: 72px;
+      margin-bottom: 14px;
+      padding: 10px 12px;
+    }
+    .client-card__logo-wrapper img {
+      max-height: 44px !important;
+    }
+    .client-card__name {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .clients-grid {
+      grid-template-columns: 1fr !important;
+      gap: 16px !important;
+    }
+    .client-card {
+      padding: 24px 20px;
+    }
+    .client-card__logo-wrapper {
+      height: 80px;
+    }
+    .client-card__logo-wrapper img {
+      max-height: 48px !important;
+    }
+  }
+}

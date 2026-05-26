@@ -12,6 +12,7 @@
   --color-paper: #f6fbfb;
   --color-surface: #edf7f6;
   --color-surface-2: #e5f2f0;
+  --color-surface-2-rgb: 229, 242, 240;
   --color-white: #ffffff;
   --color-white-rgb: 255, 255, 255;
 
@@ -35,4 +36,26 @@
   --shadow-lift: 0 30px 62px -16px rgba(6, 17, 33, 0.26);
 
   --radius-lg: 8px;
+
+  /* ─── Premium Article Callout & Share Tokens (Global Level) ─── */
+  --article-callout-warning-rgb: 217, 152, 0;
+  --article-callout-warning-bg-rgb: 254, 243, 199;
+  --article-callout-warning-text: #78510a;
+  --article-callout-warning-title: #92620a;
+
+  --article-callout-danger-rgb: 220, 38, 38;
+  --article-callout-danger-bg-rgb: 254, 226, 226;
+  --article-callout-danger-text: #991b1b;
+  --article-callout-danger-title: #b91c1c;
+
+  --article-callout-success-rgb: 22, 163, 74;
+  --article-callout-success-bg-rgb: 220, 252, 231;
+  --article-callout-success-text: #166534;
+  --article-callout-success-title: #15803d;
+
+  --article-share-linkedin-rgb: 10, 102, 194;
+  --article-share-linkedin: #0a66c2;
+  --article-share-whatsapp-rgb: 37, 211, 102;
+  --article-share-whatsapp: #25d366;
+  --article-share-whatsapp-text: #1a8f44;
 }

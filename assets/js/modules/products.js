@@ -180,16 +180,43 @@ export function initProducts() {
   const showSuggestions = () => {
     if (!suggestionsBox) return;
     const val = mainSearch.value.toLowerCase().trim();
-    let hasVisible = false;
+    
+    // Only show suggestions when there is active typed content. If empty or cleared, hide suggestions completely.
+    if (val === '') {
+      suggestionsBox.classList.add('is-hidden');
+      return;
+    }
+    
+    let hasVisibleTotal = false;
+    const groups = suggestionsBox.querySelectorAll('.suggestions-group');
 
-    suggestionItems.forEach(item => {
-      const text = item.getAttribute('data-value').toLowerCase();
-      const matches = text.includes(val);
-      item.style.display = matches ? 'flex' : 'none';
-      if (matches) hasVisible = true;
-    });
+    if (groups.length > 0) {
+      groups.forEach(group => {
+        let hasVisibleInGroup = false;
+        const items = group.querySelectorAll('.suggestion-item');
+        items.forEach(item => {
+          const text = item.getAttribute('data-value').toLowerCase();
+          const matches = text.includes(val);
+          item.style.display = matches ? 'flex' : 'none';
+          if (matches) {
+            hasVisibleInGroup = true;
+            hasVisibleTotal = true;
+          }
+        });
+        // Dynamically show/hide the entire group (including header) based on matching items
+        group.style.display = hasVisibleInGroup ? 'block' : 'none';
+      });
+    } else {
+      // Fallback if suggestions are not grouped
+      suggestionItems.forEach(item => {
+        const text = item.getAttribute('data-value').toLowerCase();
+        const matches = text.includes(val);
+        item.style.display = matches ? 'flex' : 'none';
+        if (matches) hasVisibleTotal = true;
+      });
+    }
 
-    suggestionsBox.classList.toggle('is-hidden', !hasVisible);
+    suggestionsBox.classList.toggle('is-hidden', !hasVisibleTotal);
   };
 
   // ─── Unified Event Listeners ──────────────────────────────────────────

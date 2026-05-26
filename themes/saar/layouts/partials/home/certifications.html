@@ -13,9 +13,15 @@
         <a href="{{ $item.link | default "#" }}" class="cert-badge" {{ if $item.link }}target="_blank" rel="noopener noreferrer"{{ end }}>
           <div class="cert-badge__icon">
             {{ if $item.logo }}
-              <!-- Logo placeholder - will fallback to icon if image not found -->
-              <img src="{{ $item.logo }}" alt="{{ $item.title }}" class="icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'">
-              <div class="icon-fallback" style="display:none;">
+              {{ partial "shared/optimized-image.html" (dict
+                "src" $item.logo
+                "alt" $item.title
+                "class" "icon"
+                "width" 96
+                "loading" "lazy"
+                "onerror" "this.hidden=true;this.nextElementSibling.hidden=false"
+              ) }}
+              <div class="icon-fallback" hidden>
                 <i data-lucide="{{ $item.icon }}" class="icon" aria-hidden="true"></i>
               </div>
             {{ else }}

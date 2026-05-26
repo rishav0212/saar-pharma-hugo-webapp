@@ -1,0 +1,219 @@
+﻿@layer components {
+
+  /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     CATEGORIES HUB PAGE â€” Design System (catlist)
+     URL: /products/categories/
+     
+     Token rules:
+     - All colors via CSS variables from base/variables.css
+     - All shadows via --shadow-soft / --shadow-lift
+     - All typography via font-display / font-sans
+     - No hardcoded hex values
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     1. HERO â€” Centered dark hero, distinct from:
+        â€¢ .section--cat-hero (left-content + gallery-right split)
+        â€¢ .section--products-hero (search bar layout)
+     Uses a centered column layout with teal radial bloom at center.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .catlist-hero {
+    @apply relative overflow-hidden;
+    /* Tighter, denser hero â€” was 100â†’160px top, reduced for a more compact premium feel */
+    padding-top: clamp(72px, 8vw, 110px);
+    padding-bottom: clamp(48px, 6vw, 80px);
+    /* Teal bloom at center against deep dark â€” unique from the off-center category hero glow */
+    background:
+      radial-gradient(ellipse at 50% 60%, rgba(var(--color-brand-rgb), 0.18) 0%, transparent 55%),
+      linear-gradient(160deg, var(--color-ink-deep) 0%, var(--color-abyss) 100%);
+  }
+
+  /* Subtle dot-matrix grid â€” same pattern as cat-hero but centered mask */
+  .catlist-hero__bg-grid {
+    @apply absolute inset-0 z-0 pointer-events-none;
+    background-image:
+      radial-gradient(circle, rgba(var(--color-brand-2-rgb), 0.09) 1.5px, transparent 1.5px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(ellipse at 50% 50%, rgba(var(--color-abyss-rgb), 1) 30%, transparent 90%);
+  }
+
+  /* Radial glow blobs â€” uses brand token colors */
+  .catlist-hero__glow {
+    @apply absolute pointer-events-none rounded-full;
+    filter: blur(90px);
+  }
+
+  .catlist-hero__glow--center {
+    width: 700px;
+    height: 700px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(var(--color-brand-rgb), 0.14) 0%, rgba(var(--color-brand-2-rgb), 0.04) 60%, transparent 80%);
+    animation: catlistGlowPulse 16s ease-in-out infinite alternate;
+    z-index: 0;
+  }
+
+  .catlist-hero__glow--left {
+    width: 500px;
+    height: 500px;
+    bottom: -100px;
+    left: -80px;
+    background: radial-gradient(circle, rgba(var(--color-brand-2-rgb), 0.10) 0%, transparent 70%);
+    animation: catlistGlowPulse 12s ease-in-out infinite alternate-reverse;
+    z-index: 0;
+  }
+
+  @keyframes catlistGlowPulse {
+    0%   { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50%  { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+  }
+
+  .catlist-hero__glow--left {
+    /* Override the translate for non-centered glow */
+    animation: catlistGlowFloat 14s ease-in-out infinite alternate;
+  }
+
+  @keyframes catlistGlowFloat {
+    0%   { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    100% { transform: translate(30px, -40px) scale(1.1); opacity: 0.9; }
+  }
+
+  /* Decorative floating rings â€” same visual language as category hero */
+  .catlist-hero__ring {
+    @apply absolute pointer-events-none rounded-full border border-brand-2/12;
+    box-shadow: 0 0 60px rgba(var(--color-brand-2-rgb), 0.04), inset 0 0 60px rgba(var(--color-brand-2-rgb), 0.04);
+    animation: catlistRingSpin 24s linear infinite;
+    z-index: 0;
+  }
+
+  .catlist-hero__ring--lg {
+    width: 680px;
+    height: 680px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-direction: normal;
+  }
+
+  .catlist-hero__ring--sm {
+    width: 380px;
+    height: 380px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-color: rgba(var(--color-brand-2-rgb), 0.16);
+    animation-direction: reverse;
+    animation-duration: 18s;
+  }
+
+  @keyframes catlistRingSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Inner content â€” centered column, max-width constrained */
+  .catlist-hero__inner {
+    @apply relative z-10 flex flex-col items-center text-center;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* Breadcrumb wrapper logic handled in HTML via tailwind classes for left alignment */
+
+  /* Eyebrow â€” tighter margin below (was mb-6 â†’ mb-4) */
+  .catlist-hero__eyebrow {
+    color: var(--color-brand-2);
+    @apply mb-4;
+  }
+
+  /* H1 â€” slightly smaller max cap, tighter bottom margin (was mb-5 â†’ mb-3) */
+  .catlist-hero__title {
+    font-size: clamp(28px, 4.8vw, 58px);
+    @apply leading-[1.0] font-display font-black tracking-tighter text-white mb-3;
+    /* Premium multi-layer white gradient text â€” same technique as category hero H1 */
+    background: linear-gradient(to bottom, var(--color-white) 40%, rgba(var(--color-white-rgb), 0.70) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 10px 30px rgba(var(--color-abyss-rgb), 0.4));
+  }
+
+  /* Description â€” tighter line-height and bottom margin (was mb-8 â†’ mb-5) */
+  .catlist-hero__desc {
+    @apply text-[15px] leading-[1.65] mb-5 max-w-[600px] mx-auto;
+    color: rgba(var(--color-white-rgb), 0.62);
+    text-shadow: 0 1px 4px rgba(var(--color-abyss-rgb), 0.2);
+  }
+
+  /* CTA group â€” tighter bottom gap before stat bar (was mb-12 â†’ mb-7) */
+  .catlist-hero__cta-group {
+    @apply flex flex-wrap items-center justify-center gap-3 mb-7;
+  }
+
+  /* 4-cell stat bar â€” horizontal row below CTAs */
+  .catlist-hero__stats {
+    @apply flex flex-wrap items-center justify-center w-full;
+    background: rgba(var(--color-white-rgb), 0.04);
+    border: 1px solid rgba(var(--color-white-rgb), 0.08);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(var(--color-abyss-rgb), 0.25);
+  }
+
+  /* Stat cells â€” tighter vertical padding (was py-5 â†’ py-3.5) */
+  .catlist-hero__stat {
+    @apply flex flex-col items-center gap-0.5 py-3.5 flex-1 min-w-[110px] relative;
+  }
+
+  .catlist-hero__stat + .catlist-hero__stat::before {
+    content: "";
+    @apply absolute left-0 top-1/4 h-1/2;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(var(--color-white-rgb), 0.15), transparent);
+  }
+
+  /* Stat value â€” tighter font size range (was 20â†’30px) */
+  .catlist-hero__stat-value {
+    font-size: clamp(18px, 2.4vw, 26px);
+    @apply font-display font-black leading-none tracking-tight;
+    color: var(--color-brand-2);
+    text-shadow: 0 0 20px rgba(var(--color-brand-2-rgb), 0.40);
+  }
+
+  .catlist-hero__stat-label {
+    @apply text-[10px] font-bold text-white/40 uppercase tracking-[0.12em] text-center;
+  }
+
+  /* Mobile: wrap stats to 2 columns */
+  @media (max-width: 640px) {
+    .catlist-hero__stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .catlist-hero__stat:nth-child(1),
+    .catlist-hero__stat:nth-child(2) {
+      border-bottom: 1px solid rgba(var(--color-white-rgb), 0.08);
+    }
+
+    /* Reset the pseudo dividers on mobile; grid borders replace them */
+    .catlist-hero__stat + .catlist-hero__stat::before {
+      display: none;
+    }
+
+    .catlist-hero__stat:nth-child(odd)::after {
+      content: "";
+      @apply absolute right-0 top-1/4 h-1/2;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(var(--color-white-rgb), 0.15), transparent);
+    }
+  }
+
+
+
+}
+

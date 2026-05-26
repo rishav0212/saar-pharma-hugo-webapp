@@ -1,0 +1,144 @@
+﻿@layer components {
+
+  /*
+     3. CATEGORY AUTHORITY SECTION
+     Two-column: trust signal cards left, specs 
+     data panel right.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .cat-authority-section {
+    @apply scroll-mt-[80px];
+  }
+
+  .cat-authority__grid {
+    @apply grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-8 lg:gap-16 items-start;
+  }
+
+  /* Trust signal cards grid (2-col on left side) */
+  .cat-trust-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-4;
+  }
+
+  .cat-trust-card {
+    @apply flex gap-4 p-5 bg-white border rounded-2xl transition-all duration-300 ease-out cursor-default;
+    border-color: rgba(var(--color-brand-rgb), 0.15);
+    box-shadow: 0 4px 20px rgba(var(--color-abyss-rgb), 0.02);
+  }
+
+  .cat-trust-card:hover {
+    @apply -translate-y-1.5;
+    border-color: var(--color-brand);
+    background: linear-gradient(135deg, var(--color-white) 0%, var(--color-surface) 100%);
+    box-shadow: 0 20px 40px -15px rgba(var(--color-brand-rgb), 0.16),
+                0 0 20px rgba(var(--color-brand-rgb), 0.04);
+  }
+
+  .cat-trust-card__icon {
+    @apply w-11 h-11 rounded-xl bg-white shadow-sm flex items-center justify-center shrink-0 transition-all duration-300;
+    border: 1px solid rgba(var(--color-brand-rgb), 0.25);
+  }
+
+  .cat-trust-card__icon i {
+    @apply w-5.5 h-5.5 text-brand transition-all duration-300;
+  }
+
+  .cat-trust-card:hover .cat-trust-card__icon {
+    @apply bg-brand text-white border-brand scale-110 rotate-6;
+    box-shadow: 0 0 12px rgba(var(--color-brand-rgb), 0.35);
+  }
+
+  .cat-trust-card:hover .cat-trust-card__icon i {
+    @apply text-white;
+  }
+
+  .cat-trust-card__title {
+    @apply text-[14px] font-bold text-ink mb-1 leading-snug transition-colors duration-200;
+  }
+
+  .cat-trust-card:hover .cat-trust-card__title {
+    color: var(--color-brand-3);
+  }
+
+  .cat-trust-card__desc {
+    @apply text-[12px] text-muted leading-relaxed;
+  }
+
+  /* Specs Panel (right column) */
+  .cat-specs-panel {
+    @apply border rounded-[32px] p-6 sm:p-8 lg:sticky lg:top-[100px] transition-all duration-500 ease-out;
+    border-color: rgba(var(--color-brand-rgb), 0.22);
+    background: linear-gradient(135deg, rgba(var(--color-white-rgb), 0.95) 0%, rgba(var(--color-surface-2-rgb), 0.8) 100%);
+    box-shadow: 0 20px 50px -12px rgba(var(--color-ink-rgb), 0.06),
+                0 0 30px rgba(var(--color-brand-rgb), 0.03),
+                inset 0 1px 0 rgba(var(--color-white-rgb), 0.9);
+    backdrop-filter: blur(12px);
+  }
+
+  .cat-specs-panel:hover {
+    @apply -translate-y-1;
+    border-color: rgba(var(--color-brand-rgb), 0.45);
+    box-shadow: 0 30px 60px -15px rgba(var(--color-ink-rgb), 0.12),
+                0 0 45px rgba(var(--color-brand-rgb), 0.08),
+                inset 0 1px 0 rgba(var(--color-white-rgb), 1);
+  }
+
+  .cat-specs-panel__header {
+    @apply flex items-start gap-4 mb-5 pb-5 border-b border-line;
+  }
+
+  .cat-specs-panel__icon-wrap {
+    @apply w-12 h-12 rounded-2xl bg-brand/10 border border-brand-line flex items-center justify-center shrink-0 transition-transform duration-300;
+  }
+
+  .cat-specs-panel:hover .cat-specs-panel__icon-wrap {
+    transform: scale(1.05) rotate(-3deg);
+  }
+
+  .cat-specs-panel__icon-wrap i {
+    @apply w-6 h-6 text-brand;
+  }
+
+  .cat-specs-panel__list {
+    @apply flex flex-col gap-1;
+  }
+
+  .cat-spec-row {
+    @apply grid grid-cols-[1fr_auto] gap-4 py-3 px-3.5 border-b border-line/60 items-baseline transition-all duration-300 rounded-xl;
+  }
+
+  .cat-spec-row:last-child {
+    @apply border-b-0;
+  }
+
+  .cat-spec-row:hover {
+    background-color: rgba(var(--color-brand-rgb), 0.07);
+    padding-left: 18px;
+    padding-right: 10px;
+    border-bottom-color: rgba(var(--color-brand-rgb), 0.25);
+  }
+
+  .cat-spec-row__label {
+    @apply text-[12px] font-bold text-muted transition-colors duration-200;
+  }
+
+  .cat-spec-row:hover .cat-spec-row__label {
+    color: var(--color-brand-3);
+  }
+
+  .cat-spec-row__value {
+    @apply text-[12px] font-black text-ink text-right transition-all duration-200;
+  }
+
+  .cat-spec-row:hover .cat-spec-row__value {
+    color: var(--color-brand-3);
+    transform: translateX(-2px);
+  }
+
+  .cat-specs-panel__footer {
+    @apply flex items-center gap-2 mt-5 pt-4 border-t border-line text-[11px] text-muted font-semibold italic;
+  }
+
+
+
+}
+

@@ -1,0 +1,269 @@
+﻿@layer components {
+
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+     15. BOTTOM RELATED SECTION
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .article-bottom-blocks {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-line);
+    padding-top: clamp(2.5rem, 5vw, 4rem);
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .article-bottom-section.mt-12 {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .article-bottom-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .article-bottom-title [data-lucide] {
+    width: 16px;
+    height: 16px;
+    color: var(--color-brand);
+  }
+
+  .article-bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* Product Cards */
+  .bottom-product-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-radius: 14px;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    text-decoration: none !important;
+
+    transition: all 0.2s ease;
+  }
+
+  .bottom-product-card:hover {
+    border-color: rgba(var(--color-brand-rgb), 0.3);
+
+    transform: translateY(-2px);
+  }
+
+  .bottom-product-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(var(--color-brand-rgb), 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brand);
+    flex-shrink: 0;
+  }
+
+  .bottom-product-card__info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .bottom-product-card__cat {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+  }
+
+  .bottom-product-card__name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.3;
+  }
+
+  .bottom-product-card:hover .bottom-product-card__name {
+    color: var(--color-brand);
+  }
+
+  .bottom-product-card__dosage {
+    font-size: 11px;
+    color: var(--color-brand-3);
+    font-weight: 600;
+  }
+
+  .bottom-product-card__arrow {
+    width: 14px;
+    height: 14px;
+    color: var(--color-muted);
+    transition: transform 0.2s, color 0.2s;
+  }
+
+  .bottom-product-card:hover .bottom-product-card__arrow {
+    transform: translateX(4px);
+    color: var(--color-brand);
+  }
+
+  /* Article Cards */
+  .bottom-article-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-radius: 14px;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    text-decoration: none !important;
+
+    transition: all 0.2s ease;
+  }
+
+  .bottom-article-card:hover {
+    background: var(--color-white);
+    border-color: rgba(var(--color-brand-rgb), 0.25);
+
+    transform: translateY(-2px);
+  }
+
+  .bottom-article-card__cat {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-brand-3);
+    margin-bottom: 0.5rem;
+  }
+
+  .bottom-article-card__name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .bottom-article-card:hover .bottom-article-card__name {
+    color: var(--color-brand);
+  }
+
+  .bottom-article-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+
+  .bottom-article-card__meta [data-lucide] {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* External References Grid */
+  .article-external-refs .article-bottom-title {
+    color: var(--color-ink-3);
+  }
+
+  .article-refs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.875rem;
+  }
+
+  .article-ref-card {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 0.875rem 1rem;
+    border-radius: 12px;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    text-decoration: none !important;
+    transition: all 0.18s ease;
+
+  }
+
+  .article-ref-card:hover {
+    border-color: rgba(var(--color-brand-rgb), 0.25);
+
+    transform: translateY(-1px);
+  }
+
+  .article-ref-card__icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(var(--color-brand-rgb), 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brand);
+    flex-shrink: 0;
+  }
+
+  .article-ref-card__icon [data-lucide] {
+    width: 15px;
+    height: 15px;
+  }
+
+  .article-ref-card__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .article-ref-card__source {
+    font-size: 9.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-brand-3);
+  }
+
+  .article-ref-card__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: 1.35;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: color 0.15s;
+  }
+
+  .article-ref-card:hover .article-ref-card__title {
+    color: var(--color-brand-3);
+  }
+
+  .article-ref-card__arrow {
+    width: 14px;
+    height: 14px;
+    color: var(--color-muted);
+    flex-shrink: 0;
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+
+  .article-ref-card:hover .article-ref-card__arrow {
+    transform: translate(2px, -2px);
+    color: var(--color-brand);
+  }
+
+
+
+}

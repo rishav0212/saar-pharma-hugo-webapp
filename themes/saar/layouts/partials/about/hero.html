@@ -20,6 +20,13 @@
   </div>
   
   <div class="about-hero__backdrop">
-    <img src="/images/about/hero-backdrop.png" alt="Saar Biotech Baddi Plant" class="hero-backdrop-img">
+    {{ partial "shared/optimized-image.html" (dict
+      "src" "/images/about/hero-backdrop.png"
+      "alt" "Saar Biotech Baddi Plant"
+      "class" "hero-backdrop-img"
+      "width" 1600
+      "loading" "eager"
+      "fetchpriority" "high"
+    ) }}
   </div>
 </section>

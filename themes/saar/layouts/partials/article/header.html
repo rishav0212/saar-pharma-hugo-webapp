@@ -95,12 +95,15 @@
   <div class="article-header__cover-wrap">
     <div class="container">
       <figure class="article-header__cover" aria-label="Article cover image">
-        <img src="{{ $coverImage }}"
-             alt="{{ .Title }}"
-             class="article-header__cover-img"
-             loading="eager"
-             width="1200"
-             height="630">
+        {{ partial "shared/optimized-image.html" (dict
+          "src" $coverImage
+          "alt" .Title
+          "class" "article-header__cover-img"
+          "width" 1200
+          "height" 630
+          "loading" "eager"
+          "fetchpriority" "high"
+        ) }}
       </figure>
     </div>
   </div>

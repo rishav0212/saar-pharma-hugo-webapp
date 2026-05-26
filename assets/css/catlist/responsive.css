@@ -1,0 +1,43 @@
+﻿@layer components {
+
+  /*
+     6. RESPONSIVE SAFETY
+     Prevent any overflow from the bento grid or therapeutic grid
+     on narrow viewports.
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+  .catlist-bento > *,
+  .catlist-therapeutic-grid > * {
+    min-width: 0;
+  }
+
+  @media (max-width: 767px) {
+    .catlist-bento {
+      grid-template-columns: 1fr;
+    }
+
+    .catlist-bento-card {
+      min-height: 260px;
+    }
+
+    /* Always show description on mobile (no hover state) */
+    .catlist-bento-card__desc {
+      max-height: 80px;
+      opacity: 1;
+    }
+
+    .catlist-section-head {
+      @apply flex-col items-start;
+    }
+
+    .catlist-hero__cta-group {
+      @apply flex-col w-full;
+    }
+
+    .catlist-hero__cta-group .btn {
+      @apply w-full justify-center;
+    }
+  }
+
+
+}

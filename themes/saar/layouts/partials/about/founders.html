@@ -16,7 +16,13 @@
       <div class="about-visual" data-animate data-animate-type="scale-in">
         <!-- IMAGE PLACEHOLDER: Professional photo of the Founders or a Corporate Boardroom Meeting -->
         <div class="img-frame">
-          <img src="/images/about/leadership.png" alt="Saar Biotech Leadership" class="w-full h-full object-cover">
+          {{ partial "shared/optimized-image.html" (dict
+            "src" "/images/about/leadership.png"
+            "alt" "Saar Biotech Leadership"
+            "class" "w-full h-full object-cover"
+            "width" 900
+            "loading" "lazy"
+          ) }}
           <div class="frame-accent"></div>
         </div>
       </div>

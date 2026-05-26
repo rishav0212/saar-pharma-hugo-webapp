@@ -223,6 +223,28 @@ planner:
       - "MOQ per SKU"
       - "Logistics and shipping terms"
     summary: "Export enquiries require specific country documentation and registration needs to proceed."
+
+clients:
+  - name: "Medley Pharmaceuticals"
+    logo: "/images/clients/medley-pharmaceuticals.png"
+    niche: "Oral Liquids & Syrups"
+    desc: "Outsources high-compliance pediatric syrup lines and multivitamin liquids to Saar Biotech for high-volume domestic distribution."
+  - name: "MHS Pharmaceuticals"
+    logo: "/images/clients/mhs-pharmaceuticals.png"
+    niche: "Pediatric Suspensions"
+    desc: "Entrusts Saar Biotech with large-scale third-party manufacturing orders for anti-inflammatory suspensions and specialized pediatric dosages."
+  - name: "Marico"
+    logo: "/images/clients/marico.png"
+    niche: "Dermacare Ointments"
+    desc: "Outsources production of advanced topical ointments and personal care formulations, manufactured under strict stability conditions."
+  - name: "MSD Pharmaceuticals"
+    logo: "/images/clients/msd-pharmaceuticals.png"
+    niche: "Specialty Oral Liquids"
+    desc: "Leverages our GLP-compliant analytical labs and sterile production lines for specialized oral liquid contract manufacturing orders."
+  - name: "Nicholas Piramal"
+    logo: "/images/clients/nicholas-piramal.png"
+    niche: "Therapeutic Formulations"
+    desc: "Places high-volume third-party manufacturing orders for DCGI-approved wellness liquids and therapeutic compositions."
 ---
 
 # Saar Biotech: Your Trusted Third-Party Pharmaceutical Manufacturing Partner

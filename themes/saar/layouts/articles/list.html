@@ -42,7 +42,14 @@
         <div class="featured-article">
           <div class="featured-article__visual">
             {{ if $featured.Params.cover_image }}
-              <img src="{{ $featured.Params.cover_image }}" alt="{{ $featured.Title }}" class="featured-article__img" loading="eager">
+              {{ partial "shared/optimized-image.html" (dict
+                "src" $featured.Params.cover_image
+                "alt" $featured.Title
+                "class" "featured-article__img"
+                "width" 900
+                "loading" "eager"
+                "fetchpriority" "high"
+              ) }}
             {{ else }}
               <div class="featured-article__placeholder-grad">
                 <i data-lucide="book-open" class="icon icon--lg text-white/30" aria-hidden="true"></i>
@@ -114,7 +121,13 @@
            data-summary="{{ .Summary | lower }}">
           <div class="editorial-card__visual">
             {{ if .Params.cover_image }}
-              <img src="{{ .Params.cover_image }}" alt="{{ .Title }}" class="editorial-card__img" loading="lazy">
+              {{ partial "shared/optimized-image.html" (dict
+                "src" .Params.cover_image
+                "alt" .Title
+                "class" "editorial-card__img"
+                "width" 560
+                "loading" "lazy"
+              ) }}
             {{ else }}
               <div class="editorial-card__placeholder">
                 <i data-lucide="file-text" class="icon icon--lg text-white/30" aria-hidden="true"></i>
