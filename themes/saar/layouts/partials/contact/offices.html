@@ -19,7 +19,7 @@
 
     <div class="contact-locations__grid" data-animate-stagger>
       {{ range .Params.offices }}
-      <div class="contact-location-card" data-animate="fade-up">
+      <div class="contact-location-card" id="{{ .id }}" data-animate="fade-up">
         
         {{- /* 1. Map Frame (Top) */ -}}
         <div class="contact-map-frame">

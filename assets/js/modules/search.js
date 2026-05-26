@@ -25,7 +25,9 @@ export function initSearch() {
 
     console.log('Saar Search: Loading index...');
     try {
-      const paths = ['/index.json', './index.json', 'index.json'];
+      // Add a dynamic cache-buster to bypass aggressive browser caching of static JSON files
+      const cacheBuster = `?v=${Date.now()}`;
+      const paths = [`/index.json${cacheBuster}`, `./index.json${cacheBuster}`, `index.json${cacheBuster}`];
       let response = null;
 
       for (const path of paths) {
@@ -64,7 +66,8 @@ export function initSearch() {
           { name: 'summary', weight: 0.6 },
           { name: 'content', weight: 0.6 }
         ],
-        threshold: 0.3,
+        threshold: 0.4, // Shifted from 0.3 to 0.4 to optimize fuzzy tolerances for B2B queries
+        ignoreLocation: true, // Prevents location penalty from discarding deep-indexed matches in long content strings
         minMatchCharLength: 2
       });
       console.log('Saar Search: Engine Ready.');

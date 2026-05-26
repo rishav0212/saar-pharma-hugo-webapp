@@ -38,8 +38,8 @@
       {{- range .Params.faq_clinical }}{{ $productFaqs = printf "%s %s %s" $productFaqs .question .answer }}{{ end -}}
       {{- range .Params.faq_b2b }}{{ $productFaqs = printf "%s %s %s" $productFaqs .question .answer }}{{ end -}}
       
-      {{- /* Merge everything into deepContent index for Fuse.js search */ -}}
-      {{- $deepContent = printf "%s %s %s %s %s %s %s %s %s %s %s %s %s %s" $deepContent $cats $tClass $compositions (.Params.dosage_form | default "") (.Params.drug_form | default "") (.Params.approved_name | default "") $specs $packs (.Params.quality_standards | default "") (.Params.manufacturing_status | default "") (.Params.storage_conditions | default "") (.Params.shelf_life | default "") $productFaqs -}}
+      {{- /* Merge everything into deepContent index for Fuse.js search, prepending critical compositions and drug parameters to maximize Fuse.js scoring weight */ -}}
+      {{- $deepContent = printf "%s %s %s %s %s %s %s %s %s %s %s %s %s %s" $compositions (.Params.approved_name | default "") $cats $tClass (.Params.dosage_form | default "") (.Params.drug_form | default "") $specs $packs (.Params.quality_standards | default "") (.Params.manufacturing_status | default "") (.Params.storage_conditions | default "") (.Params.shelf_life | default "") $productFaqs $deepContent -}}
       
       {{- /* Highly professional search result snippet (molecule + primary dosage) */ -}}
       {{- $displayComp := "" -}}
@@ -60,6 +60,12 @@
       {{- $deepContent = printf "%s %s %s %s %s" $deepContent (.Params.category | default "") $tags $takeaways $articleFaqs -}}
     {{- end -}}
 
+    {{- /* About-Specific Deep Indexing (Rich B2B keywords from layout partials prepended for high Fuse.js search relevance) */ -}}
+    {{- if eq .Type "about" -}}
+      {{- $aboutKeywords := "Radhe Sham Goyal Mr Anil Kumar pioneers founders directors leadership Baddi facility infrastructure Ophthalmology sterile eye drops ear drops Class 100 Dermatology wing ointments creams gels oral liquids syrups suspensions QC labs HPLC stability chambers 2005 Inception 2012 Expansion 2018 upgraded WHO-GMP 2024 ISO 9001:2015 GLP Certified DCGI Approved FSSAI Licensed Schedule M" -}}
+      {{- $deepContent = printf "%s %s" $aboutKeywords $deepContent -}}
+    {{- end -}}
+
     {{- /* Contact-Specific Deep Indexing */ -}}
     {{- if eq .Type "contact" -}}
       {{- $offices := "" -}}
@@ -75,7 +81,10 @@
       {{- range .Params.faqs -}}
         {{- $contactFaqs = printf "%s %s %s" $contactFaqs .q .a -}}
       {{- end -}}
-      {{- $deepContent = printf "%s %s %s %s %s %s" $deepContent (.Params.hero_tagline | default "") (.Params.hero_desc | default "") $offices $commitments $contactFaqs -}}
+      {{- /* Pull site contact parameters and key B2B personnel directly into index */ -}}
+      {{- $siteContacts := printf "%s %s %s %s %s %s" .Site.Params.phone .Site.Params.email .Site.Params.address .Site.Params.address_corp .Site.Params.address_plant "WhatsApp Business phone call support call tel email mail quotation Abhinav Aggrawal abhinav@dmpharma.org Chief Operating Officer Vijay quotation@saarbiotech.com Marketing Manager" -}}
+      {{- /* Prepend key contact parameters and search words to ensure they are never truncated and get maximum relevance weight */ -}}
+      {{- $deepContent = printf "%s %s %s %s %s %s %s" $siteContacts (.Params.hero_tagline | default "") (.Params.hero_desc | default "") $offices $commitments $contactFaqs $deepContent -}}
     {{- end -}}
 
     {{- /* Category / List pages specific index */ -}}
@@ -105,7 +114,7 @@
       {{- $type = "Article" -}}
     {{- end -}}
     
-    {{- $item := dict "title" .Title "permalink" .RelPermalink "summary" $summary "content" ($deepContent | truncate 3000) "type" $type "weight" 1 -}}
+    {{- $item := dict "title" .Title "permalink" .RelPermalink "summary" $summary "content" ($deepContent | truncate 10000) "type" $type "weight" 1 -}}
     {{- $index = $index | append $item -}}
   {{- end -}}
 {{- end -}}
@@ -151,6 +160,63 @@
     {{- $item := dict "title" (printf "%s Category" .title) "permalink" (printf "%s#%s" $categoriesHub.RelPermalink $slug) "summary" .desc "content" $molecules "type" "Category" "weight" 5 -}}
     {{- $index = $index | append $item -}}
   {{- end -}}
+{{- end -}}
+
+{{/* 4. Deep Sections from Contact Page */}}
+{{- $contactPage := .Site.GetPage "/contact" -}}
+{{- if $contactPage -}}
+  {{- $whatsappItem := dict "title" "WhatsApp Business Support" "permalink" (printf "%s#contact-channels" $contactPage.RelPermalink) "summary" "Direct chat support for instant quotations, drug formulations, and manufacturing briefs." "content" "WhatsApp Business chat quotation Abhinav Aggrawal direct line instant messaging support B2B inquiry" "type" "Contact Support" "weight" 2 -}}
+  {{- $index = $index | append $whatsappItem -}}
+  
+  {{- $callItem := dict "title" "Direct B2B Call Support" "permalink" (printf "%s#contact-channels" $contactPage.RelPermalink) "summary" "Instant voice response for urgent third-party contract manufacturing queries and quotes." "content" "Call Support phone tel phone call direct line instant response Chandigarh Baddi administrative office" "type" "Contact Support" "weight" 2 -}}
+  {{- $index = $index | append $callItem -}}
+
+  {{- $emailItem := dict "title" "Email Quotation Enquiry" "permalink" (printf "%s#contact-channels" $contactPage.RelPermalink) "summary" "Submit formal manufacturing briefs, product specifications, and dossier requirements." "content" "Email Support email mail inquiry quote contract manufacturing dossier registration quotation@saarbiotech.com" "type" "Contact Support" "weight" 2 -}}
+  {{- $index = $index | append $emailItem -}}
+
+  {{- $formItem := dict "title" "Manufacturing Enquiry Form" "permalink" (printf "%s#enquiry" $contactPage.RelPermalink) "summary" "Submit your B2B contract manufacturing enquiry online for a quick 24-hour turnaround." "content" "manufacturing enquiry form quote formulation B2B contract oral liquid syrup suspension ointment drops" "type" "Contact Section" "weight" 2 -}}
+  {{- $index = $index | append $formItem -}}
+
+  {{- $hqItem := dict "title" "Chandigarh Corporate Headquarters" "permalink" (printf "%s#chandigarh" $contactPage.RelPermalink) "summary" "SCO-165, Sector-38C, Chandigarh - Administrative Hub & B2B Client Relations." "content" "Chandigarh Unit office corporate headquarters Administrative B2B quotations licensing" "type" "Office Location" "weight" 2 -}}
+  {{- $index = $index | append $hqItem -}}
+
+  {{- $plantItem := dict "title" "Baddi Manufacturing Plant" "permalink" (printf "%s#baddi" $contactPage.RelPermalink) "summary" "Plot No. 125-126, EPIP, Phase-1, Baddi - WHO-GMP Certified Production Campus." "content" "Baddi Unit plant manufacturing facility WHO-GMP production quality control labs" "type" "Office Location" "weight" 2 -}}
+  {{- $index = $index | append $plantItem -}}
+
+  {{- $promiseItem := dict "title" "Our B2B Service Commitments" "permalink" (printf "%s#our-promise" $contactPage.RelPermalink) "summary" "Saar Biotech's B2B promise: 24-hour response, NDAs, and dedicated account managers." "content" "B2B promise commitments quality assurance NDA SLA response guarantee client relations" "type" "Contact Section" "weight" 2 -}}
+  {{- $index = $index | append $promiseItem -}}
+
+  {{- $faqItem := dict "title" "Contact & Partnership FAQs" "permalink" (printf "%s#contact-faq" $contactPage.RelPermalink) "summary" "Common questions about third-party manufacturing, MOQs, dossiers, and facility audits." "content" "FAQ contact inquiry visit Baddi plant MOQ export support third-party contract manufacturing" "type" "FAQ" "weight" 2 -}}
+  {{- $index = $index | append $faqItem -}}
+{{- end -}}
+
+{{/* 5. Deep Sections from About Page */}}
+{{- $aboutPage := .Site.GetPage "/about" -}}
+{{- if $aboutPage -}}
+  {{- $foundersItem := dict "title" "Company Founders & Leadership" "permalink" (printf "%s#leadership-founders" $aboutPage.RelPermalink) "summary" "Radhe Sham Goyal & Mr. Anil Kumar — The visionary directors leading Saar Biotech." "content" "Radhe Sham Goyal Mr Anil Kumar pioneers founders directors leadership corporate management" "type" "About Section" "weight" 3 -}}
+  {{- $index = $index | append $foundersItem -}}
+
+  {{- $facilityItem := dict "title" "Baddi Production Facility & Labs" "permalink" (printf "%s#baddi-facility" $aboutPage.RelPermalink) "summary" "State-of-the-art sterile cleanroom spaces, high-capacity liquid sections, and GLP QC labs." "content" "Baddi facility infrastructure cleanrooms sterile Ophthalmology eye drops Dermatology ointments oral liquids QC labs HPLC stability chambers" "type" "About Section" "weight" 3 -}}
+  {{- $index = $index | append $facilityItem -}}
+
+  {{- $certItem := dict "title" "WHO-GMP & Regulatory Certifications" "permalink" (printf "%s#certifications-accreditations" $aboutPage.RelPermalink) "summary" "WHO-GMP, GLP, and ISO 9001:2015 certified operations ensuring DCGI/FSSAI-approved quality." "content" "WHO-GMP GLP ISO 9001:2015 certifications accreditations license DCGI Approved FSSAI Licensed Schedule M" "type" "About Section" "weight" 3 -}}
+  {{- $index = $index | append $certItem -}}
+
+  {{- $timelineItem := dict "title" "Our Corporate Journey & Timeline" "permalink" (printf "%s#our-journey" $aboutPage.RelPermalink) "summary" "Over 20 years of pharmaceutical focus since our inception in 2005 to major expansions." "content" "2005 inception 2012 expansion 2018 WHO-GMP upgrade 2024 ISO certification journey timeline" "type" "About Section" "weight" 3 -}}
+  {{- $index = $index | append $timelineItem -}}
+
+  {{- $visionItem := dict "title" "Vision, Mission & Core Philosophy" "permalink" (printf "%s#vision-mission" $aboutPage.RelPermalink) "summary" "Bridging the gap between high-end pharmaceutical research and accessible, world-class manufacturing." "content" "vision mission core philosophy values quality first accessible manufacturing patient health" "type" "About Section" "weight" 3 -}}
+  {{- $index = $index | append $visionItem -}}
+{{- end -}}
+
+{{/* 6. Deep Sections from Products Hub */}}
+{{- $productsHub := .Site.GetPage "/products" -}}
+{{- if $productsHub -}}
+  {{- $dosageItem := dict "title" "Dosage Forms & Packaging Expertise" "permalink" (printf "%s#dosage-expertise" $productsHub.RelPermalink) "summary" "Specialized filling lines for oral liquids, dry syrups, sterile eye/ear drops, ointments, and tablets." "content" "dosage expertise forms packaging bottle filling blister alu-alu syrups suspensions drops tablets capsules creams gels" "type" "Products Hub" "weight" 4 -}}
+  {{- $index = $index | append $dosageItem -}}
+
+  {{- $qaItem := dict "title" "Quality Assurance & B2B Compliance" "permalink" (printf "%s#quality-assurance" $productsHub.RelPermalink) "summary" "Strict WHO-GMP and Schedule M guidelines ensuring absolute raw material control and finished product testing." "content" "quality assurance B2B compliance raw material validation Finished product testing IPQC COA batch release" "type" "Products Hub" "weight" 4 -}}
+  {{- $index = $index | append $qaItem -}}
 {{- end -}}
 
 {{- $index | jsonify -}}
