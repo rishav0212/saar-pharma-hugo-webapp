@@ -28,7 +28,7 @@ layout: "categories-list"
 
 # The hero_tagline becomes the page's H1 — it MUST contain primary keywords.
 # Keep it compelling but keyword-grounded (not pure marketing slogan).
-hero_tagline: "Pharmaceutical Contract Manufacturing — Every Dosage Form & Therapeutic Area"
+hero_tagline: "Pharmaceutical Contract Manufacturing — All Dosage Forms & Major Therapeutic Classes"
 hero_desc: "From antibiotic suspensions and analgesic tablets to pediatric syrups and nasal sprays — Saar Biotech's fully segregated, Schedule M compliant facility covers the complete B2B pharma manufacturing spectrum."
 
 # Live stat bar in the hero (4 cells)

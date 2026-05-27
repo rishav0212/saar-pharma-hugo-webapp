@@ -1,4 +1,4 @@
-﻿@layer components {
+@layer components {
 
   /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      CATEGORIES HUB PAGE â€” Design System (catlist)
@@ -132,8 +132,8 @@
 
   /* H1 â€” slightly smaller max cap, tighter bottom margin (was mb-5 â†’ mb-3) */
   .catlist-hero__title {
-    font-size: clamp(28px, 4.8vw, 58px);
-    @apply leading-[1.0] font-display font-black tracking-tighter text-white mb-3;
+    font-size: clamp(26px, 4.8vw, 58px);
+    @apply leading-[1.0] font-display font-black tracking-tighter text-white mb-3 break-words;
     /* Premium multi-layer white gradient text â€” same technique as category hero H1 */
     background: linear-gradient(to bottom, var(--color-white) 40%, rgba(var(--color-white-rgb), 0.70) 100%);
     -webkit-background-clip: text;

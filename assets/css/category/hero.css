@@ -1,4 +1,4 @@
-﻿@layer components {
+@layer components {
 
   /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
      CATEGORY PAGES â€” Design System
@@ -194,8 +194,8 @@
 
   /* H1 - with premium multi-layered clinical gradient */
   .cat-hero__title {
-    font-size: clamp(38px, 6.2vw, 80px);
-    @apply leading-[0.92] font-display font-black tracking-tighter text-white mb-4;
+    font-size: clamp(26px, 6.2vw, 80px);
+    @apply leading-[0.92] font-display font-black tracking-tighter text-white mb-4 break-words;
     background: linear-gradient(to bottom, var(--color-white) 40%, rgba(var(--color-white-rgb), 0.72) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

@@ -18,6 +18,9 @@
     background:
       radial-gradient(ellipse at 50% 100%, rgba(var(--color-brand-rgb), 0.18) 0%, transparent 55%),
       linear-gradient(160deg, var(--color-ink-deep) 0%, var(--color-abyss) 100%);
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
   }
 
   .article-header__banner::after {
@@ -89,7 +92,7 @@
   }
 
   .article-header__title {
-    @apply font-display text-[clamp(28px,4.5vw,50px)] font-black leading-[1.06] tracking-[-0.03em] mb-6 max-w-[56ch] break-words hyphens-auto;
+    @apply font-display text-[clamp(24px,4.5vw,50px)] font-black leading-[1.06] tracking-[-0.03em] mb-6 max-w-[56ch] break-words hyphens-auto;
     background: linear-gradient(to bottom, var(--color-white) 40%, rgba(var(--color-white-rgb), 0.72) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

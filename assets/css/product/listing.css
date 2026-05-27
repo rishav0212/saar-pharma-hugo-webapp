@@ -5,7 +5,10 @@
 
   /* ─── Elite Scientific Hero ─── */
   .section--products-hero {
-    @apply relative pt-[140px] pb-[100px] max-md:pt-[100px] max-md:pb-[60px] text-white bg-abyss z-[110];
+    @apply relative pt-[140px] pb-[100px] max-md:pt-[100px] max-md:pb-[60px] text-white bg-abyss z-[110] overflow-hidden;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
   }
 
   .section--products-hero:has(.hero-cat-wrap.is-active) {
@@ -91,7 +94,7 @@
   }
 
   .products-hero__inner h1 {
-    @apply text-[clamp(36px,6vw,72px)] leading-[1] mb-6 font-display font-black tracking-tighter text-white;
+    @apply text-[clamp(26px,6vw,72px)] leading-[1] mb-6 font-display font-black tracking-tighter text-white break-words;
     text-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
   }
 
