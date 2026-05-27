@@ -1,6 +1,9 @@
 @layer components {
   .article-page {
     @apply bg-paper;
+    /* Prevent any child element (glow blobs, cover image, sidebar) from causing horizontal scroll */
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   .article-progress-bar {
@@ -11,6 +14,9 @@
 
   .article-header {
     @apply relative;
+    /* Contain the cover image negative margin overlap without causing horizontal scroll */
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   .article-header__banner {
@@ -47,12 +53,19 @@
   }
 
   .article-header__glow--primary {
-    @apply top-[-30%] right-[-10%] w-[clamp(500px,70vw,900px)] h-[clamp(500px,70vw,900px)] animate-[articleGlowDrift_18s_ease-in-out_infinite_alternate];
+    /* On mobile, glow minimum is capped at 100vw to prevent viewport escape */
+    @apply top-[-30%] right-[-10%] animate-[articleGlowDrift_18s_ease-in-out_infinite_alternate];
+    width: clamp(100%, 70vw, 900px);
+    max-width: 500px;
+    aspect-ratio: 1;
     background: radial-gradient(circle, rgba(var(--color-brand-rgb), 0.22) 0%, rgba(var(--color-brand-2-rgb), 0.06) 50%, transparent 70%);
   }
 
   .article-header__glow--secondary {
-    @apply bottom-[-20%] left-[-5%] w-[clamp(300px,50vw,600px)] h-[clamp(300px,50vw,600px)] animate-[articleGlowDrift_14s_ease-in-out_infinite_alternate-reverse];
+    @apply bottom-[-20%] left-[-5%] animate-[articleGlowDrift_14s_ease-in-out_infinite_alternate-reverse];
+    width: clamp(100%, 50vw, 600px);
+    max-width: 300px;
+    aspect-ratio: 1;
     background: radial-gradient(circle, rgba(var(--color-brand-2-rgb), 0.14) 0%, rgba(var(--color-brand-rgb), 0.03) 50%, transparent 70%);
   }
 
@@ -92,7 +105,11 @@
   }
 
   .article-header__title {
-    @apply font-display text-[clamp(24px,4.5vw,50px)] font-black leading-[1.06] tracking-[-0.03em] mb-6 max-w-[56ch] break-words hyphens-auto;
+    /* hyphens-auto removed — it breaks pharma terms like 'Pharmaceutical' mid-word */
+    /* break-words removed — same reason; only word-boundary wrapping allowed */
+    @apply font-display text-[clamp(22px,4.5vw,50px)] font-black leading-[1.1] tracking-[-0.03em] mb-6 max-w-[56ch];
+    overflow-wrap: normal;
+    word-break: normal;
     background: linear-gradient(to bottom, var(--color-white) 40%, rgba(var(--color-white-rgb), 0.72) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

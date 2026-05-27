@@ -194,8 +194,11 @@
 
   /* H1 - with premium multi-layered clinical gradient */
   .cat-hero__title {
-    font-size: clamp(26px, 6.2vw, 80px);
-    @apply leading-[0.92] font-display font-black tracking-tighter text-white mb-4 break-words;
+    font-size: clamp(24px, 6.2vw, 80px);
+    /* break-words removed — prevents mid-word char breaking on mobile; only word-boundary wrapping */
+    @apply leading-[0.92] font-display font-black tracking-tighter text-white mb-4;
+    overflow-wrap: normal;
+    word-break: normal;
     background: linear-gradient(to bottom, var(--color-white) 40%, rgba(var(--color-white-rgb), 0.72) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
