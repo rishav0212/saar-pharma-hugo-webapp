@@ -1,18 +1,60 @@
-﻿@layer components {
+@layer components {
 
-  /*
-     RESPONSIVE OVERRIDES
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ─────────────────────────────────────────────────────────────────────────
+     CATEGORY PAGE — RESPONSIVE OVERRIDES
+     Targets:
+       md: ≤767px (mobile phones)
+       xs: ≤479px (iPhone SE / Galaxy A small)
+     ───────────────────────────────────────────────────────────────────────── */
 
+  /* ══════════════════════════════════════════════════════
+     ≤767px — MOBILE
+     ══════════════════════════════════════════════════════ */
   @media (max-width: 767px) {
+
+    /* — Hero section padding: replace fixed px with fluid clamp — */
+    .section--cat-hero {
+      /* Was pt-[100px] pb-[80px] max-md:pt-[80px] max-md:pb-[50px] — too generous on phones */
+      padding-top: clamp(64px, 14vw, 88px) !important;
+      padding-bottom: clamp(24px, 6vw, 50px) !important;
+    }
+
+    /* — Category badge: compact on mobile — */
+    .cat-hero__badge {
+      font-size: 9px;
+      padding: 4px 12px;
+      letter-spacing: 0.18em;
+    }
+
+    /* — Hero tagline: reduce fluid range on small screens — */
+    .cat-hero__tagline {
+      font-size: clamp(15px, 4vw, 20px);
+      margin-bottom: 0.75rem;
+    }
+
+    /* — Hero description paragraph — */
+    .cat-hero__desc {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    /* — Stats row: tighter gap and padding — */
     .cat-hero__stats {
-      @apply gap-2;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .cat-hero__stat {
-      @apply px-4 py-2.5;
+      padding: 0.75rem 1rem;
     }
 
+    /* Stat value: 22px hardcoded → scaled down for mobile */
+    .cat-hero__stat-value {
+      font-size: 18px;
+    }
+
+    /* — CTA group: stack vertically, full-width buttons — */
     .cat-hero__cta-group {
       @apply flex-col;
     }
@@ -21,29 +63,93 @@
       @apply w-full justify-center;
     }
 
+    /* — Gallery wrap: reduce min-height to avoid blank vertical space — */
+    .cat-hero__gallery-wrap {
+      min-height: 260px;
+      margin-top: 2rem;
+      padding-right: 0;
+    }
+
+    /* — Authority section — */
     .cat-authority__grid {
-      @apply gap-10;
+      gap: 2.5rem;
     }
 
     .cat-trust-grid {
       @apply grid-cols-1;
     }
 
+    /* — Specs panel: un-sticky on mobile — */
     .cat-specs-panel {
       position: static;
       top: auto;
     }
 
+    /* — Related grid — */
     .cat-related__grid {
       @apply grid-cols-1;
     }
 
+    /* — FAQ — */
     .cat-faq__grid {
-      @apply gap-8;
+      gap: 2rem;
     }
 
     .cat-faq__aside {
       position: static;
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     ≤479px — EXTRA SMALL
+     ══════════════════════════════════════════════════════ */
+  @media (max-width: 479px) {
+
+    /* Very compact banner on tiny phones */
+    .section--cat-hero {
+      padding-top: 60px !important;
+      padding-bottom: 18px !important;
+    }
+
+    /* Hero H1: override clamp floor (24px) — 22px is more appropriate at 360px */
+    .cat-hero__title {
+      font-size: 22px !important;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .cat-hero__tagline {
+      font-size: 14px;
+    }
+
+    .cat-hero__desc {
+      font-size: 13.5px;
+    }
+
+    /* Stat value: 22px → 16px at xs */
+    .cat-hero__stat-value {
+      font-size: 16px;
+    }
+
+    .cat-hero__stat-label {
+      font-size: 9px;
+    }
+
+    /* Gallery: minimal height on 360px phones */
+    .cat-hero__gallery-wrap {
+      min-height: 200px;
+    }
+
+    /* Specs panel: tighter padding */
+    .cat-specs-panel {
+      padding: 1.25rem;
+      border-radius: 20px;
+    }
+
+    /* Trust cards: tighter padding */
+    .cat-trust-card {
+      padding: 1rem;
+      gap: 0.75rem;
     }
   }
 

@@ -20,7 +20,10 @@
   }
 
   .article-header__banner {
-    @apply relative overflow-hidden w-full box-border pt-[clamp(80px,10vw,120px)] pb-[clamp(48px,7vw,80px)] max-md:pt-[clamp(72px,12vw,90px)] max-md:pb-[clamp(36px,6vw,52px)];
+    /* clamp: mobile min → fluid → desktop max; px values keep safe distance from navbar */
+    @apply relative overflow-hidden w-full box-border;
+    padding-top: clamp(64px, 10vw, 120px);
+    padding-bottom: clamp(28px, 5vw, 80px);
     background:
       radial-gradient(ellipse at 50% 100%, rgba(var(--color-brand-rgb), 0.18) 0%, transparent 55%),
       linear-gradient(160deg, var(--color-ink-deep) 0%, var(--color-abyss) 100%);
@@ -107,9 +110,11 @@
   .article-header__title {
     /* hyphens-auto removed — it breaks pharma terms like 'Pharmaceutical' mid-word */
     /* break-words removed — same reason; only word-boundary wrapping allowed */
-    @apply font-display text-[clamp(22px,4.5vw,50px)] font-black leading-[1.1] tracking-[-0.03em] mb-6 max-w-[56ch];
-    overflow-wrap: normal;
-    word-break: normal;
+    /* clamp floor raised to 20px on mobile so very-long titles stay readable but compact */
+    @apply font-display font-black leading-[1.15] tracking-[-0.025em] mb-4 max-w-[56ch];
+    font-size: clamp(20px, 5vw, 50px);
+    overflow-wrap: break-word;
+    word-break: break-word;
     background: linear-gradient(to bottom, var(--color-white) 40%, rgba(var(--color-white-rgb), 0.72) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -117,15 +122,17 @@
   }
 
   .article-header__meta {
-    @apply flex flex-wrap items-center gap-2;
+    @apply flex flex-wrap items-center gap-x-2 gap-y-1.5;
   }
 
   .article-meta-item {
-    @apply inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-white/50 tracking-[0.01em];
+    /* Responsive: 11px on mobile → 12.5px on desktop */
+    font-size: clamp(11px, 2.5vw, 12.5px);
+    @apply inline-flex items-center gap-1.5 font-semibold text-white/50 tracking-[0.01em];
   }
 
   .article-meta-item [data-lucide] {
-    @apply w-[13px] h-[13px] opacity-70;
+    @apply w-[12px] h-[12px] opacity-70;
   }
 
   .article-meta-item--updated {
@@ -141,7 +148,18 @@
   }
 
   .article-header__cover {
-    @apply w-full mx-auto overflow-hidden rounded-2xl max-md:rounded-[10px] border border-white/10 aspect-[21/9] max-md:aspect-video max-h-[560px];
+    /* On mobile: 16:9 aspect ratio is more appropriate; max-height is reduced */
+    @apply w-full mx-auto overflow-hidden rounded-xl border border-white/10;
+    aspect-ratio: 16 / 9;
+    max-height: clamp(180px, 50vw, 400px);
+  }
+
+  @media (min-width: 768px) {
+    .article-header__cover {
+      aspect-ratio: 21 / 9;
+      max-height: 560px;
+      border-radius: 1rem;
+    }
   }
 
   .article-header__cover-img {

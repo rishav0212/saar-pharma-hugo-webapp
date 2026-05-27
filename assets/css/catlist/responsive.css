@@ -1,17 +1,25 @@
-﻿@layer components {
+@layer components {
 
-  /*
-     6. RESPONSIVE SAFETY
-     Prevent any overflow from the bento grid or therapeutic grid
-     on narrow viewports.
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+  /* ─────────────────────────────────────────────────────────────────────────
+     6. CATLIST RESPONSIVE SAFETY
+     Targets:
+       md: ≤767px  (phones)
+       xs: ≤479px  (small phones)
+     Prevent overflow from bento grid or therapeutic grid on narrow viewports.
+     ───────────────────────────────────────────────────────────────────────── */
 
+  /* Overflow guard — all direct children of major grids must not overflow */
   .catlist-bento > *,
   .catlist-therapeutic-grid > * {
     min-width: 0;
   }
 
+  /* ══════════════════════════════════════════════════════
+     ≤767px — MOBILE
+     ══════════════════════════════════════════════════════ */
   @media (max-width: 767px) {
+
+    /* — Bento grid: single column on mobile — */
     .catlist-bento {
       grid-template-columns: 1fr;
     }
@@ -20,16 +28,18 @@
       min-height: 260px;
     }
 
-    /* Always show description on mobile (no hover state) */
+    /* Always show description on mobile (no hover state on touch) */
     .catlist-bento-card__desc {
       max-height: 80px;
       opacity: 1;
     }
 
+    /* — Section head: stack label + desc vertically — */
     .catlist-section-head {
       @apply flex-col items-start;
     }
 
+    /* — Hero CTA buttons: stack full-width — */
     .catlist-hero__cta-group {
       @apply flex-col w-full;
     }
@@ -37,7 +47,75 @@
     .catlist-hero__cta-group .btn {
       @apply w-full justify-center;
     }
+
+    /* — Why section: reduce vertical padding — */
+    .catlist-why-section {
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .catlist-why-head {
+      margin-bottom: 2rem;
+    }
   }
 
+  /* ══════════════════════════════════════════════════════
+     ≤479px — EXTRA SMALL (iPhone SE / small Androids)
+     ══════════════════════════════════════════════════════ */
+  @media (max-width: 479px) {
+
+    /* — Hero: tighter banner on very small screens — */
+    .catlist-hero {
+      padding-top: 60px !important;
+      padding-bottom: 24px !important;
+    }
+
+    /* — Hero title: override clamp floor at xs — */
+    .catlist-hero__title {
+      /* clamp(24px, 4.8vw, 58px): on 360px viewport 4.8vw ≈ 17px → floor is 24px.
+         24px display font is ok but tighten line-height */
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    /* — Hero description — */
+    .catlist-hero__desc {
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    /* — Stat value: clamp(18px, 2.4vw, 26px) → on 360px ≈ 8.6px → floor 18px.
+       Override to 16px for extra compactness — */
+    .catlist-hero__stat-value {
+      font-size: 16px;
+    }
+
+    .catlist-hero__stat-label {
+      font-size: 9px;
+    }
+
+    /* — Bento card: compact on tiny phones — */
+    .catlist-bento-card {
+      min-height: 220px;
+    }
+
+    /* — Why cards: reduce padding and icon size — */
+    .catlist-why-card {
+      padding: 1.25rem 1rem;
+    }
+
+    .catlist-why-card__icon-wrap {
+      width: 48px;
+      height: 48px;
+    }
+
+    .catlist-why-card__title {
+      font-size: 14px;
+    }
+
+    .catlist-why-card__desc {
+      font-size: 12px;
+    }
+  }
 
 }
