@@ -180,6 +180,19 @@
     background-image: linear-gradient(to right, var(--color-brand) 0%, var(--color-brand) 4px, transparent 4px);
   }
 
+  /* Tab Panel Title & Intro Typography */
+  .ps-tab-panel-title {
+    @apply text-[24px] lg:text-[28px] font-display font-black text-ink m-0 leading-tight;
+  }
+
+  .ps-authority-intro-title {
+    @apply text-[28px] lg:text-[32px] font-display font-black text-ink leading-tight;
+  }
+
+  .ps-authority-intro-lead {
+    @apply text-muted text-[15px] leading-relaxed;
+  }
+
   /* Authority Tab Styling */
   .ps-authority-pane {
     @apply space-y-10;
