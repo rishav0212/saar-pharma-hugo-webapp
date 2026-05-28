@@ -221,11 +221,16 @@
     }
 
     .product-card__cat-group {
-      @apply top-2 left-2;
+      position: static !important;
+      @apply flex flex-wrap gap-1 mb-1.5;
     }
 
     .product-card__cat-badge {
-      @apply text-[7px] px-2 py-0.5 rounded-md;
+      @apply text-[8px] px-1.5 py-0.5 rounded-md bg-brand/6 text-brand-3 border border-brand-line/30 shadow-none border-solid;
+    }
+
+    .product-card__cat-badge--sub {
+      @apply bg-surface text-muted border-line/55 opacity-100 border-solid;
     }
   }
 
@@ -252,7 +257,12 @@
     }
 
     .product-scroll-card .product-card__cat-group {
-      @apply !top-2 !left-2;
+      position: absolute !important;
+      @apply !top-2 !left-2 !mb-0;
+    }
+
+    .product-scroll-card .product-card__cat-badge {
+      @apply !text-[7px] !px-2 !py-0.5 bg-white/95 text-brand-3 border border-brand-line rounded-full shadow-sm;
     }
 
     .product-scroll-card .product-card__title {
