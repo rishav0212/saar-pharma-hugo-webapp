@@ -121,5 +121,14 @@
     .contact-form .btn {
       @apply w-full min-h-[44px] py-2.5 text-xs;
     }
+    .contact-list {
+      @apply gap-4.5;
+    }
+    .contact-item {
+      @apply gap-3.5;
+    }
+    .contact-item .icon {
+      @apply w-7.5 h-7.5;
+    }
   }
 }
