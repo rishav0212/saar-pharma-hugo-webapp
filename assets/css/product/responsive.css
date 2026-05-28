@@ -17,48 +17,84 @@
       padding-bottom: clamp(32px, 7vw, 60px) !important;
     }
 
-    /* Products hero H1 — clamp(22px,5.5vw,72px): at 390px → 5.5vw=21.45px → floor 22px.
-       Fine but override word-wrap for very long category names */
+    /* Products hero H1 — clamp base is 22px at 390px which reads small.
+       Override to 32px on mobile so the hero title commands visual presence */
     .products-hero__inner h1 {
+      font-size: clamp(28px, 7.5vw, 52px) !important;
+      line-height: 1.1;
       overflow-wrap: break-word;
       word-break: break-word;
     }
 
+    /* Hero sub-paragraph: slightly tighter than desktop */
+    .products-hero__inner p {
+      font-size: clamp(13px, 3.5vw, 16px) !important;
+      margin-bottom: 1.25rem;
+    }
+
     /* Products hero stats: smaller pills on mobile */
     .products-hero-stat {
-      font-size: 12px;
-      padding: 0.5rem 0.875rem;
+      font-size: 11.5px;
+      padding: 0.45rem 0.875rem;
     }
 
     /* Products hero stats bar: wrap to 2 per row */
     .products-hero-stats {
       gap: 0.5rem;
     }
+
+    /* ── Filter pills: reduce size on mobile — default px-4 py-2 is too chunky ── */
+    .filter-pill {
+      font-size: 9px !important;
+      padding: 5px 10px !important;
+      gap: 5px !important;
+    }
+
+    /* Filter pill count badge: tighter */
+    .filter-pill__count {
+      min-width: 15px !important;
+      height: 15px !important;
+      font-size: 8px !important;
+    }
+
+    /* Filter bar inner: reduce vertical padding on mobile */
+    .product-filter-bar__inner {
+      gap: 0.625rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
   }
 
   @media (max-width: 479px) {
     .section--products-hero {
       padding-top: 60px !important;
-      padding-bottom: 24px !important;
+      padding-bottom: 20px !important;
     }
 
-    /* H1: clamp floor 22px → override to 20px on 360px phones */
+    /* H1: push floor up to 26px on 360px phones — was 20px which felt tiny */
     .products-hero__inner h1 {
-      font-size: 20px !important;
-      line-height: 1.15;
-      margin-bottom: 0.75rem;
+      font-size: clamp(26px, 6.8vw, 40px) !important;
+      line-height: 1.1;
+      margin-bottom: 0.625rem;
     }
 
-    /* Paragraph below H1 */
+    /* Paragraph below H1 — compact on xs */
     .products-hero__inner p {
-      font-size: 14px !important;
-      margin-bottom: 1.25rem;
+      font-size: 13px !important;
+      margin-bottom: 1rem;
     }
 
-    /* Product stat pills: hide some on xs to reduce clutter */
+    /* Product stat pills: even tighter on xs */
     .products-hero-stat {
-      font-size: 11px;
-      padding: 0.4rem 0.75rem;
+      font-size: 10.5px;
+      padding: 0.375rem 0.625rem;
+    }
+
+    /* Filter pills: extra compact at xs */
+    .filter-pill {
+      font-size: 8.5px !important;
+      padding: 4px 9px !important;
+      letter-spacing: 0.04em !important;
     }
   }
 

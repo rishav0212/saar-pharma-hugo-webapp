@@ -50,6 +50,15 @@
       padding-bottom: clamp(24px, 5vw, 40px);
     }
 
+    /* — Article header title: clamp(20px,5vw,50px) → at 390px ≈ 20px floor.
+       Use a more impactful clamp so it scales up nicely from 390→767px — */
+    .article-header__title {
+      font-size: clamp(22px, 6vw, 38px) !important;
+      line-height: 1.12;
+      margin-bottom: 0.875rem;
+      letter-spacing: -0.02em;
+    }
+
     /* — Category pill: slightly smaller on mobile — */
     .article-category-pill {
       font-size: 9px;
@@ -104,7 +113,7 @@
     }
 
     .article-prose blockquote p {
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.7;
     }
 
@@ -188,6 +197,14 @@
       font-size: 8.5px;
       letter-spacing: 0.14em;
       padding: 3px 9px;
+    }
+
+    /* Article title: tighter on 360px phones — clamp(22px,6vw,38px) at 360px = 21.6px → floor 22px */
+    .article-header__title {
+      font-size: 20px !important;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.75rem;
     }
 
     /* Very compact header padding at 360px-wide phones */
