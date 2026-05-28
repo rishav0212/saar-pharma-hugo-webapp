@@ -83,7 +83,7 @@
   }
 
   .contact-hero__title {
-    font-size: var(--text-fluid-display-4xl);
+    font-size: var(--text-fluid-display-sm);
     @apply font-display font-black text-white leading-[1] tracking-tighter mb-6;
     filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
   }
@@ -249,7 +249,7 @@
   }
 
   .contact-location-card__name {
-    @apply text-[22px] lg:text-[26px] font-black text-ink leading-tight;
+    @apply text-[length:var(--text-fluid-title-xs)] font-black text-ink leading-tight;
   }
 
   /* Info Rows */
@@ -394,7 +394,7 @@
   }
 
   .contact-profile-card__handle {
-    @apply text-[17px] font-black text-ink mb-3 leading-tight relative z-10 truncate block w-full;
+    @apply text-[length:var(--text-fluid-lead-tight)] font-black text-ink mb-3 leading-tight relative z-10 truncate block w-full;
   }
 
   .contact-profile-card__desc {
@@ -443,7 +443,7 @@
   }
 
   .contact-commitment-card__title {
-    @apply text-[17px] font-black text-ink leading-tight;
+    @apply text-[length:var(--text-fluid-lead-tight)] font-black text-ink leading-tight;
   }
 
   .contact-commitment-card__desc {
@@ -490,13 +490,10 @@
       @apply mb-5 px-3 py-1.5 text-[9px] tracking-[0.16em];
     }
     .contact-hero__title {
-      font-size: clamp(30px, 9vw, 40px);
-      line-height: 1.04;
-      letter-spacing: -0.035em;
       @apply mb-4;
     }
     .contact-hero__desc {
-      @apply text-[14.5px] leading-[1.6] mb-8;
+      @apply mb-8;
     }
     .contact-hero__chips {
       @apply gap-2.5;
@@ -510,16 +507,9 @@
     .contact-channel-card__icon {
       @apply w-12 h-12 rounded-xl;
     }
-    .contact-location-card__name {
-      @apply text-[20px];
-    }
     .contact-profile-card,
     .contact-commitment-card {
       @apply p-6 rounded-2xl;
-    }
-    .contact-profile-card__handle,
-    .contact-commitment-card__title {
-      @apply text-[16px];
     }
 
     .contact-location-card__body {
@@ -533,20 +523,9 @@
     .contact-profiles__grid {
       @apply grid-cols-1;
     }
-
-    .contact-item a, 
-    .contact-item span {
-      @apply text-[16px];
-    }
   }
 
   @media (max-width: 380px) {
-    .contact-hero__title {
-      font-size: 28px;
-    }
-    .contact-hero__desc {
-      @apply text-[14px];
-    }
     .contact-hero__chip {
       @apply text-[11.5px];
     }
