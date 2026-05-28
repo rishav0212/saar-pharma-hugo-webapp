@@ -1,4 +1,4 @@
-﻿@layer components {
+@layer components {
 
   /*
      7. WHY CHOOSE SAAR BIOTECH
@@ -60,11 +60,11 @@
   }
 
   .catlist-why-card__title {
-    @apply text-[16px] font-display font-black text-ink leading-tight m-0;
+    @apply text-[length:var(--text-fluid-lead-tight)] font-display font-black text-ink leading-tight m-0;
   }
 
   .catlist-why-card__desc {
-    @apply text-[13px] text-muted leading-relaxed m-0;
+    @apply text-[length:var(--text-fluid-body-sm)] text-muted leading-relaxed m-0;
   }
   
   /* Mobile protection */
