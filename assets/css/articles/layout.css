@@ -4,27 +4,24 @@
     padding-top: clamp(1.5rem, 4vw, 4rem);
     padding-bottom: clamp(2rem, 5vw, 5rem);
     background: var(--color-paper);
-    /* Prevent any prose content (tables, code blocks) from causing page-level horizontal scroll */
-    overflow-x: hidden;
+    /*
+      overflow-x: clip (not hidden!) — 'clip' prevents horizontal scroll
+      WITHOUT creating a new scroll container. Using 'hidden' here would
+      implicitly set overflow-y: auto, making article-body-wrap the scroll
+      container instead of the viewport — this breaks position:sticky on
+      the mobile TOC toggle (.article-toc-mobile).
+    */
+    overflow-x: clip;
   }
 
   .article-layout {
-    /* Mobile: single column; desktop (lg+): 2-col with sidebar */
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Sidebar moves to its own column at lg breakpoint */
-  @media (min-width: 1024px) {
-    .article-layout {
-      grid-template-columns: 1fr 400px;
-      gap: 3rem;
-      align-items: start;
-    }
+    /*
+      items-start (align-items: start) must be applied at ALL breakpoints —
+      not just desktop. This matches the original @apply items-start.
+      Without it, the sidebar grid item would stretch to content height and
+      position:sticky would have no room to scroll within its grid area.
+    */
+    @apply grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 lg:gap-12 items-start max-w-[1280px] mx-auto;
   }
 
   .article-layout > * {

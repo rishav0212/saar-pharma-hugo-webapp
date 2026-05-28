@@ -1,8 +1,10 @@
 @layer components {
   .article-page {
     @apply bg-paper;
-    /* Prevent any child element (glow blobs, cover image, sidebar) from causing horizontal scroll */
-    overflow-x: hidden;
+    /* overflow-x: clip (not hidden) — prevents horizontal bleed without creating
+       a new scroll container, which would break position:sticky on child elements
+       like the mobile TOC toggle (.article-toc-mobile) */
+    overflow-x: clip;
     max-width: 100vw;
   }
 
@@ -14,8 +16,8 @@
 
   .article-header {
     @apply relative;
-    /* Contain the cover image negative margin overlap without causing horizontal scroll */
-    overflow-x: hidden;
+    /* overflow-x: clip — same reason as .article-page above */
+    overflow-x: clip;
     max-width: 100vw;
   }
 
