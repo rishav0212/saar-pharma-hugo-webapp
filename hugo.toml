@@ -28,6 +28,7 @@ enableRobotsTXT = true
   form_endpoint = "#"
   google_analytics_id = ""
   noindex = true
+  disable_avif = true
 
   # Social Links
   social_facebook = "https://www.facebook.com/SaarBiotechP"
