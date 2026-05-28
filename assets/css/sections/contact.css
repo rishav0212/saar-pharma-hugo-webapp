@@ -482,6 +482,9 @@
     .contact-layout {
       @apply gap-10;
     }
+    .contact-page-form-section {
+      @apply py-16;
+    }
     .section--contact-hero {
       padding-top: 96px;
       padding-bottom: 56px;

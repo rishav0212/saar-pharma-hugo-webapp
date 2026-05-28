@@ -72,10 +72,10 @@
               <div class="contact-info-row__icon">
                 <i data-lucide="map-pin" aria-hidden="true"></i>
               </div>
-              <div>
+              <div class="flex-1 min-w-0">
                 <div class="contact-info-row__label">Address</div>
-                <a href="{{ .map_link }}" target="_blank" rel="noopener noreferrer" class="contact-info-row__value no-underline hover:text-brand transition-colors flex items-start gap-1.5 group">
-                  <span class="whitespace-normal break-words block">{{ .address }}, {{ .pin }}</span>
+                <a href="{{ .map_link }}" target="_blank" rel="noopener noreferrer" class="contact-info-row__value no-underline hover:text-brand transition-colors flex items-start gap-1.5 group w-full">
+                  <span class="whitespace-normal break-words block flex-1 min-w-0">{{ .address }}, {{ .pin }}</span>
                   <i data-lucide="external-link" class="w-3.5 h-3.5 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"></i>
                 </a>
               </div>
@@ -85,7 +85,7 @@
               <div class="contact-info-row__icon">
                 <i data-lucide="clock" aria-hidden="true"></i>
               </div>
-              <div>
+              <div class="flex-1 min-w-0">
                 <div class="contact-info-row__label">Business Hours</div>
                 <div class="contact-info-row__value">{{ .hours }}</div>
               </div>
@@ -96,7 +96,7 @@
               <div class="contact-info-row__icon">
                 <i data-lucide="phone-call" aria-hidden="true"></i>
               </div>
-              <div>
+              <div class="flex-1 min-w-0">
                 <div class="contact-info-row__label">Direct Line</div>
                 <a href="tel:{{ $phone | urlize }}" class="contact-info-row__value no-underline hover:text-brand transition-colors">
                   {{ $phone }}
@@ -109,9 +109,9 @@
               <div class="contact-info-row__icon">
                 <i data-lucide="mail" aria-hidden="true"></i>
               </div>
-              <div>
+              <div class="flex-1 min-w-0">
                 <div class="contact-info-row__label">Support Email</div>
-                <a href="mailto:{{ $email }}" class="contact-info-row__value no-underline hover:text-brand transition-colors truncate block">
+                <a href="mailto:{{ $email }}" class="contact-info-row__value no-underline hover:text-brand transition-colors whitespace-normal break-all block">
                   {{ $email }}
                 </a>
               </div>
