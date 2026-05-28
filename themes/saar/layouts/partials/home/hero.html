@@ -1,7 +1,7 @@
 <section id="home-hero" class="section section--hero" aria-labelledby="hero-title">
   <div id="hero-canvas" class="hero-canvas" aria-hidden="true"></div>
   <div class="container hero-grid">
-    <div class="hero-copy" data-animate>
+    <div class="hero-copy">
       <div class="hero-eyebrow">
         <span class="hero-eyebrow__dot" aria-hidden="true"></span>
         Saar Biotech Pvt. Ltd. · Certified manufacturing since {{ site.Params.founded }}
@@ -12,7 +12,7 @@
       <p class="hero-subtitle">
         {{ .Params.hero_subtitle | default "Oral liquids, suspensions, syrups, ointments, topical solutions, and sprays manufactured with COA support, regulatory documentation, and first-batch dispatch in 35–45 days." }}
       </p>
-      <div class="hero-visual hero-visual--mobile my-8" data-animate data-delay="0.05">
+      <div class="hero-visual hero-visual--mobile my-8">
         <div class="manufacturing-board manufacturing-board--photo">
           {{ partial "shared/optimized-image.html" (dict
             "src" (.Params.hero_image | default "/images/products/hero-bg.webp")
@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <div class="hero-visual hero-visual--desktop" data-animate data-delay="0.12" data-parallax="-4">
+    <div class="hero-visual hero-visual--desktop" data-parallax="-4">
       <div class="manufacturing-board manufacturing-board--photo" aria-label="Saar Biotech manufacturing facility visual">
         {{ partial "shared/optimized-image.html" (dict
           "src" (.Params.hero_image | default "/images/products/hero-bg.webp")
