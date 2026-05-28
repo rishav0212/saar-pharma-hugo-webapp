@@ -6,7 +6,7 @@
 
   .article-prose {
     /* 15px on mobile is the sweet-spot: readable yet compact */
-    font-size: clamp(14.5px, 3.8vw, 16.5px);
+    font-size: var(--text-fluid-body);
     line-height: 1.8;
     color: var(--color-ink);
     font-family: var(--font-sans);
@@ -21,7 +21,7 @@
   /* Lead paragraph â€” elevated weight, border separator */
   .article-prose > p:first-of-type {
     /* Slightly smaller on mobile; still elevated vs body copy */
-    font-size: clamp(15px, 4vw, 18.5px);
+    font-size: var(--text-fluid-lead);
     line-height: 1.7;
     font-weight: 500;
     color: var(--color-ink);
@@ -33,7 +33,7 @@
   /* â”€â”€ Headings â”€â”€ */
   .article-prose h2 {
     /* floor is 18px on mobile â€” prevents overly-large headings on 360px phones */
-    font-size: clamp(18px, 5vw, 28px);
+    font-size: var(--text-fluid-heading-xs);
     font-family: var(--font-display);
     font-weight: 800;
     color: var(--color-ink) !important;
@@ -47,7 +47,7 @@
 
   .article-prose h3 {
     /* floor is 16px on mobile */
-    font-size: clamp(16px, 4vw, 22px);
+    font-size: var(--text-fluid-subheading);
     font-family: var(--font-display);
     font-weight: 700;
     color: var(--color-ink) !important;
@@ -115,7 +115,7 @@
   .article-prose blockquote p {
     margin-bottom: 0;
     /* Responsive: slightly smaller on mobile, normal on desktop */
-    font-size: clamp(14.5px, 3.8vw, 16.5px);
+    font-size: var(--text-fluid-body);
     line-height: 1.8;
     font-style: italic;
     font-weight: 500;

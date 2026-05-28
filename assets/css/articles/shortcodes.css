@@ -90,7 +90,7 @@
   }
 
   .article-faq-heading {
-    @apply flex items-center gap-3 pl-5 mb-7 border-l-4 border-brand font-display text-[clamp(22px,2.5vw,28px)] font-extrabold !text-ink tracking-[-0.025em] leading-tight;
+    @apply flex items-center gap-3 pl-5 mb-7 border-l-4 border-brand font-display text-[length:var(--text-fluid-heading-md)] font-extrabold !text-ink tracking-[-0.025em] leading-tight;
     -webkit-text-fill-color: var(--color-ink);
   }
 

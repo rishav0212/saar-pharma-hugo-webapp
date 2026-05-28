@@ -620,15 +620,6 @@ function initHomepageArticlesCarousel() {
   // Start ticker loop
   rafId = requestAnimationFrame(tick);
 
-  // Pause on hover
-  hub.addEventListener('mouseenter', () => {
-    isPaused = true;
-  });
-  hub.addEventListener('mouseleave', () => {
-    isPaused = false;
-    lastTime = 0;
-  });
-
   // Clicking cards
   items.forEach((item, index) => {
     item.addEventListener('click', () => {

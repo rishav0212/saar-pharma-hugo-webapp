@@ -23,7 +23,7 @@
   }
 
   .cat-count-num {
-    font-size: clamp(40px, 5vw, 64px);
+    font-size: var(--text-fluid-display-5xl);
     @apply font-display font-black text-brand leading-none tracking-tighter;
   }
 

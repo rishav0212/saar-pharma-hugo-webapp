@@ -83,7 +83,7 @@
   }
 
   .contact-hero__title {
-    font-size: clamp(38px, 6.5vw, 76px);
+    font-size: var(--text-fluid-display-sm);
     @apply font-display font-black text-white leading-[1] tracking-tighter mb-6;
     filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
   }
@@ -95,7 +95,7 @@
   }
 
   .contact-hero__desc {
-    @apply text-[18px] text-white/70 leading-relaxed max-w-[680px] mx-auto mb-12;
+    @apply text-[length:var(--text-fluid-lead-tight)] text-white/70 leading-relaxed max-w-[680px] mx-auto mb-12;
   }
 
   /* Trust chips row */
@@ -249,7 +249,7 @@
   }
 
   .contact-location-card__name {
-    @apply text-[22px] lg:text-[26px] font-black text-ink leading-tight;
+    @apply text-[length:var(--text-fluid-title-xs)] font-black text-ink leading-tight;
   }
 
   /* Info Rows */
@@ -394,7 +394,7 @@
   }
 
   .contact-profile-card__handle {
-    @apply text-[17px] font-black text-ink mb-3 leading-tight relative z-10 truncate block w-full;
+    @apply text-[length:var(--text-fluid-lead-tight)] font-black text-ink mb-3 leading-tight relative z-10 truncate block w-full;
   }
 
   .contact-profile-card__desc {
@@ -443,7 +443,7 @@
   }
 
   .contact-commitment-card__title {
-    @apply text-[17px] font-black text-ink leading-tight;
+    @apply text-[length:var(--text-fluid-lead-tight)] font-black text-ink leading-tight;
   }
 
   .contact-commitment-card__desc {
@@ -482,25 +482,98 @@
     .contact-layout {
       @apply gap-10;
     }
+    .contact-page-form-section {
+      @apply py-16;
+    }
+    .section--contact-hero {
+      padding-top: 96px;
+      padding-bottom: 56px;
+    }
+    .contact-hero__eyebrow {
+      @apply mb-5 px-3 py-1.5 text-[9px] tracking-[0.16em];
+    }
     .contact-hero__title {
       @apply mb-4;
     }
-
+    .contact-hero__desc {
+      @apply mb-8;
+    }
+    .contact-hero__chips {
+      @apply gap-2;
+    }
+    .contact-hero__chip {
+      @apply px-2.5 py-1.5 text-[11px] rounded-lg gap-2;
+    }
+    .contact-channel-card {
+      @apply p-5 gap-3.5 rounded-2xl;
+    }
+    .contact-channel-card__icon {
+      @apply w-12 h-12 rounded-xl;
+    }
+    .contact-profile-card {
+      @apply p-5 rounded-2xl;
+    }
+    .contact-profile-card__icon {
+      @apply w-10 h-10 mb-4 rounded-lg shrink-0;
+    }
+    .contact-commitment-card {
+      @apply p-5 gap-3 rounded-2xl;
+    }
+    .contact-commitment-card__icon {
+      @apply w-10 h-10 mb-1 rounded-lg shrink-0;
+    }
+    .office-badge {
+      @apply px-2.5 py-1 text-[9px] tracking-wider;
+    }
     .contact-location-card__body {
-      @apply p-6;
+      @apply p-5;
+    }
+    .contact-location-card__name {
+      @apply text-[18px];
+    }
+    .contact-location-card__body > .flex {
+      @apply mb-4;
+    }
+    .contact-location-card__icon-wrap {
+      @apply w-10 h-10 rounded-xl;
+    }
+    .contact-location-card__icon-wrap i {
+      @apply w-5 h-5;
+    }
+    .contact-info-row {
+      @apply gap-3;
+    }
+    .contact-info-row__icon {
+      @apply w-5.5 h-5.5 mt-0.5;
+    }
+    .contact-info-row__icon i {
+      @apply w-3 h-3;
+    }
+    .contact-info-row__value {
+      @apply text-[13.5px];
     }
 
     .contact-map-frame {
       height: 280px;
     }
+    .contact-map-badge {
+      @apply bottom-3 left-3 px-2.5 py-1.5 text-[10px] rounded-xl gap-1.5;
+    }
+    .contact-map-open {
+      @apply bottom-3 right-3 px-3 py-1.5 text-[10px] rounded-xl gap-1.5 tracking-normal;
+    }
 
     .contact-profiles__grid {
       @apply grid-cols-1;
     }
+    .contact-profiles-section .btn {
+      @apply w-full sm:w-auto justify-center;
+    }
+  }
 
-    .contact-item a, 
-    .contact-item span {
-      @apply text-[16px];
+  @media (max-width: 380px) {
+    .contact-hero__chip {
+      @apply text-[10px] px-2 py-1 gap-1.5;
     }
   }
 

@@ -194,7 +194,7 @@
 
   /* H1 - with premium multi-layered clinical gradient */
   .cat-hero__title {
-    font-size: clamp(24px, 6.2vw, 80px);
+    font-size: var(--text-fluid-display-4xl);
     /* break-words removed — prevents mid-word char breaking on mobile; only word-boundary wrapping */
     @apply leading-[0.92] font-display font-black tracking-tighter text-white mb-4;
     overflow-wrap: normal;
@@ -215,15 +215,15 @@
 
   /* Tagline with deep shadows and clean typography */
   .cat-hero__tagline {
-    font-size: clamp(16px, 1.5vw, 22px);
-    @apply text-white font-black leading-snug mb-4 max-w-[650px];
+    font-size: var(--text-fluid-lead-tight);
+    @apply text-white font-bold leading-snug mb-4 max-w-[650px];
     letter-spacing: -0.01em;
     text-shadow: 0 2px 10px rgba(var(--color-abyss-rgb), 0.5);
   }
 
   /* Description paragraph */
   .cat-hero__desc {
-    @apply text-[15px] text-white/70 leading-relaxed mb-6 max-w-[580px];
+    @apply text-[length:var(--text-fluid-body)] text-white/70 leading-relaxed mb-6 max-w-[580px];
     text-shadow: 0 1px 4px rgba(var(--color-abyss-rgb), 0.2);
   }
 
@@ -244,7 +244,7 @@
   }
 
   .cat-hero__stat-value {
-    @apply text-[22px] font-display font-black text-brand-2 leading-none tracking-tight;
+    @apply text-[length:var(--text-fluid-stat)] font-display font-black text-brand-2 leading-none tracking-tight;
     text-shadow: 0 0 20px rgba(var(--color-brand-2-rgb), 0.4);
   }
 

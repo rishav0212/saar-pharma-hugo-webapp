@@ -48,7 +48,7 @@
   }
 
   .ps-product-title {
-    @apply text-[30px] lg:text-[38px] font-display font-black text-ink leading-[1.1] tracking-tight m-0;
+    @apply text-[length:var(--text-fluid-display-tight)] font-display font-black text-ink leading-[1.1] tracking-tight m-0;
   }
 
   .ps-product-subtitle {
@@ -100,7 +100,7 @@
   }
 
   .ps-authority-num {
-    @apply font-display font-black text-[22px] lg:text-[26px] leading-none text-brand-2;
+    @apply font-display font-black text-[length:var(--text-fluid-stat-lg)] leading-none text-brand-2;
     text-shadow: 0 4px 12px rgba(100, 212, 197, 0.3);
   }
 

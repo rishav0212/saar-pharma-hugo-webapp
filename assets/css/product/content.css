@@ -182,11 +182,11 @@
 
   /* Tab Panel Title & Intro Typography */
   .ps-tab-panel-title {
-    @apply text-[24px] lg:text-[28px] font-display font-black text-ink m-0 leading-tight;
+    @apply text-[length:var(--text-fluid-title-balanced)] font-display font-black text-ink m-0 leading-tight;
   }
 
   .ps-authority-intro-title {
-    @apply text-[28px] lg:text-[32px] font-display font-black text-ink leading-tight;
+    @apply text-[length:var(--text-fluid-title-strong)] font-display font-black text-ink leading-tight;
   }
 
   .ps-authority-intro-lead {
@@ -207,7 +207,7 @@
   }
 
   .ps-authority-lead {
-    @apply text-muted text-[18px] leading-relaxed mb-8;
+    @apply text-muted text-[length:var(--text-fluid-lead-tight)] leading-relaxed mb-8;
   }
 
   .ps-authority-grid {

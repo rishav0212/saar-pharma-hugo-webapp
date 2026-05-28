@@ -73,16 +73,6 @@
     <!-- Main Overlay Link -->
     <a href="{{ .RelPermalink }}" class="absolute inset-0 z-10" aria-label="View {{ .Title }} details"></a>
 
-    {{/* ── New Category Badge System (Universal) ── */}}
-    <div class="product-card__cat-group">
-        {{ with .Params.categories }}
-        <span class="product-card__cat-badge">{{ index . 0 }}</span>
-        {{ end }}
-        {{ with .Params.therapeutic_class }}
-        <span class="product-card__cat-badge product-card__cat-badge--sub">{{ index . 0 }}</span>
-        {{ end }}
-    </div>
-
     <div class="product-card__image-container">
         {{ $productImg := "" }}
         {{ if .Params.images }}
@@ -109,6 +99,16 @@
     </div>
 
     <div class="product-card__content flex-1 flex flex-col">
+        {{/* ── New Category Badge System (Universal) ── */}}
+        <div class="product-card__cat-group">
+            {{ with .Params.categories }}
+            <span class="product-card__cat-badge">{{ index . 0 }}</span>
+            {{ end }}
+            {{ with .Params.therapeutic_class }}
+            <span class="product-card__cat-badge product-card__cat-badge--sub">{{ index . 0 }}</span>
+            {{ end }}
+        </div>
+
         {{/* Commented out dosage form tag under the image to prevent duplicate category names on the card
         {{ $dosage := .Params.dosage_form | default .Params.drug_form | default (index .Params.categories 0) }}
         {{ if $dosage }}

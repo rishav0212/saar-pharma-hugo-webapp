@@ -132,7 +132,7 @@
 
   /* H1 â€” slightly smaller max cap, tighter bottom margin (was mb-5 â†’ mb-3) */
   .catlist-hero__title {
-    font-size: clamp(24px, 4.8vw, 58px);
+    font-size: var(--text-fluid-display-xl);
     /* break-words removed — prevents mid-word char breaking on mobile; only word-boundary wrapping */
     @apply leading-[1.0] font-display font-black tracking-tighter text-white mb-3;
     overflow-wrap: normal;
@@ -146,7 +146,7 @@
 
   /* Description â€” tighter line-height and bottom margin (was mb-8 â†’ mb-5) */
   .catlist-hero__desc {
-    @apply text-[15px] leading-[1.65] mb-5 max-w-[600px] mx-auto;
+    @apply text-[length:var(--text-fluid-body)] leading-[1.65] mb-5 max-w-[600px] mx-auto;
     color: rgba(var(--color-white-rgb), 0.62);
     text-shadow: 0 1px 4px rgba(var(--color-abyss-rgb), 0.2);
   }
@@ -181,7 +181,7 @@
 
   /* Stat value â€” tighter font size range (was 20â†’30px) */
   .catlist-hero__stat-value {
-    font-size: clamp(18px, 2.4vw, 26px);
+    font-size: var(--text-fluid-stat);
     @apply font-display font-black leading-none tracking-tight;
     color: var(--color-brand-2);
     text-shadow: 0 0 20px rgba(var(--color-brand-2-rgb), 0.40);

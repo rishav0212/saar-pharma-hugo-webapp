@@ -310,7 +310,7 @@ body {
   }
 
   .footer-cta h2 {
-    @apply text-[28px] max-md:text-[22px] text-white;
+    @apply text-[length:var(--text-fluid-heading-md)] text-white;
   }
 
   .footer-cta p {

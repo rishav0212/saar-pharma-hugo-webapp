@@ -25,6 +25,10 @@
           <div><strong>Phone</strong><a href="tel:{{ .Site.Params.phone | urlize }}">{{ .Site.Params.phone }}</a></div>
         </div>
         <div class="contact-item">
+          <i data-lucide="message-square" class="icon" aria-hidden="true"></i>
+          <div><strong>WhatsApp Business</strong><a href="https://wa.me/{{ replace (replace .Site.Params.phone " " "") "+" "" }}" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a></div>
+        </div>
+        <div class="contact-item">
           <i data-lucide="mail" class="icon" aria-hidden="true"></i>
           <div><strong>Email</strong><a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></div>
         </div>

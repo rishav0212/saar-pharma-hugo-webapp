@@ -26,20 +26,19 @@
       letter-spacing: 0.18em;
     }
 
-    /* — Hero tagline: reduce fluid range on small screens — */
+    /* — Hero title and tagline: balanced on phones without shrinking the H1 too far — */
+    .cat-hero__title {
+      margin-bottom: 1rem;
+    }
+
     .cat-hero__tagline {
-      font-size: clamp(15px, 4vw, 20px);
       margin-bottom: 0.75rem;
     }
 
-    /* — Hero description paragraph — */
     .cat-hero__desc {
-      font-size: 14px;
-      line-height: 1.6;
       margin-bottom: 1.25rem;
     }
 
-    /* — Stats row: tighter gap and padding — */
     .cat-hero__stats {
       gap: 0.5rem;
       margin-bottom: 1.25rem;
@@ -47,11 +46,6 @@
 
     .cat-hero__stat {
       padding: 0.75rem 1rem;
-    }
-
-    /* Stat value: 22px hardcoded → scaled down for mobile */
-    .cat-hero__stat-value {
-      font-size: 18px;
     }
 
     /* — CTA group: stack vertically, full-width buttons — */
@@ -111,28 +105,10 @@
       padding-bottom: 18px !important;
     }
 
-    /* Hero H1: override clamp floor (24px) — 22px is more appropriate at 360px */
+    /* Hero H1: keep the page title prominent on tiny phones without overflowing */
     .cat-hero__title {
-      font-size: 22px !important;
       letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-
-    .cat-hero__tagline {
-      font-size: 14px;
-    }
-
-    .cat-hero__desc {
-      font-size: 13.5px;
-    }
-
-    /* Stat value: 22px → 16px at xs */
-    .cat-hero__stat-value {
-      font-size: 16px;
-    }
-
-    .cat-hero__stat-label {
-      font-size: 9px;
+      line-height: 1.04;
     }
 
     /* Gallery: minimal height on 360px phones */
