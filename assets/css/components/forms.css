@@ -58,11 +58,11 @@
   }
 
   .contact-item {
-    @apply flex items-start gap-5;
+    @apply flex items-start gap-4;
   }
 
   .contact-item .icon {
-    @apply w-10 h-10 flex items-center justify-center shrink-0 text-brand-2 transition-all duration-300;
+    @apply w-6 h-6 flex items-center justify-center shrink-0 text-brand-2 transition-all duration-300 mt-1;
   }
 
   .contact-item:hover .icon {
@@ -122,13 +122,13 @@
       @apply w-full min-h-[44px] py-2.5 text-xs;
     }
     .contact-list {
-      @apply gap-4.5;
+      @apply gap-4;
     }
     .contact-item {
-      @apply gap-3.5;
+      @apply gap-3;
     }
     .contact-item .icon {
-      @apply w-7.5 h-7.5;
+      @apply w-6 h-6 mt-0.5;
     }
   }
 }
