@@ -114,7 +114,7 @@
     /* break-words removed — same reason; only word-boundary wrapping allowed */
     /* clamp floor raised to 20px on mobile so very-long titles stay readable but compact */
     @apply font-display font-black leading-[1.15] tracking-[-0.025em] mb-4 max-w-[56ch];
-    font-size: clamp(20px, 5vw, 50px);
+    font-size: var(--text-fluid-heading-sm);
     overflow-wrap: break-word;
     word-break: break-word;
     background: linear-gradient(to bottom, var(--color-white) 40%, rgba(var(--color-white-rgb), 0.72) 100%);
@@ -129,7 +129,7 @@
 
   .article-meta-item {
     /* Responsive: 11px on mobile → 12.5px on desktop */
-    font-size: clamp(11px, 2.5vw, 12.5px);
+    font-size: var(--text-fluid-caption);
     @apply inline-flex items-center gap-1.5 font-semibold text-white/50 tracking-[0.01em];
   }
 

@@ -28,7 +28,7 @@
 
     /* — Hero tagline: reduce fluid range on small screens — */
     .cat-hero__tagline {
-      font-size: clamp(15px, 4vw, 20px);
+      font-size: var(--text-fluid-lead-lg);
       margin-bottom: 0.75rem;
     }
 

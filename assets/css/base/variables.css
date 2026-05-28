@@ -32,6 +32,36 @@
   --font-sans: "Inter", Arial, sans-serif;
   --font-display: "Manrope", "Inter", Arial, sans-serif;
 
+  /* Generic fluid typography scale. Keep one-off fixed pixel sizes local to components. */
+  --text-fluid-caption: clamp(11px, 2.5vw, 12.5px);
+  --text-fluid-body-sm: clamp(13px, 3.5vw, 16px);
+  --text-fluid-body: clamp(14.5px, 3.8vw, 16.5px);
+  --text-fluid-lead: clamp(15px, 4vw, 18.5px);
+  --text-fluid-lead-lg: clamp(15px, 4vw, 20px);
+  --text-fluid-lead-wide: clamp(15px, 1.3vw, 20px);
+  --text-fluid-subtitle: clamp(16px, 1.5vw, 22px);
+  --text-fluid-subheading: clamp(16px, 4vw, 22px);
+  --text-fluid-stat: clamp(18px, 2.4vw, 26px);
+  --text-fluid-heading-xs: clamp(18px, 5vw, 28px);
+  --text-fluid-heading-sm: clamp(20px, 5vw, 50px);
+  --text-fluid-heading-md: clamp(22px, 2.5vw, 28px);
+  --text-fluid-heading-lg: clamp(22px, 3.2vw, 38px);
+  --text-fluid-heading-xl: clamp(22px, 5.5vw, 32px);
+  --text-fluid-heading-2xl: clamp(22px, 6vw, 38px);
+  --text-fluid-title-sm: clamp(24px, 3vw, 36px);
+  --text-fluid-title-md: clamp(24px, 3.5vw, 36px);
+  --text-fluid-title-lg: clamp(26px, 3.5vw, 40px);
+  --text-fluid-title-xl: clamp(28px, 4vw, 42px);
+  --text-fluid-display-sm: clamp(24px, 4.8vw, 58px);
+  --text-fluid-display-md: clamp(24px, 6.2vw, 80px);
+  --text-fluid-display-lg: clamp(30px, 8vw, 44px);
+  --text-fluid-display-xl: clamp(32px, 6vw, 78px);
+  --text-fluid-display-2xl: clamp(34px, 5vw, 62px);
+  --text-fluid-display-3xl: clamp(34px, 8vw, 56px);
+  --text-fluid-display-4xl: clamp(38px, 6.5vw, 76px);
+  --text-fluid-display-5xl: clamp(40px, 5vw, 64px);
+  --text-fluid-display-max: clamp(80px, 15vw, 160px);
+
   --shadow-soft: 0 14px 32px rgba(6, 17, 33, 0.08);
   --shadow-lift: 0 30px 62px -16px rgba(6, 17, 33, 0.26);
 

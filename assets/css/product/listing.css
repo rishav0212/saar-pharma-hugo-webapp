@@ -95,14 +95,14 @@
 
   .products-hero__inner h1 {
     /* break-words intentionally removed — forces mid-word char breaks; let browser wrap at word boundaries instead */
-    @apply text-[clamp(32px,6vw,78px)] leading-[1.1] mb-6 font-display font-black tracking-tighter text-white;
+    @apply text-[length:var(--text-fluid-display-xl)] leading-[1.1] mb-6 font-display font-black tracking-tighter text-white;
     overflow-wrap: normal;
     word-break: normal;
     text-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
   }
 
   .products-hero__inner p {
-    @apply text-[clamp(15px,1.3vw,20px)] text-white/80 leading-relaxed max-w-2xl mx-auto mb-10 font-medium;
+    @apply text-[length:var(--text-fluid-lead-wide)] text-white/80 leading-relaxed max-w-2xl mx-auto mb-10 font-medium;
   }
 
   /* Hero Search Group (Consolidated) */
