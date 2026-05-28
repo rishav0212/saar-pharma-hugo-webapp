@@ -80,7 +80,7 @@
 
   .contact-item a, 
   .contact-item span {
-    @apply text-[length:var(--text-fluid-lead-tight)] font-bold text-white no-underline transition-colors duration-200 truncate block w-full;
+    @apply text-[length:var(--text-fluid-lead-tight)] font-bold text-white no-underline transition-colors duration-200 whitespace-normal break-words block w-full;
   }
 
   .contact-item a:hover {
