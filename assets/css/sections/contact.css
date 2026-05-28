@@ -95,7 +95,7 @@
   }
 
   .contact-hero__desc {
-    @apply text-[18px] text-white/70 leading-relaxed max-w-[680px] mx-auto mb-12;
+    @apply text-[length:var(--text-fluid-lead-tight)] text-white/70 leading-relaxed max-w-[680px] mx-auto mb-12;
   }
 
   /* Trust chips row */

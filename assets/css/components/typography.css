@@ -9,7 +9,7 @@
   }
 
   .section-kicker {
-    @apply text-[17px] text-muted max-w-[650px] leading-relaxed max-md:text-[16px];
+    @apply text-[length:var(--text-fluid-kicker)] text-muted max-w-[650px] leading-relaxed;
   }
 
   .text-accent {

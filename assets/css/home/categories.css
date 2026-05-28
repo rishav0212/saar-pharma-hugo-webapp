@@ -25,7 +25,7 @@
   }
 
   .tab-dosage-title {
-    @apply text-[36px] font-display font-extrabold text-ink mb-4 max-md:text-[28px];
+    @apply text-[length:var(--text-fluid-title-wide)] font-display font-extrabold text-ink mb-4;
   }
 
   .tab-dosage-text {
