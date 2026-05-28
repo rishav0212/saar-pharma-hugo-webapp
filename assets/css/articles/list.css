@@ -156,19 +156,10 @@
     @apply hidden;
   }
 
-  .filter-pill {
-    @apply rounded-full px-4.5 py-2 bg-white border border-line text-ink-3 text-[13px] font-bold whitespace-nowrap cursor-pointer transition-all duration-200;
-    box-shadow: 0 2px 6px rgba(6, 17, 33, 0.015);
-  }
-
-  .filter-pill:hover:not(.is-active) {
-    @apply -translate-y-px border-brand text-brand bg-brand/5;
-  }
-
-  .filter-pill.is-active {
-    @apply bg-brand border-brand text-white;
-    box-shadow: 0 6px 16px rgba(var(--color-brand-rgb), 0.24);
-  }
+  /* ─── .filter-pill base styles + mobile responsive overrides ─────────────
+     ⬆ Moved to components/filter-pills.css (global component).
+     Articles context override (.articles-filters .filter-pill) also lives
+     there — it sets font-size:13px + no uppercase for the editorial style. ── */
 
   .editorial-grid-wrap {
     @apply relative w-full min-h-[250px];

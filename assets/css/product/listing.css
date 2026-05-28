@@ -295,37 +295,10 @@
     --fade-bg: rgba(237, 247, 246, 0.95);
   }
 
-  .filter-pills {
-    @apply flex items-center gap-2 overflow-x-auto py-1.5 px-4 scroll-smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
+  /* ─── Filter Pill atoms (base style, hover, active, count badge) ───────────
+     ⬆ Moved to components/filter-pills.css (global component).
+     Only product-specific wrappers and nav buttons remain below. ─────────── */
 
-  .filter-pills::-webkit-scrollbar {
-    display: none;
-  }
-
-  .filter-pill {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 bg-white border border-line text-muted cursor-pointer whitespace-nowrap shadow-sm flex-shrink-0;
-  }
-
-  .filter-pill:hover {
-    @apply border-brand-2 text-brand-3 bg-brand-2/5;
-  }
-
-  .filter-pill.is-active {
-    @apply bg-brand-3 text-white border-brand-3 shadow-md shadow-brand-3/20;
-  }
-
-  .filter-pill__count {
-    @apply inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full text-[9px] font-black bg-black/5 text-inherit opacity-50;
-  }
-
-  .filter-pill.is-active .filter-pill__count {
-    @apply bg-white/20 text-white opacity-100;
-  }
-
-  /* Dynamic Fade Indicators (Now handled globally by .scroll-fade-left/right) */
 
   .filter-nav-btn {
     @apply absolute top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white border border-line flex items-center justify-center text-brand shadow-sm z-20 opacity-0 scale-90 transition-all duration-300 pointer-events-none;
