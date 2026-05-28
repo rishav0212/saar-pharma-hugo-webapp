@@ -194,7 +194,7 @@
 
   /* H1 - with premium multi-layered clinical gradient */
   .cat-hero__title {
-    font-size: var(--text-fluid-display-xl);
+    font-size: var(--text-fluid-display-4xl);
     /* break-words removed — prevents mid-word char breaking on mobile; only word-boundary wrapping */
     @apply leading-[0.92] font-display font-black tracking-tighter text-white mb-4;
     overflow-wrap: normal;
@@ -215,8 +215,8 @@
 
   /* Tagline with deep shadows and clean typography */
   .cat-hero__tagline {
-    font-size: var(--text-fluid-subtitle);
-    @apply text-white font-black leading-snug mb-4 max-w-[650px];
+    font-size: var(--text-fluid-lead-tight);
+    @apply text-white font-bold leading-snug mb-4 max-w-[650px];
     letter-spacing: -0.01em;
     text-shadow: 0 2px 10px rgba(var(--color-abyss-rgb), 0.5);
   }
