@@ -26,9 +26,16 @@
       letter-spacing: 0.18em;
     }
 
-    /* — Hero tagline: reduce fluid range on small screens — */
+    /* — Hero title and tagline: balanced on phones without shrinking the H1 too far — */
+    .cat-hero__title {
+      font-size: clamp(30px, 9vw, 40px);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      margin-bottom: 1rem;
+    }
+
     .cat-hero__tagline {
-      font-size: var(--text-fluid-lead-lg);
+      font-size: clamp(16px, 4.2vw, 19px);
       margin-bottom: 0.75rem;
     }
 
@@ -111,15 +118,15 @@
       padding-bottom: 18px !important;
     }
 
-    /* Hero H1: override clamp floor (24px) — 22px is more appropriate at 360px */
+    /* Hero H1: keep the page title prominent on tiny phones without overflowing */
     .cat-hero__title {
-      font-size: 22px !important;
+      font-size: 30px !important;
       letter-spacing: -0.02em;
-      line-height: 1.1;
+      line-height: 1.04;
     }
 
     .cat-hero__tagline {
-      font-size: 14px;
+      font-size: 15px;
     }
 
     .cat-hero__desc {
