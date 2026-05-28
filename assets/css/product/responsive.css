@@ -203,6 +203,35 @@
     .ps-faq-section {
       @apply !py-12;
     }
+
+    /* ─── Tab Content: Authority Section Typography ───
+       .ps-authority-title at 32px and .ps-authority-lead at 18px
+       are too large when the console becomes single-column at <1024px */
+    .ps-authority-title {
+      @apply text-[24px] leading-tight mb-3;
+    }
+
+    .ps-authority-lead {
+      @apply text-[16px] mb-6;
+    }
+
+    .ps-authority-card {
+      @apply p-6;
+    }
+
+    .ps-authority-card h5 {
+      @apply text-[17px] mb-2;
+    }
+
+    /* List items: py-5 (20px) top/bottom is very spacious at tablet */
+    .ps-markdown-content li {
+      @apply py-3.5 text-[14px];
+    }
+
+    /* Tab panel list items inside console: also tighter */
+    .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content li {
+      @apply py-3 text-[14px];
+    }
   }
 
   /* Tablet portrait (640–767px) */
@@ -530,11 +559,95 @@
       @apply flex-col gap-3 pt-5 items-start;
     }
 
-    /* Markdown content h2 inside tab panel: tighter on mobile */
+    /* ─── Tab Panel: Markdown Content Typography ─── */
+
+    /* Tab panel h2: reduce from 22px base (content.css) to 16px on mobile */
     .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content h2 {
-      @apply text-[18px] pb-2 mb-4 mt-5;
+      @apply text-[16px] pb-2 mb-3 mt-4;
     }
 
+    /* Main markdown h2 (outside tab): reduce from 24px */
+    .ps-markdown-content h2 {
+      @apply text-[18px] mt-6 mb-3 pb-3;
+    }
+
+    /* Markdown h3: reduce from 18px */
+    .ps-markdown-content h3 {
+      @apply text-[15px] mt-4 mb-2;
+    }
+
+    /* Markdown p: fine at 15px but tighten paragraph gap */
+    .ps-markdown-content p {
+      @apply mb-3;
+    }
+
+    /* List items: reduce huge py-5 (20px) + pl-10 padding to mobile-friendly values */
+    .ps-markdown-content li {
+      @apply py-3 pl-8 pr-3 text-[13px];
+    }
+
+    /* Tab panel list items: tighter too */
+    .ps-clinical-console .tab-panels .tab-panel .ps-markdown-content li {
+      @apply py-2.5 pl-9 pr-3 text-[13px] mb-2;
+    }
+
+    /* Console frame: reduce massive px-10 lg:px-16 → tighter on mobile */
+    .ps-console-frame {
+      @apply py-4 px-4 rounded-xl;
+    }
+
+    /* Markdown content card: reduce p-8 to tighter mobile padding */
+    .ps-markdown-content {
+      @apply p-4;
+    }
+
+    /* ─── Authority Tab Section ─── */
+
+    /* Authority title: reduce from 32px → 20px on mobile (already 22px at 640px but still large) */
+    .ps-authority-title {
+      @apply text-[20px] leading-tight mb-2;
+    }
+
+    /* Authority lead paragraph: reduce from 18px */
+    .ps-authority-lead {
+      @apply text-[14px] mb-4;
+    }
+
+    /* Authority card: reduce p-8 padding */
+    .ps-authority-card {
+      @apply p-5;
+    }
+
+    /* Authority card heading: reduce from 20px */
+    .ps-authority-card h5 {
+      @apply text-[16px] mb-2;
+    }
+
+    /* Authority card body text */
+    .ps-authority-card p {
+      @apply text-[13px];
+    }
+
+    /* Authority grid: single column on mobile (already max-md:grid-cols-1 but reinforce) */
+    .ps-authority-grid {
+      @apply grid-cols-1 gap-3;
+    }
+
+    /* Authority footer: stack vertically */
+    .ps-authority-footer {
+      @apply flex-col gap-2;
+    }
+
+    /* ─── Supply Dashboard ─── */
+    .ps-supply-grid {
+      @apply grid-cols-1 gap-3;
+    }
+
+    .ps-supply-card {
+      @apply p-4;
+    }
+
+    /* ─── Related Products Section ─── */
     /* Related products section badge pills */
     .ps-related-hub .inline-flex.items-center.gap-2.px-3.py-1 {
       @apply text-[9px] px-2.5 py-1;

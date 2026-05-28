@@ -1,0 +1,128 @@
+@layer components {
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     GLOBAL FILTER PILLS COMPONENT
+     Shared between: Products List (/products/) and Articles List (/articles/)
+     Page-specific wrappers (.product-filter-pills-wrap, .articles-filters-wrap)
+     remain in their own CSS files. Only the pill atoms + scroll row live here.
+     ───────────────────────────────────────────────────────────────────────── */
+
+  /* ── Scroll Row ──────────────────────────────────────────────────────────
+     Container that holds the horizontally scrollable row of pills.
+     Both pages use .filter-pills as the scroll rail class.
+     Products adds px-4 via .product-filter-pills-wrap context; articles
+     adds its own px-0.5 — so we keep the gap/flex base neutral here. */
+  .filter-pills {
+    @apply flex items-center gap-2 overflow-x-auto scroll-smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .filter-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ── Base Pill ───────────────────────────────────────────────────────────
+     Premium teal-accented capsule. Products use the 10px uppercase style
+     as the global standard (matches the premium filter bar aesthetic).
+     Articles override font-size + case via .articles-filters context below. */
+  .filter-pill {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 bg-white border border-line text-muted cursor-pointer whitespace-nowrap shadow-sm flex-shrink-0;
+  }
+
+  .filter-pill:hover {
+    /* Shared hover — teal-2 accent on both pages */
+    @apply border-brand-2 text-brand-3 bg-brand-2/5;
+  }
+
+  .filter-pill.is-active {
+    /* Shared active — deep teal fill */
+    @apply bg-brand-3 text-white border-brand-3 shadow-md shadow-brand-3/20;
+  }
+
+  /* ── Count Badge (used by Products; harmless/unused on Articles) ─────────
+     Small pill suffix that shows the number of items in a category. */
+  .filter-pill__count {
+    @apply inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 rounded-full text-[9px] font-black bg-black/5 text-inherit opacity-50;
+  }
+
+  .filter-pill.is-active .filter-pill__count {
+    @apply bg-white/20 text-white opacity-100;
+  }
+
+  /* ── Articles Context Override ───────────────────────────────────────────
+     The Articles list uses .filter-pill inside .articles-filters.
+     Articles pills are friendlier/less compact (13px, sentence-case) —
+     they sit above editorial cards rather than inside a sticky filter bar. */
+  .articles-filters .filter-pill {
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 700; /* bold, not black */
+    /* Active on articles uses brand (standard teal) not brand-3 (deep teal)
+       to match the editorial/blog visual tone */
+    box-shadow: 0 2px 6px rgba(6, 17, 33, 0.015);
+  }
+
+  .articles-filters .filter-pill:hover:not(.is-active) {
+    /* Articles hover uses .brand instead of .brand-2 for warmer feel */
+    @apply border-brand text-brand bg-brand/5;
+  }
+
+  .articles-filters .filter-pill.is-active {
+    @apply bg-brand border-brand;
+    box-shadow: 0 6px 16px rgba(var(--color-brand-rgb), 0.24);
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════════
+     RESPONSIVE — Mobile & Extra-Small
+     Applied globally so BOTH products and articles benefit automatically.
+     ══════════════════════════════════════════════════════════════════════════ */
+
+  /* ≤767px — Most phones */
+  @media (max-width: 767px) {
+
+    /* Base pill: tighter on mobile — default px-4 py-2 is too chunky */
+    .filter-pill {
+      font-size: 9px !important;
+      padding: 5px 10px !important;
+      gap: 5px !important;
+    }
+
+    /* Count badge: compact to match reduced pill size */
+    .filter-pill__count {
+      min-width: 15px !important;
+      height: 15px !important;
+      font-size: 8px !important;
+    }
+
+    /* Articles context: slightly larger than product pills on mobile,
+       but still tighter than the 13px desktop size */
+    .articles-filters .filter-pill {
+      font-size: 11px !important;
+      padding: 5px 12px !important;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+  }
+
+  /* ≤479px — iPhone SE / Galaxy A small */
+  @media (max-width: 479px) {
+
+    /* Products pills: maximum compactness at xs */
+    .filter-pill {
+      font-size: 8.5px !important;
+      padding: 4px 9px !important;
+      letter-spacing: 0.04em !important;
+    }
+
+    /* Articles pills: floor at 10.5px — legible at 360px */
+    .articles-filters .filter-pill {
+      font-size: 10.5px !important;
+      padding: 4px 10px !important;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+  }
+
+}
