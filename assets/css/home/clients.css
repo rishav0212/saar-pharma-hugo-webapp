@@ -11,10 +11,11 @@
     z-index: 2;
   }
 
-  /* Premium Client Showcase Grid */
+  /* Premium Client Showcase Grid (Flexbox for dynamic centering) */
   .clients-grid {
-    display: grid !important;
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
     gap: 24px !important;
     perspective: 1000px;
     width: 100%;
@@ -22,6 +23,7 @@
 
   /* Premium Card Container */
   .client-card {
+    width: calc(20% - 19.2px); /* 5 items per row minus gaps */
     background: linear-gradient(180deg, var(--color-white) 0%, var(--color-paper) 100%);
     border: 1px solid var(--color-line);
     border-radius: 16px;
@@ -177,24 +179,28 @@
   /* ─── Responsive Breakpoints ─── */
   @media (max-width: 1200px) {
     .clients-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
       gap: 20px !important;
+    }
+    .client-card {
+      width: calc(25% - 15px); /* 4 items per row */
     }
   }
 
   @media (max-width: 991px) {
     .clients-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
       gap: 16px !important;
+    }
+    .client-card {
+      width: calc(33.333% - 10.66px); /* 3 items per row */
     }
   }
 
   @media (max-width: 767px) {
     .clients-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
       gap: 14px !important;
     }
     .client-card {
+      width: calc(50% - 7px); /* 2 items per row */
       padding: 20px 16px;
     }
     .client-card__logo-wrapper {
@@ -212,10 +218,10 @@
 
   @media (max-width: 480px) {
     .clients-grid {
-      grid-template-columns: 1fr !important;
       gap: 16px !important;
     }
     .client-card {
+      width: 100%; /* 1 item per row */
       padding: 24px 20px;
     }
     .client-card__logo-wrapper {
