@@ -499,10 +499,10 @@
       @apply mb-8;
     }
     .contact-hero__chips {
-      @apply gap-2.5;
+      @apply gap-2;
     }
     .contact-hero__chip {
-      @apply px-3.5 py-2 text-[12px] rounded-lg;
+      @apply px-2.5 py-1.5 text-[11px] rounded-lg gap-2;
     }
     .contact-channel-card {
       @apply p-5 gap-3.5 rounded-2xl;
@@ -510,13 +510,29 @@
     .contact-channel-card__icon {
       @apply w-12 h-12 rounded-xl;
     }
-    .contact-profile-card,
-    .contact-commitment-card {
-      @apply p-6 rounded-2xl;
+    .contact-profile-card {
+      @apply p-5 rounded-2xl;
     }
-
+    .contact-profile-card__icon {
+      @apply w-10 h-10 mb-4 rounded-lg shrink-0;
+    }
+    .contact-commitment-card {
+      @apply p-5 gap-3 rounded-2xl;
+    }
+    .contact-commitment-card__icon {
+      @apply w-10 h-10 mb-1 rounded-lg shrink-0;
+    }
+    .office-badge {
+      @apply px-2.5 py-1 text-[9px] tracking-wider;
+    }
     .contact-location-card__body {
-      @apply p-6;
+      @apply p-5;
+    }
+    .contact-location-card__icon-wrap {
+      @apply w-10 h-10 rounded-xl;
+    }
+    .contact-location-card__icon-wrap i {
+      @apply w-5 h-5;
     }
 
     .contact-map-frame {
