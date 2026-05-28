@@ -51,14 +51,11 @@
   {{- end -}}
 {{- end -}}
 
-{{/* ── External References ─────────────────────────────────────────── */}}
-{{- $externalRefs := .Params.external_refs | default slice -}}
-
 {{/*
   Only render the entire block if there is at least ONE section to show.
   Avoids an empty div rendering when an article has no related content.
 */}}
-{{- $hasContent := or $relatedProducts $relatedFinal $externalRefs -}}
+{{- $hasContent := or $relatedProducts $relatedFinal -}}
 {{- if $hasContent }}
 
 <section id="related-insights" class="article-bottom-blocks" aria-label="Related content">
@@ -112,36 +109,6 @@
     </div>
     {{ end }}
 
-    {{/* ── External References ───────────────────────────────────── */}}
-    {{/*
-      External refs are critical for E-E-A-T (Experience, Expertise,
-      Authoritativeness, Trustworthiness). Linking to authoritative
-      sources like WHO, CDSCO, PharmaCompass signals to Google that
-      this article is well-researched and credible.
-    */}}
-    {{ if $externalRefs }}
-    <div id="references" class="article-bottom-section article-external-refs {{ if or $relatedProducts $relatedFinal }}mt-12{{ end }}">
-      <h3 class="article-bottom-title">
-        <i data-lucide="external-link"></i>
-        References & Further Resources
-      </h3>
-      <div class="article-refs-grid">
-        {{ range $externalRefs }}
-        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer nofollow"
-           class="article-ref-card">
-          <div class="article-ref-card__icon" aria-hidden="true">
-            <i data-lucide="link-2"></i>
-          </div>
-          <div class="article-ref-card__body">
-            <span class="article-ref-card__source">{{ .source }}</span>
-            <span class="article-ref-card__title">{{ .title }}</span>
-          </div>
-          <i data-lucide="arrow-up-right" class="article-ref-card__arrow" aria-hidden="true"></i>
-        </a>
-        {{ end }}
-      </div>
-    </div>
-    {{ end }}
 
   </div>
 </section>
