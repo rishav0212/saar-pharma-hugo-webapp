@@ -28,6 +28,7 @@ enableRobotsTXT = true
   form_endpoint = "#"
   google_analytics_id = ""
   noindex = true
+  disable_avif = true
 
   # Social Links
   social_facebook = "https://www.facebook.com/SaarBiotechP"
@@ -99,3 +100,14 @@ enableRobotsTXT = true
   [[related.indices]]
     name = "drug_form"
     weight = 30
+
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "static"
+    target = "static"
+  [[module.mounts]]
+    source = "static/images"
+    target = "assets/images"

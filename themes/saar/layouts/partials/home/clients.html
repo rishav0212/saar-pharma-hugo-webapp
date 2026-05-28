@@ -1,43 +1,52 @@
-<section class="section section--paper section-rail" id="clients" aria-labelledby="clients-title">
+<section class="section section-clients" id="clients" aria-labelledby="clients-title">
   <div class="container">
     <div class="clients-layout">
-      <!-- Section Header - Fully Standardized with Home Page Theme -->
+      <!-- Section Header -->
       <div class="section-head section-head--center" data-animate data-animate-type="scale-in">
-        <span class="eyebrow">Corporate Client Showcase</span>
+        <span class="eyebrow">Partners & Clients</span>
         <h2 id="clients-title" class="section-title">Our B2B Contract Manufacturing Clients</h2>
         <p class="section-kicker">
           These prominent healthcare and wellness brands outsource their formulation production and place high-volume third-party manufacturing orders with Saar Biotech, leveraging our state-of-the-art Baddi campus.
         </p>
       </div>
 
-      <!-- Premium B2B Clients Showcase Grid -->
-      <div class="clients-grid" data-animate data-animate-stagger>
-        {{ range .items }}
-        <article class="client-card">
-          <!-- Elegant landscape logo container (fits wide horizontal brand logos perfectly) -->
-          <div class="client-card__logo-wrapper">
+      <!-- Minimalist Graphic Logo Wall -->
+      <div class="clients-logo-wall" data-animate data-animate-stagger>
+        {{ range $index, $element := .items }}
+        <article class="logo-tile{{ if ge $index 10 }} logo-tile--hidden{{ end }}" tabindex="0" aria-label="{{ .name }} - B2B contract manufacturing partner">
+          <!-- Logo container: centered and grayscale by default -->
+          <div class="logo-tile__logo-wrap">
             {{ partial "shared/optimized-image.html" (dict
               "src" .logo
               "alt" (printf "%s logo - B2B Contract Manufacturing partner Saar Biotech" .name)
-              "width" 130
-              "height" 52
+              "width" 240
+              "height" 96
               "loading" "lazy"
               "decoding" "async"
             ) }}
           </div>
-          
-          <!-- Card details with rich B2B descriptions for outstanding SEO indexing -->
-          <div class="client-card__body">
-            <h3 class="client-card__name">{{ .name }}</h3>
-            <span class="client-card__niche">{{ .niche }}</span>
-            <p class="client-card__desc">{{ .desc }}</p>
+
+          <!-- Slide-up details overlay (visible on hover/tap) -->
+          <div class="logo-tile__details">
+            <h3 class="logo-tile__name">{{ .name }}</h3>
+            <span class="logo-tile__niche">{{ .niche }}</span>
           </div>
 
-          <!-- Micro-glow element behind logo that lights up on hover -->
-          <div class="client-card__glow" aria-hidden="true"></div>
+          <!-- Off-screen SEO Text Node: Preserves all rich B2B keywords and formulation descriptions for Google indexing -->
+          <p class="sr-only">{{ .desc }}</p>
         </article>
         {{ end }}
       </div>
+
+      <!-- Show More Dynamic Toggle Trigger -->
+      {{ if gt (len .items) 10 }}
+      <div class="logo-wall-trigger-wrap" data-animate>
+        <button class="btn btn--outline logo-wall-toggle-btn" id="logo-wall-toggle" type="button">
+          <span>Show All Partner Brands</span>
+          <i data-lucide="chevron-down" class="icon icon--sm logo-wall-toggle-icon"></i>
+        </button>
+      </div>
+      {{ end }}
     </div>
   </div>
 </section>

@@ -16,6 +16,7 @@ import { initFAB } from './modules/fab';
 import { initBackToTop } from './modules/back-to-top';
 import { initContactPage } from './modules/contact';
 import { initArticle } from './modules/article';
+import { initClientWall } from './modules/clients';
 
 
 function safeInit(name, fn) {
@@ -73,6 +74,7 @@ const initAll = () => {
   safeInit("BackToTop", initBackToTop);
   safeInit("ContactPage", initContactPage);
   safeInit("Article", initArticle);
+  safeInit("ClientWall", initClientWall);
 };
 
 if (document.readyState === "loading") {

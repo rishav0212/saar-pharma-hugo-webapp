@@ -12,18 +12,23 @@
 {{- $onerror := .onerror | default "" -}}
 {{- $staticPath := printf "static/%s" $path -}}
 
-{{- if and hugo.IsExtended (resources.Get $path) -}}
+{{- if and hugo.IsExtended (resources.Get $path) (not (strings.HasSuffix $path ".svg")) -}}
   {{- with resources.Get $path -}}
   {{- $targetWidth := $width -}}
   {{- if lt .Width $targetWidth -}}
     {{- $targetWidth = .Width -}}
   {{- end -}}
   {{- $resize := printf "resize %dx" $targetWidth -}}
-  {{- $avif := .Process (printf "%s avif q70" $resize) -}}
+  {{- $avif := "" -}}
+  {{- if and (not hugo.IsServer) (not site.Params.disable_avif) -}}
+    {{- $avif = .Process (printf "%s avif q70" $resize) -}}
+  {{- end -}}
   {{- $webp := .Process (printf "%s webp q75" $resize) -}}
   {{- $fallback := .Process $resize -}}
   <picture{{ with $pictureClass }} class="{{ . }}"{{ end }}>
+    {{- if $avif -}}
     <source srcset="{{ $avif.RelPermalink }}" type="image/avif">
+    {{- end -}}
     <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
     <img{{ with $id }} id="{{ . }}"{{ end }}{{ with $class }} class="{{ . }}"{{ end }}
       src="{{ $fallback.RelPermalink }}"
