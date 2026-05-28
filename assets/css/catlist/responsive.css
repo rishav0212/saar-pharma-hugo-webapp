@@ -58,37 +58,6 @@
       margin-bottom: 2rem;
     }
 
-    /* — Section title text: scale down for mobile — */
-    .catlist-section-title {
-      font-size: var(--text-fluid-heading-xl);
-      line-height: 1.15;
-      letter-spacing: -0.025em;
-    }
-
-    /* — Bento card title — */
-    .catlist-bento-card__title {
-      font-size: 18px;
-    }
-
-    /* — Bento card description — */
-    .catlist-bento-card__desc {
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    /* — Therapeutic grid card titles — */
-    .catlist-therapeutic-card__title {
-      font-size: 14px;
-    }
-
-    /* — Why card title/desc: already handled at xs, but tighten at md too — */
-    .catlist-why-card__title {
-      font-size: 15px;
-    }
-
-    .catlist-why-card__desc {
-      font-size: 13px;
-    }
   }
 
   /* ══════════════════════════════════════════════════════
@@ -112,14 +81,6 @@
 
     /* — Hero description — */
     .catlist-hero__desc {
-      font-size: 13.5px;
-      line-height: 1.6;
-    }
-
-    /* — Stat value: clamp(18px, 2.4vw, 26px) → on 360px ≈ 8.6px → floor 18px.
-       Override to 16px for extra compactness — */
-    .catlist-hero__stat-value {
-      font-size: 16px;
     }
 
     .catlist-hero__stat-label {
