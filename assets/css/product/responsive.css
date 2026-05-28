@@ -17,10 +17,9 @@
       padding-bottom: clamp(32px, 7vw, 60px) !important;
     }
 
-    /* Products hero H1 — clamp base is 22px at 390px which reads small.
-       Override to 32px on mobile so the hero title commands visual presence */
+    /* Products hero H1 — commands visual presence on mobile */
     .products-hero__inner h1 {
-      font-size: clamp(28px, 7.5vw, 52px) !important;
+      font-size: clamp(34px, 8vw, 56px) !important;
       line-height: 1.1;
       overflow-wrap: break-word;
       word-break: break-word;
@@ -57,9 +56,9 @@
       padding-bottom: 20px !important;
     }
 
-    /* H1: push floor up to 26px on 360px phones — was 20px which felt tiny */
+    /* H1: push floor up to 30px on 360px phones to prevent it from looking small */
     .products-hero__inner h1 {
-      font-size: clamp(26px, 6.8vw, 40px) !important;
+      font-size: clamp(30px, 8vw, 44px) !important;
       line-height: 1.1;
       margin-bottom: 0.625rem;
     }

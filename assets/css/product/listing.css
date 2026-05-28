@@ -95,7 +95,7 @@
 
   .products-hero__inner h1 {
     /* break-words intentionally removed — forces mid-word char breaks; let browser wrap at word boundaries instead */
-    @apply text-[clamp(22px,5.5vw,72px)] leading-[1.1] mb-6 font-display font-black tracking-tighter text-white;
+    @apply text-[clamp(32px,6vw,78px)] leading-[1.1] mb-6 font-display font-black tracking-tighter text-white;
     overflow-wrap: normal;
     word-break: normal;
     text-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
