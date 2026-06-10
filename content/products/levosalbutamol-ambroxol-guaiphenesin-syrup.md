@@ -95,8 +95,7 @@ custom_specs:
     value: "Chandigarh"
   - label: "Compliance"
     value: "DCGI Approved / Schedule M"
-  - label: "Dossier Status"
-    value: "CTD/ACTD Available"
+
   - label: "Production Scale"
     value: "High-Volume Automatic Liquid Filling"
 

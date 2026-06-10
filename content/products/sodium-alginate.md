@@ -93,8 +93,7 @@ custom_specs:
     value: "Chandigarh"
   - label: "Compliance"
     value: "DCGI Approved / Schedule M"
-  - label: "Dossier Status"
-    value: "CTD/ACTD Available"
+
   - label: "Production Scale"
     value: "High-Volume Automatic Liquid Filling"
 
@@ -131,8 +130,7 @@ faq_b2b:
 # 7. PRODUCT GALLERY IMAGES
 # ────────────────────────────────────────────────────
 images:
-  - "sodium-alginate-suspension.webp"
-  - "sodium-alginate-suspension-premium.png"
+  - "sodium-alginate.jpg"
 ---
 
 Sodium Alginate, Sodium Bicarbonate, and Calcium Carbonate Oral Suspension is a clinically precise, triple-action anti-reflux formulation engineered for the rapid management of Gastroesophageal Reflux Disease (GERD), heartburn, and chronic indigestion. As a premier **WHO-GMP certified pharmaceutical manufacturer in Baddi**, Saar Biotech utilises controlled high-shear homogenization and rigorous rheological balancing to ensure this antacid suspension delivers an immediate, structurally robust raft and superior gastric relief.

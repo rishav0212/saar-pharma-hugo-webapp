@@ -99,6 +99,7 @@ categories:
   - Eye Drops
   - Ear Drops
   - Nasal Sprays
+  - Sprays
   - Mouthwash
   - Gargles
   - Inhalers
@@ -186,6 +187,7 @@ molecules:
   - chlordiazepoxide
   - chlorhexidine
   - chlorpheniramine
+  - chlorpheniramine maleate
   - cholecalciferol
   - cilnidipine
   - cinnarizine
@@ -413,3 +415,7 @@ molecules:
   - voglibose
   - xylometazoline
   - zinc
+  - benzyl alcohol
+  - linseed oil
+  - menthol
+  - methyl salicylate

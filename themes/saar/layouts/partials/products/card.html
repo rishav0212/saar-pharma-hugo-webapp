@@ -34,6 +34,16 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
+{{- with .Params.presentations -}}
+  {{- range . -}}
+    {{- with .ingredients -}}
+      {{- range . -}}
+        {{- $searchIndexSlice = $searchIndexSlice | append (.salt | lower) -}}
+        {{- $searchIndexSlice = $searchIndexSlice | append (.strength | lower) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 
 {{- /* Extract from B2B and clinical custom specifications */ -}}
 {{- with .Params.custom_specs -}}

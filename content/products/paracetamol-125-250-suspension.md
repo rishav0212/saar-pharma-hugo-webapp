@@ -74,8 +74,7 @@ custom_specs:
     value: "Baddi, Himachal Pradesh"
   - label: "Compliance"
     value: "DCGI Approved / Schedule M"
-  - label: "Dossier Status"
-    value: "CTD/ACTD Available"
+
   - label: "Production Scale"
     value: "High-Volume Automatic Liquid Filling"
 
@@ -112,8 +111,7 @@ faq_b2b:
 # 7. PRODUCT GALLERY IMAGES
 # ────────────────────────────────────────────────────
 images:
-  - "paracetamol-suspension.webp"
-  - "paracetamol-suspension-premium.png"
+  - "paracetamol-125-250-suspension.jpg"
 ---
 
 Paracetamol remains the most prescribed pediatric analgesic and antipyretic globally. Because it is a high-volume, daily-use medication, commercial success depends entirely on manufacturing efficiency, batch consistency, and pediatric palatability. As a high-capacity **WHO-GMP certified pharmaceutical manufacturer in Baddi**, Saar Biotech utilizes automated liquid filling technology and advanced taste-masking to deliver a premium Paracetamol Paediatric Oral Suspension built for dominant B2B market performance.

@@ -61,8 +61,6 @@ manufacturing_specs:
     value: "Schedule M / ISO 9001:2015"
   - label: "Regulatory Compliance"
     value: "DCGI / CDSCO Guidelines"
-  - label: "Dossier Status"
-    value: "CTD Format Available"
   - label: "Flavouring Systems"
     value: "Mango, Orange, Peppermint, Mixed Fruit"
   - label: "Pack Sizes Available"

@@ -89,8 +89,7 @@ faq_b2b:
 
 # 7. GALLERY
 images:
-  - "azithromycin.webp"
-  - azithromycin-premium.png
+  - "azithromycin.jpg"
 ---
 
 Azithromycin is a potent, broad-spectrum macrolide antibiotic essential for treating a wide range of bacterial infections. As a premier **WHO-GMP certified pharmaceutical manufacturer in Baddi**, Saar Biotech utilizes advanced micronization techniques to ensure that our Azithromycin Oral Suspension delivers superior bioavailability and molecular stability.
