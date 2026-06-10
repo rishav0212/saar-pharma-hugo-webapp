@@ -132,6 +132,7 @@ faq_b2b:
 # ────────────────────────────────────────────────────
 images:
   - "sodium-chloride-benzalkonium.jpg"
+  - "sodium-chloride-benzalkonium-nasal-spray-1.jpg"
 ---
 
 Sodium Chloride and Benzalkonium Chloride Nasal Spray is a highly versatile, drug-free formulation essential for the management of nasal congestion, allergic rhinitis, and post-operative sinus care. As a premier **WHO-GMP certified pharmaceutical manufacturer in Baddi**, Saar Biotech utilizes ISO Class 7 cleanroom sterile filling to ensure our nasal solutions deliver uncompromised purity, precise micro-mist dispersion, and rapid mucosal relief.

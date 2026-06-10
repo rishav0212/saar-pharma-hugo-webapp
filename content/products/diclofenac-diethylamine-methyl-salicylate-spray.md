@@ -116,6 +116,7 @@ faq_b2b:
 # 7. GALLERY
 images:
   - "diclofenac-diethylamine-methyl-salicylate-spray.jpg"
+  - "diclofenac-diethylamine-methyl-salicylate-spray-1.jpg"
 ---
 
 A precisely engineered topical analgesic spray combining five synergistic actives — formulated for consistent dermal delivery and fast-acting musculoskeletal pain relief. As a **GMP-certified pharmaceutical manufacturer in Baddi**, Saar Biotech produces this multi-component spray with rigorous quality controls across every batch, making it a reliable choice for orthopaedic and sports medicine brands seeking contract manufacturing in India.

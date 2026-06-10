@@ -130,6 +130,7 @@ faq_b2b:
 # ────────────────────────────────────────────────────
 images:
   - "cholecalciferol-vitamin-d3-shot.jpg"
+  - "cholecalciferol-vitamin-d3-nano-shots-1.jpg"
 ---
 
 Cholecalciferol (Vitamin D3) is a critical fat-soluble secosteroid essential for systemic calcium metabolism, skeletal integrity, and severe bone disorder management. As a premier **WHO-GMP certified pharmaceutical manufacturer in Baddi**, Saar Biotech utilizes advanced aqueous nano-emulsification technology to ensure our 60000 IU Nano Shots deliver unparalleled intestinal absorption, maximum bioavailability, and rapid clinical correction of severe vitamin deficiency.

@@ -119,6 +119,7 @@ faq_b2b:
 # 7. GALLERY
 images:
   - "sodium-chloride-nasal-spray.jpg"
+  - "sodium-chloride-nasal-spray-1.jpg"
 ---
 
 Sodium Chloride 0.65% Nasal Spray is one of the most widely recommended non-medicated nasal care products for daily mucosal hygiene, congestion relief, and paediatric nasal care. As a **WHO-GMP certified pharmaceutical manufacturer in Baddi**, Saar Biotech produces this precisely buffered hypotonic saline spray with a formulation engineered for gentle, consistent mucosal delivery across all patient groups — from neonates to adults.

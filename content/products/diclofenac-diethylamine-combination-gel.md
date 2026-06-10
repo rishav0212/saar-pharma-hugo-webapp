@@ -130,6 +130,7 @@ faq_b2b:
 # 7. GALLERY
 images:
   - "diclofenac-diethylamine-combination-gel.jpg"
+  - "diclofenac-diethylamine-combination-gel-1.jpg"
 ---
 
 Diclofenac Diethylamine Combination Gel is a market-proven, multi-mechanism topical analgesic combining an NSAID, two counter-irritants, and a penetration-enhancing botanical — formulated for fast, targeted relief of musculoskeletal and joint pain. As a **WHO-GMP certified pharmaceutical manufacturer in Baddi**, Saar Biotech produces this combination gel using controlled homogenization to ensure uniform API dispersion, consistent viscosity, and stable percutaneous delivery across every batch.
