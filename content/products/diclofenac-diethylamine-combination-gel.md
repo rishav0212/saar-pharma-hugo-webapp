@@ -42,13 +42,7 @@ dosage_form: "Topical Gel"
 drug_form: "Topical"
 
 # BACKEND MATCHING
-compositions: ["diclofenac"]
-# ⚠️ SCHEMA FLAGS — Please add the following molecules to data/schema.yml:
-# "methyl salicylate" — topical counter-irritant/analgesic, used in multiple ortho combination gels
-# "menthol" — widely used in topical analgesic and cold/cough combinations
-# "linseed oil" — used in topical analgesic/anti-inflammatory gels
-# "benzyl alcohol" — preservative/local anaesthetic used in topical preparations
-# These are all common Indian pharma combination ingredients and will recur across your Gels, Ointments, and Roll-On pages.
+compositions: ["diclofenac", "methyl salicylate", "menthol", "linseed oil", "benzyl alcohol"]
 
 # FRONTEND DISPLAY
 presentation:
