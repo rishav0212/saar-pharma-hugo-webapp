@@ -1,0 +1,92 @@
+{{/*
+  RELATED PROMOTIONS ENGINE
+  Maps to the global ps-related-row component and editorial-card design system.
+*/}}
+
+{{ $current := . }}
+{{ $allPromos := where .Site.RegularPages "Section" "promotions" }}
+
+{{/* Basic filtering: exclude current page */}}
+{{ $related := slice }}
+{{ range $allPromos }}
+  {{ if ne .RelPermalink $current.RelPermalink }}
+    {{ $related = $related | append . }}
+  {{ end }}
+{{ end }}
+
+{{ if gt (len $related) 0 }}
+<div class="ps-related-section ps-related-hub border-t border-line">
+  <section id="related-promotions" class="ps-related-row section bg-white relative overflow-hidden pt-12 pb-16 max-md:pt-8 max-md:pb-12">
+    <div class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2"></div>
+    
+    <div class="container relative z-10">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-x-12 gap-y-6 mb-8 max-md:mb-10">
+        <div class="flex-grow">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/20 mb-3 max-md:mb-4">
+            <span class="w-2 h-2 rounded-full bg-brand animate-pulse"></span>
+            <span class="text-[10px] font-black text-brand-3 uppercase tracking-widest">Discover More</span>
+          </div>
+          <div class="flex flex-col lg:flex-row lg:items-baseline gap-x-8 gap-y-2">
+            <h2 class="text-3xl lg:text-4xl font-display font-black text-ink tracking-tight leading-tight whitespace-nowrap mb-0">More
+              <span class="text-brand">Promotions</span></h2>
+            <p class="text-muted text-[15px] lg:border-l lg:border-line lg:pl-8 max-w-md max-md:text-left">Explore other active manufacturing promotions and formulations.</p>
+          </div>
+        </div>
+
+        <div class="ps-nav-group flex items-center justify-end max-md:justify-between gap-6 w-full lg:w-auto" id="nav-promo-slider">
+          <div class="scroll-controls !mt-0 !flex !gap-3">
+            <button class="scroll-btn prev-btn" data-target="promo-slider" aria-label="Previous">
+              <i data-lucide="chevron-left" class="icon"></i>
+            </button>
+            <button class="scroll-btn next-btn" data-target="promo-slider" aria-label="Next">
+              <i data-lucide="chevron-right" class="icon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ps-slider-viewport overflow-x-auto hide-scrollbar snap-x snap-mandatory" id="promo-slider">
+        <div class="flex items-stretch gap-6 pb-4">
+          {{ range first 6 $related }}
+          <div class="flex-shrink-0 w-[280px] md:w-[320px] max-md:w-[280px] snap-start">
+            <a class="editorial-card h-full" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
+              <div class="editorial-card__visual">
+                {{ if .Params.poster }}
+                  {{ partial "shared/optimized-image.html" (dict
+                    "src" .Params.poster
+                    "alt" (.Params.poster_alt | default .Title)
+                    "class" "editorial-card__img"
+                    "width" 400
+                    "loading" "lazy"
+                  ) }}
+                {{ else }}
+                  <div class="editorial-card__placeholder">
+                    <i data-lucide="image" class="icon icon--lg text-white/30" aria-hidden="true"></i>
+                  </div>
+                {{ end }}
+              </div>
+
+              <div class="editorial-card__body">
+                <div class="editorial-card__cat-row">
+                  <span class="editorial-cat-badge">{{ .Params.subtitle | default "Promotion" }}</span>
+                </div>
+                
+                <h3 class="editorial-card__title">{{ .Params.headline | default .Title }}</h3>
+                <p class="editorial-card__summary">{{ .Summary | truncate 80 }}</p>
+                
+                <div class="editorial-card__footer mt-auto pt-4">
+                  <span class="editorial-card__action">
+                    View Promotion
+                    <i data-lucide="chevron-right" class="editorial-card__arrow icon--sm" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}

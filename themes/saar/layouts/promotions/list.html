@@ -1,0 +1,122 @@
+{{ define "main" }}
+{{/* PROMOTIONS LIST PAGE — semantic class names only */}}
+
+<div class="promo-list-page">
+
+  {{/* 1. GLOBALLY CONSISTENT CATLIST HERO */}}
+  <section class="catlist-hero">
+    <div class="catlist-hero__bg" aria-hidden="true">
+      <div class="catlist-hero__glow"></div>
+    </div>
+    <div class="container relative z-10">
+      <div class="mb-2 w-full flex justify-start">
+        {{ partial "shared/breadcrumb.html" (dict "variant" "on-dark" "items" (slice (dict "label" "Promotions"))) }}
+      </div>
+      
+      <div class="catlist-hero__inner">
+        <span class="eyebrow catlist-hero__eyebrow" data-animate="fade-in">
+          <i data-lucide="megaphone" class="icon--sm" aria-hidden="true"></i>
+          Latest from Saar Biotech
+        </span>
+        <h1 class="catlist-hero__title" data-animate="fade-up" data-delay="0.1">
+          Pharmaceutical <span class="text-brand">Promotions</span>
+        </h1>
+        <p class="catlist-hero__desc" data-animate="fade-up" data-delay="0.2">
+          Explore our latest third-party manufacturing promotions. Each promotion highlights a formulation available for
+          <strong>WHO-GMP certified contract manufacturing</strong> at our Baddi facility.
+        </p>
+        <div class="catlist-hero__cta-group mt-8" data-animate="fade-up" data-delay="0.3">
+          <a href="/products/" class="btn btn--primary">Browse Products <i data-lucide="arrow-right" class="icon--sm"></i></a>
+          <a href="/contact/" class="btn btn--ghost">Request a Quote <i data-lucide="send" class="icon--sm"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{/* 2. GLOBALLY CONSISTENT EDITORIAL GRID */}}
+  <section id="promo-grid-section" class="section section--paper">
+    <div class="container">
+
+      {{ $promotions := where .Site.RegularPages "Section" "promotions" }}
+      {{ $promotions = sort $promotions "Date" "desc" }}
+
+      {{ if $promotions }}
+      <div class="editorial-grid-wrap">
+        <div class="editorial-grid" data-animate="fade-up" data-delay="0.2">
+          {{ range $promotions }}
+          <a class="editorial-card" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
+            
+            <div class="editorial-card__visual">
+              {{ if .Params.poster }}
+                {{ partial "shared/optimized-image.html" (dict
+                  "src" .Params.poster
+                  "alt" (.Params.poster_alt | default .Title)
+                  "class" "editorial-card__img"
+                  "width" 560
+                  "loading" "lazy"
+                ) }}
+              {{ else }}
+                <div class="editorial-card__placeholder">
+                  <i data-lucide="image" class="icon icon--lg text-white/30" aria-hidden="true"></i>
+                </div>
+              {{ end }}
+            </div>
+
+            <div class="editorial-card__body">
+              <div class="editorial-card__cat-row">
+                <span class="editorial-cat-badge">{{ .Params.subtitle | default "Promotion" }}</span>
+                {{ if .Params.promo_date }}
+                <span class="editorial-card__date">
+                  {{ .Params.promo_date }}
+                </span>
+                {{ end }}
+              </div>
+              
+              <h3 class="editorial-card__title">{{ .Params.headline | default .Title }}</h3>
+              
+              {{ if .Params.highlights }}
+              <ul class="flex flex-col gap-1.5 list-none p-0 m-0 mt-3 mb-2">
+                {{ range first 3 .Params.highlights }}
+                <li class="flex items-center gap-2 text-[13px] text-muted">
+                  <i data-lucide="check-circle-2" class="w-[14px] h-[14px] text-brand flex-shrink-0"></i>
+                  {{ . }}
+                </li>
+                {{ end }}
+              </ul>
+              {{ else }}
+              <p class="editorial-card__summary">{{ .Summary | truncate 110 }}</p>
+              {{ end }}
+              
+              <div class="editorial-card__footer mt-auto pt-4">
+                <span class="editorial-card__action">
+                  View Promotion
+                  <i data-lucide="chevron-right" class="editorial-card__arrow icon--sm" aria-hidden="true"></i>
+                </span>
+                {{ if .Params.drug_form }}
+                <span class="badge badge--teal">{{ .Params.drug_form }}</span>
+                {{ end }}
+              </div>
+            </div>
+
+          </a>
+          {{ end }}
+        </div>
+      </div>
+
+      {{ else }}
+      <div id="articles-empty-state" class="articles-empty-state">
+        <div class="articles-empty-icon-wrap">
+          <i data-lucide="megaphone" class="icon icon--lg" aria-hidden="true"></i>
+        </div>
+        <h3 class="articles-empty-title">New Promotions Coming Soon</h3>
+        <p class="articles-empty-text">We're preparing exciting manufacturing promotions. Contact us to learn about current availability.</p>
+        <a href="/contact/" class="btn btn--primary mt-4">Contact Us</a>
+      </div>
+      {{ end }}
+
+    </div>
+  </section>
+
+  {{ partial "shared/cta.html" . }}
+</div>
+{{ end }}

@@ -17,6 +17,7 @@ import { initBackToTop } from './modules/back-to-top';
 import { initContactPage } from './modules/contact';
 import { initArticle } from './modules/article';
 import { initClientWall } from './modules/clients';
+import { initPromotion } from './modules/promotion';
 
 
 function safeInit(name, fn) {
@@ -75,6 +76,7 @@ const initAll = () => {
   safeInit("ContactPage", initContactPage);
   safeInit("Article", initArticle);
   safeInit("ClientWall", initClientWall);
+  safeInit("Promotion", initPromotion);
 };
 
 if (document.readyState === "loading") {

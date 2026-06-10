@@ -1,0 +1,68 @@
+{{/*
+  partial: promotion/poster-panel.html — semantic class names only
+*/}}
+
+<div class="promo-poster-panel" data-animate data-animate-type="slide-right">
+
+  {{ if .Params.promo_date }}
+  <div class="promo-date-badge">
+    <i data-lucide="calendar" class="icon--sm"></i>
+    {{ .Params.promo_date }} Promotion
+  </div>
+  {{ end }}
+
+  <div class="promo-poster-frame" id="promo-poster-frame">
+    <div class="promo-poster-frame__glow" aria-hidden="true"></div>
+
+    {{ if .Params.poster }}
+    <button
+      class="promo-poster-frame__zoom"
+      id="promo-poster-zoom"
+      aria-label="Click to enlarge poster"
+      data-poster="{{ .Params.poster }}"
+      data-alt="{{ .Params.poster_alt | default .Title }}"
+    >
+      <i data-lucide="zoom-in" class="icon--sm"></i>
+      View Full Size
+    </button>
+
+    {{ partial "shared/optimized-image.html" (dict
+      "src"           .Params.poster
+      "alt"           (.Params.poster_alt | default .Title)
+      "class"         "promo-poster-img"
+      "id"            "promo-poster-img"
+      "pictureClass"  "promo-poster-picture"
+      "width"         900
+      "loading"       "eager"
+      "fetchpriority" "high"
+    ) }}
+
+    {{ else }}
+    <div class="promo-poster-frame__empty">
+      <i data-lucide="image" class="icon--lg"></i>
+      <span>Promotion poster not available</span>
+    </div>
+    {{ end }}
+  </div>
+
+  <div class="promo-cert-strip">
+    <div class="promo-cert-strip__item">
+      <img src="/images/certs/who.svg" alt="WHO" width="28" height="28" loading="lazy">
+      <span>WHO</span>
+    </div>
+    <div class="promo-cert-strip__item">
+      <img src="/images/certs/iso.svg" alt="ISO" width="28" height="28" loading="lazy">
+      <span>ISO</span>
+    </div>
+    <div class="promo-cert-strip__item">
+      <img src="/images/certs/gmp.svg" alt="GMP" width="28" height="28" loading="lazy">
+      <span>GMP</span>
+    </div>
+    <div class="promo-cert-strip__divider" aria-hidden="true"></div>
+    <a href="tel:{{ $.Site.Params.phone | urlize }}" class="promo-cert-strip__phone">
+      <i data-lucide="phone-call" class="icon--sm"></i>
+      {{ $.Site.Params.phone }}
+    </a>
+  </div>
+
+</div>

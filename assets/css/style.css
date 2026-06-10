@@ -394,4 +394,7 @@
 @import "./assets/css/catlist/catlist.css";
 @import "./assets/css/articles/articles.css";
 
+/* Promotion Pages (single + list) */
+@import "./assets/css/promotions/promotions.css";
+
 /* Force stylesheet compilation: 2026-05-23T21:49:00 */

@@ -16,6 +16,7 @@
       <a href="/products/" class="{{ if and (or (eq .Section "products") (eq .Section "product")) (ne .RelPermalink "/products/categories/") }}active{{ end }}">Products</a>
       <a href="/contact/" class="{{ if eq .RelPermalink "/contact/" }}active{{ end }}">Contact Us</a>
       <a href="/articles/" class="{{ if or (eq .RelPermalink "/articles/") (eq .Section "articles") }}active{{ end }}">Articles</a>
+      <a href="/promotions/" class="{{ if or (eq .RelPermalink "/promotions/") (eq .Section "promotions") }}active{{ end }}">Promotions</a>
     </nav>
 
     <div id="header-actions" class="header-actions">
@@ -45,6 +46,7 @@
     <a href="/products/" class="{{ if and (or (eq .Section "products") (eq .Section "product")) (ne .RelPermalink "/products/categories/") }}active{{ end }}">Product Range</a>
     <a href="/contact/" class="{{ if eq .RelPermalink "/contact/" }}active{{ end }}">Contact Us</a>
     <a href="/articles/" class="{{ if or (eq .RelPermalink "/articles/") (eq .Section "articles") }}active{{ end }}">Articles</a>
+    <a href="/promotions/" class="{{ if or (eq .RelPermalink "/promotions/") (eq .Section "promotions") }}active{{ end }}">Promotions</a>
     <a href="#" data-enquire-trigger>Enquire Now</a>
   </nav>
 </header>

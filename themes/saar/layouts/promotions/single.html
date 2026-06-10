@@ -1,0 +1,256 @@
+{{ define "main" }}
+{{/*
+  PROMOTION SINGLE PAGE TEMPLATE
+  HTML uses only semantic class names — all styles in assets/css/promotions/single.css
+*/}}
+
+{{ partial "promotion/schema.html" . }}
+{{ partial "promotion/breadcrumb.html" . }}
+
+<article class="promo-page" itemscope itemtype="https://schema.org/Offer" id="promotion-main">
+
+  {{/* ── HERO: Dark cinematic split — poster | info panel ── */}}
+  <section id="promo-hero" class="promo-hero" aria-label="Promotion overview">
+    <div class="promo-hero__glow promo-hero__glow--tl" aria-hidden="true"></div>
+    <div class="promo-hero__glow promo-hero__glow--br" aria-hidden="true"></div>
+    <div class="container">
+      <div class="ps-split-layout relative z-10">
+        {{ partial "promotion/poster-panel.html" . }}
+        {{ partial "promotion/info-panel.html" . }}
+      </div>
+    </div>
+  </section>
+
+
+  {{/* ── COMPOSITION/RANGE STRIP ── */}}
+  {{ if or .Params.composition .Params.compositions_list }}
+  <section id="promo-composition" class="section promo-composition" aria-label="Product range and compositions">
+    <div class="container">
+      <div class="promo-composition__wrap" data-animate>
+
+        <div class="promo-composition__header">
+          <span class="eyebrow text-brand">Active Formulations & Molecules</span>
+          <h2 class="section-title section-title--sm">
+            {{ if .Params.compositions_list }}
+              Formulations in this Range
+            {{ else }}
+              Composition of {{ .Params.headline | default .Title }}
+            {{ end }}
+          </h2>
+          <p class="section-kicker">
+            Verified DCGI-approved formulations available for
+            <strong>third-party contract manufacturing</strong> at Saar Biotech's WHO-GMP facility in Baddi.
+          </p>
+        </div>
+
+        {{ if .Params.compositions_list }}
+        {{/* Multiple formulations list */}}
+        <div class="promo-range-grid">
+          {{ range .Params.compositions_list }}
+          
+          {{/* Check if this formulation links to a real product page */}}
+          {{ $linkedProduct := false }}
+          {{ if .product_url }}
+            {{ $linkedProduct = site.GetPage .product_url }}
+          {{ end }}
+
+          {{ if and $linkedProduct $linkedProduct.Title }}
+            {{/* Render the standard site-wide product card */}}
+            <div class="promo-product-card-wrap">
+              {{ partial "products/card.html" $linkedProduct }}
+            </div>
+          {{ end }}
+          {{ end }}
+        </div>
+        {{ else if .Params.composition }}
+        {{/* Original single composition table style */}}
+        <div class="promo-composition__table-wrap">
+          <table class="promo-composition__table" role="table" aria-label="Product composition table">
+            <thead>
+              <tr>
+                <th scope="col">Active Salt / Molecule</th>
+                <th scope="col">Strength per Unit</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range .Params.composition }}
+              <tr>
+                <td><strong itemprop="name">{{ .salt }}</strong></td>
+                <td><span class="promo-strength-badge">{{ .strength }}</span></td>
+                <td>
+                  <span class="promo-status-badge">
+                    <i data-lucide="check-circle-2" class="icon--sm"></i>
+                    DCGI Approved
+                  </span>
+                </td>
+              </tr>
+              {{ end }}
+            </tbody>
+          </table>
+        </div>
+        {{ end }}
+
+        <div class="promo-composition__footer">
+          <a href="/products/categories/" class="btn btn--outline btn--small">
+            <i data-lucide="layers" class="icon--sm"></i>
+            Browse All Dosage Categories
+          </a>
+          {{ if .Params.product_links }}
+            {{ range .Params.product_links }}
+            <a href="{{ .url }}" class="btn btn--primary btn--small">
+              <i data-lucide="arrow-up-right" class="icon--sm"></i>
+              {{ .label }}
+            </a>
+            {{ end }}
+          {{ else if .Params.related_product_slug }}
+            <a href="/product/{{ .Params.related_product_slug }}/" class="btn btn--primary btn--small">
+              <i data-lucide="flask-conical" class="icon--sm"></i>
+              {{ .Params.related_product_label | default "View Product Details" }}
+            </a>
+          {{ end }}
+        </div>
+
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+
+  {{/* ── BODY CONTENT + SIDEBAR ── */}}
+  {{ if .Content }}
+  <section id="promo-content" class="ps-content-wrap">
+    <div class="container">
+      <div class="ps-content-grid">
+
+        {{/* Prose body */}}
+        <div class="ps-info-col">
+          <div class="ps-markdown-content">{{ .Content }}</div>
+
+          {{/* Credibility widget - mapped to standard product authority grid */}}
+          <div class="ps-authority-pane mt-12" data-animate>
+            <div class="ps-authority-header mb-8">
+              <h3 class="ps-authority-title">Why Trust Saar Biotech</h3>
+            </div>
+            <div class="ps-authority-grid">
+              <div class="ps-authority-card">
+                <div class="ps-authority-icon"><i data-lucide="shield-check" class="w-6 h-6 text-brand"></i></div>
+                <h5>WHO-GMP Certified</h5>
+                <p>Manufactured in our Baddi facility ensuring highest global quality standards.</p>
+              </div>
+              <div class="ps-authority-card">
+                <div class="ps-authority-icon"><i data-lucide="award" class="w-6 h-6 text-brand"></i></div>
+                <h5>20+ Years Legacy</h5>
+                <p>Trusted by major pharma brands for consistent commercial batch delivery.</p>
+              </div>
+            </div>
+            <div class="ps-authority-footer">
+              <a href="/about/" class="btn btn--outline">
+                Tour our Manufacturing Facility
+                <i data-lucide="arrow-right" class="icon--sm"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {{/* Sidebar */}}
+        <aside class="ps-sticky-sidebar" aria-label="Related links">
+
+          {{/* Share card */}}
+          <div class="ps-widget-card">
+            <div class="widget-header">
+              <i data-lucide="share-2"></i>
+              <h3>Share Promotion</h3>
+            </div>
+            <div class="widget-body">
+              <div class="flex flex-col gap-2">
+                <button class="btn btn--outline w-full" id="promo-share-wa-sidebar"
+                  data-caption="{{ .Params.social_caption | default (printf "Check this promotion from Saar Biotech: %s — %s" .Title .Permalink) }}">
+                  Share on WhatsApp
+                </button>
+                <button class="btn btn--outline w-full" id="promo-share-email-sidebar"
+                  data-subject="{{ .Title }} | Saar Biotech Promotion"
+                  data-body="{{ .Params.social_caption | default (printf "Check this promotion from Saar Biotech: %s — %s" .Title .Permalink) }}">
+                  Share via Email
+                </button>
+                <button class="btn btn--outline w-full" id="promo-share-copy-sidebar"
+                  data-url="{{ .Permalink }}">
+                  Copy Page Link
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {{ if .Params.cross_links }}
+          <div class="ps-widget-card">
+            <div class="widget-header">
+              <i data-lucide="arrow-right-circle"></i>
+              <h3>Explore More</h3>
+            </div>
+            <div class="widget-body p-0">
+              <ul class="flex flex-col list-none p-0 m-0">
+                {{ range .Params.cross_links }}
+                <li class="border-b border-line last:border-b-0">
+                  <a href="{{ .url }}" class="flex items-center gap-2 p-4 text-[13.5px] font-semibold text-ink hover:bg-surface transition-colors">
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-brand"></i>
+                    {{ .label }}
+                  </a>
+                </li>
+                {{ end }}
+              </ul>
+            </div>
+          </div>
+          {{ end }}
+
+          <a href="#" class="ps-widget-link mt-4" data-enquire-trigger data-product-name="{{ .Params.brand_name | default .Title }}">
+            <div>
+              <strong>Start Manufacturing Enquiry</strong>
+              <span>Get a commercial quotation</span>
+            </div>
+            <i data-lucide="arrow-right"></i>
+          </a>
+
+        </aside>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+
+  {{/* ── FAQ ── */}}
+  {{ if .Params.faqs }}
+  <section id="promo-faq" class="section section--deep-soft" aria-labelledby="promo-faq-heading">
+    <div class="container">
+      <div class="faq-accordion" data-animate>
+        <div class="faq-accordion__aside" data-animate data-animate-type="slide-right">
+          <span class="eyebrow">Product Intelligence</span>
+          <h2 class="section-title section-title--sm" id="promo-faq-heading">Frequently Asked Questions</h2>
+          <p class="section-kicker">Common B2B manufacturing and clinical questions about {{ .Params.brand_name | default .Title }}.</p>
+          <button class="btn btn--outline mt-8" data-enquire-trigger data-product-name="{{ .Params.brand_name | default .Title }}">
+            Start Manufacturing Partnership
+            <i data-lucide="arrow-right" class="icon"></i>
+          </button>
+        </div>
+        <div class="faq-accordion__list" data-animate-stagger>
+          {{ range .Params.faqs }}
+          <div class="faq-accordion__item">
+            <div class="faq-accordion__header"><span>{{ .q }}</span></div>
+            <div class="faq-accordion__answer">
+              <div class="faq-accordion__inner">
+                <div class="faq-accordion__content">{{ .a | markdownify }}</div>
+              </div>
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
+
+  {{ partial "promotion/related.html" . }}
+  {{ partial "shared/cta.html" . }}
+
+</article>
+{{ end }}

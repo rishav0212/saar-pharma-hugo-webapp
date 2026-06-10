@@ -1,0 +1,14 @@
+{{/*
+  partial: promotion/breadcrumb.html
+  Purpose: Renders the breadcrumb navigation bar for the promotion single page.
+  Context: Full Hugo page context (.)
+  
+  Breadcrumb path: Home → Promotions → [Promotion Headline/Title]
+*/}}
+<div class="breadcrumb-bar" id="promo-breadcrumb-bar">
+  <div class="container">
+    {{ $items := slice (dict "label" "Promotions" "url" "/promotions/") }}
+    {{ $items = $items | append (dict "label" (.Params.headline | default .Title)) }}
+    {{ partial "shared/breadcrumb.html" (dict "variant" "on-light" "items" $items) }}
+  </div>
+</div>

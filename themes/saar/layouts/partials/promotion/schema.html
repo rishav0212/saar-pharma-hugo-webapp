@@ -1,0 +1,85 @@
+{{/*
+  partial: promotion/schema.html
+  Purpose: Renders page-specific JSON-LD for the promotion single page.
+           Schema types: Offer (for the manufactured product) + BreadcrumbList + FAQPage.
+           This is IN ADDITION to the global schema from shared/json-ld.html (baseof).
+  Context: Full Hugo page context (.)
+*/}}
+
+{{ $title := .Params.meta_title | default .Title }}
+{{ $description := .Params.meta_description | default .Description | default .Site.Params.description }}
+{{ $url := .Permalink }}
+{{ $posterURL := "" }}
+{{ with .Params.poster }}
+  {{ $posterURL = . | absURL }}
+{{ end }}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Offer",
+      "@id": "{{ $url }}#offer",
+      "name": "{{ .Params.headline | default .Title }}",
+      "description": "{{ $description }}",
+      "url": "{{ $url }}",
+      "offeredBy": {
+        "@id": "{{ .Site.BaseURL }}#organization"
+      }{{ if $posterURL }},
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{ $posterURL }}",
+        "name": "{{ .Params.poster_alt | default .Title }}"
+      }{{ end }}{{ if .Params.drug_form }},
+      "itemOffered": {
+        "@type": "Drug",
+        "name": "{{ .Params.brand_name | default .Title }}",
+        "description": "{{ $description }}"{{ if .Params.drug_form }},
+        "dosageForm": "{{ .Params.drug_form }}"{{ end }}
+      }{{ end }}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ $url }}#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ .Site.BaseURL }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Promotions",
+          "item": "{{ absURL "/promotions/" }}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ .Params.headline | default .Title }}",
+          "item": "{{ $url }}"
+        }
+      ]
+    }
+    {{ if .Params.faqs }}
+    ,{
+      "@type": "FAQPage",
+      "mainEntity": [
+        {{ range $index, $faq := .Params.faqs }}
+        {
+          "@type": "Question",
+          "name": "{{ $faq.q }}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ $faq.a | plainify }}"
+          }
+        }{{ if lt (add $index 1) (len $.Params.faqs) }},{{ end }}
+        {{ end }}
+      ]
+    }
+    {{ end }}
+  ]
+}
+</script>
