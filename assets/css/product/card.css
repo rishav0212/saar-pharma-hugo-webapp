@@ -42,14 +42,14 @@
   }
 
   .product-card__image-container {
-    @apply relative w-full aspect-[3/2] overflow-hidden bg-brand/5 flex items-center justify-center border-b border-line;
-    /* Fallback for missing images */
-    background-image: radial-gradient(circle at center, rgba(21, 159, 145, 0.05) 0%, transparent 70%);
+    @apply relative w-full aspect-[3/2] overflow-hidden flex items-center justify-center border-b border-line;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(21, 159, 145, 0.08) 100%);
   }
 
   .product-card__image-container picture,
   .product-card__image-container img {
     @apply w-full h-full object-contain p-2 transition-transform duration-700 ease-out;
+    mix-blend-mode: multiply;
   }
 
   .product-card__image-container picture {
@@ -60,8 +60,8 @@
     @apply p-0;
   }
 
-  .product-card__image-container .text-teal-600\/10 {
-    @apply flex items-center justify-center w-full h-full;
+  .product-card__image-fallback {
+    @apply flex items-center justify-center w-full h-full text-brand/30;
   }
 
   @media (hover: hover) {
@@ -150,6 +150,38 @@
     @apply bg-brand-3 text-white shadow-lift border-transparent;
   }
 
+  .product-card__image-actions {
+    display: none;
+  }
+
+  /* Floating Image-Action Column Hover Transition for Desktop/Hover-Capable Devices */
+  @media (hover: hover) and (min-width: 640px) {
+    .product-card:hover .product-card__image-container img {
+      transform: translateX(28px) scale(1.1);
+    }
+
+    .product-card__image-actions {
+      @apply absolute top-[76px] left-4 flex flex-col gap-2.5 z-30 opacity-0 -translate-x-2 transition-all duration-300 pointer-events-none;
+      display: flex;
+    }
+
+    .product-card:hover .product-card__image-actions {
+      @apply opacity-100 translate-x-0 pointer-events-auto;
+    }
+
+    .product-card__action-btn {
+      @apply w-[42px] h-[42px] rounded-full flex items-center justify-center bg-white border border-line text-brand transition-all duration-300 shadow-sm;
+    }
+
+    .product-card__action-btn:hover {
+      @apply bg-brand-3 text-white border-transparent shadow-lift scale-105;
+    }
+
+    .product-card__footer {
+      display: none !important;
+    }
+  }
+
   /* ─── Premium Horizontal Cards (Mobile Only) ─── */
   @media (max-width: 639px) {
     .product-card {
@@ -163,7 +195,8 @@
     }
 
     .product-card__image-container {
-      @apply w-[30%] aspect-auto border-b-0 border-r border-line bg-surface/40 p-0 shrink-0;
+      @apply w-[30%] aspect-auto border-b-0 border-r border-line p-0 shrink-0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(21, 159, 145, 0.08) 100%);
       max-height: 200px;
     }
 
@@ -249,7 +282,8 @@
     }
 
     .product-scroll-card .product-card__image-container {
-      @apply !w-full !aspect-[2/1] !bg-brand/5 !max-h-none !border-b !border-r-0;
+      @apply !w-full !aspect-[2/1] !max-h-none !border-b !border-r-0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95) 0%, rgba(21, 159, 145, 0.08) 100%) !important;
     }
 
     .product-scroll-card .product-card__content {
