@@ -9,12 +9,12 @@
 
 <article class="promo-page" itemscope itemtype="https://schema.org/Offer" id="promotion-main">
 
-  {{/* ── HERO: Dark cinematic split — poster | info panel ── */}}
+  {{/* ── HERO: Dark cinematic overlap — poster | info panel ── */}}
   <section id="promo-hero" class="promo-hero" aria-label="Promotion overview">
     <div class="promo-hero__glow promo-hero__glow--tl" aria-hidden="true"></div>
     <div class="promo-hero__glow promo-hero__glow--br" aria-hidden="true"></div>
-    <div class="container">
-      <div class="ps-split-layout relative z-10">
+    <div class="container h-full flex flex-col justify-center relative z-10">
+      <div class="promo-hero-layout">
         {{ partial "promotion/poster-panel.html" . }}
         {{ partial "promotion/info-panel.html" . }}
       </div>

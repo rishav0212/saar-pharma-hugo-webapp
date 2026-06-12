@@ -8,32 +8,42 @@
 @layer components {
 
   /* ─── HERO SECTION ─────────────────────────────────────────────────── */
-  /* Unique cinematic dark identity — distinct from Products (light editorial) */
+  /* Cinematic deeply rich background */
   .promo-hero {
-    @apply relative overflow-hidden py-10 max-md:py-8 bg-ink-deep;
+    @apply relative overflow-hidden py-16 max-md:py-12 bg-ink-deep flex items-center min-h-[95vh] xl:min-h-screen;
+    /* Soft top inner shadow for depth */
+    box-shadow: inset 0 20px 40px -10px rgba(0,0,0,0.5);
   }
 
-  /* Pure-CSS decorative glow orbs */
+  /* Sophisticated Mesh Glow Background */
   .promo-hero__glow {
-    @apply absolute rounded-full pointer-events-none blur-[140px] z-0;
+    @apply absolute rounded-full pointer-events-none z-0;
+    filter: blur(120px);
+    opacity: 0.6;
+    animation: promo-breathe 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes promo-breathe {
+    0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
+    100% { transform: scale(1.1) translate(2%, 2%); opacity: 0.7; }
   }
 
   .promo-hero__glow--tl {
-    @apply -top-1/5 -left-[10%] w-[40vw] h-[40vw] min-w-[500px] min-h-[500px] bg-brand/15;
+    @apply -top-[20%] -left-[10%] w-[600px] h-[600px] bg-brand;
   }
 
   .promo-hero__glow--br {
-    @apply -bottom-1/5 -right-[10%] w-[35vw] h-[35vw] min-w-[400px] min-h-[400px] bg-brand-2/10;
+    @apply -bottom-[20%] -right-[10%] w-[500px] h-[500px] bg-brand-3;
   }
 
-  /* Two-column split: poster | info panel */
-  .promo-hero__grid {
-    @apply relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-start;
+  /* Asymmetric Overlap Layout */
+  .promo-hero-layout {
+    @apply relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center w-full max-w-[1400px] mx-auto;
   }
 
   /* ─── POSTER PANEL ─────────────────────────────────────────────────── */
   .promo-poster-panel {
-    @apply flex flex-col gap-4;
+    @apply flex flex-col gap-4 lg:col-span-7 xl:col-span-8 z-10;
   }
 
   /* Date badge */
@@ -43,21 +53,28 @@
 
   /* Poster frame — the cinematic "stage" for the poster */
   .promo-poster-frame {
-    @apply relative rounded-2xl overflow-hidden cursor-zoom-in transition-all duration-300 mx-auto w-fit shadow-lg shadow-abyss/55 ring-1 ring-brand/20;
+    @apply relative rounded-3xl overflow-hidden cursor-zoom-in transition-all duration-500 mx-auto w-fit bg-white/5 backdrop-blur-sm;
+    /* Soft premium glow and border */
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8),
+                0 0 0 1px rgba(255,255,255,0.1) inset;
   }
 
   .promo-poster-frame:hover {
-    @apply -translate-y-1 shadow-2xl shadow-abyss/65 ring-1 ring-brand/40;
+    @apply -translate-y-2;
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.9),
+                0 0 0 1px rgba(var(--color-brand-rgb, 15,160,154), 0.4) inset,
+                0 0 40px -10px rgba(var(--color-brand-rgb, 15,160,154), 0.3);
   }
 
   /* Teal glow pseudo-backdrop behind the image */
   .promo-poster-frame__glow {
-    @apply absolute inset-[-20px] pointer-events-none z-0 bg-brand/15 blur-[60px];
+    @apply absolute inset-0 pointer-events-none z-0 opacity-40;
+    background: radial-gradient(circle at center, rgba(var(--color-brand-rgb, 15,160,154), 0.4) 0%, transparent 70%);
   }
 
   /* Zoom button — revealed on hover */
   .promo-poster-frame__zoom {
-    @apply absolute top-3 right-3 z-20 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11.5px] font-bold text-white opacity-0 -translate-y-1 transition-all duration-300 bg-abyss/75 border border-white/15 backdrop-blur-md;
+    @apply absolute top-4 right-4 z-20 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-[12px] font-bold text-white opacity-0 -translate-y-2 transition-all duration-300 bg-abyss/80 border border-white/20 backdrop-blur-md shadow-lg;
   }
 
   .promo-poster-frame:hover .promo-poster-frame__zoom {
@@ -111,17 +128,28 @@
     scrollbar-width: none;
   }
 
-  .promo-info-panel::-webkit-scrollbar {
-    display: none;
+  /* ─── INFO PANEL ───────────────────────────────────────────────────── */
+  /* Overlapping pristine white card */
+  .promo-info-panel {
+    @apply -mt-12 lg:mt-0 lg:col-span-5 xl:col-span-4 lg:-ml-12 xl:-ml-20 z-20 w-full relative;
   }
 
   .promo-info-panel__inner {
-    @apply bg-white rounded-2xl p-6 md:p-7 shadow-lift border border-black/5;
+    @apply bg-white rounded-3xl p-6 md:p-8 border border-white/50 relative overflow-hidden;
+    /* Deeper shadow to pop off the poster */
+    box-shadow: 0 40px 80px -12px rgba(0,0,0,0.4),
+                0 0 0 1px rgba(0,0,0,0.05);
+  }
+
+  /* Subtle inner gradient flare for premium feel */
+  .promo-info-panel__inner::before {
+    content: '';
+    @apply absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-brand/5 to-transparent pointer-events-none rounded-bl-full z-0;
   }
 
   /* Header */
   .promo-info-panel__header {
-    @apply mb-5;
+    @apply mb-5 relative z-10;
   }
 
   .promo-info-panel__subtitle {
@@ -129,7 +157,12 @@
   }
 
   .promo-info-panel__headline {
-    @apply font-display font-black tracking-tight leading-[1.08] m-0 mb-3 text-[length:var(--text-fluid-display-tight)] text-ink;
+    @apply font-display font-black tracking-tight leading-[1.05] m-0 mb-3 text-[length:var(--text-fluid-display-tight)];
+    /* Subtle text gradient */
+    background-image: linear-gradient(135deg, var(--color-ink, #0f172a), rgba(var(--color-ink-rgb, 15,23,42), 0.75));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .promo-info-panel__brand {
@@ -149,21 +182,21 @@
   }
 
   .promo-tag-pill {
-    @apply text-[11px] font-bold px-2.5 py-1 rounded-full text-muted bg-surface border border-line;
+    @apply text-[11.5px] font-bold px-3 py-1.5 rounded-full text-brand-3 bg-brand/10 border border-brand/20 transition-colors hover:bg-brand/15;
   }
 
   .promo-info-panel__divider {
-    @apply my-4 border-t border-line;
+    @apply my-5 border-t border-line/70 relative z-10;
   }
 
 
   /* ─── HIGHLIGHTS CHECKLIST ─────────────────────────────────────────── */
   .promo-highlights {
-    @apply mb-4;
+    @apply mb-5 relative z-10;
   }
 
   .promo-highlights__heading {
-    @apply flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest mb-3.5 text-muted;
+    @apply flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest mb-4 text-muted;
   }
 
   .promo-highlights__heading i {
@@ -171,36 +204,42 @@
   }
 
   .promo-highlights__list {
-    @apply flex flex-col gap-2.5 list-none p-0 m-0;
+    @apply flex flex-col gap-3 list-none p-0 m-0;
   }
 
   .promo-highlights__item {
-    @apply flex items-center gap-3 text-[14.5px] font-semibold text-ink-2;
+    @apply flex items-start gap-3 text-[14.5px] font-semibold text-ink-2 leading-snug;
     animation: promo-slide-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: var(--promo-delay, 0s);
   }
 
+  @keyframes promo-slide-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .promo-highlights__check {
-    @apply flex items-center justify-center flex-shrink-0 rounded-md w-[22px] h-[22px] bg-brand/10 border-[1.5px] border-brand/25 text-brand-3;
+    @apply flex items-center justify-center flex-shrink-0 rounded-full w-[24px] h-[24px] bg-brand/10 text-brand-3 shadow-sm border border-brand/20 mt-0.5;
   }
 
   /* Special callout e.g. "Golden Crimp Bottle" */
   .promo-special-callout {
-    @apply flex items-center gap-2.5 w-full px-4 py-3 mb-4 rounded-xl text-[13.5px] font-extrabold tracking-wide text-brand-3 bg-brand/5 border border-brand/20;
+    @apply flex items-center gap-3 w-full px-5 py-3.5 mb-5 rounded-2xl text-[13.5px] font-extrabold tracking-wide text-ink bg-gradient-to-r from-[#FFFDF0] to-[#FFFAF0] border border-[#f5e6a3] shadow-sm relative z-10;
   }
 
   .promo-special-callout i {
-    color: #c9a630;
+    @apply text-[#d4af37];
+    filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.4));
   }
 
 
   /* ─── TRUST STRIP ──────────────────────────────────────────────────── */
   .promo-trust-strip {
-    @apply flex items-center gap-4 flex-wrap mb-4;
+    @apply flex items-center gap-5 flex-wrap mb-5 relative z-10;
   }
 
   .promo-trust-strip__item {
-    @apply flex items-center gap-1.5 text-[11.5px] font-bold text-muted;
+    @apply flex items-center gap-2 text-[12px] font-bold text-muted bg-surface px-3 py-1.5 rounded-lg border border-line/50 shadow-sm transition-all hover:bg-white hover:border-brand/30 hover:shadow-md hover:-translate-y-0.5;
   }
 
   .promo-trust-strip__item i {
@@ -210,11 +249,23 @@
 
   /* ─── CTA GROUP ────────────────────────────────────────────────────── */
   .promo-cta-group {
-    @apply flex flex-col gap-2.5;
+    @apply flex flex-col gap-3 relative z-10;
   }
 
   .promo-cta-group__primary {
-    @apply w-full min-h-[54px] rounded-xl flex items-center gap-4 px-6 py-4 transition-all duration-300 relative overflow-hidden text-left bg-gradient-to-br from-brand to-brand-3 text-white shadow-lg shadow-brand/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand/60;
+    @apply w-full min-h-[58px] rounded-2xl flex items-center gap-4 px-6 py-4 transition-all duration-300 relative overflow-hidden text-left bg-brand text-white shadow-[0_8px_20px_-6px_rgba(var(--color-brand-rgb,15,160,154),0.6)] hover:-translate-y-1 hover:shadow-[0_12px_25px_-6px_rgba(var(--color-brand-rgb,15,160,154),0.8)];
+  }
+
+  /* Animated Shine Effect */
+  .promo-cta-group__primary::after {
+    content: '';
+    @apply absolute top-0 -left-[100%] w-1/2 h-full skew-x-[30deg] bg-white/20 pointer-events-none;
+    animation: promo-shine 4s ease-in-out infinite;
+  }
+
+  @keyframes promo-shine {
+    0%, 70% { left: -100%; }
+    100% { left: 200%; }
   }
 
   .promo-cta-group__text {
@@ -222,11 +273,11 @@
   }
 
   .promo-cta-group__text strong {
-    @apply text-[15.5px] font-black leading-tight;
+    @apply text-[16px] font-black leading-tight;
   }
 
   .promo-cta-group__text small {
-    @apply text-[11px] font-medium mt-1 text-white/80;
+    @apply text-[11.5px] font-semibold mt-0.5 text-white/80;
   }
 
 
@@ -263,7 +314,13 @@
 
   /* ─── COMPOSITION SECTION ───────────────────────────────────────────── */
   .promo-composition {
-    @apply bg-surface;
+    @apply bg-surface/50 pb-16 pt-12 relative z-30;
+    /* Overlap the bottom of the hero */
+    margin-top: -60px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    /* Soft top shadow to pop against dark background */
+    box-shadow: 0 -20px 50px rgba(0,0,0,0.15);
   }
 
   .promo-composition__wrap {
@@ -271,17 +328,17 @@
   }
 
   .promo-composition__header {
-    @apply text-center mb-10;
+    @apply text-center mb-12;
   }
 
   /* Card grid for multiple formulations / products in range */
   .promo-range-grid {
-    @apply grid gap-6 mb-8;
+    @apply grid gap-6 mb-10;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
   .promo-range-card {
-    @apply flex flex-col p-6 rounded-2xl transition-all duration-300 bg-white text-left border border-line shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-brand-line;
+    @apply flex flex-col p-6 rounded-3xl transition-all duration-300 bg-white text-left border border-white shadow-soft hover:-translate-y-1 hover:shadow-lift hover:border-brand/20;
   }
 
   .promo-range-card__header {
@@ -301,31 +358,32 @@
   }
 
   .promo-range-card__footer {
-    @apply pt-3.5 border-t border-line mt-auto;
+    @apply pt-4 border-t border-line/50 mt-auto;
   }
 
   .promo-range-card__link {
     @apply w-full justify-center;
   }
 
+  /* Redesigned Premium Composition Table */
   .promo-composition__table-wrap {
-    @apply overflow-x-auto rounded-xl border border-line shadow-sm;
+    @apply overflow-hidden rounded-3xl border border-white shadow-lift bg-white;
   }
 
   .promo-composition__table {
-    @apply w-full border-collapse text-[14.5px];
+    @apply w-full border-collapse text-[14.5px] text-left;
   }
 
   .promo-composition__table thead {
-    @apply bg-ink;
+    @apply bg-ink-deep text-white;
   }
 
   .promo-composition__table thead th {
-    @apply px-5 py-3.5 text-left text-[11px] font-extrabold uppercase tracking-widest text-white/80;
+    @apply px-6 py-4 text-[11px] font-black uppercase tracking-widest text-white/90 first:pl-8 last:pr-8;
   }
 
   .promo-composition__table tbody tr {
-    @apply bg-white border-b border-line transition-colors duration-200 hover:bg-surface;
+    @apply bg-white border-b border-line/50 transition-colors duration-200 hover:bg-surface/80;
   }
 
   .promo-composition__table tbody tr:last-child {
@@ -333,19 +391,23 @@
   }
 
   .promo-composition__table tbody td {
-    @apply px-5 py-4 text-ink-2 align-middle;
+    @apply px-6 py-5 text-ink-2 align-middle font-medium first:pl-8 last:pr-8;
   }
 
   .promo-strength-badge {
-    @apply inline-block px-2.5 py-1 rounded-md text-[13px] font-bold whitespace-nowrap bg-brand/10 text-brand-3 border border-brand/20;
+    @apply inline-flex items-center justify-center px-3 py-1 rounded-full text-[13px] font-bold whitespace-nowrap bg-surface border border-line text-ink-2 shadow-sm;
   }
 
   .promo-status-badge {
-    @apply inline-flex items-center gap-1.5 text-[12.5px] font-bold text-emerald-600;
+    @apply inline-flex items-center gap-1.5 text-[12.5px] font-extrabold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100;
+  }
+
+  .promo-status-badge i {
+    @apply text-emerald-500;
   }
 
   .promo-composition__footer {
-    @apply flex items-center justify-center gap-3 flex-wrap mt-7;
+    @apply flex items-center justify-center gap-4 flex-wrap mt-10;
   }
 
 } /* end @layer components */
