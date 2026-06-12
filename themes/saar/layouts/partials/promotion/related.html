@@ -48,36 +48,36 @@
       <div class="ps-slider-viewport overflow-x-auto hide-scrollbar snap-x snap-mandatory" id="promo-slider">
         <div class="flex items-stretch gap-6 pb-4">
           {{ range first 6 $related }}
-          <div class="flex-shrink-0 w-[280px] md:w-[320px] max-md:w-[280px] snap-start">
-            <a class="editorial-card h-full" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
-              <div class="editorial-card__visual">
+          <div class="flex-shrink-0 w-[320px] md:w-[360px] max-md:w-[280px] snap-start">
+            <a class="promo-card h-full" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
+              <div class="promo-card__visual">
                 {{ if .Params.poster }}
                   {{ partial "shared/optimized-image.html" (dict
                     "src" .Params.poster
                     "alt" (.Params.poster_alt | default .Title)
-                    "class" "editorial-card__img"
+                    "class" "promo-card__img"
                     "width" 400
                     "loading" "lazy"
                   ) }}
                 {{ else }}
-                  <div class="editorial-card__placeholder">
-                    <i data-lucide="image" class="icon icon--lg text-white/30" aria-hidden="true"></i>
+                  <div class="promo-card__placeholder">
+                    <i data-lucide="image" class="icon icon--lg text-ink/20" aria-hidden="true"></i>
                   </div>
                 {{ end }}
               </div>
 
-              <div class="editorial-card__body">
-                <div class="editorial-card__cat-row">
-                  <span class="editorial-cat-badge">{{ .Params.subtitle | default "Promotion" }}</span>
+              <div class="promo-card__body">
+                <div class="promo-card__meta">
+                  <span class="promo-card__badge">{{ .Params.subtitle | default "Promotion" }}</span>
                 </div>
                 
-                <h3 class="editorial-card__title">{{ .Params.headline | default .Title }}</h3>
-                <p class="editorial-card__summary">{{ .Summary | truncate 80 }}</p>
+                <h3 class="promo-card__title">{{ .Params.headline | default .Title }}</h3>
+                <p class="promo-card__summary">{{ .Summary | truncate 80 }}</p>
                 
-                <div class="editorial-card__footer mt-auto pt-4">
-                  <span class="editorial-card__action">
+                <div class="promo-card__footer mt-auto pt-4">
+                  <span class="promo-card__action">
                     View Promotion
-                    <i data-lucide="chevron-right" class="editorial-card__arrow icon--sm" aria-hidden="true"></i>
+                    <i data-lucide="arrow-right" class="icon--sm" aria-hidden="true"></i>
                   </span>
                 </div>
               </div>

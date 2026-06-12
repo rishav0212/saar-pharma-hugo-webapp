@@ -1,0 +1,115 @@
+/* 
+   PROMOTION LIST PAGE STYLES 
+   Horizontal Layout (Picture on left, Info on right) 
+   Grid: 3 to 4 cards per row.
+*/
+@layer components {
+  /* Promo Grid - 3 to 4 per row */
+  .promo-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:gap-6 xl:gap-8 transition-opacity duration-300;
+  }
+
+  /* Promo Card - Compact Horizontal Layout */
+  .promo-card {
+    @apply relative flex flex-row w-full bg-white rounded-xl border border-line shadow-soft overflow-hidden transition-all duration-300 !no-underline items-stretch;
+  }
+
+  .promo-card:hover {
+    @apply -translate-y-1.5 border-brand/30 shadow-lift;
+  }
+
+  /* 
+     Visual container: Left side, taking up 35-38% of the width.
+     Forces the native poster aspect ratio so height scales beautifully with width.
+  */
+  .promo-card__visual {
+    @apply relative w-[38%] shrink-0 overflow-hidden bg-white border-r border-line/50;
+    aspect-ratio: 1153 / 1600; 
+  }
+
+  .promo-card__img {
+    @apply w-full h-full object-cover transition-transform duration-700 ease-out;
+  }
+
+  .promo-card:hover .promo-card__img {
+    @apply scale-105;
+  }
+
+  .promo-card__placeholder {
+    @apply grid place-items-center w-full h-full bg-ink/5;
+  }
+
+  /* Right side content */
+  .promo-card__body {
+    @apply flex flex-col justify-center flex-1 p-4 lg:p-5 min-w-0;
+  }
+
+  .promo-card__meta {
+    @apply flex items-center flex-wrap gap-2 mb-2;
+  }
+
+  .promo-card__badge {
+    @apply inline-block px-2 py-0.5 rounded bg-brand/10 text-brand-3 text-[10px] font-extrabold uppercase tracking-wider;
+  }
+
+  .promo-card__date {
+    @apply text-[11px] font-semibold text-muted;
+  }
+
+  .promo-card__title {
+    @apply font-display text-[15px] lg:text-[17px] font-black text-ink leading-[1.25] mb-2 transition-colors duration-200;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .promo-card:hover .promo-card__title {
+    @apply text-brand-3;
+  }
+
+  .promo-card__highlights {
+    @apply flex flex-col gap-1.5 list-none p-0 m-0 mt-1 mb-3;
+  }
+
+  .promo-card__highlights li {
+    @apply flex items-start gap-1.5 text-[12px] text-muted leading-snug;
+  }
+
+  .promo-card__highlights li i {
+    @apply w-[14px] h-[14px] text-brand shrink-0 mt-[2px];
+  }
+
+  .promo-card__summary {
+    @apply text-[12.5px] text-muted leading-relaxed mb-3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .promo-card__footer {
+    @apply flex items-center justify-between mt-auto pt-3 border-t border-line/70;
+  }
+
+  .promo-card__action {
+    @apply inline-flex items-center gap-1 text-[11px] lg:text-[12px] font-extrabold text-brand uppercase tracking-wider transition-colors duration-200;
+  }
+
+  .promo-card__action i {
+    @apply w-[14px] h-[14px] transition-transform duration-300;
+  }
+
+  .promo-card:hover .promo-card__action i {
+    @apply translate-x-1;
+  }
+
+  .promo-card__drug-form {
+    @apply text-[10px] lg:text-[11px] font-bold text-ink/60 bg-ink/5 px-2 py-0.5 rounded;
+  }
+
+  /* Slider Overrides for Related */
+  .ps-slider-viewport .promo-card {
+    @apply h-full;
+  }
+}

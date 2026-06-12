@@ -41,59 +41,59 @@
       {{ $promotions = sort $promotions "Date" "desc" }}
 
       {{ if $promotions }}
-      <div class="editorial-grid-wrap">
-        <div class="editorial-grid" data-animate="fade-up" data-delay="0.2">
+      <div class="promo-grid-wrap">
+        <div class="promo-grid" data-animate="fade-up" data-delay="0.2">
           {{ range $promotions }}
-          <a class="editorial-card" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
+          <a class="promo-card" href="{{ .RelPermalink }}" aria-label="{{ .Title }}">
             
-            <div class="editorial-card__visual">
+            <div class="promo-card__visual">
               {{ if .Params.poster }}
                 {{ partial "shared/optimized-image.html" (dict
                   "src" .Params.poster
                   "alt" (.Params.poster_alt | default .Title)
-                  "class" "editorial-card__img"
-                  "width" 560
+                  "class" "promo-card__img"
+                  "width" 400
                   "loading" "lazy"
                 ) }}
               {{ else }}
-                <div class="editorial-card__placeholder">
-                  <i data-lucide="image" class="icon icon--lg text-white/30" aria-hidden="true"></i>
+                <div class="promo-card__placeholder">
+                  <i data-lucide="image" class="icon icon--lg text-ink/20" aria-hidden="true"></i>
                 </div>
               {{ end }}
             </div>
 
-            <div class="editorial-card__body">
-              <div class="editorial-card__cat-row">
-                <span class="editorial-cat-badge">{{ .Params.subtitle | default "Promotion" }}</span>
+            <div class="promo-card__body">
+              <div class="promo-card__meta">
+                <span class="promo-card__badge">{{ .Params.subtitle | default "Promotion" }}</span>
                 {{ if .Params.promo_date }}
-                <span class="editorial-card__date">
+                <span class="promo-card__date">
                   {{ .Params.promo_date }}
                 </span>
                 {{ end }}
               </div>
               
-              <h3 class="editorial-card__title">{{ .Params.headline | default .Title }}</h3>
+              <h3 class="promo-card__title">{{ .Params.headline | default .Title }}</h3>
               
               {{ if .Params.highlights }}
-              <ul class="flex flex-col gap-1.5 list-none p-0 m-0 mt-3 mb-2">
-                {{ range first 3 .Params.highlights }}
-                <li class="flex items-center gap-2 text-[13px] text-muted">
-                  <i data-lucide="check-circle-2" class="w-[14px] h-[14px] text-brand flex-shrink-0"></i>
-                  {{ . }}
+              <ul class="promo-card__highlights">
+                {{ range first 2 .Params.highlights }}
+                <li>
+                  <i data-lucide="check-circle-2"></i>
+                  <span>{{ . }}</span>
                 </li>
                 {{ end }}
               </ul>
               {{ else }}
-              <p class="editorial-card__summary">{{ .Summary | truncate 110 }}</p>
+              <p class="promo-card__summary">{{ .Summary | truncate 110 }}</p>
               {{ end }}
               
-              <div class="editorial-card__footer mt-auto pt-4">
-                <span class="editorial-card__action">
-                  View Promotion
-                  <i data-lucide="chevron-right" class="editorial-card__arrow icon--sm" aria-hidden="true"></i>
+              <div class="promo-card__footer">
+                <span class="promo-card__action">
+                  View Details
+                  <i data-lucide="arrow-right" class="icon--sm" aria-hidden="true"></i>
                 </span>
                 {{ if .Params.drug_form }}
-                <span class="badge badge--teal">{{ .Params.drug_form }}</span>
+                <span class="promo-card__drug-form">{{ .Params.drug_form }}</span>
                 {{ end }}
               </div>
             </div>

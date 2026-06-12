@@ -1,3 +1,4 @@
 /* Promotion styles — modular entry file.
    All sub-files follow the same split pattern as articles/articles.css */
 @import "./single.css";
+@import "./list.css";
